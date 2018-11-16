@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MainViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self customizeInterface];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    MainViewController *mainVC = [[MainViewController alloc] init];
+    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
+    self.window.rootViewController = mainVC;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -49,6 +60,24 @@
     [self saveContext];
 }
 
+#pragma mark - globalInterface
+- (void)customizeInterface {
+    UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
+    navigationBarAppearance.barStyle = UIStatusBarStyleDefault;
+    [navigationBarAppearance setTintColor:[UIColor blackColor]];//返回按钮的箭头颜色
+    //[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    NSDictionary *textAttributes = @{
+                                     NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:16],
+                                     NSForegroundColorAttributeName: [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1],
+                                     };
+    [navigationBarAppearance setTitleTextAttributes:textAttributes];
+    [navigationBarAppearance setTranslucent:YES];
+    
+    //透明
+    [navigationBarAppearance setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    //去掉透明后导航栏下边的黑边
+    [navigationBarAppearance setShadowImage:[[UIImage alloc] init]];
+}
 
 #pragma mark - Core Data stack
 

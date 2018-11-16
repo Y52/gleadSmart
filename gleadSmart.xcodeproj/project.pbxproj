@@ -7,6 +7,118 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB0A403021991AA8004669CA /* UIColor+ColorChange.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401021991AA8004669CA /* UIColor+ColorChange.m */; };
+		BB0A403121991AA8004669CA /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401321991AA8004669CA /* UIButton+Common.m */; };
+		BB0A403221991AA8004669CA /* NSObject+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401421991AA8004669CA /* NSObject+Common.m */; };
+		BB0A403421991AA8004669CA /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401821991AA8004669CA /* NSString+Common.m */; };
+		BB0A403521991AA8004669CA /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401921991AA8004669CA /* NSDate+Common.m */; };
+		BB0A403621991AA8004669CA /* TouchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401D21991AA8004669CA /* TouchTableView.m */; };
+		BB0A404421996F4A004669CA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A404321996F4A004669CA /* MainViewController.m */; };
+		BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A4046219970D3004669CA /* RDVTabBar.m */; };
+		BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A404A219970D3004669CA /* RDVTabBarController.m */; };
+		BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A404B219970D3004669CA /* RDVTabBarItem.m */; };
+		BB0A40A821997C99004669CA /* 矢量智能对象 拷贝 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405121997C99004669CA /* 矢量智能对象 拷贝 4@2x.png */; };
+		BB0A40A921997C99004669CA /* img_houseSelect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405221997C99004669CA /* img_houseSelect@2x.png */; };
+		BB0A40AA21997C99004669CA /* img_tab01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405321997C99004669CA /* img_tab01@3x.png */; };
+		BB0A40AB21997C99004669CA /* 椭圆 1 拷贝 2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405421997C99004669CA /* 椭圆 1 拷贝 2@3x.png */; };
+		BB0A40AC21997C99004669CA /* img_tab02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405521997C99004669CA /* img_tab02@2x.png */; };
+		BB0A40AD21997C99004669CA /* 矢量智能对象 拷贝 4.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405621997C99004669CA /* 矢量智能对象 拷贝 4.png */; };
+		BB0A40AE21997C99004669CA /* 圆角矩形 1 拷贝 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405721997C99004669CA /* 圆角矩形 1 拷贝 3@2x.png */; };
+		BB0A40AF21997C99004669CA /* 圆角矩形 1 拷贝 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405821997C99004669CA /* 圆角矩形 1 拷贝 3@3x.png */; };
+		BB0A40B021997C99004669CA /* img_tab02@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405921997C99004669CA /* img_tab02@3x.png */; };
+		BB0A40B121997C99004669CA /* 椭圆 1 拷贝 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405A21997C99004669CA /* 椭圆 1 拷贝 2@2x.png */; };
+		BB0A40B221997C99004669CA /* img_tab01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405B21997C99004669CA /* img_tab01@2x.png */; };
+		BB0A40B321997C99004669CA /* img_wallHob.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405C21997C99004669CA /* img_wallHob.png */; };
+		BB0A40B421997C99004669CA /* img_houseSelect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405D21997C99004669CA /* img_houseSelect@3x.png */; };
+		BB0A40B521997C99004669CA /* 圆角矩形 1 拷贝.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405E21997C99004669CA /* 圆角矩形 1 拷贝.png */; };
+		BB0A40B621997C99004669CA /* 矢量智能对象 拷贝 4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405F21997C99004669CA /* 矢量智能对象 拷贝 4@3x.png */; };
+		BB0A40B721997C99004669CA /* 形状 4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406021997C99004669CA /* 形状 4@3x.png */; };
+		BB0A40B821997C99004669CA /* img_headerBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406121997C99004669CA /* img_headerBg@2x.png */; };
+		BB0A40B921997C99004669CA /* 椭圆 1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406221997C99004669CA /* 椭圆 1.png */; };
+		BB0A40BA21997C99004669CA /* 椭圆 2 拷贝 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406321997C99004669CA /* 椭圆 2 拷贝 2@2x.png */; };
+		BB0A40BB21997C99004669CA /* img_homeSet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406421997C99004669CA /* img_homeSet@2x.png */; };
+		BB0A40BC21997C99004669CA /* 椭圆 1 拷贝 2.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406521997C99004669CA /* 椭圆 1 拷贝 2.png */; };
+		BB0A40BD21997C99004669CA /* img_tab02.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406621997C99004669CA /* img_tab02.png */; };
+		BB0A40BE21997C99004669CA /* 矢量智能对象6@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406721997C99004669CA /* 矢量智能对象6@3x.png */; };
+		BB0A40BF21997C99004669CA /* 椭圆 1 拷贝 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406821997C99004669CA /* 椭圆 1 拷贝 3.png */; };
+		BB0A40C021997C99004669CA /* img_tab01.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406921997C99004669CA /* img_tab01.png */; };
+		BB0A40C121997C99004669CA /* 形状 3 拷贝.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406A21997C99004669CA /* 形状 3 拷贝.png */; };
+		BB0A40C221997C99004669CA /* 矢量智能对象6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406B21997C99004669CA /* 矢量智能对象6@2x.png */; };
+		BB0A40C321997C99004669CA /* 矩形 5.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406C21997C99004669CA /* 矩形 5.png */; };
+		BB0A40C421997C99004669CA /* img_homeSet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406D21997C99004669CA /* img_homeSet@3x.png */; };
+		BB0A40C521997C99004669CA /* 椭圆 2 拷贝 2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406E21997C99004669CA /* 椭圆 2 拷贝 2@3x.png */; };
+		BB0A40C621997C99004669CA /* img_tab03.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406F21997C99004669CA /* img_tab03.png */; };
+		BB0A40C721997C99004669CA /* 椭圆 1 拷贝.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407021997C99004669CA /* 椭圆 1 拷贝.png */; };
+		BB0A40C821997C99004669CA /* img_headerBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407121997C99004669CA /* img_headerBg@3x.png */; };
+		BB0A40C921997C99004669CA /* 形状 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407221997C99004669CA /* 形状 4@2x.png */; };
+		BB0A40CA21997C99004669CA /* 形状 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407321997C99004669CA /* 形状 3@3x.png */; };
+		BB0A40CB21997C99004669CA /* 椭圆 2 拷贝 31@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407421997C99004669CA /* 椭圆 2 拷贝 31@3x.png */; };
+		BB0A40CC21997C99004669CA /* 圆角矩形 1 拷贝 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407521997C99004669CA /* 圆角矩形 1 拷贝 2@2x.png */; };
+		BB0A40CD21997C99004669CA /* 椭圆 1 拷贝 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407621997C99004669CA /* 椭圆 1 拷贝 3@3x.png */; };
+		BB0A40CE21997C99004669CA /* 椭圆 2 拷贝 21@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407721997C99004669CA /* 椭圆 2 拷贝 21@2x.png */; };
+		BB0A40CF21997C99004669CA /* img_weatherBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407821997C99004669CA /* img_weatherBg@2x.png */; };
+		BB0A40D021997C99004669CA /* 椭圆 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407921997C99004669CA /* 椭圆 1@2x.png */; };
+		BB0A40D121997C99004669CA /* img_headerBg@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407A21997C99004669CA /* img_headerBg@1x.png */; };
+		BB0A40D221997C99004669CA /* img_addDevice@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407B21997C99004669CA /* img_addDevice@3x.png */; };
+		BB0A40D321997C99004669CA /* 矩形 5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407C21997C99004669CA /* 矩形 5@3x.png */; };
+		BB0A40D421997C99004669CA /* 矩形 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407D21997C99004669CA /* 矩形 5@2x.png */; };
+		BB0A40D521997C99004669CA /* 圆角矩形 1 拷贝 2.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407E21997C99004669CA /* 圆角矩形 1 拷贝 2.png */; };
+		BB0A40D621997C99004669CA /* img_addDevice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407F21997C99004669CA /* img_addDevice@2x.png */; };
+		BB0A40D721997C99004669CA /* 椭圆 1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408021997C99004669CA /* 椭圆 1@3x.png */; };
+		BB0A40D821997C99004669CA /* img_weatherBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408121997C99004669CA /* img_weatherBg@3x.png */; };
+		BB0A40D921997C99004669CA /* 圆角矩形 1 拷贝 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408221997C99004669CA /* 圆角矩形 1 拷贝 3.png */; };
+		BB0A40DA21997C99004669CA /* 椭圆 2 拷贝 21@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408321997C99004669CA /* 椭圆 2 拷贝 21@3x.png */; };
+		BB0A40DB21997C99004669CA /* 椭圆 1 拷贝 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408421997C99004669CA /* 椭圆 1 拷贝 3@2x.png */; };
+		BB0A40DC21997C99004669CA /* 椭圆 2 拷贝 31@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408521997C99004669CA /* 椭圆 2 拷贝 31@2x.png */; };
+		BB0A40DD21997C99004669CA /* 圆角矩形 1 拷贝 2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408621997C99004669CA /* 圆角矩形 1 拷贝 2@3x.png */; };
+		BB0A40DE21997C99004669CA /* 形状 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408721997C99004669CA /* 形状 3@2x.png */; };
+		BB0A40DF21997C99004669CA /* 矢量智能对象7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408821997C99004669CA /* 矢量智能对象7@3x.png */; };
+		BB0A40E021997C99004669CA /* img_wallHob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408921997C99004669CA /* img_wallHob@2x.png */; };
+		BB0A40E121997C99004669CA /* img_homeSet.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408A21997C99004669CA /* img_homeSet.png */; };
+		BB0A40E221997C99004669CA /* 矢量智能对象5.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408B21997C99004669CA /* 矢量智能对象5.png */; };
+		BB0A40E321997C99004669CA /* 矢量智能对象5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408C21997C99004669CA /* 矢量智能对象5@2x.png */; };
+		BB0A40E421997C99004669CA /* 椭圆 2 拷贝 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408D21997C99004669CA /* 椭圆 2 拷贝 3@2x.png */; };
+		BB0A40E521997C99004669CA /* 椭圆 2 拷贝 21.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408E21997C99004669CA /* 椭圆 2 拷贝 21.png */; };
+		BB0A40E621997C99004669CA /* 椭圆 1 拷贝@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408F21997C99004669CA /* 椭圆 1 拷贝@3x.png */; };
+		BB0A40E721997C99004669CA /* img_tab03@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409021997C99004669CA /* img_tab03@3x.png */; };
+		BB0A40E821997C99004669CA /* 矢量智能对象7.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409121997C99004669CA /* 矢量智能对象7.png */; };
+		BB0A40E921997C99004669CA /* 圆角矩形 1 拷贝@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409221997C99004669CA /* 圆角矩形 1 拷贝@2x.png */; };
+		BB0A40EA21997C99004669CA /* 矢量智能对象6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409321997C99004669CA /* 矢量智能对象6.png */; };
+		BB0A40EB21997C99004669CA /* 圆角矩形 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409421997C99004669CA /* 圆角矩形 1@2x.png */; };
+		BB0A40EC21997C99004669CA /* 形状 4.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409521997C99004669CA /* 形状 4.png */; };
+		BB0A40ED21997C99004669CA /* 形状 3 拷贝@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409621997C99004669CA /* 形状 3 拷贝@2x.png */; };
+		BB0A40EE21997C99004669CA /* 形状 3 拷贝@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409721997C99004669CA /* 形状 3 拷贝@3x.png */; };
+		BB0A40EF21997C99004669CA /* 椭圆 2 拷贝 2.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409821997C99004669CA /* 椭圆 2 拷贝 2.png */; };
+		BB0A40F021997C99004669CA /* 圆角矩形 1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409921997C99004669CA /* 圆角矩形 1@3x.png */; };
+		BB0A40F121997C99004669CA /* img_houseSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409A21997C99004669CA /* img_houseSelect.png */; };
+		BB0A40F221997C99004669CA /* 圆角矩形 1 拷贝@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409B21997C99004669CA /* 圆角矩形 1 拷贝@3x.png */; };
+		BB0A40F321997C99004669CA /* img_weatherBg.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409C21997C99004669CA /* img_weatherBg.png */; };
+		BB0A40F421997C99004669CA /* 椭圆 2 拷贝 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409D21997C99004669CA /* 椭圆 2 拷贝 3.png */; };
+		BB0A40F521997C99004669CA /* img_tab03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409E21997C99004669CA /* img_tab03@2x.png */; };
+		BB0A40F621997C99004669CA /* 椭圆 1 拷贝@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409F21997C99004669CA /* 椭圆 1 拷贝@2x.png */; };
+		BB0A40F721997C99004669CA /* 圆角矩形 1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A021997C99004669CA /* 圆角矩形 1.png */; };
+		BB0A40F821997C99004669CA /* 形状 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A121997C99004669CA /* 形状 3.png */; };
+		BB0A40F921997C99004669CA /* 椭圆 2 拷贝 31.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A221997C99004669CA /* 椭圆 2 拷贝 31.png */; };
+		BB0A40FA21997C99004669CA /* 椭圆 2 拷贝 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A321997C99004669CA /* 椭圆 2 拷贝 3@3x.png */; };
+		BB0A40FB21997C99004669CA /* 矢量智能对象5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A421997C99004669CA /* 矢量智能对象5@3x.png */; };
+		BB0A40FC21997C99004669CA /* img_addDevice.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A521997C99004669CA /* img_addDevice.png */; };
+		BB0A40FD21997C99004669CA /* img_wallHob@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A621997C99004669CA /* img_wallHob@3x.png */; };
+		BB0A40FE21997C99004669CA /* 矢量智能对象7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */; };
+		BB21BF5E219E54F90067BC61 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF5D219E54F90067BC61 /* DeviceModel.m */; };
+		BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */; };
+		BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352911219D61B300428DE9 /* HouseSelectCell.m */; };
+		BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352914219D63BC00428DE9 /* HouseSelectController.m */; };
+		BB352919219D95B500428DE9 /* img_houseManage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB352916219D95B500428DE9 /* img_houseManage@3x.png */; };
+		BB35291A219D95B500428DE9 /* img_houseManage.png in Resources */ = {isa = PBXBuildFile; fileRef = BB352917219D95B500428DE9 /* img_houseManage.png */; };
+		BB35291B219D95B500428DE9 /* img_houseManage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB352918219D95B500428DE9 /* img_houseManage@2x.png */; };
+		BB352922219D968500428DE9 /* img_houseSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB35291C219D968400428DE9 /* img_houseSelected@2x.png */; };
+		BB352923219D968500428DE9 /* img_houseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = BB35291D219D968400428DE9 /* img_houseSelected.png */; };
+		BB352924219D968500428DE9 /* img_houseUnelect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB35291E219D968400428DE9 /* img_houseUnelect.png */; };
+		BB352925219D968500428DE9 /* img_houseSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB35291F219D968500428DE9 /* img_houseSelected@3x.png */; };
+		BB352926219D968500428DE9 /* img_houseUnelect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB352920219D968500428DE9 /* img_houseUnelect@3x.png */; };
+		BB352927219D968500428DE9 /* img_houseUnelect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB352921219D968500428DE9 /* img_houseUnelect@2x.png */; };
+		BB35292B219DA7EC00428DE9 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35292A219DA7EC00428DE9 /* Network.m */; };
+		BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49774A219A6B5E00427197 /* MyHouseController.m */; };
 		BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9121958864004E00A2 /* AppDelegate.m */; };
 		BB49DF9521958864004E00A2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9421958864004E00A2 /* ViewController.m */; };
 		BB49DF9821958864004E00A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB49DF9621958864004E00A2 /* Main.storyboard */; };
@@ -16,6 +128,8 @@
 		BB49DFA321958867004E00A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DFA221958867004E00A2 /* main.m */; };
 		BB49DFAD21958867004E00A2 /* gleadSmartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DFAC21958867004E00A2 /* gleadSmartTests.m */; };
 		BB49DFB821958867004E00A2 /* gleadSmartUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DFB721958867004E00A2 /* gleadSmartUITests.m */; };
+		BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB835FA3219C03A300225B60 /* HomeDeviceController.m */; };
+		DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +150,138 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gleadSmart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C91728F2E98E7E5ACCA018D /* Pods-gleadSmart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.debug.xcconfig"; sourceTree = "<group>"; };
+		21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.release.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.release.xcconfig"; sourceTree = "<group>"; };
+		BB0A401021991AA8004669CA /* UIColor+ColorChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorChange.m"; sourceTree = "<group>"; };
+		BB0A401121991AA8004669CA /* NSDate+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Common.h"; sourceTree = "<group>"; };
+		BB0A401221991AA8004669CA /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
+		BB0A401321991AA8004669CA /* UIButton+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Common.m"; sourceTree = "<group>"; };
+		BB0A401421991AA8004669CA /* NSObject+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Common.m"; sourceTree = "<group>"; };
+		BB0A401821991AA8004669CA /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
+		BB0A401921991AA8004669CA /* NSDate+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
+		BB0A401A21991AA8004669CA /* UIColor+ColorChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorChange.h"; sourceTree = "<group>"; };
+		BB0A401C21991AA8004669CA /* TouchTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTableView.h; sourceTree = "<group>"; };
+		BB0A401D21991AA8004669CA /* TouchTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTableView.m; sourceTree = "<group>"; };
+		BB0A402E21991AA8004669CA /* UIButton+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Common.h"; sourceTree = "<group>"; };
+		BB0A402F21991AA8004669CA /* NSObject+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Common.h"; sourceTree = "<group>"; };
+		BB0A404221996F4A004669CA /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		BB0A404321996F4A004669CA /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		BB0A4046219970D3004669CA /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
+		BB0A4047219970D3004669CA /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
+		BB0A4048219970D3004669CA /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
+		BB0A4049219970D3004669CA /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
+		BB0A404A219970D3004669CA /* RDVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarController.m; sourceTree = "<group>"; };
+		BB0A404B219970D3004669CA /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
+		BB0A405121997C99004669CA /* 矢量智能对象 拷贝 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 4@2x.png"; sourceTree = "<group>"; };
+		BB0A405221997C99004669CA /* img_houseSelect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseSelect@2x.png"; sourceTree = "<group>"; };
+		BB0A405321997C99004669CA /* img_tab01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab01@3x.png"; sourceTree = "<group>"; };
+		BB0A405421997C99004669CA /* 椭圆 1 拷贝 2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝 2@3x.png"; sourceTree = "<group>"; };
+		BB0A405521997C99004669CA /* img_tab02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab02@2x.png"; sourceTree = "<group>"; };
+		BB0A405621997C99004669CA /* 矢量智能对象 拷贝 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 4.png"; sourceTree = "<group>"; };
+		BB0A405721997C99004669CA /* 圆角矩形 1 拷贝 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1 拷贝 3@2x.png"; sourceTree = "<group>"; };
+		BB0A405821997C99004669CA /* 圆角矩形 1 拷贝 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1 拷贝 3@3x.png"; sourceTree = "<group>"; };
+		BB0A405921997C99004669CA /* img_tab02@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab02@3x.png"; sourceTree = "<group>"; };
+		BB0A405A21997C99004669CA /* 椭圆 1 拷贝 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝 2@2x.png"; sourceTree = "<group>"; };
+		BB0A405B21997C99004669CA /* img_tab01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab01@2x.png"; sourceTree = "<group>"; };
+		BB0A405C21997C99004669CA /* img_wallHob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_wallHob.png; sourceTree = "<group>"; };
+		BB0A405D21997C99004669CA /* img_houseSelect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseSelect@3x.png"; sourceTree = "<group>"; };
+		BB0A405E21997C99004669CA /* 圆角矩形 1 拷贝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1 拷贝.png"; sourceTree = "<group>"; };
+		BB0A405F21997C99004669CA /* 矢量智能对象 拷贝 4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 4@3x.png"; sourceTree = "<group>"; };
+		BB0A406021997C99004669CA /* 形状 4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 4@3x.png"; sourceTree = "<group>"; };
+		BB0A406121997C99004669CA /* img_headerBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_headerBg@2x.png"; sourceTree = "<group>"; };
+		BB0A406221997C99004669CA /* 椭圆 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1.png"; sourceTree = "<group>"; };
+		BB0A406321997C99004669CA /* 椭圆 2 拷贝 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 2@2x.png"; sourceTree = "<group>"; };
+		BB0A406421997C99004669CA /* img_homeSet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_homeSet@2x.png"; sourceTree = "<group>"; };
+		BB0A406521997C99004669CA /* 椭圆 1 拷贝 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝 2.png"; sourceTree = "<group>"; };
+		BB0A406621997C99004669CA /* img_tab02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tab02.png; sourceTree = "<group>"; };
+		BB0A406721997C99004669CA /* 矢量智能对象6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象6@3x.png"; sourceTree = "<group>"; };
+		BB0A406821997C99004669CA /* 椭圆 1 拷贝 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝 3.png"; sourceTree = "<group>"; };
+		BB0A406921997C99004669CA /* img_tab01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tab01.png; sourceTree = "<group>"; };
+		BB0A406A21997C99004669CA /* 形状 3 拷贝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 3 拷贝.png"; sourceTree = "<group>"; };
+		BB0A406B21997C99004669CA /* 矢量智能对象6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象6@2x.png"; sourceTree = "<group>"; };
+		BB0A406C21997C99004669CA /* 矩形 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 5.png"; sourceTree = "<group>"; };
+		BB0A406D21997C99004669CA /* img_homeSet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_homeSet@3x.png"; sourceTree = "<group>"; };
+		BB0A406E21997C99004669CA /* 椭圆 2 拷贝 2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 2@3x.png"; sourceTree = "<group>"; };
+		BB0A406F21997C99004669CA /* img_tab03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tab03.png; sourceTree = "<group>"; };
+		BB0A407021997C99004669CA /* 椭圆 1 拷贝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝.png"; sourceTree = "<group>"; };
+		BB0A407121997C99004669CA /* img_headerBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_headerBg@3x.png"; sourceTree = "<group>"; };
+		BB0A407221997C99004669CA /* 形状 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 4@2x.png"; sourceTree = "<group>"; };
+		BB0A407321997C99004669CA /* 形状 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 3@3x.png"; sourceTree = "<group>"; };
+		BB0A407421997C99004669CA /* 椭圆 2 拷贝 31@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 31@3x.png"; sourceTree = "<group>"; };
+		BB0A407521997C99004669CA /* 圆角矩形 1 拷贝 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1 拷贝 2@2x.png"; sourceTree = "<group>"; };
+		BB0A407621997C99004669CA /* 椭圆 1 拷贝 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝 3@3x.png"; sourceTree = "<group>"; };
+		BB0A407721997C99004669CA /* 椭圆 2 拷贝 21@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 21@2x.png"; sourceTree = "<group>"; };
+		BB0A407821997C99004669CA /* img_weatherBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_weatherBg@2x.png"; sourceTree = "<group>"; };
+		BB0A407921997C99004669CA /* 椭圆 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1@2x.png"; sourceTree = "<group>"; };
+		BB0A407A21997C99004669CA /* img_headerBg@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_headerBg@1x.png"; sourceTree = "<group>"; };
+		BB0A407B21997C99004669CA /* img_addDevice@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addDevice@3x.png"; sourceTree = "<group>"; };
+		BB0A407C21997C99004669CA /* 矩形 5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 5@3x.png"; sourceTree = "<group>"; };
+		BB0A407D21997C99004669CA /* 矩形 5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 5@2x.png"; sourceTree = "<group>"; };
+		BB0A407E21997C99004669CA /* 圆角矩形 1 拷贝 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1 拷贝 2.png"; sourceTree = "<group>"; };
+		BB0A407F21997C99004669CA /* img_addDevice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addDevice@2x.png"; sourceTree = "<group>"; };
+		BB0A408021997C99004669CA /* 椭圆 1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1@3x.png"; sourceTree = "<group>"; };
+		BB0A408121997C99004669CA /* img_weatherBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_weatherBg@3x.png"; sourceTree = "<group>"; };
+		BB0A408221997C99004669CA /* 圆角矩形 1 拷贝 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1 拷贝 3.png"; sourceTree = "<group>"; };
+		BB0A408321997C99004669CA /* 椭圆 2 拷贝 21@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 21@3x.png"; sourceTree = "<group>"; };
+		BB0A408421997C99004669CA /* 椭圆 1 拷贝 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝 3@2x.png"; sourceTree = "<group>"; };
+		BB0A408521997C99004669CA /* 椭圆 2 拷贝 31@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 31@2x.png"; sourceTree = "<group>"; };
+		BB0A408621997C99004669CA /* 圆角矩形 1 拷贝 2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1 拷贝 2@3x.png"; sourceTree = "<group>"; };
+		BB0A408721997C99004669CA /* 形状 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 3@2x.png"; sourceTree = "<group>"; };
+		BB0A408821997C99004669CA /* 矢量智能对象7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7@3x.png"; sourceTree = "<group>"; };
+		BB0A408921997C99004669CA /* img_wallHob@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_wallHob@2x.png"; sourceTree = "<group>"; };
+		BB0A408A21997C99004669CA /* img_homeSet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_homeSet.png; sourceTree = "<group>"; };
+		BB0A408B21997C99004669CA /* 矢量智能对象5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象5.png"; sourceTree = "<group>"; };
+		BB0A408C21997C99004669CA /* 矢量智能对象5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象5@2x.png"; sourceTree = "<group>"; };
+		BB0A408D21997C99004669CA /* 椭圆 2 拷贝 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 3@2x.png"; sourceTree = "<group>"; };
+		BB0A408E21997C99004669CA /* 椭圆 2 拷贝 21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 21.png"; sourceTree = "<group>"; };
+		BB0A408F21997C99004669CA /* 椭圆 1 拷贝@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝@3x.png"; sourceTree = "<group>"; };
+		BB0A409021997C99004669CA /* img_tab03@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab03@3x.png"; sourceTree = "<group>"; };
+		BB0A409121997C99004669CA /* 矢量智能对象7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7.png"; sourceTree = "<group>"; };
+		BB0A409221997C99004669CA /* 圆角矩形 1 拷贝@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1 拷贝@2x.png"; sourceTree = "<group>"; };
+		BB0A409321997C99004669CA /* 矢量智能对象6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象6.png"; sourceTree = "<group>"; };
+		BB0A409421997C99004669CA /* 圆角矩形 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1@2x.png"; sourceTree = "<group>"; };
+		BB0A409521997C99004669CA /* 形状 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 4.png"; sourceTree = "<group>"; };
+		BB0A409621997C99004669CA /* 形状 3 拷贝@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 3 拷贝@2x.png"; sourceTree = "<group>"; };
+		BB0A409721997C99004669CA /* 形状 3 拷贝@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 3 拷贝@3x.png"; sourceTree = "<group>"; };
+		BB0A409821997C99004669CA /* 椭圆 2 拷贝 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 2.png"; sourceTree = "<group>"; };
+		BB0A409921997C99004669CA /* 圆角矩形 1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1@3x.png"; sourceTree = "<group>"; };
+		BB0A409A21997C99004669CA /* img_houseSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_houseSelect.png; sourceTree = "<group>"; };
+		BB0A409B21997C99004669CA /* 圆角矩形 1 拷贝@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1 拷贝@3x.png"; sourceTree = "<group>"; };
+		BB0A409C21997C99004669CA /* img_weatherBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_weatherBg.png; sourceTree = "<group>"; };
+		BB0A409D21997C99004669CA /* 椭圆 2 拷贝 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 3.png"; sourceTree = "<group>"; };
+		BB0A409E21997C99004669CA /* img_tab03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab03@2x.png"; sourceTree = "<group>"; };
+		BB0A409F21997C99004669CA /* 椭圆 1 拷贝@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝@2x.png"; sourceTree = "<group>"; };
+		BB0A40A021997C99004669CA /* 圆角矩形 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 1.png"; sourceTree = "<group>"; };
+		BB0A40A121997C99004669CA /* 形状 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状 3.png"; sourceTree = "<group>"; };
+		BB0A40A221997C99004669CA /* 椭圆 2 拷贝 31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 31.png"; sourceTree = "<group>"; };
+		BB0A40A321997C99004669CA /* 椭圆 2 拷贝 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 3@3x.png"; sourceTree = "<group>"; };
+		BB0A40A421997C99004669CA /* 矢量智能对象5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象5@3x.png"; sourceTree = "<group>"; };
+		BB0A40A521997C99004669CA /* img_addDevice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_addDevice.png; sourceTree = "<group>"; };
+		BB0A40A621997C99004669CA /* img_wallHob@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_wallHob@3x.png"; sourceTree = "<group>"; };
+		BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7@2x.png"; sourceTree = "<group>"; };
+		BB0A4100219986FE004669CA /* gleadSmart-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gleadSmart-Prefix.pch"; sourceTree = "<group>"; };
+		BB21BF5C219E54F90067BC61 /* DeviceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceModel.h; sourceTree = "<group>"; };
+		BB21BF5D219E54F90067BC61 /* DeviceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceModel.m; sourceTree = "<group>"; };
+		BB35290D219D0FC700428DE9 /* HomeDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceCell.h; sourceTree = "<group>"; };
+		BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceCell.m; sourceTree = "<group>"; };
+		BB352910219D61B300428DE9 /* HouseSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSelectCell.h; sourceTree = "<group>"; };
+		BB352911219D61B300428DE9 /* HouseSelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseSelectCell.m; sourceTree = "<group>"; };
+		BB352913219D63BC00428DE9 /* HouseSelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSelectController.h; sourceTree = "<group>"; };
+		BB352914219D63BC00428DE9 /* HouseSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseSelectController.m; sourceTree = "<group>"; };
+		BB352916219D95B500428DE9 /* img_houseManage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseManage@3x.png"; sourceTree = "<group>"; };
+		BB352917219D95B500428DE9 /* img_houseManage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_houseManage.png; sourceTree = "<group>"; };
+		BB352918219D95B500428DE9 /* img_houseManage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseManage@2x.png"; sourceTree = "<group>"; };
+		BB35291C219D968400428DE9 /* img_houseSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseSelected@2x.png"; sourceTree = "<group>"; };
+		BB35291D219D968400428DE9 /* img_houseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_houseSelected.png; sourceTree = "<group>"; };
+		BB35291E219D968400428DE9 /* img_houseUnelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_houseUnelect.png; sourceTree = "<group>"; };
+		BB35291F219D968500428DE9 /* img_houseSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseSelected@3x.png"; sourceTree = "<group>"; };
+		BB352920219D968500428DE9 /* img_houseUnelect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseUnelect@3x.png"; sourceTree = "<group>"; };
+		BB352921219D968500428DE9 /* img_houseUnelect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseUnelect@2x.png"; sourceTree = "<group>"; };
+		BB352929219DA7EC00428DE9 /* Network.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
+		BB35292A219DA7EC00428DE9 /* Network.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
+		BB497749219A6B5E00427197 /* MyHouseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyHouseController.h; sourceTree = "<group>"; };
+		BB49774A219A6B5E00427197 /* MyHouseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyHouseController.m; sourceTree = "<group>"; };
 		BB49DF8D21958864004E00A2 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB49DF9021958864004E00A2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BB49DF9121958864004E00A2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -53,6 +299,8 @@
 		BB49DFB321958867004E00A2 /* gleadSmartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gleadSmartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB49DFB721958867004E00A2 /* gleadSmartUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gleadSmartUITests.m; sourceTree = "<group>"; };
 		BB49DFB921958868004E00A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB835FA2219C03A300225B60 /* HomeDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceController.h; sourceTree = "<group>"; };
+		BB835FA3219C03A300225B60 /* HomeDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +308,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,12 +329,243 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		136D526E4D55E2464B729DFA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1C91728F2E98E7E5ACCA018D /* Pods-gleadSmart.debug.xcconfig */,
+				21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BB0A400F21991AA8004669CA /* OC_Category */ = {
+			isa = PBXGroup;
+			children = (
+				BB0A402121991AA8004669CA /* View */,
+				BB0A401B21991AA8004669CA /* TableView+Touch */,
+				BB0A401121991AA8004669CA /* NSDate+Common.h */,
+				BB0A401921991AA8004669CA /* NSDate+Common.m */,
+				BB0A402F21991AA8004669CA /* NSObject+Common.h */,
+				BB0A401421991AA8004669CA /* NSObject+Common.m */,
+				BB0A401221991AA8004669CA /* NSString+Common.h */,
+				BB0A401821991AA8004669CA /* NSString+Common.m */,
+				BB0A402E21991AA8004669CA /* UIButton+Common.h */,
+				BB0A401321991AA8004669CA /* UIButton+Common.m */,
+				BB0A401A21991AA8004669CA /* UIColor+ColorChange.h */,
+				BB0A401021991AA8004669CA /* UIColor+ColorChange.m */,
+			);
+			path = OC_Category;
+			sourceTree = SOURCE_ROOT;
+		};
+		BB0A401B21991AA8004669CA /* TableView+Touch */ = {
+			isa = PBXGroup;
+			children = (
+				BB0A401C21991AA8004669CA /* TouchTableView.h */,
+				BB0A401D21991AA8004669CA /* TouchTableView.m */,
+			);
+			path = "TableView+Touch";
+			sourceTree = "<group>";
+		};
+		BB0A402121991AA8004669CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BB0A40412199686D004669CA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				BB21BF5B219E54E20067BC61 /* Model */,
+				BB497748219A6A1E00427197 /* MyHouse */,
+				BB0A404221996F4A004669CA /* MainViewController.h */,
+				BB0A404321996F4A004669CA /* MainViewController.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		BB0A4045219970D3004669CA /* RDVTabbarController */ = {
+			isa = PBXGroup;
+			children = (
+				BB0A4049219970D3004669CA /* RDVTabBar.h */,
+				BB0A4046219970D3004669CA /* RDVTabBar.m */,
+				BB0A4047219970D3004669CA /* RDVTabBarController.h */,
+				BB0A404A219970D3004669CA /* RDVTabBarController.m */,
+				BB0A4048219970D3004669CA /* RDVTabBarItem.h */,
+				BB0A404B219970D3004669CA /* RDVTabBarItem.m */,
+			);
+			path = RDVTabbarController;
+			sourceTree = "<group>";
+		};
+		BB0A404F21997A4B004669CA /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				BB0A405021997C99004669CA /* 我的家_slices */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		BB0A405021997C99004669CA /* 我的家_slices */ = {
+			isa = PBXGroup;
+			children = (
+				BB35291D219D968400428DE9 /* img_houseSelected.png */,
+				BB35291C219D968400428DE9 /* img_houseSelected@2x.png */,
+				BB35291F219D968500428DE9 /* img_houseSelected@3x.png */,
+				BB35291E219D968400428DE9 /* img_houseUnelect.png */,
+				BB352921219D968500428DE9 /* img_houseUnelect@2x.png */,
+				BB352920219D968500428DE9 /* img_houseUnelect@3x.png */,
+				BB352917219D95B500428DE9 /* img_houseManage.png */,
+				BB352918219D95B500428DE9 /* img_houseManage@2x.png */,
+				BB352916219D95B500428DE9 /* img_houseManage@3x.png */,
+				BB0A406921997C99004669CA /* img_tab01.png */,
+				BB0A405B21997C99004669CA /* img_tab01@2x.png */,
+				BB0A405321997C99004669CA /* img_tab01@3x.png */,
+				BB0A406621997C99004669CA /* img_tab02.png */,
+				BB0A405521997C99004669CA /* img_tab02@2x.png */,
+				BB0A405921997C99004669CA /* img_tab02@3x.png */,
+				BB0A406F21997C99004669CA /* img_tab03.png */,
+				BB0A409E21997C99004669CA /* img_tab03@2x.png */,
+				BB0A409021997C99004669CA /* img_tab03@3x.png */,
+				BB0A406C21997C99004669CA /* 矩形 5.png */,
+				BB0A407D21997C99004669CA /* 矩形 5@2x.png */,
+				BB0A407C21997C99004669CA /* 矩形 5@3x.png */,
+				BB0A405C21997C99004669CA /* img_wallHob.png */,
+				BB0A408921997C99004669CA /* img_wallHob@2x.png */,
+				BB0A40A621997C99004669CA /* img_wallHob@3x.png */,
+				BB0A405621997C99004669CA /* 矢量智能对象 拷贝 4.png */,
+				BB0A405121997C99004669CA /* 矢量智能对象 拷贝 4@2x.png */,
+				BB0A405F21997C99004669CA /* 矢量智能对象 拷贝 4@3x.png */,
+				BB0A407A21997C99004669CA /* img_headerBg@1x.png */,
+				BB0A406121997C99004669CA /* img_headerBg@2x.png */,
+				BB0A407121997C99004669CA /* img_headerBg@3x.png */,
+				BB0A40A521997C99004669CA /* img_addDevice.png */,
+				BB0A407F21997C99004669CA /* img_addDevice@2x.png */,
+				BB0A407B21997C99004669CA /* img_addDevice@3x.png */,
+				BB0A409A21997C99004669CA /* img_houseSelect.png */,
+				BB0A405221997C99004669CA /* img_houseSelect@2x.png */,
+				BB0A405D21997C99004669CA /* img_houseSelect@3x.png */,
+				BB0A409C21997C99004669CA /* img_weatherBg.png */,
+				BB0A407821997C99004669CA /* img_weatherBg@2x.png */,
+				BB0A408121997C99004669CA /* img_weatherBg@3x.png */,
+				BB0A408A21997C99004669CA /* img_homeSet.png */,
+				BB0A406421997C99004669CA /* img_homeSet@2x.png */,
+				BB0A406D21997C99004669CA /* img_homeSet@3x.png */,
+				BB0A408B21997C99004669CA /* 矢量智能对象5.png */,
+				BB0A408C21997C99004669CA /* 矢量智能对象5@2x.png */,
+				BB0A40A421997C99004669CA /* 矢量智能对象5@3x.png */,
+				BB0A409321997C99004669CA /* 矢量智能对象6.png */,
+				BB0A406B21997C99004669CA /* 矢量智能对象6@2x.png */,
+				BB0A406721997C99004669CA /* 矢量智能对象6@3x.png */,
+				BB0A409121997C99004669CA /* 矢量智能对象7.png */,
+				BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */,
+				BB0A408821997C99004669CA /* 矢量智能对象7@3x.png */,
+				BB0A406521997C99004669CA /* 椭圆 1 拷贝 2.png */,
+				BB0A405A21997C99004669CA /* 椭圆 1 拷贝 2@2x.png */,
+				BB0A405421997C99004669CA /* 椭圆 1 拷贝 2@3x.png */,
+				BB0A406821997C99004669CA /* 椭圆 1 拷贝 3.png */,
+				BB0A408421997C99004669CA /* 椭圆 1 拷贝 3@2x.png */,
+				BB0A407621997C99004669CA /* 椭圆 1 拷贝 3@3x.png */,
+				BB0A407021997C99004669CA /* 椭圆 1 拷贝.png */,
+				BB0A409F21997C99004669CA /* 椭圆 1 拷贝@2x.png */,
+				BB0A408F21997C99004669CA /* 椭圆 1 拷贝@3x.png */,
+				BB0A406221997C99004669CA /* 椭圆 1.png */,
+				BB0A407921997C99004669CA /* 椭圆 1@2x.png */,
+				BB0A408021997C99004669CA /* 椭圆 1@3x.png */,
+				BB0A409821997C99004669CA /* 椭圆 2 拷贝 2.png */,
+				BB0A406321997C99004669CA /* 椭圆 2 拷贝 2@2x.png */,
+				BB0A406E21997C99004669CA /* 椭圆 2 拷贝 2@3x.png */,
+				BB0A409D21997C99004669CA /* 椭圆 2 拷贝 3.png */,
+				BB0A408D21997C99004669CA /* 椭圆 2 拷贝 3@2x.png */,
+				BB0A40A321997C99004669CA /* 椭圆 2 拷贝 3@3x.png */,
+				BB0A408E21997C99004669CA /* 椭圆 2 拷贝 21.png */,
+				BB0A407721997C99004669CA /* 椭圆 2 拷贝 21@2x.png */,
+				BB0A408321997C99004669CA /* 椭圆 2 拷贝 21@3x.png */,
+				BB0A40A221997C99004669CA /* 椭圆 2 拷贝 31.png */,
+				BB0A408521997C99004669CA /* 椭圆 2 拷贝 31@2x.png */,
+				BB0A407421997C99004669CA /* 椭圆 2 拷贝 31@3x.png */,
+				BB0A406A21997C99004669CA /* 形状 3 拷贝.png */,
+				BB0A409621997C99004669CA /* 形状 3 拷贝@2x.png */,
+				BB0A409721997C99004669CA /* 形状 3 拷贝@3x.png */,
+				BB0A40A121997C99004669CA /* 形状 3.png */,
+				BB0A408721997C99004669CA /* 形状 3@2x.png */,
+				BB0A407321997C99004669CA /* 形状 3@3x.png */,
+				BB0A409521997C99004669CA /* 形状 4.png */,
+				BB0A407221997C99004669CA /* 形状 4@2x.png */,
+				BB0A406021997C99004669CA /* 形状 4@3x.png */,
+				BB0A407E21997C99004669CA /* 圆角矩形 1 拷贝 2.png */,
+				BB0A407521997C99004669CA /* 圆角矩形 1 拷贝 2@2x.png */,
+				BB0A408621997C99004669CA /* 圆角矩形 1 拷贝 2@3x.png */,
+				BB0A408221997C99004669CA /* 圆角矩形 1 拷贝 3.png */,
+				BB0A405721997C99004669CA /* 圆角矩形 1 拷贝 3@2x.png */,
+				BB0A405821997C99004669CA /* 圆角矩形 1 拷贝 3@3x.png */,
+				BB0A405E21997C99004669CA /* 圆角矩形 1 拷贝.png */,
+				BB0A409221997C99004669CA /* 圆角矩形 1 拷贝@2x.png */,
+				BB0A409B21997C99004669CA /* 圆角矩形 1 拷贝@3x.png */,
+				BB0A40A021997C99004669CA /* 圆角矩形 1.png */,
+				BB0A409421997C99004669CA /* 圆角矩形 1@2x.png */,
+				BB0A409921997C99004669CA /* 圆角矩形 1@3x.png */,
+			);
+			path = "我的家_slices";
+			sourceTree = "<group>";
+		};
+		BB21BF5B219E54E20067BC61 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BB21BF5C219E54F90067BC61 /* DeviceModel.h */,
+				BB21BF5D219E54F90067BC61 /* DeviceModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BB35290B219D0FA300428DE9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BB35290C219D0FAB00428DE9 /* Myhouse */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BB35290C219D0FAB00428DE9 /* Myhouse */ = {
+			isa = PBXGroup;
+			children = (
+				BB35290D219D0FC700428DE9 /* HomeDeviceCell.h */,
+				BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */,
+				BB352910219D61B300428DE9 /* HouseSelectCell.h */,
+				BB352911219D61B300428DE9 /* HouseSelectCell.m */,
+			);
+			path = Myhouse;
+			sourceTree = "<group>";
+		};
+		BB352928219DA7AE00428DE9 /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				BB352929219DA7EC00428DE9 /* Network.h */,
+				BB35292A219DA7EC00428DE9 /* Network.m */,
+			);
+			path = Singleton;
+			sourceTree = "<group>";
+		};
+		BB497748219A6A1E00427197 /* MyHouse */ = {
+			isa = PBXGroup;
+			children = (
+				BB497749219A6B5E00427197 /* MyHouseController.h */,
+				BB49774A219A6B5E00427197 /* MyHouseController.m */,
+				BB835FA2219C03A300225B60 /* HomeDeviceController.h */,
+				BB835FA3219C03A300225B60 /* HomeDeviceController.m */,
+				BB352913219D63BC00428DE9 /* HouseSelectController.h */,
+				BB352914219D63BC00428DE9 /* HouseSelectController.m */,
+			);
+			path = MyHouse;
+			sourceTree = "<group>";
+		};
 		BB49DF8421958864004E00A2 = {
 			isa = PBXGroup;
 			children = (
+				CFCEDBAD622E9D8465800F48 /* Frameworks */,
 				BB49DF8F21958864004E00A2 /* gleadSmart */,
 				BB49DFAB21958867004E00A2 /* gleadSmartTests */,
 				BB49DFB621958867004E00A2 /* gleadSmartUITests */,
+				136D526E4D55E2464B729DFA /* Pods */,
 				BB49DF8E21958864004E00A2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +583,12 @@
 		BB49DF8F21958864004E00A2 /* gleadSmart */ = {
 			isa = PBXGroup;
 			children = (
+				BB352928219DA7AE00428DE9 /* Singleton */,
+				BB35290B219D0FA300428DE9 /* Cell */,
+				BB0A404F21997A4B004669CA /* UIImage */,
+				BB0A4045219970D3004669CA /* RDVTabbarController */,
+				BB0A400F21991AA8004669CA /* OC_Category */,
+				BB0A40412199686D004669CA /* Main */,
 				BB49DF9021958864004E00A2 /* AppDelegate.h */,
 				BB49DF9121958864004E00A2 /* AppDelegate.m */,
 				BB49DF9321958864004E00A2 /* ViewController.h */,
@@ -112,6 +598,7 @@
 				BB49DF9E21958867004E00A2 /* LaunchScreen.storyboard */,
 				BB49DFA121958867004E00A2 /* Info.plist */,
 				BB49DFA221958867004E00A2 /* main.m */,
+				BB0A4100219986FE004669CA /* gleadSmart-Prefix.pch */,
 				BB49DF9921958864004E00A2 /* gleadSmart.xcdatamodeld */,
 			);
 			path = gleadSmart;
@@ -135,6 +622,14 @@
 			path = gleadSmartUITests;
 			sourceTree = "<group>";
 		};
+		CFCEDBAD622E9D8465800F48 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -142,9 +637,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BB49DFBC21958868004E00A2 /* Build configuration list for PBXNativeTarget "gleadSmart" */;
 			buildPhases = (
+				A3E6E42EAC7055AC4956507C /* [CP] Check Pods Manifest.lock */,
 				BB49DF8921958864004E00A2 /* Sources */,
 				BB49DF8A21958864004E00A2 /* Frameworks */,
 				BB49DF8B21958864004E00A2 /* Resources */,
+				CDE5640370C0C592CDFE9FD3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -238,9 +735,105 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0A40FD21997C99004669CA /* img_wallHob@3x.png in Resources */,
+				BB0A40CF21997C99004669CA /* img_weatherBg@2x.png in Resources */,
+				BB0A40E721997C99004669CA /* img_tab03@3x.png in Resources */,
+				BB0A40D221997C99004669CA /* img_addDevice@3x.png in Resources */,
+				BB0A40FE21997C99004669CA /* 矢量智能对象7@2x.png in Resources */,
+				BB0A40D121997C99004669CA /* img_headerBg@1x.png in Resources */,
+				BB0A40BA21997C99004669CA /* 椭圆 2 拷贝 2@2x.png in Resources */,
+				BB0A40CC21997C99004669CA /* 圆角矩形 1 拷贝 2@2x.png in Resources */,
+				BB35291B219D95B500428DE9 /* img_houseManage@2x.png in Resources */,
+				BB0A40B421997C99004669CA /* img_houseSelect@3x.png in Resources */,
+				BB0A40F021997C99004669CA /* 圆角矩形 1@3x.png in Resources */,
+				BB0A40C421997C99004669CA /* img_homeSet@3x.png in Resources */,
+				BB0A40BE21997C99004669CA /* 矢量智能对象6@3x.png in Resources */,
+				BB0A40F721997C99004669CA /* 圆角矩形 1.png in Resources */,
+				BB0A40E021997C99004669CA /* img_wallHob@2x.png in Resources */,
+				BB0A40C521997C99004669CA /* 椭圆 2 拷贝 2@3x.png in Resources */,
+				BB0A40D521997C99004669CA /* 圆角矩形 1 拷贝 2.png in Resources */,
+				BB0A40D621997C99004669CA /* img_addDevice@2x.png in Resources */,
+				BB0A40C021997C99004669CA /* img_tab01.png in Resources */,
+				BB0A40B921997C99004669CA /* 椭圆 1.png in Resources */,
+				BB352927219D968500428DE9 /* img_houseUnelect@2x.png in Resources */,
+				BB0A40EC21997C99004669CA /* 形状 4.png in Resources */,
+				BB0A40F821997C99004669CA /* 形状 3.png in Resources */,
+				BB0A40C221997C99004669CA /* 矢量智能对象6@2x.png in Resources */,
+				BB352925219D968500428DE9 /* img_houseSelected@3x.png in Resources */,
+				BB352924219D968500428DE9 /* img_houseUnelect.png in Resources */,
+				BB0A40B721997C99004669CA /* 形状 4@3x.png in Resources */,
+				BB0A40EF21997C99004669CA /* 椭圆 2 拷贝 2.png in Resources */,
+				BB0A40C121997C99004669CA /* 形状 3 拷贝.png in Resources */,
+				BB0A40C321997C99004669CA /* 矩形 5.png in Resources */,
+				BB0A40DA21997C99004669CA /* 椭圆 2 拷贝 21@3x.png in Resources */,
+				BB0A40EA21997C99004669CA /* 矢量智能对象6.png in Resources */,
+				BB0A40B121997C99004669CA /* 椭圆 1 拷贝 2@2x.png in Resources */,
+				BB0A40B621997C99004669CA /* 矢量智能对象 拷贝 4@3x.png in Resources */,
+				BB0A40B821997C99004669CA /* img_headerBg@2x.png in Resources */,
+				BB0A40F621997C99004669CA /* 椭圆 1 拷贝@2x.png in Resources */,
+				BB0A40AE21997C99004669CA /* 圆角矩形 1 拷贝 3@2x.png in Resources */,
+				BB0A40D321997C99004669CA /* 矩形 5@3x.png in Resources */,
+				BB352923219D968500428DE9 /* img_houseSelected.png in Resources */,
+				BB0A40AC21997C99004669CA /* img_tab02@2x.png in Resources */,
+				BB0A40BB21997C99004669CA /* img_homeSet@2x.png in Resources */,
+				BB0A40FA21997C99004669CA /* 椭圆 2 拷贝 3@3x.png in Resources */,
+				BB0A40E921997C99004669CA /* 圆角矩形 1 拷贝@2x.png in Resources */,
+				BB0A40CD21997C99004669CA /* 椭圆 1 拷贝 3@3x.png in Resources */,
+				BB352922219D968500428DE9 /* img_houseSelected@2x.png in Resources */,
+				BB0A40D821997C99004669CA /* img_weatherBg@3x.png in Resources */,
+				BB0A40DF21997C99004669CA /* 矢量智能对象7@3x.png in Resources */,
+				BB0A40D021997C99004669CA /* 椭圆 1@2x.png in Resources */,
+				BB0A40D421997C99004669CA /* 矩形 5@2x.png in Resources */,
+				BB0A40FC21997C99004669CA /* img_addDevice.png in Resources */,
+				BB0A40D921997C99004669CA /* 圆角矩形 1 拷贝 3.png in Resources */,
+				BB0A40BC21997C99004669CA /* 椭圆 1 拷贝 2.png in Resources */,
+				BB0A40D721997C99004669CA /* 椭圆 1@3x.png in Resources */,
 				BB49DFA021958867004E00A2 /* LaunchScreen.storyboard in Resources */,
+				BB0A40A821997C99004669CA /* 矢量智能对象 拷贝 4@2x.png in Resources */,
+				BB0A40CA21997C99004669CA /* 形状 3@3x.png in Resources */,
+				BB0A40DC21997C99004669CA /* 椭圆 2 拷贝 31@2x.png in Resources */,
+				BB0A40EB21997C99004669CA /* 圆角矩形 1@2x.png in Resources */,
+				BB0A40BD21997C99004669CA /* img_tab02.png in Resources */,
+				BB0A40AD21997C99004669CA /* 矢量智能对象 拷贝 4.png in Resources */,
+				BB0A40B321997C99004669CA /* img_wallHob.png in Resources */,
+				BB35291A219D95B500428DE9 /* img_houseManage.png in Resources */,
+				BB0A40DE21997C99004669CA /* 形状 3@2x.png in Resources */,
+				BB0A40F921997C99004669CA /* 椭圆 2 拷贝 31.png in Resources */,
+				BB0A40B021997C99004669CA /* img_tab02@3x.png in Resources */,
+				BB0A40F121997C99004669CA /* img_houseSelect.png in Resources */,
+				BB0A40F521997C99004669CA /* img_tab03@2x.png in Resources */,
+				BB0A40CB21997C99004669CA /* 椭圆 2 拷贝 31@3x.png in Resources */,
 				BB49DF9D21958867004E00A2 /* Assets.xcassets in Resources */,
+				BB0A40F321997C99004669CA /* img_weatherBg.png in Resources */,
+				BB0A40E321997C99004669CA /* 矢量智能对象5@2x.png in Resources */,
+				BB0A40DB21997C99004669CA /* 椭圆 1 拷贝 3@2x.png in Resources */,
+				BB0A40E521997C99004669CA /* 椭圆 2 拷贝 21.png in Resources */,
+				BB0A40AA21997C99004669CA /* img_tab01@3x.png in Resources */,
 				BB49DF9821958864004E00A2 /* Main.storyboard in Resources */,
+				BB0A40EE21997C99004669CA /* 形状 3 拷贝@3x.png in Resources */,
+				BB0A40AF21997C99004669CA /* 圆角矩形 1 拷贝 3@3x.png in Resources */,
+				BB352919219D95B500428DE9 /* img_houseManage@3x.png in Resources */,
+				BB0A40F221997C99004669CA /* 圆角矩形 1 拷贝@3x.png in Resources */,
+				BB0A40CE21997C99004669CA /* 椭圆 2 拷贝 21@2x.png in Resources */,
+				BB352926219D968500428DE9 /* img_houseUnelect@3x.png in Resources */,
+				BB0A40ED21997C99004669CA /* 形状 3 拷贝@2x.png in Resources */,
+				BB0A40A921997C99004669CA /* img_houseSelect@2x.png in Resources */,
+				BB0A40B521997C99004669CA /* 圆角矩形 1 拷贝.png in Resources */,
+				BB0A40DD21997C99004669CA /* 圆角矩形 1 拷贝 2@3x.png in Resources */,
+				BB0A40FB21997C99004669CA /* 矢量智能对象5@3x.png in Resources */,
+				BB0A40C621997C99004669CA /* img_tab03.png in Resources */,
+				BB0A40C921997C99004669CA /* 形状 4@2x.png in Resources */,
+				BB0A40B221997C99004669CA /* img_tab01@2x.png in Resources */,
+				BB0A40E421997C99004669CA /* 椭圆 2 拷贝 3@2x.png in Resources */,
+				BB0A40BF21997C99004669CA /* 椭圆 1 拷贝 3.png in Resources */,
+				BB0A40E621997C99004669CA /* 椭圆 1 拷贝@3x.png in Resources */,
+				BB0A40E121997C99004669CA /* img_homeSet.png in Resources */,
+				BB0A40E821997C99004669CA /* 矢量智能对象7.png in Resources */,
+				BB0A40C821997C99004669CA /* img_headerBg@3x.png in Resources */,
+				BB0A40F421997C99004669CA /* 椭圆 2 拷贝 3.png in Resources */,
+				BB0A40E221997C99004669CA /* 矢量智能对象5.png in Resources */,
+				BB0A40AB21997C99004669CA /* 椭圆 1 拷贝 2@3x.png in Resources */,
+				BB0A40C721997C99004669CA /* 椭圆 1 拷贝.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,15 +853,93 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A3E6E42EAC7055AC4956507C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gleadSmart-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDE5640370C0C592CDFE9FD3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/WMPageController/WMPageController.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMPageController.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BB49DF8921958864004E00A2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				BB49DF9521958864004E00A2 /* ViewController.m in Sources */,
+				BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */,
+				BB21BF5E219E54F90067BC61 /* DeviceModel.m in Sources */,
+				BB0A403221991AA8004669CA /* NSObject+Common.m in Sources */,
+				BB0A403021991AA8004669CA /* UIColor+ColorChange.m in Sources */,
+				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
+				BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */,
+				BB35292B219DA7EC00428DE9 /* Network.m in Sources */,
+				BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */,
+				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
+				BB0A403521991AA8004669CA /* NSDate+Common.m in Sources */,
+				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
+				BB0A403621991AA8004669CA /* TouchTableView.m in Sources */,
+				BB0A403121991AA8004669CA /* UIButton+Common.m in Sources */,
 				BB49DF9B21958864004E00A2 /* gleadSmart.xcdatamodeld in Sources */,
+				BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */,
+				BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */,
 				BB49DFA321958867004E00A2 /* main.m in Sources */,
 				BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */,
+				BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */,
+				BB0A403421991AA8004669CA /* NSString+Common.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,11 +1108,15 @@
 		};
 		BB49DFBD21958868004E00A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C91728F2E98E7E5ACCA018D /* Pods-gleadSmart.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gleadSmart/gleadSmart-Prefix.pch";
 				INFOPLIST_FILE = gleadSmart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -454,11 +1129,15 @@
 		};
 		BB49DFBE21958868004E00A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gleadSmart/gleadSmart-Prefix.pch";
 				INFOPLIST_FILE = gleadSmart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
