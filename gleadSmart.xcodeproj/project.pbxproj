@@ -106,6 +106,8 @@
 		BB0A40FE21997C99004669CA /* 矢量智能对象7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */; };
 		BB21BF5E219E54F90067BC61 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF5D219E54F90067BC61 /* DeviceModel.m */; };
 		BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */; };
+		BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF63219E66210067BC61 /* HomeManagementController.m */; };
+		BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF69219E66F30067BC61 /* HouseManagementController.m */; };
 		BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */; };
 		BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352911219D61B300428DE9 /* HouseSelectCell.m */; };
 		BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352914219D63BC00428DE9 /* HouseSelectController.m */; };
@@ -266,6 +268,10 @@
 		BB21BF5D219E54F90067BC61 /* DeviceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceModel.m; sourceTree = "<group>"; };
 		BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectDeviceTypeController.h; sourceTree = "<group>"; };
 		BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectDeviceTypeController.m; sourceTree = "<group>"; };
+		BB21BF62219E66210067BC61 /* HomeManagementController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeManagementController.h; sourceTree = "<group>"; };
+		BB21BF63219E66210067BC61 /* HomeManagementController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeManagementController.m; sourceTree = "<group>"; };
+		BB21BF68219E66F30067BC61 /* HouseManagementController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseManagementController.h; sourceTree = "<group>"; };
+		BB21BF69219E66F30067BC61 /* HouseManagementController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseManagementController.m; sourceTree = "<group>"; };
 		BB35290D219D0FC700428DE9 /* HomeDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceCell.h; sourceTree = "<group>"; };
 		BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceCell.m; sourceTree = "<group>"; };
 		BB352910219D61B300428DE9 /* HouseSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSelectCell.h; sourceTree = "<group>"; };
@@ -520,6 +526,37 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		BB21BF65219E66920067BC61 /* House */ = {
+			isa = PBXGroup;
+			children = (
+				BB352913219D63BC00428DE9 /* HouseSelectController.h */,
+				BB352914219D63BC00428DE9 /* HouseSelectController.m */,
+				BB21BF68219E66F30067BC61 /* HouseManagementController.h */,
+				BB21BF69219E66F30067BC61 /* HouseManagementController.m */,
+			);
+			path = House;
+			sourceTree = "<group>";
+		};
+		BB21BF66219E66AF0067BC61 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BB835FA2219C03A300225B60 /* HomeDeviceController.h */,
+				BB835FA3219C03A300225B60 /* HomeDeviceController.m */,
+				BB21BF62219E66210067BC61 /* HomeManagementController.h */,
+				BB21BF63219E66210067BC61 /* HomeManagementController.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		BB21BF67219E66BE0067BC61 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */,
+				BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
 		BB35290B219D0FA300428DE9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,12 +590,9 @@
 			children = (
 				BB497749219A6B5E00427197 /* MyHouseController.h */,
 				BB49774A219A6B5E00427197 /* MyHouseController.m */,
-				BB835FA2219C03A300225B60 /* HomeDeviceController.h */,
-				BB835FA3219C03A300225B60 /* HomeDeviceController.m */,
-				BB352913219D63BC00428DE9 /* HouseSelectController.h */,
-				BB352914219D63BC00428DE9 /* HouseSelectController.m */,
-				BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */,
-				BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */,
+				BB21BF65219E66920067BC61 /* House */,
+				BB21BF66219E66AF0067BC61 /* Home */,
+				BB21BF67219E66BE0067BC61 /* Device */,
 			);
 			path = MyHouse;
 			sourceTree = "<group>";
@@ -926,6 +960,8 @@
 			files = (
 				BB49DF9521958864004E00A2 /* ViewController.m in Sources */,
 				BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */,
+				BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */,
+				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
 				BB21BF5E219E54F90067BC61 /* DeviceModel.m in Sources */,
 				BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */,
 				BB0A403221991AA8004669CA /* NSObject+Common.m in Sources */,
