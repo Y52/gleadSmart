@@ -10,7 +10,7 @@
 
 @interface SelectDeviceTypeController ()
 
-#warning TODO 完成设备类型选择UI
+#warning TODO 完成设备类型选择UI ds
 @property (strong, nonatomic) UITableView *deviceTypeTable;
 
 @end
