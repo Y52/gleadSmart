@@ -26,20 +26,20 @@
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
         }
-    }
-    if (!_rightLabel) {
-        _rightLabel = [[UILabel alloc] init];
-        _rightLabel.textColor = [UIColor darkGrayColor];
-        _rightLabel.font = [UIFont systemFontOfSize:15.0];
-        _rightLabel.textAlignment = NSTextAlignmentRight;
-        _rightLabel.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1];
-        _rightLabel.adjustsFontSizeToFitWidth = YES;
-        [self.contentView addSubview:_rightLabel];
-        [_rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 30));
-            make.centerY.equalTo(self.contentView.mas_centerY);
-            make.right.equalTo(self.contentView.mas_right).offset(-15);
-        }];
+        if (!_rightLabel) {
+            _rightLabel = [[UILabel alloc] init];
+            _rightLabel.textColor = [UIColor darkGrayColor];
+            _rightLabel.font = [UIFont systemFontOfSize:15.0];
+            _rightLabel.textAlignment = NSTextAlignmentRight;
+            _rightLabel.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1];
+            _rightLabel.adjustsFontSizeToFitWidth = YES;
+            [self.contentView addSubview:_rightLabel];
+            [_rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(150, 30));
+                make.centerY.equalTo(self.contentView.mas_centerY);
+                make.right.equalTo(self.contentView.mas_right).offset(-15);
+            }];
+        }
     }
     return self;
 }

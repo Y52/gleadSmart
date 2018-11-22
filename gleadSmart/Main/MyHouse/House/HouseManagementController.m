@@ -9,7 +9,7 @@
 #import "HouseManagementController.h"
 #import "HomeManagementTableViewCell.h"
 
-static NSString *const CellIdentifier_HouseManagement = @"CellID_HouseManagement";
+NSString *const CellIdentifier_HouseManagement = @"CellID_HouseManagement";
 
 static CGFloat const Cell_Height = 50.f;
 

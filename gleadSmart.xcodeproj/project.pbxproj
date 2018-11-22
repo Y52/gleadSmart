@@ -135,6 +135,123 @@
 		BB49DFAD21958867004E00A2 /* gleadSmartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DFAC21958867004E00A2 /* gleadSmartTests.m */; };
 		BB49DFB821958867004E00A2 /* gleadSmartUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DFB721958867004E00A2 /* gleadSmartUITests.m */; };
 		BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB835FA3219C03A300225B60 /* HomeDeviceController.m */; };
+		BB8B9D9921A65FDF00E5D8B2 /* ThermostatController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8B9D9821A65FDF00E5D8B2 /* ThermostatController.m */; };
+		BB8B9DB621A6815000E5D8B2 /* 矢量智能对象 拷贝 6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9B21A6815000E5D8B2 /* 矢量智能对象 拷贝 6.png */; };
+		BB8B9DB721A6815000E5D8B2 /* Ellipse 5 copy 7.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9C21A6815000E5D8B2 /* Ellipse 5 copy 7.png */; };
+		BB8B9DB821A6815000E5D8B2 /* thermostatControl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */; };
+		BB8B9DB921A6815000E5D8B2 /* 矢量智能对象 拷贝 6@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9E21A6815000E5D8B2 /* 矢量智能对象 拷贝 6@3x.png */; };
+		BB8B9DBA21A6815000E5D8B2 /* Background 拷贝.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9F21A6815000E5D8B2 /* Background 拷贝.png */; };
+		BB8B9DBB21A6815000E5D8B2 /* 矢量智能对象 拷贝 6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA021A6815000E5D8B2 /* 矢量智能对象 拷贝 6@2x.png */; };
+		BB8B9DBC21A6815000E5D8B2 /* thermostatControl@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA121A6815000E5D8B2 /* thermostatControl@3x.png */; };
+		BB8B9DBD21A6815000E5D8B2 /* thermostatKnob@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA221A6815000E5D8B2 /* thermostatKnob@3x.png */; };
+		BB8B9DBE21A6815000E5D8B2 /* 矢量智能对象@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA321A6815000E5D8B2 /* 矢量智能对象@2x.png */; };
+		BB8B9DBF21A6815000E5D8B2 /* Background 拷贝@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA421A6815000E5D8B2 /* Background 拷贝@3x.png */; };
+		BB8B9DC021A6815000E5D8B2 /* 椭圆 1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA521A6815000E5D8B2 /* 椭圆 1.png */; };
+		BB8B9DC121A6815000E5D8B2 /* Ellipse 5 copy 7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA621A6815000E5D8B2 /* Ellipse 5 copy 7@2x.png */; };
+		BB8B9DC221A6815000E5D8B2 /* Ellipse 5 copy 7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA721A6815000E5D8B2 /* Ellipse 5 copy 7@3x.png */; };
+		BB8B9DC321A6815000E5D8B2 /* Background 拷贝@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA821A6815000E5D8B2 /* Background 拷贝@2x.png */; };
+		BB8B9DC421A6815000E5D8B2 /* thermostatKnob@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA921A6815000E5D8B2 /* thermostatKnob@1x.png */; };
+		BB8B9DC521A6815000E5D8B2 /* 矢量智能对象@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DAA21A6815000E5D8B2 /* 矢量智能对象@3x.png */; };
+		BB8B9DC621A6815000E5D8B2 /* thermostatKnob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DAB21A6815000E5D8B2 /* thermostatKnob@2x.png */; };
+		BB8B9DC721A6815000E5D8B2 /* thermostatSet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DAC21A6815000E5D8B2 /* thermostatSet@2x.png */; };
+		BB8B9DC821A6815000E5D8B2 /* 椭圆 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DAD21A6815000E5D8B2 /* 椭圆 1@2x.png */; };
+		BB8B9DC921A6815000E5D8B2 /* 矢量智能对象.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DAE21A6815000E5D8B2 /* 矢量智能对象.png */; };
+		BB8B9DCA21A6815000E5D8B2 /* thermostatMoer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DAF21A6815000E5D8B2 /* thermostatMoer@3x.png */; };
+		BB8B9DCB21A6815000E5D8B2 /* thermostatMoer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB021A6815000E5D8B2 /* thermostatMoer@2x.png */; };
+		BB8B9DCC21A6815000E5D8B2 /* 椭圆 1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB121A6815000E5D8B2 /* 椭圆 1@3x.png */; };
+		BB8B9DCD21A6815000E5D8B2 /* thermostatSet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB221A6815000E5D8B2 /* thermostatSet@3x.png */; };
+		BB8B9DCE21A6815000E5D8B2 /* thermostatControl@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB321A6815000E5D8B2 /* thermostatControl@1x.png */; };
+		BB8B9DCF21A6815000E5D8B2 /* thermostatSet@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB421A6815000E5D8B2 /* thermostatSet@1x.png */; };
+		BB8B9DD021A6815000E5D8B2 /* thermostatMoer@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB521A6815000E5D8B2 /* thermostatMoer@1x.png */; };
+		BB8B9DD321A691D400E5D8B2 /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8B9DD221A691D400E5D8B2 /* WirelessValveController.m */; };
+		BB8B9E1A21A6928500E5D8B2 /* 矢量智能对象 拷贝 6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DD521A6928500E5D8B2 /* 矢量智能对象 拷贝 6.png */; };
+		BB8B9E1B21A6928500E5D8B2 /* nodeLeakSmall_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DD621A6928500E5D8B2 /* nodeLeakSmall_normal@2x.png */; };
+		BB8B9E1C21A6928500E5D8B2 /* valveAlertMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DD721A6928500E5D8B2 /* valveAlertMark@2x.png */; };
+		BB8B9E1D21A6928500E5D8B2 /* 矩形 6 拷贝@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DD821A6928500E5D8B2 /* 矩形 6 拷贝@3x.png */; };
+		BB8B9E1E21A6928500E5D8B2 /* valveTabMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DD921A6928500E5D8B2 /* valveTabMore@2x.png */; };
+		BB8B9E1F21A6928500E5D8B2 /* 矢量智能对象 拷贝 6@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DDA21A6928500E5D8B2 /* 矢量智能对象 拷贝 6@3x.png */; };
+		BB8B9E2021A6928500E5D8B2 /* 矩形 6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DDB21A6928500E5D8B2 /* 矩形 6@2x.png */; };
+		BB8B9E2121A6928500E5D8B2 /* 矩形 6 拷贝 2.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DDC21A6928500E5D8B2 /* 矩形 6 拷贝 2.png */; };
+		BB8B9E2221A6928500E5D8B2 /* 矩形 6 拷贝 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DDD21A6928500E5D8B2 /* 矩形 6 拷贝 2@2x.png */; };
+		BB8B9E2321A6928500E5D8B2 /* nodeLeakSmall_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DDE21A6928500E5D8B2 /* nodeLeakSmall_normal.png */; };
+		BB8B9E2421A6928500E5D8B2 /* 矩形 6 拷贝 2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DDF21A6928500E5D8B2 /* 矩形 6 拷贝 2@3x.png */; };
+		BB8B9E2521A6928500E5D8B2 /* 矩形 6@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DE021A6928500E5D8B2 /* 矩形 6@3x.png */; };
+		BB8B9E2621A6928500E5D8B2 /* 椭圆 2 拷贝 10.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DE121A6928500E5D8B2 /* 椭圆 2 拷贝 10.png */; };
+		BB8B9E2721A6928500E5D8B2 /* 矢量智能对象 拷贝 6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DE221A6928500E5D8B2 /* 矢量智能对象 拷贝 6@2x.png */; };
+		BB8B9E2821A6928500E5D8B2 /* valveTabMore@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DE321A6928500E5D8B2 /* valveTabMore@3x.png */; };
+		BB8B9E2921A6928500E5D8B2 /* 矩形 6 拷贝@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DE421A6928500E5D8B2 /* 矩形 6 拷贝@2x.png */; };
+		BB8B9E2A21A6928500E5D8B2 /* nodeLeakSmall_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DE521A6928500E5D8B2 /* nodeLeakSmall_normal@3x.png */; };
+		BB8B9E2B21A6928500E5D8B2 /* valveAlertMark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DE621A6928500E5D8B2 /* valveAlertMark@3x.png */; };
+		BB8B9E2C21A6928500E5D8B2 /* 椭圆 2 拷贝 10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DE721A6928500E5D8B2 /* 椭圆 2 拷贝 10@2x.png */; };
+		BB8B9E2D21A6928500E5D8B2 /* valveHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DE821A6928500E5D8B2 /* valveHeader@2x.png */; };
+		BB8B9E2E21A6928500E5D8B2 /* valveStatus_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DE921A6928500E5D8B2 /* valveStatus_off@3x.png */; };
+		BB8B9E2F21A6928500E5D8B2 /* valveNode_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DEA21A6928500E5D8B2 /* valveNode_normal@2x.png */; };
+		BB8B9E3021A6928500E5D8B2 /* 矢量智能对象4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DEB21A6928500E5D8B2 /* 矢量智能对象4@2x.png */; };
+		BB8B9E3121A6928500E5D8B2 /* 椭圆 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DEC21A6928500E5D8B2 /* 椭圆 3.png */; };
+		BB8B9E3221A6928500E5D8B2 /* 矢量智能对象6@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DED21A6928500E5D8B2 /* 矢量智能对象6@3x.png */; };
+		BB8B9E3321A6928500E5D8B2 /* 椭圆 1 拷贝 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DEE21A6928500E5D8B2 /* 椭圆 1 拷贝 3.png */; };
+		BB8B9E3421A6928500E5D8B2 /* 矢量智能对象6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DEF21A6928500E5D8B2 /* 矢量智能对象6@2x.png */; };
+		BB8B9E3521A6928500E5D8B2 /* 矢量智能对象4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF021A6928500E5D8B2 /* 矢量智能对象4@3x.png */; };
+		BB8B9E3621A6928500E5D8B2 /* valveNode_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF121A6928500E5D8B2 /* valveNode_normal@3x.png */; };
+		BB8B9E3721A6928500E5D8B2 /* valveStatus_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF221A6928500E5D8B2 /* valveStatus_off.png */; };
+		BB8B9E3821A6928500E5D8B2 /* 矩形 6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF321A6928500E5D8B2 /* 矩形 6.png */; };
+		BB8B9E3921A6928500E5D8B2 /* valveStatus_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF421A6928500E5D8B2 /* valveStatus_off@2x.png */; };
+		BB8B9E3A21A6928500E5D8B2 /* 椭圆 2 拷贝 10@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF521A6928500E5D8B2 /* 椭圆 2 拷贝 10@3x.png */; };
+		BB8B9E3B21A6928500E5D8B2 /* valveHeader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF621A6928500E5D8B2 /* valveHeader@3x.png */; };
+		BB8B9E3C21A6928500E5D8B2 /* 椭圆 1 拷贝 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF721A6928500E5D8B2 /* 椭圆 1 拷贝 3@3x.png */; };
+		BB8B9E3D21A6928500E5D8B2 /* valveLeak_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF821A6928500E5D8B2 /* valveLeak_off@2x.png */; };
+		BB8B9E3E21A6928500E5D8B2 /* 矢量智能对象3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF921A6928500E5D8B2 /* 矢量智能对象3@2x.png */; };
+		BB8B9E3F21A6928500E5D8B2 /* 椭圆 2 拷贝 7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFA21A6928500E5D8B2 /* 椭圆 2 拷贝 7@3x.png */; };
+		BB8B9E4021A6928500E5D8B2 /* valveHeader@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFB21A6928500E5D8B2 /* valveHeader@1x.png */; };
+		BB8B9E4121A6928500E5D8B2 /* 矢量智能对象1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFC21A6928500E5D8B2 /* 矢量智能对象1@3x.png */; };
+		BB8B9E4221A6928500E5D8B2 /* 椭圆 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFD21A6928500E5D8B2 /* 椭圆 3@3x.png */; };
+		BB8B9E4321A6928500E5D8B2 /* 椭圆 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFE21A6928500E5D8B2 /* 椭圆 3@2x.png */; };
+		BB8B9E4421A6928500E5D8B2 /* 矢量智能对象1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFF21A6928500E5D8B2 /* 矢量智能对象1@2x.png */; };
+		BB8B9E4521A6928500E5D8B2 /* 椭圆 2 拷贝 7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0021A6928500E5D8B2 /* 椭圆 2 拷贝 7@2x.png */; };
+		BB8B9E4621A6928500E5D8B2 /* nodeLeakBig_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0121A6928500E5D8B2 /* nodeLeakBig_normal.png */; };
+		BB8B9E4721A6928500E5D8B2 /* 矢量智能对象3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0221A6928500E5D8B2 /* 矢量智能对象3@3x.png */; };
+		BB8B9E4821A6928500E5D8B2 /* valveLeak_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0321A6928500E5D8B2 /* valveLeak_off@3x.png */; };
+		BB8B9E4921A6928500E5D8B2 /* 椭圆 1 拷贝 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0421A6928500E5D8B2 /* 椭圆 1 拷贝 3@2x.png */; };
+		BB8B9E4A21A6928500E5D8B2 /* valveAlertMark.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0521A6928500E5D8B2 /* valveAlertMark.png */; };
+		BB8B9E4B21A6928500E5D8B2 /* 矢量智能对象7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0621A6928500E5D8B2 /* 矢量智能对象7@3x.png */; };
+		BB8B9E4C21A6928500E5D8B2 /* nodeLeakBig_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0721A6928500E5D8B2 /* nodeLeakBig_normal@3x.png */; };
+		BB8B9E4D21A6928500E5D8B2 /* 矢量智能对象4.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0821A6928500E5D8B2 /* 矢量智能对象4.png */; };
+		BB8B9E4E21A6928500E5D8B2 /* nodeHeaderBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0921A6928500E5D8B2 /* nodeHeaderBtn.png */; };
+		BB8B9E4F21A6928500E5D8B2 /* nodeHeaderBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0A21A6928500E5D8B2 /* nodeHeaderBtn@2x.png */; };
+		BB8B9E5021A6928500E5D8B2 /* 椭圆 2 拷贝 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0B21A6928500E5D8B2 /* 椭圆 2 拷贝 3@2x.png */; };
+		BB8B9E5121A6928500E5D8B2 /* 椭圆 2 拷贝 7.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0C21A6928500E5D8B2 /* 椭圆 2 拷贝 7.png */; };
+		BB8B9E5221A6928500E5D8B2 /* 矢量智能对象7.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0D21A6928500E5D8B2 /* 矢量智能对象7.png */; };
+		BB8B9E5321A6928500E5D8B2 /* 矢量智能对象6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0E21A6928500E5D8B2 /* 矢量智能对象6.png */; };
+		BB8B9E5421A6928500E5D8B2 /* valveNode_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0F21A6928500E5D8B2 /* valveNode_normal.png */; };
+		BB8B9E5521A6928500E5D8B2 /* valveTabMore.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1021A6928500E5D8B2 /* valveTabMore.png */; };
+		BB8B9E5621A6928500E5D8B2 /* 矢量智能对象3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1121A6928500E5D8B2 /* 矢量智能对象3.png */; };
+		BB8B9E5721A6928500E5D8B2 /* 椭圆 2 拷贝 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1221A6928500E5D8B2 /* 椭圆 2 拷贝 3.png */; };
+		BB8B9E5821A6928500E5D8B2 /* 矩形 6 拷贝.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1321A6928500E5D8B2 /* 矩形 6 拷贝.png */; };
+		BB8B9E5921A6928500E5D8B2 /* 椭圆 2 拷贝 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1421A6928500E5D8B2 /* 椭圆 2 拷贝 3@3x.png */; };
+		BB8B9E5A21A6928500E5D8B2 /* nodeHeaderBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1521A6928500E5D8B2 /* nodeHeaderBtn@3x.png */; };
+		BB8B9E5B21A6928500E5D8B2 /* 矢量智能对象1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1621A6928500E5D8B2 /* 矢量智能对象1.png */; };
+		BB8B9E5C21A6928500E5D8B2 /* valveLeak_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1721A6928500E5D8B2 /* valveLeak_off.png */; };
+		BB8B9E5D21A6928500E5D8B2 /* 矢量智能对象7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1821A6928500E5D8B2 /* 矢量智能对象7@2x.png */; };
+		BB8B9E5E21A6928500E5D8B2 /* nodeLeakBig_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1921A6928500E5D8B2 /* nodeLeakBig_normal@2x.png */; };
+		BB8B9E7221A6ADEB00E5D8B2 /* valveSwitch_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6021A6ADEB00E5D8B2 /* valveSwitch_off@2x.png */; };
+		BB8B9E7321A6ADEB00E5D8B2 /* valveSwitch_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6121A6ADEB00E5D8B2 /* valveSwitch_off@3x.png */; };
+		BB8B9E7421A6ADEB00E5D8B2 /* valveStatus_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6221A6ADEB00E5D8B2 /* valveStatus_on@2x.png */; };
+		BB8B9E7521A6ADEB00E5D8B2 /* nodeSet_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6321A6ADEB00E5D8B2 /* nodeSet_normal@2x.png */; };
+		BB8B9E7621A6ADEB00E5D8B2 /* nodeSet_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6421A6ADEB00E5D8B2 /* nodeSet_normal@3x.png */; };
+		BB8B9E7721A6ADEB00E5D8B2 /* valveStatus_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6521A6ADEB00E5D8B2 /* valveStatus_on@3x.png */; };
+		BB8B9E7821A6ADEB00E5D8B2 /* nodeBattery_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6621A6ADEB00E5D8B2 /* nodeBattery_normal@2x.png */; };
+		BB8B9E7921A6ADEB00E5D8B2 /* valveStatus_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6721A6ADEB00E5D8B2 /* valveStatus_on.png */; };
+		BB8B9E7A21A6ADEB00E5D8B2 /* 矢量智能对象1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6821A6ADEB00E5D8B2 /* 矢量智能对象1@3x.png */; };
+		BB8B9E7B21A6ADEB00E5D8B2 /* 矢量智能对象1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6921A6ADEB00E5D8B2 /* 矢量智能对象1@2x.png */; };
+		BB8B9E7C21A6ADEB00E5D8B2 /* nodeLeakBig_leak.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6A21A6ADEB00E5D8B2 /* nodeLeakBig_leak.png */; };
+		BB8B9E7D21A6ADEB00E5D8B2 /* nodeBattery_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6B21A6ADEB00E5D8B2 /* nodeBattery_normal@3x.png */; };
+		BB8B9E7E21A6ADEB00E5D8B2 /* nodeLeakBig_leak@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6C21A6ADEB00E5D8B2 /* nodeLeakBig_leak@3x.png */; };
+		BB8B9E7F21A6ADEB00E5D8B2 /* nodeSet_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6D21A6ADEB00E5D8B2 /* nodeSet_normal.png */; };
+		BB8B9E8021A6ADEB00E5D8B2 /* valveSwitch_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6E21A6ADEB00E5D8B2 /* valveSwitch_off.png */; };
+		BB8B9E8121A6ADEB00E5D8B2 /* nodeBattery_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6F21A6ADEB00E5D8B2 /* nodeBattery_normal.png */; };
+		BB8B9E8221A6ADEB00E5D8B2 /* 矢量智能对象1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7021A6ADEB00E5D8B2 /* 矢量智能对象1.png */; };
+		BB8B9E8321A6ADEB00E5D8B2 /* nodeLeakBig_leak@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_leak@2x.png */; };
+		BB8B9E8721A6E62100E5D8B2 /* NodeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8B9E8621A6E62100E5D8B2 /* NodeDetailCell.m */; };
 		DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */; };
 /* End PBXBuildFile section */
 
@@ -319,6 +436,126 @@
 		BB49DFB921958868004E00A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB835FA2219C03A300225B60 /* HomeDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceController.h; sourceTree = "<group>"; };
 		BB835FA3219C03A300225B60 /* HomeDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceController.m; sourceTree = "<group>"; };
+		BB8B9D9721A65FDF00E5D8B2 /* ThermostatController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThermostatController.h; sourceTree = "<group>"; };
+		BB8B9D9821A65FDF00E5D8B2 /* ThermostatController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThermostatController.m; sourceTree = "<group>"; };
+		BB8B9D9B21A6815000E5D8B2 /* 矢量智能对象 拷贝 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 6.png"; sourceTree = "<group>"; };
+		BB8B9D9C21A6815000E5D8B2 /* Ellipse 5 copy 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ellipse 5 copy 7.png"; sourceTree = "<group>"; };
+		BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@2x.png"; sourceTree = "<group>"; };
+		BB8B9D9E21A6815000E5D8B2 /* 矢量智能对象 拷贝 6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 6@3x.png"; sourceTree = "<group>"; };
+		BB8B9D9F21A6815000E5D8B2 /* Background 拷贝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background 拷贝.png"; sourceTree = "<group>"; };
+		BB8B9DA021A6815000E5D8B2 /* 矢量智能对象 拷贝 6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 6@2x.png"; sourceTree = "<group>"; };
+		BB8B9DA121A6815000E5D8B2 /* thermostatControl@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@3x.png"; sourceTree = "<group>"; };
+		BB8B9DA221A6815000E5D8B2 /* thermostatKnob@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatKnob@3x.png"; sourceTree = "<group>"; };
+		BB8B9DA321A6815000E5D8B2 /* 矢量智能对象@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象@2x.png"; sourceTree = "<group>"; };
+		BB8B9DA421A6815000E5D8B2 /* Background 拷贝@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background 拷贝@3x.png"; sourceTree = "<group>"; };
+		BB8B9DA521A6815000E5D8B2 /* 椭圆 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1.png"; sourceTree = "<group>"; };
+		BB8B9DA621A6815000E5D8B2 /* Ellipse 5 copy 7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ellipse 5 copy 7@2x.png"; sourceTree = "<group>"; };
+		BB8B9DA721A6815000E5D8B2 /* Ellipse 5 copy 7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ellipse 5 copy 7@3x.png"; sourceTree = "<group>"; };
+		BB8B9DA821A6815000E5D8B2 /* Background 拷贝@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background 拷贝@2x.png"; sourceTree = "<group>"; };
+		BB8B9DA921A6815000E5D8B2 /* thermostatKnob@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatKnob@1x.png"; sourceTree = "<group>"; };
+		BB8B9DAA21A6815000E5D8B2 /* 矢量智能对象@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象@3x.png"; sourceTree = "<group>"; };
+		BB8B9DAB21A6815000E5D8B2 /* thermostatKnob@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatKnob@2x.png"; sourceTree = "<group>"; };
+		BB8B9DAC21A6815000E5D8B2 /* thermostatSet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatSet@2x.png"; sourceTree = "<group>"; };
+		BB8B9DAD21A6815000E5D8B2 /* 椭圆 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1@2x.png"; sourceTree = "<group>"; };
+		BB8B9DAE21A6815000E5D8B2 /* 矢量智能对象.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象.png"; sourceTree = "<group>"; };
+		BB8B9DAF21A6815000E5D8B2 /* thermostatMoer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatMoer@3x.png"; sourceTree = "<group>"; };
+		BB8B9DB021A6815000E5D8B2 /* thermostatMoer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatMoer@2x.png"; sourceTree = "<group>"; };
+		BB8B9DB121A6815000E5D8B2 /* 椭圆 1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1@3x.png"; sourceTree = "<group>"; };
+		BB8B9DB221A6815000E5D8B2 /* thermostatSet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatSet@3x.png"; sourceTree = "<group>"; };
+		BB8B9DB321A6815000E5D8B2 /* thermostatControl@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@1x.png"; sourceTree = "<group>"; };
+		BB8B9DB421A6815000E5D8B2 /* thermostatSet@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatSet@1x.png"; sourceTree = "<group>"; };
+		BB8B9DB521A6815000E5D8B2 /* thermostatMoer@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatMoer@1x.png"; sourceTree = "<group>"; };
+		BB8B9DD121A691D400E5D8B2 /* WirelessValveController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WirelessValveController.h; sourceTree = "<group>"; };
+		BB8B9DD221A691D400E5D8B2 /* WirelessValveController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WirelessValveController.m; sourceTree = "<group>"; };
+		BB8B9DD521A6928500E5D8B2 /* 矢量智能对象 拷贝 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 6.png"; sourceTree = "<group>"; };
+		BB8B9DD621A6928500E5D8B2 /* nodeLeakSmall_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakSmall_normal@2x.png"; sourceTree = "<group>"; };
+		BB8B9DD721A6928500E5D8B2 /* valveAlertMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveAlertMark@2x.png"; sourceTree = "<group>"; };
+		BB8B9DD821A6928500E5D8B2 /* 矩形 6 拷贝@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 6 拷贝@3x.png"; sourceTree = "<group>"; };
+		BB8B9DD921A6928500E5D8B2 /* valveTabMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTabMore@2x.png"; sourceTree = "<group>"; };
+		BB8B9DDA21A6928500E5D8B2 /* 矢量智能对象 拷贝 6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 6@3x.png"; sourceTree = "<group>"; };
+		BB8B9DDB21A6928500E5D8B2 /* 矩形 6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 6@2x.png"; sourceTree = "<group>"; };
+		BB8B9DDC21A6928500E5D8B2 /* 矩形 6 拷贝 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 6 拷贝 2.png"; sourceTree = "<group>"; };
+		BB8B9DDD21A6928500E5D8B2 /* 矩形 6 拷贝 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 6 拷贝 2@2x.png"; sourceTree = "<group>"; };
+		BB8B9DDE21A6928500E5D8B2 /* nodeLeakSmall_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeLeakSmall_normal.png; sourceTree = "<group>"; };
+		BB8B9DDF21A6928500E5D8B2 /* 矩形 6 拷贝 2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 6 拷贝 2@3x.png"; sourceTree = "<group>"; };
+		BB8B9DE021A6928500E5D8B2 /* 矩形 6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 6@3x.png"; sourceTree = "<group>"; };
+		BB8B9DE121A6928500E5D8B2 /* 椭圆 2 拷贝 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 10.png"; sourceTree = "<group>"; };
+		BB8B9DE221A6928500E5D8B2 /* 矢量智能对象 拷贝 6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 6@2x.png"; sourceTree = "<group>"; };
+		BB8B9DE321A6928500E5D8B2 /* valveTabMore@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTabMore@3x.png"; sourceTree = "<group>"; };
+		BB8B9DE421A6928500E5D8B2 /* 矩形 6 拷贝@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 6 拷贝@2x.png"; sourceTree = "<group>"; };
+		BB8B9DE521A6928500E5D8B2 /* nodeLeakSmall_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakSmall_normal@3x.png"; sourceTree = "<group>"; };
+		BB8B9DE621A6928500E5D8B2 /* valveAlertMark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveAlertMark@3x.png"; sourceTree = "<group>"; };
+		BB8B9DE721A6928500E5D8B2 /* 椭圆 2 拷贝 10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 10@2x.png"; sourceTree = "<group>"; };
+		BB8B9DE821A6928500E5D8B2 /* valveHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveHeader@2x.png"; sourceTree = "<group>"; };
+		BB8B9DE921A6928500E5D8B2 /* valveStatus_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_off@3x.png"; sourceTree = "<group>"; };
+		BB8B9DEA21A6928500E5D8B2 /* valveNode_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_normal@2x.png"; sourceTree = "<group>"; };
+		BB8B9DEB21A6928500E5D8B2 /* 矢量智能对象4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象4@2x.png"; sourceTree = "<group>"; };
+		BB8B9DEC21A6928500E5D8B2 /* 椭圆 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3.png"; sourceTree = "<group>"; };
+		BB8B9DED21A6928500E5D8B2 /* 矢量智能对象6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象6@3x.png"; sourceTree = "<group>"; };
+		BB8B9DEE21A6928500E5D8B2 /* 椭圆 1 拷贝 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝 3.png"; sourceTree = "<group>"; };
+		BB8B9DEF21A6928500E5D8B2 /* 矢量智能对象6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象6@2x.png"; sourceTree = "<group>"; };
+		BB8B9DF021A6928500E5D8B2 /* 矢量智能对象4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象4@3x.png"; sourceTree = "<group>"; };
+		BB8B9DF121A6928500E5D8B2 /* valveNode_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_normal@3x.png"; sourceTree = "<group>"; };
+		BB8B9DF221A6928500E5D8B2 /* valveStatus_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveStatus_off.png; sourceTree = "<group>"; };
+		BB8B9DF321A6928500E5D8B2 /* 矩形 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 6.png"; sourceTree = "<group>"; };
+		BB8B9DF421A6928500E5D8B2 /* valveStatus_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_off@2x.png"; sourceTree = "<group>"; };
+		BB8B9DF521A6928500E5D8B2 /* 椭圆 2 拷贝 10@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 10@3x.png"; sourceTree = "<group>"; };
+		BB8B9DF621A6928500E5D8B2 /* valveHeader@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveHeader@3x.png"; sourceTree = "<group>"; };
+		BB8B9DF721A6928500E5D8B2 /* 椭圆 1 拷贝 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝 3@3x.png"; sourceTree = "<group>"; };
+		BB8B9DF821A6928500E5D8B2 /* valveLeak_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveLeak_off@2x.png"; sourceTree = "<group>"; };
+		BB8B9DF921A6928500E5D8B2 /* 矢量智能对象3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象3@2x.png"; sourceTree = "<group>"; };
+		BB8B9DFA21A6928500E5D8B2 /* 椭圆 2 拷贝 7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 7@3x.png"; sourceTree = "<group>"; };
+		BB8B9DFB21A6928500E5D8B2 /* valveHeader@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveHeader@1x.png"; sourceTree = "<group>"; };
+		BB8B9DFC21A6928500E5D8B2 /* 矢量智能对象1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象1@3x.png"; sourceTree = "<group>"; };
+		BB8B9DFD21A6928500E5D8B2 /* 椭圆 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@3x.png"; sourceTree = "<group>"; };
+		BB8B9DFE21A6928500E5D8B2 /* 椭圆 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@2x.png"; sourceTree = "<group>"; };
+		BB8B9DFF21A6928500E5D8B2 /* 矢量智能对象1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象1@2x.png"; sourceTree = "<group>"; };
+		BB8B9E0021A6928500E5D8B2 /* 椭圆 2 拷贝 7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 7@2x.png"; sourceTree = "<group>"; };
+		BB8B9E0121A6928500E5D8B2 /* nodeLeakBig_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeLeakBig_normal.png; sourceTree = "<group>"; };
+		BB8B9E0221A6928500E5D8B2 /* 矢量智能对象3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象3@3x.png"; sourceTree = "<group>"; };
+		BB8B9E0321A6928500E5D8B2 /* valveLeak_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveLeak_off@3x.png"; sourceTree = "<group>"; };
+		BB8B9E0421A6928500E5D8B2 /* 椭圆 1 拷贝 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 1 拷贝 3@2x.png"; sourceTree = "<group>"; };
+		BB8B9E0521A6928500E5D8B2 /* valveAlertMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveAlertMark.png; sourceTree = "<group>"; };
+		BB8B9E0621A6928500E5D8B2 /* 矢量智能对象7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7@3x.png"; sourceTree = "<group>"; };
+		BB8B9E0721A6928500E5D8B2 /* nodeLeakBig_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakBig_normal@3x.png"; sourceTree = "<group>"; };
+		BB8B9E0821A6928500E5D8B2 /* 矢量智能对象4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象4.png"; sourceTree = "<group>"; };
+		BB8B9E0921A6928500E5D8B2 /* nodeHeaderBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeHeaderBtn.png; sourceTree = "<group>"; };
+		BB8B9E0A21A6928500E5D8B2 /* nodeHeaderBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeHeaderBtn@2x.png"; sourceTree = "<group>"; };
+		BB8B9E0B21A6928500E5D8B2 /* 椭圆 2 拷贝 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 3@2x.png"; sourceTree = "<group>"; };
+		BB8B9E0C21A6928500E5D8B2 /* 椭圆 2 拷贝 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 7.png"; sourceTree = "<group>"; };
+		BB8B9E0D21A6928500E5D8B2 /* 矢量智能对象7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7.png"; sourceTree = "<group>"; };
+		BB8B9E0E21A6928500E5D8B2 /* 矢量智能对象6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象6.png"; sourceTree = "<group>"; };
+		BB8B9E0F21A6928500E5D8B2 /* valveNode_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveNode_normal.png; sourceTree = "<group>"; };
+		BB8B9E1021A6928500E5D8B2 /* valveTabMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveTabMore.png; sourceTree = "<group>"; };
+		BB8B9E1121A6928500E5D8B2 /* 矢量智能对象3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象3.png"; sourceTree = "<group>"; };
+		BB8B9E1221A6928500E5D8B2 /* 椭圆 2 拷贝 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 3.png"; sourceTree = "<group>"; };
+		BB8B9E1321A6928500E5D8B2 /* 矩形 6 拷贝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 6 拷贝.png"; sourceTree = "<group>"; };
+		BB8B9E1421A6928500E5D8B2 /* 椭圆 2 拷贝 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 3@3x.png"; sourceTree = "<group>"; };
+		BB8B9E1521A6928500E5D8B2 /* nodeHeaderBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeHeaderBtn@3x.png"; sourceTree = "<group>"; };
+		BB8B9E1621A6928500E5D8B2 /* 矢量智能对象1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象1.png"; sourceTree = "<group>"; };
+		BB8B9E1721A6928500E5D8B2 /* valveLeak_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveLeak_off.png; sourceTree = "<group>"; };
+		BB8B9E1821A6928500E5D8B2 /* 矢量智能对象7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7@2x.png"; sourceTree = "<group>"; };
+		BB8B9E1921A6928500E5D8B2 /* nodeLeakBig_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakBig_normal@2x.png"; sourceTree = "<group>"; };
+		BB8B9E6021A6ADEB00E5D8B2 /* valveSwitch_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveSwitch_off@2x.png"; sourceTree = "<group>"; };
+		BB8B9E6121A6ADEB00E5D8B2 /* valveSwitch_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveSwitch_off@3x.png"; sourceTree = "<group>"; };
+		BB8B9E6221A6ADEB00E5D8B2 /* valveStatus_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_on@2x.png"; sourceTree = "<group>"; };
+		BB8B9E6321A6ADEB00E5D8B2 /* nodeSet_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeSet_normal@2x.png"; sourceTree = "<group>"; };
+		BB8B9E6421A6ADEB00E5D8B2 /* nodeSet_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeSet_normal@3x.png"; sourceTree = "<group>"; };
+		BB8B9E6521A6ADEB00E5D8B2 /* valveStatus_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_on@3x.png"; sourceTree = "<group>"; };
+		BB8B9E6621A6ADEB00E5D8B2 /* nodeBattery_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeBattery_normal@2x.png"; sourceTree = "<group>"; };
+		BB8B9E6721A6ADEB00E5D8B2 /* valveStatus_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveStatus_on.png; sourceTree = "<group>"; };
+		BB8B9E6821A6ADEB00E5D8B2 /* 矢量智能对象1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象1@3x.png"; sourceTree = "<group>"; };
+		BB8B9E6921A6ADEB00E5D8B2 /* 矢量智能对象1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象1@2x.png"; sourceTree = "<group>"; };
+		BB8B9E6A21A6ADEB00E5D8B2 /* nodeLeakBig_leak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeLeakBig_leak.png; sourceTree = "<group>"; };
+		BB8B9E6B21A6ADEB00E5D8B2 /* nodeBattery_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeBattery_normal@3x.png"; sourceTree = "<group>"; };
+		BB8B9E6C21A6ADEB00E5D8B2 /* nodeLeakBig_leak@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakBig_leak@3x.png"; sourceTree = "<group>"; };
+		BB8B9E6D21A6ADEB00E5D8B2 /* nodeSet_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeSet_normal.png; sourceTree = "<group>"; };
+		BB8B9E6E21A6ADEB00E5D8B2 /* valveSwitch_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveSwitch_off.png; sourceTree = "<group>"; };
+		BB8B9E6F21A6ADEB00E5D8B2 /* nodeBattery_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeBattery_normal.png; sourceTree = "<group>"; };
+		BB8B9E7021A6ADEB00E5D8B2 /* 矢量智能对象1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象1.png"; sourceTree = "<group>"; };
+		BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_leak@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakBig_leak@2x.png"; sourceTree = "<group>"; };
+		BB8B9E8521A6E62100E5D8B2 /* NodeDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeDetailCell.h; sourceTree = "<group>"; };
+		BB8B9E8621A6E62100E5D8B2 /* NodeDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeDetailCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,6 +669,9 @@
 		BB0A404F21997A4B004669CA /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
+				BB8B9E5F21A6ADEB00E5D8B2 /* 无线阀门_slices */,
+				BB8B9DD421A6928500E5D8B2 /* 无线阀门(zhuangtai2)_slices */,
+				BB8B9D9A21A6815000E5D8B2 /* 温控器（关）_slices */,
 				BB0A405021997C99004669CA /* 我的家_slices */,
 			);
 			path = UIImage;
@@ -576,6 +816,10 @@
 			children = (
 				BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */,
 				BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */,
+				BB8B9D9721A65FDF00E5D8B2 /* ThermostatController.h */,
+				BB8B9D9821A65FDF00E5D8B2 /* ThermostatController.m */,
+				BB8B9DD121A691D400E5D8B2 /* WirelessValveController.h */,
+				BB8B9DD221A691D400E5D8B2 /* WirelessValveController.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -601,6 +845,8 @@
 				3E9E9B9621A2A52100CA2B7D /* HomeManagementTableViewCell.m */,
 				3EDB7ABF21A538FF009B0733 /* HomeManagementCell.h */,
 				3EDB7AC021A538FF009B0733 /* HomeManagementCell.m */,
+				BB8B9E8521A6E62100E5D8B2 /* NodeDetailCell.h */,
+				BB8B9E8621A6E62100E5D8B2 /* NodeDetailCell.m */,
 				3E9E9B9821A2ABC600CA2B7D /* Home */,
 			);
 			path = Myhouse;
@@ -690,6 +936,141 @@
 				BB49DFB921958868004E00A2 /* Info.plist */,
 			);
 			path = gleadSmartUITests;
+			sourceTree = "<group>";
+		};
+		BB8B9D9A21A6815000E5D8B2 /* 温控器（关）_slices */ = {
+			isa = PBXGroup;
+			children = (
+				BB8B9D9B21A6815000E5D8B2 /* 矢量智能对象 拷贝 6.png */,
+				BB8B9DA021A6815000E5D8B2 /* 矢量智能对象 拷贝 6@2x.png */,
+				BB8B9D9E21A6815000E5D8B2 /* 矢量智能对象 拷贝 6@3x.png */,
+				BB8B9DAE21A6815000E5D8B2 /* 矢量智能对象.png */,
+				BB8B9DA321A6815000E5D8B2 /* 矢量智能对象@2x.png */,
+				BB8B9DAA21A6815000E5D8B2 /* 矢量智能对象@3x.png */,
+				BB8B9DB521A6815000E5D8B2 /* thermostatMoer@1x.png */,
+				BB8B9DB021A6815000E5D8B2 /* thermostatMoer@2x.png */,
+				BB8B9DAF21A6815000E5D8B2 /* thermostatMoer@3x.png */,
+				BB8B9DB321A6815000E5D8B2 /* thermostatControl@1x.png */,
+				BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */,
+				BB8B9DA121A6815000E5D8B2 /* thermostatControl@3x.png */,
+				BB8B9DB421A6815000E5D8B2 /* thermostatSet@1x.png */,
+				BB8B9DAC21A6815000E5D8B2 /* thermostatSet@2x.png */,
+				BB8B9DB221A6815000E5D8B2 /* thermostatSet@3x.png */,
+				BB8B9DA521A6815000E5D8B2 /* 椭圆 1.png */,
+				BB8B9DAD21A6815000E5D8B2 /* 椭圆 1@2x.png */,
+				BB8B9DB121A6815000E5D8B2 /* 椭圆 1@3x.png */,
+				BB8B9D9F21A6815000E5D8B2 /* Background 拷贝.png */,
+				BB8B9DA821A6815000E5D8B2 /* Background 拷贝@2x.png */,
+				BB8B9DA421A6815000E5D8B2 /* Background 拷贝@3x.png */,
+				BB8B9D9C21A6815000E5D8B2 /* Ellipse 5 copy 7.png */,
+				BB8B9DA621A6815000E5D8B2 /* Ellipse 5 copy 7@2x.png */,
+				BB8B9DA721A6815000E5D8B2 /* Ellipse 5 copy 7@3x.png */,
+				BB8B9DA921A6815000E5D8B2 /* thermostatKnob@1x.png */,
+				BB8B9DAB21A6815000E5D8B2 /* thermostatKnob@2x.png */,
+				BB8B9DA221A6815000E5D8B2 /* thermostatKnob@3x.png */,
+			);
+			path = "温控器（关）_slices";
+			sourceTree = "<group>";
+		};
+		BB8B9DD421A6928500E5D8B2 /* 无线阀门(zhuangtai2)_slices */ = {
+			isa = PBXGroup;
+			children = (
+				BB8B9E0521A6928500E5D8B2 /* valveAlertMark.png */,
+				BB8B9DD721A6928500E5D8B2 /* valveAlertMark@2x.png */,
+				BB8B9DE621A6928500E5D8B2 /* valveAlertMark@3x.png */,
+				BB8B9DDC21A6928500E5D8B2 /* 矩形 6 拷贝 2.png */,
+				BB8B9DDD21A6928500E5D8B2 /* 矩形 6 拷贝 2@2x.png */,
+				BB8B9DDF21A6928500E5D8B2 /* 矩形 6 拷贝 2@3x.png */,
+				BB8B9E1321A6928500E5D8B2 /* 矩形 6 拷贝.png */,
+				BB8B9DE421A6928500E5D8B2 /* 矩形 6 拷贝@2x.png */,
+				BB8B9DD821A6928500E5D8B2 /* 矩形 6 拷贝@3x.png */,
+				BB8B9DF321A6928500E5D8B2 /* 矩形 6.png */,
+				BB8B9DDB21A6928500E5D8B2 /* 矩形 6@2x.png */,
+				BB8B9DE021A6928500E5D8B2 /* 矩形 6@3x.png */,
+				BB8B9DDE21A6928500E5D8B2 /* nodeLeakSmall_normal.png */,
+				BB8B9DD621A6928500E5D8B2 /* nodeLeakSmall_normal@2x.png */,
+				BB8B9DE521A6928500E5D8B2 /* nodeLeakSmall_normal@3x.png */,
+				BB8B9DD521A6928500E5D8B2 /* 矢量智能对象 拷贝 6.png */,
+				BB8B9DE221A6928500E5D8B2 /* 矢量智能对象 拷贝 6@2x.png */,
+				BB8B9DDA21A6928500E5D8B2 /* 矢量智能对象 拷贝 6@3x.png */,
+				BB8B9E0121A6928500E5D8B2 /* nodeLeakBig_normal.png */,
+				BB8B9E1921A6928500E5D8B2 /* nodeLeakBig_normal@2x.png */,
+				BB8B9E0721A6928500E5D8B2 /* nodeLeakBig_normal@3x.png */,
+				BB8B9DFB21A6928500E5D8B2 /* valveHeader@1x.png */,
+				BB8B9DE821A6928500E5D8B2 /* valveHeader@2x.png */,
+				BB8B9DF621A6928500E5D8B2 /* valveHeader@3x.png */,
+				BB8B9E1621A6928500E5D8B2 /* 矢量智能对象1.png */,
+				BB8B9DFF21A6928500E5D8B2 /* 矢量智能对象1@2x.png */,
+				BB8B9DFC21A6928500E5D8B2 /* 矢量智能对象1@3x.png */,
+				BB8B9E1021A6928500E5D8B2 /* valveTabMore.png */,
+				BB8B9DD921A6928500E5D8B2 /* valveTabMore@2x.png */,
+				BB8B9DE321A6928500E5D8B2 /* valveTabMore@3x.png */,
+				BB8B9E1121A6928500E5D8B2 /* 矢量智能对象3.png */,
+				BB8B9DF921A6928500E5D8B2 /* 矢量智能对象3@2x.png */,
+				BB8B9E0221A6928500E5D8B2 /* 矢量智能对象3@3x.png */,
+				BB8B9E0821A6928500E5D8B2 /* 矢量智能对象4.png */,
+				BB8B9DEB21A6928500E5D8B2 /* 矢量智能对象4@2x.png */,
+				BB8B9DF021A6928500E5D8B2 /* 矢量智能对象4@3x.png */,
+				BB8B9E0921A6928500E5D8B2 /* nodeHeaderBtn.png */,
+				BB8B9E0A21A6928500E5D8B2 /* nodeHeaderBtn@2x.png */,
+				BB8B9E1521A6928500E5D8B2 /* nodeHeaderBtn@3x.png */,
+				BB8B9E0E21A6928500E5D8B2 /* 矢量智能对象6.png */,
+				BB8B9DEF21A6928500E5D8B2 /* 矢量智能对象6@2x.png */,
+				BB8B9DED21A6928500E5D8B2 /* 矢量智能对象6@3x.png */,
+				BB8B9E0D21A6928500E5D8B2 /* 矢量智能对象7.png */,
+				BB8B9E1821A6928500E5D8B2 /* 矢量智能对象7@2x.png */,
+				BB8B9E0621A6928500E5D8B2 /* 矢量智能对象7@3x.png */,
+				BB8B9DEE21A6928500E5D8B2 /* 椭圆 1 拷贝 3.png */,
+				BB8B9E0421A6928500E5D8B2 /* 椭圆 1 拷贝 3@2x.png */,
+				BB8B9DF721A6928500E5D8B2 /* 椭圆 1 拷贝 3@3x.png */,
+				BB8B9DF221A6928500E5D8B2 /* valveStatus_off.png */,
+				BB8B9DF421A6928500E5D8B2 /* valveStatus_off@2x.png */,
+				BB8B9DE921A6928500E5D8B2 /* valveStatus_off@3x.png */,
+				BB8B9E1721A6928500E5D8B2 /* valveLeak_off.png */,
+				BB8B9DF821A6928500E5D8B2 /* valveLeak_off@2x.png */,
+				BB8B9E0321A6928500E5D8B2 /* valveLeak_off@3x.png */,
+				BB8B9E0F21A6928500E5D8B2 /* valveNode_normal.png */,
+				BB8B9DEA21A6928500E5D8B2 /* valveNode_normal@2x.png */,
+				BB8B9DF121A6928500E5D8B2 /* valveNode_normal@3x.png */,
+				BB8B9E1221A6928500E5D8B2 /* 椭圆 2 拷贝 3.png */,
+				BB8B9E0B21A6928500E5D8B2 /* 椭圆 2 拷贝 3@2x.png */,
+				BB8B9E1421A6928500E5D8B2 /* 椭圆 2 拷贝 3@3x.png */,
+				BB8B9E0C21A6928500E5D8B2 /* 椭圆 2 拷贝 7.png */,
+				BB8B9E0021A6928500E5D8B2 /* 椭圆 2 拷贝 7@2x.png */,
+				BB8B9DFA21A6928500E5D8B2 /* 椭圆 2 拷贝 7@3x.png */,
+				BB8B9DE121A6928500E5D8B2 /* 椭圆 2 拷贝 10.png */,
+				BB8B9DE721A6928500E5D8B2 /* 椭圆 2 拷贝 10@2x.png */,
+				BB8B9DF521A6928500E5D8B2 /* 椭圆 2 拷贝 10@3x.png */,
+				BB8B9DEC21A6928500E5D8B2 /* 椭圆 3.png */,
+				BB8B9DFE21A6928500E5D8B2 /* 椭圆 3@2x.png */,
+				BB8B9DFD21A6928500E5D8B2 /* 椭圆 3@3x.png */,
+			);
+			path = "无线阀门(zhuangtai2)_slices";
+			sourceTree = "<group>";
+		};
+		BB8B9E5F21A6ADEB00E5D8B2 /* 无线阀门_slices */ = {
+			isa = PBXGroup;
+			children = (
+				BB8B9E6A21A6ADEB00E5D8B2 /* nodeLeakBig_leak.png */,
+				BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_leak@2x.png */,
+				BB8B9E6C21A6ADEB00E5D8B2 /* nodeLeakBig_leak@3x.png */,
+				BB8B9E6721A6ADEB00E5D8B2 /* valveStatus_on.png */,
+				BB8B9E6221A6ADEB00E5D8B2 /* valveStatus_on@2x.png */,
+				BB8B9E6521A6ADEB00E5D8B2 /* valveStatus_on@3x.png */,
+				BB8B9E7021A6ADEB00E5D8B2 /* 矢量智能对象1.png */,
+				BB8B9E6921A6ADEB00E5D8B2 /* 矢量智能对象1@2x.png */,
+				BB8B9E6821A6ADEB00E5D8B2 /* 矢量智能对象1@3x.png */,
+				BB8B9E6E21A6ADEB00E5D8B2 /* valveSwitch_off.png */,
+				BB8B9E6021A6ADEB00E5D8B2 /* valveSwitch_off@2x.png */,
+				BB8B9E6121A6ADEB00E5D8B2 /* valveSwitch_off@3x.png */,
+				BB8B9E6F21A6ADEB00E5D8B2 /* nodeBattery_normal.png */,
+				BB8B9E6621A6ADEB00E5D8B2 /* nodeBattery_normal@2x.png */,
+				BB8B9E6B21A6ADEB00E5D8B2 /* nodeBattery_normal@3x.png */,
+				BB8B9E6D21A6ADEB00E5D8B2 /* nodeSet_normal.png */,
+				BB8B9E6321A6ADEB00E5D8B2 /* nodeSet_normal@2x.png */,
+				BB8B9E6421A6ADEB00E5D8B2 /* nodeSet_normal@3x.png */,
+			);
+			path = "无线阀门_slices";
 			sourceTree = "<group>";
 		};
 		CFCEDBAD622E9D8465800F48 /* Frameworks */ = {
@@ -806,102 +1187,216 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB0A40FD21997C99004669CA /* img_wallHob@3x.png in Resources */,
+				BB8B9E4121A6928500E5D8B2 /* 矢量智能对象1@3x.png in Resources */,
 				BB0A40CF21997C99004669CA /* img_weatherBg@2x.png in Resources */,
 				BB0A40E721997C99004669CA /* img_tab03@3x.png in Resources */,
+				BB8B9DCD21A6815000E5D8B2 /* thermostatSet@3x.png in Resources */,
+				BB8B9DC321A6815000E5D8B2 /* Background 拷贝@2x.png in Resources */,
 				BB0A40D221997C99004669CA /* img_addDevice@3x.png in Resources */,
+				BB8B9E2221A6928500E5D8B2 /* 矩形 6 拷贝 2@2x.png in Resources */,
+				BB8B9E2B21A6928500E5D8B2 /* valveAlertMark@3x.png in Resources */,
+				BB8B9E2F21A6928500E5D8B2 /* valveNode_normal@2x.png in Resources */,
+				BB8B9DC721A6815000E5D8B2 /* thermostatSet@2x.png in Resources */,
+				BB8B9E2E21A6928500E5D8B2 /* valveStatus_off@3x.png in Resources */,
 				BB0A40FE21997C99004669CA /* 矢量智能对象7@2x.png in Resources */,
+				BB8B9DCF21A6815000E5D8B2 /* thermostatSet@1x.png in Resources */,
+				BB8B9E5321A6928500E5D8B2 /* 矢量智能对象6.png in Resources */,
 				BB0A40D121997C99004669CA /* img_headerBg@1x.png in Resources */,
 				BB0A40BA21997C99004669CA /* 椭圆 2 拷贝 2@2x.png in Resources */,
+				BB8B9E4421A6928500E5D8B2 /* 矢量智能对象1@2x.png in Resources */,
+				BB8B9E8121A6ADEB00E5D8B2 /* nodeBattery_normal.png in Resources */,
+				BB8B9E3D21A6928500E5D8B2 /* valveLeak_off@2x.png in Resources */,
 				BB0A40CC21997C99004669CA /* 圆角矩形 1 拷贝 2@2x.png in Resources */,
 				BB35291B219D95B500428DE9 /* img_houseManage@2x.png in Resources */,
+				BB8B9DC921A6815000E5D8B2 /* 矢量智能对象.png in Resources */,
 				BB0A40B421997C99004669CA /* img_houseSelect@3x.png in Resources */,
+				BB8B9E8321A6ADEB00E5D8B2 /* nodeLeakBig_leak@2x.png in Resources */,
 				BB0A40F021997C99004669CA /* 圆角矩形 1@3x.png in Resources */,
 				BB0A40C421997C99004669CA /* img_homeSet@3x.png in Resources */,
+				BB8B9E3821A6928500E5D8B2 /* 矩形 6.png in Resources */,
 				BB0A40BE21997C99004669CA /* 矢量智能对象6@3x.png in Resources */,
 				BB0A40F721997C99004669CA /* 圆角矩形 1.png in Resources */,
 				BB0A40E021997C99004669CA /* img_wallHob@2x.png in Resources */,
+				BB8B9DC021A6815000E5D8B2 /* 椭圆 1.png in Resources */,
+				BB8B9DB821A6815000E5D8B2 /* thermostatControl@2x.png in Resources */,
 				BB0A40C521997C99004669CA /* 椭圆 2 拷贝 2@3x.png in Resources */,
 				BB0A40D521997C99004669CA /* 圆角矩形 1 拷贝 2.png in Resources */,
+				BB8B9E4821A6928500E5D8B2 /* valveLeak_off@3x.png in Resources */,
+				BB8B9E3721A6928500E5D8B2 /* valveStatus_off.png in Resources */,
 				BB0A40D621997C99004669CA /* img_addDevice@2x.png in Resources */,
+				BB8B9E7C21A6ADEB00E5D8B2 /* nodeLeakBig_leak.png in Resources */,
 				BB0A40C021997C99004669CA /* img_tab01.png in Resources */,
 				BB0A40B921997C99004669CA /* 椭圆 1.png in Resources */,
 				BB352927219D968500428DE9 /* img_houseUnelect@2x.png in Resources */,
+				BB8B9DC521A6815000E5D8B2 /* 矢量智能对象@3x.png in Resources */,
 				BB0A40EC21997C99004669CA /* 形状 4.png in Resources */,
+				BB8B9E4E21A6928500E5D8B2 /* nodeHeaderBtn.png in Resources */,
+				BB8B9E7821A6ADEB00E5D8B2 /* nodeBattery_normal@2x.png in Resources */,
 				BB0A40F821997C99004669CA /* 形状 3.png in Resources */,
+				BB8B9E2921A6928500E5D8B2 /* 矩形 6 拷贝@2x.png in Resources */,
+				BB8B9E4721A6928500E5D8B2 /* 矢量智能对象3@3x.png in Resources */,
+				BB8B9DBE21A6815000E5D8B2 /* 矢量智能对象@2x.png in Resources */,
+				BB8B9DC221A6815000E5D8B2 /* Ellipse 5 copy 7@3x.png in Resources */,
 				BB0A40C221997C99004669CA /* 矢量智能对象6@2x.png in Resources */,
+				BB8B9E5921A6928500E5D8B2 /* 椭圆 2 拷贝 3@3x.png in Resources */,
+				BB8B9E5621A6928500E5D8B2 /* 矢量智能对象3.png in Resources */,
+				BB8B9E3921A6928500E5D8B2 /* valveStatus_off@2x.png in Resources */,
 				BB352925219D968500428DE9 /* img_houseSelected@3x.png in Resources */,
+				BB8B9DCE21A6815000E5D8B2 /* thermostatControl@1x.png in Resources */,
 				BB352924219D968500428DE9 /* img_houseUnelect.png in Resources */,
+				BB8B9E4021A6928500E5D8B2 /* valveHeader@1x.png in Resources */,
 				BB0A40B721997C99004669CA /* 形状 4@3x.png in Resources */,
+				BB8B9E2A21A6928500E5D8B2 /* nodeLeakSmall_normal@3x.png in Resources */,
+				BB8B9E4521A6928500E5D8B2 /* 椭圆 2 拷贝 7@2x.png in Resources */,
+				BB8B9E7A21A6ADEB00E5D8B2 /* 矢量智能对象1@3x.png in Resources */,
 				BB0A40EF21997C99004669CA /* 椭圆 2 拷贝 2.png in Resources */,
+				BB8B9E5121A6928500E5D8B2 /* 椭圆 2 拷贝 7.png in Resources */,
 				BB0A40C121997C99004669CA /* 形状 3 拷贝.png in Resources */,
 				BB0A40C321997C99004669CA /* 矩形 5.png in Resources */,
 				BB0A40DA21997C99004669CA /* 椭圆 2 拷贝 21@3x.png in Resources */,
 				BB0A40EA21997C99004669CA /* 矢量智能对象6.png in Resources */,
 				BB0A40B121997C99004669CA /* 椭圆 1 拷贝 2@2x.png in Resources */,
+				BB8B9E5721A6928500E5D8B2 /* 椭圆 2 拷贝 3.png in Resources */,
 				BB0A40B621997C99004669CA /* 矢量智能对象 拷贝 4@3x.png in Resources */,
+				BB8B9E1E21A6928500E5D8B2 /* valveTabMore@2x.png in Resources */,
+				BB8B9E3521A6928500E5D8B2 /* 矢量智能对象4@3x.png in Resources */,
 				BB0A40B821997C99004669CA /* img_headerBg@2x.png in Resources */,
+				BB8B9E1C21A6928500E5D8B2 /* valveAlertMark@2x.png in Resources */,
+				BB8B9E2821A6928500E5D8B2 /* valveTabMore@3x.png in Resources */,
 				BB0A40F621997C99004669CA /* 椭圆 1 拷贝@2x.png in Resources */,
+				BB8B9DC621A6815000E5D8B2 /* thermostatKnob@2x.png in Resources */,
 				BB0A40AE21997C99004669CA /* 圆角矩形 1 拷贝 3@2x.png in Resources */,
+				BB8B9E2321A6928500E5D8B2 /* nodeLeakSmall_normal.png in Resources */,
 				BB0A40D321997C99004669CA /* 矩形 5@3x.png in Resources */,
+				BB8B9E5A21A6928500E5D8B2 /* nodeHeaderBtn@3x.png in Resources */,
+				BB8B9E3021A6928500E5D8B2 /* 矢量智能对象4@2x.png in Resources */,
+				BB8B9DB621A6815000E5D8B2 /* 矢量智能对象 拷贝 6.png in Resources */,
+				BB8B9DBF21A6815000E5D8B2 /* Background 拷贝@3x.png in Resources */,
 				BB352923219D968500428DE9 /* img_houseSelected.png in Resources */,
+				BB8B9E7621A6ADEB00E5D8B2 /* nodeSet_normal@3x.png in Resources */,
+				BB8B9E2121A6928500E5D8B2 /* 矩形 6 拷贝 2.png in Resources */,
 				BB0A40AC21997C99004669CA /* img_tab02@2x.png in Resources */,
 				BB0A40BB21997C99004669CA /* img_homeSet@2x.png in Resources */,
+				BB8B9DB721A6815000E5D8B2 /* Ellipse 5 copy 7.png in Resources */,
+				BB8B9E7521A6ADEB00E5D8B2 /* nodeSet_normal@2x.png in Resources */,
+				BB8B9E2C21A6928500E5D8B2 /* 椭圆 2 拷贝 10@2x.png in Resources */,
 				BB0A40FA21997C99004669CA /* 椭圆 2 拷贝 3@3x.png in Resources */,
 				BB0A40E921997C99004669CA /* 圆角矩形 1 拷贝@2x.png in Resources */,
 				BB0A40CD21997C99004669CA /* 椭圆 1 拷贝 3@3x.png in Resources */,
+				BB8B9E2021A6928500E5D8B2 /* 矩形 6@2x.png in Resources */,
+				BB8B9E7221A6ADEB00E5D8B2 /* valveSwitch_off@2x.png in Resources */,
+				BB8B9E4C21A6928500E5D8B2 /* nodeLeakBig_normal@3x.png in Resources */,
 				BB352922219D968500428DE9 /* img_houseSelected@2x.png in Resources */,
+				BB8B9E2521A6928500E5D8B2 /* 矩形 6@3x.png in Resources */,
 				BB0A40D821997C99004669CA /* img_weatherBg@3x.png in Resources */,
+				BB8B9E7421A6ADEB00E5D8B2 /* valveStatus_on@2x.png in Resources */,
+				BB8B9E7721A6ADEB00E5D8B2 /* valveStatus_on@3x.png in Resources */,
 				BB0A40DF21997C99004669CA /* 矢量智能对象7@3x.png in Resources */,
 				BB0A40D021997C99004669CA /* 椭圆 1@2x.png in Resources */,
 				BB0A40D421997C99004669CA /* 矩形 5@2x.png in Resources */,
 				BB0A40FC21997C99004669CA /* img_addDevice.png in Resources */,
+				BB8B9E5021A6928500E5D8B2 /* 椭圆 2 拷贝 3@2x.png in Resources */,
+				BB8B9E5521A6928500E5D8B2 /* valveTabMore.png in Resources */,
 				BB0A40D921997C99004669CA /* 圆角矩形 1 拷贝 3.png in Resources */,
+				BB8B9DC121A6815000E5D8B2 /* Ellipse 5 copy 7@2x.png in Resources */,
 				BB0A40BC21997C99004669CA /* 椭圆 1 拷贝 2.png in Resources */,
+				BB8B9E7F21A6ADEB00E5D8B2 /* nodeSet_normal.png in Resources */,
 				BB0A40D721997C99004669CA /* 椭圆 1@3x.png in Resources */,
+				BB8B9E5E21A6928500E5D8B2 /* nodeLeakBig_normal@2x.png in Resources */,
+				BB8B9DBA21A6815000E5D8B2 /* Background 拷贝.png in Resources */,
+				BB8B9E3121A6928500E5D8B2 /* 椭圆 3.png in Resources */,
+				BB8B9E1F21A6928500E5D8B2 /* 矢量智能对象 拷贝 6@3x.png in Resources */,
 				BB49DFA021958867004E00A2 /* LaunchScreen.storyboard in Resources */,
+				BB8B9DBC21A6815000E5D8B2 /* thermostatControl@3x.png in Resources */,
+				BB8B9E1D21A6928500E5D8B2 /* 矩形 6 拷贝@3x.png in Resources */,
 				BB0A40A821997C99004669CA /* 矢量智能对象 拷贝 4@2x.png in Resources */,
 				BB0A40CA21997C99004669CA /* 形状 3@3x.png in Resources */,
 				BB0A40DC21997C99004669CA /* 椭圆 2 拷贝 31@2x.png in Resources */,
+				BB8B9E8221A6ADEB00E5D8B2 /* 矢量智能对象1.png in Resources */,
 				BB0A40EB21997C99004669CA /* 圆角矩形 1@2x.png in Resources */,
+				BB8B9E1A21A6928500E5D8B2 /* 矢量智能对象 拷贝 6.png in Resources */,
+				BB8B9E7921A6ADEB00E5D8B2 /* valveStatus_on.png in Resources */,
+				BB8B9DC821A6815000E5D8B2 /* 椭圆 1@2x.png in Resources */,
 				BB0A40BD21997C99004669CA /* img_tab02.png in Resources */,
 				BB0A40AD21997C99004669CA /* 矢量智能对象 拷贝 4.png in Resources */,
+				BB8B9E3C21A6928500E5D8B2 /* 椭圆 1 拷贝 3@3x.png in Resources */,
 				BB0A40B321997C99004669CA /* img_wallHob.png in Resources */,
+				BB8B9E7B21A6ADEB00E5D8B2 /* 矢量智能对象1@2x.png in Resources */,
+				BB8B9E7D21A6ADEB00E5D8B2 /* nodeBattery_normal@3x.png in Resources */,
+				BB8B9DBB21A6815000E5D8B2 /* 矢量智能对象 拷贝 6@2x.png in Resources */,
 				BB35291A219D95B500428DE9 /* img_houseManage.png in Resources */,
+				BB8B9E3A21A6928500E5D8B2 /* 椭圆 2 拷贝 10@3x.png in Resources */,
+				BB8B9E3421A6928500E5D8B2 /* 矢量智能对象6@2x.png in Resources */,
 				BB0A40DE21997C99004669CA /* 形状 3@2x.png in Resources */,
 				BB0A40F921997C99004669CA /* 椭圆 2 拷贝 31.png in Resources */,
+				BB8B9E4B21A6928500E5D8B2 /* 矢量智能对象7@3x.png in Resources */,
+				BB8B9E3B21A6928500E5D8B2 /* valveHeader@3x.png in Resources */,
+				BB8B9E4921A6928500E5D8B2 /* 椭圆 1 拷贝 3@2x.png in Resources */,
 				BB0A40B021997C99004669CA /* img_tab02@3x.png in Resources */,
 				BB0A40F121997C99004669CA /* img_houseSelect.png in Resources */,
 				BB0A40F521997C99004669CA /* img_tab03@2x.png in Resources */,
+				BB8B9E4D21A6928500E5D8B2 /* 矢量智能对象4.png in Resources */,
+				BB8B9E4F21A6928500E5D8B2 /* nodeHeaderBtn@2x.png in Resources */,
 				BB0A40CB21997C99004669CA /* 椭圆 2 拷贝 31@3x.png in Resources */,
+				BB8B9E2421A6928500E5D8B2 /* 矩形 6 拷贝 2@3x.png in Resources */,
 				BB49DF9D21958867004E00A2 /* Assets.xcassets in Resources */,
+				BB8B9E5D21A6928500E5D8B2 /* 矢量智能对象7@2x.png in Resources */,
+				BB8B9E3E21A6928500E5D8B2 /* 矢量智能对象3@2x.png in Resources */,
 				BB0A40F321997C99004669CA /* img_weatherBg.png in Resources */,
+				BB8B9E3621A6928500E5D8B2 /* valveNode_normal@3x.png in Resources */,
 				BB0A40E321997C99004669CA /* 矢量智能对象5@2x.png in Resources */,
+				BB8B9E4221A6928500E5D8B2 /* 椭圆 3@3x.png in Resources */,
 				BB0A40DB21997C99004669CA /* 椭圆 1 拷贝 3@2x.png in Resources */,
+				BB8B9E4321A6928500E5D8B2 /* 椭圆 3@2x.png in Resources */,
 				BB0A40E521997C99004669CA /* 椭圆 2 拷贝 21.png in Resources */,
 				BB0A40AA21997C99004669CA /* img_tab01@3x.png in Resources */,
+				BB8B9E2D21A6928500E5D8B2 /* valveHeader@2x.png in Resources */,
+				BB8B9E3321A6928500E5D8B2 /* 椭圆 1 拷贝 3.png in Resources */,
 				BB49DF9821958864004E00A2 /* Main.storyboard in Resources */,
+				BB8B9E5821A6928500E5D8B2 /* 矩形 6 拷贝.png in Resources */,
+				BB8B9E7E21A6ADEB00E5D8B2 /* nodeLeakBig_leak@3x.png in Resources */,
 				BB0A40EE21997C99004669CA /* 形状 3 拷贝@3x.png in Resources */,
+				BB8B9DBD21A6815000E5D8B2 /* thermostatKnob@3x.png in Resources */,
+				BB8B9E3F21A6928500E5D8B2 /* 椭圆 2 拷贝 7@3x.png in Resources */,
 				BB0A40AF21997C99004669CA /* 圆角矩形 1 拷贝 3@3x.png in Resources */,
+				BB8B9DCA21A6815000E5D8B2 /* thermostatMoer@3x.png in Resources */,
 				BB352919219D95B500428DE9 /* img_houseManage@3x.png in Resources */,
 				BB0A40F221997C99004669CA /* 圆角矩形 1 拷贝@3x.png in Resources */,
 				BB0A40CE21997C99004669CA /* 椭圆 2 拷贝 21@2x.png in Resources */,
 				BB352926219D968500428DE9 /* img_houseUnelect@3x.png in Resources */,
 				BB0A40ED21997C99004669CA /* 形状 3 拷贝@2x.png in Resources */,
 				BB0A40A921997C99004669CA /* img_houseSelect@2x.png in Resources */,
+				BB8B9DCB21A6815000E5D8B2 /* thermostatMoer@2x.png in Resources */,
+				BB8B9E5C21A6928500E5D8B2 /* valveLeak_off.png in Resources */,
 				BB0A40B521997C99004669CA /* 圆角矩形 1 拷贝.png in Resources */,
 				BB0A40DD21997C99004669CA /* 圆角矩形 1 拷贝 2@3x.png in Resources */,
 				BB0A40FB21997C99004669CA /* 矢量智能对象5@3x.png in Resources */,
+				BB8B9E4A21A6928500E5D8B2 /* valveAlertMark.png in Resources */,
 				BB0A40C621997C99004669CA /* img_tab03.png in Resources */,
 				BB0A40C921997C99004669CA /* 形状 4@2x.png in Resources */,
+				BB8B9E5421A6928500E5D8B2 /* valveNode_normal.png in Resources */,
+				BB8B9E2621A6928500E5D8B2 /* 椭圆 2 拷贝 10.png in Resources */,
 				BB0A40B221997C99004669CA /* img_tab01@2x.png in Resources */,
 				BB0A40E421997C99004669CA /* 椭圆 2 拷贝 3@2x.png in Resources */,
 				BB0A40BF21997C99004669CA /* 椭圆 1 拷贝 3.png in Resources */,
 				BB0A40E621997C99004669CA /* 椭圆 1 拷贝@3x.png in Resources */,
+				BB8B9DC421A6815000E5D8B2 /* thermostatKnob@1x.png in Resources */,
+				BB8B9DCC21A6815000E5D8B2 /* 椭圆 1@3x.png in Resources */,
+				BB8B9E5B21A6928500E5D8B2 /* 矢量智能对象1.png in Resources */,
+				BB8B9DD021A6815000E5D8B2 /* thermostatMoer@1x.png in Resources */,
+				BB8B9E4621A6928500E5D8B2 /* nodeLeakBig_normal.png in Resources */,
 				BB0A40E121997C99004669CA /* img_homeSet.png in Resources */,
 				BB0A40E821997C99004669CA /* 矢量智能对象7.png in Resources */,
+				BB8B9E1B21A6928500E5D8B2 /* nodeLeakSmall_normal@2x.png in Resources */,
+				BB8B9E7321A6ADEB00E5D8B2 /* valveSwitch_off@3x.png in Resources */,
+				BB8B9E3221A6928500E5D8B2 /* 矢量智能对象6@3x.png in Resources */,
+				BB8B9DB921A6815000E5D8B2 /* 矢量智能对象 拷贝 6@3x.png in Resources */,
 				BB0A40C821997C99004669CA /* img_headerBg@3x.png in Resources */,
+				BB8B9E2721A6928500E5D8B2 /* 矢量智能对象 拷贝 6@2x.png in Resources */,
+				BB8B9E8021A6ADEB00E5D8B2 /* valveSwitch_off.png in Resources */,
 				BB0A40F421997C99004669CA /* 椭圆 2 拷贝 3.png in Resources */,
 				BB0A40E221997C99004669CA /* 矢量智能对象5.png in Resources */,
+				BB8B9E5221A6928500E5D8B2 /* 矢量智能对象7.png in Resources */,
 				BB0A40AB21997C99004669CA /* 椭圆 1 拷贝 2@3x.png in Resources */,
 				BB0A40C721997C99004669CA /* 椭圆 1 拷贝.png in Resources */,
 			);
@@ -983,16 +1478,19 @@
 			files = (
 				BB49DF9521958864004E00A2 /* ViewController.m in Sources */,
 				BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */,
+				BB8B9DD321A691D400E5D8B2 /* WirelessValveController.m in Sources */,
 				BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */,
 				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
 				BB21BF5E219E54F90067BC61 /* DeviceModel.m in Sources */,
 				BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */,
 				BB0A403221991AA8004669CA /* NSObject+Common.m in Sources */,
+				BB8B9E8721A6E62100E5D8B2 /* NodeDetailCell.m in Sources */,
 				BB0A403021991AA8004669CA /* UIColor+ColorChange.m in Sources */,
 				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
 				BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */,
 				BB35292B219DA7EC00428DE9 /* Network.m in Sources */,
 				3E9E9B9721A2A52100CA2B7D /* HomeManagementTableViewCell.m in Sources */,
+				BB8B9D9921A65FDF00E5D8B2 /* ThermostatController.m in Sources */,
 				BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
 				BB0A403521991AA8004669CA /* NSDate+Common.m in Sources */,

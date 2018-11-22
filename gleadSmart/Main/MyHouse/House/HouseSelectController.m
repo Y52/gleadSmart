@@ -10,7 +10,7 @@
 #import "TouchTableView.h"
 #import "HouseSelectCell.h"
 #import "HouseManagementController.h"
-static NSString *const CellIdentifier_HomeSelect = @"CellID_HomeSelect";
+NSString *const CellIdentifier_HomeSelect = @"CellID_HomeSelect";
 static CGFloat const Cell_Height = 50.f;
 
 @interface HouseSelectController () <UITableViewDelegate, UITableViewDataSource>

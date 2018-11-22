@@ -71,7 +71,7 @@
                                      NSForegroundColorAttributeName: [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1],
                                      };
     [navigationBarAppearance setTitleTextAttributes:textAttributes];
-    [navigationBarAppearance setTranslucent:YES];
+    [navigationBarAppearance setTranslucent:NO];
     
     //透明
     [navigationBarAppearance setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];

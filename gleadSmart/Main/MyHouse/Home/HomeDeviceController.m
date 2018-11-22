@@ -9,8 +9,10 @@
 #import "HomeDeviceController.h"
 #import "TouchTableView.h"
 #import "HomeDeviceCell.h"
+#import "ThermostatController.h"
+#import "WirelessValveController.h"
 
-static NSString *const CellIdentifier_HomeDevice = @"CellID_HomeDevice";
+NSString *const CellIdentifier_HomeDevice = @"CellID_HomeDevice";
 static CGFloat const Cell_Height = 72.f;
 
 @interface HomeDeviceController () <UITableViewDelegate, UITableViewDataSource>
@@ -99,6 +101,13 @@ static CGFloat const Cell_Height = 72.f;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (indexPath.row == 0) {
+        ThermostatController *thermostatVC = [[ThermostatController alloc] init];
+        [self.navigationController pushViewController:thermostatVC animated:YES];
+    }else{
+        WirelessValveController *valveVC = [[WirelessValveController alloc] init];
+        [self.navigationController pushViewController:valveVC animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
