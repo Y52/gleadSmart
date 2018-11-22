@@ -43,6 +43,12 @@ static CGFloat const Cell_Height = 50.f;
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
 
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - Lazy Load
@@ -122,8 +128,7 @@ static CGFloat const Cell_Height = 50.f;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HouseManagementController  *HouseManagementVC = [[HouseManagementController alloc] init];
-    //[self.navigationController pushViewController:HouseManagementVC animated:YES];
-    [self presentViewController:HouseManagementVC animated:YES completion:nil];
+    [self.navigationController pushViewController:HouseManagementVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

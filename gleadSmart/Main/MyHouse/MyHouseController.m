@@ -62,8 +62,6 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1].CGColor;
     
-    //挡住了最上面的几个按钮的点击
-    self.navigationController.navigationBar.userInteractionEnabled = NO;
     
     self.headerView = [self headerView];
     self.houseList = [self houseList];
@@ -80,6 +78,15 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
+    
+    //挡住了最上面的几个按钮的点击
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 #pragma mark - Lazy load
 -(UIView *)headerView{
@@ -116,7 +123,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         [_houseButton setTitle:self.houseList[selectHouse] forState:UIControlStateNormal];
         _houseButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
         _houseButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-        [_houseButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [_houseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_houseButton setImage:[UIImage imageNamed:@"img_houseSelect"] forState:UIControlStateNormal];
         [_houseButton addTarget:self action:@selector(houseSelect) forControlEvents:UIControlEventTouchUpInside];
         [self.headerView addSubview:_houseButton];
@@ -323,13 +330,14 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 - (void)houseSelect{
     NSLog(@"asdf");
     HouseSelectController *hsVC = [[HouseSelectController alloc] init];
-    hsVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    hsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     hsVC.dismissBlock = ^{
         [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
     };
-    [self presentViewController:hsVC animated:YES completion:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:hsVC];
+    nav.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)homeSetting{
