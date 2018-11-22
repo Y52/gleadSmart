@@ -9,6 +9,8 @@
 #import "MyHouseController.h"
 #import "HomeDeviceController.h"
 #import "HouseSelectController.h"
+#import "SelectDeviceTypeController.h"
+#import "HomeManagementController.h"
 
 static CGFloat const gleadHeaderHeight = 225.f;
 static CGFloat const gleadWeatherViewWidth = 335.f;
@@ -114,7 +116,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         [_houseButton setTitle:self.houseList[selectHouse] forState:UIControlStateNormal];
         _houseButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
         _houseButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-        [_houseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_houseButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
         [_houseButton setImage:[UIImage imageNamed:@"img_houseSelect"] forState:UIControlStateNormal];
         [_houseButton addTarget:self action:@selector(houseSelect) forControlEvents:UIControlEventTouchUpInside];
         [self.headerView addSubview:_houseButton];
@@ -331,10 +333,15 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 }
 
 - (void)homeSetting{
-    NSLog(@"asdf");
+    NSLog(@"as");
+    HomeManagementController *HomeManagementVC = [[HomeManagementController alloc] init];
+    [self.navigationController pushViewController:HomeManagementVC animated:YES];
 }
 
 - (void)addDevice{
     NSLog(@"asdf");
+    SelectDeviceTypeController  *SelectDeviceVC = [[SelectDeviceTypeController alloc] init];
+    [self.navigationController pushViewController:SelectDeviceVC animated:YES];
+    
 }
 @end

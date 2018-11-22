@@ -50,7 +50,7 @@
 
 typedef enum : NSUInteger {
     unselect = 1000,
-    select,
+    //select,
     up,
     down,
 } selectionStatus;

@@ -9,7 +9,7 @@
 #import "HouseSelectController.h"
 #import "TouchTableView.h"
 #import "HouseSelectCell.h"
-
+#import "HouseManagementController.h"
 static NSString *const CellIdentifier_HomeSelect = @"CellID_HomeSelect";
 static CGFloat const Cell_Height = 50.f;
 
@@ -42,6 +42,7 @@ static CGFloat const Cell_Height = 50.f;
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+
 }
 
 #pragma mark - Lazy Load
@@ -120,7 +121,9 @@ static CGFloat const Cell_Height = 50.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    HouseManagementController  *HouseManagementVC = [[HouseManagementController alloc] init];
+    //[self.navigationController pushViewController:HouseManagementVC animated:YES];
+    [self presentViewController:HouseManagementVC animated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

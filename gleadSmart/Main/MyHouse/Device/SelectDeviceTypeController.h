@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SelectDeviceTypeController : UIViewController
 
+@property (nonatomic) CGFloat filledSpcingHeight;
+
 @end
 
 NS_ASSUME_NONNULL_END
