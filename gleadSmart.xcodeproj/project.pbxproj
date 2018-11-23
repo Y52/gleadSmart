@@ -134,6 +134,12 @@
 		BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF421A7E59600B2121B /* WirelessValveController.m */; };
 		BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF721A7E59600B2121B /* ThermostatController.m */; };
 		BB37DEFF21A7E8D600B2121B /* NodeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEFD21A7E8D600B2121B /* NodeDetailCell.m */; };
+		BB37DF0A21A7EFC400B2121B /* DeviceConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0121A7EFC300B2121B /* DeviceConfirmView.m */; };
+		BB37DF0B21A7EFC400B2121B /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0321A7EFC300B2121B /* DeviceViewController.m */; };
+		BB37DF0C21A7EFC400B2121B /* EspViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0521A7EFC400B2121B /* EspViewController.m */; };
+		BB37DF0D21A7EFC400B2121B /* DeviceConnectView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0621A7EFC400B2121B /* DeviceConnectView.m */; };
+		BB37DF0E21A7EFC400B2121B /* DeviceSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0821A7EFC400B2121B /* DeviceSelectView.m */; };
+		BB37DF1221A7F3AF00B2121B /* DeviceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF1021A7F3AF00B2121B /* DeviceTableViewCell.m */; };
 		BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49774A219A6B5E00427197 /* MyHouseController.m */; };
 		BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9121958864004E00A2 /* AppDelegate.m */; };
 		BB49DF9521958864004E00A2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9421958864004E00A2 /* ViewController.m */; };
@@ -283,10 +289,10 @@
 		0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gleadSmart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C91728F2E98E7E5ACCA018D /* Pods-gleadSmart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.debug.xcconfig"; sourceTree = "<group>"; };
 		21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.release.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.release.xcconfig"; sourceTree = "<group>"; };
-		3E3AFFB821A7E74800EA8F1C /* HomeManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeManagementTableViewCell.h; path = Home/HomeManagementTableViewCell.h; sourceTree = "<group>"; };
-		3E3AFFB921A7E74900EA8F1C /* HomeManagementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeManagementTableViewCell.m; path = Home/HomeManagementTableViewCell.m; sourceTree = "<group>"; };
-		3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeManagementCell.m; path = Home/HomeManagementCell.m; sourceTree = "<group>"; };
-		3E3AFFBC21A7E75100EA8F1C /* HomeManagementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeManagementCell.h; path = Home/HomeManagementCell.h; sourceTree = "<group>"; };
+		3E3AFFB821A7E74800EA8F1C /* HomeManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeManagementTableViewCell.h; sourceTree = "<group>"; };
+		3E3AFFB921A7E74900EA8F1C /* HomeManagementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeManagementTableViewCell.m; sourceTree = "<group>"; };
+		3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeManagementCell.m; sourceTree = "<group>"; };
+		3E3AFFBC21A7E75100EA8F1C /* HomeManagementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeManagementCell.h; sourceTree = "<group>"; };
 		3E3AFFBE21A7E7EA00EA8F1C /* AddFamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFamilyViewController.m; sourceTree = "<group>"; };
 		3E3AFFBF21A7E7EA00EA8F1C /* AddFamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFamilyViewController.h; sourceTree = "<group>"; };
 		3E56AD2021A6A6DD0089BA8F /* AddFamilyTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFamilyTextCell.h; sourceTree = "<group>"; };
@@ -438,6 +444,18 @@
 		BB37DEF721A7E59600B2121B /* ThermostatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThermostatController.m; sourceTree = "<group>"; };
 		BB37DEFD21A7E8D600B2121B /* NodeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeDetailCell.m; sourceTree = "<group>"; };
 		BB37DEFE21A7E8D600B2121B /* NodeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeDetailCell.h; sourceTree = "<group>"; };
+		BB37DF0021A7EFC300B2121B /* DeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceViewController.h; sourceTree = "<group>"; };
+		BB37DF0121A7EFC300B2121B /* DeviceConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceConfirmView.m; sourceTree = "<group>"; };
+		BB37DF0221A7EFC300B2121B /* DeviceConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceConfirmView.h; sourceTree = "<group>"; };
+		BB37DF0321A7EFC300B2121B /* DeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceViewController.m; sourceTree = "<group>"; };
+		BB37DF0421A7EFC400B2121B /* EspViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EspViewController.h; sourceTree = "<group>"; };
+		BB37DF0521A7EFC400B2121B /* EspViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EspViewController.m; sourceTree = "<group>"; };
+		BB37DF0621A7EFC400B2121B /* DeviceConnectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceConnectView.m; sourceTree = "<group>"; };
+		BB37DF0721A7EFC400B2121B /* DeviceSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceSelectView.h; sourceTree = "<group>"; };
+		BB37DF0821A7EFC400B2121B /* DeviceSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceSelectView.m; sourceTree = "<group>"; };
+		BB37DF0921A7EFC400B2121B /* DeviceConnectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceConnectView.h; sourceTree = "<group>"; };
+		BB37DF1021A7F3AF00B2121B /* DeviceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTableViewCell.m; sourceTree = "<group>"; };
+		BB37DF1121A7F3AF00B2121B /* DeviceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTableViewCell.h; sourceTree = "<group>"; };
 		BB497749219A6B5E00427197 /* MyHouseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyHouseController.h; sourceTree = "<group>"; };
 		BB49774A219A6B5E00427197 /* MyHouseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyHouseController.m; sourceTree = "<group>"; };
 		BB49DF8D21958864004E00A2 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -613,6 +631,10 @@
 		3E9E9B9821A2ABC600CA2B7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				3E3AFFB821A7E74800EA8F1C /* HomeManagementTableViewCell.h */,
+				3E3AFFB921A7E74900EA8F1C /* HomeManagementTableViewCell.m */,
+				3E3AFFBC21A7E75100EA8F1C /* HomeManagementCell.h */,
+				3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -833,10 +855,9 @@
 			children = (
 				BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */,
 				BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */,
-				BB37DEF621A7E59600B2121B /* ThermostatController.h */,
-				BB37DEF721A7E59600B2121B /* ThermostatController.m */,
-				BB37DEF521A7E59600B2121B /* WirelessValveController.h */,
-				BB37DEF421A7E59600B2121B /* WirelessValveController.m */,
+				BB37DEF321A7DDCE00B2121B /* ESPTouch */,
+				BB37DF1321A7F6C800B2121B /* Thermostat */,
+				BB37DF1421A7F6D700B2121B /* Valve */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -858,16 +879,12 @@
 				BB352911219D61B300428DE9 /* HouseSelectCell.m */,
 				3ECFF39D219EB00C00024D2C /* SelectDeviceTypeCell.h */,
 				3ECFF39E219EB00C00024D2C /* SelectDeviceTypeCell.m */,
-				3E3AFFB821A7E74800EA8F1C /* HomeManagementTableViewCell.h */,
-				3E3AFFB921A7E74900EA8F1C /* HomeManagementTableViewCell.m */,
-				3E3AFFBC21A7E75100EA8F1C /* HomeManagementCell.h */,
-				3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */,
 				3E56AD2021A6A6DD0089BA8F /* AddFamilyTextCell.h */,
 				3E56AD2121A6A6DD0089BA8F /* AddFamilyTextCell.m */,
 				3E56AD2321A6A7160089BA8F /* AddFamilySelectCell.h */,
 				3E56AD2421A6A7160089BA8F /* AddFamilySelectCell.m */,
-				BB37DEFE21A7E8D600B2121B /* NodeDetailCell.h */,
-				BB37DEFD21A7E8D600B2121B /* NodeDetailCell.m */,
+				BB37DF1521A7F6F100B2121B /* Valve */,
+				BB37DF0F21A7F35500B2121B /* DeviceESP */,
 				3E9E9B9821A2ABC600CA2B7D /* Home */,
 			);
 			path = Myhouse;
@@ -887,8 +904,54 @@
 		BB37DEF321A7DDCE00B2121B /* ESPTouch */ = {
 			isa = PBXGroup;
 			children = (
+				BB37DF0021A7EFC300B2121B /* DeviceViewController.h */,
+				BB37DF0321A7EFC300B2121B /* DeviceViewController.m */,
+				BB37DF0421A7EFC400B2121B /* EspViewController.h */,
+				BB37DF0521A7EFC400B2121B /* EspViewController.m */,
+				BB37DF0221A7EFC300B2121B /* DeviceConfirmView.h */,
+				BB37DF0121A7EFC300B2121B /* DeviceConfirmView.m */,
+				BB37DF0921A7EFC400B2121B /* DeviceConnectView.h */,
+				BB37DF0621A7EFC400B2121B /* DeviceConnectView.m */,
+				BB37DF0721A7EFC400B2121B /* DeviceSelectView.h */,
+				BB37DF0821A7EFC400B2121B /* DeviceSelectView.m */,
 			);
 			path = ESPTouch;
+			sourceTree = "<group>";
+		};
+		BB37DF0F21A7F35500B2121B /* DeviceESP */ = {
+			isa = PBXGroup;
+			children = (
+				BB37DF1121A7F3AF00B2121B /* DeviceTableViewCell.h */,
+				BB37DF1021A7F3AF00B2121B /* DeviceTableViewCell.m */,
+			);
+			path = DeviceESP;
+			sourceTree = "<group>";
+		};
+		BB37DF1321A7F6C800B2121B /* Thermostat */ = {
+			isa = PBXGroup;
+			children = (
+				BB37DEF621A7E59600B2121B /* ThermostatController.h */,
+				BB37DEF721A7E59600B2121B /* ThermostatController.m */,
+			);
+			path = Thermostat;
+			sourceTree = "<group>";
+		};
+		BB37DF1421A7F6D700B2121B /* Valve */ = {
+			isa = PBXGroup;
+			children = (
+				BB37DEF521A7E59600B2121B /* WirelessValveController.h */,
+				BB37DEF421A7E59600B2121B /* WirelessValveController.m */,
+			);
+			path = Valve;
+			sourceTree = "<group>";
+		};
+		BB37DF1521A7F6F100B2121B /* Valve */ = {
+			isa = PBXGroup;
+			children = (
+				BB37DEFE21A7E8D600B2121B /* NodeDetailCell.h */,
+				BB37DEFD21A7E8D600B2121B /* NodeDetailCell.m */,
+			);
+			path = Valve;
 			sourceTree = "<group>";
 		};
 		BB497748219A6A1E00427197 /* MyHouse */ = {
@@ -900,7 +963,6 @@
 				BB21BF65219E66920067BC61 /* House */,
 				BB21BF66219E66AF0067BC61 /* Home */,
 				BB21BF67219E66BE0067BC61 /* Device */,
-				BB37DEF321A7DDCE00B2121B /* ESPTouch */,
 			);
 			path = MyHouse;
 			sourceTree = "<group>";
@@ -1484,6 +1546,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -1495,6 +1558,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -1520,12 +1584,14 @@
 				BB37DEFF21A7E8D600B2121B /* NodeDetailCell.m in Sources */,
 				BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */,
 				BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */,
+				BB37DF0C21A7EFC400B2121B /* EspViewController.m in Sources */,
 				BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */,
 				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
 				BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */,
 				BB0A403221991AA8004669CA /* NSObject+Common.m in Sources */,
 				BB0A403021991AA8004669CA /* UIColor+ColorChange.m in Sources */,
 				3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */,
+				BB37DF0E21A7EFC400B2121B /* DeviceSelectView.m in Sources */,
 				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
 				BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */,
 				3E56AD2221A6A6DD0089BA8F /* AddFamilyTextCell.m in Sources */,
@@ -1533,9 +1599,13 @@
 				BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */,
 				3E3AFFBA21A7E74900EA8F1C /* HomeManagementTableViewCell.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
+				BB37DF1221A7F3AF00B2121B /* DeviceTableViewCell.m in Sources */,
 				BB0A403521991AA8004669CA /* NSDate+Common.m in Sources */,
+				BB37DF0B21A7EFC400B2121B /* DeviceViewController.m in Sources */,
 				3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
+				BB37DF0A21A7EFC400B2121B /* DeviceConfirmView.m in Sources */,
+				BB37DF0D21A7EFC400B2121B /* DeviceConnectView.m in Sources */,
 				BB0A403621991AA8004669CA /* TouchTableView.m in Sources */,
 				BB0A403121991AA8004669CA /* UIButton+Common.m in Sources */,
 				BB49DF9B21958864004E00A2 /* gleadSmart.xcdatamodeld in Sources */,

@@ -2,54 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:gleadSmart/Main/Model/User+CoreDataProperties.h">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/User+CoreDataClass.h">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/User+CoreDataClass.m">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/User+CoreDataProperties.m">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/Room+CoreDataProperties.h">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/Room+CoreDataClass.h">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/Room+CoreDataClass.m">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/Room+CoreDataProperties.m">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/House+CoreDataProperties.h">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/House+CoreDataClass.h">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/House+CoreDataClass.m">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/House+CoreDataProperties.m">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/Device+CoreDataProperties.h">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/Device+CoreDataClass.h">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/Device+CoreDataClass.m">
-   </FileRef>
-   <FileRef
-      location = "group:gleadSmart/Main/Model/Device+CoreDataProperties.m">
-   </FileRef>
-   <FileRef
       location = "group:gleadSmart.xcodeproj">
    </FileRef>
    <FileRef

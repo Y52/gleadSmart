@@ -85,6 +85,7 @@ static CGFloat const Cell_Height = 50.f;
             break;
     }
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0:
