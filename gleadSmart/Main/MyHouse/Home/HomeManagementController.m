@@ -10,7 +10,7 @@
 #import "HomeManagementCell.h"
 
 NSString *const CellIdentifier_HomeManagementTable = @"CellID_HomeManagementTable";
-static CGFloat const Cell_Height = 40.f;
+static CGFloat const Cell_Height = 50.f;
 
 @interface HomeManagementController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -26,9 +26,18 @@ static CGFloat const Cell_Height = 40.f;
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1].CGColor;
     
-    self.navigationItem.title = LocalString(@"房间管理");
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightButton.frame = CGRectMake(0, 0, 30, 30);
+    [rightButton setTitle:@"编辑" forState:UIControlStateNormal];
+    [rightButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
+    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(editedBtn) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
     
+    self.navigationItem.title = LocalString(@"房间管理");
     self.homeManagementTable = [self homeManagementTable];
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -39,7 +48,7 @@ static CGFloat const Cell_Height = 40.f;
 -(UITableView *)homeManagementTable{
     if (!_homeManagementTable) {
         _homeManagementTable = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,320) style:UITableViewStylePlain];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,300) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
@@ -53,13 +62,12 @@ static CGFloat const Cell_Height = 40.f;
             
             _addShareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [_addShareBtn setTitle:LocalString(@"添加共享") forState:UIControlStateNormal];
-            [_addShareBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-            
+            [_addShareBtn setTitleColor:[UIColor cyanColor ] forState:UIControlStateNormal];
+            [_addShareBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+            [_addShareBtn setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
             [_addShareBtn.layer setBorderWidth:1.0];
-            _addShareBtn.layer.borderColor = [UIColor blueColor].CGColor;
-            
-            [_addShareBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:15]];
-             _addShareBtn.layer.cornerRadius = 20.f;
+            _addShareBtn.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
+             _addShareBtn.layer.cornerRadius = 15.f;
             [_addShareBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
             [_addShareBtn addTarget:self action:@selector(goshare) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:_addShareBtn];
@@ -140,4 +148,9 @@ static CGFloat const Cell_Height = 40.f;
 -(void)goshare{
     NSLog(@"dd");
 }
+-(void)editedBtn{
+    NSLog(@"rr");
+    
+}
+
 @end
