@@ -45,6 +45,8 @@ CGFloat const cellHeader_Height = 30.f;
 @property (strong, nonatomic) UILabel *nodeSetLabel;
 
 @property (strong, nonatomic) UITableView *nodeLeakDetailTable;
+
+@property (strong, nonatomic) UIButton *controlSwitchButton;
 @end
 
 @implementation WirelessValveController
@@ -72,6 +74,7 @@ CGFloat const cellHeader_Height = 30.f;
     self.nodeBatteryButton = [self nodeBatteryButton];
     self.nodeSetViewButton = [self nodeSetViewButton];
     self.nodeLeakDetailTable = [self nodeLeakDetailTable];
+    self.controlSwitchButton = [self controlSwitchButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -486,6 +489,30 @@ CGFloat const cellHeader_Height = 30.f;
     return _nodeLeakDetailTable;
 }
 
+- (UIButton *)controlSwitchButton{
+    if (!_controlSwitchButton) {
+        _controlSwitchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_controlSwitchButton setTitle:LocalString(@"开关") forState:UIControlStateNormal];
+        [_controlSwitchButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
+        [_controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl"] forState:UIControlStateNormal];
+        //[_controlSwitchButton.imageView sizeThatFits:CGSizeMake(51.f, 51.f)];
+        _controlSwitchButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:17.f];
+        [_controlSwitchButton addTarget:self action:@selector(controlSwitch) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_controlSwitchButton];
+        [_controlSwitchButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(51.f, 70.f));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(30.f + ySafeArea_Bottom)));
+        }];
+        _controlSwitchButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;//使图片和文字水平居中显示
+        [_controlSwitchButton setTitleEdgeInsets:UIEdgeInsetsMake(_controlSwitchButton.imageView.frame.size.height + _controlSwitchButton.imageView.frame.origin.y + 10.f, -
+                                                         _controlSwitchButton.imageView.frame.size.width, 0.0, 5.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
+        [_controlSwitchButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, -
+                                                         _controlSwitchButton.titleLabel.bounds.size.width)];//图片距离右边框距离减少图片的宽度，其它不边
+    }
+    return _controlSwitchButton;
+}
+
 #pragma mark - UITableView delegate&datasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -539,6 +566,10 @@ CGFloat const cellHeader_Height = 30.f;
 
 #pragma mark - Actions
 - (void)moreSetting{
+    
+}
+
+- (void)controlSwitch{
     
 }
 @end

@@ -87,7 +87,7 @@
         _timeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_timeButton setTitle:LocalString(@"定时") forState:UIControlStateNormal];
         [_timeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
-        [_timeButton setImage:[UIImage imageNamed:@"thermostatSet"] forState:UIControlStateNormal];
+        [_timeButton setImage:[UIImage imageNamed:@"thermostat_timing"] forState:UIControlStateNormal];
         [_timeButton.imageView sizeThatFits:CGSizeMake(44.f, 44.f)];
         _timeButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.f];
         [_timeButton addTarget:self action:@selector(timingAction) forControlEvents:UIControlEventTouchUpInside];
