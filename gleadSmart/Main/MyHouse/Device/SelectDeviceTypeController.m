@@ -11,7 +11,8 @@
 #import "SelectDeviceTypeCell.h"
 
 NSString *const CellIdentifier_SelectDeviceType = @"CellID_SelectDeviceType";
-static CGFloat const Cell_Height = 40.f;
+static float HEIGHT_CELL = 50.f;
+static float HEIGHT_HEADER = 40.f;
 
 @interface SelectDeviceTypeController () <UITableViewDataSource,UITableViewDelegate>
 #warning TODO 完成设备类型选择UI 
@@ -38,7 +39,7 @@ static CGFloat const Cell_Height = 40.f;
 -(UITableView *)deviceTypeTable{
     if (!_deviceTypeTable) {
         _deviceTypeTable = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,260) style:UITableViewStylePlain];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,240) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
@@ -106,13 +107,36 @@ static CGFloat const Cell_Height = 40.f;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
-- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"所有设备";
-}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return Cell_Height;
+    return HEIGHT_CELL;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT_HEADER)];
+    headerView.layer.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1].CGColor;
+    
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT_HEADER)];
+    //UILabel *textLabel = [[UILabel alloc] init];
+    textLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    textLabel.font = [UIFont systemFontOfSize:13.f];
+    textLabel.textAlignment = NSTextAlignmentLeft;
+    textLabel.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:textLabel];
+    textLabel.text = LocalString(@"所有设备");
+    
+    [textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(80, 13));
+        make.centerY.equalTo(headerView.mas_centerY);
+        make.left.equalTo(headerView.mas_left).offset(20);
+    }];
+
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return HEIGHT_HEADER;
+}
 
 @end

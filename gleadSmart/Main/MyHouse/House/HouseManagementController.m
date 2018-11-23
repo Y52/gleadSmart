@@ -39,10 +39,6 @@ static CGFloat const Cell_Height = 50.f;
     
     self.HouseManagement = [self HouseManagement];
 }
-//- (void)viewWillAppear:(BOOL)animated{
-//    [super viewWillAppear:animated];
-//    [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
-//}
 
 #pragma mark - Lazy Load
 -(UITableView *)HouseManagement{
@@ -74,7 +70,7 @@ static CGFloat const Cell_Height = 50.f;
     switch (section) {
         case 0:
         {
-            return 1+_homeManagementArray.count;
+            return _homeManagementArray.count;
         }
             break;
             

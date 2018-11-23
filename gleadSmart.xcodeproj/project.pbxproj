@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E56AD1C21A69DAB0089BA8F /* AddFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56AD1B21A69DAB0089BA8F /* AddFamilyViewController.m */; };
+		3E56AD2221A6A6DD0089BA8F /* AddFamilyTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56AD2121A6A6DD0089BA8F /* AddFamilyTextCell.m */; };
+		3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56AD2421A6A7160089BA8F /* AddFamilySelectCell.m */; };
 		3E9E9B9721A2A52100CA2B7D /* HomeManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9E9B9621A2A52100CA2B7D /* HomeManagementTableViewCell.m */; };
 		3ECFF39F219EB00C00024D2C /* SelectDeviceTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECFF39E219EB00C00024D2C /* SelectDeviceTypeCell.m */; };
 		3EDB7AC121A538FF009B0733 /* HomeManagementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB7AC021A538FF009B0733 /* HomeManagementCell.m */; };
@@ -159,6 +162,12 @@
 		0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gleadSmart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C91728F2E98E7E5ACCA018D /* Pods-gleadSmart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.debug.xcconfig"; sourceTree = "<group>"; };
 		21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.release.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.release.xcconfig"; sourceTree = "<group>"; };
+		3E56AD1A21A69DAB0089BA8F /* AddFamilyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFamilyViewController.h; sourceTree = "<group>"; };
+		3E56AD1B21A69DAB0089BA8F /* AddFamilyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFamilyViewController.m; sourceTree = "<group>"; };
+		3E56AD2021A6A6DD0089BA8F /* AddFamilyTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFamilyTextCell.h; sourceTree = "<group>"; };
+		3E56AD2121A6A6DD0089BA8F /* AddFamilyTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFamilyTextCell.m; sourceTree = "<group>"; };
+		3E56AD2321A6A7160089BA8F /* AddFamilySelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFamilySelectCell.h; sourceTree = "<group>"; };
+		3E56AD2421A6A7160089BA8F /* AddFamilySelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFamilySelectCell.m; sourceTree = "<group>"; };
 		3E9E9B9521A2A52100CA2B7D /* HomeManagementTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeManagementTableViewCell.h; sourceTree = "<group>"; };
 		3E9E9B9621A2A52100CA2B7D /* HomeManagementTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeManagementTableViewCell.m; sourceTree = "<group>"; };
 		3ECFF39D219EB00C00024D2C /* SelectDeviceTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectDeviceTypeCell.h; sourceTree = "<group>"; };
@@ -359,6 +368,10 @@
 		3E9E9B9821A2ABC600CA2B7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				3E9E9B9521A2A52100CA2B7D /* HomeManagementTableViewCell.h */,
+				3E9E9B9621A2A52100CA2B7D /* HomeManagementTableViewCell.m */,
+				3EDB7ABF21A538FF009B0733 /* HomeManagementCell.h */,
+				3EDB7AC021A538FF009B0733 /* HomeManagementCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -556,6 +569,8 @@
 				BB352914219D63BC00428DE9 /* HouseSelectController.m */,
 				BB21BF68219E66F30067BC61 /* HouseManagementController.h */,
 				BB21BF69219E66F30067BC61 /* HouseManagementController.m */,
+				3E56AD1A21A69DAB0089BA8F /* AddFamilyViewController.h */,
+				3E56AD1B21A69DAB0089BA8F /* AddFamilyViewController.m */,
 			);
 			path = House;
 			sourceTree = "<group>";
@@ -597,10 +612,10 @@
 				BB352911219D61B300428DE9 /* HouseSelectCell.m */,
 				3ECFF39D219EB00C00024D2C /* SelectDeviceTypeCell.h */,
 				3ECFF39E219EB00C00024D2C /* SelectDeviceTypeCell.m */,
-				3E9E9B9521A2A52100CA2B7D /* HomeManagementTableViewCell.h */,
-				3E9E9B9621A2A52100CA2B7D /* HomeManagementTableViewCell.m */,
-				3EDB7ABF21A538FF009B0733 /* HomeManagementCell.h */,
-				3EDB7AC021A538FF009B0733 /* HomeManagementCell.m */,
+				3E56AD2021A6A6DD0089BA8F /* AddFamilyTextCell.h */,
+				3E56AD2121A6A6DD0089BA8F /* AddFamilyTextCell.m */,
+				3E56AD2321A6A7160089BA8F /* AddFamilySelectCell.h */,
+				3E56AD2421A6A7160089BA8F /* AddFamilySelectCell.m */,
 				3E9E9B9821A2ABC600CA2B7D /* Home */,
 			);
 			path = Myhouse;
@@ -983,6 +998,7 @@
 			files = (
 				BB49DF9521958864004E00A2 /* ViewController.m in Sources */,
 				BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */,
+				3E56AD1C21A69DAB0089BA8F /* AddFamilyViewController.m in Sources */,
 				BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */,
 				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
 				BB21BF5E219E54F90067BC61 /* DeviceModel.m in Sources */,
@@ -991,11 +1007,13 @@
 				BB0A403021991AA8004669CA /* UIColor+ColorChange.m in Sources */,
 				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
 				BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */,
+				3E56AD2221A6A6DD0089BA8F /* AddFamilyTextCell.m in Sources */,
 				BB35292B219DA7EC00428DE9 /* Network.m in Sources */,
 				3E9E9B9721A2A52100CA2B7D /* HomeManagementTableViewCell.m in Sources */,
 				BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
 				BB0A403521991AA8004669CA /* NSDate+Common.m in Sources */,
+				3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
 				BB0A403621991AA8004669CA /* TouchTableView.m in Sources */,
 				BB0A403121991AA8004669CA /* UIButton+Common.m in Sources */,
