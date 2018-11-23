@@ -128,6 +128,9 @@
 		BB37DED621A798A100B2121B /* thermostatKonb_On@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED421A798A000B2121B /* thermostatKonb_On@2x.png */; };
 		BB37DED721A798A100B2121B /* thermostatKnob_On@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED521A798A100B2121B /* thermostatKnob_On@3x.png */; };
 		BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF121A7AB3700B2121B /* YSZCoreDataStackManager.m */; };
+		BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF421A7E59600B2121B /* WirelessValveController.m */; };
+		BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF721A7E59600B2121B /* ThermostatController.m */; };
+		BB37DEFC21A7E5B800B2121B /* NodeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEFA21A7E5B800B2121B /* NodeDetailCell.m */; };
 		BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49774A219A6B5E00427197 /* MyHouseController.m */; };
 		BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9121958864004E00A2 /* AppDelegate.m */; };
 		BB49DF9521958864004E00A2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9421958864004E00A2 /* ViewController.m */; };
@@ -139,7 +142,6 @@
 		BB49DFAD21958867004E00A2 /* gleadSmartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DFAC21958867004E00A2 /* gleadSmartTests.m */; };
 		BB49DFB821958867004E00A2 /* gleadSmartUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DFB721958867004E00A2 /* gleadSmartUITests.m */; };
 		BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB835FA3219C03A300225B60 /* HomeDeviceController.m */; };
-		BB8B9D9921A65FDF00E5D8B2 /* ThermostatController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8B9D9821A65FDF00E5D8B2 /* ThermostatController.m */; };
 		BB8B9DB621A6815000E5D8B2 /* 矢量智能对象 拷贝 6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9B21A6815000E5D8B2 /* 矢量智能对象 拷贝 6.png */; };
 		BB8B9DB721A6815000E5D8B2 /* Ellipse 5 copy 7.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9C21A6815000E5D8B2 /* Ellipse 5 copy 7.png */; };
 		BB8B9DB821A6815000E5D8B2 /* thermostatControl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */; };
@@ -167,7 +169,6 @@
 		BB8B9DCE21A6815000E5D8B2 /* thermostatControl@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB321A6815000E5D8B2 /* thermostatControl@1x.png */; };
 		BB8B9DCF21A6815000E5D8B2 /* thermostatSet@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB421A6815000E5D8B2 /* thermostatSet@1x.png */; };
 		BB8B9DD021A6815000E5D8B2 /* thermostatMoer@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB521A6815000E5D8B2 /* thermostatMoer@1x.png */; };
-		BB8B9DD321A691D400E5D8B2 /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8B9DD221A691D400E5D8B2 /* WirelessValveController.m */; };
 		BB8B9E1A21A6928500E5D8B2 /* 矢量智能对象 拷贝 6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DD521A6928500E5D8B2 /* 矢量智能对象 拷贝 6.png */; };
 		BB8B9E1B21A6928500E5D8B2 /* nodeLeakSmall_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DD621A6928500E5D8B2 /* nodeLeakSmall_normal@2x.png */; };
 		BB8B9E1C21A6928500E5D8B2 /* valveAlertMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DD721A6928500E5D8B2 /* valveAlertMark@2x.png */; };
@@ -255,7 +256,6 @@
 		BB8B9E8121A6ADEB00E5D8B2 /* nodeBattery_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6F21A6ADEB00E5D8B2 /* nodeBattery_normal.png */; };
 		BB8B9E8221A6ADEB00E5D8B2 /* 矢量智能对象1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7021A6ADEB00E5D8B2 /* 矢量智能对象1.png */; };
 		BB8B9E8321A6ADEB00E5D8B2 /* nodeLeakBig_leak@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_leak@2x.png */; };
-		BB8B9E8721A6E62100E5D8B2 /* NodeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8B9E8621A6E62100E5D8B2 /* NodeDetailCell.m */; };
 		DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */; };
 /* End PBXBuildFile section */
 
@@ -423,6 +423,12 @@
 		BB37DED521A798A100B2121B /* thermostatKnob_On@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatKnob_On@3x.png"; sourceTree = "<group>"; };
 		BB37DEF021A7AB3700B2121B /* YSZCoreDataStackManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSZCoreDataStackManager.h; sourceTree = "<group>"; };
 		BB37DEF121A7AB3700B2121B /* YSZCoreDataStackManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSZCoreDataStackManager.m; sourceTree = "<group>"; };
+		BB37DEF421A7E59600B2121B /* WirelessValveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WirelessValveController.m; sourceTree = "<group>"; };
+		BB37DEF521A7E59600B2121B /* WirelessValveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessValveController.h; sourceTree = "<group>"; };
+		BB37DEF621A7E59600B2121B /* ThermostatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThermostatController.h; sourceTree = "<group>"; };
+		BB37DEF721A7E59600B2121B /* ThermostatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThermostatController.m; sourceTree = "<group>"; };
+		BB37DEFA21A7E5B800B2121B /* NodeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeDetailCell.m; sourceTree = "<group>"; };
+		BB37DEFB21A7E5B800B2121B /* NodeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeDetailCell.h; sourceTree = "<group>"; };
 		BB497749219A6B5E00427197 /* MyHouseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyHouseController.h; sourceTree = "<group>"; };
 		BB49774A219A6B5E00427197 /* MyHouseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyHouseController.m; sourceTree = "<group>"; };
 		BB49DF8D21958864004E00A2 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -444,8 +450,6 @@
 		BB49DFB921958868004E00A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB835FA2219C03A300225B60 /* HomeDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceController.h; sourceTree = "<group>"; };
 		BB835FA3219C03A300225B60 /* HomeDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceController.m; sourceTree = "<group>"; };
-		BB8B9D9721A65FDF00E5D8B2 /* ThermostatController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThermostatController.h; sourceTree = "<group>"; };
-		BB8B9D9821A65FDF00E5D8B2 /* ThermostatController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThermostatController.m; sourceTree = "<group>"; };
 		BB8B9D9B21A6815000E5D8B2 /* 矢量智能对象 拷贝 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 6.png"; sourceTree = "<group>"; };
 		BB8B9D9C21A6815000E5D8B2 /* Ellipse 5 copy 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ellipse 5 copy 7.png"; sourceTree = "<group>"; };
 		BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@2x.png"; sourceTree = "<group>"; };
@@ -473,8 +477,6 @@
 		BB8B9DB321A6815000E5D8B2 /* thermostatControl@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@1x.png"; sourceTree = "<group>"; };
 		BB8B9DB421A6815000E5D8B2 /* thermostatSet@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatSet@1x.png"; sourceTree = "<group>"; };
 		BB8B9DB521A6815000E5D8B2 /* thermostatMoer@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatMoer@1x.png"; sourceTree = "<group>"; };
-		BB8B9DD121A691D400E5D8B2 /* WirelessValveController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WirelessValveController.h; sourceTree = "<group>"; };
-		BB8B9DD221A691D400E5D8B2 /* WirelessValveController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WirelessValveController.m; sourceTree = "<group>"; };
 		BB8B9DD521A6928500E5D8B2 /* 矢量智能对象 拷贝 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象 拷贝 6.png"; sourceTree = "<group>"; };
 		BB8B9DD621A6928500E5D8B2 /* nodeLeakSmall_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakSmall_normal@2x.png"; sourceTree = "<group>"; };
 		BB8B9DD721A6928500E5D8B2 /* valveAlertMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveAlertMark@2x.png"; sourceTree = "<group>"; };
@@ -562,8 +564,6 @@
 		BB8B9E6F21A6ADEB00E5D8B2 /* nodeBattery_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeBattery_normal.png; sourceTree = "<group>"; };
 		BB8B9E7021A6ADEB00E5D8B2 /* 矢量智能对象1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象1.png"; sourceTree = "<group>"; };
 		BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_leak@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakBig_leak@2x.png"; sourceTree = "<group>"; };
-		BB8B9E8521A6E62100E5D8B2 /* NodeDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeDetailCell.h; sourceTree = "<group>"; };
-		BB8B9E8621A6E62100E5D8B2 /* NodeDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeDetailCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -822,10 +822,10 @@
 			children = (
 				BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */,
 				BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */,
-				BB8B9D9721A65FDF00E5D8B2 /* ThermostatController.h */,
-				BB8B9D9821A65FDF00E5D8B2 /* ThermostatController.m */,
-				BB8B9DD121A691D400E5D8B2 /* WirelessValveController.h */,
-				BB8B9DD221A691D400E5D8B2 /* WirelessValveController.m */,
+				BB37DEF621A7E59600B2121B /* ThermostatController.h */,
+				BB37DEF721A7E59600B2121B /* ThermostatController.m */,
+				BB37DEF521A7E59600B2121B /* WirelessValveController.h */,
+				BB37DEF421A7E59600B2121B /* WirelessValveController.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -851,8 +851,8 @@
 				3E9E9B9621A2A52100CA2B7D /* HomeManagementTableViewCell.m */,
 				3EDB7ABF21A538FF009B0733 /* HomeManagementCell.h */,
 				3EDB7AC021A538FF009B0733 /* HomeManagementCell.m */,
-				BB8B9E8521A6E62100E5D8B2 /* NodeDetailCell.h */,
-				BB8B9E8621A6E62100E5D8B2 /* NodeDetailCell.m */,
+				BB37DEFB21A7E5B800B2121B /* NodeDetailCell.h */,
+				BB37DEFA21A7E5B800B2121B /* NodeDetailCell.m */,
 				3E9E9B9821A2ABC600CA2B7D /* Home */,
 			);
 			path = Myhouse;
@@ -1502,19 +1502,18 @@
 			files = (
 				BB49DF9521958864004E00A2 /* ViewController.m in Sources */,
 				BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */,
+				BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */,
 				BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */,
-				BB8B9DD321A691D400E5D8B2 /* WirelessValveController.m in Sources */,
 				BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */,
 				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
 				BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */,
 				BB0A403221991AA8004669CA /* NSObject+Common.m in Sources */,
-				BB8B9E8721A6E62100E5D8B2 /* NodeDetailCell.m in Sources */,
+				BB37DEFC21A7E5B800B2121B /* NodeDetailCell.m in Sources */,
 				BB0A403021991AA8004669CA /* UIColor+ColorChange.m in Sources */,
 				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
 				BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */,
 				BB35292B219DA7EC00428DE9 /* Network.m in Sources */,
 				3E9E9B9721A2A52100CA2B7D /* HomeManagementTableViewCell.m in Sources */,
-				BB8B9D9921A65FDF00E5D8B2 /* ThermostatController.m in Sources */,
 				BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
 				BB0A403521991AA8004669CA /* NSDate+Common.m in Sources */,
@@ -1527,6 +1526,7 @@
 				BB49DFA321958867004E00A2 /* main.m in Sources */,
 				3ECFF39F219EB00C00024D2C /* SelectDeviceTypeCell.m in Sources */,
 				BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */,
+				BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */,
 				3EDB7AC121A538FF009B0733 /* HomeManagementCell.m in Sources */,
 				BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */,
 				BB0A403421991AA8004669CA /* NSString+Common.m in Sources */,
