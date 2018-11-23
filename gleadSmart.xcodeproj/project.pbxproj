@@ -130,7 +130,6 @@
 		BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF121A7AB3700B2121B /* YSZCoreDataStackManager.m */; };
 		BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF421A7E59600B2121B /* WirelessValveController.m */; };
 		BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF721A7E59600B2121B /* ThermostatController.m */; };
-		BB37DEFC21A7E5B800B2121B /* NodeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEFA21A7E5B800B2121B /* NodeDetailCell.m */; };
 		BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49774A219A6B5E00427197 /* MyHouseController.m */; };
 		BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9121958864004E00A2 /* AppDelegate.m */; };
 		BB49DF9521958864004E00A2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9421958864004E00A2 /* ViewController.m */; };
@@ -427,8 +426,6 @@
 		BB37DEF521A7E59600B2121B /* WirelessValveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessValveController.h; sourceTree = "<group>"; };
 		BB37DEF621A7E59600B2121B /* ThermostatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThermostatController.h; sourceTree = "<group>"; };
 		BB37DEF721A7E59600B2121B /* ThermostatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThermostatController.m; sourceTree = "<group>"; };
-		BB37DEFA21A7E5B800B2121B /* NodeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeDetailCell.m; sourceTree = "<group>"; };
-		BB37DEFB21A7E5B800B2121B /* NodeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeDetailCell.h; sourceTree = "<group>"; };
 		BB497749219A6B5E00427197 /* MyHouseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyHouseController.h; sourceTree = "<group>"; };
 		BB49774A219A6B5E00427197 /* MyHouseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyHouseController.m; sourceTree = "<group>"; };
 		BB49DF8D21958864004E00A2 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -851,8 +848,6 @@
 				3E9E9B9621A2A52100CA2B7D /* HomeManagementTableViewCell.m */,
 				3EDB7ABF21A538FF009B0733 /* HomeManagementCell.h */,
 				3EDB7AC021A538FF009B0733 /* HomeManagementCell.m */,
-				BB37DEFB21A7E5B800B2121B /* NodeDetailCell.h */,
-				BB37DEFA21A7E5B800B2121B /* NodeDetailCell.m */,
 				3E9E9B9821A2ABC600CA2B7D /* Home */,
 			);
 			path = Myhouse;
@@ -1508,7 +1503,6 @@
 				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
 				BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */,
 				BB0A403221991AA8004669CA /* NSObject+Common.m in Sources */,
-				BB37DEFC21A7E5B800B2121B /* NodeDetailCell.m in Sources */,
 				BB0A403021991AA8004669CA /* UIColor+ColorChange.m in Sources */,
 				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
 				BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */,
