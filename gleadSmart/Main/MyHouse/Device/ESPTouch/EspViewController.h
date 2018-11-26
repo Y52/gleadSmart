@@ -11,7 +11,7 @@
 
 typedef void(^espBlock)(ESPTouchResult *result);
 
-@interface EspViewController : BaseViewController
+@interface EspViewController : UIViewController
 
 @property (nonatomic,strong) NSString *ssid;
 @property (nonatomic,strong) NSString *bssid;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeManagementTableViewCell : UITableViewCell
+@interface HouseManagementTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) UILabel *cityName;
 @property (strong, nonatomic) UIImageView *addhomeImage;

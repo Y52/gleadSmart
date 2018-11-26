@@ -12,12 +12,21 @@
 #ifdef __OBJC__
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "NSObject+Common.h"
+#import "NSString+Common.h"
 #import "UIColor+ColorChange.h"
 #import "UIButton+Common.h"
 #import <Masonry/Masonry.h>
 #import <MJRefresh/MJRefresh.h>
+#import "AFHTTPSessionManager.h"
 #import "RDVTabBarController.h"
+#import "DeviceModel.h"
+#import "UserModel.h"
+#import "HouseModel.h"
+#import "RoomModel.h"
+#import "Network.h"
+#import "Database.h"
 #endif
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
@@ -45,12 +54,13 @@
 #define viewWidth self.contentView.frame.size.width
 #define viewHeight self.contentView.frame.size.height
 
+#define yHttpTimeoutInterval 6.f
 
 #define LocalString(x)      NSLocalizedString(x, nil)
 
 typedef enum : NSUInteger {
     unselect = 1000,
-    //select,
+    select,
     up,
     down,
 } selectionStatus;

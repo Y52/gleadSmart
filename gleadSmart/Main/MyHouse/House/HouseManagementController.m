@@ -7,7 +7,8 @@
 //
 
 #import "HouseManagementController.h"
-#import "HomeManagementTableViewCell.h"
+#import "HouseManagementTableViewCell.h"
+#import "AddFamilyViewController.h"
 
 NSString *const CellIdentifier_HouseManagement = @"CellID_HouseManagement";
 
@@ -49,7 +50,7 @@ static CGFloat const Cell_Height = 50.f;
             tableView.dataSource = self;
             tableView.delegate = self;
             tableView.separatorColor = [UIColor clearColor];
-            [tableView registerClass:[HomeManagementTableViewCell class] forCellReuseIdentifier:CellIdentifier_HouseManagement];
+            [tableView registerClass:[HouseManagementTableViewCell class] forCellReuseIdentifier:CellIdentifier_HouseManagement];
             [self.view addSubview:tableView];
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
@@ -101,9 +102,9 @@ static CGFloat const Cell_Height = 50.f;
              }
             break;
         case 1:
-            {   HomeManagementTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HouseManagement];
+            {   HouseManagementTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HouseManagement];
                     if (cell == nil) {
-                        cell = [[HomeManagementTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HouseManagement];
+                        cell = [[HouseManagementTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HouseManagement];
                     }
                     return cell;
                 }
@@ -120,7 +121,10 @@ static CGFloat const Cell_Height = 50.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if (indexPath.section == 1) {
+        AddFamilyViewController *addVC = [[AddFamilyViewController alloc] init];
+        [self.navigationController pushViewController:addVC animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

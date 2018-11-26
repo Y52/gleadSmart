@@ -18,9 +18,9 @@
             _deviceImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_hb_m6g_small"]];
             [self.contentView addSubview:_deviceImage];
             [_deviceImage mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(90 / WScale, 60 / HScale));
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(90), yAutoFit(60)));
                 make.centerY.equalTo(self.contentView.mas_centerY);
-                make.left.equalTo(self.contentView.mas_left).offset(15 / WScale);
+                make.left.equalTo(self.contentView.mas_left).offset(15);
             }];
         }
         if (!_deviceName) {
@@ -30,8 +30,8 @@
             _deviceName.textAlignment = NSTextAlignmentLeft;
             [self.contentView addSubview:_deviceName];
             [_deviceName mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(150 / WScale, 21 / HScale));
-                make.left.equalTo(self.deviceImage.mas_right).offset(10 / WScale);
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(150), 21));
+                make.left.equalTo(self.deviceImage.mas_right).offset(10);
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
         }

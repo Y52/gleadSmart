@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DeviceConnectView : BaseViewController
+@interface DeviceConnectView : UIViewController
 
 @end

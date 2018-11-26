@@ -10,4 +10,7 @@
 
 @interface AddFamilySelectCell : UITableViewCell
 
+@property (strong, nonatomic) UILabel *leftLabel;
+@property (strong, nonatomic) UIImageView *checkImage;
+
 @end

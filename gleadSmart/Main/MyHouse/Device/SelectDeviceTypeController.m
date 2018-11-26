@@ -9,6 +9,7 @@
 #import "SelectDeviceTypeController.h"
 #import "TouchTableView.h"
 #import "SelectDeviceTypeCell.h"
+#import "DeviceViewController.h"
 
 NSString *const CellIdentifier_SelectDeviceType = @"CellID_SelectDeviceType";
 static float HEIGHT_CELL = 50.f;
@@ -105,7 +106,10 @@ static float HEIGHT_HEADER = 40.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if (indexPath.row == 0) {
+        DeviceViewController *gatewayVC = [[DeviceViewController alloc] init];
+        [self.navigationController pushViewController:gatewayVC animated:YES];
+    }
 }
 
 

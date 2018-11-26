@@ -16,7 +16,6 @@ static CGFloat const Cell_Height = 50.f;
 @interface HouseSelectController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *houseTable;
-@property (strong, nonatomic) NSMutableArray *houseArray;
 
 @property (strong, nonatomic) UIButton *dismissButton;
 
@@ -26,7 +25,7 @@ static CGFloat const Cell_Height = 50.f;
 
 -(instancetype)init{
     if (self = [super init]) {
-        self.houseArray = [[NSMutableArray alloc] init];
+        
     }
     return self;
 }
@@ -127,8 +126,13 @@ static CGFloat const Cell_Height = 50.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HouseManagementController  *HouseManagementVC = [[HouseManagementController alloc] init];
-    [self.navigationController pushViewController:HouseManagementVC animated:YES];
+    if (indexPath.row == _houseArray.count) {
+        HouseManagementController  *HouseManagementVC = [[HouseManagementController alloc] init];
+        [self.navigationController pushViewController:HouseManagementVC animated:YES];
+        return;
+    }
+    HouseModel *house = _houseArray[indexPath.row];
+    [self inquireHouseDetailWith:house];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -140,6 +144,49 @@ static CGFloat const Cell_Height = 50.f;
 }
 
 #pragma mark - Actions
+- (void)inquireHouseDetailWith:(HouseModel *)house{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http:///api/house?houseUid=%@",house.houseUid];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    NSLog(@"%@",[Database shareInstance].user.userId);
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        NSDictionary *dataDic = responseDic[@"data"];
+        Database *db = [Database shareInstance];
+        db.currentHouse.houseUid = [dataDic objectForKey:@"houseUid"];
+        db.currentHouse.name = [dataDic objectForKey:@"name"];
+        db.currentHouse.auth = house.auth;
+        db.currentHouse.roomNumber = [dataDic objectForKey:@"roomaNumber"];
+        db.currentHouse.lon = [dataDic objectForKey:@"lon"];
+        db.currentHouse.lat = [dataDic objectForKey:@"lat"];
+#warning db.members是否添加,保存在数据库？
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [self dismissVC];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error:%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"从服务器获取信息失败"];
+        });
+    }];
+}
+
 - (void)refreshTable{
     
 }

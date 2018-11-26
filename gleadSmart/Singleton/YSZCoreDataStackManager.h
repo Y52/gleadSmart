@@ -5,6 +5,7 @@
 //  Created by 杭州轨物科技有限公司 on 2018/11/23.
 //  Copyright © 2018年 杭州轨物科技有限公司. All rights reserved.
 //
+//  改用FMDB，这个不用了
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>

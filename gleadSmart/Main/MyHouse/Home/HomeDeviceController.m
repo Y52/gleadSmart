@@ -38,6 +38,20 @@ static CGFloat const Cell_Height = 72.f;
     self.deviceTable = [self deviceTable];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    Network *net = [Network shareNetwork];
+    [net onlineNodeInquire:net.connectedDevice.mac];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inquireNode) name:@"inquireNode" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"inquireNode" object:nil];
+
+}
+
 #pragma mark - Lazy Load
 -(UITableView *)deviceTable{
     if (!_deviceTable) {
@@ -82,7 +96,7 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return _deviceArray.count;
 }
 
 
@@ -140,7 +154,30 @@ static CGFloat const Cell_Height = 72.f;
 
 #pragma mark - Actions
 - (void)refreshTable{
-    [self.deviceTable.mj_header endRefreshing];
+    Network *net = [Network shareNetwork];
+    [net onlineNodeInquire:net.connectedDevice.mac];
 }
 
+#pragma mark - NSNotificationCenter
+- (void)inquireNode{
+    Network *net = [Network shareNetwork];
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+    [data addObjectsFromArray:net.recivedData68];
+    int count = [data[7] intValue];
+    if (count % 4 != 0) {
+        [NSObject showHudTipStr:@"查询节点回复帧格式错误"];
+        return;
+    }
+    for (int i = 1; i < count / 4; i++) {
+        DeviceModel *device = [[DeviceModel alloc] init];
+        device.mac = @"";
+        [device.mac stringByAppendingString:[NSString HexByInt:[data[8 + i*4] intValue]]];
+        [device.mac stringByAppendingString:[NSString HexByInt:[data[9 + i*4] intValue]]];
+        [device.mac stringByAppendingString:[NSString HexByInt:[data[10 + i*4] intValue]]];
+        [device.mac stringByAppendingString:[NSString HexByInt:[data[11 + i*4] intValue]]];
+        [_deviceArray addObject:device];
+    }
+    [self.deviceTable reloadData];
+    [self.deviceTable.mj_header endRefreshing];
+}
 @end

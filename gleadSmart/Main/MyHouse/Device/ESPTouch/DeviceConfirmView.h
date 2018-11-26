@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DeviceConfirmView : BaseViewController
+@interface DeviceConfirmView : UIViewController
 
 @end

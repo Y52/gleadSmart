@@ -111,8 +111,59 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 
 - (NSMutableArray *)houseList{
     if (!_houseList) {
-        NSArray *homeList = @[@"公寓",@"公司",@"86-155****3550",@"我的家庭"];
-        _houseList = [homeList mutableCopy];
+        [SVProgressHUD show];
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        
+        //设置超时时间
+        [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+        manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+        [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+        
+        NSString *url = [NSString stringWithFormat:@"http:///api/house/list"];
+        url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+        
+        NSLog(@"%@",[Database shareInstance].user.userId);
+        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
+        [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+            NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+            NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"success:%@",daetr);
+            [responseDic[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                HouseModel *house = [[HouseModel alloc] init];
+                house.houseUid = [obj objectForKey:@"houseUid"];
+                house.name = [obj objectForKey:@"name"];
+                house.auth = [obj objectForKey:@"auth"];
+                BOOL isStored = [[Database shareInstance] queryHouse:house.houseUid];
+                if (!isStored) {
+                    [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+                        BOOL result = [db executeUpdate:@"INSERT INTO house (houseUid,name,auth) VALUES (?,?,?)",house.houseUid,house.name,house.auth];
+                        if (result) {
+                            NSLog(@"本地插入服务器device成功");
+                        }else{
+                            NSLog(@"本地插入服务器device失败");
+                        }
+                    }];
+                }else{
+                    [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+                        [db executeUpdate:@"UPDATE house SET name = ?,auth = ? WHERE houseUid = ?",house.name,house.auth,house.houseUid];
+                    }];
+                }
+            }];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+                self.houseList = [[Database shareInstance] queryAllHouse];
+            });
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"Error:%@",error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+                [NSObject showHudTipStr:@"从服务器获取信息失败"];
+            });
+        }];
     }
     return _houseList;
 }
@@ -330,6 +381,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 - (void)houseSelect{
     NSLog(@"asdf");
     HouseSelectController *hsVC = [[HouseSelectController alloc] init];
+    hsVC.houseArray = self.houseList;
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     hsVC.dismissBlock = ^{
         [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
@@ -341,15 +393,20 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 }
 
 - (void)homeSetting{
-    NSLog(@"as");
+    if ([Database shareInstance].currentHouse == nil) {
+        [NSObject showHudTipStr:LocalString(@"请先创建家庭")];
+        return;
+    }
     HomeManagementController *HomeManagementVC = [[HomeManagementController alloc] init];
     [self.navigationController pushViewController:HomeManagementVC animated:YES];
 }
 
 - (void)addDevice{
-    NSLog(@"asdf");
+    if ([Database shareInstance].currentHouse == nil) {
+        [NSObject showHudTipStr:LocalString(@"请先创建家庭")];
+        return;
+    }
     SelectDeviceTypeController  *SelectDeviceVC = [[SelectDeviceTypeController alloc] init];
     [self.navigationController pushViewController:SelectDeviceVC animated:YES];
-    
 }
 @end

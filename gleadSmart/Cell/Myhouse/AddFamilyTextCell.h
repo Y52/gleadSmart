@@ -10,4 +10,6 @@
 
 @interface AddFamilyTextCell : UITableViewCell
 
+@property (strong, nonatomic) UILabel *leftLabel;
+@property (strong, nonatomic) UITextField *inputTF;
 @end

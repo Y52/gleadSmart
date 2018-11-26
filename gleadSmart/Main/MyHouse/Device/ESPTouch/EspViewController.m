@@ -12,7 +12,7 @@
 #import "TouchTableView.h"
 #import "SSIDTableViewCell.h"
 #import "PasswordTableViewCell.h"
-#import "DeviceSelectView.h"
+#import "DeviceConnectView.h"
 
 #import <SystemConfiguration/CaptiveNetwork.h>
 
@@ -34,7 +34,7 @@ NSString *const CellIdentifier_password = @"CellID_password";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1]];
+    self.view.layer.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1].CGColor;
 
     self.navigationItem.title = LocalString(@"添加设备");
     
@@ -58,7 +58,7 @@ NSString *const CellIdentifier_password = @"CellID_password";
         [_nextBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:16]];
         [_nextBtn setBackgroundColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:0.4]];
         [_nextBtn setButtonStyle1];
-        _nextBtn.enabled = NO;
+        //_nextBtn.enabled = NO;
         [_nextBtn addTarget:self action:@selector(goNextView) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_nextBtn];
     }
@@ -72,21 +72,21 @@ NSString *const CellIdentifier_password = @"CellID_password";
     [self.view addSubview:wifiImage];
     
     [wifiImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(150.f/WScale, 150/WScale));
-        make.top.equalTo(self.view.mas_top).offset(15/HScale);
+        make.size.mas_equalTo(CGSizeMake(yAutoFit(150.f), yAutoFit(150.f)));
+        make.top.equalTo(self.view.mas_top).offset(yAutoFit(15.f));
         make.centerX.equalTo(self.view.mas_centerX);
     }];
     
     [_ssidPasswordTable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(ScreenWidth, HEIGHT_TEXT_FIELD * 2));
-        make.top.equalTo(wifiImage.mas_bottom).offset(15/HScale);
+        make.top.equalTo(wifiImage.mas_bottom).offset(yAutoFit(15.f));
         make.centerX.equalTo(self.view.mas_centerX);
     }];
     
     [_nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(345.f / WScale, 50.f / HScale));
+        make.size.mas_equalTo(CGSizeMake(yAutoFit(345.f), yAutoFit(50.f)));
         make.centerX.equalTo(self.view.mas_centerX);
-        make.top.equalTo(_ssidPasswordTable.mas_bottom).offset(20 / HScale);
+        make.top.equalTo(self.ssidPasswordTable.mas_bottom).offset(yAutoFit(20.f));
     }];
 }
 
@@ -98,12 +98,12 @@ NSString *const CellIdentifier_password = @"CellID_password";
     PasswordTableViewCell *passwordCell = [_ssidPasswordTable cellForRowAtIndexPath:indexpath];
     _apPwd = passwordCell.passwordTF.text;
     
-    [[NetWork shareNetWork] setSsid:_ssid];
-    [[NetWork shareNetWork] setBssid:_bssid];
-    [[NetWork shareNetWork] setApPwd:_apPwd];
-    
-    DeviceSelectView *selectVC = [[DeviceSelectView alloc] init];
-    [self.navigationController pushViewController:selectVC animated:YES];
+    [[Network shareNetwork] setSsid:_ssid];
+    [[Network shareNetwork] setBssid:_bssid];
+    [[Network shareNetwork] setApPwd:_apPwd];
+    DeviceConnectView *connectVC = [[DeviceConnectView alloc] init];
+    [self.navigationController pushViewController:connectVC animated:YES];
+
 }
 
 

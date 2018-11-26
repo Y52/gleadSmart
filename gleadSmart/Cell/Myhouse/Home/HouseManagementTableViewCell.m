@@ -6,9 +6,9 @@
 //  Copyright © 2018 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "HomeManagementTableViewCell.h"
+#import "HouseManagementTableViewCell.h"
 
-@implementation HomeManagementTableViewCell
+@implementation HouseManagementTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
