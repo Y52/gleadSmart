@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^dismissBlock)(void);
+typedef void(^dismissBlock)(NSString *location);
 
 NS_ASSUME_NONNULL_BEGIN
 

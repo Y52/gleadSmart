@@ -152,6 +152,8 @@
 		BB2AC12B21AB7F22006DB83A /* img_autoLocation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC12821AB7F22006DB83A /* img_autoLocation@2x.png */; };
 		BB2AC12C21AB7F22006DB83A /* img_autoLocation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC12921AB7F22006DB83A /* img_autoLocation@3x.png */; };
 		BB2AC12D21AB7F22006DB83A /* img_autoLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC12A21AB7F22006DB83A /* img_autoLocation.png */; };
+		BB2ACC5C21AB9712006DB83A /* KYDivisionPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC12F21AB96E3006DB83A /* KYDivisionPickerView.m */; };
+		BB2AD78821AB98BD006DB83A /* KYDivisionPickerView_list.json in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD78721AB98BD006DB83A /* KYDivisionPickerView_list.json */; };
 		BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */; };
 		BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352911219D61B300428DE9 /* HouseSelectCell.m */; };
 		BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352914219D63BC00428DE9 /* HouseSelectController.m */; };
@@ -523,6 +525,9 @@
 		BB2AC12821AB7F22006DB83A /* img_autoLocation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_autoLocation@2x.png"; sourceTree = "<group>"; };
 		BB2AC12921AB7F22006DB83A /* img_autoLocation@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_autoLocation@3x.png"; sourceTree = "<group>"; };
 		BB2AC12A21AB7F22006DB83A /* img_autoLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_autoLocation.png; sourceTree = "<group>"; };
+		BB2AC12F21AB96E3006DB83A /* KYDivisionPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYDivisionPickerView.m; sourceTree = "<group>"; };
+		BB2ACC5B21AB9711006DB83A /* KYDivisionPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYDivisionPickerView.h; sourceTree = "<group>"; };
+		BB2AD78721AB98BD006DB83A /* KYDivisionPickerView_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KYDivisionPickerView_list.json; path = KYDivisionPickerViewJSON/KYDivisionPickerView_list.json; sourceTree = "<group>"; };
 		BB35290D219D0FC700428DE9 /* HomeDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceCell.h; sourceTree = "<group>"; };
 		BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceCell.m; sourceTree = "<group>"; };
 		BB352910219D61B300428DE9 /* HouseSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSelectCell.h; sourceTree = "<group>"; };
@@ -1059,6 +1064,16 @@
 			path = "添加家庭_slices";
 			sourceTree = "<group>";
 		};
+		BB2AC12E21AB96E3006DB83A /* KYDivisionPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				BB2AD78721AB98BD006DB83A /* KYDivisionPickerView_list.json */,
+				BB2AC12F21AB96E3006DB83A /* KYDivisionPickerView.m */,
+				BB2ACC5B21AB9711006DB83A /* KYDivisionPickerView.h */,
+			);
+			path = KYDivisionPickerView;
+			sourceTree = "<group>";
+		};
 		BB35290B219D0FA300428DE9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1195,6 +1210,7 @@
 		BB49DF8F21958864004E00A2 /* gleadSmart */ = {
 			isa = PBXGroup;
 			children = (
+				BB2AC12E21AB96E3006DB83A /* KYDivisionPickerView */,
 				BB2AC0F821A94D63006DB83A /* AFNetworking */,
 				BB352928219DA7AE00428DE9 /* Singleton */,
 				BB35290B219D0FA300428DE9 /* Cell */,
@@ -1597,6 +1613,7 @@
 				BB0A40D821997C99004669CA /* img_weatherBg@3x.png in Resources */,
 				BB2AC12321AA8A64006DB83A /* addFamily_check@2x.png in Resources */,
 				BB8B9E7421A6ADEB00E5D8B2 /* valveStatus_on@2x.png in Resources */,
+				BB2AD78821AB98BD006DB83A /* KYDivisionPickerView_list.json in Resources */,
 				BB8B9E7721A6ADEB00E5D8B2 /* valveStatus_on@3x.png in Resources */,
 				BB0A40DF21997C99004669CA /* 矢量智能对象7@3x.png in Resources */,
 				BB0A40D021997C99004669CA /* 椭圆 1@2x.png in Resources */,
@@ -1856,6 +1873,7 @@
 				BB2AC0EA21A8F156006DB83A /* ESP_ByteUtil.m in Sources */,
 				BB49DFA321958867004E00A2 /* main.m in Sources */,
 				3ECFF39F219EB00C00024D2C /* SelectDeviceTypeCell.m in Sources */,
+				BB2ACC5C21AB9712006DB83A /* KYDivisionPickerView.m in Sources */,
 				BB2AC0EB21A8F156006DB83A /* ESP_WifiUtil.m in Sources */,
 				BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */,
 				BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */,

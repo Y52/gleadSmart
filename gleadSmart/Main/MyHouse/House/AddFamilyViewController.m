@@ -132,7 +132,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
                 cell = [[AddFamilySelectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_addFaminlySelect];
             }
             cell.backgroundColor = [UIColor clearColor];
-            cell.tag = unselect;
+            cell.tag = yUnselect;
             cell.leftLabel.text = _defaultRoomList[indexPath.row];
             cell.checkImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
             return cell;
@@ -155,12 +155,12 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1) {
         AddFamilySelectCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (cell.tag == unselect) {
-            cell.tag = select;
+        if (cell.tag == yUnselect) {
+            cell.tag = ySelect;
             cell.checkImage.image = [UIImage imageNamed:@"addFamily_check"];
             [self.checkedRoomArray addObject:cell.leftLabel.text];
         }else{
-            cell.tag = unselect;
+            cell.tag = yUnselect;
             cell.checkImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
             for (NSString *roomName in self.checkedRoomArray) {
                 if ([cell.leftLabel.text isEqualToString:roomName]) {
@@ -174,8 +174,12 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
             FamilyLocationController *locaVC = [[FamilyLocationController alloc] init];
             locaVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
             locaVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            locaVC.contentOriginY = 100.f + getRectNavAndStatusHight;
+            locaVC.dismissBlock = ^(NSString *location) {
+                AddFamilyTextCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                cell.inputTF.text = location;
+            };
             [self presentViewController:locaVC animated:YES completion:nil];
-
         }
     }
 }

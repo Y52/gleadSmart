@@ -59,9 +59,9 @@
 #define LocalString(x)      NSLocalizedString(x, nil)
 
 typedef enum : NSUInteger {
-    unselect = 1000,
-    select,
-    up,
-    down,
+    yUnselect = 1000,
+    ySelect,
+    yUp,
+    yDown,
 } selectionStatus;
 #endif /* gleadSmart_Prefix_pch */

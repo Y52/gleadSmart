@@ -54,7 +54,7 @@ static CGFloat const Cell_Height = 50.f;
 -(UITableView *)houseTable{
     if (!_houseTable) {
         _houseTable = ({
-            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, -10, ScreenWidth, 100)];
+            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 100)];
             tableView.backgroundColor = [UIColor whiteColor];
             tableView.dataSource = self;
             tableView.delegate = self;
