@@ -62,7 +62,7 @@ static CGFloat const Cell_Height = 50.f;
             
             _addShareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [_addShareBtn setTitle:LocalString(@"添加共享") forState:UIControlStateNormal];
-            [_addShareBtn setTitleColor:[UIColor cyanColor ] forState:UIControlStateNormal];
+            [_addShareBtn setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
             [_addShareBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
             [_addShareBtn setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
             [_addShareBtn.layer setBorderWidth:1.0];
