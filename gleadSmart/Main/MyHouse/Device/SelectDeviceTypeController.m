@@ -122,7 +122,6 @@ static float HEIGHT_HEADER = 40.f;
     headerView.layer.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1].CGColor;
     
     UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT_HEADER)];
-    //UILabel *textLabel = [[UILabel alloc] init];
     textLabel.textColor = [UIColor colorWithHexString:@"999999"];
     textLabel.font = [UIFont systemFontOfSize:13.f];
     textLabel.textAlignment = NSTextAlignmentLeft;

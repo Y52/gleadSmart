@@ -12,6 +12,13 @@
 		3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBE21A7E7EA00EA8F1C /* AddFamilyViewController.m */; };
 		3E56AD2221A6A6DD0089BA8F /* AddFamilyTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56AD2121A6A6DD0089BA8F /* AddFamilyTextCell.m */; };
 		3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56AD2421A6A7160089BA8F /* AddFamilySelectCell.m */; };
+		3EA530BF21AB9B43000A6D26 /* PhoneTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530B921AB9B42000A6D26 /* PhoneTFCell.m */; };
+		3EA530C021AB9B43000A6D26 /* PhoneVerifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530BC21AB9B43000A6D26 /* PhoneVerifyCell.m */; };
+		3EA530C121AB9B43000A6D26 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530BD21AB9B43000A6D26 /* TextFieldCell.m */; };
+		3EA530CA21AB9C88000A6D26 /* PasswordLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C321AB9C88000A6D26 /* PasswordLoginController.m */; };
+		3EA530CB21AB9C88000A6D26 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C421AB9C88000A6D26 /* RegisterController.m */; };
+		3EA530CC21AB9C88000A6D26 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C621AB9C88000A6D26 /* LoginViewController.m */; };
+		3EA530CD21AB9C88000A6D26 /* RetrievePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C921AB9C88000A6D26 /* RetrievePasswordController.m */; };
 		3ECFF39F219EB00C00024D2C /* SelectDeviceTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECFF39E219EB00C00024D2C /* SelectDeviceTypeCell.m */; };
 		BB0A403021991AA8004669CA /* UIColor+ColorChange.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401021991AA8004669CA /* UIColor+ColorChange.m */; };
 		BB0A403121991AA8004669CA /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401321991AA8004669CA /* UIButton+Common.m */; };
@@ -257,10 +264,8 @@
 		BB8B9E3E21A6928500E5D8B2 /* 矢量智能对象3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DF921A6928500E5D8B2 /* 矢量智能对象3@2x.png */; };
 		BB8B9E3F21A6928500E5D8B2 /* 椭圆 2 拷贝 7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFA21A6928500E5D8B2 /* 椭圆 2 拷贝 7@3x.png */; };
 		BB8B9E4021A6928500E5D8B2 /* valveHeader@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFB21A6928500E5D8B2 /* valveHeader@1x.png */; };
-		BB8B9E4121A6928500E5D8B2 /* 矢量智能对象1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFC21A6928500E5D8B2 /* 矢量智能对象1@3x.png */; };
 		BB8B9E4221A6928500E5D8B2 /* 椭圆 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFD21A6928500E5D8B2 /* 椭圆 3@3x.png */; };
 		BB8B9E4321A6928500E5D8B2 /* 椭圆 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFE21A6928500E5D8B2 /* 椭圆 3@2x.png */; };
-		BB8B9E4421A6928500E5D8B2 /* 矢量智能对象1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DFF21A6928500E5D8B2 /* 矢量智能对象1@2x.png */; };
 		BB8B9E4521A6928500E5D8B2 /* 椭圆 2 拷贝 7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0021A6928500E5D8B2 /* 椭圆 2 拷贝 7@2x.png */; };
 		BB8B9E4621A6928500E5D8B2 /* nodeLeakBig_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0121A6928500E5D8B2 /* nodeLeakBig_normal.png */; };
 		BB8B9E4721A6928500E5D8B2 /* 矢量智能对象3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E0221A6928500E5D8B2 /* 矢量智能对象3@3x.png */; };
@@ -283,7 +288,6 @@
 		BB8B9E5821A6928500E5D8B2 /* 矩形 6 拷贝.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1321A6928500E5D8B2 /* 矩形 6 拷贝.png */; };
 		BB8B9E5921A6928500E5D8B2 /* 椭圆 2 拷贝 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1421A6928500E5D8B2 /* 椭圆 2 拷贝 3@3x.png */; };
 		BB8B9E5A21A6928500E5D8B2 /* nodeHeaderBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1521A6928500E5D8B2 /* nodeHeaderBtn@3x.png */; };
-		BB8B9E5B21A6928500E5D8B2 /* 矢量智能对象1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1621A6928500E5D8B2 /* 矢量智能对象1.png */; };
 		BB8B9E5C21A6928500E5D8B2 /* valveLeak_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1721A6928500E5D8B2 /* valveLeak_off.png */; };
 		BB8B9E5D21A6928500E5D8B2 /* 矢量智能对象7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1821A6928500E5D8B2 /* 矢量智能对象7@2x.png */; };
 		BB8B9E5E21A6928500E5D8B2 /* nodeLeakBig_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E1921A6928500E5D8B2 /* nodeLeakBig_normal@2x.png */; };
@@ -339,6 +343,20 @@
 		3E56AD2121A6A6DD0089BA8F /* AddFamilyTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFamilyTextCell.m; sourceTree = "<group>"; };
 		3E56AD2321A6A7160089BA8F /* AddFamilySelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFamilySelectCell.h; sourceTree = "<group>"; };
 		3E56AD2421A6A7160089BA8F /* AddFamilySelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFamilySelectCell.m; sourceTree = "<group>"; };
+		3EA530B921AB9B42000A6D26 /* PhoneTFCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneTFCell.m; sourceTree = "<group>"; };
+		3EA530BA21AB9B42000A6D26 /* PhoneTFCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneTFCell.h; sourceTree = "<group>"; };
+		3EA530BB21AB9B42000A6D26 /* PhoneVerifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneVerifyCell.h; sourceTree = "<group>"; };
+		3EA530BC21AB9B43000A6D26 /* PhoneVerifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneVerifyCell.m; sourceTree = "<group>"; };
+		3EA530BD21AB9B43000A6D26 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
+		3EA530BE21AB9B43000A6D26 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
+		3EA530C221AB9C87000A6D26 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		3EA530C321AB9C88000A6D26 /* PasswordLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordLoginController.m; sourceTree = "<group>"; };
+		3EA530C421AB9C88000A6D26 /* RegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterController.m; sourceTree = "<group>"; };
+		3EA530C521AB9C88000A6D26 /* RegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterController.h; sourceTree = "<group>"; };
+		3EA530C621AB9C88000A6D26 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		3EA530C721AB9C88000A6D26 /* PasswordLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordLoginController.h; sourceTree = "<group>"; };
+		3EA530C821AB9C88000A6D26 /* RetrievePasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrievePasswordController.h; sourceTree = "<group>"; };
+		3EA530C921AB9C88000A6D26 /* RetrievePasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordController.m; sourceTree = "<group>"; };
 		3ECFF39D219EB00C00024D2C /* SelectDeviceTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectDeviceTypeCell.h; sourceTree = "<group>"; };
 		3ECFF39E219EB00C00024D2C /* SelectDeviceTypeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectDeviceTypeCell.m; sourceTree = "<group>"; };
 		BB0A401021991AA8004669CA /* UIColor+ColorChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorChange.m"; sourceTree = "<group>"; };
@@ -653,10 +671,8 @@
 		BB8B9DF921A6928500E5D8B2 /* 矢量智能对象3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象3@2x.png"; sourceTree = "<group>"; };
 		BB8B9DFA21A6928500E5D8B2 /* 椭圆 2 拷贝 7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 7@3x.png"; sourceTree = "<group>"; };
 		BB8B9DFB21A6928500E5D8B2 /* valveHeader@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveHeader@1x.png"; sourceTree = "<group>"; };
-		BB8B9DFC21A6928500E5D8B2 /* 矢量智能对象1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象1@3x.png"; sourceTree = "<group>"; };
 		BB8B9DFD21A6928500E5D8B2 /* 椭圆 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@3x.png"; sourceTree = "<group>"; };
 		BB8B9DFE21A6928500E5D8B2 /* 椭圆 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@2x.png"; sourceTree = "<group>"; };
-		BB8B9DFF21A6928500E5D8B2 /* 矢量智能对象1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象1@2x.png"; sourceTree = "<group>"; };
 		BB8B9E0021A6928500E5D8B2 /* 椭圆 2 拷贝 7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 7@2x.png"; sourceTree = "<group>"; };
 		BB8B9E0121A6928500E5D8B2 /* nodeLeakBig_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeLeakBig_normal.png; sourceTree = "<group>"; };
 		BB8B9E0221A6928500E5D8B2 /* 矢量智能对象3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象3@3x.png"; sourceTree = "<group>"; };
@@ -679,7 +695,6 @@
 		BB8B9E1321A6928500E5D8B2 /* 矩形 6 拷贝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形 6 拷贝.png"; sourceTree = "<group>"; };
 		BB8B9E1421A6928500E5D8B2 /* 椭圆 2 拷贝 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 2 拷贝 3@3x.png"; sourceTree = "<group>"; };
 		BB8B9E1521A6928500E5D8B2 /* nodeHeaderBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeHeaderBtn@3x.png"; sourceTree = "<group>"; };
-		BB8B9E1621A6928500E5D8B2 /* 矢量智能对象1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象1.png"; sourceTree = "<group>"; };
 		BB8B9E1721A6928500E5D8B2 /* valveLeak_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveLeak_off.png; sourceTree = "<group>"; };
 		BB8B9E1821A6928500E5D8B2 /* 矢量智能对象7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7@2x.png"; sourceTree = "<group>"; };
 		BB8B9E1921A6928500E5D8B2 /* nodeLeakBig_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakBig_normal@2x.png"; sourceTree = "<group>"; };
@@ -749,9 +764,30 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		3ECFF39C219E6D6700024D2C /* Login */ = {
+		3EA530A521AB9714000A6D26 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				3EA530BA21AB9B42000A6D26 /* PhoneTFCell.h */,
+				3EA530B921AB9B42000A6D26 /* PhoneTFCell.m */,
+				3EA530BB21AB9B42000A6D26 /* PhoneVerifyCell.h */,
+				3EA530BC21AB9B43000A6D26 /* PhoneVerifyCell.m */,
+				3EA530BE21AB9B43000A6D26 /* TextFieldCell.h */,
+				3EA530BD21AB9B43000A6D26 /* TextFieldCell.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		3EA530AF21AB9902000A6D26 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3EA530C221AB9C87000A6D26 /* LoginViewController.h */,
+				3EA530C621AB9C88000A6D26 /* LoginViewController.m */,
+				3EA530C721AB9C88000A6D26 /* PasswordLoginController.h */,
+				3EA530C321AB9C88000A6D26 /* PasswordLoginController.m */,
+				3EA530C521AB9C88000A6D26 /* RegisterController.h */,
+				3EA530C421AB9C88000A6D26 /* RegisterController.m */,
+				3EA530C821AB9C88000A6D26 /* RetrievePasswordController.h */,
+				3EA530C921AB9C88000A6D26 /* RetrievePasswordController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1080,6 +1116,7 @@
 				3E56AD2121A6A6DD0089BA8F /* AddFamilyTextCell.m */,
 				3E56AD2321A6A7160089BA8F /* AddFamilySelectCell.h */,
 				3E56AD2421A6A7160089BA8F /* AddFamilySelectCell.m */,
+				3EA530A521AB9714000A6D26 /* Login */,
 				BB37DF1521A7F6F100B2121B /* Valve */,
 				BB37DF0F21A7F35500B2121B /* DeviceESP */,
 				3E9E9B9821A2ABC600CA2B7D /* Home */,
@@ -1162,7 +1199,7 @@
 			children = (
 				BB497749219A6B5E00427197 /* MyHouseController.h */,
 				BB49774A219A6B5E00427197 /* MyHouseController.m */,
-				3ECFF39C219E6D6700024D2C /* Login */,
+				3EA530AF21AB9902000A6D26 /* Login */,
 				BB21BF65219E66920067BC61 /* House */,
 				BB21BF66219E66AF0067BC61 /* Home */,
 				BB21BF67219E66BE0067BC61 /* Device */,
@@ -1300,9 +1337,6 @@
 				BB8B9DFB21A6928500E5D8B2 /* valveHeader@1x.png */,
 				BB8B9DE821A6928500E5D8B2 /* valveHeader@2x.png */,
 				BB8B9DF621A6928500E5D8B2 /* valveHeader@3x.png */,
-				BB8B9E1621A6928500E5D8B2 /* 矢量智能对象1.png */,
-				BB8B9DFF21A6928500E5D8B2 /* 矢量智能对象1@2x.png */,
-				BB8B9DFC21A6928500E5D8B2 /* 矢量智能对象1@3x.png */,
 				BB8B9E1021A6928500E5D8B2 /* valveTabMore.png */,
 				BB8B9DD921A6928500E5D8B2 /* valveTabMore@2x.png */,
 				BB8B9DE321A6928500E5D8B2 /* valveTabMore@3x.png */,
@@ -1488,7 +1522,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB0A40FD21997C99004669CA /* img_wallHob@3x.png in Resources */,
-				BB8B9E4121A6928500E5D8B2 /* 矢量智能对象1@3x.png in Resources */,
 				BB0A40CF21997C99004669CA /* img_weatherBg@2x.png in Resources */,
 				BB0A40E721997C99004669CA /* img_tab03@3x.png in Resources */,
 				BB8B9DCD21A6815000E5D8B2 /* thermostatSet@3x.png in Resources */,
@@ -1505,7 +1538,6 @@
 				BB0A40D121997C99004669CA /* img_headerBg@1x.png in Resources */,
 				BB2AC0C721A8EFE3006DB83A /* SSIDTableViewCell.xib in Resources */,
 				BB0A40BA21997C99004669CA /* 椭圆 2 拷贝 2@2x.png in Resources */,
-				BB8B9E4421A6928500E5D8B2 /* 矢量智能对象1@2x.png in Resources */,
 				BB8B9E8121A6ADEB00E5D8B2 /* nodeBattery_normal.png in Resources */,
 				BB8B9E3D21A6928500E5D8B2 /* valveLeak_off@2x.png in Resources */,
 				BB0A40CC21997C99004669CA /* 圆角矩形 1 拷贝 2@2x.png in Resources */,
@@ -1698,7 +1730,6 @@
 				BB2AC12C21AB7F22006DB83A /* img_autoLocation@3x.png in Resources */,
 				BB8B9DC421A6815000E5D8B2 /* thermostatKnob@1x.png in Resources */,
 				BB8B9DCC21A6815000E5D8B2 /* 椭圆 1@3x.png in Resources */,
-				BB8B9E5B21A6928500E5D8B2 /* 矢量智能对象1.png in Resources */,
 				BB8B9DD021A6815000E5D8B2 /* thermostatMoer@1x.png in Resources */,
 				BB8B9E4621A6928500E5D8B2 /* nodeLeakBig_normal.png in Resources */,
 				BB0A40E121997C99004669CA /* img_homeSet.png in Resources */,
@@ -1800,7 +1831,9 @@
 				BB49DF9521958864004E00A2 /* ViewController.m in Sources */,
 				BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */,
 				BB37DEFF21A7E8D600B2121B /* NodeDetailCell.m in Sources */,
+				3EA530CA21AB9C88000A6D26 /* PasswordLoginController.m in Sources */,
 				BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */,
+				3EA530BF21AB9B43000A6D26 /* PhoneTFCell.m in Sources */,
 				BB2AC0C521A8EFE3006DB83A /* PasswordTableViewCell.m in Sources */,
 				BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */,
 				BB37DF0C21A7EFC400B2121B /* EspViewController.m in Sources */,
@@ -1826,6 +1859,8 @@
 				BB37DF1221A7F3AF00B2121B /* DeviceTableViewCell.m in Sources */,
 				BB2AC10E21A94F42006DB83A /* HouseModel.m in Sources */,
 				BB2AC10B21A94D63006DB83A /* AFSecurityPolicy.m in Sources */,
+				3EA530CC21AB9C88000A6D26 /* LoginViewController.m in Sources */,
+				3EA530CB21AB9C88000A6D26 /* RegisterController.m in Sources */,
 				BB0A403521991AA8004669CA /* NSDate+Common.m in Sources */,
 				BB37DF0B21A7EFC400B2121B /* DeviceViewController.m in Sources */,
 				BB2AC0C621A8EFE3006DB83A /* SSIDTableViewCell.m in Sources */,
@@ -1834,6 +1869,7 @@
 				BB2AC10921A94D63006DB83A /* AFURLRequestSerialization.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
 				BB2AC0F121A8F156006DB83A /* ESPDataCode.m in Sources */,
+				3EA530C121AB9B43000A6D26 /* TextFieldCell.m in Sources */,
 				BB2AC11121A94FE8006DB83A /* RoomModel.m in Sources */,
 				BB37DF0A21A7EFC400B2121B /* DeviceConfirmView.m in Sources */,
 				BB2AC0F721A93B1B006DB83A /* UserModel.m in Sources */,
@@ -1845,6 +1881,7 @@
 				BB2AC0EC21A8F156006DB83A /* ESPTouchGenerator.m in Sources */,
 				BB2AC0F321A8F156006DB83A /* ESPTouchTask.m in Sources */,
 				BB2AC0EE21A8F156006DB83A /* ESPUDPSocketServer.m in Sources */,
+				3EA530CD21AB9C88000A6D26 /* RetrievePasswordController.m in Sources */,
 				BB49DF9B21958864004E00A2 /* gleadSmart.xcdatamodeld in Sources */,
 				BB2AC0E921A8F156006DB83A /* ESP_NetUtil.m in Sources */,
 				BB2AC10821A94D63006DB83A /* AFURLSessionManager.m in Sources */,
@@ -1854,6 +1891,7 @@
 				BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */,
 				BB2AC10621A94D63006DB83A /* AFURLResponseSerialization.m in Sources */,
 				BB2AC0EA21A8F156006DB83A /* ESP_ByteUtil.m in Sources */,
+				3EA530C021AB9B43000A6D26 /* PhoneVerifyCell.m in Sources */,
 				BB49DFA321958867004E00A2 /* main.m in Sources */,
 				3ECFF39F219EB00C00024D2C /* SelectDeviceTypeCell.m in Sources */,
 				BB2AC0EB21A8F156006DB83A /* ESP_WifiUtil.m in Sources */,

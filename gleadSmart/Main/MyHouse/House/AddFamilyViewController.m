@@ -156,7 +156,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
     if (indexPath.section == 1) {
         AddFamilySelectCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (cell.tag == unselect) {
-            cell.tag = select;
+            //cell.tag = select;
             cell.checkImage.image = [UIImage imageNamed:@"addFamily_check"];
             [self.checkedRoomArray addObject:cell.leftLabel.text];
         }else{
