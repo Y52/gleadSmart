@@ -20,6 +20,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
 @property (strong, nonatomic) UITableView *addFamilyTable;
 @property (strong, nonatomic) NSArray *defaultRoomList;
 @property (strong, nonatomic) NSMutableArray *checkedRoomArray;
+@property (strong, nonatomic) UIButton *addRoomButton;
 
 @end
 
@@ -38,6 +39,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
     
     self.defaultRoomList = [self defaultRoomList];
     self.addFamilyTable = [self addFamilyTable];
+    self.addRoomButton = [self addRoomButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -87,7 +89,27 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
     }
     return _addFamilyTable;
 }
-
+- (UIButton *)addRoomButton{
+    if (!_addRoomButton) {
+        _addRoomButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_addRoomButton setTitle:LocalString(@"添加其他房间") forState:UIControlStateNormal];
+        [_addRoomButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+        [_addRoomButton setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
+        [_addRoomButton.layer setBorderWidth:1.0];
+        _addRoomButton.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
+        _addRoomButton.layer.cornerRadius = 15.f;
+        [_addRoomButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
+        [_addRoomButton addTarget:self action:@selector(addotherRoom) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_addRoomButton];
+        
+        [_addRoomButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_top).offset(450);
+            make.left.equalTo(self.view.mas_left).offset(56);
+            make.right.equalTo(self.view.mas_right).offset(-44);
+        }];
+    }
+    return _addRoomButton;
+}
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -255,5 +277,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
 - (void)completeAddFamily{
     
 }
-
+- (void)addotherRoom{
+    NSLog(@"ss");
+}
 @end
