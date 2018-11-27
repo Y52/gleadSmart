@@ -12,6 +12,5 @@
 
 @property (strong, nonatomic) UILabel *cityName;
 @property (strong, nonatomic) UIImageView *addhomeImage;
-@property (nonatomic, strong) UIButton *addFamilyBtn;
 
 @end

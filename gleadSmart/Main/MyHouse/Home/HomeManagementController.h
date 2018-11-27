@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeManagementController : UIViewController
 
+@property (strong, nonatomic) NSMutableArray *homeList;
+
 @end
 
 NS_ASSUME_NONNULL_END

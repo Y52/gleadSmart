@@ -15,9 +15,10 @@
     if (self) {
         if (!_addhomeImage) {
             _addhomeImage = [[UIImageView alloc] init];
+            _addhomeImage.image = [UIImage imageNamed:@"img_addDevice"];
             [self.contentView addSubview:_addhomeImage];
             [_addhomeImage mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(30, 30));
+                make.size.mas_equalTo(CGSizeMake(18, 18));
                 make.right.equalTo(self.contentView.mas_right).offset(-15);
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
@@ -37,21 +38,10 @@
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
         }
-        if (!_addFamilyBtn) {
-            _addFamilyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [_addFamilyBtn setImage:[UIImage imageNamed:@"img_addDevice"] forState:UIControlStateNormal];
-            [_addFamilyBtn addTarget:self action:@selector(addFamily                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ) forControlEvents:UIControlEventTouchUpInside];
-            [self.contentView addSubview:_addFamilyBtn];
-            [_addFamilyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-             make.size.mas_equalTo(CGSizeMake(yAutoFit(20.f), yAutoFit(20.f)));
-             make.centerX.equalTo(self.addhomeImage.mas_centerX);
-             make.centerY.equalTo(self.addhomeImage.mas_centerY);
-                
-                }];
-            }
     }
     return self;
 }
+
 -(void)addFamily{
     
     NSLog(@"aa");

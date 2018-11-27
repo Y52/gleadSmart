@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *houseUid;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSNumber *deviceNumber;
+@property (strong, nonatomic) NSMutableArray *deviceArray;
 
 @end
 

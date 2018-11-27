@@ -70,8 +70,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     self.addDeviceButton = [self addDeviceButton];
     
     if ([Database shareInstance].currentHouse) {
-        [self updateHouseDetailInfo];
-        [self updateHomeList];
+        [self getHouseHomeListAndDevice];
     }
 }
 
@@ -289,7 +288,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 
 #pragma mark - Datasource & Delegate
 - (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController {
-    return self.homeList.count;
+    return self.homeList.count + 1;
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
@@ -299,6 +298,9 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
+    if (index == 0) {
+        return LocalString(@"所有设备");
+    }
     return self.homeList[index];
 }
 
@@ -312,7 +314,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 }
 
 #pragma mark - update with API
-- (void)updateHouseDetailInfo{
+- (void)getHouseHomeListAndDevice{
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
@@ -323,10 +325,9 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house?houseUid=%@",db.currentHouse.houseUid];
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house/device/list?houseUid=%@",db.currentHouse.houseUid];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
-    NSLog(@"%@",[Database shareInstance].user.userId);
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
@@ -337,11 +338,15 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             NSDictionary *dic = [responseDic objectForKey:@"data"];
-            db.currentHouse.name = [dic objectForKey:@"name"];
-            db.currentHouse.roomNumber = [dic objectForKey:@"roomNumber"];
-            db.currentHouse.lon = [dic objectForKey:@"lon"];
-            db.currentHouse.lat = [dic objectForKey:@"lat"];
             
+            /*
+             *取出家庭详细信息
+             */
+            NSDictionary *houseInfo = [dic objectForKey:@"house"];
+            db.currentHouse.lon = [houseInfo objectForKey:@"lon"];
+            db.currentHouse.lat = [houseInfo objectForKey:@"lat"];
+            db.currentHouse.apiKey = [houseInfo objectForKey:@"apiKey"];
+            db.currentHouse.deviceId = [houseInfo objectForKey:@"houseInfo"];
             /*
              *把houselist中的该house更新，防止在切换house时丢失数据
              */
@@ -352,6 +357,25 @@ static CGFloat const gleadMenuItemMargin = 25.f;
                     break;
                 }
             }
+            
+            /*
+             *取出房间内容
+             */
+            if ([[dic objectForKey:@"rooms"] count] > 0) {
+                [[dic objectForKey:@"rooms"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    RoomModel *room = [[RoomModel alloc] init];
+                    room.name = [obj objectForKey:@"roomName"];
+                    room.roomUid = [obj objectForKey:@"roomUid"];
+                    room.deviceArray = [[NSMutableArray alloc] init];
+                    [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        DeviceModel *device = [[DeviceModel alloc] init];
+                        device.name = [obj objectForKey:@"deviceName"];
+                        device.mac = [obj objectForKey:@"mac"];
+                        [room.deviceArray addObject:device];
+                    }];
+                    [self.homeList addObject:room];
+                }];
+            }
         }else{
             [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];
         }
@@ -359,7 +383,12 @@ static CGFloat const gleadMenuItemMargin = 25.f;
             [SVProgressHUD dismiss];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"Error:%@",error);
+        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+        
+        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+        
+        NSLog(@"error--%@",serializedData);
+        NSLog(@"%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
             [NSObject showHudTipStr:@"从服务器获取信息失败"];
@@ -372,56 +401,72 @@ static CGFloat const gleadMenuItemMargin = 25.f;
  */
 - (void)getWeatherByLocation{
     
+
 }
 
-- (void)updateHomeList{
-    [SVProgressHUD show];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    Database *db = [Database shareInstance];
-    
-    //设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/room/list?houseUid=%@",db.currentHouse.houseUid];
-    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-    
-    NSLog(@"%@",[Database shareInstance].user.userId);
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
-    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"success:%@",daetr);
-        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-            if ([responseDic objectForKey:@"data"]) {
-                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    RoomModel *room = [[RoomModel alloc] init];
-                    room.name = [obj objectForKey:@"name"];
-                    room.roomUid = [obj objectForKey:@"roomUid"];
-                    room.deviceNumber = [obj objectForKey:@"deviceNumber"];
-                    [self.homeList addObject:room];
-                }];
-                [self reloadData];
-            }
-        }else{
-            [NSObject showHudTipStr:LocalString(@"获取家庭房间列表失败")];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"Error:%@",error);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-            [NSObject showHudTipStr:@"从服务器获取信息失败"];
-        });
-    }];
-}
+/*
+ *用在设置页面获取家庭详细信息，现在不用
+ */
+//- (void)updateHouseDetailInfo{
+//    [SVProgressHUD show];
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//
+//    Database *db = [Database shareInstance];
+//
+//    //设置超时时间
+//    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+//    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+//    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+//
+//    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house?houseUid=%@",db.currentHouse.houseUid];
+//    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+//
+//    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+//    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+//    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+//        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+//        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"success:%@",daetr);
+//        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+//            NSDictionary *dic = [responseDic objectForKey:@"data"];
+//            db.currentHouse.name = [dic objectForKey:@"name"];
+//            db.currentHouse.roomNumber = [dic objectForKey:@"roomNumber"];
+//            db.currentHouse.lon = [dic objectForKey:@"lon"];
+//            db.currentHouse.lat = [dic objectForKey:@"lat"];
+//
+//            /*
+//             *把houselist中的该house更新，防止在切换house时丢失数据
+//             */
+//            for (HouseModel *house in db.houseList) {
+//                if (house.houseUid == db.currentHouse.houseUid) {
+//                    [db.houseList addObject:db.currentHouse];
+//                    [db.houseList removeObject:house];
+//                    break;
+//                }
+//            }
+//        }else{
+//            [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];
+//        }
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [SVProgressHUD dismiss];
+//        });
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+//
+//        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+//
+//        NSLog(@"error--%@",serializedData);
+//        NSLog(@"%@",error);
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [SVProgressHUD dismiss];
+//            [NSObject showHudTipStr:@"从服务器获取信息失败"];
+//        });
+//    }];
+//}
+
+
 
 #pragma mark - Actions
 - (void)houseSelect{
@@ -442,6 +487,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         return;
     }
     HomeManagementController *HomeManagementVC = [[HomeManagementController alloc] init];
+    HomeManagementVC.homeList = self.homeList;
     [self.navigationController pushViewController:HomeManagementVC animated:YES];
 }
 
@@ -450,7 +496,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         [NSObject showHudTipStr:LocalString(@"请先创建家庭")];
         return;
     }
-    SelectDeviceTypeController  *SelectDeviceVC = [[SelectDeviceTypeController alloc] init];
+    SelectDeviceTypeController *SelectDeviceVC = [[SelectDeviceTypeController alloc] init];
     [self.navigationController pushViewController:SelectDeviceVC animated:YES];
 }
 @end

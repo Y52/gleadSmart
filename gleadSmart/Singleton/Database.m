@@ -59,7 +59,7 @@ static Database *_database = nil;
         }else{
             NSLog(@"创建表userInfo失败");
         }
-        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS house (houseUid text PRIMARY KEY,mac text NOT NULL,name text NOT NULL,lat REAL,lon REAL,auth integer NOT NULL)"];
+        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS house (houseUid text PRIMARY KEY,mac text,name text NOT NULL,lat REAL,lon REAL,auth integer)"];
         if (result) {
             NSLog(@"创建表house成功");
         }else{
@@ -134,11 +134,33 @@ static Database *_database = nil;
 - (BOOL)queryHouse:(NSString *)houseUid{
     static BOOL isContain = NO;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        FMResultSet *set = [db executeQuery:@"SELECT * FROM device WHERE houseUid = ?",houseUid];
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM house WHERE houseUid = ?",houseUid];
         while ([set next]) {
             isContain = YES;
         }
     }];
     return isContain;
+}
+
+#pragma mark - database insert
+/*
+ *获取列表时插入
+ */
+- (BOOL)insertNewHouse:(HouseModel *)house{
+    static BOOL result = NO;
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        result = [db executeUpdate:@"REPLACE INTO house (houseUid,name,auth) VALUES (?,?,?)",house.houseUid,house.name,house.auth];
+    }];
+    return result;
+}
+/*
+ *获取房间列表时插入
+ */
+- (BOOL)insertNewRoom:(RoomModel *)room{
+    static BOOL result = NO;
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        result = [db executeUpdate:@"REPLACE INTO room (roomUid,houseUid,name) VALUES (?,?,?)",room.roomUid,self.currentHouse.houseUid,room.name];
+    }];
+    return result;
 }
 @end

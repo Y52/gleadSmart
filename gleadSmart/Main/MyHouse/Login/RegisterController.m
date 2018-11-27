@@ -151,6 +151,8 @@
                           house.name = [obj objectForKey:@"name"];
                           house.auth = [obj objectForKey:@"auth"];
                           [db.houseList addObject:house];
+                          
+                          [db insertNewHouse:house];
                       }];
                   }
                   if (db.houseList.count > 0) {

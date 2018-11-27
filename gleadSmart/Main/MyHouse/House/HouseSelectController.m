@@ -58,7 +58,7 @@ static CGFloat const Cell_Height = 50.f;
 -(UITableView *)houseTable{
     if (!_houseTable) {
         _houseTable = ({
-            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 100)];
+            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
             tableView.backgroundColor = [UIColor whiteColor];
             tableView.dataSource = self;
             tableView.delegate = self;
@@ -114,16 +114,22 @@ static CGFloat const Cell_Height = 50.f;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    Database *db = [Database shareInstance];
     HouseSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HomeSelect];
     if (cell == nil) {
         cell = [[HouseSelectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HomeSelect];
     }
-    if (indexPath.row == [Database shareInstance].houseList.count) {
+    if (indexPath.row == db.houseList.count) {
         cell.image.image = [UIImage imageNamed:@"img_houseManage"];
         cell.houseLabel.text = LocalString(@"家庭管理");
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else{
-        
+        HouseModel *house = db.houseList[indexPath.row];
+        cell.image.image = [UIImage imageNamed:@"addFamily_uncheck"];
+        if ([house.houseUid isEqualToString:db.currentHouse.houseUid]) {
+            cell.image.image = [UIImage imageNamed:@"addFamily_check"];
+        }
+        cell.houseLabel.text = house.name;
     }
     return cell;
 }
@@ -151,7 +157,7 @@ static CGFloat const Cell_Height = 50.f;
 - (void)inquireHouseList{
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
+    Database *db = [Database shareInstance];
     //设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
@@ -169,17 +175,20 @@ static CGFloat const Cell_Height = 50.f;
         NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-            NSDictionary *dataDic = responseDic[@"data"];
             if ([responseDic[@"data"] count] > 0) {
-                [dataDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                [responseDic[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     HouseModel *house = [[HouseModel alloc] init];
                     house.houseUid = [obj objectForKey:@"houseUid"];
                     house.name = [obj objectForKey:@"name"];
                     house.auth = [obj objectForKey:@"auth"];
-                    [[Database shareInstance].houseList removeAllObjects];
-                    [[Database shareInstance].houseList addObject:house];
+                    [db.houseList removeAllObjects];
+                    [db.houseList addObject:house];
+                     
+                    [db insertNewHouse:house];
                 }];
             }
+            CGFloat height = ([Database shareInstance].houseList.count + 2) * Cell_Height;
+            self.houseTable.frame = CGRectMake(0, 0, ScreenWidth, height);
             [self.houseTable reloadData];
         }else{
             [NSObject showHudTipStr:LocalString(@"获取家庭列表失败")];

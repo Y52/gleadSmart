@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *lon;
 @property (strong, nonatomic) NSNumber *auth;
 @property (strong, nonatomic) NSNumber *roomNumber;
+@property (strong, nonatomic) NSString *apiKey;
+@property (strong, nonatomic) NSString *deviceId;
 
 //定位时存储地理位置
 @property (strong, nonatomic) NSString *location;

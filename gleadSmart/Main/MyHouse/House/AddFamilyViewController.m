@@ -19,7 +19,6 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
 
 @property (strong, nonatomic) UITableView *addFamilyTable;
 @property (strong, nonatomic) NSArray *defaultRoomList;
-@property (strong, nonatomic) NSMutableArray *checkedRoomArray;
 @property (strong, nonatomic) UIButton *addRoomButton;
 
 @end
@@ -95,6 +94,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
     }
     return _addFamilyTable;
 }
+
 - (UIButton *)addRoomButton{
     if (!_addRoomButton) {
         _addRoomButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -298,9 +298,12 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
 
-    NSDictionary *parameters = @{@"name":self->name,@"lon":self->lon,@"lat":self->lat,@"rooms":self->checkedRoomArray};
-    NSLog(@"%@",parameters);
-    NSLog(@"%@",self->checkedRoomArray);
+    NSMutableArray *rooms = [[NSMutableArray alloc] init];
+    for (int i = 0; i < self->checkedRoomArray.count; i++) {
+        NSDictionary *dic = @{@"name":self->checkedRoomArray[i]};
+        [rooms addObject:dic];
+    }
+    NSDictionary *parameters = @{@"name":self->name,@"lon":self->lon,@"lat":self->lat,@"rooms":rooms};
     
     [manager POST:@"http://gleadsmart.thingcom.cn/api/house" parameters:parameters progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -310,6 +313,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
               NSLog(@"success:%@",daetr);
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
                   [NSObject showHudTipStr:LocalString(@"成功创建新家庭")];
+                  
                   
                   [[NSNotificationCenter defaultCenter] postNotificationName:@"updateHouseList" object:nil userInfo:nil];
                   [self.navigationController popToRootViewControllerAnimated:YES];
@@ -326,7 +330,6 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
               
               NSLog(@"error--%@",serializedData);
               
-              NSLog(@"Error:%@",error);
               if (error.code == -1001) {
                   [NSObject showHudTipStr:LocalString(@"当前网络状况不佳")];
               }else{

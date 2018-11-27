@@ -169,6 +169,7 @@
 		BB2AD79521ABDA45006DB83A /* img_launchTitle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD79221ABDA45006DB83A /* img_launchTitle@3x.png */; };
 		BB2AD79821ABDD3E006DB83A /* RegisterAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD79721ABDD3E006DB83A /* RegisterAccountController.m */; };
 		BB2AD79B21ABE2B5006DB83A /* PhoneVerifyCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD79A21ABE2B5006DB83A /* PhoneVerifyCell2.m */; };
+		BB2AD79E21AD4828006DB83A /* HouseNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD79D21AD4828006DB83A /* HouseNameCell.m */; };
 		BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */; };
 		BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352911219D61B300428DE9 /* HouseSelectCell.m */; };
 		BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352914219D63BC00428DE9 /* HouseSelectController.m */; };
@@ -564,6 +565,8 @@
 		BB2AD79721ABDD3E006DB83A /* RegisterAccountController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterAccountController.m; sourceTree = "<group>"; };
 		BB2AD79921ABE2B5006DB83A /* PhoneVerifyCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneVerifyCell2.h; sourceTree = "<group>"; };
 		BB2AD79A21ABE2B5006DB83A /* PhoneVerifyCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneVerifyCell2.m; sourceTree = "<group>"; };
+		BB2AD79C21AD4828006DB83A /* HouseNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseNameCell.h; sourceTree = "<group>"; };
+		BB2AD79D21AD4828006DB83A /* HouseNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseNameCell.m; sourceTree = "<group>"; };
 		BB35290D219D0FC700428DE9 /* HomeDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceCell.h; sourceTree = "<group>"; };
 		BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceCell.m; sourceTree = "<group>"; };
 		BB352910219D61B300428DE9 /* HouseSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSelectCell.h; sourceTree = "<group>"; };
@@ -781,6 +784,8 @@
 			children = (
 				3E3AFFB821A7E74800EA8F1C /* HouseManagementTableViewCell.h */,
 				3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */,
+				BB2AD79C21AD4828006DB83A /* HouseNameCell.h */,
+				BB2AD79D21AD4828006DB83A /* HouseNameCell.m */,
 				3E3AFFBC21A7E75100EA8F1C /* HomeManagementCell.h */,
 				3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */,
 			);
@@ -1959,6 +1964,7 @@
 				BB2AC0EB21A8F156006DB83A /* ESP_WifiUtil.m in Sources */,
 				BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */,
 				BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */,
+				BB2AD79E21AD4828006DB83A /* HouseNameCell.m in Sources */,
 				BB2AC0E821A8F156006DB83A /* ESPTouchResult.m in Sources */,
 				BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */,
 				BB0A403421991AA8004669CA /* NSString+Common.m in Sources */,

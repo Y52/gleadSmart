@@ -9,18 +9,18 @@
 #import "HouseManagementController.h"
 #import "HouseManagementTableViewCell.h"
 #import "AddFamilyViewController.h"
+#import "HouseNameCell.h"
 
 NSString *const CellIdentifier_HouseManagement = @"CellID_HouseManagement";
+NSString *const CellIdentifier_HouseManagementAdd = @"CellID_HouseManagementAdd";
 
 static CGFloat const Cell_Height = 50.f;
+static CGFloat const Header_Height = 25.f;
 
 @interface HouseManagementController () <UITableViewDataSource,UITableViewDelegate>
 
 #warning TODO 完成家庭管理UI
 @property (nonatomic, strong) UITableView *HouseManagement;
-
-@property (strong, nonatomic) NSMutableArray *homeManagementArray;
-
 
 @end
 
@@ -28,7 +28,7 @@ static CGFloat const Cell_Height = 50.f;
 
 -(instancetype)init{
     if (self = [super init]) {
-        self.homeManagementArray = [[NSMutableArray alloc] init];
+        
     }
     return self;
 }
@@ -50,7 +50,8 @@ static CGFloat const Cell_Height = 50.f;
             tableView.dataSource = self;
             tableView.delegate = self;
             tableView.separatorColor = [UIColor clearColor];
-            [tableView registerClass:[HouseManagementTableViewCell class] forCellReuseIdentifier:CellIdentifier_HouseManagement];
+            [tableView registerClass:[HouseNameCell class] forCellReuseIdentifier:CellIdentifier_HouseManagement];
+            [tableView registerClass:[HouseManagementTableViewCell class] forCellReuseIdentifier:CellIdentifier_HouseManagementAdd];
             [self.view addSubview:tableView];
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
@@ -71,7 +72,7 @@ static CGFloat const Cell_Height = 50.f;
     switch (section) {
         case 0:
         {
-            return _homeManagementArray.count;
+            return [Database shareInstance].houseList.count;
         }
             break;
             
@@ -90,33 +91,38 @@ static CGFloat const Cell_Height = 50.f;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0:
-            {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HouseManagement];
-                if (cell == nil) {
-                        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HouseManagement];
-
-                    cell.textLabel.text = LocalString(@"杭州");
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    return cell;
-                   }
-             }
+        {
+            HouseNameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HouseManagement];
+            if (cell == nil) {
+                cell = [[HouseNameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HouseManagement];
+            }
+            HouseModel *house = [Database shareInstance].houseList[indexPath.row];
+            cell.houseName.text = house.name;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            return cell;
+        }
             break;
+            
         case 1:
-            {   HouseManagementTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HouseManagement];
-                    if (cell == nil) {
-                        cell = [[HouseManagementTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HouseManagement];
-                    }
-                    return cell;
-                }
+        {
+            HouseManagementTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HouseManagementAdd];
+            if (cell == nil) {
+                cell = [[HouseManagementTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HouseManagementAdd];
+            }
+            return cell;
+        }
             break;
-         default:
+            
+        default:
+        {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HouseManagement];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HouseManagement];
+            }
+            return cell;
+        }
           break;
       }
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HouseManagement];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HouseManagement];
-    }
-    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -127,8 +133,28 @@ static CGFloat const Cell_Height = 50.f;
     }
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     return Cell_Height;
+}
+
+//section头部视图
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    return view ;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 5.f;
+    }else if (section == 1){
+        return Header_Height;
+    }
+    return 0;
 }
 
 @end

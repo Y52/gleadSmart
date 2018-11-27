@@ -33,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)queryDevice:(NSString *)mac;
 - (NSMutableArray *)queryAllHouse;
 - (BOOL)queryHouse:(NSString *)houseUid;
+///@brief database insert
+- (BOOL)insertNewHouse:(HouseModel *)house;
+- (BOOL)insertNewRoom:(RoomModel *)room;
 @end
 
 NS_ASSUME_NONNULL_END
