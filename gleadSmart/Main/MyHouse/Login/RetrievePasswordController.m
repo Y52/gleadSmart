@@ -43,12 +43,12 @@ NSString *const CellIdentifier_RetrieveTextField = @"CellID_RetrieveTextField";
     _pwConText = @"";
 }
 #pragma mark - LazyLoad
-static float HEIGHT_CELL = 65.f;
+static float HEIGHT_CELL = 50.f;
 
 - (UITableView *)retrieveTable{
     if (!_retrieveTable) {
         _retrieveTable = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,100,285,280)];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,100,300,250)];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
@@ -63,7 +63,7 @@ static float HEIGHT_CELL = 65.f;
             [_SureBtn setTitle:LocalString(@"确定") forState:UIControlStateNormal];
             [_SureBtn.titleLabel setFont:[UIFont systemFontOfSize:18.f]];
             [_SureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [_SureBtn setBackgroundColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:0.4]];
+            [_SureBtn setBackgroundColor:[UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0]];
             [_SureBtn addTarget:self action:@selector(Sure) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:_SureBtn];
             [_SureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -74,8 +74,10 @@ static float HEIGHT_CELL = 65.f;
             _BackBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [_BackBtn setTitle:LocalString(@"返回") forState:UIControlStateNormal];
             [_BackBtn.titleLabel setFont:[UIFont systemFontOfSize:18.f]];
-            [_BackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [_BackBtn setBackgroundColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:0.4]];
+            [_BackBtn setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
+            [_BackBtn setBackgroundColor:[UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0]];
+            [_BackBtn.layer setBorderWidth:1.0];
+            _BackBtn.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
             [_BackBtn addTarget:self action:@selector(Back) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:_BackBtn];
             [_BackBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -102,6 +104,7 @@ static float HEIGHT_CELL = 65.f;
             if (cell == nil) {
                 cell = [[PhoneTFCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RetrieveUserPhone];
             }
+            cell.phoneimage.image = [UIImage imageNamed:@"img_houseManage"];
             cell.TFBlock = ^(NSString *text) {
                 self.phone = text;
                 [self textFieldChange];
@@ -112,6 +115,7 @@ static float HEIGHT_CELL = 65.f;
             if (cell == nil) {
                 cell = [[PhoneVerifyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RetrieveUserPhoneVerify];
             }
+        cell.verifyimage.image = [UIImage imageNamed:@"img_houseManage"];
             cell.TFBlock = ^(NSString *text) {
                 self.code = text;
                 [self textFieldChange];
@@ -123,6 +127,7 @@ static float HEIGHT_CELL = 65.f;
                 cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RetrieveTextField];
             }
                 cell.textField.secureTextEntry = YES;
+                cell.passwordimage.image = [UIImage imageNamed:@"img_houseManage"];
                 cell.textField.placeholder = LocalString(@"请设置新密码（6位以上字符）");
                 cell.TFBlock = ^(NSString *text) {
                     self.pwText = text;
@@ -135,6 +140,7 @@ static float HEIGHT_CELL = 65.f;
                 cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RetrieveTextField];
             }
                 cell.textField.secureTextEntry = YES;
+                cell.passwordimage.image = [UIImage imageNamed:@"img_houseManage"];
                 cell.textField.placeholder = LocalString(@"请再次输入密码");
                 cell.TFBlock = ^(NSString *text) {
                     self.pwConText = text;

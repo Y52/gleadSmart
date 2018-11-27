@@ -13,6 +13,7 @@ typedef void(^TFBlock)(NSString *text);
 @interface TextFieldCell : UITableViewCell
 
 @property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong) UIImageView *passwordimage;
 @property (nonatomic) TFBlock TFBlock;
 
 @end

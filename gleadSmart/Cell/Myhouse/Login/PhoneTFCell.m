@@ -14,6 +14,15 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        if (!_phoneimage) {
+            _phoneimage = [[UIImageView alloc] init];
+            [self.contentView addSubview:_phoneimage];
+            [_phoneimage mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));
+                make.left.equalTo(self.contentView.mas_left).offset(yAutoFit(50.f));
+                make.centerY.equalTo(self.contentView.mas_centerY);
+            }];
+        }
         if (!_phoneTF) {
             _phoneTF = [[UITextField alloc] init];
             _phoneTF.backgroundColor = [UIColor clearColor];
@@ -34,7 +43,7 @@
             [_phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(yAutoFit(180.f), yAutoFit(30.f)));
                 make.centerY.equalTo(self.contentView.mas_centerY);
-                make.left.equalTo(self.contentView.mas_left).offset(18);
+                make.left.equalTo(self.phoneimage.mas_left).offset(yAutoFit(30));
             }];
         }
     }
