@@ -13,7 +13,6 @@
 #import "MainViewController.h"
 @interface LoginViewController () <UITextFieldDelegate>
 
-//@property (nonatomic, strong) UIImageView *headerImage;
 @property (nonatomic, strong) UITextField *phoneTF;
 @property (nonatomic, strong) UITextField *verifyTF;
 @property (nonatomic, strong) UIButton *loginBtn;
@@ -29,7 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.view.layer.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1].CGColor;
-        //_headerImage = [self headerImage];
           _phoneTF = [self phoneTF];
           _verifyTF = [self passwordTF];
           _verifyBtn = [self verifyBtn];
@@ -66,31 +64,24 @@
         }];
         
         UIImageView *phoneleftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_houseManage"]];
-        [self.view insertSubview:phoneleftImage atIndex:0];
+        [self.view addSubview:phoneleftImage];
         [phoneleftImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));
             make.left.equalTo(phoneview.mas_left).offset(yAutoFit(18.f));
             make.centerY.equalTo(phoneview.mas_centerY);
         }];
-        
-        UIImageView *phonerightImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_houseManage"]];
-        [self.view insertSubview:phonerightImage atIndex:0];
-        [phonerightImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));
-            make.right.equalTo(phoneview.mas_right).offset(yAutoFit(-18.f));
-            make.centerY.equalTo(phoneview.mas_centerY);
-        }];
+    
     }
     return _phoneTF;
 }
 - (UITextField *)passwordTF{
     if (!_verifyTF) {
-       UIView *verifyTFimage = [[UIView alloc] initWithFrame:CGRectMake(yAutoFit(45.f),yAutoFit(367.f),yAutoFit(286.f),yAutoFit(36.f))];
-        verifyTFimage.layer.borderWidth = 1;
-        verifyTFimage.backgroundColor = [UIColor clearColor];
-        verifyTFimage.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
-        verifyTFimage.layer.cornerRadius = 15.f;
-        [self.view addSubview:verifyTFimage];
+       UIView *verifyTFView = [[UIView alloc] initWithFrame:CGRectMake(yAutoFit(45.f),yAutoFit(367.f),yAutoFit(286.f),yAutoFit(36.f))];
+        verifyTFView.layer.borderWidth = 1;
+        verifyTFView.backgroundColor = [UIColor clearColor];
+        verifyTFView.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
+        verifyTFView.layer.cornerRadius = 15.f;
+        [self.view insertSubview:verifyTFView atIndex:0];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(yAutoFit(249),yAutoFit(369), yAutoFit(1),yAutoFit(30))];
         line.backgroundColor = [UIColor colorWithRed:99/255.0 green:144/255.0 blue:209/255.0 alpha:1.0];
@@ -108,21 +99,21 @@
         _verifyTF.borderStyle = UITextBorderStyleNone;
         _verifyTF.placeholder = LocalString(@"请输入验证码");
         [_verifyTF addTarget:self action:@selector(textFieldTextChange) forControlEvents:UIControlEventEditingChanged];
-        [verifyTFimage addSubview:_verifyTF];
+        [verifyTFView addSubview:_verifyTF];
         [_verifyTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(130.f),yAutoFit(12.f)));
-            make.left.equalTo(verifyTFimage.mas_left).offset(yAutoFit(55.f));
-            make.centerY.equalTo(verifyTFimage.mas_centerY);
+            make.left.equalTo(verifyTFView.mas_left).offset(yAutoFit(55.f));
+            make.centerY.equalTo(verifyTFView.mas_centerY);
         }];
 //         UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(67, 314, 12, 13)];
 //         _verifyTF.leftView = paddingView;
 //         _verifyTF.leftViewMode = UITextFieldViewModeAlways;
         UIImageView *verifyImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_houseManage"]];
-        [self.view insertSubview:verifyImage atIndex:0];
+        [self.view addSubview:verifyImage];
         [verifyImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));
-            make.left.equalTo(verifyTFimage.mas_left).offset(yAutoFit(18.f));
-            make.centerY.equalTo(verifyTFimage.mas_centerY);
+            make.left.equalTo(verifyTFView.mas_left).offset(yAutoFit(18.f));
+            make.centerY.equalTo(verifyTFView.mas_centerY);
         }];
     }
     return _verifyTF;
@@ -226,11 +217,7 @@
 //        LoginViewController *loginVC = [[LoginViewController alloc] init];
 //        [loginVC setModalTransitionStyle:(UIModalTransitionStyleCoverVertical)];
 //        [self presentViewController:loginVC animated:YES completion:nil];
-        [UIView animateWithDuration:2.0 animations:^{
-            self.passwordLoginBtn.alpha = 0.0;
-            self.verifyTF.alpha = 1.0;
-            //self.verifyBtn.alpha = 1.0;
-        }];
+
 }
 - (void)passwordLogin{
      _verifyLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -248,17 +235,6 @@
      make.left.equalTo(self.view.mas_left).offset(73);//距离左边73px
      make.top.equalTo(self.loginBtn.mas_bottom).offset(20);
      }];
-    
-//    UIButton *openButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    openButton.frame = CGRectMake(0, 0, 30, 30);
-//    [openButton setImage:[UIImage imageNamed:@"img_homeSet"] forState:UIControlStateNormal];
-//    [openButton addTarget:self action:@selector(openButton) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:openButton];
-//    [openButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(yAutoFit(30.f), yAutoFit(30.f)));
-//        make.right.equalTo(verifyTFimage.mas_right).offset(yAutoFit(-8.f));
-//        make.centerY.equalTo(verifyTFimage.mas_centerY);
-//    }];
 }
 - (void)forgetPW{
     RetrievePasswordController *RetrieveVC = [[RetrievePasswordController alloc] init];
