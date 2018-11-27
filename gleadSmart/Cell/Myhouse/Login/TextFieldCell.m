@@ -13,6 +13,15 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        if (!_passwordimage) {
+            _passwordimage = [[UIImageView alloc] init];
+            [self.contentView addSubview:_passwordimage];
+            [_passwordimage mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));
+                make.left.equalTo(self.contentView.mas_left).offset(yAutoFit(50.f));
+                make.centerY.equalTo(self.contentView.mas_centerY);
+            }];
+        }
         if (!_textField) {
             _textField = [[UITextField alloc] init];
             _textField.backgroundColor = [UIColor clearColor];
@@ -32,7 +41,7 @@
             [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(350, 30));
                 make.centerY.equalTo(self.contentView.mas_centerY);
-                make.left.equalTo(self.contentView.mas_left).offset(18);
+                make.left.equalTo(self.passwordimage.mas_left).offset(30);
             }];
         }
     }

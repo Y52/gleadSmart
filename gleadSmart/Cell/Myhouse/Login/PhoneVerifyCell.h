@@ -14,6 +14,7 @@ typedef BOOL(^BtnBlock)(void);
 
 @property (nonatomic, strong) UITextField *codeTF;
 @property (nonatomic, strong) UIButton *verifyBtn;
+@property (nonatomic, strong) UIImageView *verifyimage;
 @property (nonatomic) TFBlock TFBlock;
 @property (nonatomic) BtnBlock BtnBlock;
 

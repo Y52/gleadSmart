@@ -12,6 +12,7 @@ typedef void(^TFBlock)(NSString *text);
 @interface PhoneTFCell : UITableViewCell
 
 @property (nonatomic, strong) UITextField *phoneTF;
+@property (nonatomic, strong) UIImageView *phoneimage;
 @property (nonatomic) TFBlock TFBlock;
 
 @end

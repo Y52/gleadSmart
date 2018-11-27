@@ -14,6 +14,15 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        if (!_verifyimage) {
+            _verifyimage = [[UIImageView alloc] init];
+            [self.contentView addSubview:_verifyimage];
+            [_verifyimage mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));
+                make.left.equalTo(self.contentView.mas_left).offset(yAutoFit(50.f));
+                make.centerY.equalTo(self.contentView.mas_centerY);
+            }];
+        }
         if (!_codeTF) {
             _codeTF = [[UITextField alloc] init];
             _codeTF.backgroundColor = [UIColor clearColor];
@@ -32,9 +41,9 @@
             [self.contentView addSubview:_codeTF];
             
             [_codeTF mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(180, 12));
+                make.size.mas_equalTo(CGSizeMake(120, 12));
                 make.centerY.equalTo(self.contentView.mas_centerY);
-                make.left.equalTo(self.contentView.mas_left).offset(18);
+                make.left.equalTo(self.verifyimage.mas_left).offset(30);
             }];
         }
         if (!_verifyBtn) {
@@ -51,7 +60,7 @@
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
           
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(200, 20, 1, 35)];
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(200, 10, 1, 35)];
             line.backgroundColor = [UIColor grayColor];
             [self.contentView addSubview:line];
             
