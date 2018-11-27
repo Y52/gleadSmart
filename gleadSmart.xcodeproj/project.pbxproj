@@ -161,6 +161,14 @@
 		BB2AC12D21AB7F22006DB83A /* img_autoLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC12A21AB7F22006DB83A /* img_autoLocation.png */; };
 		BB2ACC5C21AB9712006DB83A /* KYDivisionPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC12F21AB96E3006DB83A /* KYDivisionPickerView.m */; };
 		BB2AD78821AB98BD006DB83A /* KYDivisionPickerView_list.json in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD78721AB98BD006DB83A /* KYDivisionPickerView_list.json */; };
+		BB2AD78D21ABD813006DB83A /* img_launchBG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD78A21ABD813006DB83A /* img_launchBG@3x.png */; };
+		BB2AD78E21ABD813006DB83A /* img_launchBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD78B21ABD813006DB83A /* img_launchBG@2x.png */; };
+		BB2AD78F21ABD813006DB83A /* img_launchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD78C21ABD813006DB83A /* img_launchBG.png */; };
+		BB2AD79321ABDA45006DB83A /* img_launchTitle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD79021ABDA45006DB83A /* img_launchTitle@2x.png */; };
+		BB2AD79421ABDA45006DB83A /* img_launchTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD79121ABDA45006DB83A /* img_launchTitle.png */; };
+		BB2AD79521ABDA45006DB83A /* img_launchTitle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD79221ABDA45006DB83A /* img_launchTitle@3x.png */; };
+		BB2AD79821ABDD3E006DB83A /* RegisterAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD79721ABDD3E006DB83A /* RegisterAccountController.m */; };
+		BB2AD79B21ABE2B5006DB83A /* PhoneVerifyCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD79A21ABE2B5006DB83A /* PhoneVerifyCell2.m */; };
 		BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */; };
 		BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352911219D61B300428DE9 /* HouseSelectCell.m */; };
 		BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352914219D63BC00428DE9 /* HouseSelectController.m */; };
@@ -546,6 +554,16 @@
 		BB2AC12F21AB96E3006DB83A /* KYDivisionPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYDivisionPickerView.m; sourceTree = "<group>"; };
 		BB2ACC5B21AB9711006DB83A /* KYDivisionPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYDivisionPickerView.h; sourceTree = "<group>"; };
 		BB2AD78721AB98BD006DB83A /* KYDivisionPickerView_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KYDivisionPickerView_list.json; path = KYDivisionPickerViewJSON/KYDivisionPickerView_list.json; sourceTree = "<group>"; };
+		BB2AD78A21ABD813006DB83A /* img_launchBG@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_launchBG@3x.png"; sourceTree = "<group>"; };
+		BB2AD78B21ABD813006DB83A /* img_launchBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_launchBG@2x.png"; sourceTree = "<group>"; };
+		BB2AD78C21ABD813006DB83A /* img_launchBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_launchBG.png; sourceTree = "<group>"; };
+		BB2AD79021ABDA45006DB83A /* img_launchTitle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_launchTitle@2x.png"; sourceTree = "<group>"; };
+		BB2AD79121ABDA45006DB83A /* img_launchTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_launchTitle.png; sourceTree = "<group>"; };
+		BB2AD79221ABDA45006DB83A /* img_launchTitle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_launchTitle@3x.png"; sourceTree = "<group>"; };
+		BB2AD79621ABDD3E006DB83A /* RegisterAccountController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterAccountController.h; sourceTree = "<group>"; };
+		BB2AD79721ABDD3E006DB83A /* RegisterAccountController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterAccountController.m; sourceTree = "<group>"; };
+		BB2AD79921ABE2B5006DB83A /* PhoneVerifyCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneVerifyCell2.h; sourceTree = "<group>"; };
+		BB2AD79A21ABE2B5006DB83A /* PhoneVerifyCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneVerifyCell2.m; sourceTree = "<group>"; };
 		BB35290D219D0FC700428DE9 /* HomeDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceCell.h; sourceTree = "<group>"; };
 		BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceCell.m; sourceTree = "<group>"; };
 		BB352910219D61B300428DE9 /* HouseSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSelectCell.h; sourceTree = "<group>"; };
@@ -776,6 +794,8 @@
 				3EA530B921AB9B42000A6D26 /* PhoneTFCell.m */,
 				3EA530BB21AB9B42000A6D26 /* PhoneVerifyCell.h */,
 				3EA530BC21AB9B43000A6D26 /* PhoneVerifyCell.m */,
+				BB2AD79921ABE2B5006DB83A /* PhoneVerifyCell2.h */,
+				BB2AD79A21ABE2B5006DB83A /* PhoneVerifyCell2.m */,
 				3EA530BE21AB9B43000A6D26 /* TextFieldCell.h */,
 				3EA530BD21AB9B43000A6D26 /* TextFieldCell.m */,
 			);
@@ -791,6 +811,8 @@
 				3EA530C321AB9C88000A6D26 /* PasswordLoginController.m */,
 				3EA530C521AB9C88000A6D26 /* RegisterController.h */,
 				3EA530C421AB9C88000A6D26 /* RegisterController.m */,
+				BB2AD79621ABDD3E006DB83A /* RegisterAccountController.h */,
+				BB2AD79721ABDD3E006DB83A /* RegisterAccountController.m */,
 				3EA530C821AB9C88000A6D26 /* RetrievePasswordController.h */,
 				3EA530C921AB9C88000A6D26 /* RetrievePasswordController.m */,
 			);
@@ -859,6 +881,7 @@
 		BB0A404F21997A4B004669CA /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
+				BB2AD78921ABD813006DB83A /* Login_slices */,
 				BB2AC11221AA8A64006DB83A /* 添加家庭_slices */,
 				BB8B9E5F21A6ADEB00E5D8B2 /* 无线阀门_slices */,
 				BB8B9DD421A6928500E5D8B2 /* 无线阀门(zhuangtai2)_slices */,
@@ -1108,6 +1131,19 @@
 				BB2ACC5B21AB9711006DB83A /* KYDivisionPickerView.h */,
 			);
 			path = KYDivisionPickerView;
+			sourceTree = "<group>";
+		};
+		BB2AD78921ABD813006DB83A /* Login_slices */ = {
+			isa = PBXGroup;
+			children = (
+				BB2AD79121ABDA45006DB83A /* img_launchTitle.png */,
+				BB2AD79021ABDA45006DB83A /* img_launchTitle@2x.png */,
+				BB2AD79221ABDA45006DB83A /* img_launchTitle@3x.png */,
+				BB2AD78A21ABD813006DB83A /* img_launchBG@3x.png */,
+				BB2AD78B21ABD813006DB83A /* img_launchBG@2x.png */,
+				BB2AD78C21ABD813006DB83A /* img_launchBG.png */,
+			);
+			path = Login_slices;
 			sourceTree = "<group>";
 		};
 		BB35290B219D0FA300428DE9 /* Cell */ = {
@@ -1669,6 +1705,7 @@
 				BB8B9E1D21A6928500E5D8B2 /* 矩形 6 拷贝@3x.png in Resources */,
 				BB0A40A821997C99004669CA /* 矢量智能对象 拷贝 4@2x.png in Resources */,
 				BB0A40CA21997C99004669CA /* 形状 3@3x.png in Resources */,
+				BB2AD79321ABDA45006DB83A /* img_launchTitle@2x.png in Resources */,
 				BB0A40DC21997C99004669CA /* 椭圆 2 拷贝 31@2x.png in Resources */,
 				BB8B9E8221A6ADEB00E5D8B2 /* 矢量智能对象1.png in Resources */,
 				BB0A40EB21997C99004669CA /* 圆角矩形 1@2x.png in Resources */,
@@ -1699,9 +1736,11 @@
 				BB0A40CB21997C99004669CA /* 椭圆 2 拷贝 31@3x.png in Resources */,
 				BB8B9E2421A6928500E5D8B2 /* 矩形 6 拷贝 2@3x.png in Resources */,
 				BB49DF9D21958867004E00A2 /* Assets.xcassets in Resources */,
+				BB2AD78E21ABD813006DB83A /* img_launchBG@2x.png in Resources */,
 				BB8B9E5D21A6928500E5D8B2 /* 矢量智能对象7@2x.png in Resources */,
 				BB8B9E3E21A6928500E5D8B2 /* 矢量智能对象3@2x.png in Resources */,
 				BB0A40F321997C99004669CA /* img_weatherBg.png in Resources */,
+				BB2AD79521ABDA45006DB83A /* img_launchTitle@3x.png in Resources */,
 				BB8B9E3621A6928500E5D8B2 /* valveNode_normal@3x.png in Resources */,
 				BB0A40E321997C99004669CA /* 矢量智能对象5@2x.png in Resources */,
 				BB8B9E4221A6928500E5D8B2 /* 椭圆 3@3x.png in Resources */,
@@ -1730,6 +1769,7 @@
 				BB2AC11D21AA8A64006DB83A /* addFamily_device@2x.png in Resources */,
 				BB0A40A921997C99004669CA /* img_houseSelect@2x.png in Resources */,
 				BB8B9DCB21A6815000E5D8B2 /* thermostatMoer@2x.png in Resources */,
+				BB2AD79421ABDA45006DB83A /* img_launchTitle.png in Resources */,
 				BB8B9E5C21A6928500E5D8B2 /* valveLeak_off.png in Resources */,
 				BB0A40B521997C99004669CA /* 圆角矩形 1 拷贝.png in Resources */,
 				BB0A40DD21997C99004669CA /* 圆角矩形 1 拷贝 2@3x.png in Resources */,
@@ -1738,6 +1778,7 @@
 				BB0A40C621997C99004669CA /* img_tab03.png in Resources */,
 				BB37DED721A798A100B2121B /* thermostatKnob_On@3x.png in Resources */,
 				BB0A40C921997C99004669CA /* 形状 4@2x.png in Resources */,
+				BB2AD78D21ABD813006DB83A /* img_launchBG@3x.png in Resources */,
 				BB8B9E5421A6928500E5D8B2 /* valveNode_normal.png in Resources */,
 				BB8B9E2621A6928500E5D8B2 /* 椭圆 2 拷贝 10.png in Resources */,
 				BB0A40B221997C99004669CA /* img_tab01@2x.png in Resources */,
@@ -1765,6 +1806,7 @@
 				BB8B9E5221A6928500E5D8B2 /* 矢量智能对象7.png in Resources */,
 				BB0A40AB21997C99004669CA /* 椭圆 1 拷贝 2@3x.png in Resources */,
 				BB0A40C721997C99004669CA /* 椭圆 1 拷贝.png in Resources */,
+				BB2AD78F21ABD813006DB83A /* img_launchBG.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1882,7 +1924,9 @@
 				BB37DF0B21A7EFC400B2121B /* DeviceViewController.m in Sources */,
 				BB2AC0C621A8EFE3006DB83A /* SSIDTableViewCell.m in Sources */,
 				3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */,
+				BB2AD79B21ABE2B5006DB83A /* PhoneVerifyCell2.m in Sources */,
 				BB2AC10A21A94D63006DB83A /* AFNetworkReachabilityManager.m in Sources */,
+				BB2AD79821ABDD3E006DB83A /* RegisterAccountController.m in Sources */,
 				BB2AC10921A94D63006DB83A /* AFURLRequestSerialization.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
 				BB2AC0F121A8F156006DB83A /* ESPDataCode.m in Sources */,

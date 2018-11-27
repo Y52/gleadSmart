@@ -18,7 +18,7 @@
             _phoneTF = [[UITextField alloc] init];
             _phoneTF.backgroundColor = [UIColor clearColor];
             _phoneTF.placeholder = LocalString(@"请输入手机号");
-            _phoneTF.font = [UIFont fontWithName:@"Arial" size:13.0f];
+            _phoneTF.font = [UIFont fontWithName:@"Arial" size:15.0f];
             //_phoneTF.textColor = [UIColor colorWithHexString:@"222222"];
             //_phoneTF.borderStyle = UITextBorderStyleRoundedRect;
             _phoneTF.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -32,7 +32,7 @@
             [self.contentView addSubview:_phoneTF];
             
             [_phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(180, 12));
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(180.f), yAutoFit(30.f)));
                 make.centerY.equalTo(self.contentView.mas_centerY);
                 make.left.equalTo(self.contentView.mas_left).offset(18);
             }];
@@ -45,16 +45,6 @@
     if (self.TFBlock) {
         self.TFBlock(textField.text);
     }
-}
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

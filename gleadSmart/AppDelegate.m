@@ -24,11 +24,12 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     RegisterController *loginVC = [[RegisterController alloc] init];
-    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+
     //MainViewController *mainVC = [[MainViewController alloc] init];
     //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
     //self.window.rootViewController = mainVC;
-    self.window.rootViewController = loginVC;
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     
     return YES;

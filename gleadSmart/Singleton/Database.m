@@ -33,7 +33,7 @@ static Database *_database = nil;
 - (instancetype)init{
     self = [super init];
     if (self) {
-        [self initDB];
+        self.houseList = [[NSMutableArray alloc] init];
     }
     return self;
 }

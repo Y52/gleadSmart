@@ -20,9 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 ///@brief User Information
 @property (strong, nonatomic) UserModel *user;
 @property (strong, nonatomic) NSString *token;
+@property (strong, nonatomic) NSMutableArray *houseList;
 
 ///@brief Currently Selected House
 @property (strong, nonatomic, nullable) HouseModel *currentHouse;
+
+///@brief data initial
+- (void)initDB;
 
 ///@brief database select
 - (NSMutableArray *)queryAllDevice;

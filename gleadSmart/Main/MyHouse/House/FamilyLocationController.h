@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^dismissBlock)(NSString *location);
+typedef void(^dismissBlock)(HouseModel *house);
 
 NS_ASSUME_NONNULL_BEGIN
 

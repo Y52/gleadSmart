@@ -13,9 +13,9 @@
 #import "LoginViewController.h"
 #import "SelectDeviceTypeController.h"
 #import "MainViewController.h"
-NSString *const CellIdentifier_RegisterUserPhone = @"CellID_RegisteruserPhone";
-NSString *const CellIdentifier_RegisterUserPhoneVerify = @"CellID_RegisteruserPhoneVerify";
-NSString *const CellIdentifier_RegisterTextField = @"CellID_RegisterTextField";
+NSString *const CellIdentifier_RetrieveUserPhone = @"CellID_RetrieveuserPhone";
+NSString *const CellIdentifier_RetrieveUserPhoneVerify = @"CellID_RetrieveuserPhoneVerify";
+NSString *const CellIdentifier_RetrieveTextField = @"CellID_RetrieveTextField";
 
 @interface RetrievePasswordController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -52,9 +52,9 @@ static float HEIGHT_CELL = 65.f;
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
-            [tableView registerClass:[PhoneVerifyCell class] forCellReuseIdentifier:CellIdentifier_RegisterUserPhoneVerify];
-            [tableView registerClass:[PhoneTFCell class] forCellReuseIdentifier:CellIdentifier_RegisterUserPhone];
-            [tableView registerClass:[TextFieldCell class] forCellReuseIdentifier:CellIdentifier_RegisterTextField];
+            [tableView registerClass:[PhoneVerifyCell class] forCellReuseIdentifier:CellIdentifier_RetrieveUserPhoneVerify];
+            [tableView registerClass:[PhoneTFCell class] forCellReuseIdentifier:CellIdentifier_RetrieveUserPhone];
+            [tableView registerClass:[TextFieldCell class] forCellReuseIdentifier:CellIdentifier_RetrieveTextField];
             tableView.separatorColor = [UIColor colorWithRed:99/255.0 green:144/255.0 blue:209/255.0 alpha:1];
             [self.view addSubview:tableView];
             tableView.scrollEnabled = NO;
@@ -98,9 +98,9 @@ static float HEIGHT_CELL = 65.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row ==0) {
-            PhoneTFCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RegisterUserPhone];;
+            PhoneTFCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RetrieveUserPhone];;
             if (cell == nil) {
-                cell = [[PhoneTFCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RegisterUserPhone];
+                cell = [[PhoneTFCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RetrieveUserPhone];
             }
             cell.TFBlock = ^(NSString *text) {
                 self.phone = text;
@@ -108,9 +108,9 @@ static float HEIGHT_CELL = 65.f;
             };
             return cell;
     }else if (indexPath.row == 1){
-            PhoneVerifyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RegisterUserPhoneVerify];;
+            PhoneVerifyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RetrieveUserPhoneVerify];;
             if (cell == nil) {
-                cell = [[PhoneVerifyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RegisterUserPhoneVerify];
+                cell = [[PhoneVerifyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RetrieveUserPhoneVerify];
             }
             cell.TFBlock = ^(NSString *text) {
                 self.code = text;
@@ -118,9 +118,9 @@ static float HEIGHT_CELL = 65.f;
             };
             return cell;
     }else if (indexPath.row == 2){
-            TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RegisterTextField];
+            TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RetrieveTextField];
             if (cell == nil) {
-                cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RegisterTextField];
+                cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RetrieveTextField];
             }
                 cell.textField.secureTextEntry = YES;
                 cell.textField.placeholder = LocalString(@"请设置新密码（6位以上字符）");
@@ -130,9 +130,9 @@ static float HEIGHT_CELL = 65.f;
                 };
             return cell;
     }else{
-            TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RegisterTextField];
+            TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RetrieveTextField];
             if (cell == nil) {
-                cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RegisterTextField];
+                cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RetrieveTextField];
             }
                 cell.textField.secureTextEntry = YES;
                 cell.textField.placeholder = LocalString(@"请再次输入密码");

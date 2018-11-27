@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *auth;
 @property (strong, nonatomic) NSNumber *roomNumber;
 
+//定位时存储地理位置
+@property (strong, nonatomic) NSString *location;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^TFBlock)(NSString *text);
+
 @interface AddFamilyTextCell : UITableViewCell
 
 @property (strong, nonatomic) UILabel *leftLabel;
 @property (strong, nonatomic) UITextField *inputTF;
+@property (nonatomic) TFBlock TFBlock;
+
 @end

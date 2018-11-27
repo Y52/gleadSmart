@@ -19,14 +19,19 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
 
 @property (strong, nonatomic) UITableView *addFamilyTable;
 @property (strong, nonatomic) NSArray *defaultRoomList;
-@property (strong, nonatomic) NSMutableArray *checkedRoomArray;
 
 @end
 
-@implementation AddFamilyViewController
+@implementation AddFamilyViewController{
+    NSString *name;
+    NSNumber *lon;
+    NSNumber *lat;
+    NSMutableArray *checkedRoomArray;
+}
+
 - (instancetype)init{
     if (self) {
-        _checkedRoomArray = [[NSMutableArray alloc] init];
+        self->checkedRoomArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -115,6 +120,9 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
             if (indexPath.row == 0) {
                 cell.leftLabel.text = LocalString(@"家庭名称");
                 cell.inputTF.placeholder = LocalString(@"填写家庭名称");
+                cell.TFBlock = ^(NSString *text) {
+                    self->name = text;
+                };
             }
             if (indexPath.row == 1) {
                 cell.leftLabel.text = LocalString(@"家庭位置");
@@ -158,13 +166,13 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
         if (cell.tag == yUnselect) {
             cell.tag = ySelect;
             cell.checkImage.image = [UIImage imageNamed:@"addFamily_check"];
-            [self.checkedRoomArray addObject:cell.leftLabel.text];
+            [self->checkedRoomArray addObject:cell.leftLabel.text];
         }else{
             cell.tag = yUnselect;
             cell.checkImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
-            for (NSString *roomName in self.checkedRoomArray) {
+            for (NSString *roomName in self->checkedRoomArray) {
                 if ([cell.leftLabel.text isEqualToString:roomName]) {
-                    [self.checkedRoomArray removeObject:roomName];
+                    [self->checkedRoomArray removeObject:roomName];
                     break;
                 }
             }
@@ -175,9 +183,11 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
             locaVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
             locaVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             locaVC.contentOriginY = 100.f + getRectNavAndStatusHight;
-            locaVC.dismissBlock = ^(NSString *location) {
+            locaVC.dismissBlock = ^(HouseModel *house) {
                 AddFamilyTextCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-                cell.inputTF.text = location;
+                cell.inputTF.text = house.location;
+                self->lon = house.lon;
+                self->lat = house.lat;
             };
             [self presentViewController:locaVC animated:YES completion:nil];
         }
@@ -201,7 +211,6 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
 }
 
 //section头部间距
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 1) {
@@ -209,6 +218,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
     }
     return 0;//section头部高度
 }
+
 //section头部视图
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -253,7 +263,57 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
 
 #pragma mark - Action
 - (void)completeAddFamily{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    Database *db = [Database shareInstance];
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+
+    NSDictionary *parameters = @{@"name":self->name,@"lon":self->lon,@"lat":self->lat,@"rooms":self->checkedRoomArray};
+    NSLog(@"%@",parameters);
+    NSLog(@"%@",self->checkedRoomArray);
+    
+    [manager POST:@"http://gleadsmart.thingcom.cn/api/house" parameters:parameters progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+              NSLog(@"success:%@",daetr);
+              if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+                  [NSObject showHudTipStr:LocalString(@"成功创建新家庭")];
+                  
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"updateHouseList" object:nil userInfo:nil];
+                  [self.navigationController popToRootViewControllerAnimated:YES];
+              }else{
+                  [NSObject showHudTipStr:LocalString(@"创建新家庭失败")];
+              }
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  [SVProgressHUD dismiss];
+              });
+          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+              
+              NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+              
+              NSLog(@"error--%@",serializedData);
+              
+              NSLog(@"Error:%@",error);
+              if (error.code == -1001) {
+                  [NSObject showHudTipStr:LocalString(@"当前网络状况不佳")];
+              }else{
+                  [NSObject showHudTipStr:LocalString(@"创建新家庭失败")];
+              }
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  [SVProgressHUD dismiss];
+              });
+          }
+     ];
 }
 
 @end

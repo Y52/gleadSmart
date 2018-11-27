@@ -22,9 +22,7 @@
 @implementation FamilyLocationController{
     CLLocationManager *_locationManager;
     CLGeocoder *_geocodel;
-    NSString *currentCity;
-    NSNumber *lon;
-    NSNumber *lat;
+    HouseModel *house;
 }
 
 -(instancetype)init{
@@ -36,9 +34,9 @@
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         [_locationManager requestWhenInUseAuthorization];
         [_locationManager requestAlwaysAuthorization];
-        currentCity = @"";
         
         _geocodel = [[CLGeocoder alloc] init];
+        house = [[HouseModel alloc] init];
     }
     return self;
 }
@@ -119,7 +117,7 @@
 #pragma mark - locationPicker delegate
 - (void)didGetAddressFromPickerViewWithProvinceName:(NSString *)provinceName cityName:(NSString *)cityName countyName:(NSString *)countyName streetName:(NSString *)streetName{
     NSString *addr = [NSString stringWithFormat:@"%@%@%@",provinceName,cityName,countyName];
-    self->currentCity = addr;
+    house.location = addr;
     [_geocodel geocodeAddressString:addr completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *placemark=[placemarks firstObject];
         
@@ -128,8 +126,8 @@
         NSDictionary *addressDic= placemark.addressDictionary;//详细地址信息字典,包含以下部分信息
         NSLog(@"位置:%@,区域:%@,详细信息:%@",location,region,addressDic);
         
-        self->lon = [NSNumber numberWithFloat:location.coordinate.longitude];
-        self->lat = [NSNumber numberWithFloat:location.coordinate.latitude];
+        house.lon = [NSNumber numberWithFloat:location.coordinate.longitude];
+        house.lat = [NSNumber numberWithFloat:location.coordinate.latitude];
     }];
 }
 
@@ -153,21 +151,21 @@
     //打印当前的经度与纬度
     NSLog(@"%f,%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
     
-    self->lon = [NSNumber numberWithFloat:currentLocation.coordinate.longitude];
-    self->lat = [NSNumber numberWithFloat:currentLocation.coordinate.latitude];
+    house.lon = [NSNumber numberWithFloat:currentLocation.coordinate.longitude];
+    house.lat = [NSNumber numberWithFloat:currentLocation.coordinate.latitude];
 
     //反地理编码
     [_geocodel reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (placemarks.count > 0) {
             CLPlacemark *placeMark = placemarks[0];
-            self->currentCity = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.subLocality];
-            if (!self->currentCity) {
-                self->currentCity = @"无法定位当前城市";
+            self->house.location = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.subLocality];
+            if (!self->house.location) {
+                self->house.location = @"无法定位当前城市";
             }
             
             /*看需求定义一个全局变量来接收赋值*/
             NSLog(@"----%@",placeMark.country);//当前国家
-            NSLog(@"%@",self->currentCity);//当前的城市
+            NSLog(@"%@",self->house.location);//当前的城市
             //            NSLog(@"%@",placeMark.subLocality);//当前的位置
             //            NSLog(@"%@",placeMark.thoroughfare);//当前街道
             //            NSLog(@"%@",placeMark.name);//具体地址
@@ -188,7 +186,7 @@
 - (void)dismissVC{
     [self dismissViewControllerAnimated:YES completion:nil];
     if (self.dismissBlock) {
-        self.dismissBlock(self->currentCity);
+        self.dismissBlock(self->house);
     }
 }
 @end

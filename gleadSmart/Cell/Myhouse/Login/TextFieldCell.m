@@ -16,7 +16,7 @@
         if (!_textField) {
             _textField = [[UITextField alloc] init];
             _textField.backgroundColor = [UIColor clearColor];
-            _textField.font = [UIFont fontWithName:@"Arial" size:13.0f];
+            _textField.font = [UIFont fontWithName:@"Arial" size:15.0f];
             //_textField.textColor = [UIColor colorWithHexString:@"222222"];
             //_textField.borderStyle = UITextBorderStyleRoundedRect;
             _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -30,7 +30,7 @@
             [self.contentView addSubview:_textField];
             
             [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(350, 30));
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(350.f), yAutoFit(30.f)));
                 make.centerY.equalTo(self.contentView.mas_centerY);
                 make.left.equalTo(self.contentView.mas_left).offset(18);
             }];
