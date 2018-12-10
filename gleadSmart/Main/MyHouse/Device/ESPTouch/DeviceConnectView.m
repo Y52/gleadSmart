@@ -58,7 +58,7 @@
     _spinner = [self spinner];
     _image =[self image];
     _cancelBtn = [self cancelBtn];
-    //[self startEsptouchConnect];
+    [self startEsptouchConnect];
     //[self fail];
 }
 

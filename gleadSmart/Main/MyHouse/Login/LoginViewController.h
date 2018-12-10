@@ -7,12 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^TFBlock)(NSString *text);
-typedef BOOL(^BtnBlock)(void);
-@interface LoginViewController : UIViewController
 
-@property (strong, nonatomic) dispatch_source_t timer;
-@property (nonatomic) BtnBlock BtnBlock;
--(void)openCountdown;
+@interface LoginViewController : UIViewController
 
 @end

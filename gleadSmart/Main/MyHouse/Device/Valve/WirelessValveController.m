@@ -7,8 +7,8 @@
 //
 
 #import "WirelessValveController.h"
-#import "TouchTableView.h"
 #import "NodeDetailCell.h"
+#import "NodeDetailViewController.h"
 
 NSString *const CellIdentifier_NodeDetail = @"CellID_NodeDetail";
 
@@ -142,7 +142,7 @@ CGFloat const cellHeader_Height = 30.f;
 - (UIImageView *)leakImage{
     if (!_leakImage) {
         _leakImage = [[UIImageView alloc] init];
-        _leakImage.image = [UIImage imageNamed:@"valveLeak_off"];
+        _leakImage.image = [UIImage imageNamed:@"valveLeak_abnormal"];
         [self.leakStatusView addSubview:_leakImage];
         [_leakImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(60.f), yAutoFit(60.f)));
@@ -156,7 +156,7 @@ CGFloat const cellHeader_Height = 30.f;
 - (UILabel *)leakLabel{
     if (!_leakLabel) {
         _leakLabel = [[UILabel alloc] init];
-        _leakLabel.text = LocalString(@"漏水状态");
+        _leakLabel.text = LocalString(@"漏水");
         _leakLabel.textAlignment = NSTextAlignmentCenter;
         _leakLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
         _leakLabel.font = [UIFont fontWithName:@"Helvetica" size:14.f];
@@ -174,7 +174,7 @@ CGFloat const cellHeader_Height = 30.f;
     if (!_leakMark) {
         _leakMark = [[UIImageView alloc] init];
         _leakMark.image = [UIImage imageNamed:@"valveAlertMark"];
-        _leakMark.hidden = YES;
+        //_leakMark.hidden = YES;
         [self.leakStatusView addSubview:_leakMark];
         [_leakMark mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(30.f), yAutoFit(30.f)));
@@ -210,7 +210,7 @@ CGFloat const cellHeader_Height = 30.f;
 - (UIImageView *)valveImage{
     if (!_valveImage) {
         _valveImage = [[UIImageView alloc] init];
-        _valveImage.image = [UIImage imageNamed:@"valveStatus_off"];
+        _valveImage.image = [UIImage imageNamed:@"valveStatus_normal"];
         [self.valveStatusView addSubview:_valveImage];
         [_valveImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(60.f), yAutoFit(60.f)));
@@ -224,7 +224,7 @@ CGFloat const cellHeader_Height = 30.f;
 - (UILabel *)valveLabel{
     if (!_valveLabel) {
         _valveLabel = [[UILabel alloc] init];
-        _valveLabel.text = LocalString(@"阀门状态");
+        _valveLabel.text = LocalString(@"阀门正常");
         _valveLabel.textAlignment = NSTextAlignmentCenter;
         _valveLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
         _valveLabel.font = [UIFont fontWithName:@"Helvetica" size:14.f];
@@ -279,7 +279,7 @@ CGFloat const cellHeader_Height = 30.f;
 - (UIImageView *)switchImage{
     if (!_switchImage) {
         _switchImage = [[UIImageView alloc] init];
-        _switchImage.image = [UIImage imageNamed:@"valveSwitch_off"];
+        _switchImage.image = [UIImage imageNamed:@"valveSwitch_normal"];
         [self.switchStatusView addSubview:_switchImage];
         [_switchImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(60.f), yAutoFit(60.f)));
@@ -293,7 +293,7 @@ CGFloat const cellHeader_Height = 30.f;
 - (UILabel *)switchLabel{
     if (!_switchLabel) {
         _switchLabel = [[UILabel alloc] init];
-        _switchLabel.text = LocalString(@"开关状态");
+        _switchLabel.text = LocalString(@"关闭");
         _switchLabel.textAlignment = NSTextAlignmentCenter;
         _switchLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
         _switchLabel.font = [UIFont fontWithName:@"Helvetica" size:14.f];
@@ -355,7 +355,7 @@ CGFloat const cellHeader_Height = 30.f;
             make.centerY.equalTo(self.nodesView.mas_centerY);
         }];
         
-        for (int i = 1; i < self.nodeArray.count; i++) {
+        for (int i = 1; i < 20; i++) {
             UIImageView *nodeViewNew = [[UIImageView alloc] init];
             nodeViewNew.image = [UIImage imageNamed:@"valveNode_normal"];
             nodeViewNew.tag = 1000 + i;
@@ -384,7 +384,7 @@ CGFloat const cellHeader_Height = 30.f;
 -(UIButton *)nodeLeakStatusButton{
     if (!_nodeLeakStatusButton) {
         _nodeLeakStatusButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_nodeLeakStatusButton setImage:[UIImage imageNamed:@"nodeLeakBig_normal"] forState:UIControlStateNormal];
+        [_nodeLeakStatusButton setImage:[UIImage imageNamed:@"nodeLeakBig_abnormal"] forState:UIControlStateNormal];
         [self.view addSubview:_nodeLeakStatusButton];
         [_nodeLeakStatusButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(52.f), yAutoFit(52.f)));
@@ -439,6 +439,7 @@ CGFloat const cellHeader_Height = 30.f;
     if (!_nodeSetViewButton) {
         _nodeSetViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_nodeSetViewButton setImage:[UIImage imageNamed:@"nodeSet_normal"] forState:UIControlStateNormal];
+        [_nodeSetViewButton addTarget:self action:@selector(nodeSetDetail) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_nodeSetViewButton];
         [_nodeSetViewButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(52.f), yAutoFit(52.f)));
@@ -495,6 +496,7 @@ CGFloat const cellHeader_Height = 30.f;
         [_controlSwitchButton setTitle:LocalString(@"开关") forState:UIControlStateNormal];
         [_controlSwitchButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
         [_controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl"] forState:UIControlStateNormal];
+        _controlSwitchButton.tag = yUnselect;
         //[_controlSwitchButton.imageView sizeThatFits:CGSizeMake(51.f, 51.f)];
         _controlSwitchButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:17.f];
         [_controlSwitchButton addTarget:self action:@selector(controlSwitch) forControlEvents:UIControlEventTouchUpInside];
@@ -528,7 +530,7 @@ CGFloat const cellHeader_Height = 30.f;
     if (cell == nil) {
         cell = [[NodeDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_NodeDetail];
     }
-    cell.leakImage.image = [UIImage imageNamed:@"nodeLeakSmall_normal"];
+    cell.leakImage.image = [UIImage imageNamed:@"nodeLeakBig_abnormal"];
     cell.detailLabel.text = @"厨房漏水";
     cell.dateLabel.text = @"2018.10.06 13:58:34";
     cell.backgroundColor = [UIColor clearColor];
@@ -570,6 +572,19 @@ CGFloat const cellHeader_Height = 30.f;
 }
 
 - (void)controlSwitch{
-    
+    if (self.controlSwitchButton.tag == yUnselect) {
+        self.controlSwitchButton.tag = ySelect;
+        [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl_on"] forState:UIControlStateNormal];
+
+    }else{
+        self.controlSwitchButton.tag = yUnselect;
+        [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl"] forState:UIControlStateNormal];
+
+    }
+}
+
+- (void)nodeSetDetail{
+    NodeDetailViewController *detailVC = [[NodeDetailViewController alloc] init];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 @end

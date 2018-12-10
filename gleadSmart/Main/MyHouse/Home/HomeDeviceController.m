@@ -7,7 +7,6 @@
 //
 
 #import "HomeDeviceController.h"
-#import "TouchTableView.h"
 #import "HomeDeviceCell.h"
 #import "ThermostatController.h"
 #import "WirelessValveController.h"
@@ -36,20 +35,23 @@ static CGFloat const Cell_Height = 72.f;
     self.view.layer.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1].CGColor;
     
     self.deviceTable = [self deviceTable];
+    [self selectDevicesWithRoom];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    Network *net = [Network shareNetwork];
-    [net onlineNodeInquire:net.connectedDevice.mac];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inquireNode) name:@"inquireNode" object:nil];
+    if (self.deviceTable) {
+        [self.deviceTable reloadData];
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectDevicesWithRoom) name:@"refreshDeviceTable" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(controlReply:) name:@"valveStatusControlReply" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"inquireNode" object:nil];
-
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshDeviceTable" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveStatusControlReply" object:nil];
 }
 
 #pragma mark - Lazy Load
@@ -96,7 +98,7 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _deviceArray.count;
+    return _deviceArray.count+1;
 }
 
 
@@ -105,22 +107,95 @@ static CGFloat const Cell_Height = 72.f;
     if (cell == nil) {
         cell = [[HomeDeviceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HomeDevice];
     }
-    cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
-    cell.deviceName.text = LocalString(@"温控器");
-    cell.belongingHome.text = @"客厅";
-    cell.status.text = @"已关闭";
+    if (indexPath.row == self.deviceArray.count) {
+        cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
+        cell.deviceName.text = @"无线水阀";
+        cell.status.text = LocalString(@"未设置 | 已关闭");
+        return cell;
+    }
+    DeviceModel *device = self.deviceArray[indexPath.row];
+    cell.deviceName.text = device.name;
+    RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
+    NSString *status = room.name;
+    if (room.roomUid == nil) {
+        status = LocalString(@"未设置");
+    }
+    switch ([device.type integerValue]) {
+        case 1:
+        {
+            cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_off"];
+            cell.switchBlock = ^(BOOL isOn) {
+                UInt8 controlCode = 0x01;
+                NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
+                [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data];
+            };
+        }
+            break;
+            
+        case 2:
+        {
+            cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
+            cell.switchBlock = ^(BOOL isOn) {
+                UInt8 controlCode = 0x01;
+                NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
+                [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data];
+            };
+        }
+            break;
+            
+        case 3:
+        {
+            cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    if ([device.isOn integerValue]) {
+        cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
+        cell.controlSwitch.on = YES;
+    }else{
+        cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
+        cell.controlSwitch.on = NO;
+    }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 0) {
-        ThermostatController *thermostatVC = [[ThermostatController alloc] init];
-        [self.navigationController pushViewController:thermostatVC animated:YES];
-    }else{
+    if (indexPath.row == self.deviceArray.count) {
         WirelessValveController *valveVC = [[WirelessValveController alloc] init];
         [self.navigationController pushViewController:valveVC animated:YES];
+        return;
+    }
+
+    DeviceModel *device = self.deviceArray[indexPath.row];
+    switch ([device.type integerValue]) {
+        case 1:
+        {
+            ThermostatController *thermostatVC = [[ThermostatController alloc] init];
+            thermostatVC.device = device;
+            [self.navigationController pushViewController:thermostatVC animated:YES];
+        }
+            break;
+            
+        case 2:
+        {
+            WirelessValveController *valveVC = [[WirelessValveController alloc] init];
+            [self.navigationController pushViewController:valveVC animated:YES];
+        }
+            break;
+            
+        case 3:
+        {
+            
+        }
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -139,8 +214,6 @@ static CGFloat const Cell_Height = 72.f;
     textLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:textLabel];
     
-    
-    
     return headerView;
 }
 
@@ -153,31 +226,51 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 #pragma mark - Actions
-- (void)refreshTable{
+- (void)selectDevicesWithRoom{
     Network *net = [Network shareNetwork];
-    [net onlineNodeInquire:net.connectedDevice.mac];
-}
-
-#pragma mark - NSNotificationCenter
-- (void)inquireNode{
-    Network *net = [Network shareNetwork];
-    NSMutableArray *data = [[NSMutableArray alloc] init];
-    [data addObjectsFromArray:net.recivedData68];
-    int count = [data[7] intValue];
-    if (count % 4 != 0) {
-        [NSObject showHudTipStr:@"查询节点回复帧格式错误"];
+    if (!_room) {
+        self.deviceArray = net.deviceArray;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.deviceTable reloadData];
+        });
         return;
     }
-    for (int i = 1; i < count / 4; i++) {
-        DeviceModel *device = [[DeviceModel alloc] init];
-        device.mac = @"";
-        [device.mac stringByAppendingString:[NSString HexByInt:[data[8 + i*4] intValue]]];
-        [device.mac stringByAppendingString:[NSString HexByInt:[data[9 + i*4] intValue]]];
-        [device.mac stringByAppendingString:[NSString HexByInt:[data[10 + i*4] intValue]]];
-        [device.mac stringByAppendingString:[NSString HexByInt:[data[11 + i*4] intValue]]];
-        [_deviceArray addObject:device];
+    for (DeviceModel *device in net.deviceArray) {
+        if ([device.roomUid isEqualToString:_room.roomUid]) {
+            [self.deviceArray addObject:device];
+        }
     }
-    [self.deviceTable reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.deviceTable reloadData];
+    });
+}
+
+- (void)refreshTable{
+    Network *net = [Network shareNetwork];
+    [net onlineNodeInquire:[Database shareInstance].currentHouse.mac];
     [self.deviceTable.mj_header endRefreshing];
 }
+
+#pragma mark - Notification
+- (void)refresh{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.deviceTable reloadData];
+    });
+}
+
+- (void)controlReply:(NSNotification *)notification{
+    NSDictionary *replyDic = [notification userInfo];
+    NSNumber *isOn = [replyDic objectForKey:@"isOn"];
+    NSString *mac = [replyDic objectForKey:@"mac"];
+    for (DeviceModel *device in self.deviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            device.isOn = isOn;
+            NSLog(@"%@",isOn);
+        }
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.deviceTable reloadData];
+    });
+}
+
 @end

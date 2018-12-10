@@ -16,6 +16,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *ipAddress;
 @property (strong, nonatomic) NSNumber *type;
+@property (strong, nonatomic) NSString *roomUid;
+@property (strong, nonatomic) NSString *houseUid;
+@property (strong, nonatomic) NSNumber *isOn;
+
+///@breif 温控器拥有的属性
+@property (strong, nonatomic) NSNumber *mode;//0为手动，1为自动
+@property (strong, nonatomic) NSNumber *indoorTemp;
+@property (strong, nonatomic) NSNumber *modeTemp;
+@property (strong, nonatomic) NSNumber *compensate;
+@property (strong, nonatomic) NSArray *weekProgram;
+
 
 @end
 

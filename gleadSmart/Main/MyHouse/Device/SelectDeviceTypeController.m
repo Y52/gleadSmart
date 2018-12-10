@@ -7,7 +7,6 @@
 //
 
 #import "SelectDeviceTypeController.h"
-#import "TouchTableView.h"
 #import "SelectDeviceTypeCell.h"
 #import "DeviceViewController.h"
 

@@ -95,9 +95,11 @@ static float HEIGHT_CELL = 50.f;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 4;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row ==0) {
             PhoneTFCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RetrieveUserPhone];;

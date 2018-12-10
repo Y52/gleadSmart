@@ -9,6 +9,7 @@
 #import "Database.h"
 
 static Database *_database = nil;
+static dispatch_once_t oneToken;
 
 @implementation Database
 
@@ -20,7 +21,6 @@ static Database *_database = nil;
 }
 
 + (instancetype)allocWithZone:(struct _NSZone *)zone{
-    static dispatch_once_t oneToken;
     
     dispatch_once(&oneToken, ^{
         if (_database == nil) {
@@ -33,9 +33,19 @@ static Database *_database = nil;
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.houseList = [[NSMutableArray alloc] init];
+        if (!self.houseList) {
+            self.houseList = [[NSMutableArray alloc] init];
+        }
+        if (!self.localDeviceArray) {
+            self.localDeviceArray = [[NSMutableArray alloc] init];
+        }
     }
     return self;
+}
+
++ (void)destroyInstance{
+    _database = nil;
+    oneToken = 0l;
 }
 
 #pragma mark - Database initial
@@ -48,7 +58,7 @@ static Database *_database = nil;
     //_setting = [self setting];
     //[self querySetting];
     //[self deleteTable];
-    //[self insertNewReport:nil];
+    //[self insertNewDevice:nil];
 }
 
 - (void)createTable{
@@ -59,7 +69,7 @@ static Database *_database = nil;
         }else{
             NSLog(@"创建表userInfo失败");
         }
-        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS house (houseUid text PRIMARY KEY,mac text,name text NOT NULL,lat REAL,lon REAL,auth integer)"];
+        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS house (houseUid text PRIMARY KEY,mac text,name text NOT NULL,lat REAL,lon REAL,auth integer,deviceId text,apiKey text)"];
         if (result) {
             NSLog(@"创建表house成功");
         }else{
@@ -71,7 +81,7 @@ static Database *_database = nil;
         }else{
             NSLog(@"创建表room失败");
         }
-        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS device (mac text PRIMARY KEY,houseUid text NOT NULL,roomUid text,type REAL NOT NULL)"];
+        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS device (mac text PRIMARY KEY,name text,roomUid text,houseUid text,type integer)"];
         if (result) {
             NSLog(@"创建表device成功");
         }else{
@@ -82,17 +92,98 @@ static Database *_database = nil;
 
 #pragma mark - database select
 /*
+ *家庭
+ */
+- (NSMutableArray *)queryAllHouse{
+    NSMutableArray *houseArray = [[NSMutableArray alloc] init];
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM house"];
+        while ([set next]) {
+            HouseModel *house = [[HouseModel alloc] init];
+            house.houseUid = [set stringForColumn:@"houseUid"];
+            house.name = [set stringForColumn:@"name"];
+            house.mac = [set stringForColumn:@"mac"];
+            house.deviceId = [set stringForColumn:@"deviceId"];
+            house.apiKey = [set stringForColumn:@"apiKey"];
+            house.lat = [NSNumber numberWithFloat:[set doubleForColumn:@"lat"]];
+            house.lon = [NSNumber numberWithFloat:[set doubleForColumn:@"lon"]];
+            house.auth = [NSNumber numberWithInt:[set intForColumn:@"auth"]];
+            [houseArray addObject:house];
+        }
+    }];
+    return houseArray;
+}
+
+/*
+ *查询特定家庭
+ */
+- (BOOL)queryHouse:(NSString *)houseUid{
+    static BOOL isContain = NO;
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM house WHERE houseUid = ?",houseUid];
+        while ([set next]) {
+            isContain = YES;
+        }
+    }];
+    return isContain;
+}
+
+/*
+ *房间
+ */
+- (NSMutableArray *)queryRoomsWith:(NSString *)houseUid{
+    NSMutableArray *roomArray = [[NSMutableArray alloc] init];
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM room WHERE houseUid = ?",houseUid];
+        while ([set next]) {
+            RoomModel *room = [[RoomModel alloc] init];
+            room.roomUid = [set stringForColumn:@"roomUid"];
+            room.name = [set stringForColumn:@"name"];
+            room.houseUid = houseUid;
+            [roomArray addObject:room];
+        }
+    }];
+    return roomArray;
+}
+
+- (RoomModel *)queryRoomWith:(NSString *)roomUid{
+    RoomModel *room = [[RoomModel alloc] init];
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM room WHERE roomUid = ?",roomUid];
+        while ([set next]) {
+            room.name = [set stringForColumn:@"name"];
+        }
+    }];
+    return room;
+}
+
+/*
  *设备
  */
-- (NSMutableArray *)queryAllDevice{
+- (DeviceModel *)queryGateway:(NSString *)houseUid{
+    DeviceModel *device = [[DeviceModel alloc] init];
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM device WHERE houseUid = ? AND type = ?",houseUid, @0];
+        while ([set next]) {
+            device.mac = [set stringForColumn:@"mac"];
+            device.name = [set stringForColumn:@"name"];
+            device.houseUid = houseUid;
+        }
+    }];
+    return device;
+}
+
+- (NSMutableArray *)queryAllDevice:(NSString *)houseUid{
     NSMutableArray *deviceArray = [[NSMutableArray alloc] init];
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        FMResultSet *set = [db executeQuery:@"SELECT * FROM device"];
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM device WHERE houseUid = ?",houseUid];
         while ([set next]) {
             DeviceModel *device = [[DeviceModel alloc] init];
             device.mac = [set stringForColumn:@"mac"];
             device.name = [set stringForColumn:@"name"];
+            device.roomUid = [set stringForColumn:@"roomUid"];
             device.type = [NSNumber numberWithInt:[set intForColumn:@"type"]];
+            device.houseUid = houseUid;
             [deviceArray addObject:device];
         }
     }];
@@ -110,36 +201,19 @@ static Database *_database = nil;
     return isContain;
 }
 
-/*
- *家庭
- */
-- (NSMutableArray *)queryAllHouse{
-    NSMutableArray *houseArray = [[NSMutableArray alloc] init];
+- (NSMutableArray *)queryDevicesWith:(NSString *)roomUid{
+    NSMutableArray *deviceArray = [[NSMutableArray alloc] init];
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        FMResultSet *set = [db executeQuery:@"SELECT * FROM house"];
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM device WHERE roomUid = ?",roomUid];
         while ([set next]) {
-            HouseModel *house = [[HouseModel alloc] init];
-            house.houseUid = [set stringForColumn:@"houseUid"];
-            house.name = [set stringForColumn:@"name"];
-            house.mac = [set stringForColumn:@"mac"];
-            house.lat = [NSNumber numberWithFloat:[set doubleForColumn:@"lat"]];
-            house.lon = [NSNumber numberWithFloat:[set doubleForColumn:@"lon"]];
-            house.auth = [NSNumber numberWithInt:[set intForColumn:@"auth"]];
-            [houseArray addObject:house];
+            DeviceModel *device = [[DeviceModel alloc] init];
+            device.mac = [set stringForColumn:@"mac"];
+            device.name = [set stringForColumn:@"name"];
+            device.roomUid = roomUid;
+            [deviceArray addObject:device];
         }
     }];
-    return houseArray;
-}
-
-- (BOOL)queryHouse:(NSString *)houseUid{
-    static BOOL isContain = NO;
-    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        FMResultSet *set = [db executeQuery:@"SELECT * FROM house WHERE houseUid = ?",houseUid];
-        while ([set next]) {
-            isContain = YES;
-        }
-    }];
-    return isContain;
+    return deviceArray;
 }
 
 #pragma mark - database insert
@@ -149,17 +223,56 @@ static Database *_database = nil;
 - (BOOL)insertNewHouse:(HouseModel *)house{
     static BOOL result = NO;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        result = [db executeUpdate:@"REPLACE INTO house (houseUid,name,auth) VALUES (?,?,?)",house.houseUid,house.name,house.auth];
+        result = [db executeUpdate:@"REPLACE INTO house (houseUid,name,auth,lat,lon,deviceId,apiKey) VALUES (?,?,?,?,?,?,?)",house.houseUid,house.name,house.auth,house.lat,house.lon,house.deviceId,house.apiKey];
     }];
     return result;
 }
 /*
- *获取房间列表时插入
+ *获取房间设备列表时插入
  */
 - (BOOL)insertNewRoom:(RoomModel *)room{
     static BOOL result = NO;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        result = [db executeUpdate:@"REPLACE INTO room (roomUid,houseUid,name) VALUES (?,?,?)",room.roomUid,self.currentHouse.houseUid,room.name];
+        result = [db executeUpdate:@"REPLACE INTO room (roomUid,houseUid,name) VALUES (?,?,?)",room.roomUid,room.houseUid,room.name];
+    }];
+    return result;
+}
+/*
+ *获取房间设备列表时插入
+ */
+- (BOOL)insertNewDevice:(DeviceModel *)device{
+    if (!device.houseUid) {
+        device.houseUid = self.currentHouse.houseUid;
+    }
+    static BOOL result = NO;
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        result = [db executeUpdate:@"REPLACE INTO device (mac,roomUid,name,houseUid,type) VALUES (?,?,?,?,?)",device.mac,device.roomUid,device.name,device.houseUid,device.type];
+    }];
+//    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+//        result = [db executeUpdate:@"REPLACE INTO device (mac,roomUid,name,houseUid,type) VALUES (?,?,?,?,?)",@"01040001",nil,@"01040001",@"5bfcb08be4b0c54526650eeb",@0];
+//    }];
+    return result;
+}
+#pragma mark - database update
+/*
+ *更新家庭信息
+ */
+- (BOOL)updateHouse:(HouseModel *)house{
+    static BOOL result = YES;
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        result = [db executeUpdate:@"UPDATE house SET name = ?,auth = ?,lon = ?,lat = ? WHERE houseUid = ?",house.name,house.auth,house.lon,house.lat,house.houseUid];
+        if (!result) {
+            NSLog(@"更新家庭信息");
+        }
+    }];
+    return result;
+}
+
+#pragma mark - database delete
+- (BOOL)deleteDevice:(NSString *)mac{
+    static BOOL result = YES;
+    [_queueDB inDatabase:^(FMDatabase *db) {
+        result = [db executeUpdate:@"delete from device where mac = ?",mac];
     }];
     return result;
 }

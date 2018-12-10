@@ -7,7 +7,6 @@
 //
 
 #import "HouseSelectController.h"
-#import "TouchTableView.h"
 #import "HouseSelectCell.h"
 #import "HouseManagementController.h"
 NSString *const CellIdentifier_HomeSelect = @"CellID_HomeSelect";
@@ -142,7 +141,8 @@ static CGFloat const Cell_Height = 50.f;
         return;
     }
     HouseModel *house = [Database shareInstance].houseList[indexPath.row];
-    [Database shareInstance].currentHouse.houseUid = house.houseUid;
+    [Database shareInstance].currentHouse = house;
+    [self dismissVC];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

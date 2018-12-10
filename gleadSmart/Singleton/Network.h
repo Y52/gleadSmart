@@ -8,30 +8,38 @@
 
 #import <Foundation/Foundation.h>
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
+#import "GCDAsyncUdpSocket.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Network : NSObject <GCDAsyncSocketDelegate>
+@interface Network : NSObject <GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelegate>
 
 + (instancetype)shareNetwork;
+///@brief 销毁单例
++ (void)destroyInstance;
 
 ///@brief TCPSocket
 @property (strong, nonatomic) GCDAsyncSocket *mySocket;
 ///@brief 连接上的设备
 @property (strong, nonatomic, nullable) DeviceModel *connectedDevice;
 ///@brief 线程信号量使用
-@property (nonatomic, strong) dispatch_semaphore_t sendSignal;
+@property (strong, nonatomic) dispatch_semaphore_t sendSignal;
+
+///@brief Udp
+@property (strong, nonatomic) GCDAsyncUdpSocket *udpSocket;
+@property (strong, nonatomic) NSTimer *udpTimer;;
 
 ///@brief 接收数据
-@property (nonatomic, strong) NSMutableArray *recivedData68;
+@property (strong, nonatomic) NSMutableArray *recivedData69;
 
 ///@brief Wi-Fi信息
-@property (nonatomic, strong) NSString *ssid;
-@property (nonatomic, strong) NSString *bssid;
-@property (nonatomic, strong) NSString *apPwd;
-@property (nonatomic, strong) NSString *ipAddr;
+@property (strong, nonatomic) NSString *ssid;
+@property (strong, nonatomic) NSString *bssid;
+@property (strong, nonatomic) NSString *apPwd;
+@property (strong, nonatomic) NSString *ipAddr;
 
-
+///@brief Device Info
+@property (strong, nonatomic) NSMutableArray *deviceArray;
 
 
 
@@ -40,7 +48,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///@brief Frame69帧发送方法
 - (void)onlineNodeInquire:(NSString *)mac;
+- (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data;
 
+///@brief OneNET回复数据处理
+- (void)handleOneNET69Message:(NSString *)cmmdReply;
+
+///@brief 判断设备类型
+- (NSInteger)judgeDeviceTypeWith:(int)macByte2;
 @end
 
 NS_ASSUME_NONNULL_END

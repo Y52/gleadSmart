@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HomeDeviceController : UIViewController
 
 @property (nonatomic) CGFloat filledSpcingHeight;
+@property (strong, nonatomic, nullable) RoomModel *room;
 
 @end
 

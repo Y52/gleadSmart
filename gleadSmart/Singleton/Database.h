@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Database : NSObject
 
 + (instancetype)shareInstance;
+///@brief 销毁单例
++ (void)destroyInstance;
 
 @property (strong, nonatomic) FMDatabaseQueue *queueDB;
 
@@ -25,17 +27,29 @@ NS_ASSUME_NONNULL_BEGIN
 ///@brief Currently Selected House
 @property (strong, nonatomic, nullable) HouseModel *currentHouse;
 
+///@brief Device Info
+@property (strong, nonatomic) NSMutableArray *localDeviceArray;
+
 ///@brief data initial
 - (void)initDB;
 
 ///@brief database select
-- (NSMutableArray *)queryAllDevice;
-- (BOOL)queryDevice:(NSString *)mac;
 - (NSMutableArray *)queryAllHouse;
 - (BOOL)queryHouse:(NSString *)houseUid;
+- (NSMutableArray *)queryRoomsWith:(NSString *)houseUid;
+- (RoomModel *)queryRoomWith:(NSString *)roomUid;
+- (NSMutableArray *)queryAllDevice:(NSString *)houseUid;
+- (DeviceModel *)queryGateway:(NSString *)houseUid;
+- (BOOL)queryDevice:(NSString *)mac;
+- (NSMutableArray *)queryDevicesWith:(NSString *)roomUid;
 ///@brief database insert
 - (BOOL)insertNewHouse:(HouseModel *)house;
 - (BOOL)insertNewRoom:(RoomModel *)room;
+- (BOOL)insertNewDevice:(DeviceModel *)device;
+///@brief database update
+- (BOOL)updateHouse:(HouseModel *)house;
+///@brief database delete
+- (BOOL)deleteDevice:(NSString *)mac;
 @end
 
 NS_ASSUME_NONNULL_END

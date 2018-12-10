@@ -10,7 +10,6 @@
 #import "EspViewController.h"
 #import "GCDAsyncUdpSocket.h"
 #import "GCDAsyncSocket.h"
-#import "TouchTableView.h"
 #import "MJRefresh.h"
 #import "DeviceTableViewCell.h"
 
@@ -35,10 +34,10 @@ NSString *const CellIdentifier_device = @"CellID_device";
 
 @property (nonatomic, strong) UITableView *devieceTable;
 
-///@brief 当前设备
+///@brief 在线的中央控制器
 @property (nonatomic, strong) NSMutableArray *onlineDeviceArray;
-///@brief 本地所有设备数组
-@property (nonatomic, strong) NSMutableArray *deviceArray;
+///@brief 绑定的中央控制器
+@property (nonatomic, strong) DeviceModel *bindGateway;
 
 @end
 
@@ -67,14 +66,16 @@ NSString *const CellIdentifier_device = @"CellID_device";
     _timer = [self timer];
     _lock = [self lock];
     
-    self.deviceArray = [[Database shareInstance] queryAllDevice];
     [self queryDevices];
-    [self queryDevicesByApi];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+    
+    Network *net = [Network shareNetwork];
+    [net.udpSocket pauseReceiving];
+    [net.udpTimer setFireDate:[NSDate distantFuture]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -83,6 +84,11 @@ NSString *const CellIdentifier_device = @"CellID_device";
     [_timer setFireDate:[NSDate distantFuture]];
     [_timer invalidate];
     _timer = nil;
+    
+    Network *net = [Network shareNetwork];
+    [net.udpSocket beginReceiving:nil];
+    [net.udpTimer setFireDate:[NSDate date]];
+
 }
 
 - (void)dealloc{
@@ -236,50 +242,12 @@ NSString *const CellIdentifier_device = @"CellID_device";
             
             dModel.mac = mac;
             dModel.ipAddress = ipAddress;
-            //判断本地是否已经存储过，如果有则将_deviceArray中的该设备删除，如果没有则存储该设备
-            BOOL isStored = [[Database shareInstance] queryDevice:mac];
-            if (!isStored) {
-                AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-
-                //设置超时时间
-                [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-                manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-                [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-
-                [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-                [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
-                [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
-                NSDictionary *parameters = @{@"mac":mac,@"name":mac,@"type":@0};
-                [manager POST:@"http:///api/device" parameters:parameters progress:nil
-                      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                          NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-                          if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-                              [NSObject showHudTipStr:LocalString(@"添加新设备到服务器成功")];
-
-                              [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-                                  BOOL result = [db executeUpdate:@"INSERT INTO device (sn,name,type) VALUES (?,?,?)",mac,mac,@0];
-                                  if (result) {
-                                      NSLog(@"插入新网关到device成功");
-                                  }else{
-                                      NSLog(@"插入新网关到device失败");
-                                  }
-                              }];
-                          }else{
-                              [NSObject showHudTipStr:LocalString(@"添加新网关到服务器失败")];
-                          }
-                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                          NSLog(@"Error:%@",error);
-                      }];
+            if ([mac isEqualToString:_bindGateway.mac]) {
+                dModel.name = _bindGateway.name;
+                dModel.type = @0;
+                _bindGateway = nil;
             }else{
-                for (int i = 0; i < _deviceArray.count; i++) {
-                    DeviceModel *device = _deviceArray[i];
-                    if ([mac isEqualToString:device.mac]) {
-                        dModel.name = device.name;
-                        dModel.type = @0;
-                        [_deviceArray removeObjectAtIndex:i];
-                        break;
-                    }
-                }
+                dModel.name = mac;
             }
             
             [_onlineDeviceArray addObject:dModel];
@@ -377,7 +345,13 @@ NSString *const CellIdentifier_device = @"CellID_device";
             //return 1;
             
         case 2:
-            return _deviceArray.count;
+        {
+            if ([Network shareNetwork].connectedDevice) {
+                //绑定的中央控制器只有一个，如果连接了绑定设备就不显示
+                return 0;
+            }
+            return self.bindGateway?1:0;
+        }
             
         default:
             return 0;
@@ -428,8 +402,7 @@ NSString *const CellIdentifier_device = @"CellID_device";
         }
         cell.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1];
         cell.userInteractionEnabled = NO;
-        DeviceModel *device = _deviceArray[indexPath.row];
-        cell.deviceName.text = device.name;
+        cell.deviceName.text = _bindGateway.name;
         return cell;
     }
     
@@ -446,6 +419,7 @@ NSString *const CellIdentifier_device = @"CellID_device";
         if (![net connectToHost:dModel.ipAddress onPort:16888 error:&error]) {
             NSLog(@"tcp连接错误:%@",error);
         }else{
+            [self bindDevice:dModel];
             [net setConnectedDevice:dModel];
             [_onlineDeviceArray removeObject:dModel];
             [tableView reloadData];
@@ -485,6 +459,47 @@ NSString *const CellIdentifier_device = @"CellID_device";
 }
 
 #pragma mark - view action
+- (void)bindDevice:(DeviceModel *)device{
+    DeviceModel *bindDevice = [[Database shareInstance] queryGateway:[Database shareInstance].currentHouse.houseUid];
+    if ([bindDevice.mac isEqualToString:device.mac]) {
+        return;
+    }
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
+    [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
+    NSDictionary *parameters = @{@"mac":device.mac,@"name":device.name,@"type":@0,@"houseUid":[Database shareInstance].currentHouse.houseUid};
+    [manager POST:@"http://gleadsmart.thingcom.cn/api/device" parameters:parameters progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+              NSLog(@"success:%@",daetr);
+              
+              if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+                  [NSObject showHudTipStr:LocalString(@"家庭绑定中央控制器成功")];
+                  
+                  [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+                      BOOL result = [db executeUpdate:@"INSERT INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.mac,@0,[Database shareInstance].currentHouse.houseUid];
+                      if (result) {
+                          NSLog(@"插入新网关到device成功");
+                      }else{
+                          NSLog(@"插入新网关到device失败");
+                      }
+                  }];
+              }else{
+                  [NSObject showHudTipStr:LocalString(@"家庭绑定中央控制器失败")];
+              }
+          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              NSLog(@"Error:%@",error);
+          }];
+}
 
 - (void)goEsp{
     EspViewController *EspVC = [[EspViewController alloc] init];
@@ -500,74 +515,10 @@ NSString *const CellIdentifier_device = @"CellID_device";
 }
 
 #pragma mark - Data Source
-- (void)queryDevicesByApi{
-    [SVProgressHUD show];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-
-    //设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-
-    NSString *url = [NSString stringWithFormat:@"http://"];
-    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-
-    NSLog(@"%@",[Database shareInstance].user.userId);
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
-    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"success:%@",daetr);
-        [responseDic[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            DeviceModel *device = [[DeviceModel alloc] init];
-            device.mac = [obj objectForKey:@"mac"];
-            device.name = [obj objectForKey:@"name"];
-            device.type = [obj objectForKey:@"type"];
-            BOOL isStored = [[Database shareInstance] queryDevice:device.mac];
-            if (!isStored) {
-                [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-                    BOOL result = [db executeUpdate:@"INSERT INTO device (mac,name,type) VALUES (?,?,?)",device.mac,device.name,device.type];
-                    if (result) {
-                        NSLog(@"本地插入服务器device成功");
-                    }else{
-                        NSLog(@"本地插入服务器device失败");
-                    }
-                }];
-            }else{
-                [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-                    [db executeUpdate:@"UPDATE device SET name = ?,type = ? WHERE mac = ?",device.name,device.type,device.mac];
-                }];
-            }
-        }];
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-            self.deviceArray = [[Database shareInstance] queryAllDevice];
-            [self.devieceTable reloadData];
-            [self queryDevices];
-        });
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"Error:%@",error);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-            [NSObject showHudTipStr:@"从服务器获取信息失败"];
-        });
-    }];
-}
-
 - (void)queryDevices{
+    self.bindGateway = [[Database shareInstance] queryGateway:[Database shareInstance].currentHouse.houseUid];
+    
     [self sendSearchBroadcast];
-    if ([Network shareNetwork].connectedDevice) {
-        for (DeviceModel *device in _deviceArray) {
-            if ([device.mac isEqualToString:[Network shareNetwork].connectedDevice.mac]) {
-                [_deviceArray removeObject:device];
-                break;
-            }
-        }
-    }
 }
 
 @end

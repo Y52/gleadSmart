@@ -7,7 +7,6 @@
 //
 
 #import "AddFamilyViewController.h"
-#import "TouchTableView.h"
 #import "AddFamilyTextCell.h"
 #import "AddFamilySelectCell.h"
 #import "FamilyLocationController.h"
@@ -76,7 +75,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
 - (UITableView *)addFamilyTable{
     if (!_addFamilyTable) {
         _addFamilyTable = ({
-            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
+            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - getRectNavAndStatusHight - 100.f) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
             tableView.separatorColor = [UIColor colorWithRed:232/255.0 green:231/255.0 blue:231/255.0 alpha:1.0];
             tableView.dataSource = self;
@@ -109,13 +108,14 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
         [self.view addSubview:_addRoomButton];
         
         [_addRoomButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_top).offset(450);
-            make.left.equalTo(self.view.mas_left).offset(56);
-            make.right.equalTo(self.view.mas_right).offset(-44);
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(276.f), 44.f));
+            make.bottom.equalTo(self.view.mas_bottom).offset(56.f);
+            make.centerX.equalTo(self.view.mas_centerX);
         }];
     }
     return _addRoomButton;
 }
+
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;

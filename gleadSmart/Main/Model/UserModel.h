@@ -12,10 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UserModel : NSObject
 
-@property (nonatomic, strong) NSString *userName;
-@property (nonatomic, strong) NSString *mobile;
-@property (nonatomic, strong) NSString *userId;
-@property (nonatomic, strong) NSString *headUrl;
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *mobile;
+@property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSString *headUrl;
 
 @end
 

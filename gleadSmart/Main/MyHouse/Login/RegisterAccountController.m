@@ -51,7 +51,7 @@ static float HEIGHT_CELL = 50.f;
 - (UITableView *)registerTable{
     if (!_registerTable) {
         _registerTable = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64)];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - getRectNavAndStatusHight)];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
@@ -237,6 +237,7 @@ static float HEIGHT_CELL = 50.f;
                   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                   [userDefaults setObject:self.phone forKey:@"mobile"];
                   [userDefaults setObject:self.pwText forKey:@"passWord"];
+                  [userDefaults setObject:data.user.userId forKey:@"userId"];
                   
                   dispatch_async(dispatch_get_main_queue(), ^{
                       [SVProgressHUD dismiss];
