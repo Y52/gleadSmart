@@ -15,7 +15,6 @@ static float HEIGHT_CELL = 50.f;
 static float HEIGHT_HEADER = 40.f;
 
 @interface SelectDeviceTypeController () <UITableViewDataSource,UITableViewDelegate>
-#warning TODO 完成设备类型选择UI 
 @property (strong, nonatomic) UITableView *deviceTypeTable;
 
 @end
@@ -39,7 +38,7 @@ static float HEIGHT_HEADER = 40.f;
 -(UITableView *)deviceTypeTable{
     if (!_deviceTypeTable) {
         _deviceTypeTable = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,240) style:UITableViewStylePlain];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;

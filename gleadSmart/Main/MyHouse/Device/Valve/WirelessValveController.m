@@ -334,7 +334,7 @@ CGFloat const cellHeader_Height = 30.f;
             make.top.equalTo(self.switchStatusView.mas_bottom);
             make.centerX.equalTo(self.view.mas_centerX);
         }];
-        _nodesView.contentSize = CGSizeMake(ScreenWidth * 3, height);
+        _nodesView.contentSize = CGSizeMake(32.f*19 + 12.f, height);
 
         UIImageView *nodeView = [[UIImageView alloc] init];
         nodeView.image = [UIImage imageNamed:@"valveNode_normal"];
@@ -365,6 +365,11 @@ CGFloat const cellHeader_Height = 30.f;
                 make.left.equalTo(line.mas_right);
                 make.centerY.equalTo(self.nodesView.mas_centerY);
             }];
+            
+            if (i == 19) {
+                //最后一个不加横线
+                continue;
+            }
             
             UIView *lineNew = [[UIView alloc] init];
             lineNew.backgroundColor = [UIColor whiteColor];
@@ -586,5 +591,12 @@ CGFloat const cellHeader_Height = 30.f;
 - (void)nodeSetDetail{
     NodeDetailViewController *detailVC = [[NodeDetailViewController alloc] init];
     [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+//获取所有下挂漏水节点
+- (void)getAllNode{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFE,@0x13,@0x04,@0x00];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
 }
 @end

@@ -38,7 +38,7 @@
             [_rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(50, 30));
                 make.centerY.equalTo(self.contentView.mas_centerY);
-                make.right.equalTo(self.contentView.mas_right).offset(-35.f);
+                make.right.equalTo(self.contentView.mas_right);
             }];
         }
     }

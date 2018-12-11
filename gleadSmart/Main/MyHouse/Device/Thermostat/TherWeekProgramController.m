@@ -129,8 +129,8 @@ static CGFloat const Header_Height = 35.f;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.leftImage.image = [UIImage imageNamed:_imageList[indexPath.row]];
     cell.leftLabel.text = _eventList[indexPath.row];
-    NSInteger timeRow = [self.device.weekProgram[(indexPath.row + indexPath.section*4)*2] integerValue];
-    NSInteger tempRow = [self.device.weekProgram[(indexPath.row + indexPath.section*4)*2+1] integerValue];
+    NSInteger timeRow = [self.device.weekProgram[(indexPath.row + indexPath.section*4)*2] unsignedIntegerValue];
+    NSInteger tempRow = [self.device.weekProgram[(indexPath.row + indexPath.section*4)*2+1] unsignedIntegerValue];
     cell.rightLabel.text = [NSString stringWithFormat:@"%@ %@",_timeArray[timeRow],_tempArray[tempRow]];
     return cell;
 }
@@ -149,7 +149,6 @@ static CGFloat const Header_Height = 35.f;
     wpSetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     wpSetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     wpSetVC.pickerBlock = ^(DeviceModel *device) {
-        NSLog(@"asd");
         self.device = device;
         [self.weekProgramTable reloadData];
     };

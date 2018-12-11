@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WirelessValveController : UIViewController
 
+@property (strong, nonatomic) DeviceModel *device;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -224,6 +224,9 @@ static dispatch_once_t oneToken;
     static BOOL result = NO;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
         result = [db executeUpdate:@"REPLACE INTO house (houseUid,name,auth,lat,lon,deviceId,apiKey) VALUES (?,?,?,?,?,?,?)",house.houseUid,house.name,house.auth,house.lat,house.lon,house.deviceId,house.apiKey];
+        if (house.mac) {
+            result = [db executeUpdate:@"REPLACE INTO device (mac,houseUid,type) VALUES (?,?,?)",house.mac,house.houseUid,@0];
+        }
     }];
     return result;
 }

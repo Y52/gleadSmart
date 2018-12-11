@@ -36,22 +36,17 @@
 		BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A4046219970D3004669CA /* RDVTabBar.m */; };
 		BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A404A219970D3004669CA /* RDVTabBarController.m */; };
 		BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A404B219970D3004669CA /* RDVTabBarItem.m */; };
-		BB0A40A821997C99004669CA /* img_thermostat_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405121997C99004669CA /* img_thermostat_on@2x.png */; };
 		BB0A40A921997C99004669CA /* img_houseSelect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405221997C99004669CA /* img_houseSelect@2x.png */; };
 		BB0A40AA21997C99004669CA /* img_tab_01_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405321997C99004669CA /* img_tab_01_select@3x.png */; };
 		BB0A40AC21997C99004669CA /* img_tab_02_unselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405521997C99004669CA /* img_tab_02_unselect@2x.png */; };
-		BB0A40AD21997C99004669CA /* img_thermostat_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405621997C99004669CA /* img_thermostat_on.png */; };
 		BB0A40B021997C99004669CA /* img_tab_02_unselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405921997C99004669CA /* img_tab_02_unselect@3x.png */; };
 		BB0A40B221997C99004669CA /* img_tab_01_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405B21997C99004669CA /* img_tab_01_select@2x.png */; };
 		BB0A40B321997C99004669CA /* img_wallHob.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405C21997C99004669CA /* img_wallHob.png */; };
 		BB0A40B421997C99004669CA /* img_houseSelect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405D21997C99004669CA /* img_houseSelect@3x.png */; };
-		BB0A40B621997C99004669CA /* img_thermostat_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405F21997C99004669CA /* img_thermostat_on@3x.png */; };
 		BB0A40B821997C99004669CA /* img_headerBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406121997C99004669CA /* img_headerBg@2x.png */; };
 		BB0A40BB21997C99004669CA /* img_homeSet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406421997C99004669CA /* img_homeSet@2x.png */; };
 		BB0A40BD21997C99004669CA /* img_tab_02_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406621997C99004669CA /* img_tab_02_unselect.png */; };
-		BB0A40BE21997C99004669CA /* img_valve_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406721997C99004669CA /* img_valve_on@3x.png */; };
 		BB0A40C021997C99004669CA /* img_tab_01_select.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406921997C99004669CA /* img_tab_01_select.png */; };
-		BB0A40C221997C99004669CA /* img_valve_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406B21997C99004669CA /* img_valve_on@2x.png */; };
 		BB0A40C421997C99004669CA /* img_homeSet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406D21997C99004669CA /* img_homeSet@3x.png */; };
 		BB0A40C621997C99004669CA /* img_tab_03_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406F21997C99004669CA /* img_tab_03_unselect.png */; };
 		BB0A40C821997C99004669CA /* img_headerBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407121997C99004669CA /* img_headerBg@3x.png */; };
@@ -63,15 +58,11 @@
 		BB0A40DF21997C99004669CA /* 矢量智能对象7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408821997C99004669CA /* 矢量智能对象7@3x.png */; };
 		BB0A40E021997C99004669CA /* img_wallHob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408921997C99004669CA /* img_wallHob@2x.png */; };
 		BB0A40E121997C99004669CA /* img_homeSet.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408A21997C99004669CA /* img_homeSet.png */; };
-		BB0A40E221997C99004669CA /* img_thermostat_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408B21997C99004669CA /* img_thermostat_off.png */; };
-		BB0A40E321997C99004669CA /* img_thermostat_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408C21997C99004669CA /* img_thermostat_off@2x.png */; };
 		BB0A40E721997C99004669CA /* img_tab_03_unselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409021997C99004669CA /* img_tab_03_unselect@3x.png */; };
 		BB0A40E821997C99004669CA /* 矢量智能对象7.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409121997C99004669CA /* 矢量智能对象7.png */; };
-		BB0A40EA21997C99004669CA /* img_valve_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409321997C99004669CA /* img_valve_on.png */; };
 		BB0A40F121997C99004669CA /* img_houseSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409A21997C99004669CA /* img_houseSelect.png */; };
 		BB0A40F321997C99004669CA /* img_weatherBg.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409C21997C99004669CA /* img_weatherBg.png */; };
 		BB0A40F521997C99004669CA /* img_tab_03_unselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409E21997C99004669CA /* img_tab_03_unselect@2x.png */; };
-		BB0A40FB21997C99004669CA /* img_thermostat_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A421997C99004669CA /* img_thermostat_off@3x.png */; };
 		BB0A40FC21997C99004669CA /* img_addDevice.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A521997C99004669CA /* img_addDevice.png */; };
 		BB0A40FD21997C99004669CA /* img_wallHob@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A621997C99004669CA /* img_wallHob@3x.png */; };
 		BB0A40FE21997C99004669CA /* 矢量智能对象7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */; };
@@ -147,7 +138,6 @@
 		BB35292B219DA7EC00428DE9 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35292A219DA7EC00428DE9 /* Network.m */; };
 		BB37DED221A7984000B2121B /* thermostat_timing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED021A7983F00B2121B /* thermostat_timing@3x.png */; };
 		BB37DED321A7984000B2121B /* thermostat_timing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED121A7983F00B2121B /* thermostat_timing@2x.png */; };
-		BB37DED621A798A100B2121B /* thermostatKonb_On@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED421A798A000B2121B /* thermostatKonb_On@2x.png */; };
 		BB37DED721A798A100B2121B /* thermostatKnob_On@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED521A798A100B2121B /* thermostatKnob_On@3x.png */; };
 		BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF121A7AB3700B2121B /* YSZCoreDataStackManager.m */; };
 		BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF421A7E59600B2121B /* WirelessValveController.m */; };
@@ -163,6 +153,15 @@
 		BB3D219C21AE7E2B002CB334 /* img_valve_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3D219921AE7E2A002CB334 /* img_valve_off.png */; };
 		BB3D219D21AE7E2B002CB334 /* img_valve_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3D219A21AE7E2B002CB334 /* img_valve_off@3x.png */; };
 		BB3D219E21AE7E2B002CB334 /* img_valve_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3D219B21AE7E2B002CB334 /* img_valve_off@2x.png */; };
+		BB425F5721BF4DF400AB6EFB /* img_valve_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5421BF4DF400AB6EFB /* img_valve_on@3x.png */; };
+		BB425F5821BF4DF400AB6EFB /* img_valve_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5521BF4DF400AB6EFB /* img_valve_on.png */; };
+		BB425F5921BF4DF400AB6EFB /* img_valve_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5621BF4DF400AB6EFB /* img_valve_on@2x.png */; };
+		BB425FD321BF519700AB6EFB /* img_thermostat_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FCD21BF519600AB6EFB /* img_thermostat_off@3x.png */; };
+		BB425FD421BF519700AB6EFB /* img_thermostat_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FCE21BF519700AB6EFB /* img_thermostat_on@3x.png */; };
+		BB425FD521BF519700AB6EFB /* img_thermostat_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FCF21BF519700AB6EFB /* img_thermostat_on.png */; };
+		BB425FD621BF519700AB6EFB /* img_thermostat_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FD021BF519700AB6EFB /* img_thermostat_on@2x.png */; };
+		BB425FD721BF519700AB6EFB /* img_thermostat_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FD121BF519700AB6EFB /* img_thermostat_off.png */; };
+		BB425FD821BF519700AB6EFB /* img_thermostat_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FD221BF519700AB6EFB /* img_thermostat_off@2x.png */; };
 		BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49774A219A6B5E00427197 /* MyHouseController.m */; };
 		BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9121958864004E00A2 /* AppDelegate.m */; };
 		BB49DF9521958864004E00A2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9421958864004E00A2 /* ViewController.m */; };
@@ -179,6 +178,8 @@
 		BB52F9E621BE4149005FA33A /* img_tab_03_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9E021BE4149005FA33A /* img_tab_03_select@2x.png */; };
 		BB52F9E721BE4149005FA33A /* img_tab_03_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9E121BE4149005FA33A /* img_tab_03_select@3x.png */; };
 		BB52F9E821BE4149005FA33A /* img_tab_03_select.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9E221BE4149005FA33A /* img_tab_03_select.png */; };
+		BB52F9EA21BE4A5A005FA33A /* thermostatKnob_On@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9E921BE4A59005FA33A /* thermostatKnob_On@2x.png */; };
+		BB52F9ED21BE6B03005FA33A /* NodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB52F9EC21BE6B03005FA33A /* NodeModel.m */; };
 		BB5B033721B8BD2F007AC2B1 /* img_login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B031921B8BD2B007AC2B1 /* img_login_bg.png */; };
 		BB5B033B21B8BD2F007AC2B1 /* img_login_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B031D21B8BD2C007AC2B1 /* img_login_password@2x.png */; };
 		BB5B034121B8BD2F007AC2B1 /* img_login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B032321B8BD2C007AC2B1 /* img_login_bg@2x.png */; };
@@ -444,22 +445,17 @@
 		BB0A4049219970D3004669CA /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
 		BB0A404A219970D3004669CA /* RDVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarController.m; sourceTree = "<group>"; };
 		BB0A404B219970D3004669CA /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
-		BB0A405121997C99004669CA /* img_thermostat_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermostat_on@2x.png"; sourceTree = "<group>"; };
 		BB0A405221997C99004669CA /* img_houseSelect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseSelect@2x.png"; sourceTree = "<group>"; };
 		BB0A405321997C99004669CA /* img_tab_01_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_01_select@3x.png"; sourceTree = "<group>"; };
 		BB0A405521997C99004669CA /* img_tab_02_unselect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_02_unselect@2x.png"; sourceTree = "<group>"; };
-		BB0A405621997C99004669CA /* img_thermostat_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_thermostat_on.png; sourceTree = "<group>"; };
 		BB0A405921997C99004669CA /* img_tab_02_unselect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_02_unselect@3x.png"; sourceTree = "<group>"; };
 		BB0A405B21997C99004669CA /* img_tab_01_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_01_select@2x.png"; sourceTree = "<group>"; };
 		BB0A405C21997C99004669CA /* img_wallHob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_wallHob.png; sourceTree = "<group>"; };
 		BB0A405D21997C99004669CA /* img_houseSelect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseSelect@3x.png"; sourceTree = "<group>"; };
-		BB0A405F21997C99004669CA /* img_thermostat_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermostat_on@3x.png"; sourceTree = "<group>"; };
 		BB0A406121997C99004669CA /* img_headerBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_headerBg@2x.png"; sourceTree = "<group>"; };
 		BB0A406421997C99004669CA /* img_homeSet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_homeSet@2x.png"; sourceTree = "<group>"; };
 		BB0A406621997C99004669CA /* img_tab_02_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tab_02_unselect.png; sourceTree = "<group>"; };
-		BB0A406721997C99004669CA /* img_valve_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_on@3x.png"; sourceTree = "<group>"; };
 		BB0A406921997C99004669CA /* img_tab_01_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tab_01_select.png; sourceTree = "<group>"; };
-		BB0A406B21997C99004669CA /* img_valve_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_on@2x.png"; sourceTree = "<group>"; };
 		BB0A406D21997C99004669CA /* img_homeSet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_homeSet@3x.png"; sourceTree = "<group>"; };
 		BB0A406F21997C99004669CA /* img_tab_03_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tab_03_unselect.png; sourceTree = "<group>"; };
 		BB0A407121997C99004669CA /* img_headerBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_headerBg@3x.png"; sourceTree = "<group>"; };
@@ -471,15 +467,11 @@
 		BB0A408821997C99004669CA /* 矢量智能对象7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7@3x.png"; sourceTree = "<group>"; };
 		BB0A408921997C99004669CA /* img_wallHob@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_wallHob@2x.png"; sourceTree = "<group>"; };
 		BB0A408A21997C99004669CA /* img_homeSet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_homeSet.png; sourceTree = "<group>"; };
-		BB0A408B21997C99004669CA /* img_thermostat_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_thermostat_off.png; sourceTree = "<group>"; };
-		BB0A408C21997C99004669CA /* img_thermostat_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermostat_off@2x.png"; sourceTree = "<group>"; };
 		BB0A409021997C99004669CA /* img_tab_03_unselect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_03_unselect@3x.png"; sourceTree = "<group>"; };
 		BB0A409121997C99004669CA /* 矢量智能对象7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7.png"; sourceTree = "<group>"; };
-		BB0A409321997C99004669CA /* img_valve_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_valve_on.png; sourceTree = "<group>"; };
 		BB0A409A21997C99004669CA /* img_houseSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_houseSelect.png; sourceTree = "<group>"; };
 		BB0A409C21997C99004669CA /* img_weatherBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_weatherBg.png; sourceTree = "<group>"; };
 		BB0A409E21997C99004669CA /* img_tab_03_unselect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_03_unselect@2x.png"; sourceTree = "<group>"; };
-		BB0A40A421997C99004669CA /* img_thermostat_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermostat_off@3x.png"; sourceTree = "<group>"; };
 		BB0A40A521997C99004669CA /* img_addDevice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_addDevice.png; sourceTree = "<group>"; };
 		BB0A40A621997C99004669CA /* img_wallHob@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_wallHob@3x.png"; sourceTree = "<group>"; };
 		BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7@2x.png"; sourceTree = "<group>"; };
@@ -600,7 +592,6 @@
 		BB35292A219DA7EC00428DE9 /* Network.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
 		BB37DED021A7983F00B2121B /* thermostat_timing@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_timing@3x.png"; sourceTree = "<group>"; };
 		BB37DED121A7983F00B2121B /* thermostat_timing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_timing@2x.png"; sourceTree = "<group>"; };
-		BB37DED421A798A000B2121B /* thermostatKonb_On@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatKonb_On@2x.png"; sourceTree = "<group>"; };
 		BB37DED521A798A100B2121B /* thermostatKnob_On@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatKnob_On@3x.png"; sourceTree = "<group>"; };
 		BB37DEF021A7AB3700B2121B /* YSZCoreDataStackManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSZCoreDataStackManager.h; sourceTree = "<group>"; };
 		BB37DEF121A7AB3700B2121B /* YSZCoreDataStackManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSZCoreDataStackManager.m; sourceTree = "<group>"; };
@@ -627,6 +618,15 @@
 		BB3D219921AE7E2A002CB334 /* img_valve_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_valve_off.png; sourceTree = "<group>"; };
 		BB3D219A21AE7E2B002CB334 /* img_valve_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_off@3x.png"; sourceTree = "<group>"; };
 		BB3D219B21AE7E2B002CB334 /* img_valve_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_off@2x.png"; sourceTree = "<group>"; };
+		BB425F5421BF4DF400AB6EFB /* img_valve_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_on@3x.png"; sourceTree = "<group>"; };
+		BB425F5521BF4DF400AB6EFB /* img_valve_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_valve_on.png; sourceTree = "<group>"; };
+		BB425F5621BF4DF400AB6EFB /* img_valve_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_on@2x.png"; sourceTree = "<group>"; };
+		BB425FCD21BF519600AB6EFB /* img_thermostat_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermostat_off@3x.png"; sourceTree = "<group>"; };
+		BB425FCE21BF519700AB6EFB /* img_thermostat_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermostat_on@3x.png"; sourceTree = "<group>"; };
+		BB425FCF21BF519700AB6EFB /* img_thermostat_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_thermostat_on.png; sourceTree = "<group>"; };
+		BB425FD021BF519700AB6EFB /* img_thermostat_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermostat_on@2x.png"; sourceTree = "<group>"; };
+		BB425FD121BF519700AB6EFB /* img_thermostat_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_thermostat_off.png; sourceTree = "<group>"; };
+		BB425FD221BF519700AB6EFB /* img_thermostat_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermostat_off@2x.png"; sourceTree = "<group>"; };
 		BB497749219A6B5E00427197 /* MyHouseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyHouseController.h; sourceTree = "<group>"; };
 		BB49774A219A6B5E00427197 /* MyHouseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyHouseController.m; sourceTree = "<group>"; };
 		BB49DF8D21958864004E00A2 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -653,6 +653,9 @@
 		BB52F9E021BE4149005FA33A /* img_tab_03_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_03_select@2x.png"; sourceTree = "<group>"; };
 		BB52F9E121BE4149005FA33A /* img_tab_03_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_03_select@3x.png"; sourceTree = "<group>"; };
 		BB52F9E221BE4149005FA33A /* img_tab_03_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tab_03_select.png; sourceTree = "<group>"; };
+		BB52F9E921BE4A59005FA33A /* thermostatKnob_On@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatKnob_On@2x.png"; sourceTree = "<group>"; };
+		BB52F9EB21BE6B03005FA33A /* NodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeModel.h; sourceTree = "<group>"; };
+		BB52F9EC21BE6B03005FA33A /* NodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeModel.m; sourceTree = "<group>"; };
 		BB5B031921B8BD2B007AC2B1 /* img_login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_login_bg.png; sourceTree = "<group>"; };
 		BB5B031D21B8BD2C007AC2B1 /* img_login_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_login_password@2x.png"; sourceTree = "<group>"; };
 		BB5B032321B8BD2C007AC2B1 /* img_login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_login_bg@2x.png"; sourceTree = "<group>"; };
@@ -1019,6 +1022,15 @@
 		BB0A405021997C99004669CA /* 我的家_slices */ = {
 			isa = PBXGroup;
 			children = (
+				BB425FD121BF519700AB6EFB /* img_thermostat_off.png */,
+				BB425FD221BF519700AB6EFB /* img_thermostat_off@2x.png */,
+				BB425FCD21BF519600AB6EFB /* img_thermostat_off@3x.png */,
+				BB425FCF21BF519700AB6EFB /* img_thermostat_on.png */,
+				BB425FD021BF519700AB6EFB /* img_thermostat_on@2x.png */,
+				BB425FCE21BF519700AB6EFB /* img_thermostat_on@3x.png */,
+				BB425F5521BF4DF400AB6EFB /* img_valve_on.png */,
+				BB425F5621BF4DF400AB6EFB /* img_valve_on@2x.png */,
+				BB425F5421BF4DF400AB6EFB /* img_valve_on@3x.png */,
 				BB3D219921AE7E2A002CB334 /* img_valve_off.png */,
 				BB3D219B21AE7E2B002CB334 /* img_valve_off@2x.png */,
 				BB3D219A21AE7E2B002CB334 /* img_valve_off@3x.png */,
@@ -1049,9 +1061,6 @@
 				BB0A405C21997C99004669CA /* img_wallHob.png */,
 				BB0A408921997C99004669CA /* img_wallHob@2x.png */,
 				BB0A40A621997C99004669CA /* img_wallHob@3x.png */,
-				BB0A405621997C99004669CA /* img_thermostat_on.png */,
-				BB0A405121997C99004669CA /* img_thermostat_on@2x.png */,
-				BB0A405F21997C99004669CA /* img_thermostat_on@3x.png */,
 				BB0A407A21997C99004669CA /* img_headerBg@1x.png */,
 				BB0A406121997C99004669CA /* img_headerBg@2x.png */,
 				BB0A407121997C99004669CA /* img_headerBg@3x.png */,
@@ -1067,12 +1076,6 @@
 				BB0A408A21997C99004669CA /* img_homeSet.png */,
 				BB0A406421997C99004669CA /* img_homeSet@2x.png */,
 				BB0A406D21997C99004669CA /* img_homeSet@3x.png */,
-				BB0A408B21997C99004669CA /* img_thermostat_off.png */,
-				BB0A408C21997C99004669CA /* img_thermostat_off@2x.png */,
-				BB0A40A421997C99004669CA /* img_thermostat_off@3x.png */,
-				BB0A409321997C99004669CA /* img_valve_on.png */,
-				BB0A406B21997C99004669CA /* img_valve_on@2x.png */,
-				BB0A406721997C99004669CA /* img_valve_on@3x.png */,
 				BB0A409121997C99004669CA /* 矢量智能对象7.png */,
 				BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */,
 				BB0A408821997C99004669CA /* 矢量智能对象7@3x.png */,
@@ -1085,6 +1088,8 @@
 			children = (
 				BB37DF1621A7FCBF00B2121B /* DeviceModel.h */,
 				BB37DF1721A7FCBF00B2121B /* DeviceModel.m */,
+				BB52F9EB21BE6B03005FA33A /* NodeModel.h */,
+				BB52F9EC21BE6B03005FA33A /* NodeModel.m */,
 				BB2AC0F521A93B1B006DB83A /* UserModel.h */,
 				BB2AC0F621A93B1B006DB83A /* UserModel.m */,
 				BB2AC10C21A94F42006DB83A /* HouseModel.h */,
@@ -1594,7 +1599,7 @@
 				BB63B57721B3B94000D77489 /* thermostatSet_on@2x.png */,
 				BB63B57D21B3B94100D77489 /* thermostatSet_on@3x.png */,
 				BB37DED521A798A100B2121B /* thermostatKnob_On@3x.png */,
-				BB37DED421A798A000B2121B /* thermostatKonb_On@2x.png */,
+				BB52F9E921BE4A59005FA33A /* thermostatKnob_On@2x.png */,
 				BB37DED121A7983F00B2121B /* thermostat_timing@2x.png */,
 				BB37DED021A7983F00B2121B /* thermostat_timing@3x.png */,
 				BB8B9DB521A6815000E5D8B2 /* thermostatMoer@1x.png */,
@@ -1818,6 +1823,7 @@
 				BB8B9E8121A6ADEB00E5D8B2 /* nodeBattery_normal.png in Resources */,
 				BB5B03B321B90343007AC2B1 /* img_mine_houseManage@2x.png in Resources */,
 				BB5B03C721B90343007AC2B1 /* img_mine_header@2x.png in Resources */,
+				BB425F5821BF4DF400AB6EFB /* img_valve_on.png in Resources */,
 				BB35291B219D95B500428DE9 /* img_houseManage@2x.png in Resources */,
 				BB63B58321B3B94100D77489 /* thermostatControl_on.png in Resources */,
 				BB5B03BB21B90343007AC2B1 /* img_mine_editPW.png in Resources */,
@@ -1827,12 +1833,12 @@
 				BB5B03BA21B90343007AC2B1 /* img_mine_header@3x.png in Resources */,
 				BBF6324F21BBAB34006A23AC /* valveSwitch_abnormal.png in Resources */,
 				BB0A40C421997C99004669CA /* img_homeSet@3x.png in Resources */,
-				BB0A40BE21997C99004669CA /* img_valve_on@3x.png in Resources */,
 				BB3D219C21AE7E2B002CB334 /* img_valve_off.png in Resources */,
 				BB63B58A21B3DB6900D77489 /* thermostatCircle_on.png in Resources */,
 				BB0A40E021997C99004669CA /* img_wallHob@2x.png in Resources */,
 				BB5B03AE21B90343007AC2B1 /* img_mine_checkUpdate@2x.png in Resources */,
 				BB63B58221B3B94100D77489 /* thermostat_timing_on@3x.png in Resources */,
+				BB52F9EA21BE4A5A005FA33A /* thermostatKnob_On@2x.png in Resources */,
 				BB8B9DB821A6815000E5D8B2 /* thermostatControl@2x.png in Resources */,
 				BB5B03AA21B90343007AC2B1 /* img_mine_editPW@2x.png in Resources */,
 				BB5B034521B8BD2F007AC2B1 /* img_login_bg@3x.png in Resources */,
@@ -1859,9 +1865,7 @@
 				BB63B5F621B4128F00D77489 /* thermostat_max.png in Resources */,
 				BB3D219D21AE7E2B002CB334 /* img_valve_off@3x.png in Resources */,
 				BB63B58121B3B94100D77489 /* thermostatSet_on.png in Resources */,
-				BB0A40C221997C99004669CA /* img_valve_on@2x.png in Resources */,
 				BB63B5EF21B3DBCB00D77489 /* thermostatCircle_off@3x.png in Resources */,
-				BB37DED621A798A100B2121B /* thermostatKonb_On@2x.png in Resources */,
 				BB352925219D968500428DE9 /* img_houseSelected@3x.png in Resources */,
 				BB8B9DCE21A6815000E5D8B2 /* thermostatControl@1x.png in Resources */,
 				BB352924219D968500428DE9 /* img_houseUnelect.png in Resources */,
@@ -1873,13 +1877,12 @@
 				BB5B036521B8CB6B007AC2B1 /* img_pwd_visiable.png in Resources */,
 				BBF631FE21BB5B04006A23AC /* img_auto_off@2x.png in Resources */,
 				BB62E4EE21B51CD900C0FA39 /* img_weekProgram_getup@2x.png in Resources */,
-				BB0A40EA21997C99004669CA /* img_valve_on.png in Resources */,
 				BBF6325021BBAB34006A23AC /* nodeBattery_abnormal.png in Resources */,
 				BB5B03B621B90343007AC2B1 /* img_mine_account@2x.png in Resources */,
 				BB5B036721B8CB6B007AC2B1 /* img_pwd_visiable@3x.png in Resources */,
 				BB62E4CE21B4D9CA00C0FA39 /* img_ther_addTimerSwitch@2x.png in Resources */,
+				BB425FD621BF519700AB6EFB /* img_thermostat_on@2x.png in Resources */,
 				BB63B60521B4151D00D77489 /* thermostat_-@3x.png in Resources */,
-				BB0A40B621997C99004669CA /* img_thermostat_on@3x.png in Resources */,
 				BB5B03BC21B90343007AC2B1 /* img_mine_logout.png in Resources */,
 				BB5B035D21B8C3DA007AC2B1 /* img_login_header@2x.png in Resources */,
 				BB37DED321A7984000B2121B /* thermostat_timing@2x.png in Resources */,
@@ -1888,6 +1891,7 @@
 				BB62E4B821B4CB6A00C0FA39 /* img_thermos_moTimer.png in Resources */,
 				BB62E4CD21B4D9CA00C0FA39 /* img_ther_addTimerWeek@3x.png in Resources */,
 				BB5B036421B8CB6B007AC2B1 /* img_pwd_visiable@2x.png in Resources */,
+				BB425FD821BF519700AB6EFB /* img_thermostat_off@2x.png in Resources */,
 				BBF6320121BB5B04006A23AC /* img_manual_off@3x.png in Resources */,
 				BB63B58421B3B94100D77489 /* thermostat_timing_on.png in Resources */,
 				BB5B03B921B90343007AC2B1 /* img_mine_aboutus.png in Resources */,
@@ -1933,6 +1937,7 @@
 				BB5B03A721B90343007AC2B1 /* img_mine_wechat@3x.png in Resources */,
 				BB5B034321B8BD2F007AC2B1 /* img_login_phone@3x.png in Resources */,
 				BB62E4F921B51CD900C0FA39 /* img_weekProgram_getup.png in Resources */,
+				BB425FD421BF519700AB6EFB /* img_thermostat_on@3x.png in Resources */,
 				BB2AC12B21AB7F22006DB83A /* img_autoLocation@2x.png in Resources */,
 				BB0A40FC21997C99004669CA /* img_addDevice.png in Resources */,
 				BBF6323E21BBAB34006A23AC /* nodeHeaderBtn.png in Resources */,
@@ -1947,13 +1952,11 @@
 				BB00A4F821BA237B004E4051 /* img_account_header@2x.png in Resources */,
 				BB49DFA021958867004E00A2 /* LaunchScreen.storyboard in Resources */,
 				BB8B9DBC21A6815000E5D8B2 /* thermostatControl@3x.png in Resources */,
-				BB0A40A821997C99004669CA /* img_thermostat_on@2x.png in Resources */,
 				BB2AD79321ABDA45006DB83A /* img_launchTitle@2x.png in Resources */,
 				BB8B9E8221A6ADEB00E5D8B2 /* valveStatus_abnormal.png in Resources */,
 				BB8B9E7921A6ADEB00E5D8B2 /* valveLeak_abnormal.png in Resources */,
 				BB5B034121B8BD2F007AC2B1 /* img_login_bg@2x.png in Resources */,
 				BB0A40BD21997C99004669CA /* img_tab_02_unselect.png in Resources */,
-				BB0A40AD21997C99004669CA /* img_thermostat_on.png in Resources */,
 				BB62E4F721B51CD900C0FA39 /* img_weekProgram_out@3x.png in Resources */,
 				BB62E4CB21B4D9CA00C0FA39 /* img_ther_addTimerSwitch@3x.png in Resources */,
 				BB0A40B321997C99004669CA /* img_wallHob.png in Resources */,
@@ -1970,6 +1973,7 @@
 				BB63B57E21B3B94100D77489 /* thermostatControl_on@3x.png in Resources */,
 				BB0A40B021997C99004669CA /* img_tab_02_unselect@3x.png in Resources */,
 				BB5B03BD21B90343007AC2B1 /* img_mine_logout@2x.png in Resources */,
+				BB425FD521BF519700AB6EFB /* img_thermostat_on.png in Resources */,
 				BB00A4F721BA237B004E4051 /* img_account_header.png in Resources */,
 				BB0A40F121997C99004669CA /* img_houseSelect.png in Resources */,
 				BB63B60321B4151D00D77489 /* thermostat_+@2x.png in Resources */,
@@ -1978,13 +1982,13 @@
 				BB0A40F521997C99004669CA /* img_tab_03_unselect@2x.png in Resources */,
 				BB2AC12221AA8A64006DB83A /* addFamily_check@3x.png in Resources */,
 				BB5B03C621B90343007AC2B1 /* img_mine_account.png in Resources */,
+				BB425F5721BF4DF400AB6EFB /* img_valve_on@3x.png in Resources */,
 				BB49DF9D21958867004E00A2 /* Assets.xcassets in Resources */,
 				BB2AD78E21ABD813006DB83A /* img_launchBG@2x.png in Resources */,
 				BB62E4F521B51CD900C0FA39 /* img_weekProgram_sleep@2x.png in Resources */,
 				BB0A40F321997C99004669CA /* img_weatherBg.png in Resources */,
 				BB2AD79521ABDA45006DB83A /* img_launchTitle@3x.png in Resources */,
 				BB52F9E521BE4149005FA33A /* img_tab_01_unselect.png in Resources */,
-				BB0A40E321997C99004669CA /* img_thermostat_off@2x.png in Resources */,
 				BB2AC11E21AA8A64006DB83A /* addFamily_uncheck@2x.png in Resources */,
 				BBF631FC21BB5B04006A23AC /* img_auto_on@2x.png in Resources */,
 				BB0A40AA21997C99004669CA /* img_tab_01_select@3x.png in Resources */,
@@ -2019,10 +2023,11 @@
 				BBF6324321BBAB34006A23AC /* nodeLeakBig_normal@2x.png in Resources */,
 				BBF6320021BB5B04006A23AC /* img_auto_off@3x.png in Resources */,
 				BB5B03A621B90343007AC2B1 /* pen.png in Resources */,
-				BB0A40FB21997C99004669CA /* img_thermostat_off@3x.png in Resources */,
 				BBF6324A21BBAB34006A23AC /* valveSwitch_abnormal@3x.png in Resources */,
+				BB425FD321BF519700AB6EFB /* img_thermostat_off@3x.png in Resources */,
 				BB0A40C621997C99004669CA /* img_tab_03_unselect.png in Resources */,
 				BBF6325C21BBAB34006A23AC /* valveLeak_normal.png in Resources */,
+				BB425FD721BF519700AB6EFB /* img_thermostat_off.png in Resources */,
 				BB5B039F21B90343007AC2B1 /* img_mine_wechat@2x.png in Resources */,
 				BB52F9E621BE4149005FA33A /* img_tab_03_select@2x.png in Resources */,
 				BBF6324621BBAB34006A23AC /* nodeHeaderBtn@3x.png in Resources */,
@@ -2042,9 +2047,9 @@
 				BB8B9E7321A6ADEB00E5D8B2 /* valveSwitch_normal@3x.png in Resources */,
 				BBF6325921BBAB34006A23AC /* valveStatus_normal.png in Resources */,
 				BB0A40C821997C99004669CA /* img_headerBg@3x.png in Resources */,
+				BB425F5921BF4DF400AB6EFB /* img_valve_on@2x.png in Resources */,
 				BB62E4CF21B4D9CA00C0FA39 /* img_ther_addTimerWeek@2x.png in Resources */,
 				BB8B9E8021A6ADEB00E5D8B2 /* valveSwitch_normal.png in Resources */,
-				BB0A40E221997C99004669CA /* img_thermostat_off.png in Resources */,
 				BB5B03AC21B90343007AC2B1 /* img_mine_checkUpdate@3x.png in Resources */,
 				BB63B5FB21B4128F00D77489 /* thermostat_min.png in Resources */,
 				BB2AD78F21ABD813006DB83A /* img_launchBG.png in Resources */,
@@ -2152,6 +2157,7 @@
 				3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */,
 				BB37DF1B21A7FF0600B2121B /* Database.m in Sources */,
 				BB62E4FC21B521F100C0FA39 /* WeekProgramSetController.m in Sources */,
+				BB52F9ED21BE6B03005FA33A /* NodeModel.m in Sources */,
 				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
 				BB2AC0F021A8F156006DB83A /* ESPTouchTaskParameter.m in Sources */,
 				BBF6326B21BBBDE0006A23AC /* NodeDetailViewController.m in Sources */,

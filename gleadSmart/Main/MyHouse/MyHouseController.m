@@ -51,7 +51,9 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         self.itemMargin = gleadMenuItemMargin;
         self.pageAnimatable = YES;
         
-        self.homeList = [[NSMutableArray alloc] init];
+        if (!self.homeList) {
+            self.homeList = [[NSMutableArray alloc] init];
+        }
     }
     return self;
 }
@@ -122,7 +124,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         [self.headerView addSubview:_houseButton];
         
         CGSize size = [[Database shareInstance].currentHouse.name sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica" size:15],NSFontAttributeName,nil]];
-        CGFloat y = gleadHeaderHeight - 24.f - yAutoFit(13.f) * 2 - yAutoFit(100.f) - gleadHomeListHeight;
+        CGFloat y = yAutoFit(gleadHeaderHeight) - yAutoFit(24.f) - yAutoFit(13.f) * 2 - yAutoFit(100.f) - gleadHomeListHeight;
         [_houseButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view.mas_left).offset(yAutoFit(27.f));
             make.top.equalTo(self.view.mas_top).offset(y);
@@ -278,7 +280,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 -(UIButton *)homeSetButton{
     if (!_homeSetButton) {
         _homeSetButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _homeSetButton.frame = CGRectMake(self.view.frame.size.width - gleadHomeSetButtonWidth, gleadHeaderHeight - gleadHomeListHeight - 5, gleadHomeSetButtonWidth, gleadHomeListHeight + 5);
+        _homeSetButton.frame = CGRectMake(self.view.frame.size.width - gleadHomeSetButtonWidth, yAutoFit(gleadHeaderHeight) - gleadHomeListHeight - 5, gleadHomeSetButtonWidth, gleadHomeListHeight + 5);
         [_homeSetButton setImage:[UIImage imageNamed:@"img_homeSet"] forState:UIControlStateNormal];
         [_homeSetButton addTarget:self action:@selector(homeSetting) forControlEvents:UIControlEventTouchUpInside];
         [self.headerView addSubview:_homeSetButton];
@@ -294,7 +296,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     HomeDeviceController *vc = [[HomeDeviceController alloc] init];
-    vc.filledSpcingHeight = gleadHeaderHeight + tabbarHeight + ySafeArea_Bottom;
+    vc.filledSpcingHeight = yAutoFit(gleadHeaderHeight) + tabbarHeight + ySafeArea_Bottom;
     if (index == 0) {
         vc.room = nil;
         return vc;
@@ -313,12 +315,12 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
-    return CGRectMake(0, gleadHeaderHeight - gleadHomeListHeight - 5, self.view.frame.size.width - gleadHomeSetButtonWidth, gleadHomeListHeight);
+    return CGRectMake(0, yAutoFit(gleadHeaderHeight) - gleadHomeListHeight - 5, self.view.frame.size.width - gleadHomeSetButtonWidth, gleadHomeListHeight);
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
-    CGFloat fillingSpaceHeight = gleadHeaderHeight + tabbarHeight + ySafeArea_Bottom;
-    return CGRectMake(0, gleadHeaderHeight, self.view.frame.size.width, self.view.bounds.size.height - fillingSpaceHeight);
+    CGFloat fillingSpaceHeight = yAutoFit(gleadHeaderHeight) + tabbarHeight + ySafeArea_Bottom;
+    return CGRectMake(0, yAutoFit(gleadHeaderHeight), self.view.frame.size.width, self.view.bounds.size.height - fillingSpaceHeight);
 }
 
 #pragma mark - update with API
@@ -397,7 +399,17 @@ static CGFloat const gleadMenuItemMargin = 25.f;
                         [db insertNewDevice:device];
                     }];
                     [db insertNewRoom:room];
-                    [self.homeList addObject:room];
+                    
+                    static BOOL isContain = NO;
+                    for (RoomModel *containRoom in self.homeList) {
+                        if ([room.roomUid isEqualToString:containRoom.roomUid]) {
+                            isContain = YES;
+                        }
+                    }
+                    if (!isContain) {
+                        [self.homeList addObject:room];
+                    }
+                    
                 }];
                 [self reloadData];
             }
@@ -523,7 +535,6 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     for (DeviceModel *device in db.localDeviceArray) {
         if ([device.type intValue] == 0) {
             db.currentHouse.mac = device.mac;
-            NSLog(@"%@",device.mac);
             [db.localDeviceArray removeObject:device];
             break;
         }

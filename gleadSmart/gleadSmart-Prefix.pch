@@ -27,6 +27,7 @@
 #import "HouseModel.h"
 #import "RoomModel.h"
 #import "MemberModel.h"
+#import "NodeModel.h"
 #import "Network.h"
 #import "Database.h"
 #import "YAlertViewController.h"

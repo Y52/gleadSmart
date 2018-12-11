@@ -26,24 +26,17 @@
 @end
 
 @implementation ThermostatController{
-    NSTimer *_sendTimer;//用来防止设置模式温度频率太快
-    NSTimer *_inquireTimer;//用来每2分钟查询室温等
-    BOOL setTempIsEnabled;
+    dispatch_source_t _sendTimer;//用来防止设置模式温度频率太快
+    dispatch_source_t _inquireTimer;//用来每2分钟查询室温等
+    BOOL isInquireTimerSuspend;
+    float nowSetTemp;//用来判断最新的温度设置数据是否上报
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        if (!_sendTimer) {
-            _sendTimer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(enableSetTemp) userInfo:nil repeats:YES];
-        }
-        if (!_inquireTimer) {
-            _inquireTimer = [NSTimer scheduledTimerWithTimeInterval:120.f target:self selector:@selector(inquireModeAndIndoorTempAndModeTemp) userInfo:nil repeats:YES];
-            if (![self.device.isOn boolValue]) {
-                [_inquireTimer setFireDate:[NSDate distantFuture]];
-            }
-        }
+        
     }
     return self;
 }
@@ -52,6 +45,7 @@
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithHexString:@"EDEDEC"].CGColor;
     [self setNavItem];
+    [self initTimer];
     
     self.thermostatView = [self thermostatView];
     self.statusLabel = [self statusLabel];
@@ -72,14 +66,54 @@
     
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDevice) name:@"refreshDevice" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSetBackModeTemp:) name:@"postSetBackModeTemp" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inquireModeAndIndoorTempAndModeTemp) name:@"openThermostat" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inquireModeAndIndoorTempAndModeTemp) name:@"switchThermostatMode" object:nil];
+
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshDevice" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"postSetBackModeTemp" object:nil];
+
+    dispatch_source_cancel(_sendTimer);
+    
+    if (isInquireTimerSuspend) {
+        dispatch_resume(_inquireTimer);
+    }
+    dispatch_source_cancel(_inquireTimer);
 }
 
 #pragma mark - Lazy load
+- (void)initTimer{
+    if (!_sendTimer) {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        _sendTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+        dispatch_source_set_timer(_sendTimer, dispatch_walltime(NULL, 0), 2.f * NSEC_PER_SEC, 0);
+        dispatch_source_set_event_handler(_sendTimer, ^{
+            [self enableSetTemp];
+        });
+        dispatch_resume(_sendTimer);
+    }
+    if (!_inquireTimer) {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        _inquireTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+        dispatch_source_set_timer(_inquireTimer, dispatch_walltime(NULL, 0), 120.f * NSEC_PER_SEC, 0);
+        dispatch_source_set_event_handler(_inquireTimer, ^{
+            [self inquireModeAndIndoorTempAndModeTemp];
+        });
+        if ([self.device.isOn intValue]) {
+            dispatch_resume(_inquireTimer);
+            isInquireTimerSuspend = NO;
+        }else{
+            dispatch_suspend(_inquireTimer);
+            isInquireTimerSuspend = YES;
+        }
+    }
+}
+
 - (void)setNavItem{
     self.navigationItem.title = LocalString(@"温控器");
     
@@ -100,8 +134,11 @@
         [_thermostatView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(200.f, 200.f));
             make.centerX.equalTo(self.view.mas_centerX);
-            make.top.equalTo(self.view.mas_top).offset(yAutoFit(200.f));
+            make.top.equalTo(self.view.mas_top).offset(yAutoFit(150.f));
         }];
+        
+        _thermostatView.transform = CGAffineTransformMakeRotation(-30.f / 180 * M_PI);
+
     }
     return _thermostatView;
 }
@@ -250,6 +287,7 @@
         
         CGFloat angle = M_PI / 18 * 5;//50度
         UIImageView *maxImage = [[UIImageView alloc] init];
+        maxImage.tag = 2000;
         maxImage.image = [UIImage imageNamed:@"thermostat_max"];
         maxImage.contentMode = UIViewContentModeScaleAspectFit;
         [_circleView addSubview:maxImage];
@@ -261,6 +299,7 @@
         
         angle = M_PI / 18 * 13;//140度
         UIImageView *minImage = [[UIImageView alloc] init];
+        minImage.tag = 2000;
         minImage.image = [UIImage imageNamed:@"thermostat_min"];
         minImage.contentMode = UIViewContentModeScaleAspectFit;
         [_circleView addSubview:minImage];
@@ -323,13 +362,6 @@
     NSLog(@"%@",self.device.modeTemp);
     self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
     
-    if (setTempIsEnabled) {
-        UInt8 controlCode = 0x01;
-        NSArray *data = @[@0xFE,@0x12,@0x03,@0x01,self.device.mode,[NSNumber numberWithFloat:temp*2]];
-        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
-        setTempIsEnabled = NO;
-    }
-
 }
 
 - (void)minusManualTemp{
@@ -338,13 +370,6 @@
     self.device.modeTemp = [NSNumber numberWithFloat:temp];
     self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
 
-    if (setTempIsEnabled) {
-        UInt8 controlCode = 0x01;
-        NSArray *data = @[@0xFE,@0x12,@0x03,@0x01,self.device.mode,[NSNumber numberWithFloat:temp*2]];
-        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
-        
-        setTempIsEnabled = NO;
-    }
 }
 
 - (void)timingAction{
@@ -385,8 +410,10 @@
         }
         
         if ([self.device.isOn boolValue]) {
-            [self inquireModeAndIndoorTempAndModeTemp];//在温控器打开的时候查询室温等
-            [self->_inquireTimer setFireDate:[NSDate date]];//温控器打开时每2分钟查询一次
+            
+            if (self->isInquireTimerSuspend) {
+                //dispatch_resume(self->_inquireTimer);//温控器打开时每2分钟查询一次
+            }
             
             self.thermostatView.image = [UIImage imageNamed:@"thermostatKnob_On"];
             [self.timeButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
@@ -398,6 +425,8 @@
             [self.setButton setImage:[UIImage imageNamed:@"thermostatSet_on"] forState:UIControlStateNormal];
             
             self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
+            self->nowSetTemp = [self.device.modeTemp floatValue];
+            self.thermostatView.transform = CGAffineTransformMakeRotation((-30.f + [self.device.indoorTemp floatValue]/5*30.f) / 180 * M_PI);
             
             self.addButton.hidden = NO;
             self.minusButton.hidden = NO;
@@ -412,8 +441,28 @@
                 [self.modeButton setTitle:LocalString(@"手动") forState:UIControlStateNormal];
             }
             
+            self.modeButton.enabled = YES;
+            self.timeButton.enabled = YES;
+            self.setButton.enabled = YES;
+            
+            //根据温度设置UI上圆圈颜色
+            float needDiscolorationCircleCount = [self.device.indoorTemp floatValue]/5;
+            for (UIImageView *circle in self.circleView.subviews) {
+                if (circle.tag == 2000) {
+                    //max min 图片
+                    continue;
+                }
+                if (circle.tag < (1000+needDiscolorationCircleCount)) {
+                    circle.image = [UIImage imageNamed:@"thermostatCircle_on"];
+                }else{
+                    circle.image = [UIImage imageNamed:@"thermostatCircle_off"];
+                }
+            }
+            
         }else{
-            [self->_inquireTimer setFireDate:[NSDate distantFuture]];//温控器未打开时不轮询室温等
+            if (!self->isInquireTimerSuspend) {
+                //dispatch_suspend(self->_inquireTimer);//温控器未打开时不轮询室温等
+            }
             
             self.thermostatView.image = [UIImage imageNamed:@"thermostatKnob"];
             [self.timeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
@@ -430,13 +479,25 @@
             self.minusButton.hidden = YES;
             
             if ([self.device.mode boolValue]) {
-                [self.modeButton setImage:[UIImage imageNamed:@"img_atuo_off"] forState:UIControlStateNormal];
+                [self.modeButton setImage:[UIImage imageNamed:@"img_auto_off"] forState:UIControlStateNormal];
                 [self.modeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
                 [self.modeButton setTitle:LocalString(@"自动") forState:UIControlStateNormal];
             }else{
                 [self.modeButton setImage:[UIImage imageNamed:@"img_manual_off"] forState:UIControlStateNormal];
                 [self.modeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
                 [self.modeButton setTitle:LocalString(@"手动") forState:UIControlStateNormal];
+            }
+            
+            self.modeButton.enabled = NO;
+            self.timeButton.enabled = NO;
+            self.setButton.enabled = NO;
+
+            for (UIImageView *circle in self.circleView.subviews) {
+                if (circle.tag == 2000) {
+                    //max min 图片
+                    continue;
+                }
+                circle.image = [UIImage imageNamed:@"thermostatCircle_off"];
             }
         }
     });
@@ -456,6 +517,19 @@
 }
 
 - (void)enableSetTemp{
-    setTempIsEnabled = YES;
+    if ([self.device.modeTemp floatValue] != nowSetTemp) {
+        NSLog(@"%@",self.device.modeTemp);
+        UInt8 controlCode = 0x01;
+        NSArray *data = @[@0xFE,@0x12,@0x03,@0x01,self.device.mode,[NSNumber numberWithFloat:[self.device.modeTemp floatValue]*2]];
+        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+        
+        nowSetTemp = [self.device.modeTemp floatValue];
+    }
+}
+
+- (void)getSetBackModeTemp:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    NSLog(@"%@",[userInfo objectForKey:@"modeTemp"]);
+    nowSetTemp = [[userInfo objectForKey:@"modeTemp"] floatValue];
 }
 @end

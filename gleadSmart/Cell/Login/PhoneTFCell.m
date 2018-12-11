@@ -19,7 +19,7 @@
             [self.contentView addSubview:_phoneimage];
             [_phoneimage mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));
-                make.left.equalTo(self.contentView.mas_left).offset(yAutoFit(18.f));
+                make.left.equalTo(self.contentView.mas_left).offset(yAutoFit(24.f));
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
         }
@@ -43,7 +43,7 @@
             [_phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(yAutoFit(180.f), yAutoFit(30.f)));
                 make.centerY.equalTo(self.contentView.mas_centerY);
-                make.left.equalTo(self.phoneimage.mas_left).offset(yAutoFit(30));
+                make.left.equalTo(self.contentView.mas_left).offset(48.f);
             }];
         }
     }

@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *roomUid;
 @property (strong, nonatomic) NSString *houseUid;
 @property (strong, nonatomic) NSNumber *isOn;
+@property (strong, nonatomic) NSNumber *isOnline;//判断在线离线
 
 ///@breif 温控器拥有的属性
 @property (strong, nonatomic) NSNumber *mode;//0为手动，1为自动
@@ -27,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *compensate;
 @property (strong, nonatomic) NSArray *weekProgram;
 
-
+///@brief 无线阀门拥有的属性
+@property (strong, nonatomic) NSArray *nodeArray;
 @end
 
 NS_ASSUME_NONNULL_END

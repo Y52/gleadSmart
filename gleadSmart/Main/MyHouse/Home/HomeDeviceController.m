@@ -98,7 +98,7 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _deviceArray.count+1;
+    return _deviceArray.count+2;
 }
 
 
@@ -113,6 +113,12 @@ static CGFloat const Cell_Height = 72.f;
         cell.status.text = LocalString(@"未设置 | 已关闭");
         return cell;
     }
+    if (indexPath.row == self.deviceArray.count + 1) {
+        cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_off"];
+        cell.deviceName.text = @"温控器";
+        cell.status.text = LocalString(@"未设置 | 已关闭");
+        return cell;
+    }
     DeviceModel *device = self.deviceArray[indexPath.row];
     cell.deviceName.text = device.name;
     RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
@@ -123,7 +129,11 @@ static CGFloat const Cell_Height = 72.f;
     switch ([device.type integerValue]) {
         case 1:
         {
-            cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_off"];
+            if ([device.isOnline boolValue]) {
+                cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_on"];
+            }else{
+                cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_off"];
+            }
             cell.switchBlock = ^(BOOL isOn) {
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
@@ -134,7 +144,11 @@ static CGFloat const Cell_Height = 72.f;
             
         case 2:
         {
-            cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
+            if ([device.isOnline boolValue]) {
+                cell.deviceImage.image = [UIImage imageNamed:@"img_valve_on"];
+            }else{
+                cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
+            }
             cell.switchBlock = ^(BOOL isOn) {
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
@@ -168,6 +182,11 @@ static CGFloat const Cell_Height = 72.f;
     if (indexPath.row == self.deviceArray.count) {
         WirelessValveController *valveVC = [[WirelessValveController alloc] init];
         [self.navigationController pushViewController:valveVC animated:YES];
+        return;
+    }
+    if (indexPath.row == self.deviceArray.count+1) {
+        ThermostatController *thermostatVC = [[ThermostatController alloc] init];
+        [self.navigationController pushViewController:thermostatVC animated:YES];
         return;
     }
 
