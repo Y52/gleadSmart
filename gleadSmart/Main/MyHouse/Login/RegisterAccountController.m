@@ -238,6 +238,7 @@ static float HEIGHT_CELL = 50.f;
                   [userDefaults setObject:self.phone forKey:@"mobile"];
                   [userDefaults setObject:self.pwText forKey:@"passWord"];
                   [userDefaults setObject:data.user.userId forKey:@"userId"];
+                  [userDefaults synchronize];
                   
                   dispatch_async(dispatch_get_main_queue(), ^{
                       [SVProgressHUD dismiss];

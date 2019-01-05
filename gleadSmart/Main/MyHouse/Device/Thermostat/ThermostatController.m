@@ -65,8 +65,10 @@
     [super viewWillAppear:animated];
     
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDevice) name:@"refreshDevice" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDevice) name:@"refreshThermostat" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSetBackModeTemp:) name:@"postSetBackModeTemp" object:nil];
+    
+    //打开温控器或者是切换模式后要查询温控器当前温度和设置温度
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inquireModeAndIndoorTempAndModeTemp) name:@"openThermostat" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inquireModeAndIndoorTempAndModeTemp) name:@"switchThermostatMode" object:nil];
 
@@ -75,8 +77,11 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshDevice" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshThermostat" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"postSetBackModeTemp" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"openThermostat" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"switchThermostatMode" object:nil];
+
 
     dispatch_source_cancel(_sendTimer);
     

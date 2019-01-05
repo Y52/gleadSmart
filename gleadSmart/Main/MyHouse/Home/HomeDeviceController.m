@@ -45,7 +45,6 @@ static CGFloat const Cell_Height = 72.f;
         [self.deviceTable reloadData];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectDevicesWithRoom) name:@"refreshDeviceTable" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(controlReply:) name:@"valveStatusControlReply" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -186,6 +185,9 @@ static CGFloat const Cell_Height = 72.f;
     }
     if (indexPath.row == self.deviceArray.count+1) {
         ThermostatController *thermostatVC = [[ThermostatController alloc] init];
+        DeviceModel *device = [[DeviceModel alloc] init];
+        device.isOn = @1;
+        thermostatVC.device = device;
         [self.navigationController pushViewController:thermostatVC animated:YES];
         return;
     }
@@ -266,30 +268,10 @@ static CGFloat const Cell_Height = 72.f;
 
 - (void)refreshTable{
     Network *net = [Network shareNetwork];
-    [net onlineNodeInquire:[Database shareInstance].currentHouse.mac];
+    UInt8 controlCode = 0x00;
+    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+    [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+
     [self.deviceTable.mj_header endRefreshing];
 }
-
-#pragma mark - Notification
-- (void)refresh{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.deviceTable reloadData];
-    });
-}
-
-- (void)controlReply:(NSNotification *)notification{
-    NSDictionary *replyDic = [notification userInfo];
-    NSNumber *isOn = [replyDic objectForKey:@"isOn"];
-    NSString *mac = [replyDic objectForKey:@"mac"];
-    for (DeviceModel *device in self.deviceArray) {
-        if ([device.mac isEqualToString:mac]) {
-            device.isOn = isOn;
-            NSLog(@"%@",isOn);
-        }
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.deviceTable reloadData];
-    });
-}
-
 @end

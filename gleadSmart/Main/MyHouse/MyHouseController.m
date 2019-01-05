@@ -31,6 +31,8 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 @property (strong, nonatomic) UILabel *pmValueLabel;
 @property (strong, nonatomic) UILabel *airValueLabel;
 
+@property (nonatomic, strong) UILabel *testLabel;
+
 @property (strong, nonatomic) NSMutableArray *homeList;
 @property (strong, nonatomic) UIButton *homeSetButton;
 
@@ -74,7 +76,13 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     if ([Database shareInstance].currentHouse) {
         [self getHouseHomeListAndDevice];
     }
-    [Network shareNetwork];//初始化network，为了开始udp自动查询连接
+    
+    //测试用代码
+//    self.testLabel = [self testLabel];
+//    Network *net = [Network shareNetwork];//初始化network，为了开始udp自动查询连接
+//    [net addObserver:self forKeyPath:@"testSendCount" options:NSKeyValueObservingOptionNew context:nil];
+//    [net addObserver:self forKeyPath:@"testRecieveCount" options:NSKeyValueObservingOptionNew context:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -90,6 +98,14 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
+- (void)dealloc{
+    //测试用代码
+    Network *net = [Network shareNetwork];
+    [net removeObserver:self forKeyPath:@"testSendCount"];
+    [net removeObserver:self forKeyPath:@"testRecieveCount"];
+}
+
 
 #pragma mark - Lazy load
 -(UIView *)headerView{
@@ -170,6 +186,26 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         }];
     }
     return _weatherView;
+}
+
+//测试用代码
+- (UILabel *)testLabel{
+    if (!_testLabel) {
+        _testLabel = [[UILabel alloc] init];
+        _testLabel.textAlignment = NSTextAlignmentCenter;
+        _testLabel.textColor = [UIColor whiteColor];
+        _testLabel.backgroundColor = [UIColor blackColor];
+        _testLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
+        [self.headerView addSubview:_testLabel];
+        [self.headerView bringSubviewToFront:_testLabel];
+        [_testLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0.f);
+            make.top.equalTo(self.headerView.mas_top).offset(yAutoFit(56.f));
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth, yAutoFit(30.f)));
+        }];
+
+    }
+    return _testLabel;
 }
 
 - (UILabel *)tempValueLabel{
@@ -539,7 +575,9 @@ static CGFloat const gleadMenuItemMargin = 25.f;
             break;
         }
     }
-    [[Network shareNetwork] onlineNodeInquire:db.currentHouse.mac];
+    UInt8 controlCode = 0x00;
+    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+    [[Network shareNetwork] sendData69With:controlCode mac:db.currentHouse.mac data:data];
 }
 
 #pragma mark - Actions
@@ -575,4 +613,15 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     SelectDeviceTypeController *SelectDeviceVC = [[SelectDeviceTypeController alloc] init];
     [self.navigationController pushViewController:SelectDeviceVC animated:YES];
 }
+
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    Network *net = [Network shareNetwork];
+    if ([keyPath isEqualToString:@"testSendCount"] || [keyPath isEqualToString:@"testRecieveCount"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.testLabel.text = [NSString stringWithFormat:@"send:%d,rece:%d",net.testSendCount,net.testRecieveCount];
+        });
+    }
+}
+
 @end

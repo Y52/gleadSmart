@@ -51,6 +51,7 @@ CGFloat const cellHeader_Height = 30.f;
 
 @implementation WirelessValveController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithHexString:@"EAE9E8"].CGColor;
@@ -81,9 +82,63 @@ CGFloat const cellHeader_Height = 30.f;
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     
+    //设置navigationbar隐藏
     self.navigationController.navigationBar.translucent = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDevice) name:@"refreshValve" object:nil];
+
 }
-#pragma mark - Lazy load
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshValve" object:nil];
+}
+#pragma mark - private methods
+- (void)refreshDevice{
+    [self UITransformationByStatus];
+}
+
+- (void)UITransformationByStatus{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+            if ([device.mac isEqualToString:self.device.mac]) {
+                self.device = device;
+            }
+        }
+        
+        if ([self.device.isOn boolValue]) {
+            [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl_on"] forState:UIControlStateNormal];
+        }else{
+            [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl"] forState:UIControlStateNormal];
+        }
+    });
+}
+
+- (void)moreSetting{
+    
+}
+
+- (void)controlSwitch{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:![self.device.isOn boolValue]]];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+}
+
+- (void)nodeSetDetail{
+    NodeDetailViewController *detailVC = [[NodeDetailViewController alloc] init];
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+//获取所有下挂漏水节点
+- (void)getAllNode{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFE,@0x13,@0x04,@0x00];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+}
+
+
+                   
+#pragma mark - getters and setters
 - (void)setNavItem{
     self.navigationItem.title = LocalString(@"无线水阀");
     
@@ -571,32 +626,4 @@ CGFloat const cellHeader_Height = 30.f;
     return cellHeader_Height;
 }
 
-#pragma mark - Actions
-- (void)moreSetting{
-    
-}
-
-- (void)controlSwitch{
-    if (self.controlSwitchButton.tag == yUnselect) {
-        self.controlSwitchButton.tag = ySelect;
-        [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl_on"] forState:UIControlStateNormal];
-
-    }else{
-        self.controlSwitchButton.tag = yUnselect;
-        [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl"] forState:UIControlStateNormal];
-
-    }
-}
-
-- (void)nodeSetDetail{
-    NodeDetailViewController *detailVC = [[NodeDetailViewController alloc] init];
-    [self.navigationController pushViewController:detailVC animated:YES];
-}
-
-//获取所有下挂漏水节点
-- (void)getAllNode{
-    UInt8 controlCode = 0x01;
-    NSArray *data = @[@0xFE,@0x13,@0x04,@0x00];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
-}
 @end

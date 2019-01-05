@@ -23,8 +23,14 @@ static CGFloat const Cell_Height = 44.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
+    self.navigationItem.title = LocalString(@"漏水节点");
     
     self.nodeDetailTable = [self nodeDetailTable];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //self.navigationController.navigationBar.topItem.title = @"";
 }
 
 #pragma mark - Lazy load

@@ -13,14 +13,23 @@
 static Network *_network = nil;
 static dispatch_once_t oneToken;
 
+
+//用来判断手机与设备是否有信息交互的心跳，有交互后重新清零，心跳达到60就发送心跳帧
+static int noUserInteractionHeartbeat = 0;
+
 @implementation Network{
     int _frameCount;
-    dispatch_queue_t _queue;
+    dispatch_queue_t _queue;//设备通信线程
     
-    NSLock *_lock;
-    dispatch_semaphore_t _sendSignal;
+    NSLock *_lock;//udp搜寻锁
+    dispatch_semaphore_t _sendSignal;//设备通信锁
     
     NSMutableArray *_allMsg;//收到的帧处理沾包分帧后放入该数组
+    
+    dispatch_source_t _noUserInteractionHeartbeatTimer;//心跳时钟
+    
+    //测试用代码
+    dispatch_source_t _testSendTimer;//测试时钟
 }
 
 + (instancetype)shareNetwork{
@@ -62,12 +71,44 @@ static dispatch_once_t oneToken;
             _udpTimer = [NSTimer scheduledTimerWithTimeInterval:6.f target:self selector:@selector(broadcast) userInfo:nil repeats:YES];
             [_udpTimer setFireDate:[NSDate distantFuture]];
         }
+        if (!_noUserInteractionHeartbeatTimer) {
+            //心跳时钟，每一秒加1
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            _noUserInteractionHeartbeatTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+            dispatch_source_set_timer(_noUserInteractionHeartbeatTimer, dispatch_walltime(NULL, 0), 1.f * NSEC_PER_SEC, 0);
+            dispatch_source_set_event_handler(_noUserInteractionHeartbeatTimer, ^{
+                noUserInteractionHeartbeat++;
+                if (noUserInteractionHeartbeat == 60) {
+                    UInt8 controlCode = 0x00;
+                    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+                    [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+                }
+            });
+            dispatch_resume(_noUserInteractionHeartbeatTimer);
+        }
+        
+        //测试用代码
+        if (!_testSendTimer) {
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            _testSendTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+            dispatch_source_set_timer(_testSendTimer, dispatch_walltime(NULL, 0), 1.f * NSEC_PER_SEC, 0);
+            dispatch_source_set_event_handler(_testSendTimer, ^{
+                NSLog(@"aaaa");
+                UInt8 controlCode = 0x00;
+                NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+                [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+            });
+            //dispatch_resume(_testSendTimer);
+        }
 
         _allMsg = [[NSMutableArray alloc] init];
         _lock = [[NSLock alloc] init];
         _queue = dispatch_queue_create("com.thingcom.queue", DISPATCH_QUEUE_SERIAL);
         _frameCount = 0;
         [self sendSearchBroadcast];
+        
+        _testSendCount = 0;
+        _testRecieveCount = 0;
     }
     return self;
 }
@@ -176,9 +217,13 @@ static dispatch_once_t oneToken;
 {
     NSLog(@"连接成功");
     sleep(1.f);
-    [self onlineNodeInquire:[Database shareInstance].currentHouse.mac];
     _frameCount = 0;
     
+    //查询设备帧，一连上内网查一次
+    UInt8 controlCode = 0x00;
+    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+    [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+
     [_mySocket readDataWithTimeout:-1 tag:1];
     [_mySocket readDataWithTimeout:-1 tag:1];
     [_mySocket readDataWithTimeout:-1 tag:1];
@@ -243,47 +288,16 @@ static dispatch_once_t oneToken;
 }
 
 /*
- *在网节点查询
- */
-- (void)onlineNodeInquire:(NSString *)mac{
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        dispatch_sync(self->_queue, ^{
-            
-            NSMutableArray *inquireNode = [[NSMutableArray alloc ] init];
-            [inquireNode addObject:[NSNumber numberWithUnsignedChar:0x69]];
-            [inquireNode addObject:[NSNumber numberWithUnsignedChar:0x00]];
-            [inquireNode addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(6, 2)]]]];
-            [inquireNode addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(4, 2)]]]];
-            [inquireNode addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
-            [inquireNode addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(0, 2)]]]];
-            [inquireNode addObject:[NSNumber numberWithUnsignedChar:self->_frameCount]];
-            [inquireNode addObject:[NSNumber numberWithUnsignedChar:0x04]];
-            [inquireNode addObject:[NSNumber numberWithUnsignedChar:0xFE]];
-            [inquireNode addObject:[NSNumber numberWithUnsignedChar:0x01]];
-            [inquireNode addObject:[NSNumber numberWithUnsignedChar:0x45]];
-            [inquireNode addObject:[NSNumber numberWithUnsignedChar:0x00]];
-            [inquireNode addObject:[NSNumber numberWithUnsignedChar:[NSObject getCS:inquireNode]]];
-            [inquireNode addObject:[NSNumber numberWithUnsignedChar:0x17]];
-            
-            if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
-                [self oneNETSendData:inquireNode];
-            }else{
-                [self send:inquireNode withTag:100];
-            }
-            
-            dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 2.f * 1000 * 1000 * 1000);
-            dispatch_semaphore_wait(self.sendSignal, time);
-            
-        });
-    });
-}
-
-/*
  *发送帧组成模版
  */
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data{
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_sync(self->_queue, ^{
+            noUserInteractionHeartbeat = 0;//心跳清零
+            
+            //测试用代码
+            self.testSendCount++;
+
             NSMutableArray *data69 = [[NSMutableArray alloc] init];
             [data69 addObject:[NSNumber numberWithUnsignedInteger:0x69]];
             [data69 addObject:[NSNumber numberWithUnsignedInteger:controlCode]];
@@ -303,7 +317,7 @@ static dispatch_once_t oneToken;
                 [self send:data69 withTag:100];
             }
             
-            dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 2.f * 1000 * 1000 * 1000);
+            dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.f * NSEC_PER_SEC);
             dispatch_semaphore_wait(self.sendSignal, time);
         });
     });
@@ -427,6 +441,10 @@ static dispatch_once_t oneToken;
         NSLog(@"success:%@",daetr);
         NSString *cmmdReply = [responseDic objectForKey:@"cmmdReply"];
         [[Network shareNetwork] handleOneNET69Message:cmmdReply];
+        
+        //测试
+        self.testRecieveCount++;
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error:%@",error);
         
@@ -537,6 +555,14 @@ static dispatch_once_t oneToken;
         [_recivedData69 removeAllObjects];
         [_recivedData69 addObjectsFromArray:data];
     }
+    
+    //取出mac
+    NSString *mac = @"";
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
+
     switch ([_recivedData69[9] unsignedIntegerValue]) {
         case 0x01:
         case 0x02:
@@ -567,11 +593,6 @@ static dispatch_once_t oneToken;
         {
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询温控器状态
-                NSString *mac = @"";
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
                 
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
@@ -581,17 +602,12 @@ static dispatch_once_t oneToken;
                 }
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDevice" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
 
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 
                 //开关温控器
-                NSString *mac = @"";
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
                 
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
@@ -605,15 +621,10 @@ static dispatch_once_t oneToken;
                 }
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDevice" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询温控器状态
-                NSString *mac = @"";
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
                 
                 UInt8 mode = [_recivedData69[12] unsignedIntegerValue];
                 UInt8 modetemp = [_recivedData69[13] unsignedIntegerValue];
@@ -643,15 +654,10 @@ static dispatch_once_t oneToken;
                     }
                 }
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDevice" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 NSLog(@"设置温控器模式温度");
-                NSString *mac = @"";
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
 
                 UInt8 modetemp = [_recivedData69[13] unsignedIntegerValue];
 
@@ -669,11 +675,6 @@ static dispatch_once_t oneToken;
             if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"1111");
                 //查询周程序
-                NSString *mac = @"";
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
                 
                 NSMutableArray *weekProgram = [[NSMutableArray alloc] init];
                 for (int i = 0; i < 24; i++) {
@@ -690,11 +691,6 @@ static dispatch_once_t oneToken;
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 //切换模式
-                NSString *mac = @"";
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
                 
                 UInt8 mode = [_recivedData69[12] unsignedIntegerValue];
 
@@ -704,16 +700,11 @@ static dispatch_once_t oneToken;
                     }
                 }
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDevice" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"switchThermostatMode" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x07 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询温控器状态
-                NSString *mac = @"";
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
                 
                 UInt8 temp = [_recivedData69[12] unsignedIntegerValue];
                 if (temp * 0x80) {
@@ -736,23 +727,12 @@ static dispatch_once_t oneToken;
         {
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 //控制水阀状态
-                NSString *mac = @"";
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
-
-                NSDictionary *replyDic = @{@"isOn":[NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]],@"mac":mac};
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"valveStatusControlReply" object:nil userInfo:replyDic];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询无线水阀状态
-                NSString *mac = @"";
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
                 
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
@@ -767,11 +747,6 @@ static dispatch_once_t oneToken;
             if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"2222");
                 //查询水阀下挂节点
-                NSString *mac = @"";
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-                mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
                 
                 NSInteger dataLenth = [_recivedData69[7] integerValue] - 4;
                 for (int k = 0; k < dataLenth; k=k+5) {

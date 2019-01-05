@@ -293,6 +293,7 @@
                       [userDefaults setObject:self.phoneTF.text forKey:@"mobile"];
                       [userDefaults setObject:self.verifyTF.text forKey:@"passWord"];
                       [userDefaults setObject:data.user.userId forKey:@"userId"];
+                      [userDefaults synchronize];
                   }
                   
                   if ([[dataDic objectForKey:@"houses"] count] > 0) {
