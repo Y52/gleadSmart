@@ -15,17 +15,20 @@ static CGFloat const Cell_Height = 44.f;
 @interface NodeDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *nodeDetailTable;
+@property (nonatomic, strong) UIButton *deleteButton;
 
 @end
 
 @implementation NodeDetailViewController
 
+#pragma mark - life circle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
     self.navigationItem.title = LocalString(@"漏水节点");
     
     self.nodeDetailTable = [self nodeDetailTable];
+    self.deleteButton = [self deleteButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -33,11 +36,30 @@ static CGFloat const Cell_Height = 44.f;
     //self.navigationController.navigationBar.topItem.title = @"";
 }
 
-#pragma mark - Lazy load
+#pragma mark - Actions
+- (void)deleteNode{
+    [self deleteAlertController];
+}
+
+- (void)deleteAlertController{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认删除提示" message:@"删除操作不可悔改，请确认" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UInt8 controlCode = 0x01;
+        NSArray *data = @[@0xFE,@0x13,@0x07,@0x01];
+        [[Network shareNetwork] sendData69With:controlCode mac:self.node.mac data:data];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:okAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - setters and getters
 - (UITableView *)nodeDetailTable{
     if (!_nodeDetailTable) {
         _nodeDetailTable = ({
-            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0.f, 0.f, ScreenWidth, ScreenHeight - getRectNavAndStatusHight)];
+            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0.f, 0.f, ScreenWidth, ScreenHeight - getRectNavAndStatusHight - 100)];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
@@ -54,6 +76,27 @@ static CGFloat const Cell_Height = 44.f;
         });
     }
     return _nodeDetailTable;
+}
+
+- (UIButton *)deleteButton{
+    if (!_deleteButton) {
+        _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_deleteButton setTitle:LocalString(@"移除节点") forState:UIControlStateNormal];
+        [_deleteButton setTitleColor:[UIColor colorWithHexString:@"639DF8"] forState:UIControlStateNormal];
+        [_deleteButton setBackgroundColor:[UIColor whiteColor]];
+        [_deleteButton addTarget:self action:@selector(deleteNode) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_deleteButton];
+        [_deleteButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(276.f), 44.f));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(self.view.mas_bottom).offset(-100.f);
+        }];
+        _deleteButton.layer.cornerRadius = 22.f;
+        _deleteButton.layer.borderWidth = 1.f;
+        _deleteButton.layer.borderColor = [UIColor colorWithHexString:@"3987F8"].CGColor;
+
+    }
+    return _deleteButton;
 }
 
 #pragma mark - UITableView delegate&datasource

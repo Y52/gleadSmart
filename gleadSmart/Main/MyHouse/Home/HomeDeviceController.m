@@ -205,6 +205,7 @@ static CGFloat const Cell_Height = 72.f;
         case 2:
         {
             WirelessValveController *valveVC = [[WirelessValveController alloc] init];
+            valveVC.device = device;
             [self.navigationController pushViewController:valveVC animated:YES];
         }
             break;

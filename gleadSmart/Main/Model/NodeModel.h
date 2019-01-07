@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NodeModel : NSObject
 
 @property (strong, nonatomic) NSString *mac;
-@property (strong, nonatomic) NSNumber *isLeak;
-@property (strong, nonatomic) NSNumber *isLowVoltage;
+@property (nonatomic) BOOL isLeak;
+@property (nonatomic) BOOL isLowVoltage;
 
 @end
 

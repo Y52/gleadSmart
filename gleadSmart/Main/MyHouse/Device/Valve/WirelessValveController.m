@@ -76,6 +76,7 @@ CGFloat const cellHeader_Height = 30.f;
     self.nodeSetViewButton = [self nodeSetViewButton];
     self.nodeLeakDetailTable = [self nodeLeakDetailTable];
     self.controlSwitchButton = [self controlSwitchButton];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -86,7 +87,8 @@ CGFloat const cellHeader_Height = 30.f;
     self.navigationController.navigationBar.translucent = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDevice) name:@"refreshValve" object:nil];
-
+    
+    [self getAllNode];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -95,21 +97,24 @@ CGFloat const cellHeader_Height = 30.f;
 }
 #pragma mark - private methods
 - (void)refreshDevice{
+    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+        if ([device.mac isEqualToString:self.device.mac]) {
+            self.device = device;
+        }
+    }
     [self UITransformationByStatus];
 }
 
 - (void)UITransformationByStatus{
     dispatch_async(dispatch_get_main_queue(), ^{
-        for (DeviceModel *device in [Network shareNetwork].deviceArray) {
-            if ([device.mac isEqualToString:self.device.mac]) {
-                self.device = device;
-            }
-        }
-        
         if ([self.device.isOn boolValue]) {
             [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl_on"] forState:UIControlStateNormal];
+            [self valveStatus:YES];
+            [self nodesLeakStatus:self.device.nodeArray];
         }else{
             [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl"] forState:UIControlStateNormal];
+            [self valveStatus:NO];
+            [self nodesLeakStatus:nil];//关闭水阀，没有漏水节点的信息
         }
     });
 }
@@ -118,15 +123,101 @@ CGFloat const cellHeader_Height = 30.f;
     
 }
 
+- (void)nodeSetDetail{
+    NodeDetailViewController *detailVC = [[NodeDetailViewController alloc] init];
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+//漏水状态设置，只要有一个节点漏水就传入yes
+- (void)nodesLeakStatus:(NSArray *)nodeArray{
+    BOOL hasLeak = NO;
+    
+    for (NodeModel *node in nodeArray) {
+        if (node.isLeak) {
+            hasLeak = YES;
+        }
+    }
+    
+    if (hasLeak) {
+        self.leakImage.image = [UIImage imageNamed:@"valveLeak_abnormal"];
+        _leakLabel.text = LocalString(@"漏水");
+        self.leakMark.hidden = NO;
+    }else{
+        self.leakImage.image = [UIImage imageNamed:@"valveLeak_normal"];
+        _leakLabel.text = LocalString(@"正常");
+        self.leakMark.hidden = YES;
+    }
+}
+
+//水阀开关状态设置
+- (void)valveStatus:(BOOL)isOn{
+    if (isOn) {
+        _switchLabel.text = LocalString(@"打开");
+    }else{
+        _switchLabel.text = LocalString(@"关闭");
+    }
+}
+
+//根据查询到的节点生成节点
+- (void)drawRectNodeButtonList{
+
+    _nodesView.contentSize = CGSizeMake(32.f*19 + 12.f, height);
+    
+    UIButton *nodeButton = [[UIButton alloc] init];
+    [nodeButton setImage:[UIImage imageNamed:@"valveNode_normal"] forState:UIControlStateNormal];
+    nodeButton.tag = 1000;
+    [_nodesView addSubview:nodeButton];
+    [nodeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(12.f, 12.f));
+        make.left.equalTo(self.nodesView.mas_left);
+        make.centerY.equalTo(self.nodesView.mas_centerY);
+    }];
+    
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = [UIColor whiteColor];
+    [_nodesView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(20.f, 1.f));
+        make.left.equalTo(nodeButton.mas_right);
+        make.centerY.equalTo(self.nodesView.mas_centerY);
+    }];
+    
+    for (int i = 1; i < 20; i++) {
+        UIImageView *nodeViewNew = [[UIImageView alloc] init];
+        nodeViewNew.image = [UIImage imageNamed:@"valveNode_normal"];
+        nodeViewNew.tag = 1000 + i;
+        [_nodesView addSubview:nodeViewNew];
+        [nodeViewNew mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(12.f), yAutoFit(12.f)));
+            make.left.equalTo(line.mas_right);
+            make.centerY.equalTo(self.nodesView.mas_centerY);
+        }];
+        
+        if (i == 19) {
+            //最后一个不加横线
+            continue;
+        }
+        
+        UIView *lineNew = [[UIView alloc] init];
+        lineNew.backgroundColor = [UIColor whiteColor];
+        [_nodesView addSubview:lineNew];
+        [lineNew mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(20.f, 1.f));
+            make.left.equalTo(nodeViewNew.mas_right);
+            make.centerY.equalTo(self.nodesView.mas_centerY);
+        }];
+        
+        line = lineNew;
+    }
+
+}
+
+#pragma mark - datasource private method
+//水阀开关
 - (void)controlSwitch{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:![self.device.isOn boolValue]]];
     [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
-}
-
-- (void)nodeSetDetail{
-    NodeDetailViewController *detailVC = [[NodeDetailViewController alloc] init];
-    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 //获取所有下挂漏水节点
@@ -136,8 +227,6 @@ CGFloat const cellHeader_Height = 30.f;
     [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
 }
 
-
-                   
 #pragma mark - getters and setters
 - (void)setNavItem{
     self.navigationItem.title = LocalString(@"无线水阀");
@@ -197,7 +286,7 @@ CGFloat const cellHeader_Height = 30.f;
 - (UIImageView *)leakImage{
     if (!_leakImage) {
         _leakImage = [[UIImageView alloc] init];
-        _leakImage.image = [UIImage imageNamed:@"valveLeak_abnormal"];
+        _leakImage.image = [UIImage imageNamed:@"valveLeak_normal"];
         [self.leakStatusView addSubview:_leakImage];
         [_leakImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(60.f), yAutoFit(60.f)));
@@ -211,7 +300,7 @@ CGFloat const cellHeader_Height = 30.f;
 - (UILabel *)leakLabel{
     if (!_leakLabel) {
         _leakLabel = [[UILabel alloc] init];
-        _leakLabel.text = LocalString(@"漏水");
+        _leakLabel.text = LocalString(@"正常");
         _leakLabel.textAlignment = NSTextAlignmentCenter;
         _leakLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
         _leakLabel.font = [UIFont fontWithName:@"Helvetica" size:14.f];
@@ -229,7 +318,7 @@ CGFloat const cellHeader_Height = 30.f;
     if (!_leakMark) {
         _leakMark = [[UIImageView alloc] init];
         _leakMark.image = [UIImage imageNamed:@"valveAlertMark"];
-        //_leakMark.hidden = YES;
+        _leakMark.hidden = YES;
         [self.leakStatusView addSubview:_leakMark];
         [_leakMark mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(30.f), yAutoFit(30.f)));
@@ -389,54 +478,6 @@ CGFloat const cellHeader_Height = 30.f;
             make.top.equalTo(self.switchStatusView.mas_bottom);
             make.centerX.equalTo(self.view.mas_centerX);
         }];
-        _nodesView.contentSize = CGSizeMake(32.f*19 + 12.f, height);
-
-        UIImageView *nodeView = [[UIImageView alloc] init];
-        nodeView.image = [UIImage imageNamed:@"valveNode_normal"];
-        nodeView.tag = 1000;
-        [_nodesView addSubview:nodeView];
-        [nodeView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(12.f, 12.f));
-            make.left.equalTo(self.nodesView.mas_left);
-            make.centerY.equalTo(self.nodesView.mas_centerY);
-        }];
-        
-        UIView *line = [[UIView alloc] init];
-        line.backgroundColor = [UIColor whiteColor];
-        [_nodesView addSubview:line];
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(20.f, 1.f));
-            make.left.equalTo(nodeView.mas_right);
-            make.centerY.equalTo(self.nodesView.mas_centerY);
-        }];
-        
-        for (int i = 1; i < 20; i++) {
-            UIImageView *nodeViewNew = [[UIImageView alloc] init];
-            nodeViewNew.image = [UIImage imageNamed:@"valveNode_normal"];
-            nodeViewNew.tag = 1000 + i;
-            [_nodesView addSubview:nodeViewNew];
-            [nodeViewNew mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(yAutoFit(12.f), yAutoFit(12.f)));
-                make.left.equalTo(line.mas_right);
-                make.centerY.equalTo(self.nodesView.mas_centerY);
-            }];
-            
-            if (i == 19) {
-                //最后一个不加横线
-                continue;
-            }
-            
-            UIView *lineNew = [[UIView alloc] init];
-            lineNew.backgroundColor = [UIColor whiteColor];
-            [_nodesView addSubview:lineNew];
-            [lineNew mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(20.f, 1.f));
-                make.left.equalTo(nodeViewNew.mas_right);
-                make.centerY.equalTo(self.nodesView.mas_centerY);
-            }];
-            
-            line = lineNew;
-        }
     }
     return _nodesView;
 }

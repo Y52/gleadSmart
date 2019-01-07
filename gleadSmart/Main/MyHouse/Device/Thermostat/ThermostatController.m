@@ -91,6 +91,139 @@
     dispatch_source_cancel(_inquireTimer);
 }
 
+#pragma mark - private method
+- (void)UITransformationByStatus{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+            if ([device.mac isEqualToString:self.device.mac]) {
+                self.device = device;
+            }
+        }
+        
+        if ([self.device.isOn boolValue]) {
+            
+            if (self->isInquireTimerSuspend) {
+                //dispatch_resume(self->_inquireTimer);//温控器打开时每2分钟查询一次
+            }
+            
+            self.thermostatView.image = [UIImage imageNamed:@"thermostatKnob_On"];
+            [self.timeButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
+            [self.timeButton setImage:[UIImage imageNamed:@"thermostat_timing_on"] forState:UIControlStateNormal];
+            [self.controlButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
+            [self.controlButton setTitle:LocalString(@"关闭") forState:UIControlStateNormal];
+            [self.controlButton setImage:[UIImage imageNamed:@"thermostatControl_on"] forState:UIControlStateNormal];
+            [self.setButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
+            [self.setButton setImage:[UIImage imageNamed:@"thermostatSet_on"] forState:UIControlStateNormal];
+            
+            self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
+            self->nowSetTemp = [self.device.modeTemp floatValue];
+            self.thermostatView.transform = CGAffineTransformMakeRotation((-30.f + [self.device.indoorTemp floatValue]/5*30.f) / 180 * M_PI);
+            
+            self.addButton.hidden = NO;
+            self.minusButton.hidden = NO;
+            
+            if ([self.device.mode boolValue]) {
+                [self.modeButton setImage:[UIImage imageNamed:@"img_auto_on"] forState:UIControlStateNormal];
+                [self.modeButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
+                [self.modeButton setTitle:LocalString(@"自动") forState:UIControlStateNormal];
+            }else{
+                [self.modeButton setImage:[UIImage imageNamed:@"img_manual_on"] forState:UIControlStateNormal];
+                [self.modeButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
+                [self.modeButton setTitle:LocalString(@"手动") forState:UIControlStateNormal];
+            }
+            
+            self.modeButton.enabled = YES;
+            self.timeButton.enabled = YES;
+            self.setButton.enabled = YES;
+            
+            //根据温度设置UI上圆圈颜色
+            float needDiscolorationCircleCount = [self.device.indoorTemp floatValue]/5;
+            for (UIImageView *circle in self.circleView.subviews) {
+                if (circle.tag == 2000) {
+                    //max min 图片
+                    continue;
+                }
+                if (circle.tag < (1000+needDiscolorationCircleCount)) {
+                    circle.image = [UIImage imageNamed:@"thermostatCircle_on"];
+                }else{
+                    circle.image = [UIImage imageNamed:@"thermostatCircle_off"];
+                }
+            }
+            
+        }else{
+            if (!self->isInquireTimerSuspend) {
+                //dispatch_suspend(self->_inquireTimer);//温控器未打开时不轮询室温等
+            }
+            
+            self.thermostatView.image = [UIImage imageNamed:@"thermostatKnob"];
+            [self.timeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
+            [self.timeButton setImage:[UIImage imageNamed:@"thermostat_timing"] forState:UIControlStateNormal];
+            [self.controlButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
+            [self.controlButton setTitle:LocalString(@"开启") forState:UIControlStateNormal];
+            [self.controlButton setImage:[UIImage imageNamed:@"thermostatControl"] forState:UIControlStateNormal];
+            [self.setButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
+            [self.setButton setImage:[UIImage imageNamed:@"thermostatSet"] forState:UIControlStateNormal];
+            
+            self.statusLabel.text = LocalString(@"已关闭");
+            
+            self.addButton.hidden = YES;
+            self.minusButton.hidden = YES;
+            
+            if ([self.device.mode boolValue]) {
+                [self.modeButton setImage:[UIImage imageNamed:@"img_auto_off"] forState:UIControlStateNormal];
+                [self.modeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
+                [self.modeButton setTitle:LocalString(@"自动") forState:UIControlStateNormal];
+            }else{
+                [self.modeButton setImage:[UIImage imageNamed:@"img_manual_off"] forState:UIControlStateNormal];
+                [self.modeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
+                [self.modeButton setTitle:LocalString(@"手动") forState:UIControlStateNormal];
+            }
+            
+            self.modeButton.enabled = NO;
+            self.timeButton.enabled = NO;
+            self.setButton.enabled = NO;
+            
+            for (UIImageView *circle in self.circleView.subviews) {
+                if (circle.tag == 2000) {
+                    //max min 图片
+                    continue;
+                }
+                circle.image = [UIImage imageNamed:@"thermostatCircle_off"];
+            }
+        }
+    });
+    
+}
+
+//查询室内温度
+- (void)inquireModeAndIndoorTempAndModeTemp{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFE,@0x12,@0x03,@0x00];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+}
+
+#pragma mark - NSNotification
+- (void)refreshDevice{
+    [self UITransformationByStatus];
+}
+
+- (void)enableSetTemp{
+    if ([self.device.modeTemp floatValue] != nowSetTemp) {
+        NSLog(@"%@",self.device.modeTemp);
+        UInt8 controlCode = 0x01;
+        NSArray *data = @[@0xFE,@0x12,@0x03,@0x01,self.device.mode,[NSNumber numberWithFloat:[self.device.modeTemp floatValue]*2]];
+        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+        
+        nowSetTemp = [self.device.modeTemp floatValue];
+    }
+}
+
+- (void)getSetBackModeTemp:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    NSLog(@"%@",[userInfo objectForKey:@"modeTemp"]);
+    nowSetTemp = [[userInfo objectForKey:@"modeTemp"] floatValue];
+}
+
 #pragma mark - Lazy load
 - (void)initTimer{
     if (!_sendTimer) {
@@ -403,138 +536,5 @@
     [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.f] range:NSMakeRange(0, tempStr.length)];
     [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.f] range:NSMakeRange(tempStr.length + 1, currentTempStr.length)];
     return str;
-}
-
-#pragma mark - Thermostat Control
-- (void)UITransformationByStatus{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        for (DeviceModel *device in [Network shareNetwork].deviceArray) {
-            if ([device.mac isEqualToString:self.device.mac]) {
-                self.device = device;
-            }
-        }
-        
-        if ([self.device.isOn boolValue]) {
-            
-            if (self->isInquireTimerSuspend) {
-                //dispatch_resume(self->_inquireTimer);//温控器打开时每2分钟查询一次
-            }
-            
-            self.thermostatView.image = [UIImage imageNamed:@"thermostatKnob_On"];
-            [self.timeButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
-            [self.timeButton setImage:[UIImage imageNamed:@"thermostat_timing_on"] forState:UIControlStateNormal];
-            [self.controlButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
-            [self.controlButton setTitle:LocalString(@"关闭") forState:UIControlStateNormal];
-            [self.controlButton setImage:[UIImage imageNamed:@"thermostatControl_on"] forState:UIControlStateNormal];
-            [self.setButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
-            [self.setButton setImage:[UIImage imageNamed:@"thermostatSet_on"] forState:UIControlStateNormal];
-            
-            self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
-            self->nowSetTemp = [self.device.modeTemp floatValue];
-            self.thermostatView.transform = CGAffineTransformMakeRotation((-30.f + [self.device.indoorTemp floatValue]/5*30.f) / 180 * M_PI);
-            
-            self.addButton.hidden = NO;
-            self.minusButton.hidden = NO;
-            
-            if ([self.device.mode boolValue]) {
-                [self.modeButton setImage:[UIImage imageNamed:@"img_auto_on"] forState:UIControlStateNormal];
-                [self.modeButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
-                [self.modeButton setTitle:LocalString(@"自动") forState:UIControlStateNormal];
-            }else{
-                [self.modeButton setImage:[UIImage imageNamed:@"img_manual_on"] forState:UIControlStateNormal];
-                [self.modeButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
-                [self.modeButton setTitle:LocalString(@"手动") forState:UIControlStateNormal];
-            }
-            
-            self.modeButton.enabled = YES;
-            self.timeButton.enabled = YES;
-            self.setButton.enabled = YES;
-            
-            //根据温度设置UI上圆圈颜色
-            float needDiscolorationCircleCount = [self.device.indoorTemp floatValue]/5;
-            for (UIImageView *circle in self.circleView.subviews) {
-                if (circle.tag == 2000) {
-                    //max min 图片
-                    continue;
-                }
-                if (circle.tag < (1000+needDiscolorationCircleCount)) {
-                    circle.image = [UIImage imageNamed:@"thermostatCircle_on"];
-                }else{
-                    circle.image = [UIImage imageNamed:@"thermostatCircle_off"];
-                }
-            }
-            
-        }else{
-            if (!self->isInquireTimerSuspend) {
-                //dispatch_suspend(self->_inquireTimer);//温控器未打开时不轮询室温等
-            }
-            
-            self.thermostatView.image = [UIImage imageNamed:@"thermostatKnob"];
-            [self.timeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
-            [self.timeButton setImage:[UIImage imageNamed:@"thermostat_timing"] forState:UIControlStateNormal];
-            [self.controlButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
-            [self.controlButton setTitle:LocalString(@"开启") forState:UIControlStateNormal];
-            [self.controlButton setImage:[UIImage imageNamed:@"thermostatControl"] forState:UIControlStateNormal];
-            [self.setButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
-            [self.setButton setImage:[UIImage imageNamed:@"thermostatSet"] forState:UIControlStateNormal];
-            
-            self.statusLabel.text = LocalString(@"已关闭");
-            
-            self.addButton.hidden = YES;
-            self.minusButton.hidden = YES;
-            
-            if ([self.device.mode boolValue]) {
-                [self.modeButton setImage:[UIImage imageNamed:@"img_auto_off"] forState:UIControlStateNormal];
-                [self.modeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
-                [self.modeButton setTitle:LocalString(@"自动") forState:UIControlStateNormal];
-            }else{
-                [self.modeButton setImage:[UIImage imageNamed:@"img_manual_off"] forState:UIControlStateNormal];
-                [self.modeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
-                [self.modeButton setTitle:LocalString(@"手动") forState:UIControlStateNormal];
-            }
-            
-            self.modeButton.enabled = NO;
-            self.timeButton.enabled = NO;
-            self.setButton.enabled = NO;
-
-            for (UIImageView *circle in self.circleView.subviews) {
-                if (circle.tag == 2000) {
-                    //max min 图片
-                    continue;
-                }
-                circle.image = [UIImage imageNamed:@"thermostatCircle_off"];
-            }
-        }
-    });
-
-}
-
-//查询室内温度
-- (void)inquireModeAndIndoorTempAndModeTemp{
-    UInt8 controlCode = 0x01;
-    NSArray *data = @[@0xFE,@0x12,@0x03,@0x00];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
-}
-
-#pragma mark - NSNotification
-- (void)refreshDevice{
-    [self UITransformationByStatus];
-}
-
-- (void)enableSetTemp{
-    if ([self.device.modeTemp floatValue] != nowSetTemp) {
-        NSLog(@"%@",self.device.modeTemp);
-        UInt8 controlCode = 0x01;
-        NSArray *data = @[@0xFE,@0x12,@0x03,@0x01,self.device.mode,[NSNumber numberWithFloat:[self.device.modeTemp floatValue]*2]];
-        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
-        
-        nowSetTemp = [self.device.modeTemp floatValue];
-    }
-}
-
-- (void)getSetBackModeTemp:(NSNotification *)notification{
-    NSDictionary *userInfo = [notification userInfo];
-    NSLog(@"%@",[userInfo objectForKey:@"modeTemp"]);
-    nowSetTemp = [[userInfo objectForKey:@"modeTemp"] floatValue];
 }
 @end

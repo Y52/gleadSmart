@@ -293,6 +293,10 @@ static int noUserInteractionHeartbeat = 0;
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data{
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_sync(self->_queue, ^{
+            
+            dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.f * NSEC_PER_SEC);
+            dispatch_semaphore_wait(self.sendSignal, time);
+
             noUserInteractionHeartbeat = 0;//心跳清零
             
             //测试用代码
@@ -317,8 +321,6 @@ static int noUserInteractionHeartbeat = 0;
                 [self send:data69 withTag:100];
             }
             
-            dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.f * NSEC_PER_SEC);
-            dispatch_semaphore_wait(self.sendSignal, time);
         });
     });
 }
@@ -728,6 +730,13 @@ static int noUserInteractionHeartbeat = 0;
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 //控制水阀状态
                 
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                    }
+                }
+
+                NSLog(@"水阀开关回复:%lu",(unsigned long)[_recivedData69[12] unsignedIntegerValue]);
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
             }
@@ -743,31 +752,54 @@ static int noUserInteractionHeartbeat = 0;
                 
                 //设备内容页面UI等刷新
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //下挂漏水节点状态上报
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        device.isOnline = @1;
+                    }
+                }
+                
+                //设备内容页面UI等刷新
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"2222");
                 //查询水阀下挂节点
+                NSLog(@"获得水阀下挂节点");
                 
+                NSMutableArray *nodeArray = [[NSMutableArray alloc] init];
                 NSInteger dataLenth = [_recivedData69[7] integerValue] - 4;
                 for (int k = 0; k < dataLenth; k=k+5) {
                     NodeModel *node = [[NodeModel alloc] init];
                     
                     node.mac = @"";
-                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[16 + k*4] intValue]]];
-                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[15 + k*4] intValue]]];
-                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[14 + k*4] intValue]]];
-                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[13 + k*4] intValue]]];
-                    //device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[15 + k*4] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[15 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[14 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[13 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[12 + k] intValue]]];
+                    UInt8 nodeInfo = [_recivedData69[16 + k] unsignedIntegerValue];
+                    if (nodeInfo & 0b00000001) {
+                        node.isLeak = YES;
+                    }else if (nodeInfo & 0b00000010){
+                        node.isLowVoltage = YES;
+                    }
+                    
+                    [nodeArray addObject:node];
                 }
                 
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
-                        
+                        device.nodeArray = nodeArray;
                     }
                 }
                 
                 //设备内容页面UI等刷新
-                //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDevice" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
             }
         }
             break;
