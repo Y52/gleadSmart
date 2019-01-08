@@ -756,17 +756,10 @@ static int noUserInteractionHeartbeat = 0;
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //下挂漏水节点状态上报
+                NSLog(@"下挂漏水节点状态上报");
                 
-                for (DeviceModel *device in self.deviceArray) {
-                    if ([device.mac isEqualToString:mac]) {
-                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
-                        device.isOnline = @1;
-                    }
-                }
-                
-                //设备内容页面UI等刷新
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
+                NSDictionary *userInfo = @{@"recivedData69":_recivedData69};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"valveHangingNodesReport" object:nil userInfo:userInfo];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询水阀下挂节点
@@ -783,10 +776,15 @@ static int noUserInteractionHeartbeat = 0;
                     node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[13 + k] intValue]]];
                     node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[12 + k] intValue]]];
                     UInt8 nodeInfo = [_recivedData69[16 + k] unsignedIntegerValue];
-                    if (nodeInfo & 0b00000001) {
+                    if (nodeInfo & 0b00000010) {
                         node.isLeak = YES;
-                    }else if (nodeInfo & 0b00000010){
+                    }else{
+                        node.isLeak = NO;
+                    }
+                    if (nodeInfo & 0b00000001){
                         node.isLowVoltage = YES;
+                    }else{
+                        node.isLowVoltage = NO;
                     }
                     
                     [nodeArray addObject:node];
@@ -799,7 +797,7 @@ static int noUserInteractionHeartbeat = 0;
                 }
                 
                 //设备内容页面UI等刷新
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValveHangingNodes" object:nil userInfo:nil];
             }
         }
             break;

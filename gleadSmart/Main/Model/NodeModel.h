@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *mac;
 @property (nonatomic) BOOL isLeak;
 @property (nonatomic) BOOL isLowVoltage;
+@property (nonatomic) BOOL isSelected;
 
 @end
 
