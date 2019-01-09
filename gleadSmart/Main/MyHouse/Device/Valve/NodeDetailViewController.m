@@ -42,11 +42,16 @@ static CGFloat const Cell_Height = 44.f;
 }
 
 - (void)deleteAlertController{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认删除提示" message:@"删除操作不可悔改，请确认" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认删除提示" message:@"确认要删除该节点吗?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFE,@0x13,@0x07,@0x01];
-        [[Network shareNetwork] sendData69With:controlCode mac:self.node.mac data:data];
+        NSMutableArray *muteData = [data mutableCopy];
+        [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(6, 2)]]]];
+        [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(4, 2)]]]];
+        [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(2, 2)]]]];
+        [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(0, 2)]]]];
+        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:muteData];
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -121,21 +126,22 @@ static CGFloat const Cell_Height = 44.f;
         case 0:
         {
             cell.leftLabel.text = LocalString(@"节点序号");
-            cell.infoLabel.text = @"3";
+            cell.infoLabel.text = [NSString stringWithFormat:@"%ld",(long)_index];
         }
             break;
             
         case 1:
         {
             cell.leftLabel.text = LocalString(@"节点名称");
-            cell.infoLabel.text = @"节点000";
+            cell.infoLabel.text = [NSString stringWithFormat:@"节点%03ld",_index];
         }
             break;
             
         case 2:
         {
             cell.leftLabel.text = LocalString(@"节点位置");
-            cell.infoLabel.text = @"主卧";
+            RoomModel *room = [[Database shareInstance] queryRoomWith:self.device.roomUid];
+            cell.infoLabel.text = room.name;
         }
             break;
             

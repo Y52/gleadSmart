@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray *weekProgram;
 
 ///@brief 无线阀门拥有的属性
-@property (strong, nonatomic) NSArray *nodeArray;
+@property (strong, nonatomic) NSMutableArray *nodeArray;
 @end
 
 NS_ASSUME_NONNULL_END

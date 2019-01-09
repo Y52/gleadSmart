@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NodeDetailViewController : UIViewController
 
-@property (nonatomic, strong) DeviceModel *node;
+@property (nonatomic, strong) NodeModel *node;
+@property (nonatomic, strong) DeviceModel *device;
+@property (nonatomic) NSInteger index;//节点序号
 
 @end
 

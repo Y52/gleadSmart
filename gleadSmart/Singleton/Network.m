@@ -55,7 +55,7 @@ static int noUserInteractionHeartbeat = 0;
             _mySocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:queue];
         }
         if (!_sendSignal) {
-            _sendSignal = dispatch_semaphore_create(2);
+            _sendSignal = dispatch_semaphore_create(0);
         }
         if (!_recivedData69) {
             _recivedData69 = [[NSMutableArray alloc] init];
@@ -179,6 +179,12 @@ static int noUserInteractionHeartbeat = 0;
         NSString *mac = [msg substringWithRange:NSMakeRange(0, 8)];
         DeviceModel *device = [[DeviceModel alloc] init];
         device.mac = mac;
+        
+        if (self.connectedDevice && [self.connectedDevice.mac isEqualToString:mac]) {
+            //如果已经连接了这个设备，就不再重新连接了
+            return;
+        }
+        
         if (![[Database shareInstance] queryDevice:mac]) {
             NSLog(@"as");
         }else{
@@ -216,6 +222,7 @@ static int noUserInteractionHeartbeat = 0;
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
     NSLog(@"连接成功");
+    [self.udpTimer setFireDate:[NSDate distantFuture]];
     sleep(1.f);
     _frameCount = 0;
     
@@ -235,6 +242,7 @@ static int noUserInteractionHeartbeat = 0;
     dispatch_async(dispatch_get_main_queue(), ^{
         [NSObject showHudTipStr:LocalString(@"连接已断开")];
     });
+    [self.udpTimer setFireDate:[NSDate date]];
     self.connectedDevice = nil;
 }
 
@@ -255,7 +263,7 @@ static int noUserInteractionHeartbeat = 0;
 //tcp connect
 - (BOOL)connectToHost:(NSString *)host onPort:(uint16_t)port error:(NSError *__autoreleasing *)errPtr{
     if (![_mySocket isDisconnected]) {
-        NSLog(@"主动断开");
+        NSLog(@"网关主动断开");
         [_mySocket disconnect];
     }
     return [_mySocket connectToHost:host onPort:port error:errPtr];
@@ -294,6 +302,7 @@ static int noUserInteractionHeartbeat = 0;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_sync(self->_queue, ^{
             
+            //线程锁需要放在最前面，放在后面锁不住
             dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.f * NSEC_PER_SEC);
             dispatch_semaphore_wait(self.sendSignal, time);
 
@@ -316,9 +325,9 @@ static int noUserInteractionHeartbeat = 0;
             [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
             
             if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
-                [self oneNETSendData:data69];
+                [self oneNETSendData:data69];//OneNet发送
             }else{
-                [self send:data69 withTag:100];
+                [self send:data69 withTag:100];//内网tcp发送
             }
             
         });
@@ -443,6 +452,7 @@ static int noUserInteractionHeartbeat = 0;
         NSLog(@"success:%@",daetr);
         NSString *cmmdReply = [responseDic objectForKey:@"cmmdReply"];
         [[Network shareNetwork] handleOneNET69Message:cmmdReply];
+        dispatch_semaphore_signal(self.sendSignal);//收到信息增加信号量
         
         //测试
         self.testRecieveCount++;
@@ -481,7 +491,7 @@ static int noUserInteractionHeartbeat = 0;
             NSUInteger recvDataLen = recvData.count;
             
             //数据不够一条完整的帧
-            if (recvDataLen < 15) {
+            if (recvDataLen < 10) {
                 return;
             }
             
@@ -539,7 +549,7 @@ static int noUserInteractionHeartbeat = 0;
         //取出一帧
         NSMutableArray *data = [[NSMutableArray alloc] init];
         [data addObjectsFromArray:_allMsg[i]];
-        NSLog(@"%@",data);
+        NSLog(@"沾包解出的帧%d：%@",i,data);
         
         [self handle68Message:data];
     }
@@ -575,18 +585,22 @@ static int noUserInteractionHeartbeat = 0;
             
             if ([_recivedData69[10] unsignedIntegerValue] == 0x45 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //在网节点查询
+                NSLog(@"在网节点查询");
                 [self inquireNode:_recivedData69];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x92 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 //在网节点删除
-                
+                NSLog(@"在网节点删除");
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //新增节点信息上报
+                NSLog(@"新增节点信息上报");
                 [self addNode:_recivedData69];
+                
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //恢复出厂设置
+                NSLog(@"恢复出厂设置");
             }
         }
             break;
@@ -595,7 +609,7 @@ static int noUserInteractionHeartbeat = 0;
         {
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询温控器状态
-                
+                NSLog(@"查询温控器状态");
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
@@ -608,8 +622,8 @@ static int noUserInteractionHeartbeat = 0;
 
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
-                
                 //开关温控器
+                NSLog(@"开关温控器");
                 
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
@@ -627,7 +641,7 @@ static int noUserInteractionHeartbeat = 0;
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询温控器状态
-                
+                NSLog(@"查询温控器状态");
                 UInt8 mode = [_recivedData69[12] unsignedIntegerValue];
                 UInt8 modetemp = [_recivedData69[13] unsignedIntegerValue];
                 UInt8 indoortemp = [_recivedData69[14] unsignedIntegerValue];
@@ -677,7 +691,7 @@ static int noUserInteractionHeartbeat = 0;
             if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"1111");
                 //查询周程序
-                
+                NSLog(@"查询周程序");
                 NSMutableArray *weekProgram = [[NSMutableArray alloc] init];
                 for (int i = 0; i < 24; i++) {
                     [weekProgram addObject:[NSNumber numberWithUnsignedInteger:[_recivedData69[12 + i] unsignedIntegerValue]]];
@@ -693,7 +707,7 @@ static int noUserInteractionHeartbeat = 0;
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 //切换模式
-                
+                NSLog(@"切换模式");
                 UInt8 mode = [_recivedData69[12] unsignedIntegerValue];
 
                 for (DeviceModel *device in self.deviceArray) {
@@ -707,7 +721,7 @@ static int noUserInteractionHeartbeat = 0;
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x07 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询温控器状态
-                
+                NSLog(@"查询温控器状态");
                 UInt8 temp = [_recivedData69[12] unsignedIntegerValue];
                 if (temp * 0x80) {
                     temp = temp & 0x7F;
@@ -729,7 +743,7 @@ static int noUserInteractionHeartbeat = 0;
         {
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 //控制水阀状态
-                
+                NSLog(@"控制水阀状态");
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
@@ -742,7 +756,7 @@ static int noUserInteractionHeartbeat = 0;
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询无线水阀状态
-                
+                NSLog(@"查询无线水阀状态");
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
@@ -798,6 +812,45 @@ static int noUserInteractionHeartbeat = 0;
                 
                 //设备内容页面UI等刷新
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValveHangingNodes" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x06 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //水阀恢复出厂设置
+                NSLog(@"水阀恢复出厂设置");
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        [device.nodeArray removeAllObjects];
+                    }
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"valveReset" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x07 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                //水阀删除某个节点
+                NSLog(@"水阀删除某个节点");
+                
+                if ([_recivedData69[7] integerValue] == 4) {
+                    NSLog(@"删除失败，设备为空");
+                    [NSObject showHudTipStr:@"删除失败"];
+                    return;
+                }
+
+                NodeModel *deletedNode = [[NodeModel alloc] init];
+                deletedNode.mac = @"";
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
+                
+                if ([deletedNode.mac intValue] == 0) {
+                    NSLog(@"删除失败，设备为空");
+                    [NSObject showHudTipStr:@"删除失败"];
+                    return;
+                }
+                
+                [NSObject showHudTipStr:@"删除成功"];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"valveDeleteHangingNode" object:nil userInfo:nil];//删除节点后直接水阀页面节点重新生成
             }
         }
             break;

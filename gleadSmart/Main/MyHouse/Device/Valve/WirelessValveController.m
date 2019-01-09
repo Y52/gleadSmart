@@ -14,7 +14,7 @@ NSString *const CellIdentifier_NodeDetail = @"CellID_NodeDetail";
 
 CGFloat const cell_Height = 44.f;
 CGFloat const cellHeader_Height = 30.f;
-CGFloat const nodeButtonWidth = 16.f;
+CGFloat const nodeButtonWidth = 25.f;
 
 
 @interface WirelessValveController () <UITableViewDelegate, UITableViewDataSource>
@@ -91,6 +91,8 @@ CGFloat const nodeButtonWidth = 16.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDevice) name:@"refreshValve" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshValveNodesUI) name:@"refreshValveHangingNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valveNodesReport:) name:@"valveHangingNodesReport" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valveReset) name:@"valveReset" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshValveNodesUI) name:@"valveDeleteHangingNode" object:nil];
     [self getAllNode];
 }
 
@@ -99,6 +101,8 @@ CGFloat const nodeButtonWidth = 16.f;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshValve" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshValveHangingNodes" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveHangingNodesReport" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveReset" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveDeleteHangingNode" object:nil];
 }
 #pragma mark - private methods
 - (void)refreshDevice{
@@ -129,7 +133,19 @@ CGFloat const nodeButtonWidth = 16.f;
 }
 
 - (void)nodeSetDetail{
+    if (self.device.nodeArray.count == 0) {
+        [NSObject showHudTipStr:@"当前没有选中漏水节点"];
+        return;
+    }
     NodeDetailViewController *detailVC = [[NodeDetailViewController alloc] init];
+    for (int i = 0; i < self.device.nodeArray.count; i++) {
+        NodeModel *node = self.device.nodeArray[i];
+        if (node.isSelected) {
+            detailVC.node = node;
+            detailVC.index = i+1;
+        }
+    }
+    detailVC.device = self.device;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -163,6 +179,7 @@ CGFloat const nodeButtonWidth = 16.f;
     }
 }
 
+//刷新节点UI的notification@selector
 - (void)refreshValveNodesUI{
     for (DeviceModel *device in [Network shareNetwork].deviceArray) {
         if ([device.mac isEqualToString:self.device.mac]) {
@@ -179,6 +196,9 @@ CGFloat const nodeButtonWidth = 16.f;
 
         for (UIButton *button in self.nodesView.subviews) {
             //删除所有之前生成的uibutton，重新生成
+            if (button.tag < 1000) {
+                continue;
+            }
             [button removeFromSuperview];
         }
         
@@ -191,18 +211,25 @@ CGFloat const nodeButtonWidth = 16.f;
             UIButton *nodeButton = [[UIButton alloc] init];
             if (nodemodel.isLeak || nodemodel.isLowVoltage) {
                 if (i == 0) {
+                    nodemodel.isSelected = YES;
                     [nodeButton setImage:[UIImage imageNamed:@"valveNode_selabnormal"] forState:UIControlStateNormal];
+                    //[nodeButton setBackgroundImage:[UIImage imageNamed:@"valveNode_selabnormal"] forState:UIControlStateNormal];
                 }else{
                     [nodeButton setImage:[UIImage imageNamed:@"valveNode_abnormal"] forState:UIControlStateNormal];
+                    //[nodeButton setBackgroundImage:[UIImage imageNamed:@"valveNode_abnormal"] forState:UIControlStateNormal];
                 }
             }else{
                 if (i == 0) {
+                    nodemodel.isSelected = YES;
                     [nodeButton setImage:[UIImage imageNamed:@"valveNode_selnormal"] forState:UIControlStateNormal];
+                    //[nodeButton setBackgroundImage:[UIImage imageNamed:@"valveNode_selnormal"] forState:UIControlStateNormal];
                 }else{
                     [nodeButton setImage:[UIImage imageNamed:@"valveNode_normal"] forState:UIControlStateNormal];
+                    //nodeButton setBackgroundImage:[UIImage imageNamed:@"valveNode_normal"] forState:UIControlStateNormal];
                 }
             }
             nodeButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+            [nodeButton.imageView sizeThatFits:CGSizeMake(nodeButtonWidth, nodeButtonWidth)];
             nodeButton.tag = 1000 + i;
             [nodeButton addTarget:self action:@selector(nodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.nodesView addSubview:nodeButton];
@@ -226,7 +253,7 @@ CGFloat const nodeButtonWidth = 16.f;
             lineNew.backgroundColor = [UIColor whiteColor];
             [self.nodesView addSubview:lineNew];
             [lineNew mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(20.f, 1.f));
+                make.size.mas_equalTo(CGSizeMake(20.f, 0.5));
                 make.left.equalTo(nodeButton.mas_right);
                 make.centerY.equalTo(self.nodesView.mas_centerY);
             }];
@@ -277,17 +304,25 @@ CGFloat const nodeButtonWidth = 16.f;
             isContain = YES;
             containedNode.isLeak = node.isLeak;
             containedNode.isLowVoltage = node.isLowVoltage;
-            [self updateNodeStatus];//更新该节点信息
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self updateNodeStatus];//更新该节点信息
+            });
         }
     }
     if (!isContain) {//该节点是之前没有的
         dispatch_async(dispatch_get_main_queue(), ^{
             [self drawNewReportNode:node];
         });
-        NSMutableArray *nodeArray = [[NSMutableArray alloc] init];
-        [nodeArray addObjectsFromArray:self.device.nodeArray];
-        [nodeArray addObject:node];
-        self.device.nodeArray = nodeArray;
+        if (self.device.nodeArray.count == 0) {
+            //这个添加的节点是唯一一个节点，选中该节点，并更新状态
+            node.isSelected = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self updateSelectedNodeStatus:node];
+            });
+            [self updateSelectedNodeStatus:node];
+        }
+        [self.device.nodeArray addObject:node];
+        
     }
 }
 
@@ -295,7 +330,8 @@ CGFloat const nodeButtonWidth = 16.f;
 - (void)drawNewReportNode:(NodeModel *)node{
     UIButton *lastButton;
     for (UIButton *button in self.nodesView.subviews) {
-        if (button.tag > lastButton.tag) {//之前已经生成过button了
+        if (button.tag > lastButton.tag) {
+            //获取最后一个button，如果lastButton为空，则表示之前没有节点，生成第一个节点
             lastButton = button;
         }
     }
@@ -327,6 +363,7 @@ CGFloat const nodeButtonWidth = 16.f;
         }
     }
     nodeButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [nodeButton.imageView sizeThatFits:CGSizeMake(nodeButtonWidth, nodeButtonWidth)];
     nodeButton.tag = lastButton.tag + 1;
     [nodeButton addTarget:self action:@selector(nodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.nodesView addSubview:nodeButton];
@@ -342,9 +379,12 @@ CGFloat const nodeButtonWidth = 16.f;
     }];
 }
 
-//更新所有节点的状态
+//更新所有节点按钮的状态
 - (void)updateNodeStatus{
     for (UIButton *button in self.nodesView.subviews) {
+        if (button.tag < 1000) {
+            continue;
+        }
         NSInteger index = button.tag - 1000;
         NodeModel *node = self.device.nodeArray[index];
         if (node.isLeak || node.isLowVoltage) {
@@ -359,6 +399,9 @@ CGFloat const nodeButtonWidth = 16.f;
             }else{
                 [button setImage:[UIImage imageNamed:@"valveNode_normal"] forState:UIControlStateNormal];
             }
+        }
+        if (node.isSelected) {//该节点被选中时，节点状态信息要更新
+            [self updateSelectedNodeStatus:node];
         }
     }
 }
@@ -394,9 +437,37 @@ CGFloat const nodeButtonWidth = 16.f;
     }else{
         [nodeButton setImage:[UIImage imageNamed:@"valveNode_selnormal"] forState:UIControlStateNormal];
     }
+    [self updateSelectedNodeStatus:node];
 }
 
-#pragma mark - datasource private method
+//选择节点后更新该节点内漏水和电量的状态信息
+- (void)updateSelectedNodeStatus:(NodeModel *)node{
+    if (node.isLeak) {
+        [self.nodeLeakStatusButton setImage:[UIImage imageNamed:@"nodeLeakBig_abnormal"] forState:UIControlStateNormal];
+    }else{
+        [self.nodeLeakStatusButton setImage:[UIImage imageNamed:@"nodeLeakBig_normal"] forState:UIControlStateNormal];
+    }
+    if (node.isLowVoltage) {
+        [self.nodeBatteryButton setImage:[UIImage imageNamed:@"nodeBattery_abnormal"] forState:UIControlStateNormal];
+    }else{
+        [self.nodeBatteryButton setImage:[UIImage imageNamed:@"nodeBattery_normal"] forState:UIControlStateNormal];
+    }
+}
+
+//清除所有水阀节点
+- (void)valveReset{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (UIButton *button in self.nodesView.subviews) {
+            //删除所有之前生成的uibutton
+            if (button.tag < 1000) {
+                continue;
+            }
+            [button removeFromSuperview];
+        }
+    });
+}
+
+#pragma mark - Frame private method
 //水阀开关
 - (void)controlSwitch{
     UInt8 controlCode = 0x01;
@@ -410,6 +481,8 @@ CGFloat const nodeButtonWidth = 16.f;
     NSArray *data = @[@0xFE,@0x13,@0x04,@0x00];
     [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
 }
+
+
 
 #pragma mark - getters and setters
 - (void)setNavItem{
@@ -556,6 +629,7 @@ CGFloat const nodeButtonWidth = 16.f;
         _valveLabel.textAlignment = NSTextAlignmentCenter;
         _valveLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
         _valveLabel.font = [UIFont fontWithName:@"Helvetica" size:14.f];
+        _valveLabel.adjustsFontSizeToFitWidth = YES;
         [self.valveStatusView addSubview:_valveLabel];
         [_valveLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(60.f), yAutoFit(13.f)));
@@ -669,7 +743,7 @@ CGFloat const nodeButtonWidth = 16.f;
 -(UIButton *)nodeLeakStatusButton{
     if (!_nodeLeakStatusButton) {
         _nodeLeakStatusButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_nodeLeakStatusButton setImage:[UIImage imageNamed:@"nodeLeakBig_abnormal"] forState:UIControlStateNormal];
+        [_nodeLeakStatusButton setImage:[UIImage imageNamed:@"nodeLeakBig_normal"] forState:UIControlStateNormal];
         [self.view addSubview:_nodeLeakStatusButton];
         [_nodeLeakStatusButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(52.f), yAutoFit(52.f)));
