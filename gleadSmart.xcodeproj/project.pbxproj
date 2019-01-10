@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 36134F2B21E6E10100A7D98E /* NodeButton.m */; };
 		3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */; };
 		3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */; };
 		3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBE21A7E7EA00EA8F1C /* AddFamilyViewController.m */; };
@@ -67,12 +68,11 @@
 		BB0A40FD21997C99004669CA /* img_wallHob@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A621997C99004669CA /* img_wallHob@3x.png */; };
 		BB0A40FE21997C99004669CA /* 矢量智能对象7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */; };
 		BB1EB38D21E44C7A0024603A /* valveNode_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB38A21E44C790024603A /* valveNode_abnormal@3x.png */; };
-		BB1EB38E21E44C7A0024603A /* valveNode_abnormal@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB38B21E44C790024603A /* valveNode_abnormal@1x.png */; };
-		BB1EB38F21E44C7A0024603A /* valveNode_abnormal@2x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB38C21E44C790024603A /* valveNode_abnormal@2x@2x.png */; };
-		BB1EB39421E44E2B0024603A /* valveNode_selnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39021E44E2A0024603A /* valveNode_selnormal@2x.png */; };
-		BB1EB39521E44E2B0024603A /* valveNode_selabnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39121E44E2A0024603A /* valveNode_selabnormal@2x.png */; };
-		BB1EB39621E44E2B0024603A /* valveNode_selnormal@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39221E44E2A0024603A /* valveNode_selnormal@1x.png */; };
-		BB1EB39721E44E2B0024603A /* valveNode_selabnormal@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39321E44E2B0024603A /* valveNode_selabnormal@1x.png */; };
+		BB1EB38F21E44C7A0024603A /* valveNode_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB38C21E44C790024603A /* valveNode_abnormal@2x.png */; };
+		BB1EB39421E44E2B0024603A /* valveNode_selnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39021E44E2A0024603A /* valveNode_selnormal@3x.png */; };
+		BB1EB39521E44E2B0024603A /* valveNode_selabnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39121E44E2A0024603A /* valveNode_selabnormal@3x.png */; };
+		BB1EB39621E44E2B0024603A /* valveNode_selnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39221E44E2A0024603A /* valveNode_selnormal@2x.png */; };
+		BB1EB39721E44E2B0024603A /* valveNode_selabnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39321E44E2B0024603A /* valveNode_selabnormal@2x.png */; };
 		BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */; };
 		BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF63219E66210067BC61 /* HomeManagementController.m */; };
 		BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF69219E66F30067BC61 /* HouseManagementController.m */; };
@@ -370,7 +370,6 @@
 		BBF6326421BBAB34006A23AC /* valveStatus_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323121BBAB33006A23AC /* valveStatus_normal@3x.png */; };
 		BBF6326521BBAB34006A23AC /* valveHeader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323221BBAB33006A23AC /* valveHeader@3x.png */; };
 		BBF6326621BBAB34006A23AC /* valveSwitch_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323321BBAB33006A23AC /* valveSwitch_abnormal@2x.png */; };
-		BBF6326721BBAB34006A23AC /* valveNode_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323421BBAB33006A23AC /* valveNode_normal.png */; };
 		BBF6326B21BBBDE0006A23AC /* NodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326A21BBBDE0006A23AC /* NodeDetailViewController.m */; };
 		BBF6326E21BBC472006A23AC /* NodeInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326D21BBC472006A23AC /* NodeInfoCell.m */; };
 		DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */; };
@@ -397,6 +396,8 @@
 		0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gleadSmart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C91728F2E98E7E5ACCA018D /* Pods-gleadSmart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.debug.xcconfig"; sourceTree = "<group>"; };
 		21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.release.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.release.xcconfig"; sourceTree = "<group>"; };
+		36134F2A21E6E10100A7D98E /* NodeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeButton.h; sourceTree = "<group>"; };
+		36134F2B21E6E10100A7D98E /* NodeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeButton.m; sourceTree = "<group>"; };
 		3E3AFFB821A7E74800EA8F1C /* HouseManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseManagementTableViewCell.h; sourceTree = "<group>"; };
 		3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseManagementTableViewCell.m; sourceTree = "<group>"; };
 		3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeManagementCell.m; sourceTree = "<group>"; };
@@ -484,12 +485,11 @@
 		BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7@2x.png"; sourceTree = "<group>"; };
 		BB0A4100219986FE004669CA /* gleadSmart-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gleadSmart-Prefix.pch"; sourceTree = "<group>"; };
 		BB1EB38A21E44C790024603A /* valveNode_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_abnormal@3x.png"; sourceTree = "<group>"; };
-		BB1EB38B21E44C790024603A /* valveNode_abnormal@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_abnormal@1x.png"; sourceTree = "<group>"; };
-		BB1EB38C21E44C790024603A /* valveNode_abnormal@2x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_abnormal@2x@2x.png"; sourceTree = "<group>"; };
-		BB1EB39021E44E2A0024603A /* valveNode_selnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selnormal@2x.png"; sourceTree = "<group>"; };
-		BB1EB39121E44E2A0024603A /* valveNode_selabnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selabnormal@2x.png"; sourceTree = "<group>"; };
-		BB1EB39221E44E2A0024603A /* valveNode_selnormal@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selnormal@1x.png"; sourceTree = "<group>"; };
-		BB1EB39321E44E2B0024603A /* valveNode_selabnormal@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selabnormal@1x.png"; sourceTree = "<group>"; };
+		BB1EB38C21E44C790024603A /* valveNode_abnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_abnormal@2x.png"; sourceTree = "<group>"; };
+		BB1EB39021E44E2A0024603A /* valveNode_selnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selnormal@3x.png"; sourceTree = "<group>"; };
+		BB1EB39121E44E2A0024603A /* valveNode_selabnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selabnormal@3x.png"; sourceTree = "<group>"; };
+		BB1EB39221E44E2A0024603A /* valveNode_selnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selnormal@2x.png"; sourceTree = "<group>"; };
+		BB1EB39321E44E2B0024603A /* valveNode_selabnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selabnormal@2x.png"; sourceTree = "<group>"; };
 		BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectDeviceTypeController.h; sourceTree = "<group>"; };
 		BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectDeviceTypeController.m; sourceTree = "<group>"; };
 		BB21BF62219E66210067BC61 /* HomeManagementController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeManagementController.h; sourceTree = "<group>"; };
@@ -869,7 +869,6 @@
 		BBF6323121BBAB33006A23AC /* valveStatus_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_normal@3x.png"; sourceTree = "<group>"; };
 		BBF6323221BBAB33006A23AC /* valveHeader@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveHeader@3x.png"; sourceTree = "<group>"; };
 		BBF6323321BBAB33006A23AC /* valveSwitch_abnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveSwitch_abnormal@2x.png"; sourceTree = "<group>"; };
-		BBF6323421BBAB33006A23AC /* valveNode_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveNode_normal.png; sourceTree = "<group>"; };
 		BBF6326921BBBDE0006A23AC /* NodeDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeDetailViewController.h; sourceTree = "<group>"; };
 		BBF6326A21BBBDE0006A23AC /* NodeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeDetailViewController.m; sourceTree = "<group>"; };
 		BBF6326C21BBC472006A23AC /* NodeInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeInfoCell.h; sourceTree = "<group>"; };
@@ -909,6 +908,15 @@
 				21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		36134F2921E6E0DC00A7D98E /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				36134F2A21E6E10100A7D98E /* NodeButton.h */,
+				36134F2B21E6E10100A7D98E /* NodeButton.m */,
+			);
+			path = UIButton;
 			sourceTree = "<group>";
 		};
 		3E9E9B9821A2ABC600CA2B7D /* Home */ = {
@@ -961,6 +969,7 @@
 		BB0A400F21991AA8004669CA /* OC_Category */ = {
 			isa = PBXGroup;
 			children = (
+				36134F2921E6E0DC00A7D98E /* UIButton */,
 				BB0A402121991AA8004669CA /* View */,
 				BB0A401B21991AA8004669CA /* TableView+Touch */,
 				BB0A401121991AA8004669CA /* NSDate+Common.h */,
@@ -1671,16 +1680,14 @@
 				BBF6322921BBAB32006A23AC /* valveLeak_normal.png */,
 				BBF6322321BBAB31006A23AC /* valveLeak_normal@2x.png */,
 				BBF6322721BBAB31006A23AC /* valveLeak_normal@3x.png */,
-				BBF6323421BBAB33006A23AC /* valveNode_normal.png */,
 				BBF6320E21BBAB2E006A23AC /* valveNode_normal@2x.png */,
 				BBF6322D21BBAB32006A23AC /* valveNode_normal@3x.png */,
-				BB1EB38B21E44C790024603A /* valveNode_abnormal@1x.png */,
-				BB1EB38C21E44C790024603A /* valveNode_abnormal@2x@2x.png */,
+				BB1EB38C21E44C790024603A /* valveNode_abnormal@2x.png */,
 				BB1EB38A21E44C790024603A /* valveNode_abnormal@3x.png */,
-				BB1EB39321E44E2B0024603A /* valveNode_selabnormal@1x.png */,
-				BB1EB39121E44E2A0024603A /* valveNode_selabnormal@2x.png */,
-				BB1EB39221E44E2A0024603A /* valveNode_selnormal@1x.png */,
-				BB1EB39021E44E2A0024603A /* valveNode_selnormal@2x.png */,
+				BB1EB39321E44E2B0024603A /* valveNode_selabnormal@2x.png */,
+				BB1EB39121E44E2A0024603A /* valveNode_selabnormal@3x.png */,
+				BB1EB39221E44E2A0024603A /* valveNode_selnormal@2x.png */,
+				BB1EB39021E44E2A0024603A /* valveNode_selnormal@3x.png */,
 				BB8B9E7021A6ADEB00E5D8B2 /* valveStatus_abnormal.png */,
 				BB8B9E6921A6ADEB00E5D8B2 /* valveStatus_abnormal@2x.png */,
 				BB8B9E6821A6ADEB00E5D8B2 /* valveStatus_abnormal@3x.png */,
@@ -1860,7 +1867,7 @@
 				BB5B03AE21B90343007AC2B1 /* img_mine_checkUpdate@2x.png in Resources */,
 				BB63B58221B3B94100D77489 /* thermostat_timing_on@3x.png in Resources */,
 				BB52F9EA21BE4A5A005FA33A /* thermostatKnob_On@2x.png in Resources */,
-				BB1EB39621E44E2B0024603A /* valveNode_selnormal@1x.png in Resources */,
+				BB1EB39621E44E2B0024603A /* valveNode_selnormal@2x.png in Resources */,
 				BB8B9DB821A6815000E5D8B2 /* thermostatControl@2x.png in Resources */,
 				BB5B03AA21B90343007AC2B1 /* img_mine_editPW@2x.png in Resources */,
 				BB5B034521B8BD2F007AC2B1 /* img_login_bg@3x.png in Resources */,
@@ -1907,7 +1914,7 @@
 				BB63B60521B4151D00D77489 /* thermostat_-@3x.png in Resources */,
 				BB5B03BC21B90343007AC2B1 /* img_mine_logout.png in Resources */,
 				BB5B035D21B8C3DA007AC2B1 /* img_login_header@2x.png in Resources */,
-				BB1EB39421E44E2B0024603A /* valveNode_selnormal@2x.png in Resources */,
+				BB1EB39421E44E2B0024603A /* valveNode_selnormal@3x.png in Resources */,
 				BB37DED321A7984000B2121B /* thermostat_timing@2x.png in Resources */,
 				BB0A40B821997C99004669CA /* img_headerBg@2x.png in Resources */,
 				BB8B9DC621A6815000E5D8B2 /* thermostatKnob@2x.png in Resources */,
@@ -1933,7 +1940,6 @@
 				BB0A40BB21997C99004669CA /* img_homeSet@2x.png in Resources */,
 				BB5B03CA21B90C48007AC2B1 /* img_mine_headerBG@3x.png in Resources */,
 				BBF6326521BBAB34006A23AC /* valveHeader@3x.png in Resources */,
-				BBF6326721BBAB34006A23AC /* valveNode_normal.png in Resources */,
 				BB2AC12121AA8A64006DB83A /* addFamily_device.png in Resources */,
 				BB62E4F621B51CD900C0FA39 /* img_weekProgram_out.png in Resources */,
 				BB52F9E821BE4149005FA33A /* img_tab_03_select.png in Resources */,
@@ -1943,14 +1949,13 @@
 				BB62E4F821B51CD900C0FA39 /* img_weekProgram_out@2x.png in Resources */,
 				BB5B03C221B90343007AC2B1 /* img_mine_wechat.png in Resources */,
 				BB8B9E7221A6ADEB00E5D8B2 /* valveSwitch_normal@2x.png in Resources */,
-				BB1EB38F21E44C7A0024603A /* valveNode_abnormal@2x@2x.png in Resources */,
+				BB1EB38F21E44C7A0024603A /* valveNode_abnormal@2x.png in Resources */,
 				BB3D219E21AE7E2B002CB334 /* img_valve_off@2x.png in Resources */,
 				BB352922219D968500428DE9 /* img_houseSelected@2x.png in Resources */,
 				BB0A40D821997C99004669CA /* img_weatherBg@3x.png in Resources */,
 				BB2AC12321AA8A64006DB83A /* addFamily_check@2x.png in Resources */,
 				BB5B036821B8CB6B007AC2B1 /* img_pwd_unvisiable@2x.png in Resources */,
 				BB5B03AF21B90343007AC2B1 /* img_mine_editPW@3x.png in Resources */,
-				BB1EB38E21E44C7A0024603A /* valveNode_abnormal@1x.png in Resources */,
 				BB5B034F21B8BD2F007AC2B1 /* img_login_password@3x.png in Resources */,
 				BB8B9E7421A6ADEB00E5D8B2 /* valveLeak_abnormal@2x.png in Resources */,
 				BB2AD78821AB98BD006DB83A /* KYDivisionPickerView_list.json in Resources */,
@@ -2011,7 +2016,7 @@
 				BB425F5721BF4DF400AB6EFB /* img_valve_on@3x.png in Resources */,
 				BB49DF9D21958867004E00A2 /* Assets.xcassets in Resources */,
 				BB2AD78E21ABD813006DB83A /* img_launchBG@2x.png in Resources */,
-				BB1EB39521E44E2B0024603A /* valveNode_selabnormal@2x.png in Resources */,
+				BB1EB39521E44E2B0024603A /* valveNode_selabnormal@3x.png in Resources */,
 				BB62E4F521B51CD900C0FA39 /* img_weekProgram_sleep@2x.png in Resources */,
 				BB0A40F321997C99004669CA /* img_weatherBg.png in Resources */,
 				BB2AD79521ABDA45006DB83A /* img_launchTitle@3x.png in Resources */,
@@ -2059,7 +2064,7 @@
 				BB52F9E621BE4149005FA33A /* img_tab_03_select@2x.png in Resources */,
 				BBF6324621BBAB34006A23AC /* nodeHeaderBtn@3x.png in Resources */,
 				BB37DED721A798A100B2121B /* thermostatKnob_On@3x.png in Resources */,
-				BB1EB39721E44E2B0024603A /* valveNode_selabnormal@1x.png in Resources */,
+				BB1EB39721E44E2B0024603A /* valveNode_selabnormal@2x.png in Resources */,
 				BB2AD78D21ABD813006DB83A /* img_launchBG@3x.png in Resources */,
 				BB0A40B221997C99004669CA /* img_tab_01_select@2x.png in Resources */,
 				BB5B03B221B90343007AC2B1 /* pen@2x.png in Resources */,
@@ -2203,6 +2208,7 @@
 				BB00A4FF21BA25B7004E4051 /* YAlertViewController.m in Sources */,
 				BB2AC10E21A94F42006DB83A /* HouseModel.m in Sources */,
 				BB2AC10B21A94D63006DB83A /* AFSecurityPolicy.m in Sources */,
+				36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */,
 				BBF6326E21BBC472006A23AC /* NodeInfoCell.m in Sources */,
 				3EA530CC21AB9C88000A6D26 /* LoginViewController.m in Sources */,
 				3EA530CB21AB9C88000A6D26 /* RegisterController.m in Sources */,

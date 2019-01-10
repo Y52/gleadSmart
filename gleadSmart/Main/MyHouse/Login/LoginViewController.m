@@ -283,7 +283,7 @@
                   NSDictionary *dataDic = [responseDic objectForKey:@"data"];
                   Database *data = [Database shareInstance];
                   data.user.userId = [dataDic objectForKey:@"userId"];
-                  [data initDB];
+                  [data initDB];//初始化单例，数据库等
                   data.token = [dataDic objectForKey:@"token"];
                   
                   //保存数据 用户信息；用户名；用户密码
@@ -296,6 +296,7 @@
                       [userDefaults synchronize];
                   }
                   
+                  //获取家庭列表和信息，每次登录更新数据库
                   if ([[dataDic objectForKey:@"houses"] count] > 0) {
                       [[dataDic objectForKey:@"houses"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                           HouseModel *house = [[HouseModel alloc] init];
@@ -318,7 +319,8 @@
                   
                   data.houseList = [data queryAllHouse];
                   if (data.houseList.count > 0) {
-                      //data.currentHouse = data.houseList[0];
+                      //选择第一个家庭为当前家庭
+                      data.currentHouse = data.houseList[0];
                   }
                   
                   //进入主页面
@@ -383,6 +385,7 @@
     [self presentViewController:RetrieveVC animated:YES completion:nil];
 }
 
+//获取验证码
 - (void)getVerifyCode{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     

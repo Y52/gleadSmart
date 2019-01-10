@@ -949,6 +949,7 @@ static int noUserInteractionHeartbeat = 0;
             continue;
         }
         
+        //判断设备是否本地存储过
         BOOL isLocal = NO;
         for (DeviceModel *localDevice in db.localDeviceArray) {
             if ([device.mac isEqualToString:localDevice.mac]) {
@@ -967,6 +968,7 @@ static int noUserInteractionHeartbeat = 0;
              */
             [self addNewDeviceWith:device];
             
+            //初始命名
             if ([device.type integerValue] == 1) {
                 device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"温控器"),[device.mac substringWithRange:NSMakeRange(6, 2)]];
             }else if ([device.type integerValue] == 2){
@@ -976,13 +978,16 @@ static int noUserInteractionHeartbeat = 0;
             [self.deviceArray addObject:device];
         }
     }
+    
     /*
      *将localDeviceArray剩余的device从服务器中删除，因为在网关中查找不到设备
      */
     for (DeviceModel *localDevice in db.localDeviceArray) {
+        //删除api还没做好
         //[self removeOldDeviceWith:localDevice];
     }
     
+    //通知刷新设备
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
 }
 
@@ -1014,11 +1019,6 @@ static int noUserInteractionHeartbeat = 0;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
 }
-
-
-/*
- *从onenet获取设备列表并进行数据库等的操作
- */
 
 
 /*
@@ -1059,7 +1059,11 @@ static int noUserInteractionHeartbeat = 0;
               }
           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
               NSLog(@"Error:%@",error);
-              [NSObject showHudTipStr:LocalString(@"无法登录远程服务器，请检查网络状况")];
+              if (error.code == -1001) {
+                  [NSObject showHudTipStr:LocalString(@"无法登录远程服务器，请检查网络状况")];
+              }else{
+                  [NSObject showHudTipStr:LocalString(@"服务器添加设备失败")];
+              }
 
           }
      ];

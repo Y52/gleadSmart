@@ -123,6 +123,7 @@
 }
 
 #pragma mark - Actions
+//自动登录功能
 - (void)autoLogin{
     [SVProgressHUD show];
     Database *db = [Database shareInstance];
@@ -135,6 +136,7 @@
     NSLog(@"%@",mobile);
     NSLog(@"%@",password);
     if (!mobile || !password) {
+        //如果没有保存账号密码，取消自动登录
         [SVProgressHUD dismiss];
         return;
     }
@@ -163,9 +165,10 @@
                   if ([dic objectForKey:@"mobile"]) {
                       db.user.mobile = [dic objectForKey:@"mobile"];
                   }
-                  [db initDB];
+                  [db initDB];//初始化单例，数据库等
                   db.token = [dic objectForKey:@"token"];
                   
+                  //获取家庭列表和信息，每次登录更新数据库
                   if ([[dic objectForKey:@"houses"] count] > 0) {
                       [[dic objectForKey:@"houses"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                           HouseModel *house = [[HouseModel alloc] init];

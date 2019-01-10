@@ -14,7 +14,6 @@ static CGFloat const Cell_Height = 50.f;
 
 @interface HomeManagementController () <UITableViewDataSource,UITableViewDelegate>
 
-#warning TODO 完成房间管理列表UI
 @property (strong, nonatomic) UITableView *homeManagementTable;
 @property (strong, nonatomic) UIButton *addShareBtn;
 

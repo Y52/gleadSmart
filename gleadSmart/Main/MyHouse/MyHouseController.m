@@ -74,6 +74,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     self.addDeviceButton = [self addDeviceButton];
     
     if ([Database shareInstance].currentHouse) {
+        //如果已经选中了家庭，获取家庭中的房间列表和所有设备
         [self getHouseHomeListAndDevice];
     }
     
@@ -360,7 +361,9 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 }
 
 #pragma mark - update with API
+//获取房间列表和所有设备
 - (void)getHouseHomeListAndDevice{
+    
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
@@ -420,6 +423,8 @@ static CGFloat const gleadMenuItemMargin = 25.f;
                     room.roomUid = [obj objectForKey:@"roomUid"];
                     room.houseUid = db.currentHouse.houseUid;
                     room.deviceArray = [[NSMutableArray alloc] init];
+                    
+                    //获取房间内关联的所有设备
                     [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                         DeviceModel *device = [[DeviceModel alloc] init];
                         device.name = [obj objectForKey:@"deviceName"];
@@ -436,6 +441,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
                     }];
                     [db insertNewRoom:room];
                     
+                    //防止在刷新家庭信息后房间列表内房间重复添加的bug
                     static BOOL isContain = NO;
                     for (RoomModel *containRoom in self.homeList) {
                         if ([room.roomUid isEqualToString:containRoom.roomUid]) {
@@ -447,7 +453,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
                     }
                     
                 }];
-                [self reloadData];
+                [self reloadData];//wmpagecontroller更新滑动列表
             }
         }else{
             [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];
@@ -575,6 +581,8 @@ static CGFloat const gleadMenuItemMargin = 25.f;
             break;
         }
     }
+    
+    //获取家庭网关下所有下挂设备
     UInt8 controlCode = 0x00;
     NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
     [[Network shareNetwork] sendData69With:controlCode mac:db.currentHouse.mac data:data];
