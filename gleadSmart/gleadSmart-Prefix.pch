@@ -30,6 +30,7 @@
 #import "NodeModel.h"
 #import "Network.h"
 #import "Database.h"
+#import "YRabbitMQ.h"
 #import "YAlertViewController.h"
 #endif
 // Include any system framework and library headers here that should be included in all compilation units.

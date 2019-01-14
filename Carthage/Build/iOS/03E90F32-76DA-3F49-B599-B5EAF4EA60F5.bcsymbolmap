@@ -1,0 +1,252 @@
+BCSymbolMap Version: 2.0
+-[JKVMutableValue JKV_isMutable]
+Apple LLVM version 10.0.0 (clang-1000.11.45.5)
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Public/JKVMutableValue.m
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue
+-[JKVNonZeroSetterVisitor initWithObject:]
+-[JKVNonZeroSetterVisitor propertyWasInt64:]
+-[JKVNonZeroSetterVisitor propertyWasInt32:]
+-[JKVNonZeroSetterVisitor propertyWasInt16:]
+-[JKVNonZeroSetterVisitor propertyWasFloat:]
+-[JKVNonZeroSetterVisitor propertyWasDouble:]
+-[JKVNonZeroSetterVisitor propertyWasBool:]
+-[JKVNonZeroSetterVisitor propertyWasObjCObject:]
+-[JKVNonZeroSetterVisitor propertyWasUnknownType:]
+-[JKVNonZeroSetterVisitor propertyWasCGPoint:]
+-[JKVNonZeroSetterVisitor propertyWasCGSize:]
+-[JKVNonZeroSetterVisitor propertyWasCGRect:]
+-[JKVNonZeroSetterVisitor propertyWasCGAffineTransform:]
+-[JKVNonZeroSetterVisitor propertyWasUIEdgeInsets:]
+-[JKVNonZeroSetterVisitor propertyWasUIOffset:]
+-[JKVNonZeroSetterVisitor object]
+-[JKVNonZeroSetterVisitor setObject:]
+-[JKVNonZeroSetterVisitor .cxx_destruct]
+_OBJC_IVAR_$_JKVNonZeroSetterVisitor._object
+l_OBJC_PROTOCOL_$_NSObject
+l_OBJC_LABEL_PROTOCOL_$_NSObject
+l_OBJC_PROTOCOL_$_JKVPropertyEncodingTypeVisitor
+l_OBJC_LABEL_PROTOCOL_$_JKVPropertyEncodingTypeVisitor
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Private/JKVNonZeroSetterVisitor.m
+__CGAffineTransformMake
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGAffineTransform.h
+-[JKVValue initFromJKVValue]
+-[JKVValue initWithCoder:]
++[JKVValue supportsSecureCoding]
+-[JKVValue encodeWithCoder:]
+-[JKVValue copyWithZone:]
+-[JKVValue mutableCopyWithZone:]
+-[JKVValue description]
+-[JKVValue debugDescription]
+-[JKVValue isEqual:]
+-[JKVValue hash]
+-[JKVValue differenceToObject:]
+-[JKVValue JKV_isMutable]
+-[JKVValue JKV_mutableClass]
+-[JKVValue JKV_immutableClass]
+-[JKVValue JKV_propertyNamesForIdentity]
+-[JKVValue JKV_propertyNamesToAssignCopy]
+-[JKVValue JKV_cachedPropertyNamesForIdentity]
+-[JKVValue JKV_cachedPropertyNamesToAssignCopy]
+-[JKVValue JKV_inspector]
+-[JKVValue .cxx_destruct]
+_OBJC_IVAR_$_JKVValue._JKV_propertiesForIdentity
+_OBJC_IVAR_$_JKVValue._JKV_propertiesToAssignCopy
+_OBJC_IVAR_$_JKVValue._JKV_inspector
+l_OBJC_PROTOCOL_$_NSMutableCopying
+l_OBJC_LABEL_PROTOCOL_$_NSMutableCopying
+l_OBJC_PROTOCOL_$_NSCopying
+l_OBJC_LABEL_PROTOCOL_$_NSCopying
+l_OBJC_PROTOCOL_$_NSCoding
+l_OBJC_LABEL_PROTOCOL_$_NSCoding
+l_OBJC_PROTOCOL_$_NSSecureCoding
+l_OBJC_LABEL_PROTOCOL_$_NSSecureCoding
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Public/JKVValueImpl.m
+-[JKVProperty initWithName:attributes:]
+-[JKVProperty description]
+-[JKVProperty encodingType]
+-[JKVProperty ivarName]
+-[JKVProperty encodingTypeObjCDeclaration]
+-[JKVProperty classType]
+-[JKVProperty isEncodingType:]
+-[JKVProperty isObjCObjectType]
+-[JKVProperty isWeak]
+-[JKVProperty isNonAtomic]
+-[JKVProperty isReadOnly]
+-[JKVProperty visitEncodingType:]
+-[JKVProperty name]
+-[JKVProperty setName:]
+-[JKVProperty attributes]
+-[JKVProperty setAttributes:]
+-[JKVProperty .cxx_destruct]
+_OBJC_IVAR_$_JKVProperty._name
+_OBJC_IVAR_$_JKVProperty._attributes
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Private/JKVProperty.m
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Private/JKVProperty.h
+NSMakeRange
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
+-[JKVKeyedDecoderVisitor initWithCoder:forObject:]
+-[JKVKeyedDecoderVisitor propertyWasInt64:]
+-[JKVKeyedDecoderVisitor propertyWasInt32:]
+-[JKVKeyedDecoderVisitor propertyWasInt16:]
+-[JKVKeyedDecoderVisitor propertyWasFloat:]
+-[JKVKeyedDecoderVisitor propertyWasDouble:]
+-[JKVKeyedDecoderVisitor propertyWasBool:]
+-[JKVKeyedDecoderVisitor propertyWasObjCObject:]
+-[JKVKeyedDecoderVisitor propertyWasUnknownType:]
+-[JKVKeyedDecoderVisitor propertyWasCGPoint:]
+-[JKVKeyedDecoderVisitor propertyWasCGSize:]
+-[JKVKeyedDecoderVisitor propertyWasCGRect:]
+-[JKVKeyedDecoderVisitor propertyWasCGAffineTransform:]
+-[JKVKeyedDecoderVisitor propertyWasUIEdgeInsets:]
+-[JKVKeyedDecoderVisitor propertyWasUIOffset:]
+-[JKVKeyedDecoderVisitor coder]
+-[JKVKeyedDecoderVisitor setCoder:]
+-[JKVKeyedDecoderVisitor target]
+-[JKVKeyedDecoderVisitor setTarget:]
+-[JKVKeyedDecoderVisitor .cxx_destruct]
+_OBJC_IVAR_$_JKVKeyedDecoderVisitor._coder
+_OBJC_IVAR_$_JKVKeyedDecoderVisitor._target
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Private/JKVKeyedDecoderVisitor.m
++[JKVClassInspector clearInstanceCache]
++[JKVClassInspector initialize]
++[JKVClassInspector inspectorForClass:]
+-[JKVClassInspector initWithClass:]
+-[JKVClassInspector isObject:equalToObject:byPropertyNames:]
+-[JKVClassInspector hashObject:byPropertyNames:visitedObjects:]
+-[JKVClassInspector isObject:equalToObject:withPropertyNames:]
+-[JKVClassInspector hashObject:byPropertyNames:]
+-[JKVClassInspector copyToObject:fromObject:inZone:propertyNames:weakPropertyNames:]
+-[JKVClassInspector nonWeakProperties]
+-[JKVClassInspector weakProperties]
+-[JKVClassInspector properties]
+-[JKVClassInspector _propertiesBackedByInstanceVariables]
+-[JKVClassInspector propertiesBackedByInstanceVariables]
+-[JKVClassInspector weakPropertyNames]
+-[JKVClassInspector nonWeakPropertyNames]
+-[JKVClassInspector aClass]
+-[JKVClassInspector setAClass:]
+-[JKVClassInspector setProperties:]
+-[JKVClassInspector setPropertiesBackedByInstanceVariables:]
+-[JKVClassInspector setWeakProperties:]
+-[JKVClassInspector setNonWeakProperties:]
+-[JKVClassInspector setWeakPropertyNames:]
+-[JKVClassInspector setNonWeakPropertyNames:]
+-[JKVClassInspector .cxx_destruct]
+_inspectors__
+l_OBJC_PROTOCOL_REFERENCE_$_NSMutableCopying
+_OBJC_IVAR_$_JKVClassInspector._nonWeakProperties
+_OBJC_IVAR_$_JKVClassInspector._weakProperties
+_OBJC_IVAR_$_JKVClassInspector._properties
+_OBJC_IVAR_$_JKVClassInspector._propertiesBackedByInstanceVariables
+_OBJC_IVAR_$_JKVClassInspector._weakPropertyNames
+_OBJC_IVAR_$_JKVClassInspector._nonWeakPropertyNames
+_OBJC_IVAR_$_JKVClassInspector._aClass
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Private/JKVClassInspector.m
+-[JKVKeyedEncoderVisitor initWithCoder:forObject:]
+-[JKVKeyedEncoderVisitor propertyWasInt64:]
+-[JKVKeyedEncoderVisitor propertyWasInt32:]
+-[JKVKeyedEncoderVisitor propertyWasInt16:]
+-[JKVKeyedEncoderVisitor propertyWasFloat:]
+-[JKVKeyedEncoderVisitor propertyWasDouble:]
+-[JKVKeyedEncoderVisitor propertyWasBool:]
+-[JKVKeyedEncoderVisitor propertyWasObjCObject:]
+-[JKVKeyedEncoderVisitor propertyWasUnknownType:]
+-[JKVKeyedEncoderVisitor propertyWasCGPoint:]
+-[JKVKeyedEncoderVisitor propertyWasCGSize:]
+-[JKVKeyedEncoderVisitor propertyWasCGRect:]
+-[JKVKeyedEncoderVisitor propertyWasCGAffineTransform:]
+-[JKVKeyedEncoderVisitor propertyWasUIEdgeInsets:]
+-[JKVKeyedEncoderVisitor propertyWasUIOffset:]
+-[JKVKeyedEncoderVisitor coder]
+-[JKVKeyedEncoderVisitor setCoder:]
+-[JKVKeyedEncoderVisitor target]
+-[JKVKeyedEncoderVisitor setTarget:]
+-[JKVKeyedEncoderVisitor .cxx_destruct]
+_OBJC_IVAR_$_JKVKeyedEncoderVisitor._coder
+_OBJC_IVAR_$_JKVKeyedEncoderVisitor._target
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Private/JKVKeyedEncoderVisitor.m
++[JKVFactory factoryForClass:]
+-[JKVFactory init]
+-[JKVFactory initWithClass:]
+-[JKVFactory initWithClass:properties:]
+-[JKVFactory factoryWithProperties:]
+-[JKVFactory object]
+-[JKVFactory objectWithProperties:]
++[JKVFactory buildObject]
++[JKVFactory buildObjectWithProperties:]
+-[JKVFactory setProductClass:]
+-[JKVFactory productClass]
+-[JKVFactory properties]
+-[JKVFactory setProperties:]
+-[JKVFactory inspector]
+-[JKVFactory setInspector:]
+-[JKVFactory .cxx_destruct]
+_OBJC_IVAR_$_JKVFactory._productClass
+_OBJC_IVAR_$_JKVFactory._properties
+_OBJC_IVAR_$_JKVFactory._inspector
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Public/JKVFactory.m
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Public/JKVFactory.h
+_JKVGenericSorter_block_invoke
++[JKVObjectPrinter swizzleContainers]
+___37+[JKVObjectPrinter swizzleContainers]_block_invoke
+___copy_helper_block_
+___destroy_helper_block_
+___37+[JKVObjectPrinter swizzleContainers]_block_invoke.10
+___copy_helper_block_.11
+___destroy_helper_block_.12
+___37+[JKVObjectPrinter swizzleContainers]_block_invoke.16
+___copy_helper_block_.19
+___destroy_helper_block_.20
+___37+[JKVObjectPrinter swizzleContainers]_block_invoke.24
+___copy_helper_block_.25
+___destroy_helper_block_.26
+___37+[JKVObjectPrinter swizzleContainers]_block_invoke.30
+___copy_helper_block_.33
+___destroy_helper_block_.34
+___37+[JKVObjectPrinter swizzleContainers]_block_invoke.38
+___copy_helper_block_.39
+___destroy_helper_block_.40
++[JKVObjectPrinter unswizzleContainers]
+-[JKVObjectPrinter swizzleDescriptionOfClass:withBlock:]
+___56-[JKVObjectPrinter swizzleDescriptionOfClass:withBlock:]_block_invoke
+___copy_helper_block_.51
+___destroy_helper_block_.52
+-[JKVObjectPrinter unswizzleDescriptionOfClass:]
++[JKVObjectPrinter descriptionForObject:withProperties:]
++[JKVObjectPrinter sharedInstance]
+___34+[JKVObjectPrinter sharedInstance]_block_invoke
+___copy_helper_block_.65
+___destroy_helper_block_.66
+-[JKVObjectPrinter descriptionForObject:withProperties:]
+-[JKVObjectPrinter stringForObject:withProperties:]
+-[JKVObjectPrinter stringForDictionary:]
+-[JKVObjectPrinter stringForArray:]
+-[JKVObjectPrinter stringForSet:]
+-[JKVObjectPrinter stringByPaddingString:toLength:withString:]
+-[JKVObjectPrinter stringWithMultilineString:withLinePrefix:prefixFirstLine:]
+___block_descriptor_tmp
+___block_literal_global
+___block_descriptor_tmp.6
+___block_descriptor_tmp.14
+___block_descriptor_tmp.22
+___block_descriptor_tmp.28
+___block_descriptor_tmp.36
+___block_descriptor_tmp.42
+___block_descriptor_tmp.54
+_sharedInstance.JKVObjectPrinterInstance__
+_sharedInstance.onceToken
+___block_descriptor_tmp.69
+/Users/guiwukeji/Desktop/gleadsmart/gleadSmart/Carthage/Checkouts/JKVValue/JKVValue/Public/JKVObjectPrinter.m
+__destroy_helper_block_
+__copy_helper_block_
+__34+[JKVObjectPrinter sharedInstance]_block_invoke
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/usr/include/dispatch/once.h
+__56-[JKVObjectPrinter swizzleDescriptionOfClass:withBlock:]_block_invoke
+__37+[JKVObjectPrinter swizzleContainers]_block_invoke.38
+__37+[JKVObjectPrinter swizzleContainers]_block_invoke.30
+__37+[JKVObjectPrinter swizzleContainers]_block_invoke.24
+__37+[JKVObjectPrinter swizzleContainers]_block_invoke.16
+__37+[JKVObjectPrinter swizzleContainers]_block_invoke.10
+__37+[JKVObjectPrinter swizzleContainers]_block_invoke
+JKVGenericSorter_block_invoke
+/Users/guiwukeji/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/JKVValue/v1.3.3/Build/Intermediates.noindex/ArchiveIntermediates/JKVValue-iOS/IntermediateBuildFilesPath/JKVValue.build/Release-iphoneos/JKVValue-iOS.build/DerivedSources/JKVValue_vers.c

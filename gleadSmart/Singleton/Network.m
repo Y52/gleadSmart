@@ -334,7 +334,7 @@ static int noUserInteractionHeartbeat = 0;
     });
 }
 
-#pragma mark - OneNET API
+#pragma mark - OneNET Comminicate
 - (void)oneNETSendData:(NSMutableArray *)msg{
     
     Database *db = [Database shareInstance];
@@ -451,7 +451,7 @@ static int noUserInteractionHeartbeat = 0;
         NSString * daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"success:%@",daetr);
         NSString *cmmdReply = [responseDic objectForKey:@"cmmdReply"];
-        [[Network shareNetwork] handleOneNET69Message:cmmdReply];
+        [self handleOneNET69Message:cmmdReply];
         dispatch_semaphore_signal(self.sendSignal);//收到信息增加信号量
         
         //测试
@@ -462,6 +462,18 @@ static int noUserInteractionHeartbeat = 0;
         
     }];
 }
+
+#pragma mark - OneNET 回复数据处理
+- (void)handleOneNET69Message:(NSString *)cmmdReply{
+    NSMutableArray *cmmdReplyData = [[NSMutableArray alloc] init];
+    NSInteger length = cmmdReply.length;
+    for (int i = 0; i < length; i = i + 2) {
+        NSString *frameByte = [cmmdReply substringWithRange:NSMakeRange(i, 2)];
+        [cmmdReplyData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:frameByte]]];
+    }
+    [self handle68Message:cmmdReplyData];
+}
+
 
 #pragma mark - Frame69 接收处理
 - (void)checkOutFrame:(NSData *)data{
@@ -888,19 +900,7 @@ static int noUserInteractionHeartbeat = 0;
     return YES;
 }
 
-#pragma mark - OneNET 回复数据处理
-- (void)handleOneNET69Message:(NSString *)cmmdReply{
-    NSMutableArray *cmmdReplyData = [[NSMutableArray alloc] init];
-    NSInteger length = cmmdReply.length;
-    for (int i = 0; i < length; i = i + 2) {
-        NSString *frameByte = [cmmdReply substringWithRange:NSMakeRange(i, 2)];
-        [cmmdReplyData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:frameByte]]];
-    }
-    [self handle68Message:cmmdReplyData];
-}
-
-
-#pragma mark - Device management
+#pragma mark - private method && Device management
 /*
  *从网关获取设备列表并进行数据库等的操作
  */

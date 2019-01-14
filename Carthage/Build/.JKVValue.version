@@ -1,0 +1,9 @@
+{
+  "commitish" : "v1.3.3",
+  "iOS" : [
+    {
+      "name" : "JKVValue",
+      "hash" : "dbf4b6c4e264b779cfd62106e5490c04da19ef582d05222af5486dfd4103266d"
+    }
+  ]
+}

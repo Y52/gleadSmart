@@ -1,0 +1,9 @@
+{
+  "commitish" : "v0.10.0",
+  "iOS" : [
+    {
+      "name" : "RMQClient",
+      "hash" : "80a0a9afbe788b8ae4cc8c9033c82ea63c68e5a85b23300fc9af142b337afebf"
+    }
+  ]
+}

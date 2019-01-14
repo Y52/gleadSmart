@@ -1,0 +1,23 @@
+language: objective-c
+osx_image: xcode7.3
+xcode_project: RMQClient.xcodeproj
+xcode_scheme: RMQClient
+xcode_sdk: iphonesimulator
+before_install:
+  - brew update
+  - brew outdated xctool || brew upgrade xctool
+  - git -C /usr/local/Library/Taps/homebrew/homebrew-core checkout 14aa94dd Formula/erlang.rb
+  - brew install rabbitmq
+  - cp .travis/etc/* /usr/local/etc/rabbitmq/
+  - /usr/local/sbin/rabbitmq-plugins enable --offline rabbitmq_auth_mechanism_ssl
+  - brew services start rabbitmq
+before_script:
+  - bin/bootstrap-if-needed
+  - until lsof -i:5672; do echo "Waiting for RabbitMQ to start"; sleep 1; done
+  - /usr/local/sbin/rabbitmqctl add_user "O=client,CN=guest" bunnies
+  - /usr/local/sbin/rabbitmqctl set_permissions "O=client,CN=guest" ".*" ".*" ".*"
+after_failure:
+  - cat /usr/local/var/log/rabbitmq/rabbit@localhost.log
+cache:
+  directories:
+  - Carthage

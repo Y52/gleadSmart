@@ -185,6 +185,7 @@
                       }];
                   }
               }else{
+                  //自动登录失败，使用本地保存的信息
                   [NSObject showHudTipStr:LocalString(@"自动登录失败")];
                   [db initDB];
                   db.user.userId = userId;
@@ -193,6 +194,16 @@
               if (db.houseList.count > 0) {
                   db.currentHouse = db.houseList[0];
               }
+              
+              //RabbitMQ topic routingkeys生成
+              NSMutableArray *routingkeys = [[NSMutableArray alloc] init];
+              for (HouseModel *house in db.houseList) {
+                  NSString *routingkey = [NSString stringWithFormat:@"%@.%@",db.user.userId,house.houseUid];
+                  [routingkeys addObject:routingkey];
+              }
+              [[YRabbitMQ shareInstance] receiveRabbitMessage:routingkeys];
+
+              
               //进入主页面
               MainViewController *mainVC = [[MainViewController alloc] init];
               [self presentViewController:mainVC animated:YES completion:nil];
@@ -210,6 +221,7 @@
               if (db.houseList.count > 0) {
                   db.currentHouse = db.houseList[0];
               }
+              
               //进入主页面
               MainViewController *mainVC = [[MainViewController alloc] init];
               [self presentViewController:mainVC animated:YES completion:nil];

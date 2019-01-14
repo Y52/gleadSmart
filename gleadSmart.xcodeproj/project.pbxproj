@@ -236,6 +236,9 @@
 		BB5B03CA21B90C48007AC2B1 /* img_mine_headerBG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B03C821B90C47007AC2B1 /* img_mine_headerBG@3x.png */; };
 		BB5B03CB21B90C48007AC2B1 /* img_mine_headerBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B03C921B90C47007AC2B1 /* img_mine_headerBG@2x.png */; };
 		BB5B03CE21B91290007AC2B1 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B03CD21B91290007AC2B1 /* AccountViewController.m */; };
+		BB5CDC8521EC26F300C2B6FA /* YRabbitMQ.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5CDC8421EC26F300C2B6FA /* YRabbitMQ.m */; };
+		BB5CDC8721EC2FD800C2B6FA /* RMQClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */; };
+		BB5CDC8921EC3F8100C2B6FA /* RMQClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB62E4B321B4C0B700C0FA39 /* ThermostatTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4B221B4C0B700C0FA39 /* ThermostatTimerController.m */; };
 		BB62E4B721B4CB6A00C0FA39 /* img_thermos_moTimer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4B421B4CB6A00C0FA39 /* img_thermos_moTimer@3x.png */; };
 		BB62E4B821B4CB6A00C0FA39 /* img_thermos_moTimer.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4B521B4CB6A00C0FA39 /* img_thermos_moTimer.png */; };
@@ -391,6 +394,20 @@
 			remoteInfo = gleadSmart;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BB5CDC8A21EC3F8200C2B6FA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BB5CDC8921EC3F8100C2B6FA /* RMQClient.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gleadSmart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -722,6 +739,9 @@
 		BB5B03C921B90C47007AC2B1 /* img_mine_headerBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_mine_headerBG@2x.png"; sourceTree = "<group>"; };
 		BB5B03CC21B91290007AC2B1 /* AccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		BB5B03CD21B91290007AC2B1 /* AccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		BB5CDC8321EC26F300C2B6FA /* YRabbitMQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YRabbitMQ.h; sourceTree = "<group>"; };
+		BB5CDC8421EC26F300C2B6FA /* YRabbitMQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YRabbitMQ.m; sourceTree = "<group>"; };
+		BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RMQClient.framework; path = Carthage/Build/iOS/RMQClient.framework; sourceTree = "<group>"; };
 		BB62E4B121B4C0B700C0FA39 /* ThermostatTimerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThermostatTimerController.h; sourceTree = "<group>"; };
 		BB62E4B221B4C0B700C0FA39 /* ThermostatTimerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThermostatTimerController.m; sourceTree = "<group>"; };
 		BB62E4B421B4CB6A00C0FA39 /* img_thermos_moTimer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermos_moTimer@3x.png"; sourceTree = "<group>"; };
@@ -880,6 +900,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB5CDC8721EC2FD800C2B6FA /* RMQClient.framework in Frameworks */,
 				DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1321,6 +1342,8 @@
 				BB35292A219DA7EC00428DE9 /* Network.m */,
 				BB37DF1921A7FF0600B2121B /* Database.h */,
 				BB37DF1A21A7FF0600B2121B /* Database.m */,
+				BB5CDC8321EC26F300C2B6FA /* YRabbitMQ.h */,
+				BB5CDC8421EC26F300C2B6FA /* YRabbitMQ.m */,
 				BB37DEF021A7AB3700B2121B /* YSZCoreDataStackManager.h */,
 				BB37DEF121A7AB3700B2121B /* YSZCoreDataStackManager.m */,
 			);
@@ -1710,6 +1733,7 @@
 		CFCEDBAD622E9D8465800F48 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */,
 				0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */,
 			);
 			name = Frameworks;
@@ -1727,6 +1751,7 @@
 				BB49DF8A21958864004E00A2 /* Frameworks */,
 				BB49DF8B21958864004E00A2 /* Resources */,
 				CDE5640370C0C592CDFE9FD3 /* [CP] Embed Pods Frameworks */,
+				BB5CDC8A21EC3F8200C2B6FA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2208,6 +2233,7 @@
 				BB00A4FF21BA25B7004E4051 /* YAlertViewController.m in Sources */,
 				BB2AC10E21A94F42006DB83A /* HouseModel.m in Sources */,
 				BB2AC10B21A94D63006DB83A /* AFSecurityPolicy.m in Sources */,
+				BB5CDC8521EC26F300C2B6FA /* YRabbitMQ.m in Sources */,
 				36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */,
 				BBF6326E21BBC472006A23AC /* NodeInfoCell.m in Sources */,
 				3EA530CC21AB9C88000A6D26 /* LoginViewController.m in Sources */,
@@ -2444,6 +2470,10 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gleadSmart/gleadSmart-Prefix.pch";
 				INFOPLIST_FILE = gleadSmart/Info.plist;
@@ -2466,6 +2496,10 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gleadSmart/gleadSmart-Prefix.pch";
 				INFOPLIST_FILE = gleadSmart/Info.plist;
