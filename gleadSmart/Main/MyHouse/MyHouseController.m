@@ -52,6 +52,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         self.titleColorNormal = [UIColor whiteColor];
         self.itemMargin = gleadMenuItemMargin;
         self.pageAnimatable = YES;
+        self.scrollEnable = NO;
         
         if (!self.homeList) {
             self.homeList = [[NSMutableArray alloc] init];

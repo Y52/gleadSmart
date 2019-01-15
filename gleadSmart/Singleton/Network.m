@@ -902,6 +902,7 @@ static int noUserInteractionHeartbeat = 0;
 
 #pragma mark - private method && Device management
 /*
+ @param recivedData69 中央控制器返回的69帧
  *从网关获取设备列表并进行数据库等的操作
  */
 - (void)inquireNode:(NSMutableArray *)recivedData69{
@@ -963,10 +964,11 @@ static int noUserInteractionHeartbeat = 0;
             }
         }
         if (!isLocal) {
-            /*
-             *未保存过，需要上传到服务器，保存到本地
-             */
-            [self addNewDeviceWith:device];
+            /**
+             ～～未保存过，需要上传到服务器，保存到本地～～
+             *不需要保存，显示在所有设备里，用户添加到房间才保存*
+             **/
+            //[self addNewDeviceWith:device];
             
             //初始命名
             if ([device.type integerValue] == 1) {
@@ -992,7 +994,8 @@ static int noUserInteractionHeartbeat = 0;
 }
 
 /*
- *设备入网时主动上报
+ @param recivedData69 主动上报的帧
+ *设备入网时主动上报的处理
  */
 - (void)addNode:(NSMutableArray *)recivedData69{
     if (!_deviceArray) {

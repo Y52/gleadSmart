@@ -10,4 +10,5 @@ pod 'CocoaAsyncSocket'
 pod 'WMPageController','~> 2.4.0'
 pod 'SDWebImage','~> 4.0'
 pod 'FMDB'
+pod 'RMQClient', '~> 0.10.0'
 end

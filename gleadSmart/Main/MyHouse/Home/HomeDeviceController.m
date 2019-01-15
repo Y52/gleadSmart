@@ -249,6 +249,7 @@ static CGFloat const Cell_Height = 72.f;
 
 #pragma mark - Actions
 - (void)selectDevicesWithRoom{
+    [self.deviceTable.mj_header endRefreshing];
     Network *net = [Network shareNetwork];
     if (!_room) {
         self.deviceArray = net.deviceArray;
@@ -273,6 +274,5 @@ static CGFloat const Cell_Height = 72.f;
     NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
     [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
 
-    [self.deviceTable.mj_header endRefreshing];
 }
 @end

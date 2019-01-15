@@ -42,6 +42,11 @@ static CGFloat const Header_Height = 25.f;
     self.HouseManagement = [self HouseManagement];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.HouseManagement reloadData];
+}
+
 #pragma mark - Lazy Load
 -(UITableView *)HouseManagement{
     if (!_HouseManagement) {

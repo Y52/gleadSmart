@@ -298,6 +298,9 @@
 		BB63B60521B4151D00D77489 /* thermostat_-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5FF21B4151D00D77489 /* thermostat_-@3x.png */; };
 		BB63B60621B4151D00D77489 /* thermostat_+.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60021B4151D00D77489 /* thermostat_+.png */; };
 		BB63B60721B4151D00D77489 /* thermostat_-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60121B4151D00D77489 /* thermostat_-@2x.png */; };
+		BB73D54321EDCB1E004AEE18 /* JKVValue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; };
+		BB73D54421EDCB1E004AEE18 /* JKVValue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB73D54521EDD262004AEE18 /* YTFAlertController.m */; };
 		BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB835FA3219C03A300225B60 /* HomeDeviceController.m */; };
 		BB8B9DB821A6815000E5D8B2 /* thermostatControl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */; };
 		BB8B9DBC21A6815000E5D8B2 /* thermostatControl@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA121A6815000E5D8B2 /* thermostatControl@3x.png */; };
@@ -402,6 +405,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BB73D54421EDCB1E004AEE18 /* JKVValue.framework in Embed Frameworks */,
 				BB5CDC8921EC3F8100C2B6FA /* RMQClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -812,6 +816,9 @@
 		BB63B5FF21B4151D00D77489 /* thermostat_-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_-@3x.png"; sourceTree = "<group>"; };
 		BB63B60021B4151D00D77489 /* thermostat_+.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_+.png"; sourceTree = "<group>"; };
 		BB63B60121B4151D00D77489 /* thermostat_-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_-@2x.png"; sourceTree = "<group>"; };
+		BB73D54221EDCB1E004AEE18 /* JKVValue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JKVValue.framework; path = Carthage/Build/iOS/JKVValue.framework; sourceTree = "<group>"; };
+		BB73D54521EDD262004AEE18 /* YTFAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTFAlertController.m; sourceTree = "<group>"; };
+		BB73D54621EDD262004AEE18 /* YTFAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTFAlertController.h; sourceTree = "<group>"; };
 		BB835FA2219C03A300225B60 /* HomeDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceController.h; sourceTree = "<group>"; };
 		BB835FA3219C03A300225B60 /* HomeDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceController.m; sourceTree = "<group>"; };
 		BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@2x.png"; sourceTree = "<group>"; };
@@ -900,6 +907,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB73D54321EDCB1E004AEE18 /* JKVValue.framework in Frameworks */,
 				BB5CDC8721EC2FD800C2B6FA /* RMQClient.framework in Frameworks */,
 				DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */,
 			);
@@ -1021,6 +1029,8 @@
 			children = (
 				BB00A4FD21BA25B7004E4051 /* YAlertViewController.h */,
 				BB00A4FE21BA25B7004E4051 /* YAlertViewController.m */,
+				BB73D54621EDD262004AEE18 /* YTFAlertController.h */,
+				BB73D54521EDD262004AEE18 /* YTFAlertController.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1439,6 +1449,7 @@
 		BB49DF8421958864004E00A2 = {
 			isa = PBXGroup;
 			children = (
+				BB73D54221EDCB1E004AEE18 /* JKVValue.framework */,
 				CFCEDBAD622E9D8465800F48 /* Frameworks */,
 				BB49DF8F21958864004E00A2 /* gleadSmart */,
 				BB49DFAB21958867004E00A2 /* gleadSmartTests */,
@@ -2267,6 +2278,7 @@
 				BB2AD7A721AD7F91006DB83A /* HouseSetCommonCell.m in Sources */,
 				BB2AC0EE21A8F156006DB83A /* ESPUDPSocketServer.m in Sources */,
 				3EA530CD21AB9C88000A6D26 /* RetrievePasswordController.m in Sources */,
+				BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */,
 				BB49DF9B21958864004E00A2 /* gleadSmart.xcdatamodeld in Sources */,
 				BB2AC0E921A8F156006DB83A /* ESP_NetUtil.m in Sources */,
 				BB2AC10821A94D63006DB83A /* AFURLSessionManager.m in Sources */,

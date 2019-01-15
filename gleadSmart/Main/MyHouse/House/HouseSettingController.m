@@ -9,6 +9,7 @@
 #import "HouseSettingController.h"
 #import "HouseSetCommonCell.h"
 #import "HouseSetMemberCell.h"
+#import "YTFAlertController.h"
 
 NSString *const CellIdentifier_HouseSetCommon = @"CellID_HouseSetCommon";
 NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
@@ -30,49 +31,61 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
     self.removeHouseButton = [self removeHouseButton];
 }
 
-#pragma mark - Lazy load
-- (UITableView *)houseSettingTable{
-    if (!_houseSettingTable) {
-        _houseSettingTable = ({
-            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - getRectNavAndStatusHight - 100) style:UITableViewStylePlain];
-            tableView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
-            tableView.separatorColor = [UIColor colorWithRed:232/255.0 green:231/255.0 blue:231/255.0 alpha:1.0];
-            tableView.dataSource = self;
-            tableView.delegate = self;
-            [tableView registerClass:[HouseSetCommonCell class] forCellReuseIdentifier:CellIdentifier_HouseSetCommon];
-            [tableView registerClass:[HouseSetMemberCell class] forCellReuseIdentifier:CellIdentifier_HouseSetMember];
-            [self.view addSubview:tableView];
-            tableView.scrollEnabled = NO;
-            tableView.estimatedRowHeight = 0;
-            tableView.estimatedSectionHeaderHeight = 0;
-            tableView.estimatedSectionFooterHeight = 0;
-            tableView.tableFooterView = [[UIView alloc] init];
-            tableView;
-        });
-    }
-    return _houseSettingTable;
+#pragma mark - private methods
+- (void)removeHouse{
+    
 }
 
-- (UIButton *)removeHouseButton{
-    if (!_removeHouseButton) {
-        _removeHouseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_removeHouseButton setTitle:LocalString(@"移除家庭") forState:UIControlStateNormal];
-        [_removeHouseButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
-        [_removeHouseButton setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
-        [_removeHouseButton.layer setBorderWidth:1.0];
-        _removeHouseButton.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
-        _removeHouseButton.layer.cornerRadius = 15.f;
-        [_removeHouseButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
-        [_removeHouseButton addTarget:self action:@selector(removeHouse) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_removeHouseButton];
-        
-        [_removeHouseButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(276.f), 44.f));
-            make.bottom.equalTo(self.view.mas_bottom).offset(56.f);
-            make.centerX.equalTo(self.view.mas_centerX);
-        }];
-    }
-    return _removeHouseButton;
+/**
+ 修改服务器家庭名称
+ **/
+- (void)modifyHouseName{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house?houseUid=%@",db.currentHouse.houseUid];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    NSDictionary *parameters = @{@"name":self.house.name};
+    [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            for (int i = 0; i < [Database shareInstance].houseList.count; i++) {
+                HouseModel *house = [Database shareInstance].houseList[i];
+                if ([self.house.houseUid isEqualToString:house.houseUid]) {
+                    [[Database shareInstance].houseList replaceObjectAtIndex:i withObject:house];
+                }
+            }
+        }else{
+            [NSObject showHudTipStr:@"修改家庭名称失败"];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [self.houseSettingTable reloadData];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"修改家庭名称失败"];
+        });
+    }];
+
 }
 
 #pragma mark - UITableView Delegate
@@ -136,7 +149,9 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
             if (cell == nil) {
                 cell = [[HouseSetMemberCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HouseSetMember];
             }
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             MemberModel *member = _house.members[indexPath.row];
+            cell.memberImage.image = [UIImage imageNamed:@"img_account_header"];
             cell.memberName.text = member.name;
             cell.mobile.text = member.mobile;
             if ([member.auth intValue] == 0) {
@@ -162,7 +177,30 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    switch (indexPath.section) {
+        case 0:
+            if (indexPath.row == 0) {
+                YTFAlertController *alert = [[YTFAlertController alloc] init];
+                alert.lBlock = ^{
+                };
+                alert.rBlock = ^(NSString * _Nullable text) {
+                    self.house.name = text;
+                    //使用Api更新
+                    [self modifyHouseName];
+                };
+                alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                [self presentViewController:alert animated:NO completion:^{
+                    alert.titleLabel.text = LocalString(@"更改家庭名称");
+                    alert.textField.text = self.house.name;
+                    [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
+                    [alert.rightBtn setTitle:LocalString(@"确认") forState:UIControlStateNormal];
+                }];
+            }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -227,10 +265,49 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
     return view;
 }
 
+#pragma mark - Lazy load
+- (UITableView *)houseSettingTable{
+    if (!_houseSettingTable) {
+        _houseSettingTable = ({
+            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - getRectNavAndStatusHight - 100) style:UITableViewStylePlain];
+            tableView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
+            tableView.separatorColor = [UIColor colorWithRed:232/255.0 green:231/255.0 blue:231/255.0 alpha:1.0];
+            tableView.dataSource = self;
+            tableView.delegate = self;
+            [tableView registerClass:[HouseSetCommonCell class] forCellReuseIdentifier:CellIdentifier_HouseSetCommon];
+            [tableView registerClass:[HouseSetMemberCell class] forCellReuseIdentifier:CellIdentifier_HouseSetMember];
+            [self.view addSubview:tableView];
+            tableView.scrollEnabled = NO;
+            tableView.estimatedRowHeight = 0;
+            tableView.estimatedSectionHeaderHeight = 0;
+            tableView.estimatedSectionFooterHeight = 0;
+            tableView.tableFooterView = [[UIView alloc] init];
+            tableView;
+        });
+    }
+    return _houseSettingTable;
+}
 
-#pragma mark - Actions
-- (void)removeHouse{
-    
+- (UIButton *)removeHouseButton{
+    if (!_removeHouseButton) {
+        _removeHouseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_removeHouseButton setTitle:LocalString(@"移除家庭") forState:UIControlStateNormal];
+        [_removeHouseButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+        [_removeHouseButton setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
+        [_removeHouseButton.layer setBorderWidth:1.0];
+        _removeHouseButton.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
+        _removeHouseButton.layer.cornerRadius = 15.f;
+        [_removeHouseButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
+        [_removeHouseButton addTarget:self action:@selector(removeHouse) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_removeHouseButton];
+        
+        [_removeHouseButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(276.f), 44.f));
+            make.bottom.equalTo(self.view.mas_bottom).offset(56.f);
+            make.centerX.equalTo(self.view.mas_centerX);
+        }];
+    }
+    return _removeHouseButton;
 }
 
 @end

@@ -36,7 +36,6 @@ static CGFloat const Cell_Height = 50.f;
     self.houseTable = [self houseTable];
     self.dismissButton = [self dismissButton];
     
-    [self inquireHouseList];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -45,6 +44,9 @@ static CGFloat const Cell_Height = 50.f;
 
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inquireHouseList) name:@"updateHouseList" object:nil];
+    
+    //更新家庭列表
+    [self inquireHouseList];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -176,12 +178,12 @@ static CGFloat const Cell_Height = 50.f;
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             if ([responseDic[@"data"] count] > 0) {
+                [db.houseList removeAllObjects];
                 [responseDic[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     HouseModel *house = [[HouseModel alloc] init];
                     house.houseUid = [obj objectForKey:@"houseUid"];
                     house.name = [obj objectForKey:@"name"];
                     house.auth = [obj objectForKey:@"auth"];
-                    [db.houseList removeAllObjects];
                     [db.houseList addObject:house];
                      
                     [db insertNewHouse:house];

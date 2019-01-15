@@ -12,13 +12,13 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    self.backgroundColor = [UIColor clearColor];
+    //self.backgroundColor = [UIColor clearColor];
     if (self) {
         if (!_memberImage) {
             _memberImage = [[UIImageView alloc] init];
             [self.contentView addSubview:_memberImage];
             [_memberImage mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(yAutoFit(44.f), yAutoFit(44.f)));
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(35.f), yAutoFit(35.f)));
                 make.left.equalTo(self.contentView.mas_left).offset(20.f);
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
@@ -26,7 +26,7 @@
         if (!_memberName) {
             _memberName = [[UILabel alloc] init];
             _memberName.textColor = [UIColor colorWithHexString:@"4D4D4C"];
-            _memberName.font = [UIFont fontWithName:@"Helvetica" size:18];
+            _memberName.font = [UIFont fontWithName:@"Helvetica" size:16];
             _memberName.textAlignment = NSTextAlignmentLeft;
             _memberName.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_memberName];
@@ -40,7 +40,7 @@
         if (!_mobile) {
             _mobile = [[UILabel alloc] init];
             _mobile.textColor = [UIColor colorWithHexString:@"4D4D4C"];
-            _mobile.font = [UIFont fontWithName:@"Helvetica" size:15.f];
+            _mobile.font = [UIFont fontWithName:@"Helvetica" size:13.f];
             _mobile.textAlignment = NSTextAlignmentLeft;
             _mobile.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_mobile];
@@ -56,13 +56,13 @@
             _identity = [[UILabel alloc] init];
             _identity.textColor = [UIColor colorWithHexString:@"7C7C7B"];
             _identity.font = [UIFont fontWithName:@"Helvetica" size:15.f];
-            _identity.textAlignment = NSTextAlignmentLeft;
+            _identity.textAlignment = NSTextAlignmentRight;
             _identity.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_identity];
             
             [_identity mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(yAutoFit(80.f), yAutoFit(15.f)));
-                make.right.equalTo(self.contentView.mas_right).offset(-35.f);
+                make.right.equalTo(self.contentView.mas_right);
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
         }           
