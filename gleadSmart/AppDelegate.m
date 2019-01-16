@@ -26,9 +26,6 @@
     RegisterController *loginVC = [[RegisterController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
 
-    //MainViewController *mainVC = [[MainViewController alloc] init];
-    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
-    //self.window.rootViewController = mainVC;
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     
@@ -81,6 +78,10 @@
     [navigationBarAppearance setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     //去掉透明后导航栏下边的黑边
     [navigationBarAppearance setShadowImage:[[UIImage alloc] init]];
+}
+
+- (void)SVProgressHUD{
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
 }
 
 #pragma mark - Core Data stack

@@ -42,7 +42,7 @@
         _titleLabel.textColor = [UIColor colorWithRed:61/255.0 green:61/255.0 blue:61/255.0 alpha:1];
         [_alertView addSubview:_titleLabel];
         
-        _textField = [[UITextField alloc] initWithFrame:CGRectMake(30,57,210,32)];
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(30,67,210,32)];
         _textField.backgroundColor = [UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:1.0];
         _textField.font = [UIFont fontWithName:@"Arial" size:16.0f];
         _textField.textColor = [UIColor colorWithHexString:@"666666"];

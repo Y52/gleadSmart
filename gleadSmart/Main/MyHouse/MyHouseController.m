@@ -454,20 +454,23 @@ static CGFloat const gleadMenuItemMargin = 25.f;
                     }
                     
                 }];
-                [self reloadData];//wmpagecontroller更新滑动列表
             }
         }else{
             [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];
         }
         [self getHouseHomeListAndDeviceWithDatabase];
+        [self reloadData];//wmpagecontroller更新滑动列表
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        /**
+         以下错误信息处理方法在没有网时会报错，具体原因未查明
+         **/
 //        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-//        
+//
 //        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
-//        
+//
 //        NSLog(@"error--%@",serializedData);
         NSLog(@"%@",error);
         [self getHouseHomeListAndDeviceWithDatabase];

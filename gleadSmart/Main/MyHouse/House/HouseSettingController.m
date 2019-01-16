@@ -10,9 +10,14 @@
 #import "HouseSetCommonCell.h"
 #import "HouseSetMemberCell.h"
 #import "YTFAlertController.h"
+#import "FamilyLocationController.h"
+#import <CoreLocation/CoreLocation.h>
+#import "AddHouseMemberCell.h"
+#import "AddMemberController.h"
 
 NSString *const CellIdentifier_HouseSetCommon = @"CellID_HouseSetCommon";
 NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
+NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
 
 @interface HouseSettingController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -26,20 +31,120 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1];
+    self.navigationItem.title = LocalString(@"家庭设置");
     
     self.houseSettingTable = [self houseSettingTable];
     self.removeHouseButton = [self removeHouseButton];
+    
+    [self houseLocation:self.house.lon lat:self.house.lat];
 }
 
 #pragma mark - private methods
+/**
+ 从服务器获取家庭信息详情
+ **/
+#warning 需要完成成功添加成员后的后续操作
+- (void)updateHouseDetailInfoWith:(NSString *)houseUid{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house?houseUid=%@",houseUid];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0 && [responseDic objectForKey:@"data"]) {
+            NSDictionary *dic = [responseDic objectForKey:@"data"];
+            HouseModel *house = [[HouseModel alloc] init];
+            house.houseUid = houseUid;
+            house.name = [dic objectForKey:@"name"];
+            house.roomNumber = [dic objectForKey:@"roomNumber"];
+            house.lon = [dic objectForKey:@"lon"];
+            house.lat = [dic objectForKey:@"lat"];
+            NSMutableArray *members = [[NSMutableArray alloc] init];
+            if ([[dic objectForKey:@"members"] count] > 0) {
+                [[dic objectForKey:@"members"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    MemberModel *member = [[MemberModel alloc] init];
+                    member.name = [obj objectForKey:@"name"];
+                    member.mobile = [obj objectForKey:@"mobile"];
+                    member.auth = [obj objectForKey:@"auth"];
+                    [members addObject:member];
+                }];
+                house.members = [members copy];
+            }
+            HouseSettingController *setVC = [[HouseSettingController alloc] init];
+            setVC.house = house;
+            [self.navigationController pushViewController:setVC animated:YES];
+        }else{
+            [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+        
+        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+        
+        NSLog(@"error--%@",serializedData);
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"从服务器获取信息失败,请检查网络状况"];
+        });
+    }];
+}
+
 - (void)removeHouse{
     
 }
 
 /**
+ 根据经纬度获取地理位置详细信息
+ @param lon 地理经度
+ @param lat 地理纬度
+ **/
+- (void)houseLocation:(NSNumber *)lon lat:(NSNumber *)lat{
+    //反地理编码
+    CLGeocoder *geocodel = [[CLGeocoder alloc] init];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:[lat doubleValue] longitude:[lon doubleValue]];
+    [geocodel reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (placemarks.count > 0) {
+            CLPlacemark *placeMark = placemarks[0];
+            self.house.location = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.subLocality];
+            if (!self.house.location) {
+                self.house.location = @"无法定位当前城市";
+            }
+            [self.houseSettingTable reloadData];
+            
+            /*看需求定义一个全局变量来接收赋值*/
+            NSLog(@"----%@",placeMark.country);//当前国家
+            NSLog(@"%@",self.house.location);//当前的城市
+            //            NSLog(@"%@",placeMark.subLocality);//当前的位置
+            //            NSLog(@"%@",placeMark.thoroughfare);//当前街道
+            //            NSLog(@"%@",placeMark.name);//具体地址
+            
+        }
+    }];
+}
+
+/**
  修改服务器家庭名称
  **/
-- (void)modifyHouseName{
+- (void)houseSetting{
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
@@ -57,7 +162,7 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
-    NSDictionary *parameters = @{@"name":self.house.name};
+    NSDictionary *parameters = @{@"name":self.house.name,@"lon":self.house.lon,@"lat":self.house.lat};
     [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
         NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
@@ -68,11 +173,11 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
             for (int i = 0; i < [Database shareInstance].houseList.count; i++) {
                 HouseModel *house = [Database shareInstance].houseList[i];
                 if ([self.house.houseUid isEqualToString:house.houseUid]) {
-                    [[Database shareInstance].houseList replaceObjectAtIndex:i withObject:house];
+                    [[Database shareInstance].houseList replaceObjectAtIndex:i withObject:self.house];
                 }
             }
         }else{
-            [NSObject showHudTipStr:@"修改家庭名称失败"];
+            [NSObject showHudTipStr:@"修改家庭信息失败"];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
@@ -82,15 +187,14 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
         NSLog(@"%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
-            [NSObject showHudTipStr:@"修改家庭名称失败"];
+            [NSObject showHudTipStr:@"修改家庭信息失败"];
         });
     }];
-
 }
 
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -102,6 +206,9 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
     }
     if (section == 2) {
         return self.house.members.count;
+    }
+    if (section == 3) {
+        return 1;
     }
     return 0;
 }
@@ -120,11 +227,12 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
                 cell.rightLabel.text = _house.name;
             }
             if (indexPath.row == 1) {
-                cell.leftLabel.text = LocalString(@"家庭管理");
+                cell.leftLabel.text = LocalString(@"房间管理");
                 cell.rightLabel.text = [NSString stringWithFormat:@"%@%@",_house.roomNumber,LocalString(@"个房间")];
             }
             if (indexPath.row == 2) {
                 cell.leftLabel.text = LocalString(@"家庭位置");
+                cell.rightLabel.text = self.house.location;
             }
             
             return cell;
@@ -163,6 +271,16 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
         }
             break;
             
+        case 3:
+        {
+            AddHouseMemberCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HouseAddMember];
+            if (cell == nil) {
+                cell = [[AddHouseMemberCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HouseAddMember];
+            }
+            cell.addLabel.text = LocalString(@"添加成员");
+            return cell;
+        }
+            break;
         default:
         {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellindetify_houseSetdefaultcell"];
@@ -186,7 +304,7 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
                 alert.rBlock = ^(NSString * _Nullable text) {
                     self.house.name = text;
                     //使用Api更新
-                    [self modifyHouseName];
+                    [self houseSetting];
                 };
                 alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
                 [self presentViewController:alert animated:NO completion:^{
@@ -195,8 +313,28 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
                     [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
                     [alert.rightBtn setTitle:LocalString(@"确认") forState:UIControlStateNormal];
                 }];
+            }else if (indexPath.row == 2){
+                FamilyLocationController *locaVC = [[FamilyLocationController alloc] init];
+                locaVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                locaVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                locaVC.contentOriginY = 100.f + getRectNavAndStatusHight;
+                locaVC.dismissBlock = ^(HouseModel *house) {
+                    if (house.lon && house.lat) {
+                        self.house.lon = house.lon;
+                        self.house.lat = house.lat;
+                        [self houseSetting];
+                        [self houseLocation:self.house.lon lat:self.house.lat];
+                    }
+                };
+                [self presentViewController:locaVC animated:YES completion:nil];
             }
             break;
+            
+        case 3:{
+            AddMemberController *addmemberVC = [[AddMemberController alloc] init];
+            addmemberVC.houseUid = self.house.houseUid;
+            [self.navigationController pushViewController:addmemberVC animated:YES];
+        }
             
         default:
             break;
@@ -221,6 +359,10 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
             
         case 2:
             return 40.f;
+            break;
+            
+        case 3:
+            return 5.f;
             break;
             
         default:
@@ -255,7 +397,7 @@ NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
 //section底部间距
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 15;
+    return 0;
 }
 //section底部视图
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section

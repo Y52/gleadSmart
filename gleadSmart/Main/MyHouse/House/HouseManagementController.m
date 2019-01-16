@@ -51,7 +51,7 @@ static CGFloat const Header_Height = 25.f;
 -(UITableView *)HouseManagement{
     if (!_HouseManagement) {
         _HouseManagement = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,260) style:UITableViewStylePlain];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;

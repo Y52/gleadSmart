@@ -126,8 +126,8 @@
         NSDictionary *addressDic= placemark.addressDictionary;//详细地址信息字典,包含以下部分信息
         NSLog(@"位置:%@,区域:%@,详细信息:%@",location,region,addressDic);
         
-        house.lon = [NSNumber numberWithFloat:location.coordinate.longitude];
-        house.lat = [NSNumber numberWithFloat:location.coordinate.latitude];
+        self->house.lon = [NSNumber numberWithFloat:location.coordinate.longitude];
+        self->house.lat = [NSNumber numberWithFloat:location.coordinate.latitude];
     }];
 }
 

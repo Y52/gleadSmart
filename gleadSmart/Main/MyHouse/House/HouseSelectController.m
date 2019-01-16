@@ -59,7 +59,7 @@ static CGFloat const Cell_Height = 50.f;
 -(UITableView *)houseTable{
     if (!_houseTable) {
         _houseTable = ({
-            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ([Database shareInstance].houseList.count + 2) * Cell_Height)];
             tableView.backgroundColor = [UIColor whiteColor];
             tableView.dataSource = self;
             tableView.delegate = self;
@@ -197,11 +197,13 @@ static CGFloat const Cell_Height = 50.f;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
+            [self.houseTable.mj_header endRefreshing];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error:%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
+            [self.houseTable.mj_header endRefreshing];
             [NSObject showHudTipStr:@"从服务器获取信息失败"];
         });
     }];
@@ -212,6 +214,18 @@ static CGFloat const Cell_Height = 50.f;
 }
 
 - (void)dismissVC{
+    Database *data = [Database shareInstance];
+    if (!data.currentHouse && data.houseList.count > 0) {
+        data.currentHouse = data.houseList[0];
+    }
+    if (data.currentHouse) {
+        for (HouseModel *house in data.houseList) {
+            if ([data.currentHouse.houseUid isEqualToString:house.houseUid]) {
+                data.currentHouse = house;
+            }
+        }
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     if (self.dismissBlock) {
         self.dismissBlock();
