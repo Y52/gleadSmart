@@ -80,6 +80,7 @@ CGFloat const nodeButtonWidth = 20.f;
     self.nodeLeakDetailTable = [self nodeLeakDetailTable];
     self.controlSwitchButton = [self controlSwitchButton];
     
+    [self refreshDevice];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -117,6 +118,7 @@ CGFloat const nodeButtonWidth = 20.f;
 
 - (void)UITransformationByStatus{
     dispatch_async(dispatch_get_main_queue(), ^{
+        //NSLog(@"%@",self.device.isOn);
         if ([self.device.isOn boolValue]) {
             [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl_on"] forState:UIControlStateNormal];
             [self valveStatus:YES];

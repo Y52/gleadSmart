@@ -97,7 +97,7 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _deviceArray.count+2;
+    return _deviceArray.count;
 }
 
 
@@ -105,18 +105,6 @@ static CGFloat const Cell_Height = 72.f;
     HomeDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_HomeDevice];
     if (cell == nil) {
         cell = [[HomeDeviceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HomeDevice];
-    }
-    if (indexPath.row == self.deviceArray.count) {
-        cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
-        cell.deviceName.text = @"无线水阀";
-        cell.status.text = LocalString(@"未设置 | 已关闭");
-        return cell;
-    }
-    if (indexPath.row == self.deviceArray.count + 1) {
-        cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_off"];
-        cell.deviceName.text = @"温控器";
-        cell.status.text = LocalString(@"未设置 | 已关闭");
-        return cell;
     }
     DeviceModel *device = self.deviceArray[indexPath.row];
     cell.deviceName.text = device.name;
@@ -177,21 +165,6 @@ static CGFloat const Cell_Height = 72.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.row == self.deviceArray.count) {
-        WirelessValveController *valveVC = [[WirelessValveController alloc] init];
-        [self.navigationController pushViewController:valveVC animated:YES];
-        return;
-    }
-    if (indexPath.row == self.deviceArray.count+1) {
-        ThermostatController *thermostatVC = [[ThermostatController alloc] init];
-        DeviceModel *device = [[DeviceModel alloc] init];
-        device.isOn = @1;
-        thermostatVC.device = device;
-        [self.navigationController pushViewController:thermostatVC animated:YES];
-        return;
-    }
-
     DeviceModel *device = self.deviceArray[indexPath.row];
     switch ([device.type integerValue]) {
         case 1:
@@ -273,6 +246,14 @@ static CGFloat const Cell_Height = 72.f;
     UInt8 controlCode = 0x00;
     NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
     [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
-
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        //异步等待10秒，如果未收到信息做如下处理
+        sleep(10);
+        if ([self.deviceTable.mj_header isRefreshing]) {
+            [NSObject showHudTipStr:@"设备或服务器异常，无法查询设备"];
+            [self.deviceTable.mj_header endRefreshing];
+        }
+    });
 }
 @end

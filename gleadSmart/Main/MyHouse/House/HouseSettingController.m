@@ -43,7 +43,6 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
 /**
  从服务器获取家庭信息详情
  **/
-#warning 需要完成成功添加成员后的后续操作
 - (void)updateHouseDetailInfoWith:(NSString *)houseUid{
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -85,9 +84,8 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
                 }];
                 house.members = [members copy];
             }
-            HouseSettingController *setVC = [[HouseSettingController alloc] init];
-            setVC.house = house;
-            [self.navigationController pushViewController:setVC animated:YES];
+            self.house = house;
+            [self.houseSettingTable reloadData];
         }else{
             [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];
         }
@@ -103,7 +101,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
         NSLog(@"%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
-            [NSObject showHudTipStr:@"从服务器获取信息失败,请检查网络状况"];
+            [NSObject showHudTipStr:@"从服务器获取信息失败"];
         });
     }];
 }
@@ -329,10 +327,13 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
                 [self presentViewController:locaVC animated:YES completion:nil];
             }
             break;
-            
+#warning todo 点击家庭成员，进入成员页面，页面待做，移除成员功能待做
         case 3:{
             AddMemberController *addmemberVC = [[AddMemberController alloc] init];
             addmemberVC.houseUid = self.house.houseUid;
+            addmemberVC.popBlock = ^{
+                [self updateHouseDetailInfoWith:self.house.houseUid];
+            };
             [self.navigationController pushViewController:addmemberVC animated:YES];
         }
             

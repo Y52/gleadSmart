@@ -62,6 +62,10 @@ NSString *const CellIdentifier_AddMemberManagerSet = @"CellID_AddMemberManagerSe
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            if (self.popBlock) {
+                self.popBlock();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
             [NSObject showHudTipStr:@"添加成员失败"];
         }

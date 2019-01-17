@@ -137,13 +137,21 @@ static CGFloat const Cell_Height = 50.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == [Database shareInstance].houseList.count) {
+    Database *data = [Database shareInstance];
+    Network *net = [Network shareNetwork];
+    if (indexPath.row == data.houseList.count) {
         HouseManagementController  *HouseManagementVC = [[HouseManagementController alloc] init];
         [self.navigationController pushViewController:HouseManagementVC animated:YES];
         return;
     }
-    HouseModel *house = [Database shareInstance].houseList[indexPath.row];
-    [Database shareInstance].currentHouse = house;
+    HouseModel *house = data.houseList[indexPath.row];
+    if (![data.currentHouse.houseUid isEqualToString:house.houseUid]) {
+        data.currentHouse = house;
+        if (net.mySocket.isConnected) {
+            [net.mySocket disconnect];
+        }
+        [net.deviceArray removeAllObjects];
+    }
     [self dismissVC];
 }
 
@@ -219,6 +227,7 @@ static CGFloat const Cell_Height = 50.f;
         data.currentHouse = data.houseList[0];
     }
     if (data.currentHouse) {
+        //更新家庭信息，避免家庭设置中修改了家庭信息而主页面未改变
         for (HouseModel *house in data.houseList) {
             if ([data.currentHouse.houseUid isEqualToString:house.houseUid]) {
                 data.currentHouse = house;

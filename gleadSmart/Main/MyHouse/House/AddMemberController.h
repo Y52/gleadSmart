@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^popBlock)(void);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AddMemberController : UIViewController
 
 @property (nonatomic, strong) NSString *houseUid;
+@property (nonatomic) popBlock popBlock;
 
 @end
 

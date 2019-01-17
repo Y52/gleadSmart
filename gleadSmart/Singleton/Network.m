@@ -185,8 +185,9 @@ static int noUserInteractionHeartbeat = 0;
             return;
         }
         
+        //只有绑定的网关才可以自动连接
         if (![[Database shareInstance] queryDevice:mac]) {
-            NSLog(@"as");
+            NSLog(@"该家庭未绑定该网关");
         }else{
             NSError *error;
             if ([self connectToHost:ipAddress onPort:16888 error:&error]) {
