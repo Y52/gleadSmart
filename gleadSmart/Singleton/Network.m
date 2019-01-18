@@ -78,10 +78,23 @@ static int noUserInteractionHeartbeat = 0;
             dispatch_source_set_timer(_noUserInteractionHeartbeatTimer, dispatch_walltime(NULL, 0), 1.f * NSEC_PER_SEC, 0);
             dispatch_source_set_event_handler(_noUserInteractionHeartbeatTimer, ^{
                 noUserInteractionHeartbeat++;
-                if (noUserInteractionHeartbeat == 60) {
-                    UInt8 controlCode = 0x00;
-                    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-                    [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+                if (noUserInteractionHeartbeat == 60 && [[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
+//                    UInt8 controlCode = 0x00;
+//                    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+//                    [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+
+                    //线程锁需要放在最前面，放在后面锁不住
+                    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.f * NSEC_PER_SEC);
+                    dispatch_semaphore_wait(self.sendSignal, time);
+                    
+                    noUserInteractionHeartbeat = 0;//心跳清零
+                    
+                    NSMutableArray *data69 = [[NSMutableArray alloc] init];
+                    [data69 addObject:[NSNumber numberWithUnsignedInteger:0x69]];
+                    [data69 addObject:[NSNumber numberWithUnsignedInteger:0xC0]];
+                    [data69 addObject:[NSNumber numberWithUnsignedInteger:0x00]];
+                    [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
+                    [self send:data69 withTag:100];//内网tcp发送
                 }
             });
             dispatch_resume(_noUserInteractionHeartbeatTimer);
@@ -233,8 +246,6 @@ static int noUserInteractionHeartbeat = 0;
     [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
 
     [_mySocket readDataWithTimeout:-1 tag:1];
-    [_mySocket readDataWithTimeout:-1 tag:1];
-    [_mySocket readDataWithTimeout:-1 tag:1];
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
@@ -252,7 +263,7 @@ static int noUserInteractionHeartbeat = 0;
     NSLog(@"接收到消息%@",data);
     NSLog(@"socket成功收到帧, tag: %ld", tag);
     [self checkOutFrame:data];
-    dispatch_semaphore_signal(self.sendSignal);
+    [_mySocket readDataWithTimeout:-1 tag:1];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
@@ -304,7 +315,7 @@ static int noUserInteractionHeartbeat = 0;
         dispatch_sync(self->_queue, ^{
             
             //线程锁需要放在最前面，放在后面锁不住
-            dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.f * NSEC_PER_SEC);
+            dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC);
             dispatch_semaphore_wait(self.sendSignal, time);
 
             noUserInteractionHeartbeat = 0;//心跳清零
@@ -562,7 +573,7 @@ static int noUserInteractionHeartbeat = 0;
         //取出一帧
         NSMutableArray *data = [[NSMutableArray alloc] init];
         [data addObjectsFromArray:_allMsg[i]];
-        NSLog(@"沾包解出的帧%d：%@",i,data);
+        //NSLog(@"沾包解出的帧%d：%@",i,data);
         
         [self handle68Message:data];
     }
@@ -588,6 +599,13 @@ static int noUserInteractionHeartbeat = 0;
     mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
     mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
 
+    for (DeviceModel *device in self.deviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            //收到信息就上线
+            device.isOnline = @1;
+        }
+    }
+    
     switch ([_recivedData69[9] unsignedIntegerValue]) {
         case 0x01:
         case 0x02:
@@ -621,11 +639,17 @@ static int noUserInteractionHeartbeat = 0;
         case 0x12:
         {
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                //查询温控器状态
-                NSLog(@"查询温控器状态");
+                NSLog(@"温控器状态");
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
-                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        if ([_recivedData69[1] unsignedIntegerValue] == 0x01) {
+                            //查询温控器状态
+                            device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        }else if ([_recivedData69[1] unsignedIntegerValue] == 0x85){
+                            //温控器状态主动上报
+                            device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[16] unsignedIntegerValue]];
+                        }
+
                         device.isOnline = @1;
                     }
                 }
@@ -640,10 +664,12 @@ static int noUserInteractionHeartbeat = 0;
                 
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
+                        NSLog(@"%@",device.mac);
                         device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
                         if ([device.isOn integerValue]) {
                             NSLog(@"%@",device.isOn);
 
+                            //打开温控器，通知温控器页面查询温度等
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"openThermostat" object:nil userInfo:nil];
                         }
                     }
@@ -923,27 +949,12 @@ static int noUserInteractionHeartbeat = 0;
         device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13 + i*4] intValue]]];
         device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[15 + i*4] intValue]]];
         
-        //每个设备发送状态查询帧
-        UInt8 controlCode = 0x01;
-        NSArray *data;
-        switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
-            case 1:
-                data = @[@0xFE,@0x12,@0x01,@0x00];
-                break;
-                
-            case 2:
-                data = @[@0xFE,@0x13,@0x01,@0x00];
-                break;
-                
-            default:
-                break;
-        }
-        [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data];
-        
         //将中央控制器查询到的设备和服务器设备对比
         BOOL isExisted = NO;//防止重复显示以及刷新时重新添加设备到服务器
         for (DeviceModel *existedDevice in self.deviceArray) {
             if ([existedDevice.mac isEqualToString:device.mac]) {
+                existedDevice.isOnline = @0;
+                existedDevice.isOn = @0;
                 isExisted = YES;
             }
         }
@@ -992,6 +1003,25 @@ static int noUserInteractionHeartbeat = 0;
     
     //通知刷新设备
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+    
+    for (DeviceModel *device in self.deviceArray) {
+        //每个设备发送状态查询帧
+        UInt8 controlCode = 0x01;
+        NSArray *data;
+        switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
+            case 1:
+                data = @[@0xFE,@0x12,@0x01,@0x00];
+                break;
+                
+            case 2:
+                data = @[@0xFE,@0x13,@0x01,@0x00];
+                break;
+                
+            default:
+                break;
+        }
+        [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data];
+    }
 }
 
 /*
@@ -1014,9 +1044,10 @@ static int noUserInteractionHeartbeat = 0;
     device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[14] intValue]]];
     
     /*
-     *未保存过，需要上传到服务器，保存到本地
+     ～未保存过，需要上传到服务器，保存到本地～
+     *现在不保存到服务器，只加入所有设备房间中*
      */
-    [self addNewDeviceWith:device];
+    //[self addNewDeviceWith:device];
     
     device.name = device.mac;
     [self.deviceArray addObject:device];

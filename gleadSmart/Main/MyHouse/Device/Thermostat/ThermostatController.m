@@ -202,9 +202,30 @@
     [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
 }
 
-#pragma mark - NSNotification
-- (void)refreshDevice{
-    [self UITransformationByStatus];
+#pragma mark - Actions
+- (void)modeSwitchAction{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFE,@0x12,@0x05,@0x01,[NSNumber numberWithBool:![self.device.mode boolValue]]];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+}
+
+- (void)moreSetting{
+    
+}
+
+- (void)addManualTemp{
+    CGFloat temp = [self.device.modeTemp floatValue];
+    temp = temp + 0.5;
+    self.device.modeTemp = [NSNumber numberWithFloat:temp];
+    NSLog(@"%@",self.device.modeTemp);
+    self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
+}
+
+- (void)minusManualTemp{
+    CGFloat temp = [self.device.modeTemp floatValue];
+    temp = temp - 0.5;
+    self.device.modeTemp = [NSNumber numberWithFloat:temp];
+    self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
 }
 
 - (void)enableSetTemp{
@@ -216,6 +237,39 @@
         
         nowSetTemp = [self.device.modeTemp floatValue];
     }
+}
+
+- (void)timingAction{
+    ThermostatTimerController *timerVC = [[ThermostatTimerController alloc] init];
+    [self.navigationController pushViewController:timerVC animated:YES];
+}
+
+- (void)controlThermostat{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:![self.device.isOn boolValue]]];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+}
+
+- (void)thermostatSetting{
+    ThermostSettingController *settingVC = [[ThermostSettingController alloc] init];
+    settingVC.device = self.device;
+    [self.navigationController pushViewController:settingVC animated:YES];
+}
+
+- (NSMutableAttributedString *)generateStringByTemperature:(CGFloat)temp currentTemp:(CGFloat)currentTemp{
+    NSString *tempStr = [NSString stringWithFormat:@"%.1f℃",temp];
+    NSString *currentTempStr = [NSString stringWithFormat:@"%@%.1f℃",LocalString(@"当前温度"),currentTemp];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@",tempStr,currentTempStr]];
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"79A4E3"] range:NSMakeRange(0, tempStr.length)];
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"989796"] range:NSMakeRange(tempStr.length + 1, currentTempStr.length)];
+    [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.f] range:NSMakeRange(0, tempStr.length)];
+    [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.f] range:NSMakeRange(tempStr.length + 1, currentTempStr.length)];
+    return str;
+}
+
+#pragma mark - NSNotification
+- (void)refreshDevice{
+    [self UITransformationByStatus];
 }
 
 - (void)getSetBackModeTemp:(NSNotification *)notification{
@@ -482,59 +536,5 @@
     return _minusButton;
 }
 
-#pragma mark - Actions
-- (void)modeSwitchAction{
-    UInt8 controlCode = 0x01;
-    NSArray *data = @[@0xFE,@0x12,@0x05,@0x01,[NSNumber numberWithBool:![self.device.mode boolValue]]];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
-}
 
-- (void)moreSetting{
-    
-}
-
-- (void)addManualTemp{
-    CGFloat temp = [self.device.modeTemp floatValue];
-    temp = temp + 0.5;
-    self.device.modeTemp = [NSNumber numberWithFloat:temp];
-    NSLog(@"%@",self.device.modeTemp);
-    self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
-    
-}
-
-- (void)minusManualTemp{
-    CGFloat temp = [self.device.modeTemp floatValue];
-    temp = temp - 0.5;
-    self.device.modeTemp = [NSNumber numberWithFloat:temp];
-    self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
-
-}
-
-- (void)timingAction{
-    ThermostatTimerController *timerVC = [[ThermostatTimerController alloc] init];
-    [self.navigationController pushViewController:timerVC animated:YES];
-}
-
-- (void)controlThermostat{
-    UInt8 controlCode = 0x01;
-    NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:![self.device.isOn boolValue]]];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
-}
-
-- (void)thermostatSetting{
-    ThermostSettingController *settingVC = [[ThermostSettingController alloc] init];
-    settingVC.device = self.device;
-    [self.navigationController pushViewController:settingVC animated:YES];
-}
-
-- (NSMutableAttributedString *)generateStringByTemperature:(CGFloat)temp currentTemp:(CGFloat)currentTemp{
-    NSString *tempStr = [NSString stringWithFormat:@"%.1f℃",temp];
-    NSString *currentTempStr = [NSString stringWithFormat:@"%@%.1f℃",LocalString(@"当前温度"),currentTemp];
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@",tempStr,currentTempStr]];
-    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"79A4E3"] range:NSMakeRange(0, tempStr.length)];
-    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"989796"] range:NSMakeRange(tempStr.length + 1, currentTempStr.length)];
-    [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.f] range:NSMakeRange(0, tempStr.length)];
-    [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.f] range:NSMakeRange(tempStr.length + 1, currentTempStr.length)];
-    return str;
-}
 @end

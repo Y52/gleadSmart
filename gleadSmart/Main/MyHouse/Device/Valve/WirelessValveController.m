@@ -122,11 +122,9 @@ CGFloat const nodeButtonWidth = 20.f;
         if ([self.device.isOn boolValue]) {
             [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl_on"] forState:UIControlStateNormal];
             [self valveStatus:YES];
-            [self nodesLeakStatus:self.device.nodeArray];
         }else{
             [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl"] forState:UIControlStateNormal];
             [self valveStatus:NO];
-            [self nodesLeakStatus:nil];//关闭水阀，没有漏水节点的信息
         }
     });
 }

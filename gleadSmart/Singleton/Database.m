@@ -51,7 +51,7 @@ static dispatch_once_t oneToken;
 #pragma mark - Database initial
 - (void)initDB{
     NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *filePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_Coffee.sql",_user.userId]];
+    NSString *filePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_gleadSmart.sql",_user.userId]];
     NSLog(@"%@",filePath);
     _queueDB = [FMDatabaseQueue databaseQueueWithPath:filePath];
     [self createTable];

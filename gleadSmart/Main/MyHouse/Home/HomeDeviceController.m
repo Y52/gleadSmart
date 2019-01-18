@@ -50,7 +50,6 @@ static CGFloat const Cell_Height = 72.f;
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshDeviceTable" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveStatusControlReply" object:nil];
 }
 
 #pragma mark - Lazy Load
@@ -153,7 +152,8 @@ static CGFloat const Cell_Height = 72.f;
         default:
             break;
     }
-    if ([device.isOn integerValue]) {
+    //NSLog(@"%@---%@",device.isOn,device.mac);
+    if ([device.isOn boolValue]) {
         cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
         cell.controlSwitch.on = YES;
     }else{
@@ -217,6 +217,24 @@ static CGFloat const Cell_Height = 72.f;
         return 15.f;
     }else{
         return 0.f;
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        DeviceModel *device = self.deviceArray[indexPath.row];
+        Network *net = [Network shareNetwork];
+        UInt8 controlCode = 0x00;
+        NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]]];//删除节点
+        [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
     }
 }
 
