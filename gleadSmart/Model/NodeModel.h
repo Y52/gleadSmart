@@ -13,9 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NodeModel : NSObject
 
 @property (strong, nonatomic) NSString *mac;
+@property (strong, nonatomic) NSString *number;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *room;
 @property (nonatomic) BOOL isLeak;
 @property (nonatomic) BOOL isLowVoltage;
 @property (nonatomic) BOOL isSelected;
+@property (nonatomic) BOOL isAdd2Server;
 
 @end
 

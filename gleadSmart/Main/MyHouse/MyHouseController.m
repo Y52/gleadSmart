@@ -577,7 +577,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 - (void)getHouseHomeListAndDeviceWithDatabase{
     Database *db = [Database shareInstance];
     self.homeList = [db queryRoomsWith:db.currentHouse.houseUid];
-    
+
     db.localDeviceArray = [db queryAllDevice:db.currentHouse.houseUid];
     for (DeviceModel *device in db.localDeviceArray) {
         if ([device.type intValue] == 0) {

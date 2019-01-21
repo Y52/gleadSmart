@@ -175,6 +175,7 @@
 		BB45BC5521EF2EE800504FF8 /* MemberAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB45BC5421EF2EE800504FF8 /* MemberAccountCell.m */; };
 		BB45BC5821EF305E00504FF8 /* ManagerSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB45BC5721EF305E00504FF8 /* ManagerSetCell.m */; };
 		BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49774A219A6B5E00427197 /* MyHouseController.m */; };
+		BB49B89821F5A8D100E32CF9 /* alarmModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49B89721F5A8D100E32CF9 /* alarmModel.m */; };
 		BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9121958864004E00A2 /* AppDelegate.m */; };
 		BB49DF9521958864004E00A2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9421958864004E00A2 /* ViewController.m */; };
 		BB49DF9821958864004E00A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB49DF9621958864004E00A2 /* Main.storyboard */; };
@@ -679,6 +680,8 @@
 		BB45BC5721EF305E00504FF8 /* ManagerSetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerSetCell.m; sourceTree = "<group>"; };
 		BB497749219A6B5E00427197 /* MyHouseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyHouseController.h; sourceTree = "<group>"; };
 		BB49774A219A6B5E00427197 /* MyHouseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyHouseController.m; sourceTree = "<group>"; };
+		BB49B89621F5A8D100E32CF9 /* alarmModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = alarmModel.h; sourceTree = "<group>"; };
+		BB49B89721F5A8D100E32CF9 /* alarmModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = alarmModel.m; sourceTree = "<group>"; };
 		BB49DF8D21958864004E00A2 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB49DF9021958864004E00A2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BB49DF9121958864004E00A2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1053,7 +1056,6 @@
 		BB0A40412199686D004669CA /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				BB21BF5B219E54E20067BC61 /* Model */,
 				BB497748219A6A1E00427197 /* MyHouse */,
 				BB5B036A21B90044007AC2B1 /* Mine */,
 				BB0A404221996F4A004669CA /* MainViewController.h */,
@@ -1167,6 +1169,8 @@
 				BB2AC11021A94FE8006DB83A /* RoomModel.m */,
 				BB2AD7A221AD78F0006DB83A /* MemberModel.h */,
 				BB2AD7A321AD78F0006DB83A /* MemberModel.m */,
+				BB49B89621F5A8D100E32CF9 /* alarmModel.h */,
+				BB49B89721F5A8D100E32CF9 /* alarmModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1545,6 +1549,7 @@
 				BB0A404F21997A4B004669CA /* UIImage */,
 				BB0A4045219970D3004669CA /* RDVTabbarController */,
 				BB0A400F21991AA8004669CA /* OC_Category */,
+				BB21BF5B219E54E20067BC61 /* Model */,
 				BB0A40412199686D004669CA /* Main */,
 				BB49DF9021958864004E00A2 /* AppDelegate.h */,
 				BB49DF9121958864004E00A2 /* AppDelegate.m */,
@@ -2309,6 +2314,7 @@
 				BB00A4FF21BA25B7004E4051 /* YAlertViewController.m in Sources */,
 				BB2AC10E21A94F42006DB83A /* HouseModel.m in Sources */,
 				BB2AC10B21A94D63006DB83A /* AFSecurityPolicy.m in Sources */,
+				BB49B89821F5A8D100E32CF9 /* alarmModel.m in Sources */,
 				BB45BC4A21EF259E00504FF8 /* AddMemberController.m in Sources */,
 				BB5CDC8521EC26F300C2B6FA /* YRabbitMQ.m in Sources */,
 				36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */,

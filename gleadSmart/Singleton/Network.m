@@ -117,7 +117,7 @@ static int noUserInteractionHeartbeat = 0;
         _allMsg = [[NSMutableArray alloc] init];
         _lock = [[NSLock alloc] init];
         _queue = dispatch_queue_create("com.thingcom.queue", DISPATCH_QUEUE_SERIAL);
-        _frameCount = 0;
+        _frameCount = arc4random() % 255;
         [self sendSearchBroadcast];
         
         _testSendCount = 0;
@@ -238,7 +238,6 @@ static int noUserInteractionHeartbeat = 0;
     NSLog(@"连接成功");
     [self.udpTimer setFireDate:[NSDate distantFuture]];
     sleep(1.f);
-    _frameCount = 0;
     
     //查询设备帧，一连上内网查一次
     UInt8 controlCode = 0x00;
@@ -348,7 +347,6 @@ static int noUserInteractionHeartbeat = 0;
 
 #pragma mark - OneNET Comminicate
 - (void)oneNETSendData:(NSMutableArray *)msg{
-    
     Database *db = [Database shareInstance];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [[AFHTTPRequestSerializer alloc] init];
@@ -388,6 +386,7 @@ static int noUserInteractionHeartbeat = 0;
         NSString * daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            self->_frameCount++;//帧计数器增加
             NSDictionary *data =[responseDic objectForKey:@"data"];
             NSString *cmd_uuid = [data objectForKey:@"cmd_uuid"];
             [self getOneNETCommandStatus:cmd_uuid resendTimes:5];
@@ -399,7 +398,6 @@ static int noUserInteractionHeartbeat = 0;
 }
 
 - (void)getOneNETCommandStatus:(NSString *)cmd_uuid resendTimes:(NSInteger)resendTimes{
-    
     Database *db = [Database shareInstance];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -412,7 +410,6 @@ static int noUserInteractionHeartbeat = 0;
     
     NSString *url = [NSString stringWithFormat:@"http://api.heclouds.com/cmds/%@",cmd_uuid];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-    
     
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
@@ -649,6 +646,32 @@ static int noUserInteractionHeartbeat = 0;
                             //温控器状态主动上报
                             device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[16] unsignedIntegerValue]];
                         }
+                        
+                        if (_recivedData69.count >= 18) {
+                            UInt8 mode = [_recivedData69[13] unsignedIntegerValue];
+                            UInt8 modetemp = [_recivedData69[14] unsignedIntegerValue];
+                            UInt8 indoortemp = [_recivedData69[15] unsignedIntegerValue];
+                            
+                            if (modetemp & 0x80) {
+                                modetemp = modetemp & 0x7F;
+                                modetemp = -modetemp;
+                            }else{
+                                modetemp = modetemp & 0x7F;
+                            }
+                            NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
+                            
+                            if (indoortemp & 0x80) {
+                                indoortemp = indoortemp & 0x7F;
+                                indoortemp = -indoortemp;
+                            }else{
+                                indoortemp = indoortemp & 0x7F;
+                            }
+                            NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
+                            
+                            device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                            device.modeTemp = modeTemp;
+                            device.indoorTemp = indoorTemp;
+                        }
 
                         device.isOnline = @1;
                     }
@@ -672,6 +695,33 @@ static int noUserInteractionHeartbeat = 0;
                             //打开温控器，通知温控器页面查询温度等
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"openThermostat" object:nil userInfo:nil];
                         }
+                        
+                        if (_recivedData69.count >= 18) {
+                            UInt8 mode = [_recivedData69[13] unsignedIntegerValue];
+                            UInt8 modetemp = [_recivedData69[14] unsignedIntegerValue];
+                            UInt8 indoortemp = [_recivedData69[15] unsignedIntegerValue];
+                            
+                            if (modetemp & 0x80) {
+                                modetemp = modetemp & 0x7F;
+                                modetemp = -modetemp;
+                            }else{
+                                modetemp = modetemp & 0x7F;
+                            }
+                            NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
+                            
+                            if (indoortemp & 0x80) {
+                                indoortemp = indoortemp & 0x7F;
+                                indoortemp = -indoortemp;
+                            }else{
+                                indoortemp = indoortemp & 0x7F;
+                            }
+                            NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
+                            
+                            device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                            device.modeTemp = modeTemp;
+                            device.indoorTemp = indoorTemp;
+                        }
+
                     }
                 }
                 
@@ -980,7 +1030,7 @@ static int noUserInteractionHeartbeat = 0;
              ～～未保存过，需要上传到服务器，保存到本地～～
              *不需要保存，显示在所有设备里，用户添加到房间才保存*
              **/
-            //[self addNewDeviceWith:device];
+            [self addNewDeviceWith:device];
             
             //初始命名
             if ([device.type integerValue] == 1) {
@@ -1076,7 +1126,7 @@ static int noUserInteractionHeartbeat = 0;
     if (!device.name) {
         device.name = device.mac;
     }
-    NSDictionary *parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":@"5bfcb08be4b0c54526650eec"};
+    NSDictionary *parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":@"5bfcb08be4b0c54526650eec",@"houseUid":db.currentHouse.houseUid};
 
     [manager POST:@"http://gleadsmart.thingcom.cn/api/device" parameters:parameters progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

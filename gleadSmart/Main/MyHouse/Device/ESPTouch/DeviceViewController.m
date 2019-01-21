@@ -495,7 +495,6 @@ NSString *const CellIdentifier_device = @"CellID_device";
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
                   [NSObject showHudTipStr:LocalString(@"家庭绑定中央控制器成功")];
                   
-                  
               }else{
                   [NSObject showHudTipStr:LocalString(@"家庭绑定中央控制器失败")];
               }

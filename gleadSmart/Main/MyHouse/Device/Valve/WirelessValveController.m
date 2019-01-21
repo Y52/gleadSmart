@@ -10,6 +10,7 @@
 #import "NodeDetailCell.h"
 #import "NodeDetailViewController.h"
 #import "NodeButton.h"
+#import "alarmModel.h"
 
 NSString *const CellIdentifier_NodeDetail = @"CellID_NodeDetail";
 
@@ -50,6 +51,9 @@ CGFloat const nodeButtonWidth = 20.f;
 @property (strong, nonatomic) UITableView *nodeLeakDetailTable;
 
 @property (strong, nonatomic) UIButton *controlSwitchButton;
+
+///@brief 漏水报警情况
+@property (nonatomic, strong) NSMutableArray *leakageInfos;
 @end
 
 @implementation WirelessValveController
@@ -80,7 +84,8 @@ CGFloat const nodeButtonWidth = 20.f;
     self.nodeLeakDetailTable = [self nodeLeakDetailTable];
     self.controlSwitchButton = [self controlSwitchButton];
     
-    [self refreshDevice];
+    [self refreshDevice];//更新水阀的状态UI
+    [self nodeLeakageAlarmInfoHttpGet];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -107,6 +112,7 @@ CGFloat const nodeButtonWidth = 20.f;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveDeleteHangingNode" object:nil];
 }
 #pragma mark - private methods
+//更新内容的kvc
 - (void)refreshDevice{
     for (DeviceModel *device in [Network shareNetwork].deviceArray) {
         if ([device.mac isEqualToString:self.device.mac]) {
@@ -116,6 +122,7 @@ CGFloat const nodeButtonWidth = 20.f;
     [self UITransformationByStatus];
 }
 
+//更新UI
 - (void)UITransformationByStatus{
     dispatch_async(dispatch_get_main_queue(), ^{
         //NSLog(@"%@",self.device.isOn);
@@ -129,10 +136,12 @@ CGFloat const nodeButtonWidth = 20.f;
     });
 }
 
+//tabbar rightbutton action
 - (void)moreSetting{
     
 }
 
+//进入漏水节点详情
 - (void)nodeSetDetail{
     if (self.device.nodeArray.count == 0) {
         [NSObject showHudTipStr:@"当前没有选中漏水节点"];
@@ -178,16 +187,6 @@ CGFloat const nodeButtonWidth = 20.f;
     }else{
         _switchLabel.text = LocalString(@"关闭");
     }
-}
-
-//刷新节点UI的notification@selector
-- (void)refreshValveNodesUI{
-    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
-        if ([device.mac isEqualToString:self.device.mac]) {
-            self.device = device;
-        }
-    }
-    [self drawRectNodeButtonList:self.device.nodeArray];
 }
 
 //根据查询到的节点生成节点
@@ -413,6 +412,18 @@ CGFloat const nodeButtonWidth = 20.f;
     }
 }
 
+//刷新节点UI的notification@selector，即获得了节点信息帧
+- (void)refreshValveNodesUI{
+    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+        if ([device.mac isEqualToString:self.device.mac]) {
+            self.device = device;
+        }
+    }
+    [self nodeHttpGet];
+    [self drawRectNodeButtonList:self.device.nodeArray];
+}
+
+
 //节点按钮点击
 - (void)nodeButtonAction:(UIButton *)nodeButton{
     for (NodeButton *button in self.nodesView.subviews) {
@@ -465,7 +476,7 @@ CGFloat const nodeButtonWidth = 20.f;
     }
 }
 
-//清除所有水阀节点
+//清除所有水阀节点(UI)
 - (void)valveReset{
     dispatch_async(dispatch_get_main_queue(), ^{
         for (UIButton *button in self.nodesView.subviews) {
@@ -499,7 +510,199 @@ CGFloat const nodeButtonWidth = 20.f;
     [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
 }
 
+- (NSMutableArray *)sortLeakageInfosByDate:(NSMutableArray *)arr{
+    [arr sortUsingComparator:^NSComparisonResult(alarmModel *obj1, alarmModel *obj2) {
+        return NSOrderedDescending;
+    }];
+    return arr;
+}
 
+#pragma mark - server api
+- (void)nodeHttpGet{
+    Database *db = [Database shareInstance];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/valve?valveMac=%@",self.device.mac];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            NSArray *nodeData = [responseDic objectForKey:@"data"];
+            [nodeData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (![obj isKindOfClass:[NSNull class]]) {
+                    BOOL isContain = NO;
+                    for (NodeModel *node in self.device.nodeArray) {
+                        if ([node.mac isEqualToString:[obj objectForKey:@"mac"]]) {
+                            node.number = [obj objectForKey:@"number"];
+                            node.name = [obj objectForKey:@"name"];
+                            node.room = [obj objectForKey:@"room"];
+                            node.isAdd2Server = YES;
+                            isContain = YES;
+                        }
+                    }
+                    if (!isContain) {
+                        //删除服务器的漏水节点，先不做，感觉不需要
+                    }
+                }
+            }];
+            
+            for (int i = 0; i < self.device.nodeArray.count; i++) {
+                NodeModel *node = self.device.nodeArray[i];
+                if (!node.isAdd2Server) {
+                    [self nodeInfoHttpPost:node number:[NSNumber numberWithInt:i]];
+                }else{
+                    if ([node.number intValue] != i) {
+                        
+                    }
+                }
+            }
+            
+        }else{
+            [NSObject showHudTipStr:LocalString(@"从服务器获取漏水节点详细信息失败")];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error:%@",error);
+        if (error.code == -1011) {
+            [NSObject showHudTipStr:LocalString(@"无网络")];
+            return;
+        }
+        [NSObject showHudTipStr:LocalString(@"从服务器获取漏水节点详细信息失败")];
+    }];
+}
+
+- (void)nodeInfoHttpPost:(NodeModel *)node number:(NSNumber *)number{
+    Database *db = [Database shareInstance];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/valve/node"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    NSDictionary *parameters = @{@"valveMac":self.device.mac,@"mac":node.mac,@"number":@0};
+    [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            NSLog(@"添加节点到服务器成功");
+        }else{
+            [NSObject showHudTipStr:LocalString(@"添加节点到服务器失败")];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (error.code == -1011) {
+            [NSObject showHudTipStr:LocalString(@"无网络")];
+            return;
+        }
+        [NSObject showHudTipStr:LocalString(@"添加节点到服务器失败")];
+    }];
+}
+
+- (void)nodeInfoHttpPut:(NodeModel *)node number:(NSNumber *)number{
+    Database *db = [Database shareInstance];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/valve/node"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    NSDictionary *parameters = @{@"valveMac":self.device.mac,@"mac":node.mac,@"number":@0};
+    //@"5bfcb08be4b0c54526650eec"
+    [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            NSLog(@"更新节点信息成功");
+        }else{
+            [NSObject showHudTipStr:LocalString(@"更新节点信息失败")];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (error.code == -1011) {
+            [NSObject showHudTipStr:LocalString(@"无网络")];
+            return;
+        }
+        [NSObject showHudTipStr:LocalString(@"更新节点信息失败")];
+    }];
+}
+
+
+- (void)nodeLeakageAlarmInfoHttpGet{
+    Database *db = [Database shareInstance];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/valve/warn?valveMac=%@",self.device.mac];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            NSArray *data = [responseDic objectForKey:@"data"];
+            if (data.count <= 0) {
+                return;
+            }
+            if (!self.leakageInfos) {
+                self.leakageInfos = [[NSMutableArray alloc] init];
+            }
+            [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                alarmModel *alarm = [[alarmModel alloc] init];
+                alarm.room = [obj objectForKey:@"room"];
+                alarm.time = [NSDate UTCDateFromLocalString:[obj objectForKey:@"time"]];
+                [self.leakageInfos addObject:alarm];
+            }];
+            self.leakageInfos = [self sortLeakageInfosByDate:self.leakageInfos];
+            [self.nodeLeakDetailTable reloadData];
+        }else{
+            [NSObject showHudTipStr:LocalString(@"从服务器获取漏水报警情况失败")];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error:%@",error);
+        if (error.code == -1011) {
+            [NSObject showHudTipStr:LocalString(@"无网络")];
+            return;
+        }
+        [NSObject showHudTipStr:LocalString(@"从服务器获取漏水报警情况失败")];
+    }];
+}
 
 #pragma mark - getters and setters
 - (void)setNavItem{
@@ -898,7 +1101,11 @@ CGFloat const nodeButtonWidth = 20.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    if (self.leakageInfos.count > 3) {
+        return 3;
+    }else{
+        return self.leakageInfos.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -906,9 +1113,10 @@ CGFloat const nodeButtonWidth = 20.f;
     if (cell == nil) {
         cell = [[NodeDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_NodeDetail];
     }
+    alarmModel *alarm = [self.leakageInfos objectAtIndex:indexPath.row];
     cell.leakImage.image = [UIImage imageNamed:@"nodeLeakBig_abnormal"];
-    cell.detailLabel.text = @"厨房漏水";
-    cell.dateLabel.text = @"2018.10.06 13:58:34";
+    cell.detailLabel.text = alarm.room;
+    cell.dateLabel.text = [NSDate localStringFromUTCDate:alarm.time];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }

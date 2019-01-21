@@ -117,7 +117,6 @@
             
             self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
             self->nowSetTemp = [self.device.modeTemp floatValue];
-            self.thermostatView.transform = CGAffineTransformMakeRotation((-30.f + [self.device.indoorTemp floatValue]/5*30.f) / 180 * M_PI);
             
             self.addButton.hidden = NO;
             self.minusButton.hidden = NO;
@@ -136,19 +135,8 @@
             self.timeButton.enabled = YES;
             self.setButton.enabled = YES;
             
-            //根据温度设置UI上圆圈颜色
-            float needDiscolorationCircleCount = [self.device.indoorTemp floatValue]/5;
-            for (UIImageView *circle in self.circleView.subviews) {
-                if (circle.tag == 2000) {
-                    //max min 图片
-                    continue;
-                }
-                if (circle.tag < (1000+needDiscolorationCircleCount)) {
-                    circle.image = [UIImage imageNamed:@"thermostatCircle_on"];
-                }else{
-                    circle.image = [UIImage imageNamed:@"thermostatCircle_off"];
-                }
-            }
+            [self updateModeTempUI];
+            
             
         }else{
             if (!self->isInquireTimerSuspend) {
@@ -195,6 +183,24 @@
     
 }
 
+- (void)updateModeTempUI{
+    self.thermostatView.transform = CGAffineTransformMakeRotation((-30.f + [self.device.modeTemp floatValue]/(30.f/8)*30.f) / 180 * M_PI);//旋转
+
+    //根据温度设置UI上圆圈颜色
+    float needDiscolorationCircleCount = [self.device.modeTemp floatValue]/(30.f/8);//除以一个间隔的温度
+    for (UIImageView *circle in self.circleView.subviews) {
+        if (circle.tag == 2000) {
+            //max min 图片
+            continue;
+        }
+        if (circle.tag <= (1000+needDiscolorationCircleCount)) {
+            circle.image = [UIImage imageNamed:@"thermostatCircle_on"];
+        }else{
+            circle.image = [UIImage imageNamed:@"thermostatCircle_off"];
+        }
+    }
+}
+
 //查询室内温度
 - (void)inquireModeAndIndoorTempAndModeTemp{
     UInt8 controlCode = 0x01;
@@ -215,21 +221,31 @@
 
 - (void)addManualTemp{
     CGFloat temp = [self.device.modeTemp floatValue];
+    if (temp == 30.f) {
+        [NSObject showHudTipStr:LocalString(@"最高只能30℃哦～～")];
+        return;
+    }
     temp = temp + 0.5;
     self.device.modeTemp = [NSNumber numberWithFloat:temp];
     NSLog(@"%@",self.device.modeTemp);
     self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
+    [self updateModeTempUI];
 }
 
 - (void)minusManualTemp{
     CGFloat temp = [self.device.modeTemp floatValue];
+    if (temp == 5.f) {
+        [NSObject showHudTipStr:LocalString(@"最低只能5℃哦～～")];
+        return;
+    }
     temp = temp - 0.5;
     self.device.modeTemp = [NSNumber numberWithFloat:temp];
     self.statusLabel.attributedText = [self generateStringByTemperature:[self.device.modeTemp floatValue] currentTemp:[self.device.indoorTemp floatValue]];
+    [self updateModeTempUI];
 }
 
 - (void)enableSetTemp{
-    if ([self.device.modeTemp floatValue] != nowSetTemp) {
+    if ([self.device.modeTemp floatValue] != nowSetTemp && self.device.modeTemp && self.device.mode) {
         NSLog(@"%@",self.device.modeTemp);
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFE,@0x12,@0x03,@0x01,self.device.mode,[NSNumber numberWithFloat:[self.device.modeTemp floatValue]*2]];
@@ -283,7 +299,7 @@
     if (!_sendTimer) {
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         _sendTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-        dispatch_source_set_timer(_sendTimer, dispatch_walltime(NULL, 0), 2.f * NSEC_PER_SEC, 0);
+        dispatch_source_set_timer(_sendTimer, dispatch_walltime(NULL, 0), 1.f * NSEC_PER_SEC, 0);
         dispatch_source_set_event_handler(_sendTimer, ^{
             [self enableSetTemp];
         });
