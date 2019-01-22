@@ -84,6 +84,8 @@ CGFloat const nodeButtonWidth = 20.f;
     self.nodeLeakDetailTable = [self nodeLeakDetailTable];
     self.controlSwitchButton = [self controlSwitchButton];
     
+    [self getAllNode];
+
     [self refreshDevice];//更新水阀的状态UI
     [self nodeLeakageAlarmInfoHttpGet];
 }
@@ -100,7 +102,6 @@ CGFloat const nodeButtonWidth = 20.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valveNodesReport:) name:@"valveHangingNodesReport" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valveReset) name:@"valveReset" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshValveNodesUI) name:@"valveDeleteHangingNode" object:nil];
-    [self getAllNode];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -152,7 +153,6 @@ CGFloat const nodeButtonWidth = 20.f;
         NodeModel *node = self.device.nodeArray[i];
         if (node.isSelected) {
             detailVC.node = node;
-            detailVC.index = i+1;
         }
     }
     detailVC.device = self.device;
@@ -276,10 +276,10 @@ CGFloat const nodeButtonWidth = 20.f;
 
     //取出mac
     NSString *mac = @"";
-    mac = [mac stringByAppendingString:[NSString HexByInt:[data[5] intValue]]];
-    mac = [mac stringByAppendingString:[NSString HexByInt:[data[4] intValue]]];
-    mac = [mac stringByAppendingString:[NSString HexByInt:[data[3] intValue]]];
     mac = [mac stringByAppendingString:[NSString HexByInt:[data[2] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[data[3] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[data[4] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[data[5] intValue]]];
     
     if (![self.device.mac isEqualToString:mac]) {
         return;
@@ -288,10 +288,10 @@ CGFloat const nodeButtonWidth = 20.f;
     //获取节点信息
     NodeModel *node = [[NodeModel alloc] init];
     node.mac = @"";
-    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
-    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
-    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
     node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
+    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
+    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
+    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
     UInt8 nodeInfo = [data[16] unsignedIntegerValue];
     if (nodeInfo & 0b00000010) {
         node.isLeak = YES;
@@ -597,7 +597,7 @@ CGFloat const nodeButtonWidth = 20.f;
     NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/valve/node"];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
-    NSDictionary *parameters = @{@"valveMac":self.device.mac,@"mac":node.mac,@"number":@0};
+    NSDictionary *parameters = @{@"valveMac":self.device.mac,@"mac":node.mac,@"number":number};
     [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
         NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];

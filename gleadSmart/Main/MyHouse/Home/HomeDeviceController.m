@@ -233,7 +233,7 @@ static CGFloat const Cell_Height = 72.f;
         DeviceModel *device = self.deviceArray[indexPath.row];
         Network *net = [Network shareNetwork];
         UInt8 controlCode = 0x00;
-        NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]]];//删除节点
+        NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]]];//删除节点
         [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
     }
 }
@@ -241,6 +241,7 @@ static CGFloat const Cell_Height = 72.f;
 #pragma mark - Actions
 - (void)selectDevicesWithRoom{
     [self.deviceTable.mj_header endRefreshing];
+    [SVProgressHUD dismiss];
     Network *net = [Network shareNetwork];
     if (!_room) {
         self.deviceArray = net.deviceArray;
@@ -260,6 +261,7 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 - (void)refreshTable{
+    [SVProgressHUD show];
     Network *net = [Network shareNetwork];
     UInt8 controlCode = 0x00;
     NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
@@ -270,6 +272,7 @@ static CGFloat const Cell_Height = 72.f;
         sleep(10);
         if ([self.deviceTable.mj_header isRefreshing]) {
             [NSObject showHudTipStr:@"设备或服务器异常，无法查询设备"];
+            [SVProgressHUD dismiss];
             [self.deviceTable.mj_header endRefreshing];
         }
     });

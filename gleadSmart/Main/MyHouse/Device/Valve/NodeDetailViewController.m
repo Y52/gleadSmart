@@ -47,10 +47,10 @@ static CGFloat const Cell_Height = 44.f;
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFE,@0x13,@0x07,@0x01];
         NSMutableArray *muteData = [data mutableCopy];
-        [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(6, 2)]]]];
-        [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(4, 2)]]]];
-        [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(2, 2)]]]];
         [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(0, 2)]]]];
+        [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(2, 2)]]]];
+        [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(4, 2)]]]];
+        [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(6, 2)]]]];
         [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:muteData];
     }];
     
@@ -126,22 +126,21 @@ static CGFloat const Cell_Height = 44.f;
         case 0:
         {
             cell.leftLabel.text = LocalString(@"节点序号");
-            cell.infoLabel.text = [NSString stringWithFormat:@"%ld",(long)_index];
+            cell.infoLabel.text = [NSString stringWithFormat:@"%@",self.node.number];
         }
             break;
             
         case 1:
         {
             cell.leftLabel.text = LocalString(@"节点名称");
-            cell.infoLabel.text = [NSString stringWithFormat:@"节点%03ld",_index];
+            cell.infoLabel.text = self.node.name;
         }
             break;
             
         case 2:
         {
             cell.leftLabel.text = LocalString(@"节点位置");
-            RoomModel *room = [[Database shareInstance] queryRoomWith:self.device.roomUid];
-            cell.infoLabel.text = room.name;
+            cell.infoLabel.text = self.node.room;
         }
             break;
             

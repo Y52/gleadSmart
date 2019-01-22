@@ -81,7 +81,7 @@
 }
 
 - (void)SVProgressHUD{
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
+    //[SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
 }
 
 #pragma mark - Core Data stack

@@ -79,11 +79,7 @@ static int noUserInteractionHeartbeat = 0;
             dispatch_source_set_event_handler(_noUserInteractionHeartbeatTimer, ^{
                 noUserInteractionHeartbeat++;
                 if (noUserInteractionHeartbeat == 60 && [[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
-//                    UInt8 controlCode = 0x00;
-//                    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-//                    [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
 
-                    //线程锁需要放在最前面，放在后面锁不住
                     dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.f * NSEC_PER_SEC);
                     dispatch_semaphore_wait(self.sendSignal, time);
                     
@@ -325,10 +321,10 @@ static int noUserInteractionHeartbeat = 0;
             NSMutableArray *data69 = [[NSMutableArray alloc] init];
             [data69 addObject:[NSNumber numberWithUnsignedInteger:0x69]];
             [data69 addObject:[NSNumber numberWithUnsignedInteger:controlCode]];
-            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(6, 2)]]]];
-            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(4, 2)]]]];
-            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
             [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(0, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(4, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(6, 2)]]]];
             [data69 addObject:[NSNumber numberWithInt:self->_frameCount]];
             [data69 addObject:[NSNumber numberWithInteger:data.count]];
             [data69 addObjectsFromArray:data];
@@ -591,10 +587,10 @@ static int noUserInteractionHeartbeat = 0;
     
     //取出mac
     NSString *mac = @"";
-    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
     mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
 
     for (DeviceModel *device in self.deviceArray) {
         if ([device.mac isEqualToString:mac]) {
@@ -874,10 +870,10 @@ static int noUserInteractionHeartbeat = 0;
                     NodeModel *node = [[NodeModel alloc] init];
                     
                     node.mac = @"";
-                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[15 + k] intValue]]];
-                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[14 + k] intValue]]];
-                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[13 + k] intValue]]];
                     node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[12 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[13 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[14 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[15 + k] intValue]]];
                     UInt8 nodeInfo = [_recivedData69[16 + k] unsignedIntegerValue];
                     if (nodeInfo & 0b00000010) {
                         node.isLeak = YES;
@@ -926,10 +922,10 @@ static int noUserInteractionHeartbeat = 0;
 
                 NodeModel *deletedNode = [[NodeModel alloc] init];
                 deletedNode.mac = @"";
-                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
-                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
-                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
                 deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
                 
                 if ([deletedNode.mac intValue] == 0) {
                     NSLog(@"删除失败，设备为空");
@@ -993,10 +989,10 @@ static int noUserInteractionHeartbeat = 0;
     for (int i = 0; i < count; i++) {
         DeviceModel *device = [[DeviceModel alloc] init];
         device.mac = @"";
-        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[16 + i*4] intValue]]];
-        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15 + i*4] intValue]]];
-        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14 + i*4] intValue]]];
         device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13 + i*4] intValue]]];
+        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14 + i*4] intValue]]];
+        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15 + i*4] intValue]]];
+        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[16 + i*4] intValue]]];
         device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[15 + i*4] intValue]]];
         
         //将中央控制器查询到的设备和服务器设备对比
@@ -1034,9 +1030,10 @@ static int noUserInteractionHeartbeat = 0;
             
             //初始命名
             if ([device.type integerValue] == 1) {
-                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"温控器"),[device.mac substringWithRange:NSMakeRange(6, 2)]];
+                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"温控器"),[device.mac substringWithRange:NSMakeRange(0, 2)]];
             }else if ([device.type integerValue] == 2){
-                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"无线水阀"),[device.mac substringWithRange:NSMakeRange(6, 2)]];
+                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"无线水阀"),[device.mac substringWithRange:NSMakeRange(0, 2)]];
+                NSLog(@"%@",device.name);
             }
             
             [self.deviceArray addObject:device];
@@ -1058,7 +1055,7 @@ static int noUserInteractionHeartbeat = 0;
         //每个设备发送状态查询帧
         UInt8 controlCode = 0x01;
         NSArray *data;
-        switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
+        switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]]) {
             case 1:
                 data = @[@0xFE,@0x12,@0x01,@0x00];
                 break;
@@ -1087,10 +1084,10 @@ static int noUserInteractionHeartbeat = 0;
     
     DeviceModel *device = [[DeviceModel alloc] init];
     device.mac = @"";
-    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
-    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
-    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
     device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
+    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
+    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
+    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
     device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[14] intValue]]];
     
     /*

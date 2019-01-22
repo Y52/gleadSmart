@@ -197,9 +197,9 @@
               
               //RabbitMQ topic routingkeys生成
               NSMutableArray *routingkeys = [[NSMutableArray alloc] init];
+              [routingkeys addObject:db.user.userId];
               for (HouseModel *house in db.houseList) {
-                  NSString *routingkey = [NSString stringWithFormat:@"%@.%@",db.user.userId,house.houseUid];
-                  [routingkeys addObject:routingkey];
+                  [routingkeys addObject:house.houseUid];
               }
               [[YRabbitMQ shareInstance] receiveRabbitMessage:routingkeys];
 

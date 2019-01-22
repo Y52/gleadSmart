@@ -10,7 +10,7 @@
 #import "ThermostatTimerController.h"
 #import "ThermostSettingController.h"
 
-@interface ThermostatController ()
+@interface ThermostatController () <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIImageView *thermostatView;
 @property (strong, nonatomic) UIView *circleView;
@@ -30,6 +30,8 @@
     dispatch_source_t _inquireTimer;//用来每2分钟查询室温等
     BOOL isInquireTimerSuspend;
     float nowSetTemp;//用来判断最新的温度设置数据是否上报
+    CGPoint previousPoint;//用于存储手势停留的位置
+    CGFloat angleInRadiansSum;//存储旋转的角度
 }
 
 - (instancetype)init
@@ -107,6 +109,8 @@
             }
             
             self.thermostatView.image = [UIImage imageNamed:@"thermostatKnob_On"];
+            self.thermostatView.userInteractionEnabled = YES;
+
             [self.timeButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
             [self.timeButton setImage:[UIImage imageNamed:@"thermostat_timing_on"] forState:UIControlStateNormal];
             [self.controlButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
@@ -144,6 +148,8 @@
             }
             
             self.thermostatView.image = [UIImage imageNamed:@"thermostatKnob"];
+            self.thermostatView.userInteractionEnabled = YES;
+
             [self.timeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
             [self.timeButton setImage:[UIImage imageNamed:@"thermostat_timing"] forState:UIControlStateNormal];
             [self.controlButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
@@ -183,8 +189,10 @@
     
 }
 
+//根据设置温度改变仪表UI
 - (void)updateModeTempUI{
     self.thermostatView.transform = CGAffineTransformMakeRotation((-30.f + [self.device.modeTemp floatValue]/(30.f/8)*30.f) / 180 * M_PI);//旋转
+    self->angleInRadiansSum = (-30.f + [self.device.modeTemp floatValue]/(30.f/8)*30.f) / 180 * M_PI;
 
     //根据温度设置UI上圆圈颜色
     float needDiscolorationCircleCount = [self.device.modeTemp floatValue]/(30.f/8);//除以一个间隔的温度
@@ -198,6 +206,40 @@
         }else{
             circle.image = [UIImage imageNamed:@"thermostatCircle_off"];
         }
+    }
+}
+
+//仪表旋转手势
+- (void)panView:(UIPanGestureRecognizer *)panGest{
+    if (panGest.state == UIGestureRecognizerStateBegan) {
+        previousPoint = [panGest locationInView:self.view];
+    }else if (panGest.state == UIGestureRecognizerStateEnded){
+        
+    }else{
+        //获得移动中的点
+        CGPoint currentTouchPoint = [panGest locationInView:self.view];
+        
+        CGPoint center = self.thermostatView.center;
+        CGFloat distance = sqrt((center.x-currentTouchPoint.x)*(center.x-currentTouchPoint.x) + (center.y-currentTouchPoint.y)*(center.y-currentTouchPoint.y));//求两点间距离
+//        NSLog(@"%f",currentTouchPoint.x);
+//        NSLog(@"%f",center.x);
+//        NSLog(@"%f",distance);
+        if (distance < 75.f) {
+            //如果手势滑倒了圆中心不处理
+            return;
+        }
+        
+        // 这句由当前点到中心点连成的线段跟上一个点到中心店连成的线段反算出偏移角度
+        CGFloat angleInRadians = atan2f(currentTouchPoint.y - center.y, currentTouchPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
+        NSLog(@"%f",angleInRadians);
+        if (angleInRadiansSum >= (210.f / 180 * M_PI) && angleInRadians > 0) {
+            return;
+        }
+        if (angleInRadiansSum <= (-30.f / 180 * M_PI) && angleInRadians < 0) {
+            return;
+        }
+        angleInRadiansSum += angleInRadians;
+        self.thermostatView.transform = CGAffineTransformRotate(self.thermostatView.transform, angleInRadians);//旋转
     }
 }
 
@@ -337,7 +379,7 @@
     if (!_thermostatView) {
         _thermostatView = [[UIImageView alloc] init];
         _thermostatView.image = [UIImage imageNamed:@"thermostatKnob"];
-        _thermostatView.contentMode = UIViewContentModeScaleAspectFit;
+        [_thermostatView sizeToFit];
         [self.view addSubview:_thermostatView];
         [_thermostatView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(200.f, 200.f));
@@ -346,10 +388,20 @@
         }];
         
         _thermostatView.transform = CGAffineTransformMakeRotation(-30.f / 180 * M_PI);
+        angleInRadiansSum = -30.f / 180 * M_PI;
+        
+        _thermostatView.userInteractionEnabled = YES;
+        //_thermostatView.multipleTouchEnabled = YES;
+
+        //初始化一个拖拽手势
+        UIPanGestureRecognizer *panGest = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panView:)];
+        //[_thermostatView addGestureRecognizer:panGest];
 
     }
     return _thermostatView;
 }
+
+
 
 - (UILabel *)statusLabel{
     if (!_statusLabel) {
@@ -359,7 +411,7 @@
         _statusLabel.text = LocalString(@"已关闭");
         _statusLabel.numberOfLines = 0;
         _statusLabel.textAlignment = NSTextAlignmentCenter;
-        
+        _statusLabel.userInteractionEnabled = YES;
         _statusLabel.adjustsFontSizeToFitWidth = YES;
         [self.view addSubview:_statusLabel];
         [_statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
