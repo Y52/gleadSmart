@@ -137,7 +137,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         _houseButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
         _houseButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         [_houseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_houseButton setImage:[UIImage imageNamed:@"img_houseSelect"] forState:UIControlStateNormal];
+        //[_houseButton setImage:[UIImage imageNamed:@"img_houseSelect"] forState:UIControlStateNormal];
         [_houseButton addTarget:self action:@selector(houseSelect) forControlEvents:UIControlEventTouchUpInside];
         [self.headerView addSubview:_houseButton];
         
@@ -149,8 +149,8 @@ static CGFloat const gleadMenuItemMargin = 25.f;
             make.size.mas_equalTo(CGSizeMake(yAutoFit(size.width + 24.f), yAutoFit(24.f)));
         }];
         
-        [_houseButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -_houseButton.imageView.bounds.size.width, 0, _houseButton.imageView.bounds.size.width)];
-        [_houseButton setImageEdgeInsets:UIEdgeInsetsMake(0, _houseButton.titleLabel.bounds.size.width, 0, -_houseButton.titleLabel.bounds.size.width)];
+        //[_houseButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -_houseButton.imageView.bounds.size.width, 0, _houseButton.imageView.bounds.size.width)];
+        //[_houseButton setImageEdgeInsets:UIEdgeInsetsMake(0, _houseButton.titleLabel.bounds.size.width, 0, -_houseButton.titleLabel.bounds.size.width)];
 
     }
     return _houseButton;
@@ -570,6 +570,40 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     }];
 }
 
+//家庭绑定成员
+- (void)houseBindMember{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house/member"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSDictionary *parameters = @{@"houseUid":db.currentHouse.houseUid,@"mobile":@"15558073550",@"auth":@1};
+    [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            NSLog(@"绑定成功");
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
 #pragma mark - Update by database
 /*
  *从本地获取设备信息和房间信息
@@ -614,6 +648,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         [NSObject showHudTipStr:LocalString(@"请先创建家庭")];
         return;
     }
+    
     HomeManagementController *HomeManagementVC = [[HomeManagementController alloc] init];
     HomeManagementVC.homeList = self.homeList;
     [self.navigationController pushViewController:HomeManagementVC animated:YES];

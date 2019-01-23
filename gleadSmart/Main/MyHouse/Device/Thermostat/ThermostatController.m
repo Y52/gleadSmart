@@ -211,6 +211,7 @@
 
 //仪表旋转手势
 - (void)panView:(UIPanGestureRecognizer *)panGest{
+    CGAffineTransform startTransform = self.thermostatView.transform;
     if (panGest.state == UIGestureRecognizerStateBegan) {
         previousPoint = [panGest locationInView:self.view];
     }else if (panGest.state == UIGestureRecognizerStateEnded){
@@ -226,20 +227,23 @@
 //        NSLog(@"%f",distance);
         if (distance < 75.f) {
             //如果手势滑倒了圆中心不处理
-            return;
+            //return;
         }
         
         // 这句由当前点到中心点连成的线段跟上一个点到中心店连成的线段反算出偏移角度
         CGFloat angleInRadians = atan2f(currentTouchPoint.y - center.y, currentTouchPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
-        NSLog(@"%f",angleInRadians);
-        if (angleInRadiansSum >= (210.f / 180 * M_PI) && angleInRadians > 0) {
+        NSLog(@"%f",angleInRadiansSum +  angleInRadians);
+        NSLog(@"%f",210.f / 180 * M_PI);
+        if ((angleInRadiansSum + angleInRadians) >= (210.f / 180 * M_PI) && angleInRadians > 0) {
+            //self.thermostatView.transform = CGAffineTransformMakeRotation(210.f / 180 * M_PI);//旋转
             return;
         }
-        if (angleInRadiansSum <= (-30.f / 180 * M_PI) && angleInRadians < 0) {
+        if ((angleInRadiansSum + angleInRadians) <= (-30.f / 180 * M_PI) && angleInRadians < 0) {
+            //self.thermostatView.transform = CGAffineTransformMakeRotation(-30.f / 180 * M_PI);//旋转
             return;
         }
-        angleInRadiansSum += angleInRadians;
-        self.thermostatView.transform = CGAffineTransformRotate(self.thermostatView.transform, angleInRadians);//旋转
+
+        self.thermostatView.transform = CGAffineTransformMakeRotation(angleInRadiansSum + angleInRadians);//旋转
     }
 }
 
@@ -395,7 +399,7 @@
 
         //初始化一个拖拽手势
         UIPanGestureRecognizer *panGest = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panView:)];
-        //[_thermostatView addGestureRecognizer:panGest];
+        [_thermostatView addGestureRecognizer:panGest];
 
     }
     return _thermostatView;
