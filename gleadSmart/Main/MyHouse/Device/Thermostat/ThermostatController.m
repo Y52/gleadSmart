@@ -10,6 +10,11 @@
 #import "ThermostatTimerController.h"
 #import "ThermostSettingController.h"
 
+#define ToRad(deg)      ( (M_PI * (deg)) / 180.0 )
+#define ToDeg(rad)      ( (180.0 * (rad)) / M_PI )
+#define SQR(x)          ( (x) * (x) )
+
+
 @interface ThermostatController () <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIImageView *thermostatView;
@@ -29,9 +34,7 @@
     dispatch_source_t _sendTimer;//用来防止设置模式温度频率太快
     dispatch_source_t _inquireTimer;//用来每2分钟查询室温等
     BOOL isInquireTimerSuspend;
-    float nowSetTemp;//用来判断最新的温度设置数据是否上报
-    CGPoint previousPoint;//用于存储手势停留的位置
-    CGFloat angleInRadiansSum;//存储旋转的角度
+    float nowSetTemp;//用来判断最新的温度设置数据是否上报，该值只有在确认设置温度后才改变为设置温度
 }
 
 - (instancetype)init
@@ -192,7 +195,6 @@
 //根据设置温度改变仪表UI
 - (void)updateModeTempUI{
     self.thermostatView.transform = CGAffineTransformMakeRotation((-30.f + [self.device.modeTemp floatValue]/(30.f/8)*30.f) / 180 * M_PI);//旋转
-    self->angleInRadiansSum = (-30.f + [self.device.modeTemp floatValue]/(30.f/8)*30.f) / 180 * M_PI;
 
     //根据温度设置UI上圆圈颜色
     float needDiscolorationCircleCount = [self.device.modeTemp floatValue]/(30.f/8);//除以一个间隔的温度
@@ -211,40 +213,53 @@
 
 //仪表旋转手势
 - (void)panView:(UIPanGestureRecognizer *)panGest{
-    CGAffineTransform startTransform = self.thermostatView.transform;
-    if (panGest.state == UIGestureRecognizerStateBegan) {
-        previousPoint = [panGest locationInView:self.view];
-    }else if (panGest.state == UIGestureRecognizerStateEnded){
-        
-    }else{
-        //获得移动中的点
-        CGPoint currentTouchPoint = [panGest locationInView:self.view];
-        
-        CGPoint center = self.thermostatView.center;
-        CGFloat distance = sqrt((center.x-currentTouchPoint.x)*(center.x-currentTouchPoint.x) + (center.y-currentTouchPoint.y)*(center.y-currentTouchPoint.y));//求两点间距离
-//        NSLog(@"%f",currentTouchPoint.x);
-//        NSLog(@"%f",center.x);
-//        NSLog(@"%f",distance);
-        if (distance < 75.f) {
-            //如果手势滑倒了圆中心不处理
-            //return;
-        }
-        
-        // 这句由当前点到中心点连成的线段跟上一个点到中心店连成的线段反算出偏移角度
-        CGFloat angleInRadians = atan2f(currentTouchPoint.y - center.y, currentTouchPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
-        NSLog(@"%f",angleInRadiansSum +  angleInRadians);
-        NSLog(@"%f",210.f / 180 * M_PI);
-        if ((angleInRadiansSum + angleInRadians) >= (210.f / 180 * M_PI) && angleInRadians > 0) {
-            //self.thermostatView.transform = CGAffineTransformMakeRotation(210.f / 180 * M_PI);//旋转
-            return;
-        }
-        if ((angleInRadiansSum + angleInRadians) <= (-30.f / 180 * M_PI) && angleInRadians < 0) {
-            //self.thermostatView.transform = CGAffineTransformMakeRotation(-30.f / 180 * M_PI);//旋转
-            return;
-        }
-
-        self.thermostatView.transform = CGAffineTransformMakeRotation(angleInRadiansSum + angleInRadians);//旋转
+    //获得移动中的点
+    CGPoint currentTouchPoint = [panGest locationInView:self.view];
+    
+    CGPoint center = self.thermostatView.center;
+    
+    // 这句由当前点到中心点连成的线段跟上一个点到中心店连成的线段反算出偏移角度
+    CGFloat angleInRadians = AngleFromNorth(center, currentTouchPoint, NO);
+    NSLog(@"%f",angleInRadians);
+    if (angleInRadians == 1000) {
+        return;
     }
+    
+    float temp = (30.f/8/(M_PI/6)) * (angleInRadians - M_PI + M_PI/6);
+    if (angleInRadians - M_PI + M_PI/6 < 0) {
+        //x轴下方是正的值，在AngleFromNorth函数中没有加2M_PI，所以在这里右下圆弧angleInRadians - M_PI + M_PI/6是负的，左下刚好到0，右下的需要特殊处理，加上2M_PI
+        temp = (30.f/8/(M_PI/6)) * (angleInRadians + 2*M_PI - M_PI + M_PI/6);
+    }
+    //温度间隔是0.5，所以先乘2取整再除回来，可以有.5
+    int tempFloor = floor(temp * 2);
+    temp = tempFloor/2.f;
+    
+#warning 还有些问题，0.0和30.0到达不了
+    self.statusLabel.attributedText = [self generateStringByTemperature:temp currentTemp:[self.device.indoorTemp floatValue]];
+    self.thermostatView.transform = CGAffineTransformMakeRotation(angleInRadians - M_PI);//旋转,减M_PI是因为图片是朝向左的，x轴是朝右的，所以将角度减M_PI
+
+    if (panGest.state == UIGestureRecognizerStateBegan) {
+        
+    }else if (panGest.state == UIGestureRecognizerStateEnded){
+        self.device.modeTemp = [NSNumber numberWithFloat:temp];
+    }else{
+        
+    }
+}
+
+//计算手势滑动的角度
+static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
+    CGPoint v = CGPointMake(p2.x-p1.x,p2.y-p1.y);
+    float vmag = sqrt(SQR(v.x) + SQR(v.y)), result = 0;
+    //求单位向量
+    v.x /= vmag;
+    v.y /= vmag;
+    double radians = atan2(v.y,v.x);//返回的是原点至点(x,y)的方位角，即与 x 轴的夹角
+    result = radians;
+    if (result > M_PI/6 && result < M_PI*5/6) {
+        return 1000;
+    }
+    return (result >= 0 ? result : result + 2*M_PI);//负的加2M_PI，即左边从5/6M_PI开始逐步增加到2M_PI，最右边下面30度为0到-1/6M_PI
 }
 
 //查询室内温度
@@ -392,7 +407,6 @@
         }];
         
         _thermostatView.transform = CGAffineTransformMakeRotation(-30.f / 180 * M_PI);
-        angleInRadiansSum = -30.f / 180 * M_PI;
         
         _thermostatView.userInteractionEnabled = YES;
         //_thermostatView.multipleTouchEnabled = YES;
@@ -400,7 +414,6 @@
         //初始化一个拖拽手势
         UIPanGestureRecognizer *panGest = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panView:)];
         [_thermostatView addGestureRecognizer:panGest];
-
     }
     return _thermostatView;
 }

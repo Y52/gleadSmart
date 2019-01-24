@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "RegisterController.h"
+#import "ThermostatController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -25,8 +27,12 @@
     
     RegisterController *loginVC = [[RegisterController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
-
-    self.window.rootViewController = nav;
+    
+    ThermostatController *ther = [[ThermostatController alloc] init];
+    ther.device = [[DeviceModel alloc] init];
+    ther.device.isOn = @1;
+    
+    self.window.rootViewController = ther;
     [self.window makeKeyAndVisible];
     
     return YES;
