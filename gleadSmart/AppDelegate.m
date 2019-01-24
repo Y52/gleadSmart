@@ -28,11 +28,11 @@
     RegisterController *loginVC = [[RegisterController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
     
-    ThermostatController *ther = [[ThermostatController alloc] init];
-    ther.device = [[DeviceModel alloc] init];
-    ther.device.isOn = @1;
+//    ThermostatController *ther = [[ThermostatController alloc] init];
+//    ther.device = [[DeviceModel alloc] init];
+//    ther.device.isOn = @1;
     
-    self.window.rootViewController = ther;
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     
     return YES;
