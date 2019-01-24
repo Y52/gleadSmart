@@ -14,6 +14,7 @@
 #define ToDeg(rad)      ( (180.0 * (rad)) / M_PI )
 #define SQR(x)          ( (x) * (x) )
 
+static float UIGestureRecognizerStateMovedTemp = 0.0;
 
 @interface ThermostatController () <UIGestureRecognizerDelegate>
 
@@ -221,27 +222,34 @@
     // 这句由当前点到中心点连成的线段跟上一个点到中心店连成的线段反算出偏移角度
     CGFloat angleInRadians = AngleFromNorth(center, currentTouchPoint, NO);
     NSLog(@"%f",angleInRadians);
-    if (angleInRadians == 1000) {
-        return;
-    }
     
+    if (angleInRadians > M_PI/6 && angleInRadians < M_PI*5/6) {
+        if (UIGestureRecognizerStateMovedTemp > 20.f) {
+            angleInRadians = M_PI/6;//设置为30.0摄氏度
+        }else if (UIGestureRecognizerStateMovedTemp < 10.f){
+            angleInRadians = M_PI*5/6;//设置为0.0摄氏度
+        }
+    }
+
     float temp = (30.f/8/(M_PI/6)) * (angleInRadians - M_PI + M_PI/6);
     if (angleInRadians - M_PI + M_PI/6 < 0) {
         //x轴下方是正的值，在AngleFromNorth函数中没有加2M_PI，所以在这里右下圆弧angleInRadians - M_PI + M_PI/6是负的，左下刚好到0，右下的需要特殊处理，加上2M_PI
         temp = (30.f/8/(M_PI/6)) * (angleInRadians + 2*M_PI - M_PI + M_PI/6);
     }
+    
     //温度间隔是0.5，所以先乘2取整再除回来，可以有.5
     int tempFloor = floor(temp * 2);
     temp = tempFloor/2.f;
     
-#warning 还有些问题，0.0和30.0到达不了
-    self.statusLabel.attributedText = [self generateStringByTemperature:temp currentTemp:[self.device.indoorTemp floatValue]];
+    UIGestureRecognizerStateMovedTemp = temp;//存储下来用来判断此时应该设置为30还是0摄氏度
+    
+    self.statusLabel.attributedText = [self generateStringByTemperature:temp currentTemp:[self.device.indoorTemp floatValue]];//显示设置的温度
     self.thermostatView.transform = CGAffineTransformMakeRotation(angleInRadians - M_PI);//旋转,减M_PI是因为图片是朝向左的，x轴是朝右的，所以将角度减M_PI
 
     if (panGest.state == UIGestureRecognizerStateBegan) {
         
     }else if (panGest.state == UIGestureRecognizerStateEnded){
-        self.device.modeTemp = [NSNumber numberWithFloat:temp];
+        self.device.modeTemp = [NSNumber numberWithFloat:temp];//设置后可以发送设置帧
     }else{
         
     }
@@ -256,10 +264,7 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
     v.y /= vmag;
     double radians = atan2(v.y,v.x);//返回的是原点至点(x,y)的方位角，即与 x 轴的夹角
     result = radians;
-    if (result > M_PI/6 && result < M_PI*5/6) {
-        return 1000;
-    }
-    return (result >= 0 ? result : result + 2*M_PI);//负的加2M_PI，即左边从5/6M_PI开始逐步增加到2M_PI，最右边下面30度为0到-1/6M_PI
+    return (result >= 0 ? result : result + 2*M_PI);//负的加2M_PI，即左边从5/6M_PI开始逐步增加到2M_PI，最右边下面30度为0到1/6M_PI
 }
 
 //查询室内温度
