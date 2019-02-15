@@ -219,7 +219,7 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
     
     CGPoint center = self.thermostatView.center;
     
-    // 这句由当前点到中心点连成的线段跟上一个点到中心店连成的线段反算出偏移角度
+    // 这句由当前点到中心点连成的线段与x轴的夹角从而获取触摸的点的位置(point)
     CGFloat angleInRadians = AngleFromNorth(center, currentTouchPoint, NO);
     NSLog(@"%f",angleInRadians);
     

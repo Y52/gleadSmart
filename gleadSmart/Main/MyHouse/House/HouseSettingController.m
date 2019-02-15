@@ -14,6 +14,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "AddHouseMemberCell.h"
 #import "AddMemberController.h"
+#import "FamilyMemberController.h"
 
 NSString *const CellIdentifier_HouseSetCommon = @"CellID_HouseSetCommon";
 NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
@@ -327,7 +328,20 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
                 [self presentViewController:locaVC animated:YES completion:nil];
             }
             break;
-#warning todo 点击家庭成员，进入成员页面，页面待做，移除成员功能待做
+            
+        case 2:{
+            MemberModel *member = _house.members[indexPath.row];
+            FamilyMemberController *memberVC = [[FamilyMemberController alloc] init];
+            memberVC.member = member;
+            memberVC.houseUid = self.house.houseUid;
+            memberVC.popBlock = ^{
+                [self updateHouseDetailInfoWith:self.house.houseUid];
+            };
+            [self.navigationController pushViewController:memberVC animated:YES];
+        }
+            break;
+            
+#warning todo 移除成员功能待做
         case 3:{
             AddMemberController *addmemberVC = [[AddMemberController alloc] init];
             addmemberVC.houseUid = self.house.houseUid;

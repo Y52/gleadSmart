@@ -384,6 +384,9 @@
 		BBF6326621BBAB34006A23AC /* valveSwitch_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323321BBAB33006A23AC /* valveSwitch_abnormal@2x.png */; };
 		BBF6326B21BBBDE0006A23AC /* NodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326A21BBBDE0006A23AC /* NodeDetailViewController.m */; };
 		BBF6326E21BBC472006A23AC /* NodeInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326D21BBC472006A23AC /* NodeInfoCell.m */; };
+		BBF8CAED22169FBA0030E921 /* FamilyMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAEC22169FBA0030E921 /* FamilyMemberController.m */; };
+		BBF8CAF12216A4650030E921 /* FamilyMemberInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAF02216A4650030E921 /* FamilyMemberInfoCell.m */; };
+		BBF8CAF42216A8460030E921 /* FamilyMemberSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAF32216A8460030E921 /* FamilyMemberSetCell.m */; };
 		DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */; };
 /* End PBXBuildFile section */
 
@@ -918,6 +921,12 @@
 		BBF6326A21BBBDE0006A23AC /* NodeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeDetailViewController.m; sourceTree = "<group>"; };
 		BBF6326C21BBC472006A23AC /* NodeInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeInfoCell.h; sourceTree = "<group>"; };
 		BBF6326D21BBC472006A23AC /* NodeInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeInfoCell.m; sourceTree = "<group>"; };
+		BBF8CAEB22169FBA0030E921 /* FamilyMemberController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyMemberController.h; sourceTree = "<group>"; };
+		BBF8CAEC22169FBA0030E921 /* FamilyMemberController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyMemberController.m; sourceTree = "<group>"; };
+		BBF8CAEF2216A4650030E921 /* FamilyMemberInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyMemberInfoCell.h; sourceTree = "<group>"; };
+		BBF8CAF02216A4650030E921 /* FamilyMemberInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyMemberInfoCell.m; sourceTree = "<group>"; };
+		BBF8CAF22216A8460030E921 /* FamilyMemberSetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyMemberSetCell.h; sourceTree = "<group>"; };
+		BBF8CAF32216A8460030E921 /* FamilyMemberSetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyMemberSetCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1188,6 +1197,8 @@
 				BB2AC12621AA9EF1006DB83A /* FamilyLocationController.m */,
 				BB2AD79F21AD70D6006DB83A /* HouseSettingController.h */,
 				BB2AD7A021AD70D6006DB83A /* HouseSettingController.m */,
+				BBF8CAEB22169FBA0030E921 /* FamilyMemberController.h */,
+				BBF8CAEC22169FBA0030E921 /* FamilyMemberController.m */,
 				BB45BC4821EF259E00504FF8 /* AddMemberController.h */,
 				BB45BC4921EF259E00504FF8 /* AddMemberController.m */,
 			);
@@ -1350,6 +1361,7 @@
 		BB35290C219D0FAB00428DE9 /* Myhouse */ = {
 			isa = PBXGroup;
 			children = (
+				BBF8CAEE2216A4350030E921 /* FamilyMember */,
 				BB45BC4B21EF280700504FF8 /* HouseSelect */,
 				BB45BC4C21EF286100504FF8 /* Device */,
 				BB45BC4D21EF287400504FF8 /* AddFamily */,
@@ -1809,6 +1821,17 @@
 				BBF6323021BBAB33006A23AC /* valveTabMore@3x.png */,
 			);
 			path = "无线阀门_slices";
+			sourceTree = "<group>";
+		};
+		BBF8CAEE2216A4350030E921 /* FamilyMember */ = {
+			isa = PBXGroup;
+			children = (
+				BBF8CAEF2216A4650030E921 /* FamilyMemberInfoCell.h */,
+				BBF8CAF02216A4650030E921 /* FamilyMemberInfoCell.m */,
+				BBF8CAF22216A8460030E921 /* FamilyMemberSetCell.h */,
+				BBF8CAF32216A8460030E921 /* FamilyMemberSetCell.m */,
+			);
+			path = FamilyMember;
 			sourceTree = "<group>";
 		};
 		CFCEDBAD622E9D8465800F48 /* Frameworks */ = {
@@ -2306,6 +2329,7 @@
 				BB8F5A8821B7EF1700E69094 /* TherTimerCell.m in Sources */,
 				BB35292B219DA7EC00428DE9 /* Network.m in Sources */,
 				BB2AC0F421A8F156006DB83A /* ESPDatumCode.m in Sources */,
+				BBF8CAF12216A4650030E921 /* FamilyMemberInfoCell.m in Sources */,
 				BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */,
 				3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
@@ -2338,6 +2362,7 @@
 				BB62E4D521B4E07600C0FA39 /* TherWeekSelCell.m in Sources */,
 				3EA530C121AB9B43000A6D26 /* TextFieldCell.m in Sources */,
 				BB2AC11121A94FE8006DB83A /* RoomModel.m in Sources */,
+				BBF8CAED22169FBA0030E921 /* FamilyMemberController.m in Sources */,
 				BB37DF0A21A7EFC400B2121B /* DeviceConfirmView.m in Sources */,
 				BB2AC0F721A93B1B006DB83A /* UserModel.m in Sources */,
 				BB37DF0D21A7EFC400B2121B /* DeviceConnectView.m in Sources */,
@@ -2357,6 +2382,7 @@
 				BB2AC10821A94D63006DB83A /* AFURLSessionManager.m in Sources */,
 				BB00A4F321BA202C004E4051 /* AccountHeaderCell.m in Sources */,
 				3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */,
+				BBF8CAF42216A8460030E921 /* FamilyMemberSetCell.m in Sources */,
 				BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */,
 				BB45BC5521EF2EE800504FF8 /* MemberAccountCell.m in Sources */,
 				BB2AC0E721A8F156006DB83A /* ESPGuideCode.m in Sources */,

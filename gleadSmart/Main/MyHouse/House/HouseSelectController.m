@@ -127,6 +127,8 @@ static CGFloat const Cell_Height = 50.f;
     }else{
         HouseModel *house = db.houseList[indexPath.row];
         cell.image.image = [UIImage imageNamed:@"addFamily_uncheck"];
+        NSLog(@"%@",db.currentHouse.houseUid);
+        NSLog(@"%@",house.houseUid);
         if ([house.houseUid isEqualToString:db.currentHouse.houseUid]) {
             cell.image.image = [UIImage imageNamed:@"addFamily_check"];
         }
