@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FamilyMemberController : UIViewController
 
-@property (nonatomic, strong) NSString *houseUid;
+@property (nonatomic, strong) HouseModel *house;
 @property (nonatomic, strong) MemberModel *member;
 @property (nonatomic) popBlock popBlock;
 

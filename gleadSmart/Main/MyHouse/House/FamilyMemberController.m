@@ -59,13 +59,16 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
-    NSDictionary *parameters = @{@"mobile":self.member.mobile,@"houseUid":self.houseUid,@"auht":[NSNumber numberWithBool:isManager]};
+
+    
+    NSDictionary *parameters = @{@"mobile":self.member.mobile,@"houseUid":self.house.houseUid,@"auth":[NSNumber numberWithInt:(int)isManager]};
+    
     NSLog(@"%@",parameters);
     
     [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
@@ -80,6 +83,46 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
             [NSObject showHudTipStr:@"修改成员权限失败"];
+        });
+    }];
+}
+
+- (void)removeMember{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    NSDictionary *parameters = @{@"houseUid":self.house.houseUid,@"mobile":self.member.mobile};
+    
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
+
+    [manager DELETE:@"http://gleadsmart.thingcom.cn/api/house/member" parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+        }else{
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"移除成员失败"];
         });
     }];
 }
@@ -113,7 +156,7 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
 
 - (UIView *)tableFooterView{
     UIView *view = [[UIView alloc] init];
-    view.frame = CGRectMake(0, 0, ScreenWidth, 100.f);
+    view.frame = CGRectMake(0, 0, ScreenWidth, 200.f);
     
     UILabel *label = [[UILabel alloc] init];
     label.frame = CGRectMake(20.f, 5.f, ScreenWidth - 40.f, 90.f);
@@ -122,6 +165,28 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
     label.textColor = [UIColor colorWithHexString:@"7A7A79"];
     label.numberOfLines = 0;
     [view addSubview:label];
+    
+    UIButton *removeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [removeButton setTitle:LocalString(@"移除成员") forState:UIControlStateNormal];
+    [removeButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
+    [removeButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+    [removeButton setTitleColor:[UIColor colorWithHexString:@"3987F8"] forState:UIControlStateNormal];
+    [removeButton.layer setBorderWidth:1.0];
+    removeButton.layer.borderColor = [UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0].CGColor;
+    removeButton.layer.cornerRadius = 20.f;
+    [removeButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
+    [removeButton addTarget:self action:@selector(removeMember) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:removeButton];
+    [removeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(yAutoFit(284.f), 40.f));
+        make.top.equalTo(label.mas_bottom).offset(30.f);
+        make.centerX.equalTo(view.mas_centerX);
+    }];
+    if ([self.house.auth integerValue] == 0 && [self.member.auth integerValue] != 0) {
+        removeButton.hidden = NO;
+    }else{
+        removeButton.hidden = YES;
+    }
     
     return view;
 }
@@ -164,6 +229,11 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
                 cell = [[FamilyMemberSetCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_FamilyMemberSet];
             }
             cell.leftLabel.text = LocalString(@"设为家庭管理员");
+            if ([self.house.auth integerValue] == 0) {
+                cell.controlSwitch.enabled = YES;
+            }else{
+                cell.controlSwitch.enabled = NO;
+            }
             cell.controlSwitch.on = ![self.member.auth boolValue];//0是管理员，1是普通
             cell.switchBlock = ^(BOOL isOn) {
                 [self setUpFamilyMemberAuth:!isOn];

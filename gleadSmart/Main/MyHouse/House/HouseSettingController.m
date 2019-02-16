@@ -81,6 +81,9 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
                     member.name = [obj objectForKey:@"name"];
                     member.mobile = [obj objectForKey:@"mobile"];
                     member.auth = [obj objectForKey:@"auth"];
+                    if ([member.mobile isEqualToString:db.user.mobile]) {
+                        house.auth = member.auth;//当前用户在该家庭的权限
+                    }
                     [members addObject:member];
                 }];
                 house.members = [members copy];
@@ -107,6 +110,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
     }];
 }
 
+//移除家庭
 - (void)removeHouse{
     
 }
@@ -193,7 +197,11 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
 
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    NSLog(@"%@",self.house.auth);
+    if ([self.house.auth intValue] == 0) {
+        return 4;//管理员有添加成员的section
+    }
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -207,7 +215,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
         return self.house.members.count;
     }
     if (section == 3) {
-        return 1;
+        return 1;//添加成员
     }
     return 0;
 }
@@ -333,7 +341,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
             MemberModel *member = _house.members[indexPath.row];
             FamilyMemberController *memberVC = [[FamilyMemberController alloc] init];
             memberVC.member = member;
-            memberVC.houseUid = self.house.houseUid;
+            memberVC.house = self.house;
             memberVC.popBlock = ^{
                 [self updateHouseDetailInfoWith:self.house.houseUid];
             };
@@ -438,11 +446,35 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
             tableView.estimatedSectionFooterHeight = 0;
-            tableView.tableFooterView = [[UIView alloc] init];
+            tableView.tableFooterView = [self tableFooterView];
             tableView;
         });
     }
     return _houseSettingTable;
+}
+
+- (UIView *)tableFooterView{
+    UIView *view = [[UIView alloc] init];
+    view.frame = CGRectMake(0, 0, ScreenWidth, 100.f);
+    
+    UIButton *removeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [removeButton setTitle:LocalString(@"移除家庭") forState:UIControlStateNormal];
+    [removeButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
+    [removeButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+    [removeButton setTitleColor:[UIColor colorWithHexString:@"3987F8"] forState:UIControlStateNormal];
+    [removeButton.layer setBorderWidth:1.0];
+    removeButton.layer.borderColor = [UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0].CGColor;
+    removeButton.layer.cornerRadius = 20.f;
+    [removeButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
+    [removeButton addTarget:self action:@selector(removeHouse) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:removeButton];
+    [removeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(yAutoFit(284.f), 40.f));
+        make.centerY.equalTo(view.mas_centerY);
+        make.centerX.equalTo(view.mas_centerX);
+    }];
+    
+    return view;
 }
 
 - (UIButton *)removeHouseButton{

@@ -207,6 +207,9 @@ static CGFloat const Header_Height = 25.f;
                     member.name = [obj objectForKey:@"name"];
                     member.mobile = [obj objectForKey:@"mobile"];
                     member.auth = [obj objectForKey:@"auth"];
+                    if ([member.mobile isEqualToString:db.user.mobile]) {
+                        house.auth = member.auth;//当前用户在该家庭的权限
+                    }
                     [members addObject:member];
                 }];
                 house.members = [members copy];
