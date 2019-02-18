@@ -17,6 +17,7 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
 
 @property (nonatomic, strong) UITableView *familyMemberTable;
 @property (nonatomic, strong) UILabel *tipLabel;
+@property (nonatomic, strong) UIButton *removeButton;
 
 @end
 
@@ -59,11 +60,7 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
-
-    
-    NSDictionary *parameters = @{@"mobile":self.member.mobile,@"houseUid":self.house.houseUid,@"auth":[NSNumber numberWithInt:(int)isManager]};
-    
-    NSLog(@"%@",parameters);
+    NSDictionary *parameters = @{@"mobile":self.member.mobile,@"houseUid":self.house.houseUid,@"auth":[NSNumber numberWithInt:(int)!isManager]};
     
     [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
@@ -72,6 +69,11 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            if (isManager) {
+                self.removeButton.hidden = YES;//是管理员时隐藏移除按钮
+            }else{
+                self.removeButton.hidden = NO;
+            }
         }else{
             [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
         }
@@ -88,6 +90,26 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
 }
 
 - (void)removeMember{
+    YAlertViewController *alert = [[YAlertViewController alloc] init];
+    alert.lBlock = ^{
+        
+    };
+    alert.rBlock = ^{
+        [self removeMemberHttpDelMethod];
+    };
+    alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:alert animated:NO completion:^{
+        alert.WScale_alert = 1;
+        alert.HScale_alert = 1;
+        [alert showView];
+        alert.titleLabel.text = LocalString(@"提示");
+        alert.messageLabel.text = LocalString(@"确定移除该成员吗？");
+        [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
+        [alert.rightBtn setTitle:LocalString(@"确认") forState:UIControlStateNormal];
+    }];
+}
+
+- (void)removeMemberHttpDelMethod{
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     Database *db = [Database shareInstance];
@@ -101,10 +123,10 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
+    
     NSDictionary *parameters = @{@"houseUid":self.house.houseUid,@"mobile":self.member.mobile};
     
-    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
-
     [manager DELETE:@"http://gleadsmart.thingcom.cn/api/house/member" parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
         NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
@@ -112,6 +134,7 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
             [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
         }
@@ -166,26 +189,25 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
     label.numberOfLines = 0;
     [view addSubview:label];
     
-    UIButton *removeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [removeButton setTitle:LocalString(@"移除成员") forState:UIControlStateNormal];
-    [removeButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
-    [removeButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
-    [removeButton setTitleColor:[UIColor colorWithHexString:@"3987F8"] forState:UIControlStateNormal];
-    [removeButton.layer setBorderWidth:1.0];
-    removeButton.layer.borderColor = [UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0].CGColor;
-    removeButton.layer.cornerRadius = 20.f;
-    [removeButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
-    [removeButton addTarget:self action:@selector(removeMember) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:removeButton];
-    [removeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    _removeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_removeButton setTitle:LocalString(@"移除成员") forState:UIControlStateNormal];
+    [_removeButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+    [_removeButton setTitleColor:[UIColor colorWithHexString:@"3987F8"] forState:UIControlStateNormal];
+    [_removeButton.layer setBorderWidth:1.0];
+    _removeButton.layer.borderColor = [UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0].CGColor;
+    _removeButton.layer.cornerRadius = 20.f;
+    [_removeButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
+    [_removeButton addTarget:self action:@selector(removeMember) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:_removeButton];
+    [_removeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(yAutoFit(284.f), 40.f));
         make.top.equalTo(label.mas_bottom).offset(30.f);
         make.centerX.equalTo(view.mas_centerX);
     }];
     if ([self.house.auth integerValue] == 0 && [self.member.auth integerValue] != 0) {
-        removeButton.hidden = NO;
+        _removeButton.hidden = NO;
     }else{
-        removeButton.hidden = YES;
+        _removeButton.hidden = YES;
     }
     
     return view;
@@ -236,7 +258,7 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
             }
             cell.controlSwitch.on = ![self.member.auth boolValue];//0是管理员，1是普通
             cell.switchBlock = ^(BOOL isOn) {
-                [self setUpFamilyMemberAuth:!isOn];
+                [self setUpFamilyMemberAuth:isOn];
             };
             return cell;
         }

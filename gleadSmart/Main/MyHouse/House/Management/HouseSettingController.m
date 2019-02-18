@@ -15,6 +15,7 @@
 #import "AddHouseMemberCell.h"
 #import "AddMemberController.h"
 #import "FamilyMemberController.h"
+#import "ShareDetailController.h"
 
 NSString *const CellIdentifier_HouseSetCommon = @"CellID_HouseSetCommon";
 NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
@@ -337,6 +338,13 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
             }
             break;
             
+        case 1:{
+            ShareDetailController *shareVC = [[ShareDetailController alloc] init];
+            shareVC.house = self.house;
+            [self.navigationController pushViewController:shareVC animated:YES];
+        }
+            break;
+            
         case 2:{
             MemberModel *member = _house.members[indexPath.row];
             FamilyMemberController *memberVC = [[FamilyMemberController alloc] init];
@@ -349,7 +357,6 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
         }
             break;
             
-#warning todo 移除成员功能待做
         case 3:{
             AddMemberController *addmemberVC = [[AddMemberController alloc] init];
             addmemberVC.houseUid = self.house.houseUid;

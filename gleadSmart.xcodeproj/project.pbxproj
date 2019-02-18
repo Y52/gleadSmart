@@ -307,6 +307,12 @@
 		BB73D54321EDCB1E004AEE18 /* JKVValue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; };
 		BB73D54421EDCB1E004AEE18 /* JKVValue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB73D54521EDD262004AEE18 /* YTFAlertController.m */; };
+		BB7E7969221A5D6D0060A0CF /* ShareDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7E7968221A5D6D0060A0CF /* ShareDetailController.m */; };
+		BB7E796E221A61F50060A0CF /* img_noSharer.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E796B221A61F50060A0CF /* img_noSharer.png */; };
+		BB7E796F221A61F50060A0CF /* img_noSharer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E796C221A61F50060A0CF /* img_noSharer@3x.png */; };
+		BB7E7970221A61F50060A0CF /* img_noSharer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E796D221A61F50060A0CF /* img_noSharer@2x.png */; };
+		BB7E7973221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7E7971221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.m */; };
+		BB7E7976221AA7780060A0CF /* AddShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7E7975221AA7780060A0CF /* AddShareController.m */; };
 		BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB835FA3219C03A300225B60 /* HomeDeviceController.m */; };
 		BB8B9DB821A6815000E5D8B2 /* thermostatControl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */; };
 		BB8B9DBC21A6815000E5D8B2 /* thermostatControl@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA121A6815000E5D8B2 /* thermostatControl@3x.png */; };
@@ -840,6 +846,15 @@
 		BB73D54221EDCB1E004AEE18 /* JKVValue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JKVValue.framework; path = Carthage/Build/iOS/JKVValue.framework; sourceTree = "<group>"; };
 		BB73D54521EDD262004AEE18 /* YTFAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTFAlertController.m; sourceTree = "<group>"; };
 		BB73D54621EDD262004AEE18 /* YTFAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTFAlertController.h; sourceTree = "<group>"; };
+		BB7E7967221A5D6D0060A0CF /* ShareDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDetailController.h; sourceTree = "<group>"; };
+		BB7E7968221A5D6D0060A0CF /* ShareDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDetailController.m; sourceTree = "<group>"; };
+		BB7E796B221A61F50060A0CF /* img_noSharer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_noSharer.png; sourceTree = "<group>"; };
+		BB7E796C221A61F50060A0CF /* img_noSharer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_noSharer@3x.png"; sourceTree = "<group>"; };
+		BB7E796D221A61F50060A0CF /* img_noSharer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_noSharer@2x.png"; sourceTree = "<group>"; };
+		BB7E7971221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+YBAttributeTextTapAction.m"; sourceTree = "<group>"; };
+		BB7E7972221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+YBAttributeTextTapAction.h"; sourceTree = "<group>"; };
+		BB7E7974221AA7780060A0CF /* AddShareController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddShareController.h; sourceTree = "<group>"; };
+		BB7E7975221AA7780060A0CF /* AddShareController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddShareController.m; sourceTree = "<group>"; };
 		BB835FA2219C03A300225B60 /* HomeDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceController.h; sourceTree = "<group>"; };
 		BB835FA3219C03A300225B60 /* HomeDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceController.m; sourceTree = "<group>"; };
 		BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@2x.png"; sourceTree = "<group>"; };
@@ -1038,6 +1053,8 @@
 				BB0A401321991AA8004669CA /* UIButton+Common.m */,
 				BB0A401A21991AA8004669CA /* UIColor+ColorChange.h */,
 				BB0A401021991AA8004669CA /* UIColor+ColorChange.m */,
+				BB7E7972221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.h */,
+				BB7E7971221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.m */,
 			);
 			path = OC_Category;
 			sourceTree = SOURCE_ROOT;
@@ -1089,6 +1106,7 @@
 		BB0A404F21997A4B004669CA /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
+				BB7E796A221A61F50060A0CF /* 我的共享_slices */,
 				BB5B037321B90343007AC2B1 /* 我的_slices */,
 				BB2AD78921ABD813006DB83A /* Login_slices */,
 				BB2AC11221AA8A64006DB83A /* 添加家庭_slices */,
@@ -1189,18 +1207,8 @@
 			children = (
 				BB352913219D63BC00428DE9 /* HouseSelectController.h */,
 				BB352914219D63BC00428DE9 /* HouseSelectController.m */,
-				BB21BF68219E66F30067BC61 /* HouseManagementController.h */,
-				BB21BF69219E66F30067BC61 /* HouseManagementController.m */,
-				3E3AFFBF21A7E7EA00EA8F1C /* AddFamilyViewController.h */,
-				3E3AFFBE21A7E7EA00EA8F1C /* AddFamilyViewController.m */,
-				BB2AC12521AA9EF1006DB83A /* FamilyLocationController.h */,
-				BB2AC12621AA9EF1006DB83A /* FamilyLocationController.m */,
-				BB2AD79F21AD70D6006DB83A /* HouseSettingController.h */,
-				BB2AD7A021AD70D6006DB83A /* HouseSettingController.m */,
-				BBF8CAEB22169FBA0030E921 /* FamilyMemberController.h */,
-				BBF8CAEC22169FBA0030E921 /* FamilyMemberController.m */,
-				BB45BC4821EF259E00504FF8 /* AddMemberController.h */,
-				BB45BC4921EF259E00504FF8 /* AddMemberController.m */,
+				BB7E7965221A5CEE0060A0CF /* Management */,
+				BB7E7966221A5D270060A0CF /* Share */,
 			);
 			path = House;
 			sourceTree = "<group>";
@@ -1678,6 +1686,46 @@
 			path = Thermostat;
 			sourceTree = "<group>";
 		};
+		BB7E7965221A5CEE0060A0CF /* Management */ = {
+			isa = PBXGroup;
+			children = (
+				BB21BF68219E66F30067BC61 /* HouseManagementController.h */,
+				BB21BF69219E66F30067BC61 /* HouseManagementController.m */,
+				3E3AFFBF21A7E7EA00EA8F1C /* AddFamilyViewController.h */,
+				3E3AFFBE21A7E7EA00EA8F1C /* AddFamilyViewController.m */,
+				BB2AC12521AA9EF1006DB83A /* FamilyLocationController.h */,
+				BB2AC12621AA9EF1006DB83A /* FamilyLocationController.m */,
+				BB2AD79F21AD70D6006DB83A /* HouseSettingController.h */,
+				BB2AD7A021AD70D6006DB83A /* HouseSettingController.m */,
+				BBF8CAEB22169FBA0030E921 /* FamilyMemberController.h */,
+				BBF8CAEC22169FBA0030E921 /* FamilyMemberController.m */,
+				BB45BC4821EF259E00504FF8 /* AddMemberController.h */,
+				BB45BC4921EF259E00504FF8 /* AddMemberController.m */,
+			);
+			path = Management;
+			sourceTree = "<group>";
+		};
+		BB7E7966221A5D270060A0CF /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				BB7E7967221A5D6D0060A0CF /* ShareDetailController.h */,
+				BB7E7968221A5D6D0060A0CF /* ShareDetailController.m */,
+				BB7E7974221AA7780060A0CF /* AddShareController.h */,
+				BB7E7975221AA7780060A0CF /* AddShareController.m */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
+		BB7E796A221A61F50060A0CF /* 我的共享_slices */ = {
+			isa = PBXGroup;
+			children = (
+				BB7E796B221A61F50060A0CF /* img_noSharer.png */,
+				BB7E796C221A61F50060A0CF /* img_noSharer@3x.png */,
+				BB7E796D221A61F50060A0CF /* img_noSharer@2x.png */,
+			);
+			path = "我的共享_slices";
+			sourceTree = "<group>";
+		};
 		BB8B9D9A21A6815000E5D8B2 /* 温控器_slices */ = {
 			isa = PBXGroup;
 			children = (
@@ -2066,6 +2114,7 @@
 				BB63B58C21B3DB6900D77489 /* thermostatCircle_on@3x.png in Resources */,
 				BBF6323921BBAB34006A23AC /* valveAlertMark@3x.png in Resources */,
 				BB0A40AC21997C99004669CA /* img_tab_02_unselect@2x.png in Resources */,
+				BB7E796F221A61F50060A0CF /* img_noSharer@3x.png in Resources */,
 				BB0A40BB21997C99004669CA /* img_homeSet@2x.png in Resources */,
 				BB5B03CA21B90C48007AC2B1 /* img_mine_headerBG@3x.png in Resources */,
 				BBF6326521BBAB34006A23AC /* valveHeader@3x.png in Resources */,
@@ -2134,6 +2183,7 @@
 				BB5B03BD21B90343007AC2B1 /* img_mine_logout@2x.png in Resources */,
 				BB425FD521BF519700AB6EFB /* img_thermostat_on.png in Resources */,
 				BB00A4F721BA237B004E4051 /* img_account_header.png in Resources */,
+				BB7E7970221A61F50060A0CF /* img_noSharer@2x.png in Resources */,
 				BB0A40F121997C99004669CA /* img_houseSelect.png in Resources */,
 				BB63B60321B4151D00D77489 /* thermostat_+@2x.png in Resources */,
 				BBF6323F21BBAB34006A23AC /* nodeHeaderBtn@2x.png in Resources */,
@@ -2179,6 +2229,7 @@
 				BBF6325E21BBAB34006A23AC /* nodeBattery_abnormal@3x.png in Resources */,
 				BBF6324E21BBAB34006A23AC /* nodeLeakSmall_normal@2x.png in Resources */,
 				BB8B9DCB21A6815000E5D8B2 /* thermostatMoer@2x.png in Resources */,
+				BB7E796E221A61F50060A0CF /* img_noSharer.png in Resources */,
 				BB2AD79421ABDA45006DB83A /* img_launchTitle.png in Resources */,
 				BB5B03CB21B90C48007AC2B1 /* img_mine_headerBG@2x.png in Resources */,
 				BBF6324321BBAB34006A23AC /* nodeLeakBig_normal@2x.png in Resources */,
@@ -2317,6 +2368,7 @@
 				BB0A403221991AA8004669CA /* NSObject+Common.m in Sources */,
 				BB0A403021991AA8004669CA /* UIColor+ColorChange.m in Sources */,
 				3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */,
+				BB7E7973221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.m in Sources */,
 				BB37DF1B21A7FF0600B2121B /* Database.m in Sources */,
 				BB62E4FC21B521F100C0FA39 /* WeekProgramSetController.m in Sources */,
 				BB52F9ED21BE6B03005FA33A /* NodeModel.m in Sources */,
@@ -2367,6 +2419,7 @@
 				BB2AC0F721A93B1B006DB83A /* UserModel.m in Sources */,
 				BB37DF0D21A7EFC400B2121B /* DeviceConnectView.m in Sources */,
 				BB2AC12721AA9EF1006DB83A /* FamilyLocationController.m in Sources */,
+				BB7E7969221A5D6D0060A0CF /* ShareDetailController.m in Sources */,
 				BB0A403621991AA8004669CA /* TouchTableView.m in Sources */,
 				BB0A403121991AA8004669CA /* UIButton+Common.m in Sources */,
 				BB5B037121B90194007AC2B1 /* MineNormalCell.m in Sources */,
@@ -2374,6 +2427,7 @@
 				BB2AC0EC21A8F156006DB83A /* ESPTouchGenerator.m in Sources */,
 				BB2AC0F321A8F156006DB83A /* ESPTouchTask.m in Sources */,
 				BB2AD7A721AD7F91006DB83A /* HouseSetCommonCell.m in Sources */,
+				BB7E7976221AA7780060A0CF /* AddShareController.m in Sources */,
 				BB2AC0EE21A8F156006DB83A /* ESPUDPSocketServer.m in Sources */,
 				3EA530CD21AB9C88000A6D26 /* RetrievePasswordController.m in Sources */,
 				BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */,
