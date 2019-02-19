@@ -345,6 +345,8 @@
 		BB8B9E8221A6ADEB00E5D8B2 /* valveStatus_abnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7021A6ADEB00E5D8B2 /* valveStatus_abnormal.png */; };
 		BB8B9E8321A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png */; };
 		BB8F5A8821B7EF1700E69094 /* TherTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8F5A8721B7EF1700E69094 /* TherTimerCell.m */; };
+		BBAB280F221B912400E21041 /* HomeDeviceSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */; };
+		BBAB2813221B9D4F00E21041 /* ShareDeviceSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB2812221B9D4F00E21041 /* ShareDeviceSelectCell.m */; };
 		BBF631FB21BB5B04006A23AC /* img_auto_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F321BB5B02006A23AC /* img_auto_on@3x.png */; };
 		BBF631FC21BB5B04006A23AC /* img_auto_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F421BB5B02006A23AC /* img_auto_on@2x.png */; };
 		BBF631FD21BB5B04006A23AC /* img_manual_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F521BB5B02006A23AC /* img_manual_on@3x.png */; };
@@ -889,6 +891,10 @@
 		BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakBig_abnormal@2x.png"; sourceTree = "<group>"; };
 		BB8F5A8621B7EF1700E69094 /* TherTimerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TherTimerCell.h; sourceTree = "<group>"; };
 		BB8F5A8721B7EF1700E69094 /* TherTimerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TherTimerCell.m; sourceTree = "<group>"; };
+		BBAB280D221B912400E21041 /* HomeDeviceSelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceSelectController.h; sourceTree = "<group>"; };
+		BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceSelectController.m; sourceTree = "<group>"; };
+		BBAB2811221B9D4F00E21041 /* ShareDeviceSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceSelectCell.h; sourceTree = "<group>"; };
+		BBAB2812221B9D4F00E21041 /* ShareDeviceSelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceSelectCell.m; sourceTree = "<group>"; };
 		BBF631F321BB5B02006A23AC /* img_auto_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_auto_on@3x.png"; sourceTree = "<group>"; };
 		BBF631F421BB5B02006A23AC /* img_auto_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_auto_on@2x.png"; sourceTree = "<group>"; };
 		BBF631F521BB5B02006A23AC /* img_manual_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_manual_on@3x.png"; sourceTree = "<group>"; };
@@ -1369,6 +1375,7 @@
 		BB35290C219D0FAB00428DE9 /* Myhouse */ = {
 			isa = PBXGroup;
 			children = (
+				BBAB2810221B9D2C00E21041 /* AddShare */,
 				BBF8CAEE2216A4350030E921 /* FamilyMember */,
 				BB45BC4B21EF280700504FF8 /* HouseSelect */,
 				BB45BC4C21EF286100504FF8 /* Device */,
@@ -1712,6 +1719,8 @@
 				BB7E7968221A5D6D0060A0CF /* ShareDetailController.m */,
 				BB7E7974221AA7780060A0CF /* AddShareController.h */,
 				BB7E7975221AA7780060A0CF /* AddShareController.m */,
+				BBAB280D221B912400E21041 /* HomeDeviceSelectController.h */,
+				BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1869,6 +1878,15 @@
 				BBF6323021BBAB33006A23AC /* valveTabMore@3x.png */,
 			);
 			path = "无线阀门_slices";
+			sourceTree = "<group>";
+		};
+		BBAB2810221B9D2C00E21041 /* AddShare */ = {
+			isa = PBXGroup;
+			children = (
+				BBAB2811221B9D4F00E21041 /* ShareDeviceSelectCell.h */,
+				BBAB2812221B9D4F00E21041 /* ShareDeviceSelectCell.m */,
+			);
+			path = AddShare;
 			sourceTree = "<group>";
 		};
 		BBF8CAEE2216A4350030E921 /* FamilyMember */ = {
@@ -2371,6 +2389,7 @@
 				BB7E7973221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.m in Sources */,
 				BB37DF1B21A7FF0600B2121B /* Database.m in Sources */,
 				BB62E4FC21B521F100C0FA39 /* WeekProgramSetController.m in Sources */,
+				BBAB280F221B912400E21041 /* HomeDeviceSelectController.m in Sources */,
 				BB52F9ED21BE6B03005FA33A /* NodeModel.m in Sources */,
 				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
 				BB2AC0F021A8F156006DB83A /* ESPTouchTaskParameter.m in Sources */,
@@ -2389,6 +2408,7 @@
 				BB37DF1221A7F3AF00B2121B /* DeviceTableViewCell.m in Sources */,
 				BB00A4FF21BA25B7004E4051 /* YAlertViewController.m in Sources */,
 				BB2AC10E21A94F42006DB83A /* HouseModel.m in Sources */,
+				BBAB2813221B9D4F00E21041 /* ShareDeviceSelectCell.m in Sources */,
 				BB2AC10B21A94D63006DB83A /* AFSecurityPolicy.m in Sources */,
 				BB49B89821F5A8D100E32CF9 /* alarmModel.m in Sources */,
 				BB45BC4A21EF259E00504FF8 /* AddMemberController.m in Sources */,

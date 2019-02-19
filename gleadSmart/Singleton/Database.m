@@ -279,4 +279,113 @@ static dispatch_once_t oneToken;
     }];
     return result;
 }
+
+#pragma mark - API methods and update database
+- (void)getHouseHomeListAndDevice:(HouseModel *)house success:(void(^)(void))success failure:(void(^)(void))failure{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house/device/list?houseUid=%@",house.houseUid];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:self.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",self.token] forHTTPHeaderField:@"Authorization"];
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            NSDictionary *dic = [responseDic objectForKey:@"data"];
+            
+            /*
+             *取出家庭详细信息
+             */
+            NSDictionary *houseInfo = [dic objectForKey:@"house"];
+            house.lon = [houseInfo objectForKey:@"lon"];
+            house.lat = [houseInfo objectForKey:@"lat"];
+            house.apiKey = [houseInfo objectForKey:@"apiKey"];
+            house.deviceId = [houseInfo objectForKey:@"deviceId"];
+            /*
+             *把houselist中的该house更新，防止在切换house时丢失数据
+             */
+            for (HouseModel *existHouse in self.houseList) {
+                if (house.houseUid == existHouse.houseUid) {
+                    [self.houseList addObject:house];
+                    [self.houseList removeObject:existHouse];
+                    break;
+                }
+            }
+            /*
+             *把本地数据库的该house更新
+             */
+            [self updateHouse:house];
+            
+            /*
+             *取出房间内容
+             */
+            if ([[dic objectForKey:@"rooms"] count] > 0) {
+                [[dic objectForKey:@"rooms"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    RoomModel *room = [[RoomModel alloc] init];
+                    room.name = [obj objectForKey:@"roomName"];
+                    room.roomUid = [obj objectForKey:@"roomUid"];
+                    room.houseUid = house.houseUid;
+                    room.deviceArray = [[NSMutableArray alloc] init];
+                    
+                    //获取房间内关联的所有设备
+                    [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        DeviceModel *device = [[DeviceModel alloc] init];
+                        device.name = [obj objectForKey:@"deviceName"];
+                        device.mac = [obj objectForKey:@"mac"];
+                        device.roomUid = room.roomUid;
+                        device.houseUid = house.houseUid;
+                        if ([NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]] == 0x01) {
+                            device.type = @0;
+                        }else{
+                            device.type = [NSNumber numberWithInteger:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]];
+                        }
+                        //插入房间的设备
+                        [self insertNewDevice:device];
+                    }];
+                    [self insertNewRoom:room];
+                    
+                }];
+                if (success) {
+                    success();
+                }
+            }
+        }else{
+            [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];
+            if (failure) {
+                failure();
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        /**
+         以下错误信息处理方法在没有网时会报错，具体原因未查明
+         **/
+        //        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+        //
+        //        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+        //
+        //        NSLog(@"error--%@",serializedData);
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"从服务器获取信息失败"];
+            if (failure) {
+                failure();
+            }
+        });
+    }];
+}
 @end

@@ -361,123 +361,25 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     return CGRectMake(0, yAutoFit(gleadHeaderHeight), self.view.frame.size.width, self.view.bounds.size.height - fillingSpaceHeight);
 }
 
-#pragma mark - update with API
+#pragma mark - API methods
 //获取房间列表和所有设备
 - (void)getHouseHomeListAndDevice{
-    
-    [SVProgressHUD show];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
     Database *db = [Database shareInstance];
-    
-    //设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house/device/list?houseUid=%@",db.currentHouse.houseUid];
-    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-    
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
-    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"success:%@",daetr);
-        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-            NSDictionary *dic = [responseDic objectForKey:@"data"];
-            
-            /*
-             *取出家庭详细信息
-             */
-            NSDictionary *houseInfo = [dic objectForKey:@"house"];
-            db.currentHouse.lon = [houseInfo objectForKey:@"lon"];
-            db.currentHouse.lat = [houseInfo objectForKey:@"lat"];
-            [self getWeatherByLocation];//获取天气信息
-            [self getAirQualityByLocation];//获取空气质量
-            db.currentHouse.apiKey = [houseInfo objectForKey:@"apiKey"];
-            db.currentHouse.deviceId = [houseInfo objectForKey:@"deviceId"];
-            /*
-             *把houselist中的该house更新，防止在切换house时丢失数据
-             */
-            for (HouseModel *house in db.houseList) {
-                if (house.houseUid == db.currentHouse.houseUid) {
-                    [db.houseList addObject:db.currentHouse];
-                    [db.houseList removeObject:house];
-                    break;
-                }
+    [db getHouseHomeListAndDevice:db.currentHouse success:^{
+        for (HouseModel *newHouse in db.houseList) {
+            if ([db.currentHouse.houseUid isEqualToString:newHouse.houseUid]) {
+                db.currentHouse = newHouse;//更新当前家庭信息
             }
-            /*
-             *把本地数据库的该house更新
-             */
-            [db updateHouse:db.currentHouse];
-            
-            /*
-             *取出房间内容
-             */
-            if ([[dic objectForKey:@"rooms"] count] > 0) {
-                [[dic objectForKey:@"rooms"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    RoomModel *room = [[RoomModel alloc] init];
-                    room.name = [obj objectForKey:@"roomName"];
-                    room.roomUid = [obj objectForKey:@"roomUid"];
-                    room.houseUid = db.currentHouse.houseUid;
-                    room.deviceArray = [[NSMutableArray alloc] init];
-                    
-                    //获取房间内关联的所有设备
-                    [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        DeviceModel *device = [[DeviceModel alloc] init];
-                        device.name = [obj objectForKey:@"deviceName"];
-                        device.mac = [obj objectForKey:@"mac"];
-                        device.roomUid = room.roomUid;
-                        device.houseUid = db.currentHouse.houseUid;
-                        if ([NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]] == 0x01) {
-                            device.type = @0;
-                        }else{
-                            device.type = [NSNumber numberWithInteger:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]];
-                        }
-                        //插入房间的设备
-                        [db insertNewDevice:device];
-                    }];
-                    [db insertNewRoom:room];
-                    
-                    //防止在刷新家庭信息后房间列表内房间重复添加的bug
-                    static BOOL isContain = NO;
-                    for (RoomModel *containRoom in self.homeList) {
-                        if ([room.roomUid isEqualToString:containRoom.roomUid]) {
-                            isContain = YES;
-                        }
-                    }
-                    if (!isContain) {
-                        [self.homeList addObject:room];
-                    }
-                    
-                }];
-            }
-        }else{
-            [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];
         }
-        [self getHouseHomeListAndDeviceWithDatabase];
+        [self getWeatherByLocation];//获取天气信息
+        [self getAirQualityByLocation];//获取空气质量
+        [self getHouseHomeListAndDeviceWithDatabase];//获取房间和设备
         [self reloadData];//wmpagecontroller更新滑动列表
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        /**
-         以下错误信息处理方法在没有网时会报错，具体原因未查明
-         **/
-//        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-//
-//        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
-//
-//        NSLog(@"error--%@",serializedData);
-        NSLog(@"%@",error);
-        [self getHouseHomeListAndDeviceWithDatabase];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-            [NSObject showHudTipStr:@"从服务器获取信息失败"];
-        });
+    } failure:^{
+        [self getWeatherByLocation];//获取天气信息
+        [self getAirQualityByLocation];//获取空气质量
+        [self getHouseHomeListAndDeviceWithDatabase];//获取房间和设备
+
     }];
 }
 
@@ -570,46 +472,17 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     }];
 }
 
-//家庭绑定成员
-- (void)houseBindMember{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    Database *db = [Database shareInstance];
-    
-    //设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
-
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house/member"];
-    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-    
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    NSDictionary *parameters = @{@"houseUid":db.currentHouse.houseUid,@"mobile":@"15558073550",@"auth":@1};
-    [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"success:%@",daetr);
-        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-            NSLog(@"绑定成功");
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
-}
-
 #pragma mark - Update by database
 /*
  *从本地获取设备信息和房间信息
  */
 - (void)getHouseHomeListAndDeviceWithDatabase{
     Database *db = [Database shareInstance];
+    
+    if (!self.homeList) {
+        self.homeList = [[NSMutableArray alloc] init];
+    }
+    [self.homeList removeAllObjects];
     self.homeList = [db queryRoomsWith:db.currentHouse.houseUid];
 
     db.localDeviceArray = [db queryAllDevice:db.currentHouse.houseUid];

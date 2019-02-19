@@ -19,6 +19,7 @@
 
 #import "ShareDetailController.h"
 #import "UILabel+YBAttributeTextTapAction.h"
+#import "AddShareController.h"
 
 NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
 
@@ -118,7 +119,9 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
 
 //添加共享
 - (void)addSharer{
-    
+    AddShareController *addVC = [[AddShareController alloc] init];
+    addVC.house = self.house;
+    [self.navigationController pushViewController:addVC animated:YES];
 }
 
 #pragma mark - YBAttributeTapActionDelegate
