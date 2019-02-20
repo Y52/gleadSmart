@@ -76,6 +76,7 @@
 		BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */; };
 		BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF63219E66210067BC61 /* HomeManagementController.m */; };
 		BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF69219E66F30067BC61 /* HouseManagementController.m */; };
+		BB2AA50F221D061100AF3968 /* SharerInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AA50E221D061100AF3968 /* SharerInputController.m */; };
 		BB2AC0C521A8EFE3006DB83A /* PasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0C121A8EFE3006DB83A /* PasswordTableViewCell.m */; };
 		BB2AC0C621A8EFE3006DB83A /* SSIDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0C221A8EFE3006DB83A /* SSIDTableViewCell.m */; };
 		BB2AC0C721A8EFE3006DB83A /* SSIDTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC0C421A8EFE3006DB83A /* SSIDTableViewCell.xib */; };
@@ -534,6 +535,8 @@
 		BB21BF63219E66210067BC61 /* HomeManagementController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeManagementController.m; sourceTree = "<group>"; };
 		BB21BF68219E66F30067BC61 /* HouseManagementController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseManagementController.h; sourceTree = "<group>"; };
 		BB21BF69219E66F30067BC61 /* HouseManagementController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseManagementController.m; sourceTree = "<group>"; };
+		BB2AA50D221D061100AF3968 /* SharerInputController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharerInputController.h; sourceTree = "<group>"; };
+		BB2AA50E221D061100AF3968 /* SharerInputController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharerInputController.m; sourceTree = "<group>"; };
 		BB2AC0C021A8EFE3006DB83A /* PasswordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordTableViewCell.h; sourceTree = "<group>"; };
 		BB2AC0C121A8EFE3006DB83A /* PasswordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordTableViewCell.m; sourceTree = "<group>"; };
 		BB2AC0C221A8EFE3006DB83A /* SSIDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSIDTableViewCell.m; sourceTree = "<group>"; };
@@ -1721,6 +1724,8 @@
 				BB7E7975221AA7780060A0CF /* AddShareController.m */,
 				BBAB280D221B912400E21041 /* HomeDeviceSelectController.h */,
 				BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */,
+				BB2AA50D221D061100AF3968 /* SharerInputController.h */,
+				BB2AA50E221D061100AF3968 /* SharerInputController.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -2440,6 +2445,7 @@
 				BB37DF0D21A7EFC400B2121B /* DeviceConnectView.m in Sources */,
 				BB2AC12721AA9EF1006DB83A /* FamilyLocationController.m in Sources */,
 				BB7E7969221A5D6D0060A0CF /* ShareDetailController.m in Sources */,
+				BB2AA50F221D061100AF3968 /* SharerInputController.m in Sources */,
 				BB0A403621991AA8004669CA /* TouchTableView.m in Sources */,
 				BB0A403121991AA8004669CA /* UIButton+Common.m in Sources */,
 				BB5B037121B90194007AC2B1 /* MineNormalCell.m in Sources */,

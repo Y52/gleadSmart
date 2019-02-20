@@ -51,15 +51,6 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
 }
 
 #pragma mark - private methods
-- (void)reloadTableView{
-    if (self.sharerList.count > 0) {
-        self.sharerTable.hidden = NO;
-    }else{
-        self.sharerTable.hidden = YES;
-        [self.sharerTable reloadData];
-    }
-}
-
 - (void)getHouseSharerInfo{
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -115,6 +106,15 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
             [NSObject showHudTipStr:@"获取分享者列表失败"];
         });
     }];
+}
+
+- (void)reloadTableView{
+    if (self.sharerList.count > 0) {
+        self.sharerTable.hidden = NO;
+        [self.sharerTable reloadData];
+    }else{
+        self.sharerTable.hidden = YES;
+    }
 }
 
 //添加共享

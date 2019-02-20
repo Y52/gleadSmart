@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^selectBlock)(NSString *mac);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeDeviceSelectController : UIViewController
 
 @property (nonatomic, strong) HouseModel *house;
 @property (nonatomic, strong) NSMutableArray *deviceList;
+@property (nonatomic) selectBlock selectBlock;
 
 @end
 

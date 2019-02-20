@@ -56,7 +56,7 @@
             _selectImage = [[UIImageView alloc] init];
             [self.contentView addSubview:_selectImage];
             [_selectImage mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(yAutoFit(14.f), yAutoFit(14.f)));
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(17.f), yAutoFit(17.f)));
                 make.right.equalTo(self.contentView.mas_right).offset(yAutoFit(-24.f));
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];

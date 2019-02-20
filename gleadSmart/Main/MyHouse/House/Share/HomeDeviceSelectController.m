@@ -149,34 +149,26 @@ CGFloat const Cell_Height = 50.f;
         default:
             break;
     }
-    
-    cell.selectImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
+    if (device.tag == ySelect) {
+        cell.selectImage.image = [UIImage imageNamed:@"addFamily_check"];
+    }else{
+        cell.selectImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
+    }
 
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ShareDeviceSelectCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     DeviceModel *device = self.deviceList[indexPath.row];
-    switch ([device.type integerValue]) {
-        case 1:
-        {
-        }
-            break;
-            
-        case 2:
-        {
-        }
-            break;
-            
-        case 3:
-        {
-            
-        }
-            break;
-            
-        default:
-            break;
+    if (device.tag == ySelect) {
+        cell.selectImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
+    }else{
+        cell.selectImage.image = [UIImage imageNamed:@"addFamily_check"];
+    }
+    if (self.selectBlock) {
+        self.selectBlock(device.mac);
     }
 }
 

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DeviceModel : NSObject
 
+@property (nonatomic) NSUInteger tag;
+
 @property (strong, nonatomic) NSString *mac;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *ipAddress;
