@@ -6,24 +6,15 @@
 //  Copyright © 2019年 杭州轨物科技有限公司. All rights reserved.
 //
 
-@interface SharerModel : NSObject
-
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *sharerUid;
-
-@end
-
-@implementation SharerModel
-
-@end
-
-#import "ShareDetailController.h"
+#import "HouseShareController.h"
 #import "UILabel+YBAttributeTextTapAction.h"
 #import "AddShareController.h"
+#import "SharerInfoCell.h"
+#import "SharerDetailController.h"
 
 NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
 
-@interface ShareDetailController () <YBAttributeTapActionDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface HouseShareController () <YBAttributeTapActionDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UILabel *tipLabel;
 @property (nonatomic, strong) UIImageView *noShareImageView;
@@ -34,7 +25,7 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
 
 @end
 
-@implementation ShareDetailController
+@implementation HouseShareController
 
 #pragma mark - life cycle
 - (void)viewDidLoad {
@@ -47,6 +38,10 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
     self.addSharerButton = [self addSharerButton];
     self.sharerTable = [self sharerTable];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self getHouseSharerInfo];
 }
 
@@ -81,8 +76,9 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
                 [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     if (![obj isKindOfClass:[NSNull class]]) {
                         SharerModel *sharer = [[SharerModel alloc] init];
-                        sharer.name = [obj objectForKey:@"name"];
-                        sharer.sharerUid = [obj objectForKey:@"sharerUid"];
+                        sharer.name = [obj objectForKey:@"shareName"];
+                        sharer.sharerUid = [obj objectForKey:@"shareUid"];
+                        sharer.mobile = [obj objectForKey:@"mobile"];
                         [self.sharerList addObject:sharer];
                     }
                 }];
@@ -208,12 +204,12 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
 - (UITableView *)sharerTable{
     if (!_sharerTable) {
         _sharerTable = ({
-            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 46 + 20, ScreenWidth, ScreenHeight - getRectNavAndStatusHight - 46 - 20) style:UITableViewStylePlain];
+            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 46 + 20, ScreenWidth, ScreenHeight - getRectNavAndStatusHight - 46 - 20 - 80.f) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
             tableView.separatorColor = [UIColor colorWithRed:232/255.0 green:231/255.0 blue:231/255.0 alpha:1.0];
             tableView.dataSource = self;
             tableView.delegate = self;
-            [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier_SharerList];
+            [tableView registerClass:[SharerInfoCell class] forCellReuseIdentifier:CellIdentifier_SharerList];
             [self.view addSubview:tableView];
             tableView.scrollEnabled = YES;
             tableView.hidden = YES;
@@ -237,20 +233,24 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_SharerList];
+    SharerInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_SharerList];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_SharerList];
+        cell = [[SharerInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_SharerList];
     }
     SharerModel *sharer = self.sharerList[indexPath.row];
-    cell.textLabel.text = sharer.name;
-    cell.textLabel.textColor = [UIColor colorWithHexString:@"7C7C7B"];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.sharerName.text = sharer.name;
+    cell.mobile.text = sharer.mobile;
+    cell.sharerImage.image = [UIImage imageNamed:@"img_account_header"];
     return cell;
 
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SharerModel *sharer = self.sharerList[indexPath.row];
+    SharerDetailController *vc = [[SharerDetailController alloc] init];
+    vc.sharer = sharer;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

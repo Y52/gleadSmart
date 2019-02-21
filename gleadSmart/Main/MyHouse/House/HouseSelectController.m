@@ -133,6 +133,7 @@ static CGFloat const Cell_Height = 50.f;
             cell.image.image = [UIImage imageNamed:@"addFamily_check"];
         }
         cell.houseLabel.text = house.name;
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     return cell;
 }

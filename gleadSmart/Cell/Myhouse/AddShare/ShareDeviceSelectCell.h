@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) UIImageView *deviceImage;
 @property (strong, nonatomic) UILabel *deviceName;
-@property (strong, nonatomic) UILabel *belongingHome;
 @property (strong, nonatomic) UILabel *status;
 @property (strong, nonatomic) UIImageView *selectImage;
 

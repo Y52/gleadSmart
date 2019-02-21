@@ -9,6 +9,7 @@
 #import "SharerInputController.h"
 #import "AreaCodeCell.h"
 #import "MemberAccountCell.h"
+#import "HouseShareController.h"
 
 NSString *const CellIdentifier_sharerInputAreaCode = @"CellID_sharerInputAreaCode";
 NSString *const CellIdentifier_sharerInputAccount = @"CellID_sharerInputAccount";
@@ -64,7 +65,12 @@ NSString *const CellIdentifier_sharerInputAccount = @"CellID_sharerInputAccount"
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
-            //[self.navigationController popViewControllerAnimated:YES];
+            
+            for (UIViewController *vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[HouseShareController class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                }
+            }
         }else{
             [NSObject showHudTipStr:@"添加共享失败"];
         }

@@ -993,7 +993,7 @@ static int noUserInteractionHeartbeat = 0;
         device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14 + i*4] intValue]]];
         device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15 + i*4] intValue]]];
         device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[16 + i*4] intValue]]];
-        device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[15 + i*4] intValue]]];
+        device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[14 + i*4] intValue]]];
         
         //将中央控制器查询到的设备和服务器设备对比
         BOOL isExisted = NO;//防止重复显示以及刷新时重新添加设备到服务器
@@ -1088,7 +1088,7 @@ static int noUserInteractionHeartbeat = 0;
     device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
     device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
     device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
-    device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[14] intValue]]];
+    device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[13] intValue]]];
     
     /*
      ～未保存过，需要上传到服务器，保存到本地～

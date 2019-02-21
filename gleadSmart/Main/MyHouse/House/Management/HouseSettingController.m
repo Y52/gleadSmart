@@ -15,7 +15,7 @@
 #import "AddHouseMemberCell.h"
 #import "AddMemberController.h"
 #import "FamilyMemberController.h"
-#import "ShareDetailController.h"
+#import "HouseShareController.h"
 
 NSString *const CellIdentifier_HouseSetCommon = @"CellID_HouseSetCommon";
 NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
@@ -339,7 +339,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
             break;
             
         case 1:{
-            ShareDetailController *shareVC = [[ShareDetailController alloc] init];
+            HouseShareController *shareVC = [[HouseShareController alloc] init];
             shareVC.house = self.house;
             [self.navigationController pushViewController:shareVC animated:YES];
         }

@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *ipAddress;
 @property (strong, nonatomic) NSNumber *type;
 @property (strong, nonatomic) NSString *roomUid;
+@property (nonatomic, strong) NSString *roomName;
 @property (strong, nonatomic) NSString *houseUid;
 @property (strong, nonatomic) NSNumber *isOn;
 @property (strong, nonatomic) NSNumber *isOnline;//判断在线离线

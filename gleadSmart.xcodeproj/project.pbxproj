@@ -308,7 +308,10 @@
 		BB73D54321EDCB1E004AEE18 /* JKVValue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; };
 		BB73D54421EDCB1E004AEE18 /* JKVValue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB73D54521EDD262004AEE18 /* YTFAlertController.m */; };
-		BB7E7969221A5D6D0060A0CF /* ShareDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7E7968221A5D6D0060A0CF /* ShareDetailController.m */; };
+		BB7D9B9A221E4B4C00C5DFD1 /* SharerInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7D9B99221E4B4C00C5DFD1 /* SharerInfoCell.m */; };
+		BB7D9B9D221E8FA300C5DFD1 /* SharerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7D9B9C221E8FA300C5DFD1 /* SharerDetailController.m */; };
+		BB7D9BA0221EA71000C5DFD1 /* SharerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7D9B9F221EA71000C5DFD1 /* SharerModel.m */; };
+		BB7E7969221A5D6D0060A0CF /* HouseShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7E7968221A5D6D0060A0CF /* HouseShareController.m */; };
 		BB7E796E221A61F50060A0CF /* img_noSharer.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E796B221A61F50060A0CF /* img_noSharer.png */; };
 		BB7E796F221A61F50060A0CF /* img_noSharer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E796C221A61F50060A0CF /* img_noSharer@3x.png */; };
 		BB7E7970221A61F50060A0CF /* img_noSharer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E796D221A61F50060A0CF /* img_noSharer@2x.png */; };
@@ -851,8 +854,14 @@
 		BB73D54221EDCB1E004AEE18 /* JKVValue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JKVValue.framework; path = Carthage/Build/iOS/JKVValue.framework; sourceTree = "<group>"; };
 		BB73D54521EDD262004AEE18 /* YTFAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTFAlertController.m; sourceTree = "<group>"; };
 		BB73D54621EDD262004AEE18 /* YTFAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTFAlertController.h; sourceTree = "<group>"; };
-		BB7E7967221A5D6D0060A0CF /* ShareDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDetailController.h; sourceTree = "<group>"; };
-		BB7E7968221A5D6D0060A0CF /* ShareDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDetailController.m; sourceTree = "<group>"; };
+		BB7D9B98221E4B4C00C5DFD1 /* SharerInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharerInfoCell.h; sourceTree = "<group>"; };
+		BB7D9B99221E4B4C00C5DFD1 /* SharerInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharerInfoCell.m; sourceTree = "<group>"; };
+		BB7D9B9B221E8FA300C5DFD1 /* SharerDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharerDetailController.h; sourceTree = "<group>"; };
+		BB7D9B9C221E8FA300C5DFD1 /* SharerDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharerDetailController.m; sourceTree = "<group>"; };
+		BB7D9B9E221EA71000C5DFD1 /* SharerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharerModel.h; sourceTree = "<group>"; };
+		BB7D9B9F221EA71000C5DFD1 /* SharerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharerModel.m; sourceTree = "<group>"; };
+		BB7E7967221A5D6D0060A0CF /* HouseShareController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseShareController.h; sourceTree = "<group>"; };
+		BB7E7968221A5D6D0060A0CF /* HouseShareController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseShareController.m; sourceTree = "<group>"; };
 		BB7E796B221A61F50060A0CF /* img_noSharer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_noSharer.png; sourceTree = "<group>"; };
 		BB7E796C221A61F50060A0CF /* img_noSharer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_noSharer@3x.png"; sourceTree = "<group>"; };
 		BB7E796D221A61F50060A0CF /* img_noSharer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_noSharer@2x.png"; sourceTree = "<group>"; };
@@ -1207,6 +1216,8 @@
 				BB2AD7A321AD78F0006DB83A /* MemberModel.m */,
 				BB49B89621F5A8D100E32CF9 /* alarmModel.h */,
 				BB49B89721F5A8D100E32CF9 /* alarmModel.m */,
+				BB7D9B9E221EA71000C5DFD1 /* SharerModel.h */,
+				BB7D9B9F221EA71000C5DFD1 /* SharerModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1718,8 +1729,10 @@
 		BB7E7966221A5D270060A0CF /* Share */ = {
 			isa = PBXGroup;
 			children = (
-				BB7E7967221A5D6D0060A0CF /* ShareDetailController.h */,
-				BB7E7968221A5D6D0060A0CF /* ShareDetailController.m */,
+				BB7E7967221A5D6D0060A0CF /* HouseShareController.h */,
+				BB7E7968221A5D6D0060A0CF /* HouseShareController.m */,
+				BB7D9B9B221E8FA300C5DFD1 /* SharerDetailController.h */,
+				BB7D9B9C221E8FA300C5DFD1 /* SharerDetailController.m */,
 				BB7E7974221AA7780060A0CF /* AddShareController.h */,
 				BB7E7975221AA7780060A0CF /* AddShareController.m */,
 				BBAB280D221B912400E21041 /* HomeDeviceSelectController.h */,
@@ -1890,6 +1903,8 @@
 			children = (
 				BBAB2811221B9D4F00E21041 /* ShareDeviceSelectCell.h */,
 				BBAB2812221B9D4F00E21041 /* ShareDeviceSelectCell.m */,
+				BB7D9B98221E4B4C00C5DFD1 /* SharerInfoCell.h */,
+				BB7D9B99221E4B4C00C5DFD1 /* SharerInfoCell.m */,
 			);
 			path = AddShare;
 			sourceTree = "<group>";
@@ -2410,6 +2425,7 @@
 				3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
 				BB2AD7A121AD70D6006DB83A /* HouseSettingController.m in Sources */,
+				BB7D9B9A221E4B4C00C5DFD1 /* SharerInfoCell.m in Sources */,
 				BB37DF1221A7F3AF00B2121B /* DeviceTableViewCell.m in Sources */,
 				BB00A4FF21BA25B7004E4051 /* YAlertViewController.m in Sources */,
 				BB2AC10E21A94F42006DB83A /* HouseModel.m in Sources */,
@@ -2444,7 +2460,7 @@
 				BB2AC0F721A93B1B006DB83A /* UserModel.m in Sources */,
 				BB37DF0D21A7EFC400B2121B /* DeviceConnectView.m in Sources */,
 				BB2AC12721AA9EF1006DB83A /* FamilyLocationController.m in Sources */,
-				BB7E7969221A5D6D0060A0CF /* ShareDetailController.m in Sources */,
+				BB7E7969221A5D6D0060A0CF /* HouseShareController.m in Sources */,
 				BB2AA50F221D061100AF3968 /* SharerInputController.m in Sources */,
 				BB0A403621991AA8004669CA /* TouchTableView.m in Sources */,
 				BB0A403121991AA8004669CA /* UIButton+Common.m in Sources */,
@@ -2486,6 +2502,8 @@
 				BB45BC5221EF290600504FF8 /* AreaCodeCell.m in Sources */,
 				BB2AD79E21AD4828006DB83A /* HouseNameCell.m in Sources */,
 				BB62E4C021B4D57900C0FA39 /* TherAddTimerWeekCell.m in Sources */,
+				BB7D9BA0221EA71000C5DFD1 /* SharerModel.m in Sources */,
+				BB7D9B9D221E8FA300C5DFD1 /* SharerDetailController.m in Sources */,
 				BB2AC0E821A8F156006DB83A /* ESPTouchResult.m in Sources */,
 				BB2AD7AA21AD8063006DB83A /* HouseSetMemberCell.m in Sources */,
 				BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */,
