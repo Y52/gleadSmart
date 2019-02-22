@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SharerDetailController : UIViewController
 
 @property (nonatomic, strong) SharerModel *sharer;
+@property (nonatomic, strong) HouseModel *house;
 
 @end
 

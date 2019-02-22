@@ -41,7 +41,7 @@
         if (!_mobile) {
             _mobile = [[UILabel alloc] init];
             _mobile.textColor = [UIColor colorWithHexString:@"4D4D4C"];
-            _mobile.font = [UIFont fontWithName:@"Helvetica" size:11.f];
+            _mobile.font = [UIFont fontWithName:@"Helvetica" size:13.f];
             _mobile.textAlignment = NSTextAlignmentLeft;
             _mobile.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_mobile];

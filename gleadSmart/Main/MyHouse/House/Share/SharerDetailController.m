@@ -9,6 +9,8 @@
 #import "SharerDetailController.h"
 #import "HouseSetCommonCell.h"
 #import "ShareDeviceSelectCell.h"
+#import "AddShareController.h"
+#import "SharerRemarkController.h"
 
 NSString *const CellIdentifier_SharerDetailInfo = @"CellID_SharerDetailInfo";
 NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice";
@@ -17,6 +19,7 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
 
 @property (nonatomic, strong) UITableView *sharerDetailTable;
 @property (nonatomic, strong) NSMutableArray *deviceList;
+@property (nonatomic, strong) UIButton *addSharerButton;
 
 @end
 
@@ -27,6 +30,7 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
     self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
 
     self.sharerDetailTable = [self sharerDetailTable];
+    self.addSharerButton = [self addSharerButton];
     [self getSharerInfo];
 }
 
@@ -98,6 +102,66 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
     }];
 }
 
+- (void)removeSharerDevicceHttpDelMethod:(NSString *)mac success:(void(^)(void))success failure:(void(^)(void))failure{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
+    
+    NSDictionary *parameters = @{@"shareUid":self.sharer.sharerUid,@"mac":mac};
+    
+    [manager DELETE:@"http://gleadsmart.thingcom.cn/api/share/sharer/device" parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            if (success) {
+                success();
+            }
+        }else{
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            if (failure) {
+                failure();
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        if (failure) {
+            failure();
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"移除设备失败"];
+        });
+    }];
+}
+
+
+- (void)addSharer{
+    AddShareController *addVC = [[AddShareController alloc] init];
+    addVC.house = self.house;
+    addVC.isSharedDiviceMacList = [[NSMutableArray alloc] init];
+    for (DeviceModel *device in self.deviceList) {
+        [addVC.isSharedDiviceMacList addObject:device.mac];
+    }
+    [self.navigationController pushViewController:addVC animated:YES];
+}
+
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -108,7 +172,7 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
         return 2;
     }
     if (section == 1) {
-        return 1;
+        return self.deviceList.count;
     }
     return 0;
 }
@@ -121,14 +185,15 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
             if (cell == nil) {
                 cell = [[HouseSetCommonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_SharerDetailInfo];
             }
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
                 cell.leftLabel.text = LocalString(@"共享给");
                 cell.rightLabel.text = self.sharer.mobile;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
             if (indexPath.row == 1) {
                 cell.leftLabel.text = LocalString(@"备注");
                 cell.rightLabel.text = self.sharer.name;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
             return cell;
         }
@@ -192,6 +257,16 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        //修改备注
+        SharerRemarkController *vc = [[SharerRemarkController alloc] init];
+        vc.sharer = self.sharer;
+        vc.houseUid = self.house.houseUid;
+        vc.popBlock = ^{
+            [self.sharerDetailTable reloadData];
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -265,6 +340,26 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
     return view;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        DeviceModel *device = self.deviceList[indexPath.row];
+        [self removeSharerDevicceHttpDelMethod:device.mac success:^{
+            [self.deviceList removeObject:device];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        } failure:^{
+            
+        }];
+    }
+}
+
 #pragma mark - Lazy load
 - (UITableView *)sharerDetailTable{
     if (!_sharerDetailTable) {
@@ -288,5 +383,25 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
     return _sharerDetailTable;
 }
 
+- (UIButton *)addSharerButton{
+    if (!_addSharerButton) {
+        _addSharerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_addSharerButton setTitle:LocalString(@"添加共享") forState:UIControlStateNormal];
+        [_addSharerButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+        [_addSharerButton setTitleColor:[UIColor colorWithHexString:@"639DF8"] forState:UIControlStateNormal];
+        [_addSharerButton.layer setBorderWidth:1.0];
+        _addSharerButton.layer.borderColor = [UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0].CGColor;
+        _addSharerButton.layer.cornerRadius = 20.f;
+        [_addSharerButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
+        [_addSharerButton addTarget:self action:@selector(addSharer) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_addSharerButton];
+        [_addSharerButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(284.f), 40.f));
+            make.bottom.equalTo(self.view.mas_bottom).offset(-40.f);
+            make.centerX.equalTo(self.view.mas_centerX);
+        }];
+    }
+    return _addSharerButton;
+}
 
 @end

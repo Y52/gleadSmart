@@ -9,6 +9,7 @@
 #import "AddShareController.h"
 #import "HomeDeviceSelectController.h"
 #import "SharerInputController.h"
+#import "HouseShareController.h"
 
 static CGFloat const gleadHomeListHeight = 37.f;
 static CGFloat const gleadMenuItemMargin = 25.f;
@@ -100,9 +101,26 @@ static CGFloat const gleadMenuItemMargin = 25.f;
             break;
         }
     }
+    
+    if (self.isSharedDiviceMacList.count <= 0) {
+        return;
+    }
+    for (DeviceModel *device in self.deviceList) {
+        for (NSString *mac in self.isSharedDiviceMacList) {
+            if ([device.mac isEqualToString:mac]) {
+                device.isShared = YES;
+            }
+        }
+    }
 }
 
 - (void)shareSelectedDevice{
+    if (self.sharer) {
+        //如果是从分享者界面进入的不需要输入手机号码，直接添加
+        [self addSharer];
+        return;
+    }
+    
     SharerInputController *vc = [[SharerInputController alloc] init];
     vc.deviceList = [[NSMutableArray alloc] init];
     for (DeviceModel *device in self.deviceList) {
@@ -112,6 +130,59 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     }
     vc.houseUid = self.house.houseUid;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)addSharer{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/share"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    NSMutableArray *deviceDicArr = [[NSMutableArray alloc] init];
+    for (DeviceModel *device in self.deviceList) {
+        NSDictionary *dic = @{@"mac":device.mac,@"type":device.type};
+        [deviceDicArr addObject:dic];
+    }
+    NSDictionary *parameters = @{@"houseUid":self.house.houseUid,@"mobile":self.sharer.mobile,@"ownerUid":db.user.userId,@"deviceList":deviceDicArr};
+    
+    [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            
+            for (UIViewController *vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[HouseShareController class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                }
+            }
+        }else{
+            [NSObject showHudTipStr:@"添加共享失败"];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"添加共享失败"];
+        });
+    }];
 }
 
 #pragma mark - WMPage Datasource & Delegate

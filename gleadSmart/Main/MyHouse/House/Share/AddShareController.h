@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <WMPageController/WMPageController.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AddShareController : WMPageController
 
 @property (nonatomic, strong) HouseModel *house;
+
+@property (nonatomic, strong) NSMutableArray *isSharedDiviceMacList;
+@property (nonatomic, strong) SharerModel *sharer;
 
 @end
 

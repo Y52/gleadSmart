@@ -131,6 +131,10 @@
 		BB2AD7A421AD78F0006DB83A /* MemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD7A321AD78F0006DB83A /* MemberModel.m */; };
 		BB2AD7A721AD7F91006DB83A /* HouseSetCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD7A621AD7F91006DB83A /* HouseSetCommonCell.m */; };
 		BB2AD7AA21AD8063006DB83A /* HouseSetMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD7A921AD8063006DB83A /* HouseSetMemberCell.m */; };
+		BB2CB8A1221FA8B9001E6703 /* img_addShareCheck_notable.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2CB89E221FA8B8001E6703 /* img_addShareCheck_notable.png */; };
+		BB2CB8A2221FA8B9001E6703 /* img_addShareCheck_notable@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2CB89F221FA8B8001E6703 /* img_addShareCheck_notable@3x.png */; };
+		BB2CB8A3221FA8B9001E6703 /* img_addShareCheck_notable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2CB8A0221FA8B8001E6703 /* img_addShareCheck_notable@2x.png */; };
+		BB2CB8A6221FE171001E6703 /* SharerRemarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2CB8A5221FE171001E6703 /* SharerRemarkController.m */; };
 		BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */; };
 		BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352911219D61B300428DE9 /* HouseSelectCell.m */; };
 		BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352914219D63BC00428DE9 /* HouseSelectController.m */; };
@@ -631,6 +635,11 @@
 		BB2AD7A621AD7F91006DB83A /* HouseSetCommonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseSetCommonCell.m; sourceTree = "<group>"; };
 		BB2AD7A821AD8063006DB83A /* HouseSetMemberCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSetMemberCell.h; sourceTree = "<group>"; };
 		BB2AD7A921AD8063006DB83A /* HouseSetMemberCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseSetMemberCell.m; sourceTree = "<group>"; };
+		BB2CB89E221FA8B8001E6703 /* img_addShareCheck_notable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_addShareCheck_notable.png; sourceTree = "<group>"; };
+		BB2CB89F221FA8B8001E6703 /* img_addShareCheck_notable@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addShareCheck_notable@3x.png"; sourceTree = "<group>"; };
+		BB2CB8A0221FA8B8001E6703 /* img_addShareCheck_notable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addShareCheck_notable@2x.png"; sourceTree = "<group>"; };
+		BB2CB8A4221FE171001E6703 /* SharerRemarkController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharerRemarkController.h; sourceTree = "<group>"; };
+		BB2CB8A5221FE171001E6703 /* SharerRemarkController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharerRemarkController.m; sourceTree = "<group>"; };
 		BB35290D219D0FC700428DE9 /* HomeDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceCell.h; sourceTree = "<group>"; };
 		BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceCell.m; sourceTree = "<group>"; };
 		BB352910219D61B300428DE9 /* HouseSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSelectCell.h; sourceTree = "<group>"; };
@@ -1328,6 +1337,9 @@
 				BB2AC11B21AA8A64006DB83A /* addFamily_check.png */,
 				BB2AC11A21AA8A64006DB83A /* addFamily_check@2x.png */,
 				BB2AC11921AA8A64006DB83A /* addFamily_check@3x.png */,
+				BB2CB89E221FA8B8001E6703 /* img_addShareCheck_notable.png */,
+				BB2CB8A0221FA8B8001E6703 /* img_addShareCheck_notable@2x.png */,
+				BB2CB89F221FA8B8001E6703 /* img_addShareCheck_notable@3x.png */,
 			);
 			path = "添加家庭_slices";
 			sourceTree = "<group>";
@@ -1733,6 +1745,8 @@
 				BB7E7968221A5D6D0060A0CF /* HouseShareController.m */,
 				BB7D9B9B221E8FA300C5DFD1 /* SharerDetailController.h */,
 				BB7D9B9C221E8FA300C5DFD1 /* SharerDetailController.m */,
+				BB2CB8A4221FE171001E6703 /* SharerRemarkController.h */,
+				BB2CB8A5221FE171001E6703 /* SharerRemarkController.m */,
 				BB7E7974221AA7780060A0CF /* AddShareController.h */,
 				BB7E7975221AA7780060A0CF /* AddShareController.m */,
 				BBAB280D221B912400E21041 /* HomeDeviceSelectController.h */,
@@ -2103,6 +2117,7 @@
 				BBF6324021BBAB34006A23AC /* nodeLeakBig_normal.png in Resources */,
 				BB352927219D968500428DE9 /* img_houseUnelect@2x.png in Resources */,
 				BB5B034221B8BD2F007AC2B1 /* img_login_phone@2x.png in Resources */,
+				BB2CB8A3221FA8B9001E6703 /* img_addShareCheck_notable@2x.png in Resources */,
 				BB8B9E7821A6ADEB00E5D8B2 /* nodeBattery_normal@2x.png in Resources */,
 				BBF6324C21BBAB34006A23AC /* valveTabMore@2x.png in Resources */,
 				BBF6325121BBAB34006A23AC /* valveHeader@2x.png in Resources */,
@@ -2164,6 +2179,7 @@
 				BB5B036621B8CB6B007AC2B1 /* img_pwd_unvisiable.png in Resources */,
 				BB62E4F821B51CD900C0FA39 /* img_weekProgram_out@2x.png in Resources */,
 				BB5B03C221B90343007AC2B1 /* img_mine_wechat.png in Resources */,
+				BB2CB8A2221FA8B9001E6703 /* img_addShareCheck_notable@3x.png in Resources */,
 				BB8B9E7221A6ADEB00E5D8B2 /* valveSwitch_normal@2x.png in Resources */,
 				BB1EB38F21E44C7A0024603A /* valveNode_abnormal@2x.png in Resources */,
 				BB3D219E21AE7E2B002CB334 /* img_valve_off@2x.png in Resources */,
@@ -2205,6 +2221,7 @@
 				BB0A40BD21997C99004669CA /* img_tab_02_unselect.png in Resources */,
 				BB62E4F721B51CD900C0FA39 /* img_weekProgram_out@3x.png in Resources */,
 				BB62E4CB21B4D9CA00C0FA39 /* img_ther_addTimerSwitch@3x.png in Resources */,
+				BB2CB8A1221FA8B9001E6703 /* img_addShareCheck_notable.png in Resources */,
 				BB0A40B321997C99004669CA /* img_wallHob.png in Resources */,
 				BB8B9E7B21A6ADEB00E5D8B2 /* valveStatus_abnormal@2x.png in Resources */,
 				BBF631FF21BB5B04006A23AC /* img_manual_on@2x.png in Resources */,
@@ -2475,6 +2492,7 @@
 				BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */,
 				BB49DF9B21958864004E00A2 /* gleadSmart.xcdatamodeld in Sources */,
 				BB2AC0E921A8F156006DB83A /* ESP_NetUtil.m in Sources */,
+				BB2CB8A6221FE171001E6703 /* SharerRemarkController.m in Sources */,
 				BB2AC10821A94D63006DB83A /* AFURLSessionManager.m in Sources */,
 				BB00A4F321BA202C004E4051 /* AccountHeaderCell.m in Sources */,
 				3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */,

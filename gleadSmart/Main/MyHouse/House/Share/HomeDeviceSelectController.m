@@ -154,6 +154,9 @@ CGFloat const Cell_Height = 50.f;
     }else{
         cell.selectImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
     }
+    if (device.isShared) {
+        cell.selectImage.image = [UIImage imageNamed:@"img_addShareCheck_notable"];
+    }
 
     return cell;
 }
@@ -162,6 +165,9 @@ CGFloat const Cell_Height = 50.f;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ShareDeviceSelectCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     DeviceModel *device = self.deviceList[indexPath.row];
+    if (device.isShared) {
+        return;//已经分享过
+    }
     if (device.tag == ySelect) {
         cell.selectImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
     }else{
