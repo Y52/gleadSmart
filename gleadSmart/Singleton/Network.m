@@ -1055,7 +1055,7 @@ static int noUserInteractionHeartbeat = 0;
         //每个设备发送状态查询帧
         UInt8 controlCode = 0x01;
         NSArray *data;
-        switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]]) {
+        switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
             case 1:
                 data = @[@0xFE,@0x12,@0x01,@0x00];
                 break;

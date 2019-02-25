@@ -159,6 +159,7 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
     for (DeviceModel *device in self.deviceList) {
         [addVC.isSharedDiviceMacList addObject:device.mac];
     }
+    addVC.sharer = self.sharer;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

@@ -115,7 +115,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 }
 
 - (void)shareSelectedDevice{
-    if (self.sharer) {
+    if (self.sharer != nil) {
         //如果是从分享者界面进入的不需要输入手机号码，直接添加
         [self addSharer];
         return;
@@ -152,10 +152,13 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     
     NSMutableArray *deviceDicArr = [[NSMutableArray alloc] init];
     for (DeviceModel *device in self.deviceList) {
-        NSDictionary *dic = @{@"mac":device.mac,@"type":device.type};
-        [deviceDicArr addObject:dic];
+        if (device.tag == ySelect && !device.isShared) {
+            NSDictionary *dic = @{@"mac":device.mac,@"type":device.type};
+            [deviceDicArr addObject:dic];
+        }
     }
     NSDictionary *parameters = @{@"houseUid":self.house.houseUid,@"mobile":self.sharer.mobile,@"ownerUid":db.user.userId,@"deviceList":deviceDicArr};
+    NSLog(@"%@",parameters);
     
     [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];

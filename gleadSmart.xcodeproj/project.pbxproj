@@ -56,17 +56,17 @@
 		BB0A40D221997C99004669CA /* img_addDevice@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407B21997C99004669CA /* img_addDevice@3x.png */; };
 		BB0A40D621997C99004669CA /* img_addDevice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407F21997C99004669CA /* img_addDevice@2x.png */; };
 		BB0A40D821997C99004669CA /* img_weatherBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408121997C99004669CA /* img_weatherBg@3x.png */; };
-		BB0A40DF21997C99004669CA /* 矢量智能对象7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408821997C99004669CA /* 矢量智能对象7@3x.png */; };
+		BB0A40DF21997C99004669CA /* img_shareInfo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408821997C99004669CA /* img_shareInfo@3x.png */; };
 		BB0A40E021997C99004669CA /* img_wallHob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408921997C99004669CA /* img_wallHob@2x.png */; };
 		BB0A40E121997C99004669CA /* img_homeSet.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408A21997C99004669CA /* img_homeSet.png */; };
 		BB0A40E721997C99004669CA /* img_tab_03_unselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409021997C99004669CA /* img_tab_03_unselect@3x.png */; };
-		BB0A40E821997C99004669CA /* 矢量智能对象7.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409121997C99004669CA /* 矢量智能对象7.png */; };
+		BB0A40E821997C99004669CA /* img_shareInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409121997C99004669CA /* img_shareInfo.png */; };
 		BB0A40F121997C99004669CA /* img_houseSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409A21997C99004669CA /* img_houseSelect.png */; };
 		BB0A40F321997C99004669CA /* img_weatherBg.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409C21997C99004669CA /* img_weatherBg.png */; };
 		BB0A40F521997C99004669CA /* img_tab_03_unselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409E21997C99004669CA /* img_tab_03_unselect@2x.png */; };
 		BB0A40FC21997C99004669CA /* img_addDevice.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A521997C99004669CA /* img_addDevice.png */; };
 		BB0A40FD21997C99004669CA /* img_wallHob@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A621997C99004669CA /* img_wallHob@3x.png */; };
-		BB0A40FE21997C99004669CA /* 矢量智能对象7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */; };
+		BB0A40FE21997C99004669CA /* img_shareInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A721997C99004669CA /* img_shareInfo@2x.png */; };
 		BB1EB38D21E44C7A0024603A /* valveNode_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB38A21E44C790024603A /* valveNode_abnormal@3x.png */; };
 		BB1EB38F21E44C7A0024603A /* valveNode_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB38C21E44C790024603A /* valveNode_abnormal@2x.png */; };
 		BB1EB39421E44E2B0024603A /* valveNode_selnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39021E44E2A0024603A /* valveNode_selnormal@3x.png */; };
@@ -355,6 +355,7 @@
 		BB8F5A8821B7EF1700E69094 /* TherTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8F5A8721B7EF1700E69094 /* TherTimerCell.m */; };
 		BBAB280F221B912400E21041 /* HomeDeviceSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */; };
 		BBAB2813221B9D4F00E21041 /* ShareDeviceSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB2812221B9D4F00E21041 /* ShareDeviceSelectCell.m */; };
+		BBB5EEAC2223D3750048B4C0 /* ShareDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB5EEAB2223D3750048B4C0 /* ShareDeviceModel.m */; };
 		BBF631FB21BB5B04006A23AC /* img_auto_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F321BB5B02006A23AC /* img_auto_on@3x.png */; };
 		BBF631FC21BB5B04006A23AC /* img_auto_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F421BB5B02006A23AC /* img_auto_on@2x.png */; };
 		BBF631FD21BB5B04006A23AC /* img_manual_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F521BB5B02006A23AC /* img_manual_on@3x.png */; };
@@ -518,17 +519,17 @@
 		BB0A407B21997C99004669CA /* img_addDevice@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addDevice@3x.png"; sourceTree = "<group>"; };
 		BB0A407F21997C99004669CA /* img_addDevice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addDevice@2x.png"; sourceTree = "<group>"; };
 		BB0A408121997C99004669CA /* img_weatherBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_weatherBg@3x.png"; sourceTree = "<group>"; };
-		BB0A408821997C99004669CA /* 矢量智能对象7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7@3x.png"; sourceTree = "<group>"; };
+		BB0A408821997C99004669CA /* img_shareInfo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_shareInfo@3x.png"; sourceTree = "<group>"; };
 		BB0A408921997C99004669CA /* img_wallHob@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_wallHob@2x.png"; sourceTree = "<group>"; };
 		BB0A408A21997C99004669CA /* img_homeSet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_homeSet.png; sourceTree = "<group>"; };
 		BB0A409021997C99004669CA /* img_tab_03_unselect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_03_unselect@3x.png"; sourceTree = "<group>"; };
-		BB0A409121997C99004669CA /* 矢量智能对象7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7.png"; sourceTree = "<group>"; };
+		BB0A409121997C99004669CA /* img_shareInfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_shareInfo.png; sourceTree = "<group>"; };
 		BB0A409A21997C99004669CA /* img_houseSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_houseSelect.png; sourceTree = "<group>"; };
 		BB0A409C21997C99004669CA /* img_weatherBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_weatherBg.png; sourceTree = "<group>"; };
 		BB0A409E21997C99004669CA /* img_tab_03_unselect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_03_unselect@2x.png"; sourceTree = "<group>"; };
 		BB0A40A521997C99004669CA /* img_addDevice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_addDevice.png; sourceTree = "<group>"; };
 		BB0A40A621997C99004669CA /* img_wallHob@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_wallHob@3x.png"; sourceTree = "<group>"; };
-		BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象7@2x.png"; sourceTree = "<group>"; };
+		BB0A40A721997C99004669CA /* img_shareInfo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_shareInfo@2x.png"; sourceTree = "<group>"; };
 		BB0A4100219986FE004669CA /* gleadSmart-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gleadSmart-Prefix.pch"; sourceTree = "<group>"; };
 		BB1EB38A21E44C790024603A /* valveNode_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_abnormal@3x.png"; sourceTree = "<group>"; };
 		BB1EB38C21E44C790024603A /* valveNode_abnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_abnormal@2x.png"; sourceTree = "<group>"; };
@@ -916,6 +917,8 @@
 		BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceSelectController.m; sourceTree = "<group>"; };
 		BBAB2811221B9D4F00E21041 /* ShareDeviceSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceSelectCell.h; sourceTree = "<group>"; };
 		BBAB2812221B9D4F00E21041 /* ShareDeviceSelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceSelectCell.m; sourceTree = "<group>"; };
+		BBB5EEAA2223D3750048B4C0 /* ShareDeviceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceModel.h; sourceTree = "<group>"; };
+		BBB5EEAB2223D3750048B4C0 /* ShareDeviceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceModel.m; sourceTree = "<group>"; };
 		BBF631F321BB5B02006A23AC /* img_auto_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_auto_on@3x.png"; sourceTree = "<group>"; };
 		BBF631F421BB5B02006A23AC /* img_auto_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_auto_on@2x.png"; sourceTree = "<group>"; };
 		BBF631F521BB5B02006A23AC /* img_manual_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_manual_on@3x.png"; sourceTree = "<group>"; };
@@ -1201,9 +1204,9 @@
 				BB0A408A21997C99004669CA /* img_homeSet.png */,
 				BB0A406421997C99004669CA /* img_homeSet@2x.png */,
 				BB0A406D21997C99004669CA /* img_homeSet@3x.png */,
-				BB0A409121997C99004669CA /* 矢量智能对象7.png */,
-				BB0A40A721997C99004669CA /* 矢量智能对象7@2x.png */,
-				BB0A408821997C99004669CA /* 矢量智能对象7@3x.png */,
+				BB0A409121997C99004669CA /* img_shareInfo.png */,
+				BB0A40A721997C99004669CA /* img_shareInfo@2x.png */,
+				BB0A408821997C99004669CA /* img_shareInfo@3x.png */,
 			);
 			path = "我的家_slices";
 			sourceTree = "<group>";
@@ -1213,6 +1216,8 @@
 			children = (
 				BB37DF1621A7FCBF00B2121B /* DeviceModel.h */,
 				BB37DF1721A7FCBF00B2121B /* DeviceModel.m */,
+				BBB5EEAA2223D3750048B4C0 /* ShareDeviceModel.h */,
+				BBB5EEAB2223D3750048B4C0 /* ShareDeviceModel.m */,
 				BB52F9EB21BE6B03005FA33A /* NodeModel.h */,
 				BB52F9EC21BE6B03005FA33A /* NodeModel.m */,
 				BB2AC0F521A93B1B006DB83A /* UserModel.h */,
@@ -2070,7 +2075,7 @@
 				BBF6326121BBAB34006A23AC /* valveStatus_normal@2x.png in Resources */,
 				BBF6323B21BBAB34006A23AC /* nodeLeakSmall_normal@3x.png in Resources */,
 				BB63B5FA21B4128F00D77489 /* thermostat_min@2x.png in Resources */,
-				BB0A40FE21997C99004669CA /* 矢量智能对象7@2x.png in Resources */,
+				BB0A40FE21997C99004669CA /* img_shareInfo@2x.png in Resources */,
 				BBF6323D21BBAB34006A23AC /* nodeLeakBig_normal@3x.png in Resources */,
 				BB8B9DCF21A6815000E5D8B2 /* thermostatSet@1x.png in Resources */,
 				BB0A40D121997C99004669CA /* img_headerBg@1x.png in Resources */,
@@ -2193,7 +2198,7 @@
 				BB2AD78821AB98BD006DB83A /* KYDivisionPickerView_list.json in Resources */,
 				BB5B036921B8CB6B007AC2B1 /* img_pwd_unvisiable@3x.png in Resources */,
 				BB8B9E7721A6ADEB00E5D8B2 /* valveLeak_abnormal@3x.png in Resources */,
-				BB0A40DF21997C99004669CA /* 矢量智能对象7@3x.png in Resources */,
+				BB0A40DF21997C99004669CA /* img_shareInfo@3x.png in Resources */,
 				BBF6325321BBAB34006A23AC /* nodeSet_abnormal@3x.png in Resources */,
 				BB5B03B821B90343007AC2B1 /* pen@3x.png in Resources */,
 				BB5B03A721B90343007AC2B1 /* img_mine_wechat@3x.png in Resources */,
@@ -2309,7 +2314,7 @@
 				BB8B9DD021A6815000E5D8B2 /* thermostatMoer@1x.png in Resources */,
 				BB0A40E121997C99004669CA /* img_homeSet.png in Resources */,
 				BB2AC12421AA8A64006DB83A /* addFamily_check.png in Resources */,
-				BB0A40E821997C99004669CA /* 矢量智能对象7.png in Resources */,
+				BB0A40E821997C99004669CA /* img_shareInfo.png in Resources */,
 				BB62E4F321B51CD900C0FA39 /* img_weekProgram_back@3x.png in Resources */,
 				BB2AC12021AA8A64006DB83A /* addFamily_device@3x.png in Resources */,
 				BB8B9E7321A6ADEB00E5D8B2 /* valveSwitch_normal@3x.png in Resources */,
@@ -2517,6 +2522,7 @@
 				BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */,
 				BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */,
 				BB62E4BC21B4D1D200C0FA39 /* ThermostatAddTimerController.m in Sources */,
+				BBB5EEAC2223D3750048B4C0 /* ShareDeviceModel.m in Sources */,
 				BB45BC5221EF290600504FF8 /* AreaCodeCell.m in Sources */,
 				BB2AD79E21AD4828006DB83A /* HouseNameCell.m in Sources */,
 				BB62E4C021B4D57900C0FA39 /* TherAddTimerWeekCell.m in Sources */,

@@ -114,7 +114,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
     if (section == 0){
         return 3;
     }else if (section == 1){
-        return 3;
+        return 2;
     }else{
         return 2;
     }

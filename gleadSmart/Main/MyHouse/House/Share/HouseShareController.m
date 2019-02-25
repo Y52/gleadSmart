@@ -316,7 +316,7 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
     view.backgroundColor = [UIColor clearColor];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = LocalString(@"家中部分共享已共享给这些用户");
+    label.text = LocalString(@"家中部分设备已共享给这些用户");
     label.font = [UIFont fontWithName:@"Helvetica" size:15];
     label.textColor = [UIColor colorWithHexString:@"7C7C7B"];
     label.textAlignment = NSTextAlignmentLeft;

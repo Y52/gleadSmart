@@ -90,13 +90,24 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 #pragma mark - UITableView delegate&datasource
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _deviceArray.count;
+    switch (section) {
+        case 0:
+            return _deviceArray.count;
+            break;
+            
+        case 1:
+            return [Database shareInstance].shareDeviceArray.count;
+            break;
+            
+        default:
+            return 0;
+            break;
+    }
 }
 
 
@@ -105,17 +116,56 @@ static CGFloat const Cell_Height = 72.f;
     if (cell == nil) {
         cell = [[HomeDeviceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_HomeDevice];
     }
-    DeviceModel *device = self.deviceArray[indexPath.row];
-    cell.deviceName.text = device.name;
-    RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
-    NSString *status = room.name;
-    if (room.roomUid == nil) {
-        status = LocalString(@"未设置");
-    }
-    switch ([device.type integerValue]) {
+    switch (indexPath.section) {
+        case 0:
+        {
+            DeviceModel *device = self.deviceArray[indexPath.row];
+            cell.deviceName.text = device.name;
+            RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
+            NSString *status = room.name;
+            if (room.roomUid == nil) {
+                status = LocalString(@"未设置");
+            }
+            
+            //NSLog(@"%@---%@",device.isOn,device.mac);
+            if ([device.isOn boolValue]) {
+                cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
+                cell.controlSwitch.on = YES;
+            }else{
+                cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
+                cell.controlSwitch.on = NO;
+            }
+            [self differenceDiveceAction:[device.type integerValue] isOnline:[device.isOnline boolValue] mac:device.mac cell:cell];
+        }
+            break;
+            
         case 1:
         {
-            if ([device.isOnline boolValue]) {
+            ShareDeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
+            cell.deviceName.text = device.name;
+            if ([device.isOn boolValue]) {
+                cell.status.text = LocalString(@"已开启");
+                cell.controlSwitch.on = YES;
+            }else{
+                cell.status.text = LocalString(@"已关闭");
+                cell.controlSwitch.on = NO;
+            }
+            NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
+            [self differenceDiveceAction:type isOnline:[device.isOnline boolValue] mac:device.mac cell:cell];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return cell;
+}
+
+- (void)differenceDiveceAction:(NSInteger)type isOnline:(BOOL)isOnline mac:(NSString *)mac cell:(HomeDeviceCell *)cell{
+    switch (type) {
+        case 1:
+        {
+            if (isOnline) {
                 cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_on"];
             }else{
                 cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_off"];
@@ -123,14 +173,14 @@ static CGFloat const Cell_Height = 72.f;
             cell.switchBlock = ^(BOOL isOn) {
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
-                [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data];
+                [[Network shareNetwork] sendData69With:controlCode mac:mac data:data];
             };
         }
             break;
             
         case 2:
         {
-            if ([device.isOnline boolValue]) {
+            if (isOnline) {
                 cell.deviceImage.image = [UIImage imageNamed:@"img_valve_on"];
             }else{
                 cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
@@ -138,7 +188,7 @@ static CGFloat const Cell_Height = 72.f;
             cell.switchBlock = ^(BOOL isOn) {
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
-                [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data];
+                [[Network shareNetwork] sendData69With:controlCode mac:mac data:data];
             };
         }
             break;
@@ -152,46 +202,50 @@ static CGFloat const Cell_Height = 72.f;
         default:
             break;
     }
-    //NSLog(@"%@---%@",device.isOn,device.mac);
-    if ([device.isOn boolValue]) {
-        cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
-        cell.controlSwitch.on = YES;
-    }else{
-        cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
-        cell.controlSwitch.on = NO;
-    }
-    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    DeviceModel *device = self.deviceArray[indexPath.row];
-    switch ([device.type integerValue]) {
+    switch (indexPath.section) {
+        case 0:
+        {
+            DeviceModel *device = self.deviceArray[indexPath.row];
+            switch ([device.type integerValue]) {
+                case 1:
+                {
+                    ThermostatController *thermostatVC = [[ThermostatController alloc] init];
+                    thermostatVC.device = device;
+                    [self.navigationController pushViewController:thermostatVC animated:YES];
+                }
+                    break;
+                    
+                case 2:
+                {
+                    WirelessValveController *valveVC = [[WirelessValveController alloc] init];
+                    valveVC.device = device;
+                    [self.navigationController pushViewController:valveVC animated:YES];
+                }
+                    break;
+                    
+                case 3:
+                {
+                    
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+            break;
+            
         case 1:
-        {
-            ThermostatController *thermostatVC = [[ThermostatController alloc] init];
-            thermostatVC.device = device;
-            [self.navigationController pushViewController:thermostatVC animated:YES];
-        }
-            break;
-            
-        case 2:
-        {
-            WirelessValveController *valveVC = [[WirelessValveController alloc] init];
-            valveVC.device = device;
-            [self.navigationController pushViewController:valveVC animated:YES];
-        }
-            break;
-            
-        case 3:
-        {
-            
-        }
             break;
             
         default:
             break;
     }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -202,12 +256,37 @@ static CGFloat const Cell_Height = 72.f;
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0)];
     headerView.layer.backgroundColor = [UIColor clearColor].CGColor;
     
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0)];
-    textLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    textLabel.font = [UIFont systemFontOfSize:14.f];
-    textLabel.textAlignment = NSTextAlignmentCenter;
-    textLabel.backgroundColor = [UIColor clearColor];
-    [headerView addSubview:textLabel];
+    switch (section) {
+        case 0:
+            break;
+            
+        case 1:
+        {
+            if ([Database shareInstance].shareDeviceArray.count != 0) {
+                UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(30.f, 0, 200.f, 20.f)];
+                textLabel.textColor = [UIColor colorWithHexString:@"3987F8"];
+                textLabel.text = LocalString(@"我收到的共享");
+                textLabel.font = [UIFont systemFontOfSize:14.f];
+                textLabel.textAlignment = NSTextAlignmentLeft;
+                textLabel.backgroundColor = [UIColor clearColor];
+                [headerView addSubview:textLabel];
+                
+                UIButton *shareInfoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                [shareInfoButton setImage:[UIImage imageNamed:@"img_shareInfo"] forState:UIControlStateNormal];
+                [shareInfoButton addTarget:self action:@selector(shareInfo) forControlEvents:UIControlEventTouchUpInside];
+                [headerView addSubview:shareInfoButton];
+                [shareInfoButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.size.mas_equalTo(CGSizeMake(20.f, 20.f));
+                    make.centerY.equalTo(headerView.mas_centerY);
+                    make.right.equalTo(headerView.mas_right).offset(-31.f);
+                }];
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
     
     return headerView;
 }
@@ -216,7 +295,7 @@ static CGFloat const Cell_Height = 72.f;
     if (section == 0) {
         return 15.f;
     }else{
-        return 0.f;
+        return 20.f;
     }
 }
 
@@ -229,12 +308,19 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        DeviceModel *device = self.deviceArray[indexPath.row];
-        Network *net = [Network shareNetwork];
-        UInt8 controlCode = 0x00;
-        NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]]];//删除节点
-        [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+    switch (indexPath.section) {
+        case 0:
+            if (editingStyle == UITableViewCellEditingStyleDelete) {
+                DeviceModel *device = self.deviceArray[indexPath.row];
+                Network *net = [Network shareNetwork];
+                UInt8 controlCode = 0x00;
+                NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]]];//删除节点
+                [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+            }
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -242,15 +328,23 @@ static CGFloat const Cell_Height = 72.f;
 - (void)selectDevicesWithRoom{
     [self.deviceTable.mj_header endRefreshing];
     [SVProgressHUD dismiss];
-    Network *net = [Network shareNetwork];
+    NSMutableArray *allDevice = [[NSMutableArray alloc] init];
+    if ([Network shareNetwork].deviceArray.count > 0) {
+        //从中央控制器得到了设备的回复信息
+        allDevice = [Network shareNetwork].deviceArray;
+    }else{
+        //未得到回复信息，用本地or服务器存储的信息
+        allDevice = [Database shareInstance].localDeviceArray;
+    }
     if (!_room) {
-        self.deviceArray = net.deviceArray;
+        //所有设备房间列表
+        self.deviceArray = allDevice;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.deviceTable reloadData];
         });
         return;
     }
-    for (DeviceModel *device in net.deviceArray) {
+    for (DeviceModel *device in allDevice) {
         if ([device.roomUid isEqualToString:_room.roomUid]) {
             [self.deviceArray addObject:device];
         }
@@ -276,5 +370,9 @@ static CGFloat const Cell_Height = 72.f;
             [self.deviceTable.mj_header endRefreshing];
         }
     });
+}
+
+- (void)shareInfo{
+    
 }
 @end

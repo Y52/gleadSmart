@@ -360,6 +360,30 @@ static dispatch_once_t oneToken;
                     success();
                 }
             }
+            
+            /*
+             *取出共享内容
+             */
+            if ([[dic objectForKey:@"shareHouse"] isKindOfClass:[NSArray class]] && [[dic objectForKey:@"shareHouse"] count] > 0) {
+                Database *db = [Database shareInstance];
+                if (!db.shareDeviceArray) {
+                    db.shareDeviceArray = [[NSMutableArray alloc] init];
+                }
+                [db.shareDeviceArray removeAllObjects];
+                [[dic objectForKey:@"shareHouse"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([[obj objectForKey:@"devices"] isKindOfClass:[NSArray class]] && [[obj objectForKey:@"devices"] count] > 0) {
+                        [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj1, NSUInteger idx, BOOL * _Nonnull stop) {
+                            ShareDeviceModel *device = [[ShareDeviceModel alloc] init];
+                            device.name = [obj1 objectForKey:@"deviceName"];
+                            device.mac = [obj1 objectForKey:@"mac"];
+                            device.apiKey = [obj objectForKey:@"apiKey"];
+                            device.deviceId = [obj objectForKey:@"deviceId"];
+                            device.houseUid = [obj objectForKey:@"houseUid"];
+                            [db.shareDeviceArray addObject:device];
+                        }];
+                    }
+                }];
+            }
         }else{
             [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];
             if (failure) {

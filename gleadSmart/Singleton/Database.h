@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///@brief Device Info
 @property (strong, nonatomic) NSMutableArray *localDeviceArray;
+///@brief 共享家庭与设备,不在本地存储
+@property (strong, nonatomic) NSMutableArray *shareDeviceArray;
 
 ///@brief data initial
 - (void)initDB;
