@@ -10,6 +10,7 @@
 #import "HomeDeviceCell.h"
 #import "ThermostatController.h"
 #import "WirelessValveController.h"
+#import "ShareDeviceListController.h"
 
 NSString *const CellIdentifier_HomeDevice = @"CellID_HomeDevice";
 static CGFloat const Cell_Height = 72.f;
@@ -50,6 +51,60 @@ static CGFloat const Cell_Height = 72.f;
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshDeviceTable" object:nil];
+}
+
+#pragma mark - Actions
+- (void)selectDevicesWithRoom{
+    [self.deviceTable.mj_header endRefreshing];
+    [SVProgressHUD dismiss];
+    NSMutableArray *allDevice = [[NSMutableArray alloc] init];
+    if ([Network shareNetwork].deviceArray.count > 0) {
+        //从中央控制器得到了设备的回复信息
+        allDevice = [Network shareNetwork].deviceArray;
+    }else{
+        //未得到回复信息，用本地or服务器存储的信息
+        allDevice = [Database shareInstance].localDeviceArray;
+    }
+    if (!_room) {
+        //所有设备房间列表
+        self.deviceArray = allDevice;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.deviceTable reloadData];
+        });
+        return;
+    }
+    for (DeviceModel *device in allDevice) {
+        if ([device.roomUid isEqualToString:_room.roomUid]) {
+            [self.deviceArray addObject:device];
+        }
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.deviceTable reloadData];
+    });
+}
+
+- (void)refreshTable{
+    [SVProgressHUD show];
+    Network *net = [Network shareNetwork];
+    UInt8 controlCode = 0x00;
+    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+    [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        //异步等待10秒，如果未收到信息做如下处理
+        sleep(10);
+        if ([self.deviceTable.mj_header isRefreshing]) {
+            [NSObject showHudTipStr:@"设备或服务器异常，无法查询设备"];
+            [SVProgressHUD dismiss];
+            [self.deviceTable.mj_header endRefreshing];
+        }
+    });
+}
+
+- (void)shareInfo{
+    ShareDeviceListController *vc = [[ShareDeviceListController alloc] init];
+    vc.shareDeviceList = [Database shareInstance].shareDeviceArray;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Lazy Load
@@ -324,55 +379,5 @@ static CGFloat const Cell_Height = 72.f;
     }
 }
 
-#pragma mark - Actions
-- (void)selectDevicesWithRoom{
-    [self.deviceTable.mj_header endRefreshing];
-    [SVProgressHUD dismiss];
-    NSMutableArray *allDevice = [[NSMutableArray alloc] init];
-    if ([Network shareNetwork].deviceArray.count > 0) {
-        //从中央控制器得到了设备的回复信息
-        allDevice = [Network shareNetwork].deviceArray;
-    }else{
-        //未得到回复信息，用本地or服务器存储的信息
-        allDevice = [Database shareInstance].localDeviceArray;
-    }
-    if (!_room) {
-        //所有设备房间列表
-        self.deviceArray = allDevice;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.deviceTable reloadData];
-        });
-        return;
-    }
-    for (DeviceModel *device in allDevice) {
-        if ([device.roomUid isEqualToString:_room.roomUid]) {
-            [self.deviceArray addObject:device];
-        }
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.deviceTable reloadData];
-    });
-}
 
-- (void)refreshTable{
-    [SVProgressHUD show];
-    Network *net = [Network shareNetwork];
-    UInt8 controlCode = 0x00;
-    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-    [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        //异步等待10秒，如果未收到信息做如下处理
-        sleep(10);
-        if ([self.deviceTable.mj_header isRefreshing]) {
-            [NSObject showHudTipStr:@"设备或服务器异常，无法查询设备"];
-            [SVProgressHUD dismiss];
-            [self.deviceTable.mj_header endRefreshing];
-        }
-    });
-}
-
-- (void)shareInfo{
-    
-}
 @end
