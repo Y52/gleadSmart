@@ -34,6 +34,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 @property (nonatomic, strong) UILabel *testLabel;
 
 @property (strong, nonatomic) NSMutableArray *homeList;
+@property (strong, nonatomic) NSString *houseUid;
 @property (strong, nonatomic) UIButton *homeSetButton;
 
 @end
@@ -93,6 +94,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     
     //挡住了最上面的几个按钮的点击
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -524,6 +526,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     
     HomeManagementController *HomeManagementVC = [[HomeManagementController alloc] init];
     HomeManagementVC.homeList = self.homeList;
+    HomeManagementVC.houseUid = self.houseUid;
     [self.navigationController pushViewController:HomeManagementVC animated:YES];
 }
 
