@@ -989,11 +989,11 @@ static int noUserInteractionHeartbeat = 0;
     for (int i = 0; i < count; i++) {
         DeviceModel *device = [[DeviceModel alloc] init];
         device.mac = @"";
-        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13 + i*4] intValue]]];
-        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14 + i*4] intValue]]];
-        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15 + i*4] intValue]]];
         device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[16 + i*4] intValue]]];
-        device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[14 + i*4] intValue]]];
+        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15 + i*4] intValue]]];
+        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14 + i*4] intValue]]];
+        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13 + i*4] intValue]]];
+        device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[15 + i*4] intValue]]];
         
         //将中央控制器查询到的设备和服务器设备对比
         BOOL isExisted = NO;//防止重复显示以及刷新时重新添加设备到服务器
@@ -1051,23 +1051,124 @@ static int noUserInteractionHeartbeat = 0;
     //通知刷新设备
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
     
+    if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
+        //外网，OneNet查询监控点
+        [self inquireDeviceInfoByOneNetdatastreams:self.deviceArray];
+    }else{
+        //内网
+        for (DeviceModel *device in self.deviceArray) {
+            //每个设备发送状态查询帧
+            UInt8 controlCode = 0x01;
+            NSArray *data;
+            switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
+                case 1:
+                    data = @[@0xFE,@0x12,@0x01,@0x00];
+                    break;
+                    
+                case 2:
+                    data = @[@0xFE,@0x13,@0x01,@0x00];
+                    break;
+                    
+                default:
+                    break;
+            }
+            [self sendData69With:controlCode mac:device.mac data:data];
+        }
+    }
+}
+
+/*
+ *批量查询数据流信息
+ */
+- (void)inquireDeviceInfoByOneNetdatastreams:(NSMutableArray *)deviceArray{
+    Database *db = [Database shareInstance];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://api.heclouds.com/devices/%@/datastreams",db.currentHouse.deviceId];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    NSString *datastreams = @"";
     for (DeviceModel *device in self.deviceArray) {
         //每个设备发送状态查询帧
-        UInt8 controlCode = 0x01;
-        NSArray *data;
         switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
             case 1:
-                data = @[@0xFE,@0x12,@0x01,@0x00];
+                datastreams = [datastreams stringByAppendingString:@"11"];
+                datastreams = [datastreams stringByAppendingString:device.mac];
+                datastreams = [datastreams stringByAppendingString:@","];
                 break;
                 
             case 2:
-                data = @[@0xFE,@0x13,@0x01,@0x00];
+                datastreams = [datastreams stringByAppendingString:@"21"];
+                datastreams = [datastreams stringByAppendingString:device.mac];
+                datastreams = [datastreams stringByAppendingString:@","];
                 break;
                 
             default:
                 break;
         }
-        [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data];
+    }
+    NSDictionary *parameters = @{@"datastream_ids":datastreams};
+    
+    [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            if ([[responseDic objectForKey:@"data"] isKindOfClass:[NSArray class]] && [[responseDic objectForKey:@"data"] count] > 0) {
+                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSString *streamId = [obj objectForKey:@"id"];
+                    NSNumber *value = [obj objectForKey:@"current_value"];
+                    [self analysisResultValue:streamId value:value];
+                }];
+            }
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error:%@",error);
+        
+    }];
+}
+
+//解析从onenet获取的监控点信息
+- (void)analysisResultValue:(NSString *)streamId value:(NSNumber *)value{
+    NSString *index = [streamId substringWithRange:NSMakeRange(0, 2)];
+    NSString *mac = [streamId substringFromIndex:2];
+    for (DeviceModel *device in self.deviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            switch ([index integerValue]) {
+                case 11:
+                {
+                    device.isOnline = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x80];
+                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x01];
+                }
+                    break;
+                    
+                case 21:
+                {
+                    device.isOnline = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x80];
+                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x01];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
     }
 }
 

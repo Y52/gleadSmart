@@ -36,7 +36,6 @@ static CGFloat const Cell_Height = 72.f;
     self.view.layer.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1].CGColor;
     
     self.deviceTable = [self deviceTable];
-    [self selectDevicesWithRoom];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -46,6 +45,7 @@ static CGFloat const Cell_Height = 72.f;
         [self.deviceTable reloadData];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectDevicesWithRoom) name:@"refreshDeviceTable" object:nil];
+    [self selectDevicesWithRoom];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

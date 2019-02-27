@@ -143,17 +143,21 @@ static CGFloat const Cell_Height = 50.f;
     Database *data = [Database shareInstance];
     Network *net = [Network shareNetwork];
     if (indexPath.row == data.houseList.count) {
+        //进入家庭管理
         HouseManagementController  *HouseManagementVC = [[HouseManagementController alloc] init];
         [self.navigationController pushViewController:HouseManagementVC animated:YES];
         return;
     }
     HouseModel *house = data.houseList[indexPath.row];
     if (![data.currentHouse.houseUid isEqualToString:house.houseUid]) {
+        //选择了不同家庭
         data.currentHouse = house;
+        [data.localDeviceArray removeAllObjects];
+        [data.shareDeviceArray removeAllObjects];
+        [net.deviceArray removeAllObjects];
         if (net.mySocket.isConnected) {
             [net.mySocket disconnect];
         }
-        [net.deviceArray removeAllObjects];
     }
     [self dismissVC];
 }
