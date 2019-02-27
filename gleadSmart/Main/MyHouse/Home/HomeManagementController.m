@@ -8,6 +8,7 @@
 
 #import "HomeManagementController.h"
 #import "HomeManagementCell.h"
+#import "AddRoomsViewController.h"
 
 NSString *const CellIdentifier_HomeManagementTable = @"CellID_HomeManagementTable";
 static CGFloat const Cell_Height = 50.f;
@@ -15,7 +16,7 @@ static CGFloat const Cell_Height = 50.f;
 @interface HomeManagementController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *homeManagementTable;
-@property (strong, nonatomic) UIButton *addShareBtn;
+@property (strong, nonatomic) UIButton *addRoomsBtn;
 
 @end
 
@@ -25,18 +26,12 @@ static CGFloat const Cell_Height = 50.f;
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1].CGColor;
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.frame = CGRectMake(0, 0, 30, 30);
-    [rightButton setTitle:@"编辑" forState:UIControlStateNormal];
-    [rightButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
-    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(editedBtn) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
-    
     self.navigationItem.title = LocalString(@"房间管理");
     self.homeManagementTable = [self homeManagementTable];
-    self.addShareBtn = [self addShareBtn];
+    self.addRoomsBtn = [self addRoomsBtn];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView:)];
+    [self getEditedSharerInfo];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -65,26 +60,26 @@ static CGFloat const Cell_Height = 50.f;
     return _homeManagementTable;
 }
 
-- (UIButton *)addShareBtn{
-    if (!_addShareBtn) {
-        _addShareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_addShareBtn setTitle:LocalString(@"添加共享") forState:UIControlStateNormal];
-        [_addShareBtn setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
-        [_addShareBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
-        [_addShareBtn setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
-        [_addShareBtn.layer setBorderWidth:1.0];
-        _addShareBtn.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
-        _addShareBtn.layer.cornerRadius = 20.f;
-        [_addShareBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
-        [_addShareBtn addTarget:self action:@selector(goshare) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_addShareBtn];
-        [_addShareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UIButton *)addRoomsBtn{
+    if (!_addRoomsBtn) {
+        _addRoomsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_addRoomsBtn setTitle:LocalString(@"添加房间") forState:UIControlStateNormal];
+        [_addRoomsBtn setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
+        [_addRoomsBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+        [_addRoomsBtn setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
+        [_addRoomsBtn.layer setBorderWidth:1.0];
+        _addRoomsBtn.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
+        _addRoomsBtn.layer.cornerRadius = 20.f;
+        [_addRoomsBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
+        [_addRoomsBtn addTarget:self action:@selector(goRooms) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_addRoomsBtn];
+        [_addRoomsBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(284.f), 40.f));
             make.bottom.equalTo(self.view.mas_bottom).offset(-60);
             make.centerX.equalTo(self.view.mas_centerX);
         }];
     }
-    return _addShareBtn;
+    return _addRoomsBtn;
 }
 
 #pragma mark - UITableView delegate&datasource
@@ -116,6 +111,53 @@ static CGFloat const Cell_Height = 50.f;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return Cell_Height;
 }
+
+#pragma mark - private methods
+- (void)getEditedSharerInfo{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/room/list"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    NSLog(@"fsfsfsfs%@",url);
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
+    
+    NSMutableArray *roomsDicArr = [[NSMutableArray alloc] init];
+    for (RoomModel *roomname in self.homeList) {
+        NSDictionary *dic = @{@"name":roomname.name,@"name":roomname.name};
+        [roomsDicArr addObject:dic];
+    }
+    NSDictionary *parameters = @{@"rooms":roomsDicArr};
+    
+    [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            
+        }else{
+            [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        [NSObject showHudTipStr:LocalString(@"修改房间失败")];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+}
+
+
 
 #pragma mark - Actions
 /*
@@ -174,12 +216,71 @@ static CGFloat const Cell_Height = 50.f;
 //    }];
 //}
 
--(void)goshare{
+-(void)goRooms{
     NSLog(@"dd");
+    AddRoomsViewController *AddRoomsVC = [[AddRoomsViewController alloc] init];
+    [self.navigationController pushViewController:AddRoomsVC animated:YES];
 }
--(void)editedBtn{
-    NSLog(@"rr");
+
+//点中右上角按键  进入编辑状态
+-(void)editTableView:(UIBarButtonItem*)sender {
+    [self.homeManagementTable setEditing:!self.homeManagementTable.editing animated:YES];
+    //   isEditing editing的getter方法的 新名字
+    sender.title = self.homeManagementTable.isEditing ? @"完成" : @"编辑";
+  
+}
+//可以编辑
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+//每行编辑是什么样式
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //返回 插入
+//  return UITableViewCellEditingStyleInsert;
+    //返回 删除
+    return UITableViewCellEditingStyleDelete;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (editingStyle) {
+        case UITableViewCellEditingStyleNone:
+        {
+        }
+            break;
+        case UITableViewCellEditingStyleDelete:
+        {
+            //修改数据源，在刷新 tableView
+            [_homeList removeObjectAtIndex:indexPath.row];
     
+            //让表视图删除对应的行
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+            break;
+//        case UITableViewCellEditingStyleInsert:
+//        {
+//            [_homeList insertObject:@"新增行" atIndex:indexPath.row];
+//            //让表视图添加对应的行
+//            [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        }
+//            break;
+        default:
+            break;
+    }
+}
+//是否移动
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    //修改数据源
+    [_homeList exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    //让表视图对应的行进行移动
+    [tableView exchangeSubviewAtIndex:sourceIndexPath.row withSubviewAtIndex:destinationIndexPath.row];
 }
 
 @end

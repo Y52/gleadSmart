@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 36134F2B21E6E10100A7D98E /* NodeButton.m */; };
+		369C169B22250ECB0079159E /* AddRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169A22250ECA0079159E /* AddRoomsViewController.m */; };
+		369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169E222513E90079159E /* AddRoomsTextCell.m */; };
+		369C16A322255FD90079159E /* addRoom_hand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A022255FD90079159E /* addRoom_hand@3x.png */; };
+		369C16A422255FD90079159E /* addRoom_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A122255FD90079159E /* addRoom_hand.png */; };
+		369C16A522255FD90079159E /* addRoom_hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A222255FD90079159E /* addRoom_hand@2x.png */; };
 		3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */; };
 		3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */; };
 		3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBE21A7E7EA00EA8F1C /* AddFamilyViewController.m */; };
@@ -445,6 +450,13 @@
 		21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.release.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.release.xcconfig"; sourceTree = "<group>"; };
 		36134F2A21E6E10100A7D98E /* NodeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeButton.h; sourceTree = "<group>"; };
 		36134F2B21E6E10100A7D98E /* NodeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeButton.m; sourceTree = "<group>"; };
+		369C169922250ECA0079159E /* AddRoomsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRoomsViewController.h; sourceTree = "<group>"; };
+		369C169A22250ECA0079159E /* AddRoomsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRoomsViewController.m; sourceTree = "<group>"; };
+		369C169D222513E90079159E /* AddRoomsTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRoomsTextCell.h; sourceTree = "<group>"; };
+		369C169E222513E90079159E /* AddRoomsTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRoomsTextCell.m; sourceTree = "<group>"; };
+		369C16A022255FD90079159E /* addRoom_hand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addRoom_hand@3x.png"; sourceTree = "<group>"; };
+		369C16A122255FD90079159E /* addRoom_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addRoom_hand.png; sourceTree = "<group>"; };
+		369C16A222255FD90079159E /* addRoom_hand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addRoom_hand@2x.png"; sourceTree = "<group>"; };
 		3E3AFFB821A7E74800EA8F1C /* HouseManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseManagementTableViewCell.h; sourceTree = "<group>"; };
 		3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseManagementTableViewCell.m; sourceTree = "<group>"; };
 		3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeManagementCell.m; sourceTree = "<group>"; };
@@ -1020,6 +1032,15 @@
 			path = UIButton;
 			sourceTree = "<group>";
 		};
+		369C169C222513600079159E /* AddRooms */ = {
+			isa = PBXGroup;
+			children = (
+				369C169D222513E90079159E /* AddRoomsTextCell.h */,
+				369C169E222513E90079159E /* AddRoomsTextCell.m */,
+			);
+			path = AddRooms;
+			sourceTree = "<group>";
+		};
 		3E9E9B9821A2ABC600CA2B7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1254,6 +1275,8 @@
 				BB835FA3219C03A300225B60 /* HomeDeviceController.m */,
 				BB21BF62219E66210067BC61 /* HomeManagementController.h */,
 				BB21BF63219E66210067BC61 /* HomeManagementController.m */,
+				369C169922250ECA0079159E /* AddRoomsViewController.h */,
+				369C169A22250ECA0079159E /* AddRoomsViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1330,6 +1353,9 @@
 		BB2AC11221AA8A64006DB83A /* 添加家庭_slices */ = {
 			isa = PBXGroup;
 			children = (
+				369C16A122255FD90079159E /* addRoom_hand.png */,
+				369C16A222255FD90079159E /* addRoom_hand@2x.png */,
+				369C16A022255FD90079159E /* addRoom_hand@3x.png */,
 				BB2AC12A21AB7F22006DB83A /* img_autoLocation.png */,
 				BB2AC12821AB7F22006DB83A /* img_autoLocation@2x.png */,
 				BB2AC12921AB7F22006DB83A /* img_autoLocation@3x.png */,
@@ -1406,6 +1432,7 @@
 		BB35290C219D0FAB00428DE9 /* Myhouse */ = {
 			isa = PBXGroup;
 			children = (
+				369C169C222513600079159E /* AddRooms */,
 				BBAB2810221B9D2C00E21041 /* AddShare */,
 				BBF8CAEE2216A4350030E921 /* FamilyMember */,
 				BB45BC4B21EF280700504FF8 /* HouseSelect */,
@@ -2084,6 +2111,7 @@
 				BB2AC0C721A8EFE3006DB83A /* SSIDTableViewCell.xib in Resources */,
 				BB8B9E8121A6ADEB00E5D8B2 /* nodeBattery_normal.png in Resources */,
 				BB5B03B321B90343007AC2B1 /* img_mine_houseManage@2x.png in Resources */,
+				369C16A322255FD90079159E /* addRoom_hand@3x.png in Resources */,
 				BB5B03C721B90343007AC2B1 /* img_mine_header@2x.png in Resources */,
 				BB425F5821BF4DF400AB6EFB /* img_valve_on.png in Resources */,
 				BB35291B219D95B500428DE9 /* img_houseManage@2x.png in Resources */,
@@ -2112,6 +2140,7 @@
 				BB62E4F421B51CD900C0FA39 /* img_weekProgram_back.png in Resources */,
 				BBF631FD21BB5B04006A23AC /* img_manual_on@3x.png in Resources */,
 				BB52F9E321BE4149005FA33A /* img_tab_01_unselect@3x.png in Resources */,
+				369C16A422255FD90079159E /* addRoom_hand.png in Resources */,
 				BB0A40D621997C99004669CA /* img_addDevice@2x.png in Resources */,
 				BB8B9E7C21A6ADEB00E5D8B2 /* nodeLeakBig_abnormal.png in Resources */,
 				BB63B58021B3B94100D77489 /* thermostatSet_on@2x.png in Resources */,
@@ -2147,6 +2176,7 @@
 				BB62E4CE21B4D9CA00C0FA39 /* img_ther_addTimerSwitch@2x.png in Resources */,
 				BB425FD621BF519700AB6EFB /* img_thermostat_on@2x.png in Resources */,
 				BB63B60521B4151D00D77489 /* thermostat_-@3x.png in Resources */,
+				369C16A522255FD90079159E /* addRoom_hand@2x.png in Resources */,
 				BB5B03BC21B90343007AC2B1 /* img_mine_logout.png in Resources */,
 				BB5B035D21B8C3DA007AC2B1 /* img_login_header@2x.png in Resources */,
 				BB1EB39421E44E2B0024603A /* valveNode_selnormal@3x.png in Resources */,
@@ -2470,6 +2500,7 @@
 				BB2AD79B21ABE2B5006DB83A /* PhoneVerifyCell2.m in Sources */,
 				BB2AC10A21A94D63006DB83A /* AFNetworkReachabilityManager.m in Sources */,
 				BB62E4D221B4DD7C00C0FA39 /* TherWeekSelectController.m in Sources */,
+				369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */,
 				BB2AD79821ABDD3E006DB83A /* RegisterAccountController.m in Sources */,
 				BB2AC10921A94D63006DB83A /* AFURLRequestSerialization.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
@@ -2525,6 +2556,7 @@
 				BBB5EEAC2223D3750048B4C0 /* ShareDeviceModel.m in Sources */,
 				BB45BC5221EF290600504FF8 /* AreaCodeCell.m in Sources */,
 				BB2AD79E21AD4828006DB83A /* HouseNameCell.m in Sources */,
+				369C169B22250ECB0079159E /* AddRoomsViewController.m in Sources */,
 				BB62E4C021B4D57900C0FA39 /* TherAddTimerWeekCell.m in Sources */,
 				BB7D9BA0221EA71000C5DFD1 /* SharerModel.m in Sources */,
 				BB7D9B9D221E8FA300C5DFD1 /* SharerDetailController.m in Sources */,
