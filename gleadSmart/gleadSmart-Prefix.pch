@@ -29,7 +29,6 @@
 #import "MemberModel.h"
 #import "NodeModel.h"
 #import "SharerModel.h"
-#import "ShareDeviceModel.h"
 #import "Network.h"
 #import "Database.h"
 #import "YRabbitMQ.h"

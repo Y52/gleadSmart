@@ -321,10 +321,18 @@ static int noUserInteractionHeartbeat = 0;
             NSMutableArray *data69 = [[NSMutableArray alloc] init];
             [data69 addObject:[NSNumber numberWithUnsignedInteger:0x69]];
             [data69 addObject:[NSNumber numberWithUnsignedInteger:controlCode]];
-            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(0, 2)]]]];
-            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
-            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(4, 2)]]]];
-            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(6, 2)]]]];
+            if ([self judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]] == 0) {
+                [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(0, 2)]]]];
+                [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
+                [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(4, 2)]]]];
+                [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(6, 2)]]]];
+            }else{
+                [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(6, 2)]]]];
+                [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(4, 2)]]]];
+                [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
+                [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(0, 2)]]]];
+
+            }
             [data69 addObject:[NSNumber numberWithInt:self->_frameCount]];
             [data69 addObject:[NSNumber numberWithInteger:data.count]];
             [data69 addObjectsFromArray:data];
@@ -332,7 +340,8 @@ static int noUserInteractionHeartbeat = 0;
             [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
             
             if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
-                [self oneNETSendData:data69];//OneNet发送
+                Database *db = [Database shareInstance];
+                [self oneNETSendData:data69 apiKey:db.currentHouse.apiKey deviceId:db.currentHouse.deviceId];//OneNet发送
             }else{
                 [self send:data69 withTag:100];//内网tcp发送
             }
@@ -341,22 +350,51 @@ static int noUserInteractionHeartbeat = 0;
     });
 }
 
+/*
+ *分享设备发送帧
+ */
+- (void)sendData69With:(UInt8)controlCode shareDevice:(DeviceModel *)shareDevice data:(NSArray *)data{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_sync(self->_queue, ^{
+            
+            //线程锁需要放在最前面，放在后面锁不住
+            dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC);
+            dispatch_semaphore_wait(self.sendSignal, time);
+            
+            NSMutableArray *data69 = [[NSMutableArray alloc] init];
+            [data69 addObject:[NSNumber numberWithUnsignedInteger:0x69]];
+            [data69 addObject:[NSNumber numberWithUnsignedInteger:controlCode]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(0, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(2, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(4, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(6, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:self->_frameCount]];
+            [data69 addObject:[NSNumber numberWithInteger:data.count]];
+            [data69 addObjectsFromArray:data];
+            [data69 addObject:[NSNumber numberWithUnsignedChar:[NSObject getCS:data69]]];
+            [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
+            
+            [self oneNETSendData:data69 apiKey:shareDevice.apiKey deviceId:shareDevice.deviceId];//OneNet发送
+
+        });
+    });
+}
+
 #pragma mark - OneNET Comminicate
-- (void)oneNETSendData:(NSMutableArray *)msg{
-    Database *db = [Database shareInstance];
+- (void)oneNETSendData:(NSMutableArray *)msg apiKey:(NSString *)apiKey deviceId:(NSString *)deviceId{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [[AFHTTPRequestSerializer alloc] init];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
     
     [manager.requestSerializer setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
+    [manager.requestSerializer setValue:apiKey forHTTPHeaderField:@"api-key"];
     
     //设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://api.heclouds.com/cmds?device_id=%@",db.currentHouse.deviceId];
+    NSString *url = [NSString stringWithFormat:@"http://api.heclouds.com/cmds?device_id=%@",deviceId];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     NSUInteger len = msg.count;
@@ -369,7 +407,7 @@ static int noUserInteractionHeartbeat = 0;
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSASCIIStringEncoding];
-    NSLog(@"%@",jsonString);
+    NSLog(@"%@,%@,%@",jsonString,apiKey,deviceId);
     
     //AFNet会处理传入的parameters内容，添加=号，做以下处理就会原内容发送
     [manager.requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error) {
@@ -587,11 +625,19 @@ static int noUserInteractionHeartbeat = 0;
     
     //取出mac
     NSString *mac = @"";
-    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
-    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
-    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
-    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
+    if ([_recivedData69[9] unsignedIntegerValue] == 0x01 || [_recivedData69[9] unsignedIntegerValue] == 0x02) {
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
+    }else{
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
+    }
 
+    Database *db = [Database shareInstance];
     for (DeviceModel *device in self.deviceArray) {
         if ([device.mac isEqualToString:mac]) {
             //收到信息就上线
@@ -620,7 +666,6 @@ static int noUserInteractionHeartbeat = 0;
                 //新增节点信息上报
                 NSLog(@"新增节点信息上报");
                 [self addNode:_recivedData69];
-                
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //恢复出厂设置
@@ -681,45 +726,56 @@ static int noUserInteractionHeartbeat = 0;
                 //开关温控器
                 NSLog(@"开关温控器");
                 
-                for (DeviceModel *device in self.deviceArray) {
-                    if ([device.mac isEqualToString:mac]) {
-                        NSLog(@"%@",device.mac);
-                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
-                        if ([device.isOn integerValue]) {
-                            NSLog(@"%@",device.isOn);
-
-                            //打开温控器，通知温控器页面查询温度等
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"openThermostat" object:nil userInfo:nil];
-                        }
-                        
-                        if (_recivedData69.count >= 18) {
-                            UInt8 mode = [_recivedData69[13] unsignedIntegerValue];
-                            UInt8 modetemp = [_recivedData69[14] unsignedIntegerValue];
-                            UInt8 indoortemp = [_recivedData69[15] unsignedIntegerValue];
-                            
-                            if (modetemp & 0x80) {
-                                modetemp = modetemp & 0x7F;
-                                modetemp = -modetemp;
-                            }else{
-                                modetemp = modetemp & 0x7F;
-                            }
-                            NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
-                            
-                            if (indoortemp & 0x80) {
-                                indoortemp = indoortemp & 0x7F;
-                                indoortemp = -indoortemp;
-                            }else{
-                                indoortemp = indoortemp & 0x7F;
-                            }
-                            NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
-                            
+                NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                if ([isOn integerValue]) {
+                    NSLog(@"%@",isOn);
+                    
+                    //打开温控器，通知温控器页面查询温度等
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"openThermostat" object:nil userInfo:nil];
+                }
+                
+                if (_recivedData69.count >= 18) {
+                    UInt8 mode = [_recivedData69[13] unsignedIntegerValue];
+                    UInt8 modetemp = [_recivedData69[14] unsignedIntegerValue];
+                    UInt8 indoortemp = [_recivedData69[15] unsignedIntegerValue];
+                    
+                    if (modetemp & 0x80) {
+                        modetemp = modetemp & 0x7F;
+                        modetemp = -modetemp;
+                    }else{
+                        modetemp = modetemp & 0x7F;
+                    }
+                    NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
+                    
+                    if (indoortemp & 0x80) {
+                        indoortemp = indoortemp & 0x7F;
+                        indoortemp = -indoortemp;
+                    }else{
+                        indoortemp = indoortemp & 0x7F;
+                    }
+                    NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
+                    
+                    for (DeviceModel *device in self.deviceArray) {
+                        if ([device.mac isEqualToString:mac]) {
+                            NSLog(@"%@",device.mac);
+                            device.isOn = isOn;
                             device.mode = [NSNumber numberWithUnsignedInteger:mode];
                             device.modeTemp = modeTemp;
                             device.indoorTemp = indoorTemp;
                         }
-
+                    }
+                    for (DeviceModel *device in db.shareDeviceArray) {
+                        if ([device.mac isEqualToString:mac]) {
+                            NSLog(@"%@",device.mac);
+                            device.isOn = isOn;
+                            device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                            device.modeTemp = modeTemp;
+                            device.indoorTemp = indoorTemp;
+                        }
                     }
                 }
+
+                
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
@@ -748,6 +804,13 @@ static int noUserInteractionHeartbeat = 0;
                 NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
                 
                 for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                        device.modeTemp = modeTemp;
+                        device.indoorTemp = indoorTemp;
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         device.mode = [NSNumber numberWithUnsignedInteger:mode];
                         device.modeTemp = modeTemp;
@@ -1083,8 +1146,6 @@ static int noUserInteractionHeartbeat = 0;
 - (void)inquireDeviceInfoByOneNetdatastreams:(NSMutableArray *)deviceArray{
     Database *db = [Database shareInstance];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
     
     //设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];

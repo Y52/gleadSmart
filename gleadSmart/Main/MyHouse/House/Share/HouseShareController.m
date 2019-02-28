@@ -251,7 +251,7 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
         _sharerTable = ({
             TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 46 + 20, ScreenWidth, ScreenHeight - getRectNavAndStatusHight - 46 - 20 - 80.f) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
-            tableView.separatorColor = [UIColor colorWithRed:232/255.0 green:231/255.0 blue:231/255.0 alpha:1.0];
+            tableView.separatorColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.08];
             tableView.dataSource = self;
             tableView.delegate = self;
             [tableView registerClass:[SharerInfoCell class] forCellReuseIdentifier:CellIdentifier_SharerList];

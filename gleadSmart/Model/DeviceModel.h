@@ -34,6 +34,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///@brief 无线阀门拥有的属性
 @property (strong, nonatomic) NSMutableArray *nodeArray;
+
+///@brief 分享设备特有的属性
+@property (nonatomic) BOOL isShare;
+@property (nonatomic, strong) NSString *apiKey;
+@property (nonatomic, strong) NSString *deviceId;
+
 @end
 
 NS_ASSUME_NONNULL_END

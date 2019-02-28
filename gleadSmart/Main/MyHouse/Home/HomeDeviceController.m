@@ -196,7 +196,7 @@ static CGFloat const Cell_Height = 72.f;
             
         case 1:
         {
-            ShareDeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
+            DeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
             cell.deviceName.text = device.name;
             if ([device.isOn boolValue]) {
                 cell.status.text = LocalString(@"已开启");
