@@ -103,7 +103,6 @@ static CGFloat const Cell_Height = 72.f;
 
 - (void)shareInfo{
     ShareDeviceListController *vc = [[ShareDeviceListController alloc] init];
-    vc.shareDeviceList = [Database shareInstance].shareDeviceArray;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

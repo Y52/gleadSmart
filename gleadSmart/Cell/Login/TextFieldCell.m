@@ -12,13 +12,14 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self.backgroundColor = [UIColor clearColor];
     if (self) {
         if (!_passwordimage) {
             _passwordimage = [[UIImageView alloc] init];
             [self.contentView addSubview:_passwordimage];
             [_passwordimage mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));
-                make.left.equalTo(self.contentView.mas_left).offset(yAutoFit(18.f));
+                make.left.equalTo(self.contentView.mas_left).offset(yAutoFit(24.f));
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
         }

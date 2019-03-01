@@ -12,6 +12,8 @@
 #import "LogOutCell.h"
 #import "RegisterController.h"
 #import "AppDelegate.h"
+#import "ModifyPasswordViewController.h"
+#import "UsernameViewController.h"
 
 NSString *const CellIdentifier_accountHeader = @"CellID_accountHeader";
 NSString *const CellIdentifier_accountNormal = @"CellID_accountNormal";
@@ -37,6 +39,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+    [self.accountTable reloadData];
     
 }
 
@@ -98,6 +101,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
         if(indexPath.row == 1){
             cell.normalLabel.text = LocalString(@"昵称");
             cell.normalImage.image = [UIImage imageNamed:@"img_mine_houseManage"];
+            cell.rightLabel.text = [Database shareInstance].user.userName;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
         }else{
@@ -132,13 +136,15 @@ static CGFloat const HEIGHT_CELL = 51.f;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0){
-        if (indexPath.row == 1) {
-            
+        if (indexPath.row == 1){
+            UsernameViewController *UsernameVC = [[UsernameViewController alloc] init];
+            [self.navigationController pushViewController:UsernameVC animated:YES];
         }
     }else if (indexPath.section == 1){
-        if (indexPath.row == 1) {
-            
-        }else if (indexPath.row == 0){
+        if (indexPath.row == 0) {
+            ModifyPasswordViewController *modifyPasswordVC = [[ModifyPasswordViewController alloc] init];
+            [self.navigationController pushViewController:modifyPasswordVC animated:YES];
+        }else if (indexPath.row == 1){
             
         }
     }else{

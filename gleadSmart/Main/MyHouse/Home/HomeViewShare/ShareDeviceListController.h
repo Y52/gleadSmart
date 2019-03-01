@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ShareDeviceListController : UIViewController
 
-@property (nonatomic, strong) NSMutableArray *shareDeviceList;
-
 @end
 
 NS_ASSUME_NONNULL_END

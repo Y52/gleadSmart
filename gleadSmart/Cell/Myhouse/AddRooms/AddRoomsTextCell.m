@@ -37,10 +37,11 @@
             _inputTF.adjustsFontSizeToFitWidth = YES;
             //设置自动缩小显示的最小字体大小
             _inputTF.minimumFontSize = 11.f;
+            _inputTF.clearButtonMode = UITextFieldViewModeWhileEditing;
             [_inputTF addTarget:self action:@selector(textFieldTextChange:) forControlEvents:UIControlEventEditingChanged];
             [self.contentView addSubview:_inputTF];
             [_inputTF mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(yAutoFit(200.f), 30.f));
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(2450.f), 30.f));
                 make.centerY.equalTo(self.contentView.mas_centerY);
                 make.left.equalTo(self.leftLabel.mas_right).offset(30.f);
             }];

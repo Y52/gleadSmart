@@ -31,7 +31,6 @@ static CGFloat const HEIGHT_CELL = 51.f;
     
     _headerView = [self headerView];
     _mineTableView = [self mineTableView];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -40,6 +39,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
     self.navigationController.navigationBar.translucent = YES;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    [self getUserInfoByApi];
     
 }
 
@@ -71,7 +71,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
         }];
         
         _nickLabel = [[UILabel alloc] init];
-        _nickLabel.text = @"用户wksdfg1e23";
+        _nickLabel.text = [Database shareInstance].user.userName;
         _nickLabel.font = [UIFont systemFontOfSize:17.f];
         _nickLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1];
         _nickLabel.textAlignment = NSTextAlignmentCenter;
@@ -107,14 +107,12 @@ static CGFloat const HEIGHT_CELL = 51.f;
 
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
         return 3;
-    }else if (section == 1){
-        return 2;
     }else{
         return 2;
     }
@@ -148,18 +146,6 @@ static CGFloat const HEIGHT_CELL = 51.f;
         
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
-            cell.normalLabel.text = LocalString(@"修改登录密码");
-            cell.normalImage.image = [UIImage imageNamed:@"img_mine_editPW"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
-        }else{
-            cell.normalLabel.text = LocalString(@"注销账号");
-            cell.normalImage.image = [UIImage imageNamed:@"img_mine_logout"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
-        }
-    }else if (indexPath.section == 2){
-        if (indexPath.row == 0) {
             cell.normalLabel.text = LocalString(@"检查更新");
             cell.normalImage.image = [UIImage imageNamed:@"img_mine_checkUpdate"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -186,7 +172,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
         if (indexPath.row == 1) {
 
         }else if (indexPath.row == 0){
-
+            
         }
     }
 }
@@ -231,5 +217,50 @@ static CGFloat const HEIGHT_CELL = 51.f;
 }
 
 #pragma mark - API
+- (void)getUserInfoByApi{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 6.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/user"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            NSLog(@"success:%@",daetr);
+            if ([responseDic objectForKey:@"data"]) {
+                NSDictionary *userinfoDic = [responseDic objectForKey:@"data"];
+                db.user.userName = [userinfoDic objectForKey:@"name"];
+                db.user.mobile = [userinfoDic objectForKey:@"mobile"];
+                self.nickLabel.text = db.user.userName;
+                [self.mineTableView reloadData];
+            }
+        }else{
+            [NSObject showHudTipStr:LocalString(@"获取用户信息失败")];
+            NSLog(@"获取用户信息失败");
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error:%@",error);
+        [NSObject showHudTipStr:LocalString(@"获取用户信息失败")];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+}
 
 @end

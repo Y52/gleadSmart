@@ -34,7 +34,6 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 @property (nonatomic, strong) UILabel *testLabel;
 
 @property (strong, nonatomic) NSMutableArray *homeList;
-@property (strong, nonatomic) NSString *houseUid;
 @property (strong, nonatomic) UIButton *homeSetButton;
 
 @end
@@ -550,5 +549,224 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     return _homeSetButton;
 }
 
+#pragma mark - Datasource & Delegate
+- (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController {
+    return self.homeList.count + 1;
+}
+
+- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
+    HomeDeviceController *vc = [[HomeDeviceController alloc] init];
+    vc.filledSpcingHeight = yAutoFit(gleadHeaderHeight) + tabbarHeight + ySafeArea_Bottom;
+    if (index == 0) {
+        vc.room = nil;
+        return vc;
+    }
+    RoomModel *room = self.homeList[index-1];
+    vc.room = room;
+    return vc;
+}
+
+- (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
+    if (index == 0) {
+        return LocalString(@"所有设备");
+    }
+    RoomModel *room = self.homeList[index-1];
+    return room.name;
+}
+
+- (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
+    return CGRectMake(0, yAutoFit(gleadHeaderHeight) - gleadHomeListHeight - 5, self.view.frame.size.width - gleadHomeSetButtonWidth, gleadHomeListHeight);
+}
+
+- (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
+    CGFloat fillingSpaceHeight = yAutoFit(gleadHeaderHeight) + tabbarHeight + ySafeArea_Bottom;
+    return CGRectMake(0, yAutoFit(gleadHeaderHeight), self.view.frame.size.width, self.view.bounds.size.height - fillingSpaceHeight);
+}
+
+#pragma mark - API methods
+//获取房间列表和所有设备
+- (void)getHouseHomeListAndDevice{
+    Database *db = [Database shareInstance];
+    [db getHouseHomeListAndDevice:db.currentHouse success:^{
+        for (HouseModel *newHouse in db.houseList) {
+            if ([db.currentHouse.houseUid isEqualToString:newHouse.houseUid]) {
+                db.currentHouse = newHouse;//更新当前家庭信息
+            }
+        }
+        [self getWeatherByLocation];//获取天气信息
+        [self getAirQualityByLocation];//获取空气质量
+        [self getHouseHomeListAndDeviceWithDatabase];//获取房间和设备
+        [self reloadData];//wmpagecontroller更新滑动列表
+    } failure:^{
+        [self getWeatherByLocation];//获取天气信息
+        [self getAirQualityByLocation];//获取空气质量
+        [self getHouseHomeListAndDeviceWithDatabase];//获取房间和设备
+
+    }];
+}
+
+/*
+ *根据经纬度获取当地天气情况
+ */
+- (void)getWeatherByLocation{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"https://free-api.heweather.com/s6/weather/now?location=%@,%@&key=%@",db.currentHouse.lon,db.currentHouse.lat,@"6efda5ac4ceb40ffb4c07d7ff740d628"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    NSLog(@"%@",url);
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([responseDic objectForKey:@"HeWeather6"]) {
+            NSArray *dataArr = [responseDic objectForKey:@"HeWeather6"];
+            if (dataArr.count == 0) {
+                return ;
+            }
+            NSDictionary *dataDic = dataArr[0];
+            if ([[dataDic objectForKey:@"status"] isEqualToString:@"ok"]) {
+                NSDictionary *weather = [dataDic objectForKey:@"now"];
+                self.tempValueLabel.text = [NSString stringWithFormat:@"%@℃",[weather objectForKey:@"tmp"]];
+            }
+        }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NSObject showHudTipStr:@"获取当前天气失败"];
+        });
+    }];
+}
+
+/*
+ *根据经纬度获取当地空气质量
+ */
+- (void)getAirQualityByLocation{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"https://free-api.heweather.com/s6/air/now?location=%@,%@&key=%@",db.currentHouse.lon,db.currentHouse.lat,@"6efda5ac4ceb40ffb4c07d7ff740d628"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    NSLog(@"%@",url);
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([responseDic objectForKey:@"HeWeather6"]) {
+            NSArray *dataArr = [responseDic objectForKey:@"HeWeather6"];
+            if (dataArr.count == 0) {
+                return ;
+            }
+            NSDictionary *dataDic = dataArr[0];
+            if ([[dataDic objectForKey:@"status"] isEqualToString:@"ok"]) {
+                NSDictionary *weather = [dataDic objectForKey:@"air_now_city"];
+                self.pmValueLabel.text = [NSString stringWithFormat:@"%@",[weather objectForKey:@"pm25"]];
+                self.airValueLabel.text = [NSString stringWithFormat:@"%@",[weather objectForKey:@"qlty"]];
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NSObject showHudTipStr:@"获取当前天气失败"];
+        });
+    }];
+}
+
+#pragma mark - Update by database
+/*
+ *从本地获取设备信息和房间信息
+ */
+- (void)getHouseHomeListAndDeviceWithDatabase{
+    Database *db = [Database shareInstance];
+    
+    if (!self.homeList) {
+        self.homeList = [[NSMutableArray alloc] init];
+    }
+    [self.homeList removeAllObjects];
+    self.homeList = [db queryRoomsWith:db.currentHouse.houseUid];
+
+    db.localDeviceArray = [db queryAllDevice:db.currentHouse.houseUid];
+    for (DeviceModel *device in db.localDeviceArray) {
+        if ([device.type intValue] == 0) {
+            //获取中央控制器的mac并设置为当前家庭的mac
+            db.currentHouse.mac = device.mac;
+            [db.localDeviceArray removeObject:device];
+            break;
+        }
+    }
+    
+    //获取家庭网关下所有下挂设备
+    UInt8 controlCode = 0x00;
+    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+    [[Network shareNetwork] sendData69With:controlCode mac:db.currentHouse.mac data:data];
+}
+
+#pragma mark - Actions
+- (void)houseSelect{
+    HouseSelectController *hsVC = [[HouseSelectController alloc] init];
+    [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+    hsVC.dismissBlock = ^{
+        [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
+        [self getHouseHomeListAndDevice];
+        [self.houseButton setTitle:[Database shareInstance].currentHouse.name forState:UIControlStateNormal];
+    };
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:hsVC];
+    nav.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)homeSetting{
+    if ([Database shareInstance].currentHouse == nil) {
+        [NSObject showHudTipStr:LocalString(@"请先创建家庭")];
+        return;
+    }
+    
+    HomeManagementController *HomeManagementVC = [[HomeManagementController alloc] init];
+    HomeManagementVC.homeList = self.homeList;
+    HomeManagementVC.houseUid = [Database shareInstance].currentHouse.houseUid;
+    [self.navigationController pushViewController:HomeManagementVC animated:YES];
+}
+
+- (void)addDevice{
+    if ([Database shareInstance].currentHouse == nil) {
+        [NSObject showHudTipStr:LocalString(@"请先创建家庭")];
+        return;
+    }
+    SelectDeviceTypeController *SelectDeviceVC = [[SelectDeviceTypeController alloc] init];
+    [self.navigationController pushViewController:SelectDeviceVC animated:YES];
+}
+
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    Network *net = [Network shareNetwork];
+    if ([keyPath isEqualToString:@"testSendCount"] || [keyPath isEqualToString:@"testRecieveCount"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.testLabel.text = [NSString stringWithFormat:@"send:%d,rece:%d",net.testSendCount,net.testRecieveCount];
+        });
+    }
+}
 
 @end

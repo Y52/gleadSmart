@@ -13,6 +13,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self.backgroundColor = [UIColor clearColor];
     if (self) {
         if (!_phoneimage) {
             _phoneimage = [[UIImageView alloc] init];
@@ -27,7 +28,7 @@
             _phoneTF = [[UITextField alloc] init];
             _phoneTF.backgroundColor = [UIColor clearColor];
             _phoneTF.placeholder = LocalString(@"请输入手机号");
-            _phoneTF.font = [UIFont fontWithName:@"Arial" size:15.0f];
+            _phoneTF.font = [UIFont fontWithName:@"Arial" size:15.f];
             //_phoneTF.textColor = [UIColor colorWithHexString:@"222222"];
             //_phoneTF.borderStyle = UITextBorderStyleRoundedRect;
             _phoneTF.clearButtonMode = UITextFieldViewModeWhileEditing;

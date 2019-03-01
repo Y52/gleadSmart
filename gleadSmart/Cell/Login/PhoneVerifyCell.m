@@ -13,13 +13,14 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self.backgroundColor = [UIColor clearColor];
     if (self) {
         if (!_verifyimage) {
             _verifyimage = [[UIImageView alloc] init];
             [self.contentView addSubview:_verifyimage];
             [_verifyimage mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));
-                make.left.equalTo(self.contentView.mas_left).offset(yAutoFit(50.f));
+                make.left.equalTo(self.contentView.mas_left).offset(yAutoFit(24.f));
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
         }
@@ -27,7 +28,7 @@
             _codeTF = [[UITextField alloc] init];
             _codeTF.backgroundColor = [UIColor clearColor];
             _codeTF.placeholder = LocalString(@"请输入验证码");
-            _codeTF.font = [UIFont fontWithName:@"Arial" size:13.0f];
+            _codeTF.font = [UIFont fontWithName:@"Arial" size:15.f];
             //_codeTF.textColor = [UIColor colorWithHexString:@"222222"];
             //_codeTF.borderStyle = UITextBorderStyleRoundedRect;
             _codeTF.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -43,14 +44,14 @@
             [_codeTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(120, 12));
                 make.centerY.equalTo(self.contentView.mas_centerY);
-                make.left.equalTo(self.verifyimage.mas_left).offset(30);
+                make.left.equalTo(self.contentView.mas_left).offset(48.f);
             }];
         }
         if (!_verifyBtn) {
             _verifyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [_verifyBtn setTitle:LocalString(@"获取验证码") forState:UIControlStateNormal];
-            [_verifyBtn.titleLabel setFont:[UIFont systemFontOfSize:10.f]];
-            [_verifyBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+            [_verifyBtn.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
+            [_verifyBtn setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
             [_verifyBtn addTarget:self action:@selector(getVerifyCode) forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:_verifyBtn];
             
@@ -75,13 +76,12 @@
     }
 }
 - (void)getVerifyCode{
-    //    if (self.BtnBlock) {
-    //        BOOL result = self.BtnBlock();
-    //        if (result) {
-    //            [self openCountdown];
-    //        }
-    //    }
-    [self openCountdown];
+        if (self.BtnBlock) {
+            BOOL result = self.BtnBlock();
+            if (result) {
+                [self openCountdown];
+            }
+        }
 }
 //开始倒计时
 -(void)openCountdown{
