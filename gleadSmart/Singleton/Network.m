@@ -1291,6 +1291,11 @@ static int noUserInteractionHeartbeat = 0;
                         device.weekProgram = weekProgram;
                     }
                 }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.weekProgram = weekProgram;
+                    }
+                }
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshWeekProgram" object:nil userInfo:nil];
             }
@@ -1304,13 +1309,17 @@ static int noUserInteractionHeartbeat = 0;
                         device.mode = [NSNumber numberWithUnsignedInteger:mode];
                     }
                 }
-                
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                    }
+                }
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"switchThermostatMode" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x07 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                //查询温控器状态
-                NSLog(@"查询温控器状态");
+                //查询补偿
+                NSLog(@"查询补偿");
                 UInt8 temp = [_recivedData69[12] unsignedIntegerValue];
                 if (temp * 0x80) {
                     temp = temp & 0x7F;
@@ -1322,7 +1331,11 @@ static int noUserInteractionHeartbeat = 0;
                         device.compensate = compensate;
                     }
                 }
-                
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.compensate = compensate;
+                    }
+                }
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCompensate" object:nil userInfo:nil];
             }
         }
@@ -1338,6 +1351,11 @@ static int noUserInteractionHeartbeat = 0;
                         device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
                     }
                 }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                    }
+                }
 
                 NSLog(@"水阀开关回复:%lu",(unsigned long)[_recivedData69[12] unsignedIntegerValue]);
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
@@ -1347,6 +1365,12 @@ static int noUserInteractionHeartbeat = 0;
                 //查询无线水阀状态
                 NSLog(@"查询无线水阀状态");
                 for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        device.isOnline = @1;
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
                         device.isOnline = @1;
@@ -1398,6 +1422,11 @@ static int noUserInteractionHeartbeat = 0;
                         device.nodeArray = nodeArray;
                     }
                 }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.nodeArray = nodeArray;
+                    }
+                }
                 
                 //设备内容页面UI等刷新
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValveHangingNodes" object:nil userInfo:nil];
@@ -1407,6 +1436,11 @@ static int noUserInteractionHeartbeat = 0;
                 NSLog(@"水阀恢复出厂设置");
                 
                 for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        [device.nodeArray removeAllObjects];
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         [device.nodeArray removeAllObjects];
                     }
