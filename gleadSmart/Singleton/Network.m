@@ -302,6 +302,7 @@ static int noUserInteractionHeartbeat = 0;
     }
 }
 
+#pragma mark - 基本设备方法
 /*
  *发送帧组成模版
  */
@@ -351,6 +352,347 @@ static int noUserInteractionHeartbeat = 0;
 }
 
 /*
+ @param recivedData69 中央控制器返回的69帧
+ *从网关获取设备列表并进行数据库等的操作
+ */
+- (void)inquireNode:(NSMutableArray *)recivedData69{
+    Database *db = [Database shareInstance];
+    if (!self.deviceArray) {
+        self.deviceArray = [[NSMutableArray alloc] init];
+    }
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+    [data addObjectsFromArray:recivedData69];
+    int count = [data[12] intValue];
+    for (int i = 0; i < count; i++) {
+        DeviceModel *device = [[DeviceModel alloc] init];
+        device.mac = @"";
+        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[16 + i*4] intValue]]];
+        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15 + i*4] intValue]]];
+        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14 + i*4] intValue]]];
+        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13 + i*4] intValue]]];
+        device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[15 + i*4] intValue]]];
+        
+        //将中央控制器查询到的设备和服务器设备对比
+        BOOL isExisted = NO;//防止重复显示以及刷新时重新添加设备到服务器
+        for (DeviceModel *existedDevice in self.deviceArray) {
+            if ([existedDevice.mac isEqualToString:device.mac]) {
+                existedDevice.isOnline = @0;
+                existedDevice.isOn = @0;
+                isExisted = YES;
+            }
+        }
+        if (isExisted) {
+            continue;
+        }
+        
+        //判断设备是否本地存储过
+        BOOL isLocal = NO;
+        for (DeviceModel *localDevice in db.localDeviceArray) {
+            if ([device.mac isEqualToString:localDevice.mac]) {
+                localDevice.type = device.type;
+                
+                [self.deviceArray addObject:localDevice];
+                
+                [db.localDeviceArray removeObject:localDevice];
+                isLocal = YES;
+                break;
+            }
+        }
+        if (!isLocal) {
+            /**
+             ～～未保存过，需要上传到服务器，保存到本地～～
+             *不需要保存，显示在所有设备里，用户添加到房间才保存*
+             **/
+            [self addNewDeviceWith:device];
+            
+            //初始命名
+            if ([device.type integerValue] == 1) {
+                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"温控器"),[device.mac substringWithRange:NSMakeRange(0, 2)]];
+            }else if ([device.type integerValue] == 2){
+                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"无线水阀"),[device.mac substringWithRange:NSMakeRange(0, 2)]];
+                NSLog(@"%@",device.name);
+            }
+            
+            [self.deviceArray addObject:device];
+        }
+    }
+    
+    /*
+     *将localDeviceArray剩余的device从服务器中删除，因为在网关中查找不到设备
+     */
+    for (DeviceModel *localDevice in db.localDeviceArray) {
+        //删除api还没做好
+        //[self removeOldDeviceWith:localDevice];
+    }
+    
+    //通知刷新设备
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+    
+    if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
+        //外网，OneNet查询监控点
+        [self inquireDeviceInfoByOneNetdatastreams:self.deviceArray];
+    }else{
+        //内网
+        for (DeviceModel *device in self.deviceArray) {
+            //每个设备发送状态查询帧
+            UInt8 controlCode = 0x01;
+            NSArray *data;
+            switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
+                case 1:
+                    data = @[@0xFE,@0x12,@0x01,@0x00];
+                    break;
+                    
+                case 2:
+                    data = @[@0xFE,@0x13,@0x01,@0x00];
+                    break;
+                    
+                default:
+                    break;
+            }
+            [self sendData69With:controlCode mac:device.mac data:data];
+        }
+    }
+    
+    //分享设备onenet获取状态
+    for (DeviceModel *device in db.shareDeviceArray) {
+        [self inquireShareDeviceInfoByOneNetdatastream:device];
+    }
+}
+
+/*
+ *批量查询数据流信息
+ */
+- (void)inquireDeviceInfoByOneNetdatastreams:(NSMutableArray *)deviceArray{
+    Database *db = [Database shareInstance];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://api.heclouds.com/devices/%@/datastreams",db.currentHouse.deviceId];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    NSString *datastreams = @"";
+    for (DeviceModel *device in deviceArray) {
+        //每个设备发送状态查询帧
+        switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
+            case 1:
+                datastreams = [datastreams stringByAppendingString:@"11"];
+                datastreams = [datastreams stringByAppendingString:device.mac];
+                datastreams = [datastreams stringByAppendingString:@","];
+                break;
+                
+            case 2:
+                datastreams = [datastreams stringByAppendingString:@"21"];
+                datastreams = [datastreams stringByAppendingString:device.mac];
+                datastreams = [datastreams stringByAppendingString:@","];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    NSDictionary *parameters = @{@"datastream_ids":datastreams};
+    
+    [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            if ([[responseDic objectForKey:@"data"] isKindOfClass:[NSArray class]] && [[responseDic objectForKey:@"data"] count] > 0) {
+                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSString *streamId = [obj objectForKey:@"id"];
+                    NSNumber *value = [obj objectForKey:@"current_value"];
+                    [self analysisResultValue:streamId value:value];
+                }];
+            }
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error:%@",error);
+        
+    }];
+}
+
+//解析从onenet获取的监控点信息
+- (void)analysisResultValue:(NSString *)streamId value:(NSNumber *)value{
+    NSString *index = [streamId substringWithRange:NSMakeRange(0, 2)];
+    NSString *mac = [streamId substringFromIndex:2];
+    for (DeviceModel *device in self.deviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            switch ([index integerValue]) {
+                case 11:
+                {
+                    device.isOnline = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x80];
+                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x01];
+                }
+                    break;
+                    
+                case 21:
+                {
+                    device.isOnline = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x80];
+                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x01];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+/*
+ @param recivedData69 主动上报的帧
+ *设备入网时主动上报的处理
+ */
+- (void)addNode:(NSMutableArray *)recivedData69{
+    if (!_deviceArray) {
+        _deviceArray = [[NSMutableArray alloc] init];
+    }
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+    [data addObjectsFromArray:self.recivedData69];
+    
+    DeviceModel *device = [[DeviceModel alloc] init];
+    device.mac = @"";
+    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
+    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
+    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
+    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
+    device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[13] intValue]]];
+    
+    /*
+     ～未保存过，需要上传到服务器，保存到本地～
+     *现在不保存到服务器，只加入所有设备房间中*
+     */
+    //[self addNewDeviceWith:device];
+    
+    device.name = device.mac;
+    [self.deviceArray addObject:device];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+}
+
+
+/*
+ *上传新设备
+ */
+- (void)addNewDeviceWith:(DeviceModel *)device{
+    Database *db = [Database shareInstance];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    if (!device.name) {
+        device.name = device.mac;
+    }
+    NSDictionary *parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":@"5bfcb08be4b0c54526650eec",@"houseUid":db.currentHouse.houseUid};
+    
+    [manager POST:@"http://gleadsmart.thingcom.cn/api/device" parameters:parameters progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+              NSLog(@"success:%@",daetr);
+              if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+                  /*
+                   *保存到本地
+                   */
+                  [db insertNewDevice:device];
+              }else{
+                  
+              }
+          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              NSLog(@"Error:%@",error);
+              if (error.code == -1001) {
+                  [NSObject showHudTipStr:LocalString(@"无法登录远程服务器，请检查网络状况")];
+              }else{
+                  [NSObject showHudTipStr:LocalString(@"服务器添加设备失败")];
+              }
+              
+          }
+     ];
+}
+
+/*
+ *删除设备
+ */
+- (void)removeOldDeviceWith:(DeviceModel *)device{
+    Database *db = [Database shareInstance];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    NSLog(@"%@",db.user.userId);
+    NSDictionary *parameters = @{@"userId":db.user.userId,@"mac":device.mac};
+    
+    [manager DELETE:@"http://gleadsmart.thingcom.cn/api/device" parameters:parameters
+            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+                NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+                NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"success:%@",daetr);
+                if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+                    /*
+                     *在本地删除
+                     */
+                    [db deleteDevice:device.mac];
+                }else{
+                    
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"Error:%@",error);
+                [NSObject showHudTipStr:LocalString(@"无法登录远程服务器，请检查网络状况")];
+                
+            }
+     ];
+}
+
+/*
+ *判断设备类型
+ *设备种类；0表示中央控制器，1表示温控器，2表示无线水阀，3表示壁挂炉调节器
+ */
+- (NSInteger)judgeDeviceTypeWith:(int)macByte2{
+    if (macByte2 >= 0x08 && macByte2 <= 0x0F) {
+        return 1;
+    }
+    if (macByte2 >= 0x10 && macByte2 <= 0x17){
+        return 3;
+    }
+    if (macByte2 >= 0x18 && macByte2 <= 0x1F) {
+        return 2;
+    }
+    return 0;
+}
+
+#pragma mark - 分享设备方法
+/*
  *分享设备发送帧
  */
 - (void)sendData69With:(UInt8)controlCode shareDevice:(DeviceModel *)shareDevice data:(NSArray *)data{
@@ -375,9 +717,97 @@ static int noUserInteractionHeartbeat = 0;
             [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
             
             [self oneNETSendData:data69 apiKey:shareDevice.apiKey deviceId:shareDevice.deviceId];//OneNet发送
-
+            
         });
     });
+}
+
+/*
+ *单独查询每个分享设备数据流信息
+ */
+- (void)inquireShareDeviceInfoByOneNetdatastream:(DeviceModel *)device{
+    Database *db = [Database shareInstance];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:device.apiKey forHTTPHeaderField:@"api-key"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://api.heclouds.com/devices/%@/datastreams",device.deviceId];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    NSString *datastreams = @"";
+    switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
+        case 1:
+            datastreams = [datastreams stringByAppendingString:@"11"];
+            datastreams = [datastreams stringByAppendingString:device.mac];
+            break;
+            
+        case 2:
+            datastreams = [datastreams stringByAppendingString:@"21"];
+            datastreams = [datastreams stringByAppendingString:device.mac];
+            break;
+            
+        default:
+            break;
+    }
+    NSDictionary *parameters = @{@"datastream_ids":datastreams};
+    
+    [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            if ([[responseDic objectForKey:@"data"] isKindOfClass:[NSArray class]] && [[responseDic objectForKey:@"data"] count] > 0) {
+                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSString *streamId = [obj objectForKey:@"id"];
+                    NSNumber *value = [obj objectForKey:@"current_value"];
+                    [self analysisShareDeviceResultValue:streamId value:value];
+                }];
+            }
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error:%@",error);
+        
+    }];
+}
+
+//解析从onenet获取的分享设备监控点信息
+- (void)analysisShareDeviceResultValue:(NSString *)streamId value:(NSNumber *)value{
+    NSString *index = [streamId substringWithRange:NSMakeRange(0, 2)];
+    NSString *mac = [streamId substringFromIndex:2];
+    for (DeviceModel *device in [Database shareInstance].shareDeviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            switch ([index integerValue]) {
+                case 11:
+                {
+                    device.isOnline = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x80];
+                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x01];
+                }
+                    break;
+                    
+                case 21:
+                {
+                    device.isOnline = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x80];
+                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x01];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
 }
 
 #pragma mark - OneNET Comminicate
@@ -678,43 +1108,54 @@ static int noUserInteractionHeartbeat = 0;
         {
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"温控器状态");
-                for (DeviceModel *device in self.deviceArray) {
-                    if ([device.mac isEqualToString:mac]) {
-                        if ([_recivedData69[1] unsignedIntegerValue] == 0x01) {
-                            //查询温控器状态
-                            device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
-                        }else if ([_recivedData69[1] unsignedIntegerValue] == 0x85){
-                            //温控器状态主动上报
-                            device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[16] unsignedIntegerValue]];
-                        }
-                        
-                        if (_recivedData69.count >= 18) {
-                            UInt8 mode = [_recivedData69[13] unsignedIntegerValue];
-                            UInt8 modetemp = [_recivedData69[14] unsignedIntegerValue];
-                            UInt8 indoortemp = [_recivedData69[15] unsignedIntegerValue];
-                            
-                            if (modetemp & 0x80) {
-                                modetemp = modetemp & 0x7F;
-                                modetemp = -modetemp;
-                            }else{
-                                modetemp = modetemp & 0x7F;
-                            }
-                            NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
-                            
-                            if (indoortemp & 0x80) {
-                                indoortemp = indoortemp & 0x7F;
-                                indoortemp = -indoortemp;
-                            }else{
-                                indoortemp = indoortemp & 0x7F;
-                            }
-                            NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
-                            
+                NSNumber *isOn;
+
+                if ([_recivedData69[1] unsignedIntegerValue] == 0x01) {
+                    //查询温控器状态
+                    isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                }else if ([_recivedData69[1] unsignedIntegerValue] == 0x85){
+                    //温控器状态主动上报
+                    isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[16] unsignedIntegerValue]];
+                }
+                
+                if (_recivedData69.count >= 18) {
+                    UInt8 mode = [_recivedData69[13] unsignedIntegerValue];
+                    UInt8 modetemp = [_recivedData69[14] unsignedIntegerValue];
+                    UInt8 indoortemp = [_recivedData69[15] unsignedIntegerValue];
+                    
+                    if (modetemp & 0x80) {
+                        modetemp = modetemp & 0x7F;
+                        modetemp = -modetemp;
+                    }else{
+                        modetemp = modetemp & 0x7F;
+                    }
+                    NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
+                    
+                    if (indoortemp & 0x80) {
+                        indoortemp = indoortemp & 0x7F;
+                        indoortemp = -indoortemp;
+                    }else{
+                        indoortemp = indoortemp & 0x7F;
+                    }
+                    NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
+                    
+                    for (DeviceModel *device in self.deviceArray) {
+                        if ([device.mac isEqualToString:mac]) {
+                            NSLog(@"%@",device.mac);
+                            device.isOn = isOn;
                             device.mode = [NSNumber numberWithUnsignedInteger:mode];
                             device.modeTemp = modeTemp;
                             device.indoorTemp = indoorTemp;
                         }
-
-                        device.isOnline = @1;
+                    }
+                    for (DeviceModel *device in db.shareDeviceArray) {
+                        if ([device.mac isEqualToString:mac]) {
+                            NSLog(@"%@",device.mac);
+                            device.isOn = isOn;
+                            device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                            device.modeTemp = modeTemp;
+                            device.indoorTemp = indoorTemp;
+                        }
                     }
                 }
                 
@@ -1034,342 +1475,6 @@ static int noUserInteractionHeartbeat = 0;
         return NO;
     }
     return YES;
-}
-
-#pragma mark - private method && Device management
-/*
- @param recivedData69 中央控制器返回的69帧
- *从网关获取设备列表并进行数据库等的操作
- */
-- (void)inquireNode:(NSMutableArray *)recivedData69{
-    Database *db = [Database shareInstance];
-    if (!self.deviceArray) {
-        self.deviceArray = [[NSMutableArray alloc] init];
-    }
-    NSMutableArray *data = [[NSMutableArray alloc] init];
-    [data addObjectsFromArray:recivedData69];
-    int count = [data[12] intValue];
-    for (int i = 0; i < count; i++) {
-        DeviceModel *device = [[DeviceModel alloc] init];
-        device.mac = @"";
-        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[16 + i*4] intValue]]];
-        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15 + i*4] intValue]]];
-        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14 + i*4] intValue]]];
-        device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13 + i*4] intValue]]];
-        device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[15 + i*4] intValue]]];
-        
-        //将中央控制器查询到的设备和服务器设备对比
-        BOOL isExisted = NO;//防止重复显示以及刷新时重新添加设备到服务器
-        for (DeviceModel *existedDevice in self.deviceArray) {
-            if ([existedDevice.mac isEqualToString:device.mac]) {
-                existedDevice.isOnline = @0;
-                existedDevice.isOn = @0;
-                isExisted = YES;
-            }
-        }
-        if (isExisted) {
-            continue;
-        }
-        
-        //判断设备是否本地存储过
-        BOOL isLocal = NO;
-        for (DeviceModel *localDevice in db.localDeviceArray) {
-            if ([device.mac isEqualToString:localDevice.mac]) {
-                localDevice.type = device.type;
-                
-                [self.deviceArray addObject:localDevice];
-                
-                [db.localDeviceArray removeObject:localDevice];
-                isLocal = YES;
-                break;
-            }
-        }
-        if (!isLocal) {
-            /**
-             ～～未保存过，需要上传到服务器，保存到本地～～
-             *不需要保存，显示在所有设备里，用户添加到房间才保存*
-             **/
-            [self addNewDeviceWith:device];
-            
-            //初始命名
-            if ([device.type integerValue] == 1) {
-                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"温控器"),[device.mac substringWithRange:NSMakeRange(0, 2)]];
-            }else if ([device.type integerValue] == 2){
-                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"无线水阀"),[device.mac substringWithRange:NSMakeRange(0, 2)]];
-                NSLog(@"%@",device.name);
-            }
-            
-            [self.deviceArray addObject:device];
-        }
-    }
-    
-    /*
-     *将localDeviceArray剩余的device从服务器中删除，因为在网关中查找不到设备
-     */
-    for (DeviceModel *localDevice in db.localDeviceArray) {
-        //删除api还没做好
-        //[self removeOldDeviceWith:localDevice];
-    }
-    
-    //通知刷新设备
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
-    
-    if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
-        //外网，OneNet查询监控点
-        [self inquireDeviceInfoByOneNetdatastreams:self.deviceArray];
-    }else{
-        //内网
-        for (DeviceModel *device in self.deviceArray) {
-            //每个设备发送状态查询帧
-            UInt8 controlCode = 0x01;
-            NSArray *data;
-            switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
-                case 1:
-                    data = @[@0xFE,@0x12,@0x01,@0x00];
-                    break;
-                    
-                case 2:
-                    data = @[@0xFE,@0x13,@0x01,@0x00];
-                    break;
-                    
-                default:
-                    break;
-            }
-            [self sendData69With:controlCode mac:device.mac data:data];
-        }
-    }
-}
-
-/*
- *批量查询数据流信息
- */
-- (void)inquireDeviceInfoByOneNetdatastreams:(NSMutableArray *)deviceArray{
-    Database *db = [Database shareInstance];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    //设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
-    [manager.requestSerializer setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
-    
-    NSString *url = [NSString stringWithFormat:@"http://api.heclouds.com/devices/%@/datastreams",db.currentHouse.deviceId];
-    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-    
-    NSString *datastreams = @"";
-    for (DeviceModel *device in self.deviceArray) {
-        //每个设备发送状态查询帧
-        switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
-            case 1:
-                datastreams = [datastreams stringByAppendingString:@"11"];
-                datastreams = [datastreams stringByAppendingString:device.mac];
-                datastreams = [datastreams stringByAppendingString:@","];
-                break;
-                
-            case 2:
-                datastreams = [datastreams stringByAppendingString:@"21"];
-                datastreams = [datastreams stringByAppendingString:device.mac];
-                datastreams = [datastreams stringByAppendingString:@","];
-                break;
-                
-            default:
-                break;
-        }
-    }
-    NSDictionary *parameters = @{@"datastream_ids":datastreams};
-    
-    [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-        NSString * daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"success:%@",daetr);
-        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-            if ([[responseDic objectForKey:@"data"] isKindOfClass:[NSArray class]] && [[responseDic objectForKey:@"data"] count] > 0) {
-                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    NSString *streamId = [obj objectForKey:@"id"];
-                    NSNumber *value = [obj objectForKey:@"current_value"];
-                    [self analysisResultValue:streamId value:value];
-                }];
-            }
-            
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
-
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"Error:%@",error);
-        
-    }];
-}
-
-//解析从onenet获取的监控点信息
-- (void)analysisResultValue:(NSString *)streamId value:(NSNumber *)value{
-    NSString *index = [streamId substringWithRange:NSMakeRange(0, 2)];
-    NSString *mac = [streamId substringFromIndex:2];
-    for (DeviceModel *device in self.deviceArray) {
-        if ([device.mac isEqualToString:mac]) {
-            switch ([index integerValue]) {
-                case 11:
-                {
-                    device.isOnline = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x80];
-                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x01];
-                }
-                    break;
-                    
-                case 21:
-                {
-                    device.isOnline = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x80];
-                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x01];
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-        }
-    }
-}
-
-/*
- @param recivedData69 主动上报的帧
- *设备入网时主动上报的处理
- */
-- (void)addNode:(NSMutableArray *)recivedData69{
-    if (!_deviceArray) {
-        _deviceArray = [[NSMutableArray alloc] init];
-    }
-    NSMutableArray *data = [[NSMutableArray alloc] init];
-    [data addObjectsFromArray:self.recivedData69];
-    
-    DeviceModel *device = [[DeviceModel alloc] init];
-    device.mac = @"";
-    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
-    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
-    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
-    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
-    device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[13] intValue]]];
-    
-    /*
-     ～未保存过，需要上传到服务器，保存到本地～
-     *现在不保存到服务器，只加入所有设备房间中*
-     */
-    //[self addNewDeviceWith:device];
-    
-    device.name = device.mac;
-    [self.deviceArray addObject:device];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
-}
-
-
-/*
- *上传新设备
- */
-- (void)addNewDeviceWith:(DeviceModel *)device{
-    Database *db = [Database shareInstance];
-
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-
-    //设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
-
-    if (!device.name) {
-        device.name = device.mac;
-    }
-    NSDictionary *parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":@"5bfcb08be4b0c54526650eec",@"houseUid":db.currentHouse.houseUid};
-
-    [manager POST:@"http://gleadsmart.thingcom.cn/api/device" parameters:parameters progress:nil
-          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-              NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-              NSLog(@"success:%@",daetr);
-              if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-                  /*
-                   *保存到本地
-                   */
-                  [db insertNewDevice:device];
-              }else{
-                  
-              }
-          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-              NSLog(@"Error:%@",error);
-              if (error.code == -1001) {
-                  [NSObject showHudTipStr:LocalString(@"无法登录远程服务器，请检查网络状况")];
-              }else{
-                  [NSObject showHudTipStr:LocalString(@"服务器添加设备失败")];
-              }
-
-          }
-     ];
-}
-
-/*
- *删除设备
- */
-- (void)removeOldDeviceWith:(DeviceModel *)device{
-    Database *db = [Database shareInstance];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    //设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
-
-    NSLog(@"%@",db.user.userId);
-    NSDictionary *parameters = @{@"userId":db.user.userId,@"mac":device.mac};
-    
-    [manager DELETE:@"http://gleadsmart.thingcom.cn/api/device" parameters:parameters
-          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-              NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-              NSLog(@"success:%@",daetr);
-              if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-                  /*
-                   *在本地删除
-                   */
-                  [db deleteDevice:device.mac];
-              }else{
-                  
-              }
-          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-              NSLog(@"Error:%@",error);
-              [NSObject showHudTipStr:LocalString(@"无法登录远程服务器，请检查网络状况")];
-              
-          }
-     ];
-}
-
-/*
- *判断设备类型
- *设备种类；0表示中央控制器，1表示温控器，2表示无线水阀，3表示壁挂炉调节器
- */
-- (NSInteger)judgeDeviceTypeWith:(int)macByte2{
-    if (macByte2 >= 0x08 && macByte2 <= 0x0F) {
-        return 1;
-    }
-    if (macByte2 >= 0x10 && macByte2 <= 0x17){
-        return 3;
-    }
-    if (macByte2 >= 0x18 && macByte2 <= 0x1F) {
-        return 2;
-    }
-    return 0;
 }
 
 @end
