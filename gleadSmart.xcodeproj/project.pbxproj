@@ -82,9 +82,6 @@
 		BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF63219E66210067BC61 /* HomeManagementController.m */; };
 		BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF69219E66F30067BC61 /* HouseManagementController.m */; };
 		BB2AA50F221D061100AF3968 /* SharerInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AA50E221D061100AF3968 /* SharerInputController.m */; };
-		BB2AC0C521A8EFE3006DB83A /* PasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0C121A8EFE3006DB83A /* PasswordTableViewCell.m */; };
-		BB2AC0C621A8EFE3006DB83A /* SSIDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0C221A8EFE3006DB83A /* SSIDTableViewCell.m */; };
-		BB2AC0C721A8EFE3006DB83A /* SSIDTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC0C421A8EFE3006DB83A /* SSIDTableViewCell.xib */; };
 		BB2AC0E721A8F156006DB83A /* ESPGuideCode.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0C921A8F156006DB83A /* ESPGuideCode.m */; };
 		BB2AC0E821A8F156006DB83A /* ESPTouchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0CA21A8F156006DB83A /* ESPTouchResult.m */; };
 		BB2AC0E921A8F156006DB83A /* ESP_NetUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0CD21A8F156006DB83A /* ESP_NetUtil.m */; };
@@ -160,7 +157,6 @@
 		BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF421A7E59600B2121B /* WirelessValveController.m */; };
 		BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF721A7E59600B2121B /* ThermostatController.m */; };
 		BB37DEFF21A7E8D600B2121B /* NodeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEFD21A7E8D600B2121B /* NodeDetailCell.m */; };
-		BB37DF0A21A7EFC400B2121B /* DeviceConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0121A7EFC300B2121B /* DeviceConfirmView.m */; };
 		BB37DF0B21A7EFC400B2121B /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0321A7EFC300B2121B /* DeviceViewController.m */; };
 		BB37DF0C21A7EFC400B2121B /* EspViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0521A7EFC400B2121B /* EspViewController.m */; };
 		BB37DF0D21A7EFC400B2121B /* DeviceConnectView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0621A7EFC400B2121B /* DeviceConnectView.m */; };
@@ -329,6 +325,7 @@
 		BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB835FA3219C03A300225B60 /* HomeDeviceController.m */; };
 		BB8A743522263707008B2439 /* ShareDeviceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8A743422263707008B2439 /* ShareDeviceListController.m */; };
 		BB8A74382226374A008B2439 /* ShareDeviceDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8A74372226374A008B2439 /* ShareDeviceDetailController.m */; };
+		BB8AE4B422292F890074118D /* APNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8AE4B322292F890074118D /* APNetworkController.m */; };
 		BB8B9DB821A6815000E5D8B2 /* thermostatControl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */; };
 		BB8B9DBC21A6815000E5D8B2 /* thermostatControl@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA121A6815000E5D8B2 /* thermostatControl@3x.png */; };
 		BB8B9DBD21A6815000E5D8B2 /* thermostatKnob@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA221A6815000E5D8B2 /* thermostatKnob@3x.png */; };
@@ -558,11 +555,6 @@
 		BB21BF69219E66F30067BC61 /* HouseManagementController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseManagementController.m; sourceTree = "<group>"; };
 		BB2AA50D221D061100AF3968 /* SharerInputController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharerInputController.h; sourceTree = "<group>"; };
 		BB2AA50E221D061100AF3968 /* SharerInputController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharerInputController.m; sourceTree = "<group>"; };
-		BB2AC0C021A8EFE3006DB83A /* PasswordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordTableViewCell.h; sourceTree = "<group>"; };
-		BB2AC0C121A8EFE3006DB83A /* PasswordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordTableViewCell.m; sourceTree = "<group>"; };
-		BB2AC0C221A8EFE3006DB83A /* SSIDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSIDTableViewCell.m; sourceTree = "<group>"; };
-		BB2AC0C321A8EFE3006DB83A /* SSIDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSIDTableViewCell.h; sourceTree = "<group>"; };
-		BB2AC0C421A8EFE3006DB83A /* SSIDTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSIDTableViewCell.xib; sourceTree = "<group>"; };
 		BB2AC0C921A8F156006DB83A /* ESPGuideCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPGuideCode.m; sourceTree = "<group>"; };
 		BB2AC0CA21A8F156006DB83A /* ESPTouchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPTouchResult.m; sourceTree = "<group>"; };
 		BB2AC0CB21A8F156006DB83A /* ESPTouchTaskParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPTouchTaskParameter.h; sourceTree = "<group>"; };
@@ -683,8 +675,6 @@
 		BB37DEFD21A7E8D600B2121B /* NodeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeDetailCell.m; sourceTree = "<group>"; };
 		BB37DEFE21A7E8D600B2121B /* NodeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeDetailCell.h; sourceTree = "<group>"; };
 		BB37DF0021A7EFC300B2121B /* DeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceViewController.h; sourceTree = "<group>"; };
-		BB37DF0121A7EFC300B2121B /* DeviceConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceConfirmView.m; sourceTree = "<group>"; };
-		BB37DF0221A7EFC300B2121B /* DeviceConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceConfirmView.h; sourceTree = "<group>"; };
 		BB37DF0321A7EFC300B2121B /* DeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceViewController.m; sourceTree = "<group>"; };
 		BB37DF0421A7EFC400B2121B /* EspViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EspViewController.h; sourceTree = "<group>"; };
 		BB37DF0521A7EFC400B2121B /* EspViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EspViewController.m; sourceTree = "<group>"; };
@@ -898,6 +888,8 @@
 		BB8A743422263707008B2439 /* ShareDeviceListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceListController.m; sourceTree = "<group>"; };
 		BB8A74362226374A008B2439 /* ShareDeviceDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceDetailController.h; sourceTree = "<group>"; };
 		BB8A74372226374A008B2439 /* ShareDeviceDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceDetailController.m; sourceTree = "<group>"; };
+		BB8AE4B222292F890074118D /* APNetworkController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APNetworkController.h; sourceTree = "<group>"; };
+		BB8AE4B322292F890074118D /* APNetworkController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APNetworkController.m; sourceTree = "<group>"; };
 		BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@2x.png"; sourceTree = "<group>"; };
 		BB8B9DA121A6815000E5D8B2 /* thermostatControl@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@3x.png"; sourceTree = "<group>"; };
 		BB8B9DA221A6815000E5D8B2 /* thermostatKnob@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatKnob@3x.png"; sourceTree = "<group>"; };
@@ -1160,6 +1152,7 @@
 		BB0A404F21997A4B004669CA /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
+				BB8AE4B522293CC70074118D /* 添加设备_slices */,
 				BB7E796A221A61F50060A0CF /* 我的共享_slices */,
 				BB5B037321B90343007AC2B1 /* 我的_slices */,
 				BB2AD78921ABD813006DB83A /* Login_slices */,
@@ -1468,10 +1461,10 @@
 				BB37DF0321A7EFC300B2121B /* DeviceViewController.m */,
 				BB37DF0421A7EFC400B2121B /* EspViewController.h */,
 				BB37DF0521A7EFC400B2121B /* EspViewController.m */,
-				BB37DF0221A7EFC300B2121B /* DeviceConfirmView.h */,
-				BB37DF0121A7EFC300B2121B /* DeviceConfirmView.m */,
 				BB37DF0921A7EFC400B2121B /* DeviceConnectView.h */,
 				BB37DF0621A7EFC400B2121B /* DeviceConnectView.m */,
+				BB8AE4B222292F890074118D /* APNetworkController.h */,
+				BB8AE4B322292F890074118D /* APNetworkController.m */,
 			);
 			path = ESPTouch;
 			sourceTree = "<group>";
@@ -1479,14 +1472,8 @@
 		BB37DF0F21A7F35500B2121B /* DeviceESP */ = {
 			isa = PBXGroup;
 			children = (
-				BB2AC0C821A8F156006DB83A /* EspTouch */,
 				BB37DF1121A7F3AF00B2121B /* DeviceTableViewCell.h */,
 				BB37DF1021A7F3AF00B2121B /* DeviceTableViewCell.m */,
-				BB2AC0C021A8EFE3006DB83A /* PasswordTableViewCell.h */,
-				BB2AC0C121A8EFE3006DB83A /* PasswordTableViewCell.m */,
-				BB2AC0C321A8EFE3006DB83A /* SSIDTableViewCell.h */,
-				BB2AC0C221A8EFE3006DB83A /* SSIDTableViewCell.m */,
-				BB2AC0C421A8EFE3006DB83A /* SSIDTableViewCell.xib */,
 			);
 			path = DeviceESP;
 			sourceTree = "<group>";
@@ -1631,6 +1618,7 @@
 				BB52F9DC21BE037F005FA33A /* gleadSmart.entitlements */,
 				BB2AC12E21AB96E3006DB83A /* KYDivisionPickerView */,
 				BB2AC0F821A94D63006DB83A /* AFNetworking */,
+				BB2AC0C821A8F156006DB83A /* EspTouch */,
 				BB352928219DA7AE00428DE9 /* Singleton */,
 				BB35290B219D0FA300428DE9 /* Cell */,
 				BB0A404F21997A4B004669CA /* UIImage */,
@@ -1810,6 +1798,13 @@
 				BB8A74372226374A008B2439 /* ShareDeviceDetailController.m */,
 			);
 			path = HomeViewShare;
+			sourceTree = "<group>";
+		};
+		BB8AE4B522293CC70074118D /* 添加设备_slices */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "添加设备_slices";
 			sourceTree = "<group>";
 		};
 		BB8B9D9A21A6815000E5D8B2 /* 温控器_slices */ = {
@@ -2121,7 +2116,6 @@
 				BB0A40D121997C99004669CA /* img_headerBg@1x.png in Resources */,
 				BB63B5F721B4128F00D77489 /* thermostat_min@3x.png in Resources */,
 				BB63B60621B4151D00D77489 /* thermostat_+.png in Resources */,
-				BB2AC0C721A8EFE3006DB83A /* SSIDTableViewCell.xib in Resources */,
 				BB8B9E8121A6ADEB00E5D8B2 /* nodeBattery_normal.png in Resources */,
 				BB5B03B321B90343007AC2B1 /* img_mine_houseManage@2x.png in Resources */,
 				369C16A322255FD90079159E /* addRoom_hand@3x.png in Resources */,
@@ -2459,7 +2453,6 @@
 				BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */,
 				BB62E4DE21B5155000C0FA39 /* TherWeekProgramController.m in Sources */,
 				3EA530BF21AB9B43000A6D26 /* PhoneTFCell.m in Sources */,
-				BB2AC0C521A8EFE3006DB83A /* PasswordTableViewCell.m in Sources */,
 				BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */,
 				BB37DF0C21A7EFC400B2121B /* EspViewController.m in Sources */,
 				BB2AC0ED21A8F156006DB83A /* ESP_CRC8.m in Sources */,
@@ -2509,7 +2502,6 @@
 				BB62E4D821B5110800C0FA39 /* ThermostSettingController.m in Sources */,
 				BB37DF0B21A7EFC400B2121B /* DeviceViewController.m in Sources */,
 				BB8A743522263707008B2439 /* ShareDeviceListController.m in Sources */,
-				BB2AC0C621A8EFE3006DB83A /* SSIDTableViewCell.m in Sources */,
 				3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */,
 				BB5B03CE21B91290007AC2B1 /* AccountViewController.m in Sources */,
 				BB2AD79B21ABE2B5006DB83A /* PhoneVerifyCell2.m in Sources */,
@@ -2524,7 +2516,6 @@
 				3EA530C121AB9B43000A6D26 /* TextFieldCell.m in Sources */,
 				BB2AC11121A94FE8006DB83A /* RoomModel.m in Sources */,
 				BBF8CAED22169FBA0030E921 /* FamilyMemberController.m in Sources */,
-				BB37DF0A21A7EFC400B2121B /* DeviceConfirmView.m in Sources */,
 				BB2AC0F721A93B1B006DB83A /* UserModel.m in Sources */,
 				BB37DF0D21A7EFC400B2121B /* DeviceConnectView.m in Sources */,
 				BB2AC12721AA9EF1006DB83A /* FamilyLocationController.m in Sources */,
@@ -2563,6 +2554,7 @@
 				BB62E4DB21B5132200C0FA39 /* TherSettingCell.m in Sources */,
 				BB5B036D21B90069007AC2B1 /* MineViewController.m in Sources */,
 				BB2ACC5C21AB9712006DB83A /* KYDivisionPickerView.m in Sources */,
+				BB8AE4B422292F890074118D /* APNetworkController.m in Sources */,
 				BB2AC0EB21A8F156006DB83A /* ESP_WifiUtil.m in Sources */,
 				BB62E4B321B4C0B700C0FA39 /* ThermostatTimerController.m in Sources */,
 				BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */,
