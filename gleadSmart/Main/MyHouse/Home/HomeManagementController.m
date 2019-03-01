@@ -244,7 +244,7 @@ static CGFloat const Cell_Height = 50.f;
         NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-            [NSObject showHudTipStr:@"删除房间成功"];
+            //[NSObject showHudTipStr:@"删除房间成功"];
             [[Database shareInstance] deleteRoom:room.roomUid];
             [self.homeManagementTable reloadData];
             
