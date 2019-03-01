@@ -31,7 +31,6 @@ static CGFloat const Cell_Height = 50.f;
     self.addRoomsBtn = [self addRoomsBtn];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView:)];
-    [self getEditedSharerInfo];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -106,14 +105,75 @@ static CGFloat const Cell_Height = 50.f;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return Cell_Height;
 }
 
+//可以编辑
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+//每行编辑是什么样式
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //返回 插入
+    //  return UITableViewCellEditingStyleInsert;
+    //返回 删除
+    return UITableViewCellEditingStyleDelete;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (editingStyle) {
+        case UITableViewCellEditingStyleNone:
+        {
+        }
+            break;
+        case UITableViewCellEditingStyleDelete:
+        {
+        
+            RoomModel *room = _homeList[indexPath.row];
+            [self deleteroomsByApi:room];
+            
+            //修改数据源，在刷新 tableView
+            [_homeList removeObjectAtIndex:indexPath.row];
+            
+            //让表视图删除对应的行 //必须执行在移除数组后面
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+            break;
+        case UITableViewCellEditingStyleInsert:
+        {
+            [_homeList insertObject:@"新增行" atIndex:indexPath.row];
+            //让表视图添加对应的行
+            [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+        }
+            break;
+        default:
+            break;
+    }
+}
+//是否移动
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    //修改数据源
+    [_homeList exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    //让表视图对应的行进行移动
+    [tableView exchangeSubviewAtIndex:sourceIndexPath.row withSubviewAtIndex:destinationIndexPath.row];
+}
+
+
 #pragma mark - private methods
-- (void)getEditedSharerInfo{
+- (void)modifyEditedHomebyApi{
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置超时时间
@@ -123,7 +183,6 @@ static CGFloat const Cell_Height = 50.f;
     
     NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/room/list"];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-    NSLog(@"fsfsfsfs%@",url);
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
@@ -157,7 +216,52 @@ static CGFloat const Cell_Height = 50.f;
     }];
 }
 
-
+- (void)deleteroomsByApi:(RoomModel *)room{
+    
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 6.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/room"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
+    
+    NSDictionary *parameters = @{@"houseUid":_houseUid,@"roomUid":room.roomUid};
+    
+    [manager DELETE:url parameters: parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [NSObject showHudTipStr:@"删除房间成功"];
+            [[Database shareInstance] deleteRoom:room.roomUid];
+            [self.homeManagementTable reloadData];
+            
+        }else{
+            [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [NSObject showHudTipStr:LocalString(@"删除房间失败")];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            NSLog(@"%@",error);
+        });
+    }];
+}
 
 #pragma mark - Actions
 /*
@@ -217,70 +321,17 @@ static CGFloat const Cell_Height = 50.f;
 //}
 
 -(void)goRooms{
-    NSLog(@"dd");
+    
     AddRoomsViewController *AddRoomsVC = [[AddRoomsViewController alloc] init];
     [self.navigationController pushViewController:AddRoomsVC animated:YES];
 }
 
 //点中右上角按键  进入编辑状态
--(void)editTableView:(UIBarButtonItem*)sender {
+-(void)editTableView:(UIBarButtonItem *)sender {
     [self.homeManagementTable setEditing:!self.homeManagementTable.editing animated:YES];
     //   isEditing editing的getter方法的 新名字
     sender.title = self.homeManagementTable.isEditing ? @"完成" : @"编辑";
   
-}
-//可以编辑
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-//每行编辑是什么样式
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //返回 插入
-//  return UITableViewCellEditingStyleInsert;
-    //返回 删除
-    return UITableViewCellEditingStyleDelete;
-}
-
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    switch (editingStyle) {
-        case UITableViewCellEditingStyleNone:
-        {
-        }
-            break;
-        case UITableViewCellEditingStyleDelete:
-        {
-            //修改数据源，在刷新 tableView
-            [_homeList removeObjectAtIndex:indexPath.row];
-    
-            //让表视图删除对应的行
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        }
-            break;
-//        case UITableViewCellEditingStyleInsert:
-//        {
-//            [_homeList insertObject:@"新增行" atIndex:indexPath.row];
-//            //让表视图添加对应的行
-//            [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//        }
-//            break;
-        default:
-            break;
-    }
-}
-//是否移动
--(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
--(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    //修改数据源
-    [_homeList exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
-    //让表视图对应的行进行移动
-    [tableView exchangeSubviewAtIndex:sourceIndexPath.row withSubviewAtIndex:destinationIndexPath.row];
 }
 
 @end

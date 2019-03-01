@@ -7,12 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36004A7A222784E700C99215 /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36004A79222784E700C99215 /* ModifyPasswordViewController.m */; };
+		36004A7E2227969200C99215 /* Imag_retrieve_phoneuser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A7B2227969200C99215 /* Imag_retrieve_phoneuser@2x.png */; };
+		36004A7F2227969200C99215 /* Imag_retrieve_phoneuser@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A7C2227969200C99215 /* Imag_retrieve_phoneuser@3x.png */; };
+		36004A802227969200C99215 /* Imag_retrieve_phoneuser.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A7D2227969200C99215 /* Imag_retrieve_phoneuser.png */; };
+		36004A842227B4D800C99215 /* img_retrieve_verify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A812227B4D800C99215 /* img_retrieve_verify@2x.png */; };
+		36004A852227B4D800C99215 /* img_retrieve_verify@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A822227B4D800C99215 /* img_retrieve_verify@3x.png */; };
+		36004A862227B4D800C99215 /* img_retrieve_verify.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A832227B4D800C99215 /* img_retrieve_verify.png */; };
+		36004A8A2227B64700C99215 /* img_retrieve_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A872227B64700C99215 /* img_retrieve_password@2x.png */; };
+		36004A8B2227B64700C99215 /* img_retrieve_password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A882227B64700C99215 /* img_retrieve_password@3x.png */; };
+		36004A8C2227B64700C99215 /* img_retrieve_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A892227B64700C99215 /* img_retrieve_password.png */; };
+		36004A8F2227E96500C99215 /* UsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36004A8E2227E96500C99215 /* UsernameViewController.m */; };
 		36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 36134F2B21E6E10100A7D98E /* NodeButton.m */; };
 		369C169B22250ECB0079159E /* AddRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169A22250ECA0079159E /* AddRoomsViewController.m */; };
 		369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169E222513E90079159E /* AddRoomsTextCell.m */; };
 		369C16A322255FD90079159E /* addRoom_hand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A022255FD90079159E /* addRoom_hand@3x.png */; };
 		369C16A422255FD90079159E /* addRoom_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A122255FD90079159E /* addRoom_hand.png */; };
 		369C16A522255FD90079159E /* addRoom_hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A222255FD90079159E /* addRoom_hand@2x.png */; };
+		36B8F16722263FA200652CFA /* ShareDeviceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B8F16622263FA200652CFA /* ShareDeviceListCell.m */; };
+		36B8F16A22263FDE00652CFA /* ShareDeviceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B8F16922263FDE00652CFA /* ShareDeviceDetailCell.m */; };
 		3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */; };
 		3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */; };
 		3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBE21A7E7EA00EA8F1C /* AddFamilyViewController.m */; };
@@ -450,6 +463,19 @@
 		0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gleadSmart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C91728F2E98E7E5ACCA018D /* Pods-gleadSmart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.debug.xcconfig"; sourceTree = "<group>"; };
 		21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.release.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.release.xcconfig"; sourceTree = "<group>"; };
+		36004A78222784E700C99215 /* ModifyPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordViewController.h; sourceTree = "<group>"; };
+		36004A79222784E700C99215 /* ModifyPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordViewController.m; sourceTree = "<group>"; };
+		36004A7B2227969200C99215 /* Imag_retrieve_phoneuser@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Imag_retrieve_phoneuser@2x.png"; sourceTree = "<group>"; };
+		36004A7C2227969200C99215 /* Imag_retrieve_phoneuser@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Imag_retrieve_phoneuser@3x.png"; sourceTree = "<group>"; };
+		36004A7D2227969200C99215 /* Imag_retrieve_phoneuser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Imag_retrieve_phoneuser.png; sourceTree = "<group>"; };
+		36004A812227B4D800C99215 /* img_retrieve_verify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_retrieve_verify@2x.png"; sourceTree = "<group>"; };
+		36004A822227B4D800C99215 /* img_retrieve_verify@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_retrieve_verify@3x.png"; sourceTree = "<group>"; };
+		36004A832227B4D800C99215 /* img_retrieve_verify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_retrieve_verify.png; sourceTree = "<group>"; };
+		36004A872227B64700C99215 /* img_retrieve_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_retrieve_password@2x.png"; sourceTree = "<group>"; };
+		36004A882227B64700C99215 /* img_retrieve_password@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_retrieve_password@3x.png"; sourceTree = "<group>"; };
+		36004A892227B64700C99215 /* img_retrieve_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_retrieve_password.png; sourceTree = "<group>"; };
+		36004A8D2227E96500C99215 /* UsernameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsernameViewController.h; sourceTree = "<group>"; };
+		36004A8E2227E96500C99215 /* UsernameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsernameViewController.m; sourceTree = "<group>"; };
 		36134F2A21E6E10100A7D98E /* NodeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeButton.h; sourceTree = "<group>"; };
 		36134F2B21E6E10100A7D98E /* NodeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeButton.m; sourceTree = "<group>"; };
 		369C169922250ECA0079159E /* AddRoomsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRoomsViewController.h; sourceTree = "<group>"; };
@@ -459,6 +485,10 @@
 		369C16A022255FD90079159E /* addRoom_hand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addRoom_hand@3x.png"; sourceTree = "<group>"; };
 		369C16A122255FD90079159E /* addRoom_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addRoom_hand.png; sourceTree = "<group>"; };
 		369C16A222255FD90079159E /* addRoom_hand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addRoom_hand@2x.png"; sourceTree = "<group>"; };
+		36B8F16522263FA200652CFA /* ShareDeviceListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceListCell.h; sourceTree = "<group>"; };
+		36B8F16622263FA200652CFA /* ShareDeviceListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceListCell.m; sourceTree = "<group>"; };
+		36B8F16822263FDE00652CFA /* ShareDeviceDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceDetailCell.h; sourceTree = "<group>"; };
+		36B8F16922263FDE00652CFA /* ShareDeviceDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceDetailCell.m; sourceTree = "<group>"; };
 		3E3AFFB821A7E74800EA8F1C /* HouseManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseManagementTableViewCell.h; sourceTree = "<group>"; };
 		3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseManagementTableViewCell.m; sourceTree = "<group>"; };
 		3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeManagementCell.m; sourceTree = "<group>"; };
@@ -1047,6 +1077,24 @@
 			path = AddRooms;
 			sourceTree = "<group>";
 		};
+		36B8F16422263F6900652CFA /* ShareDevice */ = {
+			isa = PBXGroup;
+			children = (
+				36B8F16522263FA200652CFA /* ShareDeviceListCell.h */,
+				36B8F16622263FA200652CFA /* ShareDeviceListCell.m */,
+				36B8F16822263FDE00652CFA /* ShareDeviceDetailCell.h */,
+				36B8F16922263FDE00652CFA /* ShareDeviceDetailCell.m */,
+			);
+			path = ShareDevice;
+			sourceTree = "<group>";
+		};
+		36B8F16B2226A6B700652CFA /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		3E9E9B9821A2ABC600CA2B7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1395,6 +1443,15 @@
 		BB2AD78921ABD813006DB83A /* Login_slices */ = {
 			isa = PBXGroup;
 			children = (
+				36004A892227B64700C99215 /* img_retrieve_password.png */,
+				36004A872227B64700C99215 /* img_retrieve_password@2x.png */,
+				36004A882227B64700C99215 /* img_retrieve_password@3x.png */,
+				36004A832227B4D800C99215 /* img_retrieve_verify.png */,
+				36004A812227B4D800C99215 /* img_retrieve_verify@2x.png */,
+				36004A822227B4D800C99215 /* img_retrieve_verify@3x.png */,
+				36004A7D2227969200C99215 /* Imag_retrieve_phoneuser.png */,
+				36004A7B2227969200C99215 /* Imag_retrieve_phoneuser@2x.png */,
+				36004A7C2227969200C99215 /* Imag_retrieve_phoneuser@3x.png */,
 				BB5B036021B8CB6A007AC2B1 /* img_pwd_unvisiable.png */,
 				BB5B036221B8CB6B007AC2B1 /* img_pwd_unvisiable@2x.png */,
 				BB5B036321B8CB6B007AC2B1 /* img_pwd_unvisiable@3x.png */,
@@ -1439,6 +1496,7 @@
 		BB35290C219D0FAB00428DE9 /* Myhouse */ = {
 			isa = PBXGroup;
 			children = (
+				36B8F16422263F6900652CFA /* ShareDevice */,
 				369C169C222513600079159E /* AddRooms */,
 				BBAB2810221B9D2C00E21041 /* AddShare */,
 				BBF8CAEE2216A4350030E921 /* FamilyMember */,
@@ -1683,6 +1741,10 @@
 				BB5B036C21B90069007AC2B1 /* MineViewController.m */,
 				BB5B03CC21B91290007AC2B1 /* AccountViewController.h */,
 				BB5B03CD21B91290007AC2B1 /* AccountViewController.m */,
+				36004A78222784E700C99215 /* ModifyPasswordViewController.h */,
+				36004A79222784E700C99215 /* ModifyPasswordViewController.m */,
+				36004A8D2227E96500C99215 /* UsernameViewController.h */,
+				36004A8E2227E96500C99215 /* UsernameViewController.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1784,6 +1846,7 @@
 				BB7E7968221A5D6D0060A0CF /* HouseShareController.m */,
 				BB7D9B9B221E8FA300C5DFD1 /* SharerDetailController.h */,
 				BB7D9B9C221E8FA300C5DFD1 /* SharerDetailController.m */,
+				36B8F16B2226A6B700652CFA /* New Group */,
 				BB2CB8A4221FE171001E6703 /* SharerRemarkController.h */,
 				BB2CB8A5221FE171001E6703 /* SharerRemarkController.m */,
 				BB7E7974221AA7780060A0CF /* AddShareController.h */,
@@ -2113,6 +2176,7 @@
 				BB0A40CF21997C99004669CA /* img_weatherBg@2x.png in Resources */,
 				BB0A40E721997C99004669CA /* img_tab_03_unselect@3x.png in Resources */,
 				BB8B9DCD21A6815000E5D8B2 /* thermostatSet@3x.png in Resources */,
+				36004A7F2227969200C99215 /* Imag_retrieve_phoneuser@3x.png in Resources */,
 				BB0A40D221997C99004669CA /* img_addDevice@3x.png in Resources */,
 				BB5B03BF21B90343007AC2B1 /* img_mine_header.png in Resources */,
 				BB8B9DC721A6815000E5D8B2 /* thermostatSet@2x.png in Resources */,
@@ -2136,6 +2200,7 @@
 				BB63B58321B3B94100D77489 /* thermostatControl_on.png in Resources */,
 				BB5B03BB21B90343007AC2B1 /* img_mine_editPW.png in Resources */,
 				BBF6325721BBAB34006A23AC /* valveAlertMark@2x.png in Resources */,
+				36004A842227B4D800C99215 /* img_retrieve_verify@2x.png in Resources */,
 				BB0A40B421997C99004669CA /* img_houseSelect@3x.png in Resources */,
 				BB8B9E8321A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png in Resources */,
 				BB5B03BA21B90343007AC2B1 /* img_mine_header@3x.png in Resources */,
@@ -2145,7 +2210,9 @@
 				BB63B58A21B3DB6900D77489 /* thermostatCircle_on.png in Resources */,
 				BB0A40E021997C99004669CA /* img_wallHob@2x.png in Resources */,
 				BB5B03AE21B90343007AC2B1 /* img_mine_checkUpdate@2x.png in Resources */,
+				36004A8C2227B64700C99215 /* img_retrieve_password.png in Resources */,
 				BB63B58221B3B94100D77489 /* thermostat_timing_on@3x.png in Resources */,
+				36004A862227B4D800C99215 /* img_retrieve_verify.png in Resources */,
 				BB52F9EA21BE4A5A005FA33A /* thermostatKnob_On@2x.png in Resources */,
 				BB1EB39621E44E2B0024603A /* valveNode_selnormal@2x.png in Resources */,
 				BB8B9DB821A6815000E5D8B2 /* thermostatControl@2x.png in Resources */,
@@ -2157,6 +2224,7 @@
 				BB5B035C21B8C3DA007AC2B1 /* img_login_header@3x.png in Resources */,
 				BB62E4F421B51CD900C0FA39 /* img_weekProgram_back.png in Resources */,
 				BBF631FD21BB5B04006A23AC /* img_manual_on@3x.png in Resources */,
+				36004A852227B4D800C99215 /* img_retrieve_verify@3x.png in Resources */,
 				BB52F9E321BE4149005FA33A /* img_tab_01_unselect@3x.png in Resources */,
 				369C16A422255FD90079159E /* addRoom_hand.png in Resources */,
 				BB0A40D621997C99004669CA /* img_addDevice@2x.png in Resources */,
@@ -2184,6 +2252,7 @@
 				BB63B60421B4151D00D77489 /* thermostat_+@3x.png in Resources */,
 				BB63B58521B3B94100D77489 /* thermostat_timing_on@2x.png in Resources */,
 				BB8B9E7A21A6ADEB00E5D8B2 /* valveStatus_abnormal@3x.png in Resources */,
+				36004A8A2227B64700C99215 /* img_retrieve_password@2x.png in Resources */,
 				BB5B03A821B90343007AC2B1 /* img_mine_aboutus@3x.png in Resources */,
 				BB5B036521B8CB6B007AC2B1 /* img_pwd_visiable.png in Resources */,
 				BBF631FE21BB5B04006A23AC /* img_auto_off@2x.png in Resources */,
@@ -2195,6 +2264,7 @@
 				BB425FD621BF519700AB6EFB /* img_thermostat_on@2x.png in Resources */,
 				BB63B60521B4151D00D77489 /* thermostat_-@3x.png in Resources */,
 				369C16A522255FD90079159E /* addRoom_hand@2x.png in Resources */,
+				36004A802227969200C99215 /* Imag_retrieve_phoneuser.png in Resources */,
 				BB5B03BC21B90343007AC2B1 /* img_mine_logout.png in Resources */,
 				BB5B035D21B8C3DA007AC2B1 /* img_login_header@2x.png in Resources */,
 				BB1EB39421E44E2B0024603A /* valveNode_selnormal@3x.png in Resources */,
@@ -2221,6 +2291,7 @@
 				BBF6323921BBAB34006A23AC /* valveAlertMark@3x.png in Resources */,
 				BB0A40AC21997C99004669CA /* img_tab_02_unselect@2x.png in Resources */,
 				BB7E796F221A61F50060A0CF /* img_noSharer@3x.png in Resources */,
+				36004A8B2227B64700C99215 /* img_retrieve_password@3x.png in Resources */,
 				BB0A40BB21997C99004669CA /* img_homeSet@2x.png in Resources */,
 				BB5B03CA21B90C48007AC2B1 /* img_mine_headerBG@3x.png in Resources */,
 				BBF6326521BBAB34006A23AC /* valveHeader@3x.png in Resources */,
@@ -2341,6 +2412,7 @@
 				BB2AD79421ABDA45006DB83A /* img_launchTitle.png in Resources */,
 				BB5B03CB21B90C48007AC2B1 /* img_mine_headerBG@2x.png in Resources */,
 				BBF6324321BBAB34006A23AC /* nodeLeakBig_normal@2x.png in Resources */,
+				36004A7E2227969200C99215 /* Imag_retrieve_phoneuser@2x.png in Resources */,
 				BBF6320021BB5B04006A23AC /* img_auto_off@3x.png in Resources */,
 				BB5B03A621B90343007AC2B1 /* pen.png in Resources */,
 				BBF6324A21BBAB34006A23AC /* valveSwitch_abnormal@3x.png in Resources */,
@@ -2463,6 +2535,7 @@
 				3EA530CA21AB9C88000A6D26 /* PasswordLoginController.m in Sources */,
 				BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */,
 				BB62E4DE21B5155000C0FA39 /* TherWeekProgramController.m in Sources */,
+				36004A8F2227E96500C99215 /* UsernameViewController.m in Sources */,
 				3EA530BF21AB9B43000A6D26 /* PhoneTFCell.m in Sources */,
 				BB2AC0C521A8EFE3006DB83A /* PasswordTableViewCell.m in Sources */,
 				BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */,
@@ -2500,6 +2573,7 @@
 				BB00A4FF21BA25B7004E4051 /* YAlertViewController.m in Sources */,
 				BB2AC10E21A94F42006DB83A /* HouseModel.m in Sources */,
 				BBAB2813221B9D4F00E21041 /* ShareDeviceSelectCell.m in Sources */,
+				36B8F16722263FA200652CFA /* ShareDeviceListCell.m in Sources */,
 				BB2AC10B21A94D63006DB83A /* AFSecurityPolicy.m in Sources */,
 				BB49B89821F5A8D100E32CF9 /* alarmModel.m in Sources */,
 				BB45BC4A21EF259E00504FF8 /* AddMemberController.m in Sources */,
@@ -2523,6 +2597,7 @@
 				369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */,
 				BB2AD79821ABDD3E006DB83A /* RegisterAccountController.m in Sources */,
 				BB2AC10921A94D63006DB83A /* AFURLRequestSerialization.m in Sources */,
+				36B8F16A22263FDE00652CFA /* ShareDeviceDetailCell.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
 				BB2AC0F121A8F156006DB83A /* ESPDataCode.m in Sources */,
 				BB62E4D521B4E07600C0FA39 /* TherWeekSelCell.m in Sources */,
@@ -2564,6 +2639,7 @@
 				3EA530C021AB9B43000A6D26 /* PhoneVerifyCell.m in Sources */,
 				BB49DFA321958867004E00A2 /* main.m in Sources */,
 				BB45BC4721EF1F6900504FF8 /* AddHouseMemberCell.m in Sources */,
+				36004A7A222784E700C99215 /* ModifyPasswordViewController.m in Sources */,
 				3ECFF39F219EB00C00024D2C /* SelectDeviceTypeCell.m in Sources */,
 				BB62E4DB21B5132200C0FA39 /* TherSettingCell.m in Sources */,
 				BB5B036D21B90069007AC2B1 /* MineViewController.m in Sources */,

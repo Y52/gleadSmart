@@ -34,7 +34,6 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 @property (nonatomic, strong) UILabel *testLabel;
 
 @property (strong, nonatomic) NSMutableArray *homeList;
-@property (strong, nonatomic) NSString *houseUid;
 @property (strong, nonatomic) UIButton *homeSetButton;
 
 @end
@@ -526,7 +525,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     
     HomeManagementController *HomeManagementVC = [[HomeManagementController alloc] init];
     HomeManagementVC.homeList = self.homeList;
-    HomeManagementVC.houseUid = self.houseUid;
+    HomeManagementVC.houseUid = [Database shareInstance].currentHouse.houseUid;
     [self.navigationController pushViewController:HomeManagementVC animated:YES];
 }
 

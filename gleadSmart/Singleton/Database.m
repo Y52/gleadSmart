@@ -280,6 +280,14 @@ static dispatch_once_t oneToken;
     return result;
 }
 
+- (BOOL)deleteRoom:(NSString *)roomUid{
+    static BOOL result = YES;
+    [_queueDB inDatabase:^(FMDatabase *db) {
+        result = [db executeUpdate:@"delete from room where roomUid = ?",roomUid];
+    }];
+    return result;
+}
+
 #pragma mark - API methods and update database
 - (void)getHouseHomeListAndDevice:(HouseModel *)house success:(void(^)(void))success failure:(void(^)(void))failure{
     [SVProgressHUD show];
