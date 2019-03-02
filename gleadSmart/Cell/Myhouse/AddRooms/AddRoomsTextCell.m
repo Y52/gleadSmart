@@ -41,7 +41,7 @@
             [_inputTF addTarget:self action:@selector(textFieldTextChange:) forControlEvents:UIControlEventEditingChanged];
             [self.contentView addSubview:_inputTF];
             [_inputTF mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(yAutoFit(2450.f), 30.f));
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(245.f), 30.f));
                 make.centerY.equalTo(self.contentView.mas_centerY);
                 make.left.equalTo(self.leftLabel.mas_right).offset(30.f);
             }];
