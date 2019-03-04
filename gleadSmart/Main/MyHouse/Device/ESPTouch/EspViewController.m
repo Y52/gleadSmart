@@ -69,7 +69,7 @@
     ssid = [netInfo objectForKey:@"SSID"];
     bssid = [netInfo objectForKey:@"BSSID"];
     if (ssid == NULL) {
-        [self showAlertView];
+        [self showNoWifiAlertView];
         self.wifiLabel.text = [NSString stringWithFormat:@"Wi-Fi:"];
         [_passwordTF resignFirstResponder];
     }else{
@@ -78,7 +78,7 @@
     }
 }
 
-- (void)showAlertView{
+- (void)showNoWifiAlertView{
     YAlertViewController *alert = [[YAlertViewController alloc] init];
     alert.lBlock = ^{
         
@@ -107,34 +107,43 @@
 
 - (void)confirmSSIDAndPassword{
     if (ssid == NULL) {
-        [self showAlertView];
+        [self showNoWifiAlertView];
         return;
     }
     if ([self.passwordTF.text isEqualToString:@""]) {
-        YAlertViewController *alert = [[YAlertViewController alloc] init];
-        alert.lBlock = ^{
-            
-        };
-        alert.rBlock = ^{
-            //获取Wi-Fi密码
-            self->password = self.passwordTF.text;
-            
-            DeviceConnectView *connectVC = [[DeviceConnectView alloc] init];
-            connectVC.ssid = self->ssid;
-            connectVC.bssid = self->bssid;
-            connectVC.password = self->password;
-            [self.navigationController pushViewController:connectVC animated:YES];
-
-        };
-        alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [self presentViewController:alert animated:NO completion:^{
-            [alert showView];
-            alert.titleLabel.text = LocalString(@"提示");
-            alert.messageLabel.text = LocalString(@"您输入的密码为空，请再次确认");
-            [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
-            [alert.rightBtn setTitle:LocalString(@"继续") forState:UIControlStateNormal];
-        }];
+        [self showNoPasswordAlert];
+    }else{
+        self->password = self.passwordTF.text;
+        DeviceConnectView *connectVC = [[DeviceConnectView alloc] init];
+        connectVC.ssid = self->ssid;
+        connectVC.bssid = self->bssid;
+        connectVC.password = self->password;
+        [self.navigationController pushViewController:connectVC animated:YES];
     }
+}
+
+- (void)showNoPasswordAlert{
+    YAlertViewController *alert = [[YAlertViewController alloc] init];
+    alert.lBlock = ^{
+        
+    };
+    alert.rBlock = ^{
+        self->password = self.passwordTF.text;
+        DeviceConnectView *connectVC = [[DeviceConnectView alloc] init];
+        connectVC.ssid = self->ssid;
+        connectVC.bssid = self->bssid;
+        connectVC.password = self->password;
+        [self.navigationController pushViewController:connectVC animated:YES];
+    };
+    alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:alert animated:NO completion:^{
+        [alert showView];
+        alert.titleLabel.text = LocalString(@"提示");
+        alert.messageLabel.text = LocalString(@"您输入的密码为空，请再次确认");
+        [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
+        [alert.rightBtn setTitle:LocalString(@"继续") forState:UIControlStateNormal];
+    }];
+
 }
 
 #pragma mark - setters and getters

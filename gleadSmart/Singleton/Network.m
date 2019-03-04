@@ -403,17 +403,18 @@ static int noUserInteractionHeartbeat = 0;
              ～～未保存过，需要上传到服务器，保存到本地～～
              *不需要保存，显示在所有设备里，用户添加到房间才保存*
              **/
-            [self addNewDeviceWith:device];
             
             //初始命名
             if ([device.type integerValue] == 1) {
-                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"温控器"),[device.mac substringWithRange:NSMakeRange(0, 2)]];
+                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"温控器"),[device.mac substringWithRange:NSMakeRange(6, 2)]];
             }else if ([device.type integerValue] == 2){
-                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"无线水阀"),[device.mac substringWithRange:NSMakeRange(0, 2)]];
+                device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"无线水阀"),[device.mac substringWithRange:NSMakeRange(6, 2)]];
                 NSLog(@"%@",device.name);
             }
-            
-            [self.deviceArray addObject:device];
+            __block typeof(self) blockSelf = self;
+            [self addNewDeviceWith:device success:^{
+                [blockSelf.deviceArray addObject:device];
+            }];
         }
     }
     
@@ -587,7 +588,7 @@ static int noUserInteractionHeartbeat = 0;
 /*
  *上传新设备
  */
-- (void)addNewDeviceWith:(DeviceModel *)device{
+- (void)addNewDeviceWith:(DeviceModel *)device success:(void(^)(void))success{
     Database *db = [Database shareInstance];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -617,6 +618,9 @@ static int noUserInteractionHeartbeat = 0;
                    *保存到本地
                    */
                   [db insertNewDevice:device];
+                  if (success) {
+                      success();
+                  }
               }else{
                   
               }
@@ -726,7 +730,6 @@ static int noUserInteractionHeartbeat = 0;
  *单独查询每个分享设备数据流信息
  */
 - (void)inquireShareDeviceInfoByOneNetdatastream:(DeviceModel *)device{
-    Database *db = [Database shareInstance];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     //设置超时时间

@@ -198,7 +198,6 @@
 		BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9121958864004E00A2 /* AppDelegate.m */; };
 		BB49DF9521958864004E00A2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9421958864004E00A2 /* ViewController.m */; };
 		BB49DF9821958864004E00A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB49DF9621958864004E00A2 /* Main.storyboard */; };
-		BB49DF9B21958864004E00A2 /* gleadSmart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9921958864004E00A2 /* gleadSmart.xcdatamodeld */; };
 		BB49DF9D21958867004E00A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB49DF9C21958867004E00A2 /* Assets.xcassets */; };
 		BB49DFA021958867004E00A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB49DF9E21958867004E00A2 /* LaunchScreen.storyboard */; };
 		BB49DFA321958867004E00A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DFA221958867004E00A2 /* main.m */; };
@@ -751,7 +750,6 @@
 		BB49DF9321958864004E00A2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		BB49DF9421958864004E00A2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		BB49DF9721958864004E00A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BB49DF9A21958864004E00A2 /* gleadSmart.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = gleadSmart.xcdatamodel; sourceTree = "<group>"; };
 		BB49DF9C21958867004E00A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB49DF9F21958867004E00A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB49DFA121958867004E00A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1700,7 +1698,6 @@
 				BB49DFA121958867004E00A2 /* Info.plist */,
 				BB49DFA221958867004E00A2 /* main.m */,
 				BB0A4100219986FE004669CA /* gleadSmart-Prefix.pch */,
-				BB49DF9921958864004E00A2 /* gleadSmart.xcdatamodeld */,
 			);
 			path = gleadSmart;
 			sourceTree = "<group>";
@@ -2619,7 +2616,6 @@
 				BB2AC0EE21A8F156006DB83A /* ESPUDPSocketServer.m in Sources */,
 				3EA530CD21AB9C88000A6D26 /* RetrievePasswordController.m in Sources */,
 				BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */,
-				BB49DF9B21958864004E00A2 /* gleadSmart.xcdatamodeld in Sources */,
 				BB2AC0E921A8F156006DB83A /* ESP_NetUtil.m in Sources */,
 				BB2CB8A6221FE171001E6703 /* SharerRemarkController.m in Sources */,
 				BB2AC10821A94D63006DB83A /* AFURLSessionManager.m in Sources */,
@@ -2990,19 +2986,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		BB49DF9921958864004E00A2 /* gleadSmart.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				BB49DF9A21958864004E00A2 /* gleadSmart.xcdatamodel */,
-			);
-			currentVersion = BB49DF9A21958864004E00A2 /* gleadSmart.xcdatamodel */;
-			path = gleadSmart.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = BB49DF8521958864004E00A2 /* Project object */;
 }

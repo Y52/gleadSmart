@@ -36,12 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///@brief 接收数据
 @property (strong, nonatomic) NSMutableArray *recivedData69;
 
-///@brief Wi-Fi信息
-@property (strong, nonatomic) NSString *ssid;
-@property (strong, nonatomic) NSString *bssid;
-@property (strong, nonatomic) NSString *apPwd;
-@property (strong, nonatomic) NSString *ipAddr;
-
 ///@brief Device Info
 @property (strong, nonatomic) NSMutableArray *deviceArray;
 

@@ -225,12 +225,12 @@
     if (useAES) {
         NSString *secretKey = @"1234567890123456"; // TODO modify your own key
         ESPAES *aes = [[ESPAES alloc] initWithKey:secretKey];
-        self.esptouchTask = [[ESPTouchTask alloc]initWithApSsid:[Network shareNetwork].ssid andApBssid:[Network shareNetwork].bssid andApPwd:[Network shareNetwork].apPwd andAES:aes];
+        self.esptouchTask = [[ESPTouchTask alloc]initWithApSsid:self.ssid andApBssid:self.bssid andApPwd:self.password andAES:aes];
     } else {
-        self.esptouchTask = [[ESPTouchTask alloc]initWithApSsid:[Network shareNetwork].ssid andApBssid:[Network shareNetwork].bssid andApPwd:[Network shareNetwork].apPwd];
-        NSLog(@"%@",[Network shareNetwork].ssid);
-        NSLog(@"%@",[Network shareNetwork].bssid);
-        NSLog(@"%@",[Network shareNetwork].apPwd);
+        self.esptouchTask = [[ESPTouchTask alloc]initWithApSsid:self.ssid andApBssid:self.bssid andApPwd:self.password];
+        NSLog(@"%@",self.ssid);
+        NSLog(@"%@",self.bssid);
+        NSLog(@"%@",self.password);
     }
     
     // set delegate
