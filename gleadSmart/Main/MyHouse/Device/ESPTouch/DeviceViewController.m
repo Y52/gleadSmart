@@ -13,12 +13,7 @@
 #import "MJRefresh.h"
 #import "DeviceTableViewCell.h"
 
-#import <SystemConfiguration/CaptiveNetwork.h>
-
-#import <sys/socket.h>
-#import <netdb.h>
-#import <ifaddrs.h>
-#import <arpa/inet.h>
+#import <netdb.h>//解析udp获取的IP地址
 
 #define HEIGHT_CELL 70.f
 #define HEIGHT_HEADER 44.f
@@ -281,54 +276,6 @@ NSString *const CellIdentifier_device = @"CellID_device";
     NSLog(@"没有发送数据");
 }
 
-#pragma mark - 获取网络信息
-- (NSDictionary *)fetchNetInfo
-{
-    NSArray *interfaceNames = CFBridgingRelease(CNCopySupportedInterfaces());
-    //    NSLog(@"%s: Supported interfaces: %@", __func__, interfaceNames);
-    
-    NSDictionary *SSIDInfo;
-    for (NSString *interfaceName in interfaceNames) {
-        SSIDInfo = CFBridgingRelease(
-                                     CNCopyCurrentNetworkInfo((__bridge CFStringRef)interfaceName));
-        //        NSLog(@"%s: %@ => %@", __func__, interfaceName, SSIDInfo);
-        
-        BOOL isNotEmpty = (SSIDInfo.count > 0);
-        if (isNotEmpty) {
-            break;
-        }
-    }
-    return SSIDInfo;
-}
-
-- (NSString *)deviceIPAdress {
-    NSString *address = @"an error occurred when obtaining ip address";
-    struct ifaddrs *interfaces = NULL;
-    struct ifaddrs *temp_addr = NULL;
-    int success = 0;
-    
-    success = getifaddrs(&interfaces);
-    
-    if (success == 0) { // 0 表示获取成功
-        
-        temp_addr = interfaces;
-        while (temp_addr != NULL) {
-            if( temp_addr->ifa_addr->sa_family == AF_INET) {
-                // Check if interface is en0 which is the wifi connection on the iPhone
-                if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
-                    // Get NSString from C String
-                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
-                }
-            }
-            
-            temp_addr = temp_addr->ifa_next;
-        }
-    }
-    
-    freeifaddrs(interfaces);
-    return address;
-}
-
 #pragma mark - uitableview
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
@@ -505,13 +452,6 @@ NSString *const CellIdentifier_device = @"CellID_device";
 
 - (void)goEsp{
     EspViewController *EspVC = [[EspViewController alloc] init];
-    NSDictionary *netInfo = [self fetchNetInfo];
-    EspVC.ssid = [netInfo objectForKey:@"SSID"];
-    EspVC.bssid = [netInfo objectForKey:@"BSSID"];
-    NSLog(@"%@",[netInfo objectForKey:@"SSID"]);
-    EspVC.block = ^(ESPTouchResult *result) {
-        
-    };
     [self.navigationController pushViewController:EspVC animated:YES];
     
 }

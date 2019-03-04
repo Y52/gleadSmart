@@ -29,14 +29,14 @@
 - (UIView *)alertView{
     if (!_alertView) {
         _alertView = [[UIView alloc] init];
-        _alertView.frame = CGRectMake(52.5 / _WScale_alert, 172 / _HScale_alert, 270 / _WScale_alert, 203 / _HScale_alert);
+        _alertView.frame = CGRectMake(52.5, 172, 270, 203);
         _alertView.center = self.view.center;
         _alertView.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1];
         _alertView.layer.cornerRadius = 10.f;
         [self.view addSubview:_alertView];
         
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.frame = CGRectMake(44 / _WScale_alert,20 / _HScale_alert,182 / _WScale_alert,21 / _HScale_alert);
+        _titleLabel.frame = CGRectMake(44,20,182,21);
         _titleLabel.text = @"";
         _titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:16];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -44,7 +44,7 @@
         [_alertView addSubview:_titleLabel];
         
         _messageLabel = [[UILabel alloc] init];
-        _messageLabel.frame = CGRectMake(16 / _WScale_alert,57 / _HScale_alert,238 / _WScale_alert,42 / _HScale_alert);
+        _messageLabel.frame = CGRectMake(16,57,238,42);
         _messageLabel.text = @"";
         _messageLabel.textAlignment = NSTextAlignmentCenter;
         _messageLabel.numberOfLines = 0;
@@ -53,22 +53,22 @@
         [_alertView addSubview:_messageLabel];
         
         _leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _leftBtn.frame = CGRectMake(15 / _WScale_alert,129 / _HScale_alert,114 / _WScale_alert,44 / _HScale_alert);
+        _leftBtn.frame = CGRectMake(15,129,114,44);
         [_leftBtn setTitleColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1] forState:UIControlStateNormal];
         [_leftBtn setTitle:LocalString(@"") forState:UIControlStateNormal];
         [_leftBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:16]];
         [_leftBtn setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-        [_leftBtn setButtonStyleWithColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1] Width:1 cornerRadius:18.f / _HScale_alert];
+        [_leftBtn setButtonStyleWithColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1] Width:1 cornerRadius:18.f];
         [_leftBtn addTarget:self action:@selector(leftAction) forControlEvents:UIControlEventTouchUpInside];
         [_alertView addSubview:_leftBtn];
         
         _rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _rightBtn.frame = CGRectMake(141 / _WScale_alert,129 / _HScale_alert,114 / _WScale_alert,44 / _HScale_alert);
+        _rightBtn.frame = CGRectMake(141,129,114,44);
         [_rightBtn setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
         [_rightBtn setTitle:LocalString(@"") forState:UIControlStateNormal];
         [_rightBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:16]];
         [_rightBtn setBackgroundColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:1]];
-        [_rightBtn setButtonStyleWithColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1] Width:1 cornerRadius:18.f / _HScale_alert];
+        [_rightBtn setButtonStyleWithColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1] Width:1 cornerRadius:18.f];
         [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
         [_alertView addSubview:_rightBtn];
     }

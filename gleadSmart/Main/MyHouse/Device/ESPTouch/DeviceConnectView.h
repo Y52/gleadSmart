@@ -10,4 +10,8 @@
 
 @interface DeviceConnectView : UIViewController
 
+@property (nonatomic, strong) NSString *ssid;
+@property (nonatomic, strong) NSString *bssid;
+@property (nonatomic, strong) NSString *password;
+
 @end

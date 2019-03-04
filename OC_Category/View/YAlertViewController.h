@@ -12,8 +12,6 @@ typedef void(^leftBlock)(void);
 typedef void(^rightBlock)(void);
 
 @interface YAlertViewController : UIViewController
-@property (nonatomic) float WScale_alert;
-@property (nonatomic) float HScale_alert;
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *messageLabel;

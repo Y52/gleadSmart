@@ -99,8 +99,6 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
     };
     alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:alert animated:NO completion:^{
-        alert.WScale_alert = 1;
-        alert.HScale_alert = 1;
         [alert showView];
         alert.titleLabel.text = LocalString(@"提示");
         alert.messageLabel.text = LocalString(@"确定移除该成员吗？");

@@ -166,8 +166,6 @@ static CGFloat const HEIGHT_CELL = 51.f;
         };
         alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self presentViewController:alert animated:NO completion:^{
-            alert.WScale_alert = 1;
-            alert.HScale_alert = 1;
             [alert showView];
             alert.titleLabel.text = LocalString(@"提示");
             alert.messageLabel.text = LocalString(@"确定退出登录吗？");

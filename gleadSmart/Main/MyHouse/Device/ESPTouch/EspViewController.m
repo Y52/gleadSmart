@@ -23,7 +23,11 @@
 
 @end
 
-@implementation EspViewController
+@implementation EspViewController{
+    NSString *ssid;
+    NSString *bssid;
+    NSString *password;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,9 +41,100 @@
     self.nextBtn = [self nextBtn];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getSSIDAndBSSID];
+}
+
+#pragma mark - private methods
+- (NSDictionary *)fetchNetInfo
+{
+    NSArray *interfaceNames = CFBridgingRelease(CNCopySupportedInterfaces());
+    //    NSLog(@"%s: Supported interfaces: %@", __func__, interfaceNames);
+    
+    NSDictionary *SSIDInfo;
+    for (NSString *interfaceName in interfaceNames) {
+        SSIDInfo = CFBridgingRelease(CNCopyCurrentNetworkInfo((__bridge CFStringRef)interfaceName));
+        //NSLog(@"%s: %@ => %@", __func__, interfaceName, SSIDInfo);
+        BOOL isNotEmpty = (SSIDInfo.count > 0);
+        if (isNotEmpty) {
+            break;
+        }
+    }
+    return SSIDInfo;
+}
+
+- (void)getSSIDAndBSSID{
+    NSDictionary *netInfo = [self fetchNetInfo];
+    ssid = [netInfo objectForKey:@"SSID"];
+    bssid = [netInfo objectForKey:@"BSSID"];
+    if (ssid == NULL) {
+        [self showAlertView];
+        self.wifiLabel.text = [NSString stringWithFormat:@"Wi-Fi:"];
+        [_passwordTF resignFirstResponder];
+    }else{
+        self.wifiLabel.text = [NSString stringWithFormat:@"Wi-Fi:%@",ssid];
+        [_passwordTF becomeFirstResponder];
+    }
+}
+
+- (void)showAlertView{
+    YAlertViewController *alert = [[YAlertViewController alloc] init];
+    alert.lBlock = ^{
+        
+    };
+    alert.rBlock = ^{
+        //去Wi-Fi设置页面
+        [self jump2Settings];
+    };
+    alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:alert animated:NO completion:^{
+        [alert showView];
+        alert.titleLabel.text = LocalString(@"提示");
+        alert.messageLabel.text = LocalString(@"当前手机没有连接Wi-Fi");
+        [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
+        [alert.rightBtn setTitle:LocalString(@"去连接") forState:UIControlStateNormal];
+    }];
+
+}
+
+- (void)jump2Settings{
+    NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    if([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+    }
+}
+
+- (void)confirmSSIDAndPassword{
+    if (ssid == NULL) {
+        [self showAlertView];
+        return;
+    }
+    if ([self.passwordTF.text isEqualToString:@""]) {
+        YAlertViewController *alert = [[YAlertViewController alloc] init];
+        alert.lBlock = ^{
+            
+        };
+        alert.rBlock = ^{
+            //获取Wi-Fi密码
+            self->password = self.passwordTF.text;
+            
+            DeviceConnectView *connectVC = [[DeviceConnectView alloc] init];
+            connectVC.ssid = self->ssid;
+            connectVC.bssid = self->bssid;
+            connectVC.password = self->password;
+            [self.navigationController pushViewController:connectVC animated:YES];
+
+        };
+        alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self presentViewController:alert animated:NO completion:^{
+            [alert showView];
+            alert.titleLabel.text = LocalString(@"提示");
+            alert.messageLabel.text = LocalString(@"您输入的密码为空，请再次确认");
+            [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
+            [alert.rightBtn setTitle:LocalString(@"继续") forState:UIControlStateNormal];
+        }];
+    }
 }
 
 #pragma mark - setters and getters
@@ -80,6 +175,7 @@
             make.top.equalTo(self.backgroundView.mas_top).offset(60.f);
             make.centerX.equalTo(self.backgroundView.mas_centerX);
         }];
+        passwordView.layer.cornerRadius = 10.f;
 
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.image = [UIImage imageNamed:@"img_wifipwd"];
@@ -109,7 +205,7 @@
         _wifiLabel = [[UILabel alloc] init];
         _wifiLabel.font = [UIFont systemFontOfSize:13.f];
         _wifiLabel.textColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1.0];
-        _wifiLabel.text = @"Wi-Fi：CMCC-602";
+        _wifiLabel.text = @"Wi-Fi:CMCC-602";
         _wifiLabel.adjustsFontSizeToFitWidth = YES;
         [self.backgroundView addSubview:_wifiLabel];
         [_wifiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -128,7 +224,7 @@
         [_changeWifiButton setTitle:LocalString(@"更改网络") forState:UIControlStateNormal];
         [_changeWifiButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:13]];
         _changeWifiButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-        [_changeWifiButton addTarget:self action:@selector(changeWifi) forControlEvents:UIControlEventTouchUpInside];
+        [_changeWifiButton addTarget:self action:@selector(jump2Settings) forControlEvents:UIControlEventTouchUpInside];
         [self.backgroundView addSubview:_changeWifiButton];
         
         [_changeWifiButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -157,7 +253,7 @@
         [_nextBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_nextBtn setTitle:LocalString(@"确定") forState:UIControlStateNormal];
         [_nextBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:20]];
-        [_nextBtn addTarget:self action:@selector(goNextView) forControlEvents:UIControlEventTouchUpInside];
+        [_nextBtn addTarget:self action:@selector(confirmSSIDAndPassword) forControlEvents:UIControlEventTouchUpInside];
         [self.backgroundView addSubview:_nextBtn];
         [_nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(320.f), 50.f));
