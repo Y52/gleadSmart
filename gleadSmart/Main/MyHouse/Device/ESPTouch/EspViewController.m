@@ -8,6 +8,7 @@
 
 #import "EspViewController.h"
 #import "DeviceConnectView.h"
+#import "APNetworkController.h"
 
 #import <SystemConfiguration/CaptiveNetwork.h>
 
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) UILabel *wifiLabel;
 @property (nonatomic, strong) UIButton *changeWifiButton;
 @property (nonatomic, strong) UIButton *nextBtn;
+@property (nonatomic, strong) UILabel *tipLabel;
 
 @end
 
@@ -33,12 +35,14 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"7A7A7A"]];
 
-    self.navigationItem.title = LocalString(@"添加设备");
+    [self setNavItem];
+    
     self.backgroundView = [self backgroundView];
     self.passwordTF = [self passwordTF];
     self.wifiLabel = [self wifiLabel];
     self.changeWifiButton = [self changeWifiButton];
     self.nextBtn = [self nextBtn];
+    self.tipLabel = [self tipLabel];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -143,10 +147,28 @@
         [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
         [alert.rightBtn setTitle:LocalString(@"继续") forState:UIControlStateNormal];
     }];
+}
 
+- (void)goAP{
+    APNetworkController *apVC = [[APNetworkController alloc] init];
+    [self.navigationController pushViewController:apVC animated:YES];
 }
 
 #pragma mark - setters and getters
+- (void)setNavItem{
+    self.navigationItem.title = LocalString(@"添加设备");
+
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightButton.frame = CGRectMake(0, 0, 60, 30);
+    [rightButton setTitle:LocalString(@"AP模式") forState:UIControlStateNormal];
+    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [rightButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+    [rightButton addTarget:self action:@selector(goAP) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.titleLabel.textAlignment = NSTextAlignmentRight;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+}
+
 - (UIView *)backgroundView{
     if (!_backgroundView) {
         _backgroundView = [[UIView alloc] init];
@@ -271,6 +293,23 @@
         }];
     }
     return _nextBtn;
+}
+
+- (UILabel *)tipLabel{
+    if (!_tipLabel) {
+        _tipLabel = [[UILabel alloc] init];
+        _tipLabel.text = LocalString(@"仅支持2~4GWi-FI网络");
+        _tipLabel.font = [UIFont systemFontOfSize:16.f];
+        _tipLabel.textColor = [UIColor whiteColor];
+        _tipLabel.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:_tipLabel];
+        [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(200, 20.f));
+            make.top.equalTo(self.backgroundView.mas_bottom).offset(10.f);
+            make.centerX.equalTo(self.view.mas_centerX);
+        }];
+    }
+    return _tipLabel;
 }
 
 @end

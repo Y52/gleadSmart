@@ -266,6 +266,36 @@ static int noUserInteractionHeartbeat = 0;
     _frameCount++;
 }
 
+#pragma mark - AP配网组帧
+/*
+ *AP配网组帧
+ */
+- (void)APsendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_sync(self->_queue, ^{
+            
+            //线程锁需要放在最前面，放在后面锁不住
+            dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC);
+            dispatch_semaphore_wait(self.sendSignal, time);
+            
+            NSMutableArray *data69 = [[NSMutableArray alloc] init];
+            [data69 addObject:[NSNumber numberWithUnsignedInteger:0x69]];
+            [data69 addObject:[NSNumber numberWithUnsignedInteger:controlCode]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(0, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(4, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(6, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:self->_frameCount]];
+            [data69 addObject:[NSNumber numberWithInteger:data.count]];
+            [data69 addObjectsFromArray:data];
+            [data69 addObject:[NSNumber numberWithUnsignedChar:[NSObject getCS:data69]]];
+            [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
+            
+            [self send:data69 withTag:100];//内网tcp发送
+        });
+    });
+}
+
 #pragma mark - Actions
 //tcp connect
 - (BOOL)connectToHost:(NSString *)host onPort:(uint16_t)port error:(NSError *__autoreleasing *)errPtr{

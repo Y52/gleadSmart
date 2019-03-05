@@ -47,6 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///@brief Frame69帧发送方法
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data;
 
+///@brief AP配网发帧
+- (void)APsendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data;
+
 ///@brief OneNET回复数据处理
 - (void)handleOneNET69Message:(NSString *)cmmdReply;
 

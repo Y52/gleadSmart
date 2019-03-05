@@ -295,6 +295,8 @@
 		BB62E4F821B51CD900C0FA39 /* img_weekProgram_out@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4EC21B51CD900C0FA39 /* img_weekProgram_out@2x.png */; };
 		BB62E4F921B51CD900C0FA39 /* img_weekProgram_getup.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4ED21B51CD900C0FA39 /* img_weekProgram_getup.png */; };
 		BB62E4FC21B521F100C0FA39 /* WeekProgramSetController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4FB21B521F100C0FA39 /* WeekProgramSetController.m */; };
+		BB63AACF222E05DC00DFC848 /* ConnectApNetController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB63AACE222E05DC00DFC848 /* ConnectApNetController.m */; };
+		BB63AAD2222E156B00DFC848 /* APProcessController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB63AAD1222E156B00DFC848 /* APProcessController.m */; };
 		BB63B57E21B3B94100D77489 /* thermostatControl_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57521B3B94000D77489 /* thermostatControl_on@3x.png */; };
 		BB63B57F21B3B94100D77489 /* thermostatControl_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57621B3B94000D77489 /* thermostatControl_on@2x.png */; };
 		BB63B58021B3B94100D77489 /* thermostatSet_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57721B3B94000D77489 /* thermostatSet_on@2x.png */; };
@@ -868,6 +870,10 @@
 		BB62E4ED21B51CD900C0FA39 /* img_weekProgram_getup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_weekProgram_getup.png; sourceTree = "<group>"; };
 		BB62E4FA21B521F100C0FA39 /* WeekProgramSetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeekProgramSetController.h; sourceTree = "<group>"; };
 		BB62E4FB21B521F100C0FA39 /* WeekProgramSetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeekProgramSetController.m; sourceTree = "<group>"; };
+		BB63AACD222E05DC00DFC848 /* ConnectApNetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConnectApNetController.h; sourceTree = "<group>"; };
+		BB63AACE222E05DC00DFC848 /* ConnectApNetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConnectApNetController.m; sourceTree = "<group>"; };
+		BB63AAD0222E156B00DFC848 /* APProcessController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APProcessController.h; sourceTree = "<group>"; };
+		BB63AAD1222E156B00DFC848 /* APProcessController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APProcessController.m; sourceTree = "<group>"; };
 		BB63B57521B3B94000D77489 /* thermostatControl_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl_on@3x.png"; sourceTree = "<group>"; };
 		BB63B57621B3B94000D77489 /* thermostatControl_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl_on@2x.png"; sourceTree = "<group>"; };
 		BB63B57721B3B94000D77489 /* thermostatSet_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatSet_on@2x.png"; sourceTree = "<group>"; };
@@ -1527,6 +1533,10 @@
 				BB37DF0621A7EFC400B2121B /* DeviceConnectView.m */,
 				BB8AE4B222292F890074118D /* APNetworkController.h */,
 				BB8AE4B322292F890074118D /* APNetworkController.m */,
+				BB63AACD222E05DC00DFC848 /* ConnectApNetController.h */,
+				BB63AACE222E05DC00DFC848 /* ConnectApNetController.m */,
+				BB63AAD0222E156B00DFC848 /* APProcessController.h */,
+				BB63AAD1222E156B00DFC848 /* APProcessController.m */,
 			);
 			path = ESPTouch;
 			sourceTree = "<group>";
@@ -2588,10 +2598,12 @@
 				3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */,
 				BB5B03CE21B91290007AC2B1 /* AccountViewController.m in Sources */,
 				BB2AD79B21ABE2B5006DB83A /* PhoneVerifyCell2.m in Sources */,
+				BB63AAD2222E156B00DFC848 /* APProcessController.m in Sources */,
 				BB2AC10A21A94D63006DB83A /* AFNetworkReachabilityManager.m in Sources */,
 				BB62E4D221B4DD7C00C0FA39 /* TherWeekSelectController.m in Sources */,
 				369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */,
 				BB2AD79821ABDD3E006DB83A /* RegisterAccountController.m in Sources */,
+				BB63AACF222E05DC00DFC848 /* ConnectApNetController.m in Sources */,
 				BB2AC10921A94D63006DB83A /* AFURLRequestSerialization.m in Sources */,
 				36B8F16A22263FDE00652CFA /* ShareDeviceDetailCell.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
