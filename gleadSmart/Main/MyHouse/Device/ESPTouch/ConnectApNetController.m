@@ -15,9 +15,11 @@
 @property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UIButton *connectButton;
 
+
 @end
 
-@implementation ConnectApNetController
+@implementation ConnectApNetController{
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,19 +29,34 @@
 
     self.backgroundView = [self backgroundView];
     self.connectButton = [self connectButton];
+    
+    [self applicationWillEnterForeground];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self confirmWifiName];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - private methods
+- (void)applicationWillEnterForeground{
+    UIApplication *app = [UIApplication sharedApplication];
+    [[NSNotificationCenter defaultCenter]addObserverForName:UIApplicationWillEnterForegroundNotification  object:app queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [self confirmWifiName];
+    }];
+}
+
 - (void)confirmWifiName{
     NSDictionary *netInfo = [self fetchNetInfo];
     NSString *ssid = [netInfo objectForKey:@"SSID"];
-    if ([ssid hasPrefix:@"Glead"]) {
-        [self goAPProcess];
+    if ([ssid hasPrefix:@"ESP"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self goAPProcess];
+        });
     }
 }
 
@@ -91,6 +108,7 @@
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.text = LocalString(@"将手机Wi-Fi连接到设备热点");
         titleLabel.font = [UIFont boldSystemFontOfSize:25.f];
+        titleLabel.adjustsFontSizeToFitWidth = YES;
         titleLabel.numberOfLines = 0;
         [_backgroundView addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -101,7 +119,7 @@
         
         UITextView *textView = [[UITextView alloc] init];
         textView.backgroundColor = [UIColor clearColor];
-        textView.text = LocalString(@"1.请将手机连接到如下热点:SmartLife-XXXX\n2.返回本应用，继续添加设备");
+        textView.text = LocalString(@"1.请将手机连接到如下热点: SmartLife-XXXX\n2.返回本应用，继续添加设备");
         textView.font = [UIFont systemFontOfSize:17.f];
         textView.textAlignment = NSTextAlignmentLeft;
         textView.textColor = [UIColor blackColor];
@@ -136,5 +154,6 @@
     }
     return _connectButton;
 }
+
 
 @end

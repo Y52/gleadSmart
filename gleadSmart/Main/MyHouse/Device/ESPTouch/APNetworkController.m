@@ -200,6 +200,8 @@
         _passwordTF = [[UITextField alloc] init];
         _passwordTF.textColor = [UIColor colorWithHexString:@"A1A1A1"];
         _passwordTF.placeholder = LocalString(@"请输入Wi-Fi密码");
+        _passwordTF.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _passwordTF.autocorrectionType = UITextAutocorrectionTypeNo;
         [passwordView addSubview:_passwordTF];
         [_passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(180.f), 20.f));

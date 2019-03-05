@@ -56,7 +56,7 @@ NSString *const CellIdentifier_sharerInputAccount = @"CellID_sharerInputAccount"
         NSDictionary *dic = @{@"mac":device.mac,@"type":device.type};
         [deviceDicArr addObject:dic];
     }
-    NSDictionary *parameters = @{@"houseUid":self.houseUid,@"mobile":self->mobile,@"ownerUid":db.user.userId,@"deviceList":deviceDicArr};
+    NSDictionary *parameters = @{@"houseUid":self.houseUid,@"mobile":self->mobile,@"userId":db.user.userId,@"deviceList":deviceDicArr};
     
     [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];

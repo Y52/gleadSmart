@@ -235,12 +235,14 @@ static int noUserInteractionHeartbeat = 0;
     [self.udpTimer setFireDate:[NSDate distantFuture]];
     sleep(1.f);
     
-    //查询设备帧，一连上内网查一次
-    UInt8 controlCode = 0x00;
-    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-    [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
-
-    [_mySocket readDataWithTimeout:-1 tag:1];
+    if ([self.connectedDevice.mac isEqualToString:[Database shareInstance].currentHouse.mac]) {
+        //查询设备帧，一连上内网查一次
+        UInt8 controlCode = 0x00;
+        NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+        [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+        
+        [_mySocket readDataWithTimeout:-1 tag:1];
+    }
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
@@ -750,7 +752,11 @@ static int noUserInteractionHeartbeat = 0;
             [data69 addObject:[NSNumber numberWithUnsignedChar:[NSObject getCS:data69]]];
             [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
             
-            [self oneNETSendData:data69 apiKey:shareDevice.apiKey deviceId:shareDevice.deviceId];//OneNet发送
+            if (![shareDevice.shareDeviceHouseMac isEqualToString:self.connectedDevice.mac]) {
+                [self oneNETSendData:data69 apiKey:shareDevice.apiKey deviceId:shareDevice.deviceId];//OneNet发送
+            }else{
+                [self send:data69 withTag:100];//内网tcp发送
+            }
             
         });
     });

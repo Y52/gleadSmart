@@ -157,7 +157,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
             [deviceDicArr addObject:dic];
         }
     }
-    NSDictionary *parameters = @{@"houseUid":self.house.houseUid,@"mobile":self.sharer.mobile,@"ownerUid":db.user.userId,@"deviceList":deviceDicArr};
+    NSDictionary *parameters = @{@"houseUid":self.house.houseUid,@"mobile":self.sharer.mobile,@"userId":db.user.userId,@"deviceList":deviceDicArr};
     NSLog(@"%@",parameters);
     
     [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

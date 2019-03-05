@@ -156,13 +156,13 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         }
         [self getWeatherByLocation];//获取天气信息
         [self getAirQualityByLocation];//获取空气质量
-        [self getHouseHomeListAndDeviceWithDatabase];//获取房间和设备
+        [self getHouseHomeListAndDeviceWithDatabase];//数据库获取房间和设备
         [self reloadData];//wmpagecontroller更新滑动列表
     } failure:^{
         [self getWeatherByLocation];//获取天气信息
         [self getAirQualityByLocation];//获取空气质量
-        [self getHouseHomeListAndDeviceWithDatabase];//获取房间和设备
-        
+        [self getHouseHomeListAndDeviceWithDatabase];//数据库获取房间和设备
+        db.shareDeviceArray = [db queryAllShareDevice];//http请求失败后数据库获取共享设备
     }];
 }
 

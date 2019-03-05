@@ -39,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL isShare;
 @property (nonatomic, strong) NSString *apiKey;
 @property (nonatomic, strong) NSString *deviceId;
+@property (nonatomic, strong) NSString *shareDeviceHouseMac;
 
 @end
 

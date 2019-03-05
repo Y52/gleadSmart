@@ -50,7 +50,7 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     NSLog(@"%@",url);
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"ownerUid"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];

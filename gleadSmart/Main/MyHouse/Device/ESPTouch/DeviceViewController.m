@@ -79,11 +79,6 @@ NSString *const CellIdentifier_device = @"CellID_device";
     [_timer setFireDate:[NSDate distantFuture]];
     [_timer invalidate];
     _timer = nil;
-    
-    Network *net = [Network shareNetwork];
-    [net.udpSocket beginReceiving:nil];
-    [net.udpTimer setFireDate:[NSDate date]];
-
 }
 
 - (void)dealloc{

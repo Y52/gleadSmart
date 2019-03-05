@@ -33,6 +33,9 @@ static float HEIGHT_HEADER = 40.f;
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     
+    Network *net = [Network shareNetwork];
+    [net.udpSocket beginReceiving:nil];
+    [net.udpTimer setFireDate:[NSDate date]];
 }
 #pragma mark - Lazy Load
 -(UITableView *)deviceTypeTable{

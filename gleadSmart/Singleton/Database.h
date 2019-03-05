@@ -44,15 +44,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (DeviceModel *)queryGateway:(NSString *)houseUid;
 - (BOOL)queryDevice:(NSString *)mac;
 - (NSMutableArray *)queryDevicesWith:(NSString *)roomUid;
+- (NSMutableArray *)queryAllShareDevice;
 ///@brief database insert
 - (BOOL)insertNewHouse:(HouseModel *)house;
 - (BOOL)insertNewRoom:(RoomModel *)room;
 - (BOOL)insertNewDevice:(DeviceModel *)device;
+- (BOOL)insertNewShareDevice:(DeviceModel *)device;
 ///@brief database update
 - (BOOL)updateHouse:(HouseModel *)house;
 ///@brief database delete
 - (BOOL)deleteDevice:(NSString *)mac;
 - (BOOL)deleteRoom:(NSString *)roomUid;
+- (BOOL)deleteShareDevice:(NSString *)mac;
 
 ///@brief API
 - (void)getHouseHomeListAndDevice:(HouseModel *)house success:(void(^)(void))success failure:(void(^)(void))failure;

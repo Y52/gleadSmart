@@ -37,16 +37,11 @@
     self.udpSocket = [self udpSocket];
     self.lock = [self lock];
     
-    [self tcpSendSSID];
     [self sendSearchBroadcast];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    Network *net = [Network shareNetwork];
-    [net.udpSocket pauseReceiving];
-    [net.udpTimer setFireDate:[NSDate distantFuture]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -55,11 +50,6 @@
     [_timer setFireDate:[NSDate distantFuture]];
     [_timer invalidate];
     _timer = nil;
-    
-    Network *net = [Network shareNetwork];
-    [net.udpSocket beginReceiving:nil];
-    [net.udpTimer setFireDate:[NSDate date]];
-    
 }
 
 - (void)dealloc{
@@ -131,7 +121,8 @@
         [ssidArray addObject:asciiSSID];
     }
     UInt8 controlCode = 0x00;
-    NSArray *data = @[@0xFE,@0x03,@0x01,@0x01,ssidArray];//在网节点查询
+    NSMutableArray *data = [@[@0xFE,@0x03,@0x01,@0x01] mutableCopy];
+    [data addObjectsFromArray:ssidArray];
     NSLog(@"%@",data);
     [[Network shareNetwork] APsendData69With:controlCode mac:mac data:data];
 }
@@ -146,7 +137,8 @@
     }
 
     UInt8 controlCode = 0x00;
-    NSArray *data = @[@0xFE,@0x03,@0x01,@0x02];//在网节点查询
+    NSMutableArray *data = [@[@0xFE,@0x03,@0x02,@0x01] mutableCopy];
+    [data addObjectsFromArray:passwordArray];
     NSLog(@"%@",data);
     [[Network shareNetwork] APsendData69With:controlCode mac:mac data:data];
 }

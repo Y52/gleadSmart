@@ -87,6 +87,12 @@ static dispatch_once_t oneToken;
         }else{
             NSLog(@"创建表device失败");
         }
+        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS shareDevice (mac text PRIMARY KEY,name text,houseUid text,apiKey text,deviceId text,houseMac text)"];
+        if (result) {
+            NSLog(@"创建表shareDevice成功");
+        }else{
+            NSLog(@"创建表shareDevice失败");
+        }
     }];
 }
 
@@ -184,6 +190,25 @@ static dispatch_once_t oneToken;
             device.roomUid = [set stringForColumn:@"roomUid"];
             device.type = [NSNumber numberWithInt:[set intForColumn:@"type"]];
             device.houseUid = houseUid;
+            NSLog(@"%@",device.name);
+            [deviceArray addObject:device];
+        }
+    }];
+    return deviceArray;
+}
+
+- (NSMutableArray *)queryAllShareDevice{
+    NSMutableArray *deviceArray = [[NSMutableArray alloc] init];
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM shareDevice"];
+        while ([set next]) {
+            DeviceModel *device = [[DeviceModel alloc] init];
+            device.mac = [set stringForColumn:@"mac"];
+            device.name = [set stringForColumn:@"name"];
+            device.houseUid = [set stringForColumn:@"houseUid"];
+            device.deviceId = [set stringForColumn:@"deviceId"];
+            device.apiKey = [set stringForColumn:@"apiKey"];
+            device.shareDeviceHouseMac = [set stringForColumn:@"houseMac"];
             [deviceArray addObject:device];
         }
     }];
@@ -256,6 +281,15 @@ static dispatch_once_t oneToken;
 //    }];
     return result;
 }
+
+- (BOOL)insertNewShareDevice:(DeviceModel *)device{
+    static BOOL result = NO;
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        result = [db executeUpdate:@"REPLACE INTO shareDevice (mac,name,houseUid,apiKey,deviceId,houseMac) VALUES (?,?,?,?,?)",device.mac,device.name,device.houseUid,device.apiKey,device.deviceId,device.shareDeviceHouseMac];
+    }];
+    return result;
+}
+
 #pragma mark - database update
 /*
  *更新家庭信息
@@ -276,6 +310,14 @@ static dispatch_once_t oneToken;
     static BOOL result = YES;
     [_queueDB inDatabase:^(FMDatabase *db) {
         result = [db executeUpdate:@"delete from device where mac = ?",mac];
+    }];
+    return result;
+}
+
+- (BOOL)deleteShareDevice:(NSString *)mac{
+    static BOOL result = YES;
+    [_queueDB inDatabase:^(FMDatabase *db) {
+        result = [db executeUpdate:@"delete from shareDevice where mac = ?",mac];
     }];
     return result;
 }
@@ -373,11 +415,10 @@ static dispatch_once_t oneToken;
              *取出共享内容
              */
             if ([[dic objectForKey:@"shareHouse"] isKindOfClass:[NSArray class]] && [[dic objectForKey:@"shareHouse"] count] > 0) {
-                Database *db = [Database shareInstance];
-                if (!db.shareDeviceArray) {
-                    db.shareDeviceArray = [[NSMutableArray alloc] init];
+                if (!self.shareDeviceArray) {
+                    self.shareDeviceArray = [[NSMutableArray alloc] init];
                 }
-                [db.shareDeviceArray removeAllObjects];
+                [self.shareDeviceArray removeAllObjects];
                 [[dic objectForKey:@"shareHouse"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     if ([[obj objectForKey:@"devices"] isKindOfClass:[NSArray class]] && [[obj objectForKey:@"devices"] count] > 0) {
                         [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj1, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -387,7 +428,8 @@ static dispatch_once_t oneToken;
                             device.apiKey = [obj objectForKey:@"apiKey"];
                             device.deviceId = [obj objectForKey:@"deviceId"];
                             device.houseUid = [obj objectForKey:@"houseUid"];
-                            [db.shareDeviceArray addObject:device];
+                            [self insertNewShareDevice:device];
+                            [self.shareDeviceArray addObject:device];
                         }];
                     }
                 }];
