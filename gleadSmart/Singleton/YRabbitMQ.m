@@ -77,8 +77,13 @@ static NSArray *_routingkeys = nil;
         //把Json转为dic
         NSError *err;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:message.body options:NSJSONReadingMutableContainers error:&err];
+        
 
     }];
+}
+
+- (void)analyzeMessageBody{
+    
 }
 
 #pragma mark - 系统通知监听

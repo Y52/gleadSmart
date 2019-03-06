@@ -163,6 +163,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         [self getAirQualityByLocation];//获取空气质量
         [self getHouseHomeListAndDeviceWithDatabase];//数据库获取房间和设备
         db.shareDeviceArray = [db queryAllShareDevice];//http请求失败后数据库获取共享设备
+        [self reloadData];//wmpagecontroller更新滑动列表
     }];
 }
 
@@ -281,7 +282,7 @@ static CGFloat const gleadMenuItemMargin = 25.f;
     //获取家庭网关下所有下挂设备
     UInt8 controlCode = 0x00;
     NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-    [[Network shareNetwork] sendData69With:controlCode mac:db.currentHouse.mac data:data];
+    [[Network shareNetwork] sendData69With:controlCode mac:db.currentHouse.mac data:data failuer:nil];
 }
 
 #pragma mark - Actions

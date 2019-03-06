@@ -105,7 +105,7 @@ static int noUserInteractionHeartbeat = 0;
                 NSLog(@"aaaa");
                 UInt8 controlCode = 0x00;
                 NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-                [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+                [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
             });
             //dispatch_resume(_testSendTimer);
         }
@@ -239,7 +239,7 @@ static int noUserInteractionHeartbeat = 0;
         //查询设备帧，一连上内网查一次
         UInt8 controlCode = 0x00;
         NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-        [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+        [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
         
         [_mySocket readDataWithTimeout:-1 tag:1];
     }
@@ -338,7 +338,7 @@ static int noUserInteractionHeartbeat = 0;
 /*
  *发送帧组成模版
  */
-- (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data{
+- (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data failuer:(nullable void(^)(void))failure{
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_sync(self->_queue, ^{
             
@@ -374,7 +374,7 @@ static int noUserInteractionHeartbeat = 0;
             
             if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
                 Database *db = [Database shareInstance];
-                [self oneNETSendData:data69 apiKey:db.currentHouse.apiKey deviceId:db.currentHouse.deviceId];//OneNet发送
+                [self oneNETSendData:data69 apiKey:db.currentHouse.apiKey deviceId:db.currentHouse.deviceId failure:failure];//OneNet发送
             }else{
                 [self send:data69 withTag:100];//内网tcp发送
             }
@@ -482,7 +482,7 @@ static int noUserInteractionHeartbeat = 0;
                 default:
                     break;
             }
-            [self sendData69With:controlCode mac:device.mac data:data];
+            [self sendData69With:controlCode mac:device.mac data:data failuer:nil];
         }
     }
     
@@ -731,7 +731,7 @@ static int noUserInteractionHeartbeat = 0;
 /*
  *分享设备发送帧
  */
-- (void)sendData69With:(UInt8)controlCode shareDevice:(DeviceModel *)shareDevice data:(NSArray *)data{
+- (void)sendData69With:(UInt8)controlCode shareDevice:(DeviceModel *)shareDevice data:(NSArray *)data failure:(nullable void(^)(void))failure{
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_sync(self->_queue, ^{
             
@@ -753,7 +753,7 @@ static int noUserInteractionHeartbeat = 0;
             [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
             
             if (![shareDevice.shareDeviceHouseMac isEqualToString:self.connectedDevice.mac]) {
-                [self oneNETSendData:data69 apiKey:shareDevice.apiKey deviceId:shareDevice.deviceId];//OneNet发送
+                [self oneNETSendData:data69 apiKey:shareDevice.apiKey deviceId:shareDevice.deviceId failure:failure];//OneNet发送
             }else{
                 [self send:data69 withTag:100];//内网tcp发送
             }
@@ -850,7 +850,7 @@ static int noUserInteractionHeartbeat = 0;
 }
 
 #pragma mark - OneNET Comminicate
-- (void)oneNETSendData:(NSMutableArray *)msg apiKey:(NSString *)apiKey deviceId:(NSString *)deviceId{
+- (void)oneNETSendData:(NSMutableArray *)msg apiKey:(NSString *)apiKey deviceId:(NSString *)deviceId failure:(void(^)(void))failure{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [[AFHTTPRequestSerializer alloc] init];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
@@ -896,7 +896,10 @@ static int noUserInteractionHeartbeat = 0;
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error:%@",error);
-        
+        if (failure) {
+            failure();
+        }
+        [NSObject showHudTipStr:LocalString(@"网络异常")];
     }];
 }
 
@@ -1254,8 +1257,6 @@ static int noUserInteractionHeartbeat = 0;
                         }
                     }
                 }
-
-                
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];

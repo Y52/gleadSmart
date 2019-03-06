@@ -285,7 +285,7 @@ static dispatch_once_t oneToken;
 - (BOOL)insertNewShareDevice:(DeviceModel *)device{
     static BOOL result = NO;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        result = [db executeUpdate:@"REPLACE INTO shareDevice (mac,name,houseUid,apiKey,deviceId,houseMac) VALUES (?,?,?,?,?)",device.mac,device.name,device.houseUid,device.apiKey,device.deviceId,device.shareDeviceHouseMac];
+        result = [db executeUpdate:@"REPLACE INTO shareDevice (mac,name,houseUid,apiKey,deviceId,houseMac) VALUES (?,?,?,?,?,?)",device.mac,device.name,device.houseUid,device.apiKey,device.deviceId,device.shareDeviceHouseMac];
     }];
     return result;
 }

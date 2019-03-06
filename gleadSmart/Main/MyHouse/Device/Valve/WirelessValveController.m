@@ -500,14 +500,14 @@ CGFloat const nodeButtonWidth = 20.f;
 - (void)controlSwitch{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:![self.device.isOn boolValue]]];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
 }
 
 //获取所有下挂漏水节点
 - (void)getAllNode{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x13,@0x04,@0x00];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
 }
 
 - (NSMutableArray *)sortLeakageInfosByDate:(NSMutableArray *)arr{

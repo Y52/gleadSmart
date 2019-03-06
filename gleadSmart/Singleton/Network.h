@@ -45,8 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)connectToHost:(NSString*)host onPort:(uint16_t)port error:(NSError **)errPtr;
 
 ///@brief Frame69帧发送方法
-- (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data;
-
+- (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data failuer:(nullable void(^)(void))failure;
+- (void)sendData69With:(UInt8)controlCode shareDevice:(DeviceModel *)shareDevice data:(NSArray *)data failuer:(nullable void(^)(void))failure;
 ///@brief AP配网发帧
 - (void)APsendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data;
 

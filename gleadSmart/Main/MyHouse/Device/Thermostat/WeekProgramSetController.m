@@ -222,7 +222,7 @@
     UInt8 controlCode = 0x01;
     NSInteger index = self.indexpath.section*4 + self.indexpath.row + 1;
     NSArray *data = @[@0xFE,@0x12,@0x04,@0x01,@0x01,[NSNumber numberWithInteger:index],[NSNumber numberWithInteger:self.timeRow],[NSNumber numberWithInteger:self.tempRow]];
-    [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data];
+    [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data failuer:nil];
 }
 
 @end

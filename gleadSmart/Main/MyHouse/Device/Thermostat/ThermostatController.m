@@ -271,14 +271,14 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
 - (void)inquireModeAndIndoorTempAndModeTemp{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x12,@0x03,@0x00];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
 }
 
 #pragma mark - Actions
 - (void)modeSwitchAction{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x12,@0x05,@0x01,[NSNumber numberWithBool:![self.device.mode boolValue]]];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
 }
 
 - (void)moreSetting{
@@ -315,7 +315,7 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
         NSLog(@"%@",self.device.modeTemp);
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFE,@0x12,@0x03,@0x01,self.device.mode,[NSNumber numberWithFloat:[self.device.modeTemp floatValue]*2]];
-        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
         
         nowSetTemp = [self.device.modeTemp floatValue];
     }
@@ -329,7 +329,7 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
 - (void)controlThermostat{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:![self.device.isOn boolValue]]];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
 }
 
 - (void)thermostatSetting{

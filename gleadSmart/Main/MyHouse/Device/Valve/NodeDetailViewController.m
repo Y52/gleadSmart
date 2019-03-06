@@ -51,7 +51,7 @@ static CGFloat const Cell_Height = 44.f;
         [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(2, 2)]]]];
         [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(4, 2)]]]];
         [muteData addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[self.node.mac substringWithRange:NSMakeRange(6, 2)]]]];
-        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:muteData];
+        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:muteData failuer:nil];
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];

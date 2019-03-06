@@ -199,7 +199,7 @@ static CGFloat const Header_Height = 35.f;
 - (void)inquireWeekProgram{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x12,@0x04,@0x00];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
 }
 
 #pragma mark - NSNotification

@@ -148,7 +148,7 @@ static CGFloat const Cell_Height = 44.f;
 - (void)inquireCompensate{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x12,@0x07,@0x00];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
 }
 
 #pragma mark - NSNotification

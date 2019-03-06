@@ -73,6 +73,7 @@ static CGFloat const Cell_Height = 72.f;
         });
         return;
     }
+    [self.deviceArray removeAllObjects];
     for (DeviceModel *device in allDevice) {
         if ([device.roomUid isEqualToString:_room.roomUid]) {
             [self.deviceArray addObject:device];
@@ -88,7 +89,7 @@ static CGFloat const Cell_Height = 72.f;
     Network *net = [Network shareNetwork];
     UInt8 controlCode = 0x00;
     NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-    [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+    [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         //异步等待10秒，如果未收到信息做如下处理
@@ -205,7 +206,7 @@ static CGFloat const Cell_Height = 72.f;
                 cell.controlSwitch.on = NO;
             }
             NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
-            [self differenceDiveceAction:type isOnline:[device.isOnline boolValue] mac:device.mac cell:cell];
+            [self differenceShareDiveceAction:type isOnline:[device.isOnline boolValue] device:device cell:cell];
         }
             break;
             
@@ -216,6 +217,7 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 - (void)differenceDiveceAction:(NSInteger)type isOnline:(BOOL)isOnline mac:(NSString *)mac cell:(HomeDeviceCell *)cell{
+    __block typeof(cell) blockCell = cell;
     switch (type) {
         case 1:
         {
@@ -227,7 +229,9 @@ static CGFloat const Cell_Height = 72.f;
             cell.switchBlock = ^(BOOL isOn) {
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
-                [[Network shareNetwork] sendData69With:controlCode mac:mac data:data];
+                [[Network shareNetwork] sendData69With:controlCode mac:mac data:data failuer:^{
+                    blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                }];
             };
         }
             break;
@@ -242,7 +246,57 @@ static CGFloat const Cell_Height = 72.f;
             cell.switchBlock = ^(BOOL isOn) {
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
-                [[Network shareNetwork] sendData69With:controlCode mac:mac data:data];
+                [[Network shareNetwork] sendData69With:controlCode mac:mac data:data failuer:^{
+                    blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                }];
+            };
+        }
+            break;
+            
+        case 3:
+        {
+            cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)differenceShareDiveceAction:(NSInteger)type isOnline:(BOOL)isOnline device:(DeviceModel *)device cell:(HomeDeviceCell *)cell{
+    __block typeof(cell) blockCell = cell;
+    switch (type) {
+        case 1:
+        {
+            if (isOnline) {
+                cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_on"];
+            }else{
+                cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_off"];
+            }
+            cell.switchBlock = ^(BOOL isOn) {
+                UInt8 controlCode = 0x01;
+                NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
+                [[Network shareNetwork] sendData69With:controlCode shareDevice:device data:data failuer:^{
+                    blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                }];
+            };
+        }
+            break;
+            
+        case 2:
+        {
+            if (isOnline) {
+                cell.deviceImage.image = [UIImage imageNamed:@"img_valve_on"];
+            }else{
+                cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
+            }
+            cell.switchBlock = ^(BOOL isOn) {
+                UInt8 controlCode = 0x01;
+                NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
+                [[Network shareNetwork] sendData69With:controlCode shareDevice:device data:data failuer:^{
+                    blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                }];
             };
         }
             break;
@@ -369,7 +423,7 @@ static CGFloat const Cell_Height = 72.f;
                 Network *net = [Network shareNetwork];
                 UInt8 controlCode = 0x00;
                 NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]]];//删除节点
-                [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data];
+                [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
             }
             break;
             
