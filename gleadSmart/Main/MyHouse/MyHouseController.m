@@ -16,7 +16,7 @@ static CGFloat const gleadHeaderHeight = 225.f;
 static CGFloat const gleadWeatherViewWidth = 335.f;
 static CGFloat const gleadHomeListHeight = 37.f;
 static CGFloat const gleadHomeSetButtonWidth = 50.f;
-static CGFloat const gleadMenuItemMargin = 25.f;
+static CGFloat const gleadMenuItemMargin = 20.f;
 
 @interface MyHouseController ()
 
@@ -51,8 +51,10 @@ static CGFloat const gleadMenuItemMargin = 25.f;
         self.titleColorSelected = [UIColor whiteColor];
         self.titleColorNormal = [UIColor whiteColor];
         self.itemMargin = gleadMenuItemMargin;
+        self.menuViewContentMargin = 0.f;
         self.pageAnimatable = YES;
         self.scrollEnable = NO;
+        self.menuViewLayoutMode = WMMenuViewLayoutModeLeft;
         
         if (!self.homeList) {
             self.homeList = [[NSMutableArray alloc] init];
@@ -302,7 +304,16 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 
 - (void)homeSetting{
     if ([Database shareInstance].currentHouse == nil) {
-        [NSObject showHudTipStr:LocalString(@"请先创建家庭")];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"家庭错误") message:LocalString(@"请先添加或选择家庭") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }else if ([[Database shareInstance].currentHouse.auth integerValue] > 0){
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"普通成员不可操作") message:LocalString(@"请先联系管理员在\"家庭设置-家庭成员\"中开启权限") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
     
@@ -314,7 +325,16 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 
 - (void)addDevice{
     if ([Database shareInstance].currentHouse == nil) {
-        [NSObject showHudTipStr:LocalString(@"请先创建家庭")];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"家庭错误") message:LocalString(@"请先添加或选择家庭") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }else if ([[Database shareInstance].currentHouse.auth integerValue] > 0){
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"普通成员不可操作") message:LocalString(@"请先联系管理员在\"家庭设置-家庭成员\"中开启权限") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
     SelectDeviceTypeController *SelectDeviceVC = [[SelectDeviceTypeController alloc] init];

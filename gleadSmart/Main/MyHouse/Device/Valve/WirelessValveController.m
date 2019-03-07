@@ -100,6 +100,7 @@ CGFloat const nodeButtonWidth = 20.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDevice) name:@"refreshValve" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshValveNodesUI) name:@"refreshValveHangingNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valveNodesReport:) name:@"valveHangingNodesReport" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valveNodeRabbitmqReport:) name:@"valveHangingNodesRabbitmqReport" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valveReset) name:@"valveReset" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshValveNodesUI) name:@"valveDeleteHangingNode" object:nil];
 }
@@ -109,6 +110,7 @@ CGFloat const nodeButtonWidth = 20.f;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshValve" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshValveHangingNodes" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveHangingNodesReport" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveHangingNodesRabbitmqReport" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveReset" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveDeleteHangingNode" object:nil];
 }
@@ -303,7 +305,21 @@ CGFloat const nodeButtonWidth = 20.f;
     }else{
         node.isLowVoltage = NO;
     }
-    
+    [self handleNodeReportInfoWithNode:node];
+}
+
+//rabbitmq推送信息
+- (void)valveNodeRabbitmqReport:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    NodeModel *node = [userInfo objectForKey:@"node"];
+    if (![self.device.mac isEqualToString:node.valveMac]) {
+        return;
+    }
+    [self handleNodeReportInfoWithNode:node];
+}
+
+//处理所有推送或上报的节点的信息
+- (void)handleNodeReportInfoWithNode:(NodeModel *)node{
     static BOOL isContain = NO;
     for (NodeModel *containedNode in self.device.nodeArray) {//查找水阀下是否有该节点
         if ([containedNode.mac isEqualToString:node.mac]) {
@@ -328,7 +344,6 @@ CGFloat const nodeButtonWidth = 20.f;
             [self updateSelectedNodeStatus:node];
         }
         [self.device.nodeArray addObject:node];
-        
     }
 }
 

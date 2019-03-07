@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NodeModel : NSObject
 
+@property (nonatomic, strong) NSString *valveMac;
 @property (strong, nonatomic) NSString *mac;
 @property (strong, nonatomic) NSString *number;
 @property (nonatomic, strong) NSString *name;

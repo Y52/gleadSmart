@@ -52,6 +52,7 @@ static CGFloat const Cell_Height = 50.f;
             tableView.estimatedSectionHeaderHeight = 0;
             tableView.estimatedSectionFooterHeight = 0;
             tableView.scrollEnabled = NO;
+            tableView.tableFooterView = [[UIView alloc] init];
             
             tableView;
         });

@@ -72,22 +72,7 @@ static CGFloat const Cell_Height = 50.f;
             UIView *footView = [[UIView alloc] init];
             footView.backgroundColor = [UIColor clearColor];
             tableView.tableFooterView = footView;
-            
-            MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshTable)];
-            // Set title
-            [header setTitle:LocalString(@"下拉刷新") forState:MJRefreshStateIdle];
-            [header setTitle:LocalString(@"松开刷新") forState:MJRefreshStatePulling];
-            [header setTitle:LocalString(@"加载中") forState:MJRefreshStateRefreshing];
-            
-            // Set font
-            header.stateLabel.font = [UIFont systemFontOfSize:15];
-            header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:14];
-            
-            // Set textColor
-            header.stateLabel.textColor = [UIColor lightGrayColor];
-            header.lastUpdatedTimeLabel.textColor = [UIColor lightGrayColor];
-            tableView.mj_header = header;
-            
+                    
             tableView;
         });
     }
