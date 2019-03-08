@@ -61,8 +61,8 @@
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
           
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(200, 10, 1, 35)];
-            line.backgroundColor = [UIColor grayColor];
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(yAutoFit(187),yAutoFit(5), yAutoFit(1),yAutoFit(40))];
+            line.backgroundColor = [UIColor colorWithRed:99/255.0 green:144/255.0 blue:209/255.0 alpha:1.0];
             [self.contentView addSubview:line];
             
         }
