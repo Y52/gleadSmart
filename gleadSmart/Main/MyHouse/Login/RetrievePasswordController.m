@@ -48,7 +48,7 @@ static float HEIGHT_CELL = 50.f;
 - (UITableView *)retrieveTable{
     if (!_retrieveTable) {
         _retrieveTable = ({
-            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(35, 150, 290.f, ScreenHeight - getRectNavAndStatusHight - 550.f) style:UITableViewStylePlain];
+            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(35, 150, 290.f,220.f) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
