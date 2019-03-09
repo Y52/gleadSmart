@@ -9,6 +9,7 @@
 #import "HouseSelectController.h"
 #import "HouseSelectCell.h"
 #import "HouseManagementController.h"
+
 NSString *const CellIdentifier_HomeSelect = @"CellID_HomeSelect";
 static CGFloat const Cell_Height = 50.f;
 
@@ -40,7 +41,7 @@ static CGFloat const Cell_Height = 50.f;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+    //[self.rdv_tabBarController setTabBarHidden:YES animated:YES];
 
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inquireHouseList) name:@"updateHouseList" object:nil];
@@ -129,8 +130,10 @@ static CGFloat const Cell_Height = 50.f;
     Network *net = [Network shareNetwork];
     if (indexPath.row == data.houseList.count) {
         //进入家庭管理
-        HouseManagementController  *HouseManagementVC = [[HouseManagementController alloc] init];
-        [self.navigationController pushViewController:HouseManagementVC animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.pushBlock) {
+            self.pushBlock();
+        }
         return;
     }
     HouseModel *house = data.houseList[indexPath.row];
@@ -157,7 +160,7 @@ static CGFloat const Cell_Height = 50.f;
 
 #pragma mark - Actions
 - (void)inquireHouseList{
-    [SVProgressHUD show];
+    //[SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     Database *db = [Database shareInstance];
     //设置超时时间

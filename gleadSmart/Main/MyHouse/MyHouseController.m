@@ -11,6 +11,7 @@
 #import "HouseSelectController.h"
 #import "SelectDeviceTypeController.h"
 #import "HomeManagementController.h"
+#import "HouseManagementController.h"
 
 static CGFloat const gleadHeaderHeight = 225.f;
 static CGFloat const gleadWeatherViewWidth = 335.f;
@@ -290,11 +291,21 @@ static CGFloat const gleadMenuItemMargin = 20.f;
 #pragma mark - Actions
 - (void)houseSelect{
     HouseSelectController *hsVC = [[HouseSelectController alloc] init];
-    [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+    //[self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     hsVC.dismissBlock = ^{
         [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
         [self getHouseHomeListAndDevice];
         [self.houseButton setTitle:[Database shareInstance].currentHouse.name forState:UIControlStateNormal];
+    };
+    hsVC.pushBlock = ^{
+        HouseManagementController *HouseManagementVC = [[HouseManagementController alloc] init];
+        HouseManagementVC.popBlock = ^{
+            [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
+            [self getHouseHomeListAndDevice];
+            [self.houseButton setTitle:[Database shareInstance].currentHouse.name forState:UIControlStateNormal];
+        };
+        [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+        [self.navigationController pushViewController:HouseManagementVC animated:YES];
     };
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:hsVC];
     nav.modalPresentationStyle = UIModalPresentationOverCurrentContext;

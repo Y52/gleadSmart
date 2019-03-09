@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^popBlock)(void);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HouseManagementController : UIViewController
+
+@property (nonatomic) popBlock popBlock;
 
 @end
 

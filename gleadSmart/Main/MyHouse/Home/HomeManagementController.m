@@ -30,12 +30,12 @@ static CGFloat const Cell_Height = 50.f;
     self.homeManagementTable = [self homeManagementTable];
     self.addRoomsBtn = [self addRoomsBtn];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView:)];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
-    
+    [self getHomeList];
 }
 #pragma mark - Lazy Load
 -(UITableView *)homeManagementTable{
@@ -100,6 +100,9 @@ static CGFloat const Cell_Height = 50.f;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     RoomModel *room = _homeList[indexPath.row];
     cell.leftLabel.text = room.name;
+    if (room.deviceNumber) {
+        cell.rightLabel.text = [NSString stringWithFormat:@"%@个设备",room.deviceNumber];
+    }
     return cell;
 }
 
@@ -268,62 +271,70 @@ static CGFloat const Cell_Height = 50.f;
 /*
  *用于更新房间列表，现在不需要用到
  */
-//- (void)updateHomeList{
-//    [SVProgressHUD show];
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    
-//    Database *db = [Database shareInstance];
-//    
-//    //设置超时时间
-//    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-//    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-//    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-//    
-//    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/room/list?houseUid=%@",db.currentHouse.houseUid];
-//    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-//    
-//    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
-//    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
-//    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-//        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-//        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-//        NSLog(@"success:%@",daetr);
-//        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-//            if ([responseDic objectForKey:@"data"]) {
-//                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                    RoomModel *room = [[RoomModel alloc] init];
-//                    room.name = [obj objectForKey:@"name"];
-//                    room.roomUid = [obj objectForKey:@"roomUid"];
-//                    room.deviceNumber = [obj objectForKey:@"deviceNumber"];
-//                    [self.homeList addObject:room];
-//                    
-//                    [db insertNewRoom:room];
-//                }];
-//            }
-//        }else{
-//            [NSObject showHudTipStr:LocalString(@"获取家庭房间列表失败")];
-//        }
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [SVProgressHUD dismiss];
-//        });
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-//        
-//        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
-//        
-//        NSLog(@"error--%@",serializedData);
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [SVProgressHUD dismiss];
-//            [NSObject showHudTipStr:@"从服务器获取信息失败"];
-//        });
-//    }];
-//}
+- (void)getHomeList{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/room/list?houseUid=%@",db.currentHouse.houseUid];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            if ([responseDic objectForKey:@"data"] && [[responseDic objectForKey:@"data"] count] > 0) {
+                if (!self.homeList) {
+                    self.homeList = [[NSMutableArray alloc] init];
+                }
+                [self.homeList removeAllObjects];
+                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    RoomModel *room = [[RoomModel alloc] init];
+                    room.name = [obj objectForKey:@"name"];
+                    room.roomUid = [obj objectForKey:@"roomUid"];
+                    room.deviceNumber = [obj objectForKey:@"deviceNumber"];
+                    room.houseUid = self.houseUid;
+                    [self.homeList addObject:room];
+                    
+                    [db insertNewRoom:room];
+                }];
+                [self.homeManagementTable reloadData];
+            }
+        }else{
+            [NSObject showHudTipStr:LocalString(@"获取家庭房间列表失败")];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+        
+        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+        
+        NSLog(@"error--%@",serializedData);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"从服务器获取信息失败"];
+        });
+    }];
+}
 
 -(void)goRooms{
     
     AddRoomsViewController *AddRoomsVC = [[AddRoomsViewController alloc] init];
+    AddRoomsVC.houseUid = self.houseUid;
     [self.navigationController pushViewController:AddRoomsVC animated:YES];
 }
 

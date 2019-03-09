@@ -332,7 +332,7 @@ static dispatch_once_t oneToken;
 
 #pragma mark - API methods and update database
 - (void)getHouseHomeListAndDevice:(HouseModel *)house success:(void(^)(void))success failure:(void(^)(void))failure{
-    [SVProgressHUD show];
+    //[SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     //设置超时时间

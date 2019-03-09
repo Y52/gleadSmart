@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^dismissBlock)(void);
+typedef void(^pushBlock)(void);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HouseSelectController : UIViewController
 
 @property (nonatomic) dismissBlock dismissBlock;
+@property (nonatomic) pushBlock pushBlock;
 
 @end
 

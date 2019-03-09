@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "RegisterAccountController.h"
 #import "MainViewController.h"
+#import "NoHouseBridgingController.h"
 
 @interface RegisterController ()
 
@@ -204,6 +205,12 @@
               [[YRabbitMQ shareInstance] receiveRabbitMessage:routingkeys];
 
               
+              NoHouseBridgingController *vc = [[NoHouseBridgingController alloc] init];
+              [self presentViewController:vc animated:YES completion:nil];
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  [SVProgressHUD dismiss];
+              });
+              return ;
               //进入主页面
               MainViewController *mainVC = [[MainViewController alloc] init];
               [self presentViewController:mainVC animated:YES completion:nil];

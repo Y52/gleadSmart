@@ -324,6 +324,8 @@
 		BB63B60521B4151D00D77489 /* thermostat_-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5FF21B4151D00D77489 /* thermostat_-@3x.png */; };
 		BB63B60621B4151D00D77489 /* thermostat_+.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60021B4151D00D77489 /* thermostat_+.png */; };
 		BB63B60721B4151D00D77489 /* thermostat_-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60121B4151D00D77489 /* thermostat_-@2x.png */; };
+		BB6739DB22326801002E6239 /* NoHouseBridgingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DA22326801002E6239 /* NoHouseBridgingController.m */; };
+		BB6739DE223271AA002E6239 /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DD223271AA002E6239 /* NoHouseAddController.m */; };
 		BB73D54321EDCB1E004AEE18 /* JKVValue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; };
 		BB73D54421EDCB1E004AEE18 /* JKVValue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB73D54521EDD262004AEE18 /* YTFAlertController.m */; };
@@ -901,6 +903,10 @@
 		BB63B5FF21B4151D00D77489 /* thermostat_-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_-@3x.png"; sourceTree = "<group>"; };
 		BB63B60021B4151D00D77489 /* thermostat_+.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_+.png"; sourceTree = "<group>"; };
 		BB63B60121B4151D00D77489 /* thermostat_-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_-@2x.png"; sourceTree = "<group>"; };
+		BB6739D922326801002E6239 /* NoHouseBridgingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoHouseBridgingController.h; sourceTree = "<group>"; };
+		BB6739DA22326801002E6239 /* NoHouseBridgingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoHouseBridgingController.m; sourceTree = "<group>"; };
+		BB6739DC223271AA002E6239 /* NoHouseAddController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoHouseAddController.h; sourceTree = "<group>"; };
+		BB6739DD223271AA002E6239 /* NoHouseAddController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoHouseAddController.m; sourceTree = "<group>"; };
 		BB73D54221EDCB1E004AEE18 /* JKVValue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JKVValue.framework; path = Carthage/Build/iOS/JKVValue.framework; sourceTree = "<group>"; };
 		BB73D54521EDD262004AEE18 /* YTFAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTFAlertController.m; sourceTree = "<group>"; };
 		BB73D54621EDD262004AEE18 /* YTFAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTFAlertController.h; sourceTree = "<group>"; };
@@ -1137,6 +1143,10 @@
 				BB2AD79721ABDD3E006DB83A /* RegisterAccountController.m */,
 				3EA530C821AB9C88000A6D26 /* RetrievePasswordController.h */,
 				3EA530C921AB9C88000A6D26 /* RetrievePasswordController.m */,
+				BB6739D922326801002E6239 /* NoHouseBridgingController.h */,
+				BB6739DA22326801002E6239 /* NoHouseBridgingController.m */,
+				BB6739DC223271AA002E6239 /* NoHouseAddController.h */,
+				BB6739DD223271AA002E6239 /* NoHouseAddController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2548,6 +2558,7 @@
 				BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */,
 				BB37DF0C21A7EFC400B2121B /* EspViewController.m in Sources */,
 				BB2AC0ED21A8F156006DB83A /* ESP_CRC8.m in Sources */,
+				BB6739DB22326801002E6239 /* NoHouseBridgingController.m in Sources */,
 				BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */,
 				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
 				BB62E4E121B517F100C0FA39 /* TherWeekProgramCell.m in Sources */,
@@ -2565,6 +2576,7 @@
 				BB2AC0F021A8F156006DB83A /* ESPTouchTaskParameter.m in Sources */,
 				BBF6326B21BBBDE0006A23AC /* NodeDetailViewController.m in Sources */,
 				BB2AC0EF21A8F156006DB83A /* ESPUDPSocketClient.m in Sources */,
+				BB6739DE223271AA002E6239 /* NoHouseAddController.m in Sources */,
 				BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */,
 				3E56AD2221A6A6DD0089BA8F /* AddFamilyTextCell.m in Sources */,
 				BB8F5A8821B7EF1700E69094 /* TherTimerCell.m in Sources */,

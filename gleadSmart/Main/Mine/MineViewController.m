@@ -9,6 +9,7 @@
 #import "MineViewController.h"
 #import "MineNormalCell.h"
 #import "AccountViewController.h"
+#import "HouseManagementController.h"
 
 NSString *const CellIdentifier_Mine = @"CellID_Mine";
 static CGFloat const HEIGHT_CELL = 51.f;
@@ -167,6 +168,9 @@ static CGFloat const HEIGHT_CELL = 51.f;
         if (indexPath.row == 0) {
             AccountViewController *accountVC = [[AccountViewController alloc] init];
             [self.navigationController pushViewController:accountVC animated:YES];
+        }else if (indexPath.row == 1){
+            HouseManagementController *HouseManagementVC = [[HouseManagementController alloc] init];
+            [self.navigationController pushViewController:HouseManagementVC animated:YES];
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 1) {
