@@ -26,13 +26,13 @@
 		369C16A522255FD90079159E /* addRoom_hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A222255FD90079159E /* addRoom_hand@2x.png */; };
 		36B8F16722263FA200652CFA /* ShareDeviceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B8F16622263FA200652CFA /* ShareDeviceListCell.m */; };
 		36B8F16A22263FDE00652CFA /* ShareDeviceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B8F16922263FDE00652CFA /* ShareDeviceDetailCell.m */; };
+		36FD8C562236553300DE4D28 /* PhoneVerifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */; };
 		3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */; };
 		3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */; };
 		3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBE21A7E7EA00EA8F1C /* AddFamilyViewController.m */; };
 		3E56AD2221A6A6DD0089BA8F /* AddFamilyTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56AD2121A6A6DD0089BA8F /* AddFamilyTextCell.m */; };
 		3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56AD2421A6A7160089BA8F /* AddFamilySelectCell.m */; };
 		3EA530BF21AB9B43000A6D26 /* PhoneTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530B921AB9B42000A6D26 /* PhoneTFCell.m */; };
-		3EA530C021AB9B43000A6D26 /* PhoneVerifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530BC21AB9B43000A6D26 /* PhoneVerifyCell.m */; };
 		3EA530C121AB9B43000A6D26 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530BD21AB9B43000A6D26 /* TextFieldCell.m */; };
 		3EA530CA21AB9C88000A6D26 /* PasswordLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C321AB9C88000A6D26 /* PasswordLoginController.m */; };
 		3EA530CB21AB9C88000A6D26 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C421AB9C88000A6D26 /* RegisterController.m */; };
@@ -140,7 +140,6 @@
 		BB2AD79421ABDA45006DB83A /* img_launchTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD79121ABDA45006DB83A /* img_launchTitle.png */; };
 		BB2AD79521ABDA45006DB83A /* img_launchTitle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD79221ABDA45006DB83A /* img_launchTitle@3x.png */; };
 		BB2AD79821ABDD3E006DB83A /* RegisterAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD79721ABDD3E006DB83A /* RegisterAccountController.m */; };
-		BB2AD79B21ABE2B5006DB83A /* PhoneVerifyCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD79A21ABE2B5006DB83A /* PhoneVerifyCell2.m */; };
 		BB2AD79E21AD4828006DB83A /* HouseNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD79D21AD4828006DB83A /* HouseNameCell.m */; };
 		BB2AD7A121AD70D6006DB83A /* HouseSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD7A021AD70D6006DB83A /* HouseSettingController.m */; };
 		BB2AD7A421AD78F0006DB83A /* MemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD7A321AD78F0006DB83A /* MemberModel.m */; };
@@ -489,6 +488,8 @@
 		36B8F16622263FA200652CFA /* ShareDeviceListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceListCell.m; sourceTree = "<group>"; };
 		36B8F16822263FDE00652CFA /* ShareDeviceDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceDetailCell.h; sourceTree = "<group>"; };
 		36B8F16922263FDE00652CFA /* ShareDeviceDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceDetailCell.m; sourceTree = "<group>"; };
+		36FD8C542236553300DE4D28 /* PhoneVerifyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneVerifyCell.h; sourceTree = "<group>"; };
+		36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneVerifyCell.m; sourceTree = "<group>"; };
 		3E3AFFB821A7E74800EA8F1C /* HouseManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseManagementTableViewCell.h; sourceTree = "<group>"; };
 		3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseManagementTableViewCell.m; sourceTree = "<group>"; };
 		3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeManagementCell.m; sourceTree = "<group>"; };
@@ -501,8 +502,6 @@
 		3E56AD2421A6A7160089BA8F /* AddFamilySelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFamilySelectCell.m; sourceTree = "<group>"; };
 		3EA530B921AB9B42000A6D26 /* PhoneTFCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneTFCell.m; sourceTree = "<group>"; };
 		3EA530BA21AB9B42000A6D26 /* PhoneTFCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneTFCell.h; sourceTree = "<group>"; };
-		3EA530BB21AB9B42000A6D26 /* PhoneVerifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneVerifyCell.h; sourceTree = "<group>"; };
-		3EA530BC21AB9B43000A6D26 /* PhoneVerifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneVerifyCell.m; sourceTree = "<group>"; };
 		3EA530BD21AB9B43000A6D26 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		3EA530BE21AB9B43000A6D26 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		3EA530C221AB9C87000A6D26 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -663,8 +662,6 @@
 		BB2AD79221ABDA45006DB83A /* img_launchTitle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_launchTitle@3x.png"; sourceTree = "<group>"; };
 		BB2AD79621ABDD3E006DB83A /* RegisterAccountController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterAccountController.h; sourceTree = "<group>"; };
 		BB2AD79721ABDD3E006DB83A /* RegisterAccountController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterAccountController.m; sourceTree = "<group>"; };
-		BB2AD79921ABE2B5006DB83A /* PhoneVerifyCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneVerifyCell2.h; sourceTree = "<group>"; };
-		BB2AD79A21ABE2B5006DB83A /* PhoneVerifyCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneVerifyCell2.m; sourceTree = "<group>"; };
 		BB2AD79C21AD4828006DB83A /* HouseNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseNameCell.h; sourceTree = "<group>"; };
 		BB2AD79D21AD4828006DB83A /* HouseNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseNameCell.m; sourceTree = "<group>"; };
 		BB2AD79F21AD70D6006DB83A /* HouseSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSettingController.h; sourceTree = "<group>"; };
@@ -1114,10 +1111,8 @@
 			children = (
 				3EA530BA21AB9B42000A6D26 /* PhoneTFCell.h */,
 				3EA530B921AB9B42000A6D26 /* PhoneTFCell.m */,
-				3EA530BB21AB9B42000A6D26 /* PhoneVerifyCell.h */,
-				3EA530BC21AB9B43000A6D26 /* PhoneVerifyCell.m */,
-				BB2AD79921ABE2B5006DB83A /* PhoneVerifyCell2.h */,
-				BB2AD79A21ABE2B5006DB83A /* PhoneVerifyCell2.m */,
+				36FD8C542236553300DE4D28 /* PhoneVerifyCell.h */,
+				36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */,
 				3EA530BE21AB9B43000A6D26 /* TextFieldCell.h */,
 				3EA530BD21AB9B43000A6D26 /* TextFieldCell.m */,
 			);
@@ -2597,7 +2592,6 @@
 				BB8A743522263707008B2439 /* ShareDeviceListController.m in Sources */,
 				3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */,
 				BB5B03CE21B91290007AC2B1 /* AccountViewController.m in Sources */,
-				BB2AD79B21ABE2B5006DB83A /* PhoneVerifyCell2.m in Sources */,
 				BB63AAD2222E156B00DFC848 /* APProcessController.m in Sources */,
 				BB2AC10A21A94D63006DB83A /* AFNetworkReachabilityManager.m in Sources */,
 				BB62E4D221B4DD7C00C0FA39 /* TherWeekSelectController.m in Sources */,
@@ -2642,7 +2636,6 @@
 				BB2AC10621A94D63006DB83A /* AFURLResponseSerialization.m in Sources */,
 				BB2AC0EA21A8F156006DB83A /* ESP_ByteUtil.m in Sources */,
 				BB2AD7A421AD78F0006DB83A /* MemberModel.m in Sources */,
-				3EA530C021AB9B43000A6D26 /* PhoneVerifyCell.m in Sources */,
 				BB49DFA321958867004E00A2 /* main.m in Sources */,
 				BB45BC4721EF1F6900504FF8 /* AddHouseMemberCell.m in Sources */,
 				36004A7A222784E700C99215 /* ModifyPasswordViewController.m in Sources */,
@@ -2665,6 +2658,7 @@
 				BB2AC0E821A8F156006DB83A /* ESPTouchResult.m in Sources */,
 				BB2AD7AA21AD8063006DB83A /* HouseSetMemberCell.m in Sources */,
 				BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */,
+				36FD8C562236553300DE4D28 /* PhoneVerifyCell.m in Sources */,
 				BB0A403421991AA8004669CA /* NSString+Common.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
