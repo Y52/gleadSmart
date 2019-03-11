@@ -441,7 +441,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
 - (UITableView *)houseSettingTable{
     if (!_houseSettingTable) {
         _houseSettingTable = ({
-            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - getRectNavAndStatusHight - 100) style:UITableViewStylePlain];
+            TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - getRectNavAndStatusHight) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
             tableView.separatorColor = [UIColor colorWithRed:232/255.0 green:231/255.0 blue:231/255.0 alpha:1.0];
             tableView.dataSource = self;
@@ -449,7 +449,6 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
             [tableView registerClass:[HouseSetCommonCell class] forCellReuseIdentifier:CellIdentifier_HouseSetCommon];
             [tableView registerClass:[HouseSetMemberCell class] forCellReuseIdentifier:CellIdentifier_HouseSetMember];
             [self.view addSubview:tableView];
-            tableView.scrollEnabled = NO;
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
             tableView.estimatedSectionFooterHeight = 0;
