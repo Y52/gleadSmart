@@ -11,6 +11,7 @@
 #import "RetrievePasswordController.h"
 #import "SelectDeviceTypeController.h"
 #import "MainViewController.h"
+#import "NoHouseBridgingController.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 
@@ -331,9 +332,18 @@
                   }
                   [[YRabbitMQ shareInstance] receiveRabbitMessage:routingkeys];
                   
-                  //进入主页面
-                  MainViewController *mainVC = [[MainViewController alloc] init];
-                  [self presentViewController:mainVC animated:YES completion:nil];
+                  if (data.houseList.count <= 0) {
+                      NoHouseBridgingController *vc = [[NoHouseBridgingController alloc] init];
+                      [self presentViewController:vc animated:YES completion:nil];
+                  }else{
+                      //进入主页面
+                      MainViewController *mainVC = [[MainViewController alloc] init];
+                      [self presentViewController:mainVC animated:YES completion:nil];
+                  }
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      [SVProgressHUD dismiss];
+                  });
+
               }else{
                   [NSObject showHudTipStr:LocalString(@"登录失败，请检查验证码或者密码是否填写错误")];
                   dispatch_async(dispatch_get_main_queue(), ^{

@@ -250,7 +250,7 @@ static dispatch_once_t oneToken;
     static BOOL result = NO;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
         result = [db executeUpdate:@"REPLACE INTO house (houseUid,name,auth,lat,lon,deviceId,apiKey) VALUES (?,?,?,?,?,?,?)",house.houseUid,house.name,house.auth,house.lat,house.lon,house.deviceId,house.apiKey];
-        if (![house.mac isKindOfClass:[NSNull class]]) {
+        if ([house.mac isKindOfClass:[NSString class]] && house.mac.length > 0) {
             result = [db executeUpdate:@"REPLACE INTO device (mac,houseUid,type) VALUES (?,?,?)",house.mac,house.houseUid,@0];
         }
     }];
@@ -277,9 +277,6 @@ static dispatch_once_t oneToken;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
         result = [db executeUpdate:@"REPLACE INTO device (mac,roomUid,name,houseUid,type) VALUES (?,?,?,?,?)",device.mac,device.roomUid,device.name,device.houseUid,device.type];
     }];
-//    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-//        result = [db executeUpdate:@"REPLACE INTO device (mac,roomUid,name,houseUid,type) VALUES (?,?,?,?,?)",@"01040001",nil,@"01040001",@"5bfcb08be4b0c54526650eeb",@0];
-//    }];
     return result;
 }
 
@@ -401,7 +398,7 @@ static dispatch_once_t oneToken;
                         }else{
                             device.type = [NSNumber numberWithInteger:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]];
                         }
-                        if (![device.mac isKindOfClass:[NSNull class]]) {
+                        if ([device.mac isKindOfClass:[NSString class]] && device.mac.length > 0) {
                             //插入房间的设备
                             [self insertNewDevice:device];
                         }
@@ -431,8 +428,11 @@ static dispatch_once_t oneToken;
                             device.apiKey = [obj objectForKey:@"apiKey"];
                             device.deviceId = [obj objectForKey:@"deviceId"];
                             device.houseUid = [obj objectForKey:@"houseUid"];
-                            [self insertNewShareDevice:device];
-                            [self.shareDeviceArray addObject:device];
+                            if (![device.mac isKindOfClass:[NSNull class]]) {
+                                //插入房间的设备
+                                [self insertNewShareDevice:device];
+                                [self.shareDeviceArray addObject:device];
+                            }
                         }];
                     }
                 }];

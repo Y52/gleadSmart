@@ -10,6 +10,7 @@
 #import "AddFamilyTextCell.h"
 #import "AddFamilySelectCell.h"
 #import "FamilyLocationController.h"
+#import "MainViewController.h"
 
 NSString *const CellIdentifier_noHouseAddFamilyText = @"noHouseAddFamilyText";
 NSString *const CellIdentifier_noHouseAddFaminlySelect = @"CellID_noHouseAddFaminlySelect";
@@ -53,6 +54,21 @@ NSString *const CellIdentifier_noHouseAddFaminlySelect = @"CellID_noHouseAddFami
 
 #pragma mark - private methods
 - (void)completeAddFamily{
+    if (self->checkedRoomArray.count <= 0 || [self->name isKindOfClass:[NSNull class]] || self->lon == NULL || self->lat == NULL) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"请填写正确信息") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    NSMutableArray *rooms = [[NSMutableArray alloc] init];
+    for (int i = 0; i < self->checkedRoomArray.count; i++) {
+        NSDictionary *dic = @{@"name":self->checkedRoomArray[i]};
+        [rooms addObject:dic];
+    }
+    NSDictionary *parameters = @{@"name":self->name,@"lon":self->lon,@"lat":self->lat,@"rooms":rooms};
+
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     Database *db = [Database shareInstance];
@@ -65,13 +81,6 @@ NSString *const CellIdentifier_noHouseAddFaminlySelect = @"CellID_noHouseAddFami
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
-    NSMutableArray *rooms = [[NSMutableArray alloc] init];
-    for (int i = 0; i < self->checkedRoomArray.count; i++) {
-        NSDictionary *dic = @{@"name":self->checkedRoomArray[i]};
-        [rooms addObject:dic];
-    }
-    NSDictionary *parameters = @{@"name":self->name,@"lon":self->lon,@"lat":self->lat,@"rooms":rooms};
-    
     [manager POST:@"http://gleadsmart.thingcom.cn/api/house" parameters:parameters progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
               NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
@@ -80,10 +89,7 @@ NSString *const CellIdentifier_noHouseAddFaminlySelect = @"CellID_noHouseAddFami
               NSLog(@"success:%@",daetr);
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
                   [NSObject showHudTipStr:LocalString(@"成功创建新家庭")];
-                  
-                  
-                  [[NSNotificationCenter defaultCenter] postNotificationName:@"updateHouseList" object:nil userInfo:nil];
-                  [self.navigationController popToRootViewControllerAnimated:YES];
+                  [self showSuccessAlert];
               }else{
                   [NSObject showHudTipStr:LocalString(@"创建新家庭失败")];
               }
@@ -91,12 +97,7 @@ NSString *const CellIdentifier_noHouseAddFaminlySelect = @"CellID_noHouseAddFami
                   [SVProgressHUD dismiss];
               });
           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-              NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-              
-              NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
-              
-              NSLog(@"error--%@",serializedData);
-              
+              NSLog(@"%@",error);
               if (error.code == -1001) {
                   [NSObject showHudTipStr:LocalString(@"当前网络状况不佳")];
               }else{
@@ -118,15 +119,81 @@ NSString *const CellIdentifier_noHouseAddFaminlySelect = @"CellID_noHouseAddFami
 }
 
 - (void)showSuccessAlert{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"家庭错误") message:LocalString(@"请先添加或选择家庭") preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"完成" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"查看家庭" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"家庭创建成功") message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"完成" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self inquireHouseList:^{
+            Database *db = [Database shareInstance];
+            db.houseList = [db queryAllHouse];
+            if (db.houseList.count > 0) {
+                db.currentHouse = db.houseList[0];
+            }
+            AddFamilyTextCell *cell = [self.addFamilyTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            [cell.inputTF resignFirstResponder];
+            MainViewController *mainVC = [[MainViewController alloc] init];
+            [UIApplication sharedApplication].keyWindow.rootViewController = mainVC;
+        }];
+    }];
+    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"查看家庭" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //暂时先不要这功能了
+    }];
 
     [alertController addAction:cancelAction];
-    [alertController addAction:doneAction];
+    //[alertController addAction:doneAction];
     [self presentViewController:alertController animated:YES completion:nil];
 
 }
+
+- (void)inquireHouseList:(void(^)(void))success{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    Database *db = [Database shareInstance];
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house/list"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            if ([responseDic[@"data"] count] > 0) {
+                [db.houseList removeAllObjects];
+                [responseDic[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    HouseModel *house = [[HouseModel alloc] init];
+                    house.houseUid = [obj objectForKey:@"houseUid"];
+                    house.name = [obj objectForKey:@"name"];
+                    house.auth = [obj objectForKey:@"auth"];
+                    [db.houseList addObject:house];
+                    
+                    [db insertNewHouse:house];
+                }];
+            }
+            if (success) {
+                success();
+            }
+        }else{
+            [NSObject showHudTipStr:LocalString(@"获取家庭列表失败")];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error:%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"从服务器获取信息失败"];
+        });
+    }];
+}
+
 #pragma mark - Lazyload
 - (void)setNavItem{
     self.navigationItem.title = LocalString(@"添加家庭");

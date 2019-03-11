@@ -11,6 +11,7 @@
 #import "PhoneVerifyCell2.h"
 #import "TextFieldCell.h"
 #import "MainViewController.h"
+#import "NoHouseBridgingController.h"
 
 NSString *const CellIdentifier_RegisterUserPhone = @"CellID_RegisteruserPhone";
 NSString *const CellIdentifier_RegisterUserPhoneVerify = @"CellID_RegisteruserPhoneVerify";
@@ -244,9 +245,11 @@ static float HEIGHT_CELL = 50.f;
                       [SVProgressHUD dismiss];
                   });
                   
-                  //进入主页面
-                  MainViewController *mainVC = [[MainViewController alloc] init];
-                  [self presentViewController:mainVC animated:YES completion:nil];
+                  NoHouseBridgingController *vc = [[NoHouseBridgingController alloc] init];
+                  [self presentViewController:vc animated:YES completion:nil];
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      [SVProgressHUD dismiss];
+                  });
               }else{
                   [NSObject showHudTipStr:LocalString(@"注册用户失败，请检查验证码和密码是否填写错误")];
                   dispatch_async(dispatch_get_main_queue(), ^{

@@ -188,10 +188,11 @@
               }else{
                   //自动登录失败，使用本地保存的信息
                   [NSObject showHudTipStr:LocalString(@"自动登录失败")];
-                  [db initDB];
                   db.user.userId = userId;
+                  [db initDB];
               }
               db.houseList = [db queryAllHouse];
+              NSLog(@"%lu",db.houseList.count);
               if (db.houseList.count > 0) {
                   db.currentHouse = db.houseList[0];
               }
@@ -204,16 +205,17 @@
               }
               [[YRabbitMQ shareInstance] receiveRabbitMessage:routingkeys];
 
+              NSLog(@"%lu",db.houseList.count);
               
-              NoHouseBridgingController *vc = [[NoHouseBridgingController alloc] init];
-              [self presentViewController:vc animated:YES completion:nil];
-              dispatch_async(dispatch_get_main_queue(), ^{
-                  [SVProgressHUD dismiss];
-              });
-              return ;
-              //进入主页面
-              MainViewController *mainVC = [[MainViewController alloc] init];
-              [self presentViewController:mainVC animated:YES completion:nil];
+              if (db.houseList.count <= 0 && [[responseDic objectForKey:@"errno"] intValue] == 0) {
+                  //如果登录失败就不能进入创建家庭页面
+                  NoHouseBridgingController *vc = [[NoHouseBridgingController alloc] init];
+                  [self presentViewController:vc animated:YES completion:nil];
+              }else{
+                  //进入主页面
+                  MainViewController *mainVC = [[MainViewController alloc] init];
+                  [self presentViewController:mainVC animated:YES completion:nil];
+              }
               dispatch_async(dispatch_get_main_queue(), ^{
                   [SVProgressHUD dismiss];
               });
