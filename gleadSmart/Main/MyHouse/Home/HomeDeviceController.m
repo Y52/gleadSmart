@@ -227,6 +227,16 @@ static CGFloat const Cell_Height = 72.f;
                 cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_off"];
             }
             cell.switchBlock = ^(BOOL isOn) {
+                blockCell.controlSwitch.enabled = NO;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    //异步等待10秒，如果未收到信息做如下处理
+                    sleep(4);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        blockCell.controlSwitch.enabled = YES;
+                        blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                    });
+                });
+                
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
                 [[Network shareNetwork] sendData69With:controlCode mac:mac data:data failuer:^{

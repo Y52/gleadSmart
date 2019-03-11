@@ -1090,13 +1090,6 @@
 			path = ShareDevice;
 			sourceTree = "<group>";
 		};
-		36B8F16B2226A6B700652CFA /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		3E9E9B9821A2ABC600CA2B7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1847,7 +1840,6 @@
 				BB7E7968221A5D6D0060A0CF /* HouseShareController.m */,
 				BB7D9B9B221E8FA300C5DFD1 /* SharerDetailController.h */,
 				BB7D9B9C221E8FA300C5DFD1 /* SharerDetailController.m */,
-				36B8F16B2226A6B700652CFA /* New Group */,
 				BB2CB8A4221FE171001E6703 /* SharerRemarkController.h */,
 				BB2CB8A5221FE171001E6703 /* SharerRemarkController.m */,
 				BB7E7974221AA7780060A0CF /* AddShareController.h */,

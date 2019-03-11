@@ -34,6 +34,13 @@ NSString *const CellIdentifier_sharerInputAccount = @"CellID_sharerInputAccount"
 
 #pragma mark - private methods
 - (void)addSharer{
+    if (!([self->mobile isKindOfClass:[NSString class]] && self->mobile.length > 0)) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"错误") message:LocalString(@"请输入手机号码") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
