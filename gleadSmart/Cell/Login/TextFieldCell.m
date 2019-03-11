@@ -42,7 +42,7 @@
             [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(yAutoFit(350.f), yAutoFit(30.f)));
                 make.centerY.equalTo(self.contentView.mas_centerY);
-                make.left.equalTo(self.passwordimage.mas_left).offset(30);
+                make.left.equalTo(self.contentView.mas_left).offset(48.f);
             }];
         }
     }

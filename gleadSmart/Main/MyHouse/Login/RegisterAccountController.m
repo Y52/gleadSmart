@@ -8,7 +8,7 @@
 
 #import "RegisterAccountController.h"
 #import "PhoneTFCell.h"
-#import "PhoneVerifyCell2.h"
+#import "PhoneVerifyCell.h"
 #import "TextFieldCell.h"
 #import "MainViewController.h"
 #import "NoHouseBridgingController.h"
@@ -56,7 +56,7 @@ static float HEIGHT_CELL = 50.f;
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
-            [tableView registerClass:[PhoneVerifyCell2 class] forCellReuseIdentifier:CellIdentifier_RegisterUserPhoneVerify];
+            [tableView registerClass:[PhoneVerifyCell class] forCellReuseIdentifier:CellIdentifier_RegisterUserPhoneVerify];
             [tableView registerClass:[PhoneTFCell class] forCellReuseIdentifier:CellIdentifier_RegisterUserPhone];
             [tableView registerClass:[TextFieldCell class] forCellReuseIdentifier:CellIdentifier_RegisterTextField];
             tableView.separatorColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.08];
@@ -99,10 +99,11 @@ static float HEIGHT_CELL = 50.f;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 1) {
-            PhoneVerifyCell2 *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RegisterUserPhoneVerify];;
+            PhoneVerifyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_RegisterUserPhoneVerify];;
             if (cell == nil) {
-                cell = [[PhoneVerifyCell2 alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RegisterUserPhoneVerify];
+                cell = [[PhoneVerifyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RegisterUserPhoneVerify];
             }
+            cell.verifyimage.image = [UIImage imageNamed:@"img_retrieve_verify"];
             cell.TFBlock = ^(NSString *text) {
                 self.code = text;
                 [self textFieldChange];
@@ -149,6 +150,7 @@ static float HEIGHT_CELL = 50.f;
             if (cell == nil) {
                 cell = [[PhoneTFCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_RegisterUserPhone];
             }
+            cell.phoneimage.image = [UIImage imageNamed:@"Imag_retrieve_phoneuser"];
             cell.TFBlock = ^(NSString *text) {
                 self.phone = text;
                 [self textFieldChange];
@@ -163,12 +165,14 @@ static float HEIGHT_CELL = 50.f;
         cell.textField.secureTextEntry = YES;
         if (indexPath.row == 0) {
             cell.textField.placeholder = LocalString(@"请输入密码（6位以上字符）");
+            cell.passwordimage.image = [UIImage imageNamed:@"img_retrieve_password"];
             cell.TFBlock = ^(NSString *text) {
                 self.pwText = text;
                 [self textFieldChange];
             };
         }else{
             cell.textField.placeholder = LocalString(@"请再次输入密码");
+            cell.passwordimage.image = [UIImage imageNamed:@"img_retrieve_password"];
             cell.TFBlock = ^(NSString *text) {
                 self.pwConText = text;
                 [self textFieldChange];
