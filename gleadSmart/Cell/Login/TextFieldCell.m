@@ -12,10 +12,12 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor clearColor];
     if (self) {
         if (!_passwordimage) {
             _passwordimage = [[UIImageView alloc] init];
+            _passwordimage.contentMode = UIViewContentModeScaleAspectFit;
             [self.contentView addSubview:_passwordimage];
             [_passwordimage mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));

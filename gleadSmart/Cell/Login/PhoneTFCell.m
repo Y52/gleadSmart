@@ -13,10 +13,12 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor clearColor];
     if (self) {
         if (!_phoneimage) {
             _phoneimage = [[UIImageView alloc] init];
+            _phoneimage.contentMode = UIViewContentModeScaleAspectFit;
             [self.contentView addSubview:_phoneimage];
             [_phoneimage mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));

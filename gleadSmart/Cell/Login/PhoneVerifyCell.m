@@ -13,9 +13,11 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     if (self) {
         if (!_verifyimage) {
             _verifyimage = [[UIImageView alloc] init];
+            _verifyimage.contentMode = UIViewContentModeScaleAspectFit;
             [self.contentView addSubview:_verifyimage];
             [_verifyimage mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(yAutoFit(15.f), yAutoFit(15.f)));

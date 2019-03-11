@@ -162,7 +162,8 @@ static CGFloat const HEIGHT_CELL = 51.f;
             [Database destroyInstance];
 
             RegisterController *loginVC = [[RegisterController alloc] init];
-            [UIApplication sharedApplication].keyWindow.rootViewController = loginVC;
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
         };
         alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self presentViewController:alert animated:NO completion:^{
