@@ -295,14 +295,22 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     hsVC.dismissBlock = ^{
         [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
         [self getHouseHomeListAndDevice];
-        [self.houseButton setTitle:[Database shareInstance].currentHouse.name forState:UIControlStateNormal];
+        if (![Database shareInstance].currentHouse) {
+            [self.houseButton setTitle:LocalString(@"请选择家庭") forState:UIControlStateNormal];
+        }else{
+            [self.houseButton setTitle:[Database shareInstance].currentHouse.name forState:UIControlStateNormal];
+        }
     };
     hsVC.pushBlock = ^{
         HouseManagementController *HouseManagementVC = [[HouseManagementController alloc] init];
         HouseManagementVC.popBlock = ^{
             [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
             [self getHouseHomeListAndDevice];
-            [self.houseButton setTitle:[Database shareInstance].currentHouse.name forState:UIControlStateNormal];
+            if (![Database shareInstance].currentHouse) {
+                [self.houseButton setTitle:LocalString(@"请选择家庭") forState:UIControlStateNormal];
+            }else{
+                [self.houseButton setTitle:[Database shareInstance].currentHouse.name forState:UIControlStateNormal];
+            }
         };
         [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
         [self.navigationController pushViewController:HouseManagementVC animated:YES];
@@ -387,25 +395,27 @@ static CGFloat const gleadMenuItemMargin = 20.f;
 - (UIButton *)houseButton{
     if (!_houseButton) {
         _houseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_houseButton setTitle:[Database shareInstance].currentHouse.name forState:UIControlStateNormal];
+        if (![Database shareInstance].currentHouse) {
+            [self.houseButton setTitle:LocalString(@"请选择家庭") forState:UIControlStateNormal];
+        }else{
+            [self.houseButton setTitle:[Database shareInstance].currentHouse.name forState:UIControlStateNormal];
+        }
         _houseButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
         _houseButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+        _houseButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+        _houseButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_houseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        //[_houseButton setImage:[UIImage imageNamed:@"img_houseSelect"] forState:UIControlStateNormal];
         [_houseButton addTarget:self action:@selector(houseSelect) forControlEvents:UIControlEventTouchUpInside];
         [self.headerView addSubview:_houseButton];
         
-        CGSize size = [[Database shareInstance].currentHouse.name sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica" size:15],NSFontAttributeName,nil]];
         CGFloat y = yAutoFit(gleadHeaderHeight) - yAutoFit(24.f) - yAutoFit(13.f) * 2 - yAutoFit(100.f) - gleadHomeListHeight;
         [_houseButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view.mas_left).offset(yAutoFit(27.f));
+            make.left.equalTo(self.view.mas_left).offset(yAutoFit(35.f));
             make.top.equalTo(self.view.mas_top).offset(y);
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(size.width + 24.f), yAutoFit(24.f)));
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(150.f), yAutoFit(24.f)));
         }];
         
-        //[_houseButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -_houseButton.imageView.bounds.size.width, 0, _houseButton.imageView.bounds.size.width)];
-        //[_houseButton setImageEdgeInsets:UIEdgeInsetsMake(0, _houseButton.titleLabel.bounds.size.width, 0, -_houseButton.titleLabel.bounds.size.width)];
-
+        [_houseButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
     return _houseButton;
 }

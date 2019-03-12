@@ -115,6 +115,20 @@ static CGFloat const gleadMenuItemMargin = 25.f;
 }
 
 - (void)shareSelectedDevice{
+    BOOL isSelect = NO;
+    for (DeviceModel *device in self.deviceList) {
+        if (device.tag == ySelect && !device.isShared) {
+            isSelect = YES;
+        }
+    }
+    if (!isSelect) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"请选择设备再分享") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
     if (self.sharer != nil) {
         //如果是从分享者界面进入的不需要输入手机号码，直接添加
         [self addSharer];

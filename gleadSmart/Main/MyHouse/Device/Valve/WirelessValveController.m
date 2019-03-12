@@ -171,15 +171,17 @@ CGFloat const nodeButtonWidth = 20.f;
         }
     }
     
-    if (hasLeak) {
-        self.leakImage.image = [UIImage imageNamed:@"valveLeak_abnormal"];
-        _leakLabel.text = LocalString(@"漏水");
-        self.leakMark.hidden = NO;
-    }else{
-        self.leakImage.image = [UIImage imageNamed:@"valveLeak_normal"];
-        _leakLabel.text = LocalString(@"正常");
-        self.leakMark.hidden = YES;
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (hasLeak) {
+            self.leakImage.image = [UIImage imageNamed:@"valveLeak_abnormal"];
+            self.leakLabel.text = LocalString(@"漏水");
+            self.leakMark.hidden = NO;
+        }else{
+            self.leakImage.image = [UIImage imageNamed:@"valveLeak_normal"];
+            self.leakLabel.text = LocalString(@"正常");
+            self.leakMark.hidden = YES;
+        }
+    });
 }
 
 //水阀开关状态设置
@@ -345,6 +347,8 @@ CGFloat const nodeButtonWidth = 20.f;
         }
         [self.device.nodeArray addObject:node];
     }
+    
+    [self nodesLeakStatus:self.device.nodeArray];//根据漏水信息更新UI
 }
 
 //添加新的节点按钮
@@ -436,6 +440,7 @@ CGFloat const nodeButtonWidth = 20.f;
     }
     [self nodeHttpGet];
     [self drawRectNodeButtonList:self.device.nodeArray];
+    [self nodesLeakStatus:self.device.nodeArray];
 }
 
 
@@ -515,14 +520,22 @@ CGFloat const nodeButtonWidth = 20.f;
 - (void)controlSwitch{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:![self.device.isOn boolValue]]];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
+    if (self.device.isShare) {
+        [[Network shareNetwork] sendData69With:controlCode shareDevice:self.device data:data failure:nil];
+    }else{
+        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
+    }
 }
 
 //获取所有下挂漏水节点
 - (void)getAllNode{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x13,@0x04,@0x00];
-    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
+    if (self.device.isShare) {
+        [[Network shareNetwork] sendData69With:controlCode shareDevice:self.device data:data failure:nil];
+    }else{
+        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
+    }
 }
 
 - (NSMutableArray *)sortLeakageInfosByDate:(NSMutableArray *)arr{

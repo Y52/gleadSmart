@@ -46,7 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///@brief Frame69帧发送方法
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data failuer:(nullable void(^)(void))failure;
-- (void)sendData69With:(UInt8)controlCode shareDevice:(DeviceModel *)shareDevice data:(NSArray *)data failuer:(nullable void(^)(void))failure;
+- (void)sendData69With:(UInt8)controlCode shareDevice:(DeviceModel *)shareDevice data:(NSArray *)data failure:(nullable void(^)(void))failure;
+- (void)inquireShareDeviceInfoByOneNetdatastream:(DeviceModel *)device;
+
 ///@brief AP配网发帧
 - (void)APsendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data;
 

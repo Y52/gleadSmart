@@ -486,10 +486,10 @@ static int noUserInteractionHeartbeat = 0;
         }
     }
     
-    //分享设备onenet获取状态
-    for (DeviceModel *device in db.shareDeviceArray) {
-        [self inquireShareDeviceInfoByOneNetdatastream:device];
-    }
+//    //分享设备onenet获取状态
+//    for (DeviceModel *device in db.shareDeviceArray) {
+//        [self inquireShareDeviceInfoByOneNetdatastream:device];
+//    }
 }
 
 /*
@@ -545,8 +545,6 @@ static int noUserInteractionHeartbeat = 0;
                     [self analysisResultValue:streamId value:value];
                 }];
             }
-            
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
             
         }
@@ -742,10 +740,10 @@ static int noUserInteractionHeartbeat = 0;
             NSMutableArray *data69 = [[NSMutableArray alloc] init];
             [data69 addObject:[NSNumber numberWithUnsignedInteger:0x69]];
             [data69 addObject:[NSNumber numberWithUnsignedInteger:controlCode]];
-            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(0, 2)]]]];
-            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(2, 2)]]]];
-            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(4, 2)]]]];
             [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(6, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(4, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(2, 2)]]]];
+            [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[shareDevice.mac substringWithRange:NSMakeRange(0, 2)]]]];
             [data69 addObject:[NSNumber numberWithInt:self->_frameCount]];
             [data69 addObject:[NSNumber numberWithInteger:data.count]];
             [data69 addObjectsFromArray:data];
@@ -1150,8 +1148,8 @@ static int noUserInteractionHeartbeat = 0;
         {
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"温控器状态");
+                NSDictionary *userInfo;
                 NSNumber *isOn;
-
                 if ([_recivedData69[1] unsignedIntegerValue] == 0x01) {
                     //查询温控器状态
                     isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
@@ -1188,6 +1186,7 @@ static int noUserInteractionHeartbeat = 0;
                             device.mode = [NSNumber numberWithUnsignedInteger:mode];
                             device.modeTemp = modeTemp;
                             device.indoorTemp = indoorTemp;
+                            userInfo = @{@"device":device,@"isShare":@0};
                         }
                     }
                     for (DeviceModel *device in db.shareDeviceArray) {
@@ -1197,18 +1196,21 @@ static int noUserInteractionHeartbeat = 0;
                             device.mode = [NSNumber numberWithUnsignedInteger:mode];
                             device.modeTemp = modeTemp;
                             device.indoorTemp = indoorTemp;
+                            userInfo = @{@"device":device,@"isShare":@1};
                         }
                     }
                 }
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
 
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 //开关温控器
                 NSLog(@"开关温控器");
-                
+                NSDictionary *userInfo;
+
                 NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
                 if ([isOn integerValue]) {
                     NSLog(@"%@",isOn);
@@ -1245,6 +1247,7 @@ static int noUserInteractionHeartbeat = 0;
                             device.mode = [NSNumber numberWithUnsignedInteger:mode];
                             device.modeTemp = modeTemp;
                             device.indoorTemp = indoorTemp;
+                            userInfo = @{@"device":device,@"isShare":@0};
                         }
                     }
                     for (DeviceModel *device in db.shareDeviceArray) {
@@ -1254,11 +1257,12 @@ static int noUserInteractionHeartbeat = 0;
                             device.mode = [NSNumber numberWithUnsignedInteger:mode];
                             device.modeTemp = modeTemp;
                             device.indoorTemp = indoorTemp;
+                            userInfo = @{@"device":device,@"isShare":@1};
                         }
                     }
                 }
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
@@ -1386,39 +1390,47 @@ static int noUserInteractionHeartbeat = 0;
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 //控制水阀状态
                 NSLog(@"控制水阀状态");
+                NSDictionary *userInfo;
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        userInfo = @{@"device":device,@"isShare":@0};
                     }
                 }
                 for (DeviceModel *device in db.shareDeviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        userInfo = @{@"device":device,@"isShare":@1};
                     }
                 }
 
                 NSLog(@"水阀开关回复:%lu",(unsigned long)[_recivedData69[12] unsignedIntegerValue]);
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询无线水阀状态
+                NSDictionary *userInfo;
                 NSLog(@"查询无线水阀状态");
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
                         device.isOnline = @1;
+                        userInfo = @{@"device":device,@"isShare":@0};
                     }
                 }
                 for (DeviceModel *device in db.shareDeviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
                         device.isOnline = @1;
+                        userInfo = @{@"device":device,@"isShare":@1};
                     }
                 }
                 
                 //设备内容页面UI等刷新
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {

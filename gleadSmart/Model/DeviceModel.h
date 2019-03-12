@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DeviceModel : NSObject
 
 @property (nonatomic) NSUInteger tag;
+///@brief 分享设备页面判断是否已经分享过
 @property (nonatomic) BOOL isShared;
 
 @property (strong, nonatomic) NSString *mac;

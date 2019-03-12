@@ -45,12 +45,14 @@ static CGFloat const Cell_Height = 72.f;
         [self.deviceTable reloadData];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectDevicesWithRoom) name:@"refreshDeviceTable" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oneDeviceStatusUpdate:) name:@"oneDeviceStatusUpdate" object:nil];
     [self selectDevicesWithRoom];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshDeviceTable" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"oneDeviceStatusUpdate" object:nil];
 }
 
 #pragma mark - Actions
@@ -82,6 +84,40 @@ static CGFloat const Cell_Height = 72.f;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.deviceTable reloadData];
     });
+}
+
+- (void)oneDeviceStatusUpdate:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    DeviceModel *device = [userInfo objectForKey:@"device"];
+    NSNumber *isShare = [userInfo objectForKey:@"isShare"];
+    if ([isShare boolValue]) {
+        for (int i = 0; i < [Database shareInstance].shareDeviceArray.count; i++) {
+            DeviceModel *shareDevice = [Database shareInstance].shareDeviceArray[i];
+            if ([device.mac isEqualToString:shareDevice.mac]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    HomeDeviceCell *cell = [self.deviceTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1]];
+                    cell.controlSwitch.enabled = YES;
+                    cell.controlSwitch.on = [device.isOn boolValue];
+                });
+            }
+        }
+        return;
+    }
+    
+    for (int i = 0; i < self.deviceArray.count; i++) {
+        DeviceModel *oldDevice = self.deviceArray[i];
+        if ([device.mac isEqualToString:oldDevice.mac]) {
+            oldDevice.isOn = device.isOn;
+            oldDevice.mode = device.mode;
+            oldDevice.modeTemp = device.modeTemp;
+            oldDevice.indoorTemp = device.indoorTemp;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                HomeDeviceCell *cell = [self.deviceTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                cell.controlSwitch.enabled = YES;
+                cell.controlSwitch.on = [oldDevice.isOn boolValue];
+            });
+        }
+    }
 }
 
 - (void)refreshTable{
@@ -206,7 +242,7 @@ static CGFloat const Cell_Height = 72.f;
                 cell.controlSwitch.on = NO;
             }
             NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
-            [self differenceShareDiveceAction:type isOnline:[device.isOnline boolValue] device:device cell:cell];
+            [self differenceShareDiveceAction:type isOnline:[device.isOnline boolValue] device:device cell:cell indexpath:indexPath];
         }
             break;
             
@@ -257,6 +293,19 @@ static CGFloat const Cell_Height = 72.f;
                 cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
             }
             cell.switchBlock = ^(BOOL isOn) {
+                blockCell.controlSwitch.enabled = NO;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    //异步等待4秒，如果未收到信息做如下处理
+                    sleep(4);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        DeviceModel *device = self.deviceArray[indexPath.row];
+                        if ([device.isOn boolValue] != isOn) {
+                            blockCell.controlSwitch.enabled = YES;
+                            blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                        }
+                    });
+                });
+                
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
                 [[Network shareNetwork] sendData69With:controlCode mac:mac data:data failuer:^{
@@ -277,7 +326,7 @@ static CGFloat const Cell_Height = 72.f;
     }
 }
 
-- (void)differenceShareDiveceAction:(NSInteger)type isOnline:(BOOL)isOnline device:(DeviceModel *)device cell:(HomeDeviceCell *)cell{
+- (void)differenceShareDiveceAction:(NSInteger)type isOnline:(BOOL)isOnline device:(DeviceModel *)device cell:(HomeDeviceCell *)cell indexpath:(NSIndexPath *)indexPath{
     __block typeof(cell) blockCell = cell;
     switch (type) {
         case 1:
@@ -288,9 +337,22 @@ static CGFloat const Cell_Height = 72.f;
                 cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_off"];
             }
             cell.switchBlock = ^(BOOL isOn) {
+                blockCell.controlSwitch.enabled = NO;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    //异步等待4秒，如果未收到信息做如下处理
+                    sleep(4);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        DeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
+                        if ([device.isOn boolValue] != isOn) {
+                            blockCell.controlSwitch.enabled = YES;
+                            blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                        }
+                    });
+                });
+                
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
-                [[Network shareNetwork] sendData69With:controlCode shareDevice:device data:data failuer:^{
+                [[Network shareNetwork] sendData69With:controlCode shareDevice:device data:data failure:^{
                     blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
                 }];
             };
@@ -305,9 +367,22 @@ static CGFloat const Cell_Height = 72.f;
                 cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
             }
             cell.switchBlock = ^(BOOL isOn) {
+                blockCell.controlSwitch.enabled = NO;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    //异步等待4秒，如果未收到信息做如下处理
+                    sleep(4);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        DeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
+                        if ([device.isOn boolValue] != isOn) {
+                            blockCell.controlSwitch.enabled = YES;
+                            blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                        }
+                    });
+                });
+                
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
-                [[Network shareNetwork] sendData69With:controlCode shareDevice:device data:data failuer:^{
+                [[Network shareNetwork] sendData69With:controlCode shareDevice:device data:data failure:^{
                     blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
                 }];
             };
@@ -361,6 +436,36 @@ static CGFloat const Cell_Height = 72.f;
             break;
             
         case 1:
+        {
+            DeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
+            NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
+            switch (type) {
+                case 1:
+                {
+                    ThermostatController *thermostatVC = [[ThermostatController alloc] init];
+                    thermostatVC.device = device;
+                    [self.navigationController pushViewController:thermostatVC animated:YES];
+                }
+                    break;
+                    
+                case 2:
+                {
+                    WirelessValveController *valveVC = [[WirelessValveController alloc] init];
+                    valveVC.device = device;
+                    [self.navigationController pushViewController:valveVC animated:YES];
+                }
+                    break;
+                    
+                case 3:
+                {
+                    
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
             break;
             
         default:

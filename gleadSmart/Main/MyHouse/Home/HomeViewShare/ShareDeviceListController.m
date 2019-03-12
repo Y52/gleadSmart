@@ -6,6 +6,17 @@
 //  Copyright © 2019年 杭州轨物科技有限公司. All rights reserved.
 //
 
+@interface OwnerModel : NSObject
+
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *ownerUid;
+
+@end
+
+@implementation OwnerModel
+
+@end
+
 #import "ShareDeviceListController.h"
 #import "ShareDeviceListCell.h"
 #import "ShareDeviceDetailController.h"
@@ -17,7 +28,7 @@ static float HEIGHT_HEADER = 40.f;
 @interface ShareDeviceListController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *deviceListTable;
-@property (nonatomic, strong) NSMutableArray *shareDeviceList;
+@property (nonatomic, strong) NSMutableArray *ownerList;
 
 
 @end
@@ -32,7 +43,7 @@ static float HEIGHT_HEADER = 40.f;
     self.navigationItem.title = LocalString(@"我收到的共享");
     
     self.deviceListTable = [self deviceListTable];
-#warning TODO 共享设备列表页面
+    [self getHouseSharerInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -42,11 +53,59 @@ static float HEIGHT_HEADER = 40.f;
 }
 
 #pragma mark - private methods
+- (void)getHouseSharerInfo{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/share/ownerList"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            if ([[responseDic objectForKey:@"data"] isKindOfClass:[NSArray class]] && [[responseDic objectForKey:@"data"] count] > 0) {
+                if (!self.ownerList) {
+                    self.ownerList = [[NSMutableArray alloc] init];
+                }
+                [self.ownerList removeAllObjects];
+                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (![obj isKindOfClass:[NSNull class]]) {
+                        OwnerModel *owner = [[OwnerModel alloc] init];
+                        owner.name = [obj objectForKey:@"name"];
+                        owner.ownerUid = [obj objectForKey:@"ownerUid"];
+                        [self.ownerList addObject:owner];
+                    }
+                }];
+                [self.deviceListTable reloadData];
+            }
+        }else{
+            [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"获取共享设备拥有者列表失败"];
+        });
+    }];
+}
 
 #pragma mark - setters and getters
-
-#pragma mark - Lazy Load
-
 - (UITableView *)deviceListTable{
     if (!_deviceListTable) {
         _deviceListTable = ({
@@ -75,7 +134,7 @@ static float HEIGHT_HEADER = 40.f;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
    
-    return self.shareDeviceList.count;
+    return self.ownerList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -86,11 +145,8 @@ static float HEIGHT_HEADER = 40.f;
         cell = [[ShareDeviceListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_ShareDeviceList];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    if (indexPath.row == 0) {
-        cell.leftLabel.text = LocalString(@"哈哈");
-
-    }
+    OwnerModel *owner = self.ownerList[indexPath.row];
+    cell.leftLabel.text = owner.name;
     return cell;
     
 }

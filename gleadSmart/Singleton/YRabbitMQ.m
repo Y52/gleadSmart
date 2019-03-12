@@ -115,6 +115,7 @@ static NSArray *_routingkeys = nil;
  *修改开关
  */
 - (void)analyzeMessageTypeB:(NSDictionary *)dic{
+    NSDictionary *userInfo;
     NSString *mac = [dic objectForKey:@"mac"];
     NSNumber *on = [dic objectForKey:@"on"];
     NSNumber *online = [dic objectForKey:@"online"];
@@ -124,6 +125,7 @@ static NSArray *_routingkeys = nil;
             NSLog(@"%@",device.mac);
             device.isOn = on;
             device.isOnline = online;
+            userInfo = @{@"device":device,@"isShare":@0};
         }
     }
     for (DeviceModel *device in [Database shareInstance].shareDeviceArray) {
@@ -131,9 +133,10 @@ static NSArray *_routingkeys = nil;
             NSLog(@"%@",device.mac);
             device.isOn = on;
             device.isOnline = online;
+            userInfo = @{@"device":device,@"isShare":@1};
         }
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
 }

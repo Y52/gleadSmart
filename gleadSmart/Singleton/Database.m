@@ -428,6 +428,7 @@ static dispatch_once_t oneToken;
                             device.apiKey = [obj objectForKey:@"apiKey"];
                             device.deviceId = [obj objectForKey:@"deviceId"];
                             device.houseUid = [obj objectForKey:@"houseUid"];
+                            device.isShare = YES;
                             if (![device.mac isKindOfClass:[NSNull class]]) {
                                 //插入房间的设备
                                 [self insertNewShareDevice:device];
@@ -436,6 +437,10 @@ static dispatch_once_t oneToken;
                         }];
                     }
                 }];
+                //分享设备onenet获取状态
+                for (DeviceModel *device in self.shareDeviceArray) {
+                    [[Network shareNetwork] inquireShareDeviceInfoByOneNetdatastream:device];
+                }
             }
         }else{
             [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];
