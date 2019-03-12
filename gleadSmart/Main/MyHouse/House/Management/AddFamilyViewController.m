@@ -324,11 +324,12 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
                   [SVProgressHUD dismiss];
               });
           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-              NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-              
-              NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
-              
-              NSLog(@"error--%@",serializedData);
+//              NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+//
+//              NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+//
+//              NSLog(@"error--%@",serializedData);
+              NSLog(@"%@",error);
               
               if (error.code == -1001) {
                   [NSObject showHudTipStr:LocalString(@"当前网络状况不佳")];

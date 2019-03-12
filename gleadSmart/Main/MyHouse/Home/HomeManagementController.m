@@ -319,11 +319,12 @@ static CGFloat const Cell_Height = 50.f;
             [SVProgressHUD dismiss];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-        
-        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
-        
-        NSLog(@"error--%@",serializedData);
+//        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+//
+//        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+//
+//        NSLog(@"error--%@",serializedData);
+        NSLog(@"%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
             [NSObject showHudTipStr:@"从服务器获取信息失败"];

@@ -232,11 +232,11 @@ static CGFloat const Header_Height = 25.f;
             [SVProgressHUD dismiss];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-
-        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
-
-        NSLog(@"error--%@",serializedData);
+//        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+//
+//        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+//
+//        NSLog(@"error--%@",serializedData);
         NSLog(@"%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];

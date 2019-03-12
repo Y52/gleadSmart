@@ -190,7 +190,7 @@ static CGFloat const Cell_Height = 72.f;
                 cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
                 cell.controlSwitch.on = NO;
             }
-            [self differenceDiveceAction:[device.type integerValue] isOnline:[device.isOnline boolValue] mac:device.mac cell:cell];
+            [self differenceDiveceAction:[device.type integerValue] isOnline:[device.isOnline boolValue] mac:device.mac cell:cell indexpath:indexPath];
         }
             break;
             
@@ -216,7 +216,7 @@ static CGFloat const Cell_Height = 72.f;
     return cell;
 }
 
-- (void)differenceDiveceAction:(NSInteger)type isOnline:(BOOL)isOnline mac:(NSString *)mac cell:(HomeDeviceCell *)cell{
+- (void)differenceDiveceAction:(NSInteger)type isOnline:(BOOL)isOnline mac:(NSString *)mac cell:(HomeDeviceCell *)cell indexpath:(NSIndexPath *)indexPath{
     __block typeof(cell) blockCell = cell;
     switch (type) {
         case 1:
@@ -229,11 +229,14 @@ static CGFloat const Cell_Height = 72.f;
             cell.switchBlock = ^(BOOL isOn) {
                 blockCell.controlSwitch.enabled = NO;
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    //异步等待10秒，如果未收到信息做如下处理
+                    //异步等待4秒，如果未收到信息做如下处理
                     sleep(4);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        blockCell.controlSwitch.enabled = YES;
-                        blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                        DeviceModel *device = self.deviceArray[indexPath.row];
+                        if ([device.isOn boolValue] != isOn) {
+                            blockCell.controlSwitch.enabled = YES;
+                            blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                        }
                     });
                 });
                 
