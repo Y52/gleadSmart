@@ -148,11 +148,9 @@ static CGFloat const HEIGHT_CELL = 51.f;
             
         }
     }else{
-        YAlertViewController *alert = [[YAlertViewController alloc] init];
-        alert.lBlock = ^{
-        
-        };
-        alert.rBlock = ^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"退出登录") message:LocalString(@"请再次确认是否退出登录") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults removeObjectForKey:@"mobile"];
             [userDefaults removeObjectForKey:@"passWord"];
@@ -160,19 +158,15 @@ static CGFloat const HEIGHT_CELL = 51.f;
             //清除单例
             [Network destroyInstance];
             [Database destroyInstance];
-
+            
             RegisterController *loginVC = [[RegisterController alloc] init];
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
             [UIApplication sharedApplication].keyWindow.rootViewController = nav;
-        };
-        alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [self presentViewController:alert animated:NO completion:^{
-            [alert showView];
-            alert.titleLabel.text = LocalString(@"提示");
-            alert.messageLabel.text = LocalString(@"确定退出登录吗？");
-            [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
-            [alert.rightBtn setTitle:LocalString(@"确认") forState:UIControlStateNormal];
+
         }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:confirmAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 

@@ -339,9 +339,16 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
             break;
             
         case 1:{
-            HouseShareController *shareVC = [[HouseShareController alloc] init];
-            shareVC.house = self.house;
-            [self.navigationController pushViewController:shareVC animated:YES];
+            if ([self.house.auth intValue] == 0) {
+                HouseShareController *shareVC = [[HouseShareController alloc] init];
+                shareVC.house = self.house;
+                [self.navigationController pushViewController:shareVC animated:YES];
+            }else{
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您不是该家庭的管理员，无法分享设备") preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+                [alertController addAction:cancelAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            }
         }
             break;
             
