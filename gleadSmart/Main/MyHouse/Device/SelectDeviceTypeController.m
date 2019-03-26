@@ -78,25 +78,25 @@ static float HEIGHT_HEADER = 40.f;
         case 0:
         {
             cell.deviceName.text = LocalString(@"中央控制器");
-            cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
+            cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_gateway"];
         }
             break;
         case 1:
         {
             cell.deviceName.text = LocalString(@"温控器（LoRa）");
-            cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
+            cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_wenkongqi"];
         }
             break;
         case 2:
         {
             cell.deviceName.text = LocalString(@"壁挂炉调节器（LoRa）");
-            cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
+            cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_bigualu"];
         }
             break;
         case 3:
         {
             cell.deviceName.text = LocalString(@"无线阀门（LoRa）");
-            cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
+            cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_valve"];
         }
             break;
         default:

@@ -30,7 +30,7 @@
     MineViewController *vc3 = [[MineViewController alloc] init];
     UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:vc3];
 
-    self.viewControllers = @[nav1,nav2,nav3];
+    self.viewControllers = @[nav1,nav3];
     
     [self customizeTabBarForController];
     
@@ -40,9 +40,9 @@
 
 #pragma mark - customizeInterface
 - (void)customizeTabBarForController{
-    NSArray *tabBarItemTitle = @[@"我的家", @"商城",@"我的"];
-    NSArray *tabBarItemImages = @[@"img_tab_01_unselect",@"img_tab_02_unselect",@"img_tab_03_unselect"];
-    NSArray *tabBarItemSelectImages = @[@"img_tab_01_select",@"img_tab_02_unselect",@"img_tab_03_select"];
+    NSArray *tabBarItemTitle = @[@"我的家",@"我的"];
+    NSArray *tabBarItemImages = @[@"img_tab_01_unselect",@"img_tab_03_unselect"];
+    NSArray *tabBarItemSelectImages = @[@"img_tab_01_select",@"img_tab_03_select"];
     
     NSDictionary *tabBarTitleUnselectedDic = @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"DADBDA"],NSFontAttributeName:[UIFont systemFontOfSize:11]};
     NSDictionary *tabBarTitleSelectedDic = @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"FFFFFF"],NSFontAttributeName:[UIFont systemFontOfSize:11]};

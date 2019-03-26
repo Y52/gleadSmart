@@ -375,6 +375,18 @@
 		BB8B9E8221A6ADEB00E5D8B2 /* valveStatus_abnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7021A6ADEB00E5D8B2 /* valveStatus_abnormal.png */; };
 		BB8B9E8321A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png */; };
 		BB8F5A8821B7EF1700E69094 /* TherTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8F5A8721B7EF1700E69094 /* TherTimerCell.m */; };
+		BBA593D6224A266F009D5941 /* img_adddevice_wenkongqi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CA224A266D009D5941 /* img_adddevice_wenkongqi@2x.png */; };
+		BBA593D7224A266F009D5941 /* img_adddevice_wenkongqi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CB224A266E009D5941 /* img_adddevice_wenkongqi@3x.png */; };
+		BBA593D8224A266F009D5941 /* img_adddevice_gateway.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CC224A266E009D5941 /* img_adddevice_gateway.png */; };
+		BBA593D9224A266F009D5941 /* img_adddevice_valve@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CD224A266E009D5941 /* img_adddevice_valve@3x.png */; };
+		BBA593DA224A266F009D5941 /* img_adddevice_valve.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CE224A266E009D5941 /* img_adddevice_valve.png */; };
+		BBA593DB224A266F009D5941 /* img_adddevice_valve@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CF224A266E009D5941 /* img_adddevice_valve@2x.png */; };
+		BBA593DC224A266F009D5941 /* img_adddevice_gateway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D0224A266E009D5941 /* img_adddevice_gateway@2x.png */; };
+		BBA593DD224A266F009D5941 /* img_adddevice_gateway@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D1224A266E009D5941 /* img_adddevice_gateway@3x.png */; };
+		BBA593DE224A266F009D5941 /* img_adddevice_wenkongqi.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D2224A266E009D5941 /* img_adddevice_wenkongqi.png */; };
+		BBA593DF224A266F009D5941 /* img_adddevice_bigualu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D3224A266E009D5941 /* img_adddevice_bigualu@3x.png */; };
+		BBA593E0224A266F009D5941 /* img_adddevice_bigualu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D4224A266E009D5941 /* img_adddevice_bigualu@2x.png */; };
+		BBA593E1224A266F009D5941 /* img_adddevice_bigualu.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D5224A266F009D5941 /* img_adddevice_bigualu.png */; };
 		BBAB280F221B912400E21041 /* HomeDeviceSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */; };
 		BBAB2813221B9D4F00E21041 /* ShareDeviceSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB2812221B9D4F00E21041 /* ShareDeviceSelectCell.m */; };
 		BBF631FB21BB5B04006A23AC /* img_auto_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F321BB5B02006A23AC /* img_auto_on@3x.png */; };
@@ -965,6 +977,18 @@
 		BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakBig_abnormal@2x.png"; sourceTree = "<group>"; };
 		BB8F5A8621B7EF1700E69094 /* TherTimerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TherTimerCell.h; sourceTree = "<group>"; };
 		BB8F5A8721B7EF1700E69094 /* TherTimerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TherTimerCell.m; sourceTree = "<group>"; };
+		BBA593CA224A266D009D5941 /* img_adddevice_wenkongqi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_wenkongqi@2x.png"; sourceTree = "<group>"; };
+		BBA593CB224A266E009D5941 /* img_adddevice_wenkongqi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_wenkongqi@3x.png"; sourceTree = "<group>"; };
+		BBA593CC224A266E009D5941 /* img_adddevice_gateway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_adddevice_gateway.png; sourceTree = "<group>"; };
+		BBA593CD224A266E009D5941 /* img_adddevice_valve@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_valve@3x.png"; sourceTree = "<group>"; };
+		BBA593CE224A266E009D5941 /* img_adddevice_valve.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_adddevice_valve.png; sourceTree = "<group>"; };
+		BBA593CF224A266E009D5941 /* img_adddevice_valve@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_valve@2x.png"; sourceTree = "<group>"; };
+		BBA593D0224A266E009D5941 /* img_adddevice_gateway@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_gateway@2x.png"; sourceTree = "<group>"; };
+		BBA593D1224A266E009D5941 /* img_adddevice_gateway@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_gateway@3x.png"; sourceTree = "<group>"; };
+		BBA593D2224A266E009D5941 /* img_adddevice_wenkongqi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_adddevice_wenkongqi.png; sourceTree = "<group>"; };
+		BBA593D3224A266E009D5941 /* img_adddevice_bigualu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_bigualu@3x.png"; sourceTree = "<group>"; };
+		BBA593D4224A266E009D5941 /* img_adddevice_bigualu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_bigualu@2x.png"; sourceTree = "<group>"; };
+		BBA593D5224A266F009D5941 /* img_adddevice_bigualu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_adddevice_bigualu.png; sourceTree = "<group>"; };
 		BBAB280D221B912400E21041 /* HomeDeviceSelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceSelectController.h; sourceTree = "<group>"; };
 		BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceSelectController.m; sourceTree = "<group>"; };
 		BBAB2811221B9D4F00E21041 /* ShareDeviceSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceSelectCell.h; sourceTree = "<group>"; };
@@ -1876,6 +1900,18 @@
 		BB8AE4B522293CC70074118D /* 添加设备_slices */ = {
 			isa = PBXGroup;
 			children = (
+				BBA593D5224A266F009D5941 /* img_adddevice_bigualu.png */,
+				BBA593D4224A266E009D5941 /* img_adddevice_bigualu@2x.png */,
+				BBA593D3224A266E009D5941 /* img_adddevice_bigualu@3x.png */,
+				BBA593CC224A266E009D5941 /* img_adddevice_gateway.png */,
+				BBA593D0224A266E009D5941 /* img_adddevice_gateway@2x.png */,
+				BBA593D1224A266E009D5941 /* img_adddevice_gateway@3x.png */,
+				BBA593CE224A266E009D5941 /* img_adddevice_valve.png */,
+				BBA593CF224A266E009D5941 /* img_adddevice_valve@2x.png */,
+				BBA593CD224A266E009D5941 /* img_adddevice_valve@3x.png */,
+				BBA593D2224A266E009D5941 /* img_adddevice_wenkongqi.png */,
+				BBA593CA224A266D009D5941 /* img_adddevice_wenkongqi@2x.png */,
+				BBA593CB224A266E009D5941 /* img_adddevice_wenkongqi@3x.png */,
 				BB7E07F8222A343000E6658B /* img_wifipwd.png */,
 				BB7E07F9222A343000E6658B /* img_wifipwd@2x.png */,
 				BB7E07FA222A343000E6658B /* img_wifipwd@3x.png */,
@@ -2173,6 +2209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBA593DC224A266F009D5941 /* img_adddevice_gateway@2x.png in Resources */,
 				BB0A40FD21997C99004669CA /* img_wallHob@3x.png in Resources */,
 				BBF6326421BBAB34006A23AC /* valveStatus_normal@3x.png in Resources */,
 				BBF6325821BBAB34006A23AC /* nodeSet_abnormal@2x.png in Resources */,
@@ -2204,7 +2241,9 @@
 				BBF6325721BBAB34006A23AC /* valveAlertMark@2x.png in Resources */,
 				36004A842227B4D800C99215 /* img_retrieve_verify@2x.png in Resources */,
 				BB0A40B421997C99004669CA /* img_houseSelect@3x.png in Resources */,
+				BBA593DD224A266F009D5941 /* img_adddevice_gateway@3x.png in Resources */,
 				BB8B9E8321A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png in Resources */,
+				BBA593DA224A266F009D5941 /* img_adddevice_valve.png in Resources */,
 				BB5B03BA21B90343007AC2B1 /* img_mine_header@3x.png in Resources */,
 				BBF6324F21BBAB34006A23AC /* valveSwitch_abnormal.png in Resources */,
 				BB0A40C421997C99004669CA /* img_homeSet@3x.png in Resources */,
@@ -2231,6 +2270,7 @@
 				369C16A422255FD90079159E /* addRoom_hand.png in Resources */,
 				BB0A40D621997C99004669CA /* img_addDevice@2x.png in Resources */,
 				BB8B9E7C21A6ADEB00E5D8B2 /* nodeLeakBig_abnormal.png in Resources */,
+				BBA593E1224A266F009D5941 /* img_adddevice_bigualu.png in Resources */,
 				BB63B58021B3B94100D77489 /* thermostatSet_on@2x.png in Resources */,
 				BB63B57F21B3B94100D77489 /* thermostatControl_on@2x.png in Resources */,
 				BB0A40C021997C99004669CA /* img_tab_01_select.png in Resources */,
@@ -2271,6 +2311,7 @@
 				BB5B03BC21B90343007AC2B1 /* img_mine_logout.png in Resources */,
 				BB5B035D21B8C3DA007AC2B1 /* img_login_header@2x.png in Resources */,
 				BB1EB39421E44E2B0024603A /* valveNode_selnormal@3x.png in Resources */,
+				BBA593D8224A266F009D5941 /* img_adddevice_gateway.png in Resources */,
 				BB37DED321A7984000B2121B /* thermostat_timing@2x.png in Resources */,
 				BB0A40B821997C99004669CA /* img_headerBg@2x.png in Resources */,
 				BB8B9DC621A6815000E5D8B2 /* thermostatKnob@2x.png in Resources */,
@@ -2318,10 +2359,12 @@
 				BB5B034F21B8BD2F007AC2B1 /* img_login_password@3x.png in Resources */,
 				BB8B9E7421A6ADEB00E5D8B2 /* valveLeak_abnormal@2x.png in Resources */,
 				BB2AD78821AB98BD006DB83A /* KYDivisionPickerView_list.json in Resources */,
+				BBA593DF224A266F009D5941 /* img_adddevice_bigualu@3x.png in Resources */,
 				BB5B036921B8CB6B007AC2B1 /* img_pwd_unvisiable@3x.png in Resources */,
 				BB8B9E7721A6ADEB00E5D8B2 /* valveLeak_abnormal@3x.png in Resources */,
 				BB0A40DF21997C99004669CA /* img_shareInfo@3x.png in Resources */,
 				BBF6325321BBAB34006A23AC /* nodeSet_abnormal@3x.png in Resources */,
+				BBA593DB224A266F009D5941 /* img_adddevice_valve@2x.png in Resources */,
 				BB5B03B821B90343007AC2B1 /* pen@3x.png in Resources */,
 				BB5B03A721B90343007AC2B1 /* img_mine_wechat@3x.png in Resources */,
 				BB5B034321B8BD2F007AC2B1 /* img_login_phone@3x.png in Resources */,
@@ -2346,8 +2389,10 @@
 				BB8B9E7921A6ADEB00E5D8B2 /* valveLeak_abnormal.png in Resources */,
 				BB5B034121B8BD2F007AC2B1 /* img_login_bg@2x.png in Resources */,
 				BB0A40BD21997C99004669CA /* img_tab_02_unselect.png in Resources */,
+				BBA593DE224A266F009D5941 /* img_adddevice_wenkongqi.png in Resources */,
 				BB62E4F721B51CD900C0FA39 /* img_weekProgram_out@3x.png in Resources */,
 				BB62E4CB21B4D9CA00C0FA39 /* img_ther_addTimerSwitch@3x.png in Resources */,
+				BBA593E0224A266F009D5941 /* img_adddevice_bigualu@2x.png in Resources */,
 				BB2CB8A1221FA8B9001E6703 /* img_addShareCheck_notable.png in Resources */,
 				BB0A40B321997C99004669CA /* img_wallHob.png in Resources */,
 				BB8B9E7B21A6ADEB00E5D8B2 /* valveStatus_abnormal@2x.png in Resources */,
@@ -2394,6 +2439,7 @@
 				BB8B9DBD21A6815000E5D8B2 /* thermostatKnob@3x.png in Resources */,
 				BB62E4F121B51CD900C0FA39 /* img_weekProgram_sleep.png in Resources */,
 				BB62E4B721B4CB6A00C0FA39 /* img_thermos_moTimer@3x.png in Resources */,
+				BBA593D9224A266F009D5941 /* img_adddevice_valve@3x.png in Resources */,
 				BB5B03C521B90343007AC2B1 /* img_mine_logout@3x.png in Resources */,
 				BB8B9DCA21A6815000E5D8B2 /* thermostatMoer@3x.png in Resources */,
 				BB352919219D95B500428DE9 /* img_houseManage@3x.png in Resources */,
@@ -2438,6 +2484,7 @@
 				BB8B9DC421A6815000E5D8B2 /* thermostatKnob@1x.png in Resources */,
 				BB8B9DD021A6815000E5D8B2 /* thermostatMoer@1x.png in Resources */,
 				BB0A40E121997C99004669CA /* img_homeSet.png in Resources */,
+				BBA593D6224A266F009D5941 /* img_adddevice_wenkongqi@2x.png in Resources */,
 				BB2AC12421AA8A64006DB83A /* addFamily_check.png in Resources */,
 				BB0A40E821997C99004669CA /* img_shareInfo.png in Resources */,
 				BB62E4F321B51CD900C0FA39 /* img_weekProgram_back@3x.png in Resources */,
@@ -2447,6 +2494,7 @@
 				BB0A40C821997C99004669CA /* img_headerBg@3x.png in Resources */,
 				BB425F5921BF4DF400AB6EFB /* img_valve_on@2x.png in Resources */,
 				BB62E4CF21B4D9CA00C0FA39 /* img_ther_addTimerWeek@2x.png in Resources */,
+				BBA593D7224A266F009D5941 /* img_adddevice_wenkongqi@3x.png in Resources */,
 				BB8B9E8021A6ADEB00E5D8B2 /* valveSwitch_normal.png in Resources */,
 				BB5B03AC21B90343007AC2B1 /* img_mine_checkUpdate@3x.png in Resources */,
 				BB63B5FB21B4128F00D77489 /* thermostat_min.png in Resources */,

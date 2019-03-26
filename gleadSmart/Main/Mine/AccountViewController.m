@@ -31,6 +31,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
+    self.navigationItem.title = LocalString(@"我的账号");
     
     self.accountTable = [self accountTable];
     

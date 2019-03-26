@@ -29,8 +29,8 @@ static CGFloat const gleadMenuItemMargin = 20.f;
 
 @property (strong, nonatomic) UIView *weatherView;
 @property (strong, nonatomic) UILabel *tempValueLabel;
-@property (strong, nonatomic) UILabel *pmValueLabel;
-@property (strong, nonatomic) UILabel *airValueLabel;
+@property (strong, nonatomic) UILabel *weatherValueLabel;
+@property (strong, nonatomic) UILabel *humValueLabel;
 
 @property (nonatomic, strong) UILabel *testLabel;
 
@@ -72,8 +72,8 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     self.houseButton = [self houseButton];
     self.weatherView = [self weatherView];
     self.tempValueLabel = [self tempValueLabel];
-    self.pmValueLabel = [self pmValueLabel];
-    self.airValueLabel = [self airValueLabel];
+    self.weatherValueLabel = [self weatherValueLabel];
+    self.humValueLabel = [self humValueLabel];
     self.homeSetButton = [self homeSetButton];
     self.addDeviceButton = [self addDeviceButton];
     
@@ -158,12 +158,10 @@ static CGFloat const gleadMenuItemMargin = 20.f;
             }
         }
         [self getWeatherByLocation];//获取天气信息
-        [self getAirQualityByLocation];//获取空气质量
         [self getHouseHomeListAndDeviceWithDatabase];//数据库获取房间和设备
         [self reloadData];//wmpagecontroller更新滑动列表
     } failure:^{
         [self getWeatherByLocation];//获取天气信息
-        [self getAirQualityByLocation];//获取空气质量
         [self getHouseHomeListAndDeviceWithDatabase];//数据库获取房间和设备
         db.shareDeviceArray = [db queryAllShareDevice];//http请求失败后数据库获取共享设备
         [self reloadData];//wmpagecontroller更新滑动列表
@@ -203,51 +201,8 @@ static CGFloat const gleadMenuItemMargin = 20.f;
             if ([[dataDic objectForKey:@"status"] isEqualToString:@"ok"]) {
                 NSDictionary *weather = [dataDic objectForKey:@"now"];
                 self.tempValueLabel.text = [NSString stringWithFormat:@"%@℃",[weather objectForKey:@"tmp"]];
-            }
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [NSObject showHudTipStr:@"获取当前天气失败"];
-        });
-    }];
-}
-
-/*
- *根据经纬度获取当地空气质量
- */
-- (void)getAirQualityByLocation{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    Database *db = [Database shareInstance];
-    
-    //设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
-    NSString *url = [NSString stringWithFormat:@"https://free-api.heweather.com/s6/air/now?location=%@,%@&key=%@",db.currentHouse.lon,db.currentHouse.lat,@"6efda5ac4ceb40ffb4c07d7ff740d628"];
-    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-    NSLog(@"%@",url);
-    
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"success:%@",daetr);
-        if ([responseDic objectForKey:@"HeWeather6"]) {
-            NSArray *dataArr = [responseDic objectForKey:@"HeWeather6"];
-            if (dataArr.count == 0) {
-                return ;
-            }
-            NSDictionary *dataDic = dataArr[0];
-            if ([[dataDic objectForKey:@"status"] isEqualToString:@"ok"]) {
-                NSDictionary *weather = [dataDic objectForKey:@"air_now_city"];
-                self.pmValueLabel.text = [NSString stringWithFormat:@"%@",[weather objectForKey:@"pm25"]];
-                self.airValueLabel.text = [NSString stringWithFormat:@"%@",[weather objectForKey:@"qlty"]];
+                self.weatherValueLabel.text = [weather objectForKey:@"cond_txt"];
+                self.humValueLabel.text = [NSString stringWithFormat:@"%@%%",[weather objectForKey:@"hum"]];
             }
         }
         
@@ -512,27 +467,27 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     return _tempValueLabel;
 }
 
-- (UILabel *)pmValueLabel{
-    if (!_pmValueLabel) {
-        _pmValueLabel = [[UILabel alloc] init];
-        _pmValueLabel.textAlignment = NSTextAlignmentCenter;
-        _pmValueLabel.textColor = [UIColor whiteColor];
-        _pmValueLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
-        _pmValueLabel.text = @"良";
-        [self.weatherView addSubview:_pmValueLabel];
-        [_pmValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UILabel *)weatherValueLabel{
+    if (!_weatherValueLabel) {
+        _weatherValueLabel = [[UILabel alloc] init];
+        _weatherValueLabel.textAlignment = NSTextAlignmentCenter;
+        _weatherValueLabel.textColor = [UIColor whiteColor];
+        _weatherValueLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
+        _weatherValueLabel.text = @"良";
+        [self.weatherView addSubview:_weatherValueLabel];
+        [_weatherValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(yAutoFit(gleadWeatherViewWidth) / 3.0);
             make.top.equalTo(self.weatherView.mas_top).offset(yAutoFit(56.f));
             make.size.mas_equalTo(CGSizeMake(yAutoFit(gleadWeatherViewWidth) / 3.0, yAutoFit(17.f)));
         }];
         
-        UILabel *pmTextLabel = [[UILabel alloc] init];
-        pmTextLabel.text = LocalString(@"PM2.5");
-        pmTextLabel.textAlignment = NSTextAlignmentCenter;
-        pmTextLabel.textColor = [UIColor whiteColor];
-        pmTextLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
-        [self.weatherView addSubview:pmTextLabel];
-        [pmTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        UILabel *weatherTextLabel = [[UILabel alloc] init];
+        weatherTextLabel.text = LocalString(@"天气状况");
+        weatherTextLabel.textAlignment = NSTextAlignmentCenter;
+        weatherTextLabel.textColor = [UIColor whiteColor];
+        weatherTextLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
+        [self.weatherView addSubview:weatherTextLabel];
+        [weatherTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(yAutoFit(gleadWeatherViewWidth) / 3.0);
             make.top.equalTo(self.weatherView.mas_top).offset(yAutoFit(31.f));
             make.size.mas_equalTo(CGSizeMake(yAutoFit(gleadWeatherViewWidth) / 3.0, yAutoFit(17.f)));
@@ -547,36 +502,36 @@ static CGFloat const gleadMenuItemMargin = 20.f;
             make.centerX.equalTo(self.weatherView.mas_left).offset(yAutoFit(gleadWeatherViewWidth) / 3.0 * 2.0);
         }];
     }
-    return _pmValueLabel;
+    return _weatherValueLabel;
 }
 
-- (UILabel *)airValueLabel{
-    if (!_airValueLabel) {
-        _airValueLabel = [[UILabel alloc] init];
-        _airValueLabel.textAlignment = NSTextAlignmentCenter;
-        _airValueLabel.textColor = [UIColor whiteColor];
-        _airValueLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
-        _airValueLabel.text = @"良";
-        [self.weatherView addSubview:_airValueLabel];
-        [_airValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UILabel *)humValueLabel{
+    if (!_humValueLabel) {
+        _humValueLabel = [[UILabel alloc] init];
+        _humValueLabel.textAlignment = NSTextAlignmentCenter;
+        _humValueLabel.textColor = [UIColor whiteColor];
+        _humValueLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
+        _humValueLabel.text = @"良";
+        [self.weatherView addSubview:_humValueLabel];
+        [_humValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(yAutoFit(gleadWeatherViewWidth) / 3.0 * 2.0);
             make.top.equalTo(self.weatherView.mas_top).offset(yAutoFit(56.f));
             make.size.mas_equalTo(CGSizeMake(yAutoFit(gleadWeatherViewWidth) / 3.0, yAutoFit(17.f)));
         }];
         
-        UILabel *airTextLabel = [[UILabel alloc] init];
-        airTextLabel.text = LocalString(@"空气质量");
-        airTextLabel.textAlignment = NSTextAlignmentCenter;
-        airTextLabel.textColor = [UIColor whiteColor];
-        airTextLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
-        [self.weatherView addSubview:airTextLabel];
-        [airTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        UILabel *humTextLabel = [[UILabel alloc] init];
+        humTextLabel.text = LocalString(@"空气湿度");
+        humTextLabel.textAlignment = NSTextAlignmentCenter;
+        humTextLabel.textColor = [UIColor whiteColor];
+        humTextLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
+        [self.weatherView addSubview:humTextLabel];
+        [humTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(yAutoFit(gleadWeatherViewWidth) / 3.0 * 2.0);
             make.top.equalTo(self.weatherView.mas_top).offset(yAutoFit(31.f));
             make.size.mas_equalTo(CGSizeMake(yAutoFit(gleadWeatherViewWidth) / 3.0, yAutoFit(17.f)));
         }];
     }
-    return _airValueLabel;
+    return _humValueLabel;
 }
 
 -(UIButton *)homeSetButton{
