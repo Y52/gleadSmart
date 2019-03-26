@@ -387,6 +387,435 @@
 		BBA593DF224A266F009D5941 /* img_adddevice_bigualu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D3224A266E009D5941 /* img_adddevice_bigualu@3x.png */; };
 		BBA593E0224A266F009D5941 /* img_adddevice_bigualu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D4224A266E009D5941 /* img_adddevice_bigualu@2x.png */; };
 		BBA593E1224A266F009D5941 /* img_adddevice_bigualu.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D5224A266F009D5941 /* img_adddevice_bigualu.png */; };
+		BBA593E5224A2AB1009D5941 /* ESPAES.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0E421A8F156006DB83A /* ESPAES.m */; };
+		BBA593E6224A2AB1009D5941 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9421958864004E00A2 /* ViewController.m */; };
+		BBA593E7224A2AB1009D5941 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A404B219970D3004669CA /* RDVTabBarItem.m */; };
+		BBA593E8224A2AB1009D5941 /* LogOutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB00A4FB21BA243E004E4051 /* LogOutCell.m */; };
+		BBA593E9224A2AB1009D5941 /* NodeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEFD21A7E8D600B2121B /* NodeDetailCell.m */; };
+		BBA593EA224A2AB1009D5941 /* PasswordLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C321AB9C88000A6D26 /* PasswordLoginController.m */; };
+		BBA593EB224A2AB1009D5941 /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF421A7E59600B2121B /* WirelessValveController.m */; };
+		BBA593EC224A2AB1009D5941 /* TherWeekProgramController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4DD21B5155000C0FA39 /* TherWeekProgramController.m */; };
+		BBA593ED224A2AB1009D5941 /* UsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36004A8E2227E96500C99215 /* UsernameViewController.m */; };
+		BBA593EE224A2AB1009D5941 /* PhoneTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530B921AB9B42000A6D26 /* PhoneTFCell.m */; };
+		BBA593EF224A2AB1009D5941 /* YSZCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF121A7AB3700B2121B /* YSZCoreDataStackManager.m */; };
+		BBA593F0224A2AB1009D5941 /* EspViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0521A7EFC400B2121B /* EspViewController.m */; };
+		BBA593F1224A2AB1009D5941 /* ESP_CRC8.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0D121A8F156006DB83A /* ESP_CRC8.m */; };
+		BBA593F2224A2AB1009D5941 /* NoHouseBridgingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DA22326801002E6239 /* NoHouseBridgingController.m */; };
+		BBA593F3224A2AB1009D5941 /* HomeManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF63219E66210067BC61 /* HomeManagementController.m */; };
+		BBA593F4224A2AB1009D5941 /* HouseManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF69219E66F30067BC61 /* HouseManagementController.m */; };
+		BBA593F5224A2AB1009D5941 /* TherWeekProgramCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4E021B517F100C0FA39 /* TherWeekProgramCell.m */; };
+		BBA593F6224A2AB1009D5941 /* SelectDeviceTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */; };
+		BBA593F7224A2AB1009D5941 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF1721A7FCBF00B2121B /* DeviceModel.m */; };
+		BBA593F8224A2AB1009D5941 /* NSObject+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401421991AA8004669CA /* NSObject+Common.m */; };
+		BBA593F9224A2AB1009D5941 /* UIColor+ColorChange.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401021991AA8004669CA /* UIColor+ColorChange.m */; };
+		BBA593FA224A2AB1009D5941 /* HomeManagementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */; };
+		BBA593FB224A2AB1009D5941 /* UILabel+YBAttributeTextTapAction.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7E7971221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.m */; };
+		BBA593FC224A2AB1009D5941 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF1A21A7FF0600B2121B /* Database.m */; };
+		BBA593FD224A2AB1009D5941 /* WeekProgramSetController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4FB21B521F100C0FA39 /* WeekProgramSetController.m */; };
+		BBA593FE224A2AB1009D5941 /* HomeDeviceSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */; };
+		BBA593FF224A2AB1009D5941 /* NodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB52F9EC21BE6B03005FA33A /* NodeModel.m */; };
+		BBA59400224A2AB1009D5941 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A404321996F4A004669CA /* MainViewController.m */; };
+		BBA59401224A2AB1009D5941 /* ESPTouchTaskParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0DE21A8F156006DB83A /* ESPTouchTaskParameter.m */; };
+		BBA59402224A2AB1009D5941 /* NodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326A21BBBDE0006A23AC /* NodeDetailViewController.m */; };
+		BBA59403224A2AB1009D5941 /* ESPUDPSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0DD21A8F156006DB83A /* ESPUDPSocketClient.m */; };
+		BBA59404224A2AB1009D5941 /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DD223271AA002E6239 /* NoHouseAddController.m */; };
+		BBA59405224A2AB1009D5941 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A404A219970D3004669CA /* RDVTabBarController.m */; };
+		BBA59406224A2AB1009D5941 /* AddFamilyTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56AD2121A6A6DD0089BA8F /* AddFamilyTextCell.m */; };
+		BBA59407224A2AB1009D5941 /* TherTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8F5A8721B7EF1700E69094 /* TherTimerCell.m */; };
+		BBA59408224A2AB1009D5941 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35292A219DA7EC00428DE9 /* Network.m */; };
+		BBA59409224A2AB1009D5941 /* ESPDatumCode.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0E621A8F156006DB83A /* ESPDatumCode.m */; };
+		BBA5940A224A2AB1009D5941 /* FamilyMemberInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAF02216A4650030E921 /* FamilyMemberInfoCell.m */; };
+		BBA5940B224A2AB1009D5941 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A4046219970D3004669CA /* RDVTabBar.m */; };
+		BBA5940C224A2AB1009D5941 /* HouseManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */; };
+		BBA5940D224A2AB1009D5941 /* HouseSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352914219D63BC00428DE9 /* HouseSelectController.m */; };
+		BBA5940E224A2AB1009D5941 /* HouseSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD7A021AD70D6006DB83A /* HouseSettingController.m */; };
+		BBA5940F224A2AB1009D5941 /* SharerInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7D9B99221E4B4C00C5DFD1 /* SharerInfoCell.m */; };
+		BBA59410224A2AB1009D5941 /* DeviceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF1021A7F3AF00B2121B /* DeviceTableViewCell.m */; };
+		BBA59411224A2AB1009D5941 /* YAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB00A4FE21BA25B7004E4051 /* YAlertViewController.m */; };
+		BBA59412224A2AB1009D5941 /* HouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC10D21A94F42006DB83A /* HouseModel.m */; };
+		BBA59413224A2AB1009D5941 /* ShareDeviceSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB2812221B9D4F00E21041 /* ShareDeviceSelectCell.m */; };
+		BBA59414224A2AB1009D5941 /* ShareDeviceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B8F16622263FA200652CFA /* ShareDeviceListCell.m */; };
+		BBA59415224A2AB1009D5941 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC10421A94D63006DB83A /* AFSecurityPolicy.m */; };
+		BBA59416224A2AB1009D5941 /* alarmModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49B89721F5A8D100E32CF9 /* alarmModel.m */; };
+		BBA59417224A2AB1009D5941 /* AddMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB45BC4921EF259E00504FF8 /* AddMemberController.m */; };
+		BBA59418224A2AB1009D5941 /* YRabbitMQ.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5CDC8421EC26F300C2B6FA /* YRabbitMQ.m */; };
+		BBA59419224A2AB1009D5941 /* NodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 36134F2B21E6E10100A7D98E /* NodeButton.m */; };
+		BBA5941A224A2AB1009D5941 /* NodeInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326D21BBC472006A23AC /* NodeInfoCell.m */; };
+		BBA5941B224A2AB1009D5941 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C621AB9C88000A6D26 /* LoginViewController.m */; };
+		BBA5941C224A2AB1009D5941 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C421AB9C88000A6D26 /* RegisterController.m */; };
+		BBA5941D224A2AB1009D5941 /* ShareDeviceDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8A74372226374A008B2439 /* ShareDeviceDetailController.m */; };
+		BBA5941E224A2AB1009D5941 /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401921991AA8004669CA /* NSDate+Common.m */; };
+		BBA5941F224A2AB1009D5941 /* ManagerSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB45BC5721EF305E00504FF8 /* ManagerSetCell.m */; };
+		BBA59420224A2AB1009D5941 /* ThermostSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4D721B5110800C0FA39 /* ThermostSettingController.m */; };
+		BBA59421224A2AB1009D5941 /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0321A7EFC300B2121B /* DeviceViewController.m */; };
+		BBA59422224A2AB1009D5941 /* ShareDeviceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8A743422263707008B2439 /* ShareDeviceListController.m */; };
+		BBA59423224A2AB1009D5941 /* AddFamilySelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56AD2421A6A7160089BA8F /* AddFamilySelectCell.m */; };
+		BBA59424224A2AB1009D5941 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B03CD21B91290007AC2B1 /* AccountViewController.m */; };
+		BBA59425224A2AB1009D5941 /* APProcessController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB63AAD1222E156B00DFC848 /* APProcessController.m */; };
+		BBA59426224A2AB1009D5941 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC10321A94D63006DB83A /* AFNetworkReachabilityManager.m */; };
+		BBA59427224A2AB1009D5941 /* TherWeekSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4D121B4DD7C00C0FA39 /* TherWeekSelectController.m */; };
+		BBA59428224A2AB1009D5941 /* AddRoomsTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169E222513E90079159E /* AddRoomsTextCell.m */; };
+		BBA59429224A2AB1009D5941 /* RegisterAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD79721ABDD3E006DB83A /* RegisterAccountController.m */; };
+		BBA5942A224A2AB1009D5941 /* ConnectApNetController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB63AACE222E05DC00DFC848 /* ConnectApNetController.m */; };
+		BBA5942B224A2AB1009D5941 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC10121A94D63006DB83A /* AFURLRequestSerialization.m */; };
+		BBA5942C224A2AB1009D5941 /* ShareDeviceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B8F16922263FDE00652CFA /* ShareDeviceDetailCell.m */; };
+		BBA5942D224A2AB1009D5941 /* HouseSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352911219D61B300428DE9 /* HouseSelectCell.m */; };
+		BBA5942E224A2AB1009D5941 /* ESPDataCode.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0DF21A8F156006DB83A /* ESPDataCode.m */; };
+		BBA5942F224A2AB1009D5941 /* TherWeekSelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4D421B4E07600C0FA39 /* TherWeekSelCell.m */; };
+		BBA59430224A2AB1009D5941 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530BD21AB9B43000A6D26 /* TextFieldCell.m */; };
+		BBA59431224A2AB1009D5941 /* RoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC11021A94FE8006DB83A /* RoomModel.m */; };
+		BBA59432224A2AB1009D5941 /* FamilyMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAEC22169FBA0030E921 /* FamilyMemberController.m */; };
+		BBA59433224A2AB1009D5941 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0F621A93B1B006DB83A /* UserModel.m */; };
+		BBA59434224A2AB1009D5941 /* DeviceConnectView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0621A7EFC400B2121B /* DeviceConnectView.m */; };
+		BBA59435224A2AB1009D5941 /* FamilyLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC12621AA9EF1006DB83A /* FamilyLocationController.m */; };
+		BBA59436224A2AB1009D5941 /* HouseShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7E7968221A5D6D0060A0CF /* HouseShareController.m */; };
+		BBA59437224A2AB1009D5941 /* SharerInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AA50E221D061100AF3968 /* SharerInputController.m */; };
+		BBA59438224A2AB1009D5941 /* TouchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401D21991AA8004669CA /* TouchTableView.m */; };
+		BBA59439224A2AB1009D5941 /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401321991AA8004669CA /* UIButton+Common.m */; };
+		BBA5943A224A2AB1009D5941 /* MineNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B037021B90194007AC2B1 /* MineNormalCell.m */; };
+		BBA5943B224A2AB1009D5941 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0FE21A94D63006DB83A /* AFHTTPSessionManager.m */; };
+		BBA5943C224A2AB1009D5941 /* ESPTouchGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0D021A8F156006DB83A /* ESPTouchGenerator.m */; };
+		BBA5943D224A2AB1009D5941 /* ESPTouchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0E521A8F156006DB83A /* ESPTouchTask.m */; };
+		BBA5943E224A2AB1009D5941 /* HouseSetCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD7A621AD7F91006DB83A /* HouseSetCommonCell.m */; };
+		BBA5943F224A2AB1009D5941 /* AddShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7E7975221AA7780060A0CF /* AddShareController.m */; };
+		BBA59440224A2AB1009D5941 /* ESPUDPSocketServer.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0D321A8F156006DB83A /* ESPUDPSocketServer.m */; };
+		BBA59441224A2AB1009D5941 /* RetrievePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C921AB9C88000A6D26 /* RetrievePasswordController.m */; };
+		BBA59442224A2AB1009D5941 /* YTFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB73D54521EDD262004AEE18 /* YTFAlertController.m */; };
+		BBA59443224A2AB1009D5941 /* ESP_NetUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0CD21A8F156006DB83A /* ESP_NetUtil.m */; };
+		BBA59444224A2AB1009D5941 /* SharerRemarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2CB8A5221FE171001E6703 /* SharerRemarkController.m */; };
+		BBA59445224A2AB1009D5941 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC10021A94D63006DB83A /* AFURLSessionManager.m */; };
+		BBA59446224A2AB1009D5941 /* AccountHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB00A4F221BA202C004E4051 /* AccountHeaderCell.m */; };
+		BBA59447224A2AB1009D5941 /* AddFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBE21A7E7EA00EA8F1C /* AddFamilyViewController.m */; };
+		BBA59448224A2AB1009D5941 /* FamilyMemberSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAF32216A8460030E921 /* FamilyMemberSetCell.m */; };
+		BBA59449224A2AB1009D5941 /* MyHouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49774A219A6B5E00427197 /* MyHouseController.m */; };
+		BBA5944A224A2AB1009D5941 /* MemberAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB45BC5421EF2EE800504FF8 /* MemberAccountCell.m */; };
+		BBA5944B224A2AB1009D5941 /* ESPGuideCode.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0C921A8F156006DB83A /* ESPGuideCode.m */; };
+		BBA5944C224A2AB1009D5941 /* TherAddTimerSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4C221B4D65E00C0FA39 /* TherAddTimerSwitchCell.m */; };
+		BBA5944D224A2AB1009D5941 /* HomeDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */; };
+		BBA5944E224A2AB1009D5941 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0FD21A94D63006DB83A /* AFURLResponseSerialization.m */; };
+		BBA5944F224A2AB1009D5941 /* ESP_ByteUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0CE21A8F156006DB83A /* ESP_ByteUtil.m */; };
+		BBA59450224A2AB1009D5941 /* MemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD7A321AD78F0006DB83A /* MemberModel.m */; };
+		BBA59451224A2AB1009D5941 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DFA221958867004E00A2 /* main.m */; };
+		BBA59452224A2AB1009D5941 /* AddHouseMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB45BC4621EF1F6900504FF8 /* AddHouseMemberCell.m */; };
+		BBA59453224A2AB1009D5941 /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36004A79222784E700C99215 /* ModifyPasswordViewController.m */; };
+		BBA59454224A2AB1009D5941 /* SelectDeviceTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECFF39E219EB00C00024D2C /* SelectDeviceTypeCell.m */; };
+		BBA59455224A2AB1009D5941 /* TherSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4DA21B5132200C0FA39 /* TherSettingCell.m */; };
+		BBA59456224A2AB1009D5941 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B036C21B90069007AC2B1 /* MineViewController.m */; };
+		BBA59457224A2AB1009D5941 /* KYDivisionPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC12F21AB96E3006DB83A /* KYDivisionPickerView.m */; };
+		BBA59458224A2AB1009D5941 /* APNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8AE4B322292F890074118D /* APNetworkController.m */; };
+		BBA59459224A2AB1009D5941 /* ESP_WifiUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0CF21A8F156006DB83A /* ESP_WifiUtil.m */; };
+		BBA5945A224A2AB1009D5941 /* ThermostatTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4B221B4C0B700C0FA39 /* ThermostatTimerController.m */; };
+		BBA5945B224A2AB1009D5941 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB49DF9121958864004E00A2 /* AppDelegate.m */; };
+		BBA5945C224A2AB1009D5941 /* ThermostatController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF721A7E59600B2121B /* ThermostatController.m */; };
+		BBA5945D224A2AB1009D5941 /* ThermostatAddTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4BB21B4D1D200C0FA39 /* ThermostatAddTimerController.m */; };
+		BBA5945E224A2AB1009D5941 /* AreaCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB45BC5121EF290600504FF8 /* AreaCodeCell.m */; };
+		BBA5945F224A2AB1009D5941 /* HouseNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD79D21AD4828006DB83A /* HouseNameCell.m */; };
+		BBA59460224A2AB1009D5941 /* AddRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169A22250ECA0079159E /* AddRoomsViewController.m */; };
+		BBA59461224A2AB1009D5941 /* TherAddTimerWeekCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4BF21B4D57900C0FA39 /* TherAddTimerWeekCell.m */; };
+		BBA59462224A2AB1009D5941 /* SharerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7D9B9F221EA71000C5DFD1 /* SharerModel.m */; };
+		BBA59463224A2AB1009D5941 /* SharerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7D9B9C221E8FA300C5DFD1 /* SharerDetailController.m */; };
+		BBA59464224A2AB1009D5941 /* ESPTouchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0CA21A8F156006DB83A /* ESPTouchResult.m */; };
+		BBA59465224A2AB1009D5941 /* HouseSetMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AD7A921AD8063006DB83A /* HouseSetMemberCell.m */; };
+		BBA59466224A2AB1009D5941 /* HomeDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB835FA3219C03A300225B60 /* HomeDeviceController.m */; };
+		BBA59467224A2AB1009D5941 /* PhoneVerifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */; };
+		BBA59468224A2AB1009D5941 /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401821991AA8004669CA /* NSString+Common.m */; };
+		BBA5946A224A2AB1009D5941 /* JKVValue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; };
+		BBA5946B224A2AB1009D5941 /* RMQClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */; };
+		BBA5946C224A2AB1009D5941 /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */; };
+		BBA5946E224A2AB1009D5941 /* img_adddevice_gateway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D0224A266E009D5941 /* img_adddevice_gateway@2x.png */; };
+		BBA5946F224A2AB1009D5941 /* img_wallHob@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A621997C99004669CA /* img_wallHob@3x.png */; };
+		BBA59470224A2AB1009D5941 /* valveStatus_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323121BBAB33006A23AC /* valveStatus_normal@3x.png */; };
+		BBA59471224A2AB1009D5941 /* nodeSet_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322521BBAB31006A23AC /* nodeSet_abnormal@2x.png */; };
+		BBA59472224A2AB1009D5941 /* img_weatherBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407821997C99004669CA /* img_weatherBg@2x.png */; };
+		BBA59473224A2AB1009D5941 /* img_tab_03_unselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409021997C99004669CA /* img_tab_03_unselect@3x.png */; };
+		BBA59474224A2AB1009D5941 /* thermostatSet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB221A6815000E5D8B2 /* thermostatSet@3x.png */; };
+		BBA59475224A2AB1009D5941 /* Imag_retrieve_phoneuser@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A7C2227969200C99215 /* Imag_retrieve_phoneuser@3x.png */; };
+		BBA59476224A2AB1009D5941 /* img_addDevice@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407B21997C99004669CA /* img_addDevice@3x.png */; };
+		BBA59477224A2AB1009D5941 /* img_mine_header.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039521B90343007AC2B1 /* img_mine_header.png */; };
+		BBA59478224A2AB1009D5941 /* thermostatSet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DAC21A6815000E5D8B2 /* thermostatSet@2x.png */; };
+		BBA59479224A2AB1009D5941 /* img_mine_houseManage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038D21B90343007AC2B1 /* img_mine_houseManage@3x.png */; };
+		BBA5947A224A2AB1009D5941 /* valveStatus_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322E21BBAB33006A23AC /* valveStatus_normal@2x.png */; };
+		BBA5947B224A2AB1009D5941 /* nodeLeakSmall_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6320821BBAB2D006A23AC /* nodeLeakSmall_normal@3x.png */; };
+		BBA5947C224A2AB1009D5941 /* thermostat_min@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5F421B4128E00D77489 /* thermostat_min@2x.png */; };
+		BBA5947D224A2AB1009D5941 /* img_shareInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A721997C99004669CA /* img_shareInfo@2x.png */; };
+		BBA5947E224A2AB1009D5941 /* nodeLeakBig_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6320A21BBAB2D006A23AC /* nodeLeakBig_normal@3x.png */; };
+		BBA5947F224A2AB1009D5941 /* thermostatSet@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB421A6815000E5D8B2 /* thermostatSet@1x.png */; };
+		BBA59480224A2AB1009D5941 /* img_headerBg@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407A21997C99004669CA /* img_headerBg@1x.png */; };
+		BBA59481224A2AB1009D5941 /* thermostat_min@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5F121B4128E00D77489 /* thermostat_min@3x.png */; };
+		BBA59482224A2AB1009D5941 /* thermostat_+.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60021B4151D00D77489 /* thermostat_+.png */; };
+		BBA59483224A2AB1009D5941 /* nodeBattery_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6F21A6ADEB00E5D8B2 /* nodeBattery_normal.png */; };
+		BBA59484224A2AB1009D5941 /* img_mine_houseManage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038921B90343007AC2B1 /* img_mine_houseManage@2x.png */; };
+		BBA59485224A2AB1009D5941 /* addRoom_hand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A022255FD90079159E /* addRoom_hand@3x.png */; };
+		BBA59486224A2AB1009D5941 /* img_mine_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039D21B90343007AC2B1 /* img_mine_header@2x.png */; };
+		BBA59487224A2AB1009D5941 /* img_valve_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5521BF4DF400AB6EFB /* img_valve_on.png */; };
+		BBA59488224A2AB1009D5941 /* img_houseManage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB352918219D95B500428DE9 /* img_houseManage@2x.png */; };
+		BBA59489224A2AB1009D5941 /* thermostatControl_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57A21B3B94100D77489 /* thermostatControl_on.png */; };
+		BBA5948A224A2AB1009D5941 /* img_mine_editPW.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039121B90343007AC2B1 /* img_mine_editPW.png */; };
+		BBA5948B224A2AB1009D5941 /* valveAlertMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322421BBAB31006A23AC /* valveAlertMark@2x.png */; };
+		BBA5948C224A2AB1009D5941 /* img_retrieve_verify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A812227B4D800C99215 /* img_retrieve_verify@2x.png */; };
+		BBA5948D224A2AB1009D5941 /* img_houseSelect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405D21997C99004669CA /* img_houseSelect@3x.png */; };
+		BBA5948E224A2AB1009D5941 /* img_adddevice_gateway@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D1224A266E009D5941 /* img_adddevice_gateway@3x.png */; };
+		BBA5948F224A2AB1009D5941 /* nodeLeakBig_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png */; };
+		BBA59490224A2AB1009D5941 /* img_adddevice_valve.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CE224A266E009D5941 /* img_adddevice_valve.png */; };
+		BBA59491224A2AB1009D5941 /* img_mine_header@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039021B90343007AC2B1 /* img_mine_header@3x.png */; };
+		BBA59492224A2AB1009D5941 /* valveSwitch_abnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321C21BBAB30006A23AC /* valveSwitch_abnormal.png */; };
+		BBA59493224A2AB1009D5941 /* img_homeSet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406D21997C99004669CA /* img_homeSet@3x.png */; };
+		BBA59494224A2AB1009D5941 /* img_valve_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3D219921AE7E2A002CB334 /* img_valve_off.png */; };
+		BBA59495224A2AB1009D5941 /* thermostatCircle_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B58721B3DB6800D77489 /* thermostatCircle_on.png */; };
+		BBA59496224A2AB1009D5941 /* img_wallHob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408921997C99004669CA /* img_wallHob@2x.png */; };
+		BBA59497224A2AB1009D5941 /* img_mine_checkUpdate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038421B90343007AC2B1 /* img_mine_checkUpdate@2x.png */; };
+		BBA59498224A2AB1009D5941 /* img_retrieve_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A892227B64700C99215 /* img_retrieve_password.png */; };
+		BBA59499224A2AB1009D5941 /* thermostat_timing_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57921B3B94100D77489 /* thermostat_timing_on@3x.png */; };
+		BBA5949A224A2AB1009D5941 /* img_retrieve_verify.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A832227B4D800C99215 /* img_retrieve_verify.png */; };
+		BBA5949B224A2AB1009D5941 /* thermostatKnob_On@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9E921BE4A59005FA33A /* thermostatKnob_On@2x.png */; };
+		BBA5949C224A2AB1009D5941 /* valveNode_selnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39221E44E2A0024603A /* valveNode_selnormal@2x.png */; };
+		BBA5949D224A2AB1009D5941 /* thermostatControl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9D9D21A6815000E5D8B2 /* thermostatControl@2x.png */; };
+		BBA5949E224A2AB1009D5941 /* img_mine_editPW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038021B90343007AC2B1 /* img_mine_editPW@2x.png */; };
+		BBA5949F224A2AB1009D5941 /* img_login_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B032721B8BD2D007AC2B1 /* img_login_bg@3x.png */; };
+		BBA594A0224A2AB1009D5941 /* img_login_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B031D21B8BD2C007AC2B1 /* img_login_password@2x.png */; };
+		BBA594A1224A2AB1009D5941 /* valveNode_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322D21BBAB32006A23AC /* valveNode_normal@3x.png */; };
+		BBA594A2224A2AB1009D5941 /* valveAlertMark.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322121BBAB30006A23AC /* valveAlertMark.png */; };
+		BBA594A3224A2AB1009D5941 /* img_login_header@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B035A21B8C3DA007AC2B1 /* img_login_header@3x.png */; };
+		BBA594A4224A2AB1009D5941 /* img_weekProgram_back.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4E821B51CD700C0FA39 /* img_weekProgram_back.png */; };
+		BBA594A5224A2AB1009D5941 /* img_manual_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F521BB5B02006A23AC /* img_manual_on@3x.png */; };
+		BBA594A6224A2AB1009D5941 /* img_retrieve_verify@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A822227B4D800C99215 /* img_retrieve_verify@3x.png */; };
+		BBA594A7224A2AB1009D5941 /* img_tab_01_unselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9DD21BE4148005FA33A /* img_tab_01_unselect@3x.png */; };
+		BBA594A8224A2AB1009D5941 /* addRoom_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A122255FD90079159E /* addRoom_hand.png */; };
+		BBA594A9224A2AB1009D5941 /* img_addDevice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407F21997C99004669CA /* img_addDevice@2x.png */; };
+		BBA594AA224A2AB1009D5941 /* nodeLeakBig_abnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6A21A6ADEB00E5D8B2 /* nodeLeakBig_abnormal.png */; };
+		BBA594AB224A2AB1009D5941 /* img_adddevice_bigualu.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D5224A266F009D5941 /* img_adddevice_bigualu.png */; };
+		BBA594AC224A2AB1009D5941 /* thermostatSet_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57721B3B94000D77489 /* thermostatSet_on@2x.png */; };
+		BBA594AD224A2AB1009D5941 /* thermostatControl_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57621B3B94000D77489 /* thermostatControl_on@2x.png */; };
+		BBA594AE224A2AB1009D5941 /* img_tab_01_select.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406921997C99004669CA /* img_tab_01_select.png */; };
+		BBA594AF224A2AB1009D5941 /* valveLeak_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322321BBAB31006A23AC /* valveLeak_normal@2x.png */; };
+		BBA594B0224A2AB1009D5941 /* img_mine_houseManage.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039921B90343007AC2B1 /* img_mine_houseManage.png */; };
+		BBA594B1224A2AB1009D5941 /* nodeLeakBig_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6320D21BBAB2D006A23AC /* nodeLeakBig_normal.png */; };
+		BBA594B2224A2AB1009D5941 /* img_houseUnelect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB352921219D968500428DE9 /* img_houseUnelect@2x.png */; };
+		BBA594B3224A2AB1009D5941 /* img_login_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B032421B8BD2D007AC2B1 /* img_login_phone@2x.png */; };
+		BBA594B4224A2AB1009D5941 /* img_addShareCheck_notable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2CB8A0221FA8B8001E6703 /* img_addShareCheck_notable@2x.png */; };
+		BBA594B5224A2AB1009D5941 /* nodeBattery_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6621A6ADEB00E5D8B2 /* nodeBattery_normal@2x.png */; };
+		BBA594B6224A2AB1009D5941 /* valveTabMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321921BBAB2F006A23AC /* valveTabMore@2x.png */; };
+		BBA594B7224A2AB1009D5941 /* valveHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321E21BBAB30006A23AC /* valveHeader@2x.png */; };
+		BBA594B8224A2AB1009D5941 /* thermostat_max.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5F021B4128E00D77489 /* thermostat_max.png */; };
+		BBA594B9224A2AB1009D5941 /* img_valve_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3D219A21AE7E2B002CB334 /* img_valve_off@3x.png */; };
+		BBA594BA224A2AB1009D5941 /* img_wifipwd.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E07F8222A343000E6658B /* img_wifipwd.png */; };
+		BBA594BB224A2AB1009D5941 /* thermostatSet_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57821B3B94000D77489 /* thermostatSet_on.png */; };
+		BBA594BC224A2AB1009D5941 /* thermostatCircle_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5EC21B3DBCB00D77489 /* thermostatCircle_off@3x.png */; };
+		BBA594BD224A2AB1009D5941 /* img_houseSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB35291F219D968500428DE9 /* img_houseSelected@3x.png */; };
+		BBA594BE224A2AB1009D5941 /* thermostatControl@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB321A6815000E5D8B2 /* thermostatControl@1x.png */; };
+		BBA594BF224A2AB1009D5941 /* img_houseUnelect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB35291E219D968400428DE9 /* img_houseUnelect.png */; };
+		BBA594C0224A2AB1009D5941 /* img_mine_aboutus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B037421B90343007AC2B1 /* img_mine_aboutus@2x.png */; };
+		BBA594C1224A2AB1009D5941 /* thermostat_+@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5FE21B4151D00D77489 /* thermostat_+@3x.png */; };
+		BBA594C2224A2AB1009D5941 /* thermostat_timing_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57C21B3B94100D77489 /* thermostat_timing_on@2x.png */; };
+		BBA594C3224A2AB1009D5941 /* valveStatus_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6821A6ADEB00E5D8B2 /* valveStatus_abnormal@3x.png */; };
+		BBA594C4224A2AB1009D5941 /* img_retrieve_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A872227B64700C99215 /* img_retrieve_password@2x.png */; };
+		BBA594C5224A2AB1009D5941 /* img_mine_aboutus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B037E21B90343007AC2B1 /* img_mine_aboutus@3x.png */; };
+		BBA594C6224A2AB1009D5941 /* img_pwd_visiable.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B035F21B8CB6A007AC2B1 /* img_pwd_visiable.png */; };
+		BBA594C7224A2AB1009D5941 /* img_auto_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F621BB5B03006A23AC /* img_auto_off@2x.png */; };
+		BBA594C8224A2AB1009D5941 /* img_weekProgram_getup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4E221B51CD600C0FA39 /* img_weekProgram_getup@2x.png */; };
+		BBA594C9224A2AB1009D5941 /* nodeBattery_abnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321D21BBAB30006A23AC /* nodeBattery_abnormal.png */; };
+		BBA594CA224A2AB1009D5941 /* img_mine_account@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038C21B90343007AC2B1 /* img_mine_account@2x.png */; };
+		BBA594CB224A2AB1009D5941 /* img_pwd_visiable@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B036121B8CB6B007AC2B1 /* img_pwd_visiable@3x.png */; };
+		BBA594CC224A2AB1009D5941 /* img_ther_addTimerSwitch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4C821B4D9CA00C0FA39 /* img_ther_addTimerSwitch@2x.png */; };
+		BBA594CD224A2AB1009D5941 /* img_thermostat_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FD021BF519700AB6EFB /* img_thermostat_on@2x.png */; };
+		BBA594CE224A2AB1009D5941 /* thermostat_-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5FF21B4151D00D77489 /* thermostat_-@3x.png */; };
+		BBA594CF224A2AB1009D5941 /* addRoom_hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A222255FD90079159E /* addRoom_hand@2x.png */; };
+		BBA594D0224A2AB1009D5941 /* Imag_retrieve_phoneuser.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A7D2227969200C99215 /* Imag_retrieve_phoneuser.png */; };
+		BBA594D1224A2AB1009D5941 /* img_mine_logout.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039221B90343007AC2B1 /* img_mine_logout.png */; };
+		BBA594D2224A2AB1009D5941 /* img_login_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B035B21B8C3DA007AC2B1 /* img_login_header@2x.png */; };
+		BBA594D3224A2AB1009D5941 /* valveNode_selnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39021E44E2A0024603A /* valveNode_selnormal@3x.png */; };
+		BBA594D4224A2AB1009D5941 /* img_adddevice_gateway.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CC224A266E009D5941 /* img_adddevice_gateway.png */; };
+		BBA594D5224A2AB1009D5941 /* thermostat_timing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED121A7983F00B2121B /* thermostat_timing@2x.png */; };
+		BBA594D6224A2AB1009D5941 /* img_headerBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406121997C99004669CA /* img_headerBg@2x.png */; };
+		BBA594D7224A2AB1009D5941 /* thermostatKnob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DAB21A6815000E5D8B2 /* thermostatKnob@2x.png */; };
+		BBA594D8224A2AB1009D5941 /* img_thermos_moTimer.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4B521B4CB6A00C0FA39 /* img_thermos_moTimer.png */; };
+		BBA594D9224A2AB1009D5941 /* img_ther_addTimerWeek@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4C721B4D9CA00C0FA39 /* img_ther_addTimerWeek@3x.png */; };
+		BBA594DA224A2AB1009D5941 /* img_pwd_visiable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B035E21B8CB6A007AC2B1 /* img_pwd_visiable@2x.png */; };
+		BBA594DB224A2AB1009D5941 /* img_thermostat_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FD221BF519700AB6EFB /* img_thermostat_off@2x.png */; };
+		BBA594DC224A2AB1009D5941 /* img_manual_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F921BB5B04006A23AC /* img_manual_off@3x.png */; };
+		BBA594DD224A2AB1009D5941 /* thermostat_timing_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57B21B3B94100D77489 /* thermostat_timing_on.png */; };
+		BBA594DE224A2AB1009D5941 /* img_mine_aboutus.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038F21B90343007AC2B1 /* img_mine_aboutus.png */; };
+		BBA594DF224A2AB1009D5941 /* img_weekProgram_getup@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4E421B51CD700C0FA39 /* img_weekProgram_getup@3x.png */; };
+		BBA594E0224A2AB1009D5941 /* img_login_password.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B032B21B8BD2E007AC2B1 /* img_login_password.png */; };
+		BBA594E1224A2AB1009D5941 /* thermostat_max@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5F321B4128E00D77489 /* thermostat_max@3x.png */; };
+		BBA594E2224A2AB1009D5941 /* img_houseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = BB35291D219D968400428DE9 /* img_houseSelected.png */; };
+		BBA594E3224A2AB1009D5941 /* nodeBattery_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321121BBAB2E006A23AC /* nodeBattery_abnormal@2x.png */; };
+		BBA594E4224A2AB1009D5941 /* img_login_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B032821B8BD2D007AC2B1 /* img_login_phone.png */; };
+		BBA594E5224A2AB1009D5941 /* nodeSet_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6421A6ADEB00E5D8B2 /* nodeSet_normal@3x.png */; };
+		BBA594E6224A2AB1009D5941 /* img_auto_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F321BB5B02006A23AC /* img_auto_on@3x.png */; };
+		BBA594E7224A2AB1009D5941 /* thermostat_timing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED021A7983F00B2121B /* thermostat_timing@3x.png */; };
+		BBA594E8224A2AB1009D5941 /* thermostatCircle_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B58921B3DB6900D77489 /* thermostatCircle_on@3x.png */; };
+		BBA594E9224A2AB1009D5941 /* valveAlertMark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6320621BBAB2C006A23AC /* valveAlertMark@3x.png */; };
+		BBA594EA224A2AB1009D5941 /* img_tab_02_unselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405521997C99004669CA /* img_tab_02_unselect@2x.png */; };
+		BBA594EB224A2AB1009D5941 /* img_noSharer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E796C221A61F50060A0CF /* img_noSharer@3x.png */; };
+		BBA594EC224A2AB1009D5941 /* img_retrieve_password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A882227B64700C99215 /* img_retrieve_password@3x.png */; };
+		BBA594ED224A2AB1009D5941 /* img_homeSet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406421997C99004669CA /* img_homeSet@2x.png */; };
+		BBA594EE224A2AB1009D5941 /* img_mine_headerBG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B03C821B90C47007AC2B1 /* img_mine_headerBG@3x.png */; };
+		BBA594EF224A2AB1009D5941 /* valveHeader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323221BBAB33006A23AC /* valveHeader@3x.png */; };
+		BBA594F0224A2AB1009D5941 /* addFamily_device.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC11821AA8A64006DB83A /* addFamily_device.png */; };
+		BBA594F1224A2AB1009D5941 /* img_weekProgram_out.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4EA21B51CD800C0FA39 /* img_weekProgram_out.png */; };
+		BBA594F2224A2AB1009D5941 /* img_tab_03_select.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9E221BE4149005FA33A /* img_tab_03_select.png */; };
+		BBA594F3224A2AB1009D5941 /* thermostatCircle_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B58821B3DB6800D77489 /* thermostatCircle_on@2x.png */; };
+		BBA594F4224A2AB1009D5941 /* nodeSet_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6321A6ADEB00E5D8B2 /* nodeSet_normal@2x.png */; };
+		BBA594F5224A2AB1009D5941 /* img_pwd_unvisiable.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B036021B8CB6A007AC2B1 /* img_pwd_unvisiable.png */; };
+		BBA594F6224A2AB1009D5941 /* img_weekProgram_out@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4EC21B51CD900C0FA39 /* img_weekProgram_out@2x.png */; };
+		BBA594F7224A2AB1009D5941 /* img_mine_wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039821B90343007AC2B1 /* img_mine_wechat.png */; };
+		BBA594F8224A2AB1009D5941 /* img_addShareCheck_notable@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2CB89F221FA8B8001E6703 /* img_addShareCheck_notable@3x.png */; };
+		BBA594F9224A2AB1009D5941 /* valveSwitch_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6021A6ADEB00E5D8B2 /* valveSwitch_normal@2x.png */; };
+		BBA594FA224A2AB1009D5941 /* valveNode_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB38C21E44C790024603A /* valveNode_abnormal@2x.png */; };
+		BBA594FB224A2AB1009D5941 /* img_valve_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3D219B21AE7E2B002CB334 /* img_valve_off@2x.png */; };
+		BBA594FC224A2AB1009D5941 /* img_houseSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB35291C219D968400428DE9 /* img_houseSelected@2x.png */; };
+		BBA594FD224A2AB1009D5941 /* img_weatherBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408121997C99004669CA /* img_weatherBg@3x.png */; };
+		BBA594FE224A2AB1009D5941 /* addFamily_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC11A21AA8A64006DB83A /* addFamily_check@2x.png */; };
+		BBA594FF224A2AB1009D5941 /* img_pwd_unvisiable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B036221B8CB6B007AC2B1 /* img_pwd_unvisiable@2x.png */; };
+		BBA59500224A2AB1009D5941 /* img_mine_editPW@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038521B90343007AC2B1 /* img_mine_editPW@3x.png */; };
+		BBA59501224A2AB1009D5941 /* img_login_password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B033121B8BD2E007AC2B1 /* img_login_password@3x.png */; };
+		BBA59502224A2AB1009D5941 /* valveLeak_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6221A6ADEB00E5D8B2 /* valveLeak_abnormal@2x.png */; };
+		BBA59503224A2AB1009D5941 /* KYDivisionPickerView_list.json in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD78721AB98BD006DB83A /* KYDivisionPickerView_list.json */; };
+		BBA59504224A2AB1009D5941 /* img_adddevice_bigualu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D3224A266E009D5941 /* img_adddevice_bigualu@3x.png */; };
+		BBA59505224A2AB1009D5941 /* img_pwd_unvisiable@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B036321B8CB6B007AC2B1 /* img_pwd_unvisiable@3x.png */; };
+		BBA59506224A2AB1009D5941 /* valveLeak_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6521A6ADEB00E5D8B2 /* valveLeak_abnormal@3x.png */; };
+		BBA59507224A2AB1009D5941 /* img_shareInfo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408821997C99004669CA /* img_shareInfo@3x.png */; };
+		BBA59508224A2AB1009D5941 /* nodeSet_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322021BBAB30006A23AC /* nodeSet_abnormal@3x.png */; };
+		BBA59509224A2AB1009D5941 /* img_adddevice_valve@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CF224A266E009D5941 /* img_adddevice_valve@2x.png */; };
+		BBA5950A224A2AB1009D5941 /* pen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038E21B90343007AC2B1 /* pen@3x.png */; };
+		BBA5950B224A2AB1009D5941 /* img_mine_wechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B037D21B90343007AC2B1 /* img_mine_wechat@3x.png */; };
+		BBA5950C224A2AB1009D5941 /* img_login_phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B032521B8BD2D007AC2B1 /* img_login_phone@3x.png */; };
+		BBA5950D224A2AB1009D5941 /* img_weekProgram_getup.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4ED21B51CD900C0FA39 /* img_weekProgram_getup.png */; };
+		BBA5950E224A2AB1009D5941 /* img_thermostat_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FCE21BF519700AB6EFB /* img_thermostat_on@3x.png */; };
+		BBA5950F224A2AB1009D5941 /* img_autoLocation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC12821AB7F22006DB83A /* img_autoLocation@2x.png */; };
+		BBA59510224A2AB1009D5941 /* img_addDevice.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A521997C99004669CA /* img_addDevice.png */; };
+		BBA59511224A2AB1009D5941 /* nodeHeaderBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6320B21BBAB2D006A23AC /* nodeHeaderBtn.png */; };
+		BBA59512224A2AB1009D5941 /* img_manual_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631FA21BB5B04006A23AC /* img_manual_off@2x.png */; };
+		BBA59513224A2AB1009D5941 /* thermostatCircle_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5EB21B3DBCB00D77489 /* thermostatCircle_off.png */; };
+		BBA59514224A2AB1009D5941 /* img_autoLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC12A21AB7F22006DB83A /* img_autoLocation.png */; };
+		BBA59515224A2AB1009D5941 /* img_mine_account@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038B21B90343007AC2B1 /* img_mine_account@3x.png */; };
+		BBA59516224A2AB1009D5941 /* nodeSet_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6D21A6ADEB00E5D8B2 /* nodeSet_normal.png */; };
+		BBA59517224A2AB1009D5941 /* thermostat_-.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5FC21B4151C00D77489 /* thermostat_-.png */; };
+		BBA59518224A2AB1009D5941 /* nodeSet_abnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6320421BBAB2C006A23AC /* nodeSet_abnormal.png */; };
+		BBA59519224A2AB1009D5941 /* img_account_header@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB00A4F621BA237B004E4051 /* img_account_header@3x.png */; };
+		BBA5951A224A2AB1009D5941 /* img_account_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB00A4F521BA237A004E4051 /* img_account_header@2x.png */; };
+		BBA5951B224A2AB1009D5941 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB49DF9E21958867004E00A2 /* LaunchScreen.storyboard */; };
+		BBA5951C224A2AB1009D5941 /* thermostatControl@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA121A6815000E5D8B2 /* thermostatControl@3x.png */; };
+		BBA5951D224A2AB1009D5941 /* img_launchTitle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD79021ABDA45006DB83A /* img_launchTitle@2x.png */; };
+		BBA5951E224A2AB1009D5941 /* valveStatus_abnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7021A6ADEB00E5D8B2 /* valveStatus_abnormal.png */; };
+		BBA5951F224A2AB1009D5941 /* valveLeak_abnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6721A6ADEB00E5D8B2 /* valveLeak_abnormal.png */; };
+		BBA59520224A2AB1009D5941 /* img_login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B032321B8BD2C007AC2B1 /* img_login_bg@2x.png */; };
+		BBA59521224A2AB1009D5941 /* img_tab_02_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406621997C99004669CA /* img_tab_02_unselect.png */; };
+		BBA59522224A2AB1009D5941 /* img_adddevice_wenkongqi.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D2224A266E009D5941 /* img_adddevice_wenkongqi.png */; };
+		BBA59523224A2AB1009D5941 /* img_weekProgram_out@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4EB21B51CD800C0FA39 /* img_weekProgram_out@3x.png */; };
+		BBA59524224A2AB1009D5941 /* img_ther_addTimerSwitch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4C521B4D9C900C0FA39 /* img_ther_addTimerSwitch@3x.png */; };
+		BBA59525224A2AB1009D5941 /* img_adddevice_bigualu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D4224A266E009D5941 /* img_adddevice_bigualu@2x.png */; };
+		BBA59526224A2AB1009D5941 /* img_addShareCheck_notable.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2CB89E221FA8B8001E6703 /* img_addShareCheck_notable.png */; };
+		BBA59527224A2AB1009D5941 /* img_wallHob.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405C21997C99004669CA /* img_wallHob.png */; };
+		BBA59528224A2AB1009D5941 /* valveStatus_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6921A6ADEB00E5D8B2 /* valveStatus_abnormal@2x.png */; };
+		BBA59529224A2AB1009D5941 /* img_manual_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F721BB5B03006A23AC /* img_manual_on@2x.png */; };
+		BBA5952A224A2AB1009D5941 /* valveHeader@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321621BBAB2F006A23AC /* valveHeader@1x.png */; };
+		BBA5952B224A2AB1009D5941 /* img_weekProgram_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4E321B51CD700C0FA39 /* img_weekProgram_back@2x.png */; };
+		BBA5952C224A2AB1009D5941 /* nodeBattery_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6B21A6ADEB00E5D8B2 /* nodeBattery_normal@3x.png */; };
+		BBA5952D224A2AB1009D5941 /* img_houseManage.png in Resources */ = {isa = PBXBuildFile; fileRef = BB352917219D95B500428DE9 /* img_houseManage.png */; };
+		BBA5952E224A2AB1009D5941 /* img_login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B031921B8BD2B007AC2B1 /* img_login_bg.png */; };
+		BBA5952F224A2AB1009D5941 /* nodeLeakSmall_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6320921BBAB2D006A23AC /* nodeLeakSmall_normal.png */; };
+		BBA59530224A2AB1009D5941 /* img_weekProgram_sleep@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4E621B51CD700C0FA39 /* img_weekProgram_sleep@3x.png */; };
+		BBA59531224A2AB1009D5941 /* valveSwitch_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323321BBAB33006A23AC /* valveSwitch_abnormal@2x.png */; };
+		BBA59532224A2AB1009D5941 /* thermostatControl_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57521B3B94000D77489 /* thermostatControl_on@3x.png */; };
+		BBA59533224A2AB1009D5941 /* img_tab_02_unselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405921997C99004669CA /* img_tab_02_unselect@3x.png */; };
+		BBA59534224A2AB1009D5941 /* img_mine_logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039321B90343007AC2B1 /* img_mine_logout@2x.png */; };
+		BBA59535224A2AB1009D5941 /* img_thermostat_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FCF21BF519700AB6EFB /* img_thermostat_on.png */; };
+		BBA59536224A2AB1009D5941 /* img_account_header.png in Resources */ = {isa = PBXBuildFile; fileRef = BB00A4F421BA237A004E4051 /* img_account_header.png */; };
+		BBA59537224A2AB1009D5941 /* img_noSharer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E796D221A61F50060A0CF /* img_noSharer@2x.png */; };
+		BBA59538224A2AB1009D5941 /* img_houseSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409A21997C99004669CA /* img_houseSelect.png */; };
+		BBA59539224A2AB1009D5941 /* thermostat_+@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5FD21B4151D00D77489 /* thermostat_+@2x.png */; };
+		BBA5953A224A2AB1009D5941 /* nodeHeaderBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6320C21BBAB2D006A23AC /* nodeHeaderBtn@2x.png */; };
+		BBA5953B224A2AB1009D5941 /* valveLeak_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322721BBAB31006A23AC /* valveLeak_normal@3x.png */; };
+		BBA5953C224A2AB1009D5941 /* valveNode_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB38A21E44C790024603A /* valveNode_abnormal@3x.png */; };
+		BBA5953D224A2AB1009D5941 /* img_tab_03_unselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409E21997C99004669CA /* img_tab_03_unselect@2x.png */; };
+		BBA5953E224A2AB1009D5941 /* addFamily_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC11921AA8A64006DB83A /* addFamily_check@3x.png */; };
+		BBA5953F224A2AB1009D5941 /* img_mine_account.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039C21B90343007AC2B1 /* img_mine_account.png */; };
+		BBA59540224A2AB1009D5941 /* img_valve_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5421BF4DF400AB6EFB /* img_valve_on@3x.png */; };
+		BBA59541224A2AB1009D5941 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB49DF9C21958867004E00A2 /* Assets.xcassets */; };
+		BBA59542224A2AB1009D5941 /* img_launchBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD78B21ABD813006DB83A /* img_launchBG@2x.png */; };
+		BBA59543224A2AB1009D5941 /* valveNode_selabnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39121E44E2A0024603A /* valveNode_selabnormal@3x.png */; };
+		BBA59544224A2AB1009D5941 /* img_weekProgram_sleep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4E921B51CD700C0FA39 /* img_weekProgram_sleep@2x.png */; };
+		BBA59545224A2AB1009D5941 /* img_wifipwd@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E07FA222A343000E6658B /* img_wifipwd@3x.png */; };
+		BBA59546224A2AB1009D5941 /* img_weatherBg.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409C21997C99004669CA /* img_weatherBg.png */; };
+		BBA59547224A2AB1009D5941 /* img_launchTitle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD79221ABDA45006DB83A /* img_launchTitle@3x.png */; };
+		BBA59548224A2AB1009D5941 /* img_tab_01_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9DF21BE4149005FA33A /* img_tab_01_unselect.png */; };
+		BBA59549224A2AB1009D5941 /* addFamily_uncheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC11521AA8A64006DB83A /* addFamily_uncheck@2x.png */; };
+		BBA5954A224A2AB1009D5941 /* img_auto_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F421BB5B02006A23AC /* img_auto_on@2x.png */; };
+		BBA5954B224A2AB1009D5941 /* img_tab_01_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405321997C99004669CA /* img_tab_01_select@3x.png */; };
+		BBA5954C224A2AB1009D5941 /* img_mine_checkUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039621B90343007AC2B1 /* img_mine_checkUpdate.png */; };
+		BBA5954D224A2AB1009D5941 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB49DF9621958864004E00A2 /* Main.storyboard */; };
+		BBA5954E224A2AB1009D5941 /* img_thermos_moTimer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4B621B4CB6A00C0FA39 /* img_thermos_moTimer@2x.png */; };
+		BBA5954F224A2AB1009D5941 /* nodeLeakBig_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6C21A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@3x.png */; };
+		BBA59550224A2AB1009D5941 /* thermostatSet_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B57D21B3B94100D77489 /* thermostatSet_on@3x.png */; };
+		BBA59551224A2AB1009D5941 /* thermostatKnob@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA221A6815000E5D8B2 /* thermostatKnob@3x.png */; };
+		BBA59552224A2AB1009D5941 /* img_weekProgram_sleep.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4E521B51CD700C0FA39 /* img_weekProgram_sleep.png */; };
+		BBA59553224A2AB1009D5941 /* img_thermos_moTimer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4B421B4CB6A00C0FA39 /* img_thermos_moTimer@3x.png */; };
+		BBA59554224A2AB1009D5941 /* img_adddevice_valve@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CD224A266E009D5941 /* img_adddevice_valve@3x.png */; };
+		BBA59555224A2AB1009D5941 /* img_mine_logout@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B039B21B90343007AC2B1 /* img_mine_logout@3x.png */; };
+		BBA59556224A2AB1009D5941 /* thermostatMoer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DAF21A6815000E5D8B2 /* thermostatMoer@3x.png */; };
+		BBA59557224A2AB1009D5941 /* img_houseManage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB352916219D95B500428DE9 /* img_houseManage@3x.png */; };
+		BBA59558224A2AB1009D5941 /* valveNode_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6320E21BBAB2E006A23AC /* valveNode_normal@2x.png */; };
+		BBA59559224A2AB1009D5941 /* addFamily_uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC11321AA8A64006DB83A /* addFamily_uncheck.png */; };
+		BBA5955A224A2AB1009D5941 /* img_tab_01_unselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9DE21BE4149005FA33A /* img_tab_01_unselect@2x.png */; };
+		BBA5955B224A2AB1009D5941 /* addFamily_uncheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC11621AA8A64006DB83A /* addFamily_uncheck@3x.png */; };
+		BBA5955C224A2AB1009D5941 /* thermostat_max@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5F221B4128E00D77489 /* thermostat_max@2x.png */; };
+		BBA5955D224A2AB1009D5941 /* valveTabMore@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323021BBAB33006A23AC /* valveTabMore@3x.png */; };
+		BBA5955E224A2AB1009D5941 /* thermostatCircle_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5EA21B3DBCB00D77489 /* thermostatCircle_off@2x.png */; };
+		BBA5955F224A2AB1009D5941 /* valveTabMore.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321A21BBAB2F006A23AC /* valveTabMore.png */; };
+		BBA59560224A2AB1009D5941 /* img_houseUnelect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB352920219D968500428DE9 /* img_houseUnelect@3x.png */; };
+		BBA59561224A2AB1009D5941 /* img_tab_03_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9E121BE4149005FA33A /* img_tab_03_select@3x.png */; };
+		BBA59562224A2AB1009D5941 /* addFamily_device@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC11421AA8A64006DB83A /* addFamily_device@2x.png */; };
+		BBA59563224A2AB1009D5941 /* img_houseSelect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405221997C99004669CA /* img_houseSelect@2x.png */; };
+		BBA59564224A2AB1009D5941 /* nodeBattery_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322B21BBAB32006A23AC /* nodeBattery_abnormal@3x.png */; };
+		BBA59565224A2AB1009D5941 /* nodeLeakSmall_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321B21BBAB2F006A23AC /* nodeLeakSmall_normal@2x.png */; };
+		BBA59566224A2AB1009D5941 /* thermostatMoer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB021A6815000E5D8B2 /* thermostatMoer@2x.png */; };
+		BBA59567224A2AB1009D5941 /* img_noSharer.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E796B221A61F50060A0CF /* img_noSharer.png */; };
+		BBA59568224A2AB1009D5941 /* img_launchTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD79121ABDA45006DB83A /* img_launchTitle.png */; };
+		BBA59569224A2AB1009D5941 /* img_mine_headerBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B03C921B90C47007AC2B1 /* img_mine_headerBG@2x.png */; };
+		BBA5956A224A2AB1009D5941 /* img_wifipwd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7E07F9222A343000E6658B /* img_wifipwd@2x.png */; };
+		BBA5956B224A2AB1009D5941 /* nodeLeakBig_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321021BBAB2E006A23AC /* nodeLeakBig_normal@2x.png */; };
+		BBA5956C224A2AB1009D5941 /* Imag_retrieve_phoneuser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A7B2227969200C99215 /* Imag_retrieve_phoneuser@2x.png */; };
+		BBA5956D224A2AB1009D5941 /* img_auto_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F821BB5B03006A23AC /* img_auto_off@3x.png */; };
+		BBA5956E224A2AB1009D5941 /* pen.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B037C21B90343007AC2B1 /* pen.png */; };
+		BBA5956F224A2AB1009D5941 /* valveSwitch_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321721BBAB2F006A23AC /* valveSwitch_abnormal@3x.png */; };
+		BBA59570224A2AB1009D5941 /* img_thermostat_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FCD21BF519600AB6EFB /* img_thermostat_off@3x.png */; };
+		BBA59571224A2AB1009D5941 /* img_tab_03_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A406F21997C99004669CA /* img_tab_03_unselect.png */; };
+		BBA59572224A2AB1009D5941 /* valveLeak_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322921BBAB32006A23AC /* valveLeak_normal.png */; };
+		BBA59573224A2AB1009D5941 /* img_thermostat_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425FD121BF519700AB6EFB /* img_thermostat_off.png */; };
+		BBA59574224A2AB1009D5941 /* img_mine_wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B037521B90343007AC2B1 /* img_mine_wechat@2x.png */; };
+		BBA59575224A2AB1009D5941 /* img_tab_03_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB52F9E021BE4149005FA33A /* img_tab_03_select@2x.png */; };
+		BBA59576224A2AB1009D5941 /* nodeHeaderBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6321321BBAB2E006A23AC /* nodeHeaderBtn@3x.png */; };
+		BBA59577224A2AB1009D5941 /* thermostatKnob_On@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED521A798A100B2121B /* thermostatKnob_On@3x.png */; };
+		BBA59578224A2AB1009D5941 /* valveNode_selabnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39321E44E2B0024603A /* valveNode_selabnormal@2x.png */; };
+		BBA59579224A2AB1009D5941 /* img_launchBG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD78A21ABD813006DB83A /* img_launchBG@3x.png */; };
+		BBA5957A224A2AB1009D5941 /* img_tab_01_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A405B21997C99004669CA /* img_tab_01_select@2x.png */; };
+		BBA5957B224A2AB1009D5941 /* pen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038821B90343007AC2B1 /* pen@2x.png */; };
+		BBA5957C224A2AB1009D5941 /* img_autoLocation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC12921AB7F22006DB83A /* img_autoLocation@3x.png */; };
+		BBA5957D224A2AB1009D5941 /* img_ther_addTimerSwitch.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4C421B4D9C900C0FA39 /* img_ther_addTimerSwitch.png */; };
+		BBA5957E224A2AB1009D5941 /* thermostatKnob@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DA921A6815000E5D8B2 /* thermostatKnob@1x.png */; };
+		BBA5957F224A2AB1009D5941 /* thermostatMoer@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9DB521A6815000E5D8B2 /* thermostatMoer@1x.png */; };
+		BBA59580224A2AB1009D5941 /* img_homeSet.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A408A21997C99004669CA /* img_homeSet.png */; };
+		BBA59581224A2AB1009D5941 /* img_adddevice_wenkongqi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CA224A266D009D5941 /* img_adddevice_wenkongqi@2x.png */; };
+		BBA59582224A2AB1009D5941 /* addFamily_check.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC11B21AA8A64006DB83A /* addFamily_check.png */; };
+		BBA59583224A2AB1009D5941 /* img_shareInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A409121997C99004669CA /* img_shareInfo.png */; };
+		BBA59584224A2AB1009D5941 /* img_weekProgram_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4E721B51CD700C0FA39 /* img_weekProgram_back@3x.png */; };
+		BBA59585224A2AB1009D5941 /* addFamily_device@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AC11721AA8A64006DB83A /* addFamily_device@3x.png */; };
+		BBA59586224A2AB1009D5941 /* valveSwitch_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6121A6ADEB00E5D8B2 /* valveSwitch_normal@3x.png */; };
+		BBA59587224A2AB1009D5941 /* valveStatus_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6322621BBAB31006A23AC /* valveStatus_normal.png */; };
+		BBA59588224A2AB1009D5941 /* img_headerBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A407121997C99004669CA /* img_headerBg@3x.png */; };
+		BBA59589224A2AB1009D5941 /* img_valve_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5621BF4DF400AB6EFB /* img_valve_on@2x.png */; };
+		BBA5958A224A2AB1009D5941 /* img_ther_addTimerWeek@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4C921B4D9CA00C0FA39 /* img_ther_addTimerWeek@2x.png */; };
+		BBA5958B224A2AB1009D5941 /* img_adddevice_wenkongqi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CB224A266E009D5941 /* img_adddevice_wenkongqi@3x.png */; };
+		BBA5958C224A2AB1009D5941 /* valveSwitch_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6E21A6ADEB00E5D8B2 /* valveSwitch_normal.png */; };
+		BBA5958D224A2AB1009D5941 /* img_mine_checkUpdate@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B038221B90343007AC2B1 /* img_mine_checkUpdate@3x.png */; };
+		BBA5958E224A2AB1009D5941 /* thermostat_min.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5F521B4128E00D77489 /* thermostat_min.png */; };
+		BBA5958F224A2AB1009D5941 /* img_launchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD78C21ABD813006DB83A /* img_launchBG.png */; };
+		BBA59590224A2AB1009D5941 /* img_ther_addTimerWeek.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4C621B4D9C900C0FA39 /* img_ther_addTimerWeek.png */; };
+		BBA59591224A2AB1009D5941 /* thermostat_-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60121B4151D00D77489 /* thermostat_-@2x.png */; };
+		BBA59594224A2AB1009D5941 /* JKVValue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BBA59595224A2AB1009D5941 /* RMQClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BBAB280F221B912400E21041 /* HomeDeviceSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */; };
 		BBAB2813221B9D4F00E21041 /* ShareDeviceSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB2812221B9D4F00E21041 /* ShareDeviceSelectCell.m */; };
 		BBF631FB21BB5B04006A23AC /* img_auto_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F321BB5B02006A23AC /* img_auto_on@3x.png */; };
@@ -466,6 +895,18 @@
 			files = (
 				BB73D54421EDCB1E004AEE18 /* JKVValue.framework in Embed Frameworks */,
 				BB5CDC8921EC3F8100C2B6FA /* RMQClient.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBA59593224A2AB1009D5941 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BBA59594224A2AB1009D5941 /* JKVValue.framework in Embed Frameworks */,
+				BBA59595224A2AB1009D5941 /* RMQClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -989,6 +1430,8 @@
 		BBA593D3224A266E009D5941 /* img_adddevice_bigualu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_bigualu@3x.png"; sourceTree = "<group>"; };
 		BBA593D4224A266E009D5941 /* img_adddevice_bigualu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_bigualu@2x.png"; sourceTree = "<group>"; };
 		BBA593D5224A266F009D5941 /* img_adddevice_bigualu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_adddevice_bigualu.png; sourceTree = "<group>"; };
+		BBA59599224A2AB1009D5941 /* jienuoIOT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jienuoIOT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBA5959A224A2AB1009D5941 /* jienuoIOT-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "jienuoIOT-Info.plist"; path = "/Users/guiwukeji/Desktop/iOSCoding/gleadsmart/gleadSmart/jienuoIOT-Info.plist"; sourceTree = "<absolute>"; };
 		BBAB280D221B912400E21041 /* HomeDeviceSelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceSelectController.h; sourceTree = "<group>"; };
 		BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceSelectController.m; sourceTree = "<group>"; };
 		BBAB2811221B9D4F00E21041 /* ShareDeviceSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceSelectCell.h; sourceTree = "<group>"; };
@@ -1070,6 +1513,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBA59469224A2AB1009D5941 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBA5946A224A2AB1009D5941 /* JKVValue.framework in Frameworks */,
+				BBA5946B224A2AB1009D5941 /* RMQClient.framework in Frameworks */,
+				BBA5946C224A2AB1009D5941 /* Pods_gleadSmart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1691,6 +2144,7 @@
 				BB49DF8F21958864004E00A2 /* gleadSmart */,
 				BB49DFAB21958867004E00A2 /* gleadSmartTests */,
 				BB49DFB621958867004E00A2 /* gleadSmartUITests */,
+				BBA5959B224A2BCB009D5941 /* jienuoIOT */,
 				136D526E4D55E2464B729DFA /* Pods */,
 				BB49DF8E21958864004E00A2 /* Products */,
 			);
@@ -1702,6 +2156,7 @@
 				BB49DF8D21958864004E00A2 /* gleadSmart.app */,
 				BB49DFA821958867004E00A2 /* gleadSmartTests.xctest */,
 				BB49DFB321958867004E00A2 /* gleadSmartUITests.xctest */,
+				BBA59599224A2AB1009D5941 /* jienuoIOT.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2064,6 +2519,14 @@
 			path = "无线阀门_slices";
 			sourceTree = "<group>";
 		};
+		BBA5959B224A2BCB009D5941 /* jienuoIOT */ = {
+			isa = PBXGroup;
+			children = (
+				BBA5959A224A2AB1009D5941 /* jienuoIOT-Info.plist */,
+			);
+			path = jienuoIOT;
+			sourceTree = "<group>";
+		};
 		BBAB2810221B9D2C00E21041 /* AddShare */ = {
 			isa = PBXGroup;
 			children = (
@@ -2154,6 +2617,26 @@
 			productReference = BB49DFB321958867004E00A2 /* gleadSmartUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		BBA593E2224A2AB1009D5941 /* jienuoIOT */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBA59596224A2AB1009D5941 /* Build configuration list for PBXNativeTarget "jienuoIOT" */;
+			buildPhases = (
+				BBA593E3224A2AB1009D5941 /* [CP] Check Pods Manifest.lock */,
+				BBA593E4224A2AB1009D5941 /* Sources */,
+				BBA59469224A2AB1009D5941 /* Frameworks */,
+				BBA5946D224A2AB1009D5941 /* Resources */,
+				BBA59592224A2AB1009D5941 /* [CP] Embed Pods Frameworks */,
+				BBA59593224A2AB1009D5941 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = jienuoIOT;
+			productName = gleadSmart;
+			productReference = BBA59599224A2AB1009D5941 /* jienuoIOT.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2200,6 +2683,7 @@
 				BB49DF8C21958864004E00A2 /* gleadSmart */,
 				BB49DFA721958867004E00A2 /* gleadSmartTests */,
 				BB49DFB221958867004E00A2 /* gleadSmartUITests */,
+				BBA593E2224A2AB1009D5941 /* jienuoIOT */,
 			);
 		};
 /* End PBXProject section */
@@ -2518,6 +3002,305 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BBA5946D224A2AB1009D5941 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBA5946E224A2AB1009D5941 /* img_adddevice_gateway@2x.png in Resources */,
+				BBA5946F224A2AB1009D5941 /* img_wallHob@3x.png in Resources */,
+				BBA59470224A2AB1009D5941 /* valveStatus_normal@3x.png in Resources */,
+				BBA59471224A2AB1009D5941 /* nodeSet_abnormal@2x.png in Resources */,
+				BBA59472224A2AB1009D5941 /* img_weatherBg@2x.png in Resources */,
+				BBA59473224A2AB1009D5941 /* img_tab_03_unselect@3x.png in Resources */,
+				BBA59474224A2AB1009D5941 /* thermostatSet@3x.png in Resources */,
+				BBA59475224A2AB1009D5941 /* Imag_retrieve_phoneuser@3x.png in Resources */,
+				BBA59476224A2AB1009D5941 /* img_addDevice@3x.png in Resources */,
+				BBA59477224A2AB1009D5941 /* img_mine_header.png in Resources */,
+				BBA59478224A2AB1009D5941 /* thermostatSet@2x.png in Resources */,
+				BBA59479224A2AB1009D5941 /* img_mine_houseManage@3x.png in Resources */,
+				BBA5947A224A2AB1009D5941 /* valveStatus_normal@2x.png in Resources */,
+				BBA5947B224A2AB1009D5941 /* nodeLeakSmall_normal@3x.png in Resources */,
+				BBA5947C224A2AB1009D5941 /* thermostat_min@2x.png in Resources */,
+				BBA5947D224A2AB1009D5941 /* img_shareInfo@2x.png in Resources */,
+				BBA5947E224A2AB1009D5941 /* nodeLeakBig_normal@3x.png in Resources */,
+				BBA5947F224A2AB1009D5941 /* thermostatSet@1x.png in Resources */,
+				BBA59480224A2AB1009D5941 /* img_headerBg@1x.png in Resources */,
+				BBA59481224A2AB1009D5941 /* thermostat_min@3x.png in Resources */,
+				BBA59482224A2AB1009D5941 /* thermostat_+.png in Resources */,
+				BBA59483224A2AB1009D5941 /* nodeBattery_normal.png in Resources */,
+				BBA59484224A2AB1009D5941 /* img_mine_houseManage@2x.png in Resources */,
+				BBA59485224A2AB1009D5941 /* addRoom_hand@3x.png in Resources */,
+				BBA59486224A2AB1009D5941 /* img_mine_header@2x.png in Resources */,
+				BBA59487224A2AB1009D5941 /* img_valve_on.png in Resources */,
+				BBA59488224A2AB1009D5941 /* img_houseManage@2x.png in Resources */,
+				BBA59489224A2AB1009D5941 /* thermostatControl_on.png in Resources */,
+				BBA5948A224A2AB1009D5941 /* img_mine_editPW.png in Resources */,
+				BBA5948B224A2AB1009D5941 /* valveAlertMark@2x.png in Resources */,
+				BBA5948C224A2AB1009D5941 /* img_retrieve_verify@2x.png in Resources */,
+				BBA5948D224A2AB1009D5941 /* img_houseSelect@3x.png in Resources */,
+				BBA5948E224A2AB1009D5941 /* img_adddevice_gateway@3x.png in Resources */,
+				BBA5948F224A2AB1009D5941 /* nodeLeakBig_abnormal@2x.png in Resources */,
+				BBA59490224A2AB1009D5941 /* img_adddevice_valve.png in Resources */,
+				BBA59491224A2AB1009D5941 /* img_mine_header@3x.png in Resources */,
+				BBA59492224A2AB1009D5941 /* valveSwitch_abnormal.png in Resources */,
+				BBA59493224A2AB1009D5941 /* img_homeSet@3x.png in Resources */,
+				BBA59494224A2AB1009D5941 /* img_valve_off.png in Resources */,
+				BBA59495224A2AB1009D5941 /* thermostatCircle_on.png in Resources */,
+				BBA59496224A2AB1009D5941 /* img_wallHob@2x.png in Resources */,
+				BBA59497224A2AB1009D5941 /* img_mine_checkUpdate@2x.png in Resources */,
+				BBA59498224A2AB1009D5941 /* img_retrieve_password.png in Resources */,
+				BBA59499224A2AB1009D5941 /* thermostat_timing_on@3x.png in Resources */,
+				BBA5949A224A2AB1009D5941 /* img_retrieve_verify.png in Resources */,
+				BBA5949B224A2AB1009D5941 /* thermostatKnob_On@2x.png in Resources */,
+				BBA5949C224A2AB1009D5941 /* valveNode_selnormal@2x.png in Resources */,
+				BBA5949D224A2AB1009D5941 /* thermostatControl@2x.png in Resources */,
+				BBA5949E224A2AB1009D5941 /* img_mine_editPW@2x.png in Resources */,
+				BBA5949F224A2AB1009D5941 /* img_login_bg@3x.png in Resources */,
+				BBA594A0224A2AB1009D5941 /* img_login_password@2x.png in Resources */,
+				BBA594A1224A2AB1009D5941 /* valveNode_normal@3x.png in Resources */,
+				BBA594A2224A2AB1009D5941 /* valveAlertMark.png in Resources */,
+				BBA594A3224A2AB1009D5941 /* img_login_header@3x.png in Resources */,
+				BBA594A4224A2AB1009D5941 /* img_weekProgram_back.png in Resources */,
+				BBA594A5224A2AB1009D5941 /* img_manual_on@3x.png in Resources */,
+				BBA594A6224A2AB1009D5941 /* img_retrieve_verify@3x.png in Resources */,
+				BBA594A7224A2AB1009D5941 /* img_tab_01_unselect@3x.png in Resources */,
+				BBA594A8224A2AB1009D5941 /* addRoom_hand.png in Resources */,
+				BBA594A9224A2AB1009D5941 /* img_addDevice@2x.png in Resources */,
+				BBA594AA224A2AB1009D5941 /* nodeLeakBig_abnormal.png in Resources */,
+				BBA594AB224A2AB1009D5941 /* img_adddevice_bigualu.png in Resources */,
+				BBA594AC224A2AB1009D5941 /* thermostatSet_on@2x.png in Resources */,
+				BBA594AD224A2AB1009D5941 /* thermostatControl_on@2x.png in Resources */,
+				BBA594AE224A2AB1009D5941 /* img_tab_01_select.png in Resources */,
+				BBA594AF224A2AB1009D5941 /* valveLeak_normal@2x.png in Resources */,
+				BBA594B0224A2AB1009D5941 /* img_mine_houseManage.png in Resources */,
+				BBA594B1224A2AB1009D5941 /* nodeLeakBig_normal.png in Resources */,
+				BBA594B2224A2AB1009D5941 /* img_houseUnelect@2x.png in Resources */,
+				BBA594B3224A2AB1009D5941 /* img_login_phone@2x.png in Resources */,
+				BBA594B4224A2AB1009D5941 /* img_addShareCheck_notable@2x.png in Resources */,
+				BBA594B5224A2AB1009D5941 /* nodeBattery_normal@2x.png in Resources */,
+				BBA594B6224A2AB1009D5941 /* valveTabMore@2x.png in Resources */,
+				BBA594B7224A2AB1009D5941 /* valveHeader@2x.png in Resources */,
+				BBA594B8224A2AB1009D5941 /* thermostat_max.png in Resources */,
+				BBA594B9224A2AB1009D5941 /* img_valve_off@3x.png in Resources */,
+				BBA594BA224A2AB1009D5941 /* img_wifipwd.png in Resources */,
+				BBA594BB224A2AB1009D5941 /* thermostatSet_on.png in Resources */,
+				BBA594BC224A2AB1009D5941 /* thermostatCircle_off@3x.png in Resources */,
+				BBA594BD224A2AB1009D5941 /* img_houseSelected@3x.png in Resources */,
+				BBA594BE224A2AB1009D5941 /* thermostatControl@1x.png in Resources */,
+				BBA594BF224A2AB1009D5941 /* img_houseUnelect.png in Resources */,
+				BBA594C0224A2AB1009D5941 /* img_mine_aboutus@2x.png in Resources */,
+				BBA594C1224A2AB1009D5941 /* thermostat_+@3x.png in Resources */,
+				BBA594C2224A2AB1009D5941 /* thermostat_timing_on@2x.png in Resources */,
+				BBA594C3224A2AB1009D5941 /* valveStatus_abnormal@3x.png in Resources */,
+				BBA594C4224A2AB1009D5941 /* img_retrieve_password@2x.png in Resources */,
+				BBA594C5224A2AB1009D5941 /* img_mine_aboutus@3x.png in Resources */,
+				BBA594C6224A2AB1009D5941 /* img_pwd_visiable.png in Resources */,
+				BBA594C7224A2AB1009D5941 /* img_auto_off@2x.png in Resources */,
+				BBA594C8224A2AB1009D5941 /* img_weekProgram_getup@2x.png in Resources */,
+				BBA594C9224A2AB1009D5941 /* nodeBattery_abnormal.png in Resources */,
+				BBA594CA224A2AB1009D5941 /* img_mine_account@2x.png in Resources */,
+				BBA594CB224A2AB1009D5941 /* img_pwd_visiable@3x.png in Resources */,
+				BBA594CC224A2AB1009D5941 /* img_ther_addTimerSwitch@2x.png in Resources */,
+				BBA594CD224A2AB1009D5941 /* img_thermostat_on@2x.png in Resources */,
+				BBA594CE224A2AB1009D5941 /* thermostat_-@3x.png in Resources */,
+				BBA594CF224A2AB1009D5941 /* addRoom_hand@2x.png in Resources */,
+				BBA594D0224A2AB1009D5941 /* Imag_retrieve_phoneuser.png in Resources */,
+				BBA594D1224A2AB1009D5941 /* img_mine_logout.png in Resources */,
+				BBA594D2224A2AB1009D5941 /* img_login_header@2x.png in Resources */,
+				BBA594D3224A2AB1009D5941 /* valveNode_selnormal@3x.png in Resources */,
+				BBA594D4224A2AB1009D5941 /* img_adddevice_gateway.png in Resources */,
+				BBA594D5224A2AB1009D5941 /* thermostat_timing@2x.png in Resources */,
+				BBA594D6224A2AB1009D5941 /* img_headerBg@2x.png in Resources */,
+				BBA594D7224A2AB1009D5941 /* thermostatKnob@2x.png in Resources */,
+				BBA594D8224A2AB1009D5941 /* img_thermos_moTimer.png in Resources */,
+				BBA594D9224A2AB1009D5941 /* img_ther_addTimerWeek@3x.png in Resources */,
+				BBA594DA224A2AB1009D5941 /* img_pwd_visiable@2x.png in Resources */,
+				BBA594DB224A2AB1009D5941 /* img_thermostat_off@2x.png in Resources */,
+				BBA594DC224A2AB1009D5941 /* img_manual_off@3x.png in Resources */,
+				BBA594DD224A2AB1009D5941 /* thermostat_timing_on.png in Resources */,
+				BBA594DE224A2AB1009D5941 /* img_mine_aboutus.png in Resources */,
+				BBA594DF224A2AB1009D5941 /* img_weekProgram_getup@3x.png in Resources */,
+				BBA594E0224A2AB1009D5941 /* img_login_password.png in Resources */,
+				BBA594E1224A2AB1009D5941 /* thermostat_max@3x.png in Resources */,
+				BBA594E2224A2AB1009D5941 /* img_houseSelected.png in Resources */,
+				BBA594E3224A2AB1009D5941 /* nodeBattery_abnormal@2x.png in Resources */,
+				BBA594E4224A2AB1009D5941 /* img_login_phone.png in Resources */,
+				BBA594E5224A2AB1009D5941 /* nodeSet_normal@3x.png in Resources */,
+				BBA594E6224A2AB1009D5941 /* img_auto_on@3x.png in Resources */,
+				BBA594E7224A2AB1009D5941 /* thermostat_timing@3x.png in Resources */,
+				BBA594E8224A2AB1009D5941 /* thermostatCircle_on@3x.png in Resources */,
+				BBA594E9224A2AB1009D5941 /* valveAlertMark@3x.png in Resources */,
+				BBA594EA224A2AB1009D5941 /* img_tab_02_unselect@2x.png in Resources */,
+				BBA594EB224A2AB1009D5941 /* img_noSharer@3x.png in Resources */,
+				BBA594EC224A2AB1009D5941 /* img_retrieve_password@3x.png in Resources */,
+				BBA594ED224A2AB1009D5941 /* img_homeSet@2x.png in Resources */,
+				BBA594EE224A2AB1009D5941 /* img_mine_headerBG@3x.png in Resources */,
+				BBA594EF224A2AB1009D5941 /* valveHeader@3x.png in Resources */,
+				BBA594F0224A2AB1009D5941 /* addFamily_device.png in Resources */,
+				BBA594F1224A2AB1009D5941 /* img_weekProgram_out.png in Resources */,
+				BBA594F2224A2AB1009D5941 /* img_tab_03_select.png in Resources */,
+				BBA594F3224A2AB1009D5941 /* thermostatCircle_on@2x.png in Resources */,
+				BBA594F4224A2AB1009D5941 /* nodeSet_normal@2x.png in Resources */,
+				BBA594F5224A2AB1009D5941 /* img_pwd_unvisiable.png in Resources */,
+				BBA594F6224A2AB1009D5941 /* img_weekProgram_out@2x.png in Resources */,
+				BBA594F7224A2AB1009D5941 /* img_mine_wechat.png in Resources */,
+				BBA594F8224A2AB1009D5941 /* img_addShareCheck_notable@3x.png in Resources */,
+				BBA594F9224A2AB1009D5941 /* valveSwitch_normal@2x.png in Resources */,
+				BBA594FA224A2AB1009D5941 /* valveNode_abnormal@2x.png in Resources */,
+				BBA594FB224A2AB1009D5941 /* img_valve_off@2x.png in Resources */,
+				BBA594FC224A2AB1009D5941 /* img_houseSelected@2x.png in Resources */,
+				BBA594FD224A2AB1009D5941 /* img_weatherBg@3x.png in Resources */,
+				BBA594FE224A2AB1009D5941 /* addFamily_check@2x.png in Resources */,
+				BBA594FF224A2AB1009D5941 /* img_pwd_unvisiable@2x.png in Resources */,
+				BBA59500224A2AB1009D5941 /* img_mine_editPW@3x.png in Resources */,
+				BBA59501224A2AB1009D5941 /* img_login_password@3x.png in Resources */,
+				BBA59502224A2AB1009D5941 /* valveLeak_abnormal@2x.png in Resources */,
+				BBA59503224A2AB1009D5941 /* KYDivisionPickerView_list.json in Resources */,
+				BBA59504224A2AB1009D5941 /* img_adddevice_bigualu@3x.png in Resources */,
+				BBA59505224A2AB1009D5941 /* img_pwd_unvisiable@3x.png in Resources */,
+				BBA59506224A2AB1009D5941 /* valveLeak_abnormal@3x.png in Resources */,
+				BBA59507224A2AB1009D5941 /* img_shareInfo@3x.png in Resources */,
+				BBA59508224A2AB1009D5941 /* nodeSet_abnormal@3x.png in Resources */,
+				BBA59509224A2AB1009D5941 /* img_adddevice_valve@2x.png in Resources */,
+				BBA5950A224A2AB1009D5941 /* pen@3x.png in Resources */,
+				BBA5950B224A2AB1009D5941 /* img_mine_wechat@3x.png in Resources */,
+				BBA5950C224A2AB1009D5941 /* img_login_phone@3x.png in Resources */,
+				BBA5950D224A2AB1009D5941 /* img_weekProgram_getup.png in Resources */,
+				BBA5950E224A2AB1009D5941 /* img_thermostat_on@3x.png in Resources */,
+				BBA5950F224A2AB1009D5941 /* img_autoLocation@2x.png in Resources */,
+				BBA59510224A2AB1009D5941 /* img_addDevice.png in Resources */,
+				BBA59511224A2AB1009D5941 /* nodeHeaderBtn.png in Resources */,
+				BBA59512224A2AB1009D5941 /* img_manual_off@2x.png in Resources */,
+				BBA59513224A2AB1009D5941 /* thermostatCircle_off.png in Resources */,
+				BBA59514224A2AB1009D5941 /* img_autoLocation.png in Resources */,
+				BBA59515224A2AB1009D5941 /* img_mine_account@3x.png in Resources */,
+				BBA59516224A2AB1009D5941 /* nodeSet_normal.png in Resources */,
+				BBA59517224A2AB1009D5941 /* thermostat_-.png in Resources */,
+				BBA59518224A2AB1009D5941 /* nodeSet_abnormal.png in Resources */,
+				BBA59519224A2AB1009D5941 /* img_account_header@3x.png in Resources */,
+				BBA5951A224A2AB1009D5941 /* img_account_header@2x.png in Resources */,
+				BBA5951B224A2AB1009D5941 /* LaunchScreen.storyboard in Resources */,
+				BBA5951C224A2AB1009D5941 /* thermostatControl@3x.png in Resources */,
+				BBA5951D224A2AB1009D5941 /* img_launchTitle@2x.png in Resources */,
+				BBA5951E224A2AB1009D5941 /* valveStatus_abnormal.png in Resources */,
+				BBA5951F224A2AB1009D5941 /* valveLeak_abnormal.png in Resources */,
+				BBA59520224A2AB1009D5941 /* img_login_bg@2x.png in Resources */,
+				BBA59521224A2AB1009D5941 /* img_tab_02_unselect.png in Resources */,
+				BBA59522224A2AB1009D5941 /* img_adddevice_wenkongqi.png in Resources */,
+				BBA59523224A2AB1009D5941 /* img_weekProgram_out@3x.png in Resources */,
+				BBA59524224A2AB1009D5941 /* img_ther_addTimerSwitch@3x.png in Resources */,
+				BBA59525224A2AB1009D5941 /* img_adddevice_bigualu@2x.png in Resources */,
+				BBA59526224A2AB1009D5941 /* img_addShareCheck_notable.png in Resources */,
+				BBA59527224A2AB1009D5941 /* img_wallHob.png in Resources */,
+				BBA59528224A2AB1009D5941 /* valveStatus_abnormal@2x.png in Resources */,
+				BBA59529224A2AB1009D5941 /* img_manual_on@2x.png in Resources */,
+				BBA5952A224A2AB1009D5941 /* valveHeader@1x.png in Resources */,
+				BBA5952B224A2AB1009D5941 /* img_weekProgram_back@2x.png in Resources */,
+				BBA5952C224A2AB1009D5941 /* nodeBattery_normal@3x.png in Resources */,
+				BBA5952D224A2AB1009D5941 /* img_houseManage.png in Resources */,
+				BBA5952E224A2AB1009D5941 /* img_login_bg.png in Resources */,
+				BBA5952F224A2AB1009D5941 /* nodeLeakSmall_normal.png in Resources */,
+				BBA59530224A2AB1009D5941 /* img_weekProgram_sleep@3x.png in Resources */,
+				BBA59531224A2AB1009D5941 /* valveSwitch_abnormal@2x.png in Resources */,
+				BBA59532224A2AB1009D5941 /* thermostatControl_on@3x.png in Resources */,
+				BBA59533224A2AB1009D5941 /* img_tab_02_unselect@3x.png in Resources */,
+				BBA59534224A2AB1009D5941 /* img_mine_logout@2x.png in Resources */,
+				BBA59535224A2AB1009D5941 /* img_thermostat_on.png in Resources */,
+				BBA59536224A2AB1009D5941 /* img_account_header.png in Resources */,
+				BBA59537224A2AB1009D5941 /* img_noSharer@2x.png in Resources */,
+				BBA59538224A2AB1009D5941 /* img_houseSelect.png in Resources */,
+				BBA59539224A2AB1009D5941 /* thermostat_+@2x.png in Resources */,
+				BBA5953A224A2AB1009D5941 /* nodeHeaderBtn@2x.png in Resources */,
+				BBA5953B224A2AB1009D5941 /* valveLeak_normal@3x.png in Resources */,
+				BBA5953C224A2AB1009D5941 /* valveNode_abnormal@3x.png in Resources */,
+				BBA5953D224A2AB1009D5941 /* img_tab_03_unselect@2x.png in Resources */,
+				BBA5953E224A2AB1009D5941 /* addFamily_check@3x.png in Resources */,
+				BBA5953F224A2AB1009D5941 /* img_mine_account.png in Resources */,
+				BBA59540224A2AB1009D5941 /* img_valve_on@3x.png in Resources */,
+				BBA59541224A2AB1009D5941 /* Assets.xcassets in Resources */,
+				BBA59542224A2AB1009D5941 /* img_launchBG@2x.png in Resources */,
+				BBA59543224A2AB1009D5941 /* valveNode_selabnormal@3x.png in Resources */,
+				BBA59544224A2AB1009D5941 /* img_weekProgram_sleep@2x.png in Resources */,
+				BBA59545224A2AB1009D5941 /* img_wifipwd@3x.png in Resources */,
+				BBA59546224A2AB1009D5941 /* img_weatherBg.png in Resources */,
+				BBA59547224A2AB1009D5941 /* img_launchTitle@3x.png in Resources */,
+				BBA59548224A2AB1009D5941 /* img_tab_01_unselect.png in Resources */,
+				BBA59549224A2AB1009D5941 /* addFamily_uncheck@2x.png in Resources */,
+				BBA5954A224A2AB1009D5941 /* img_auto_on@2x.png in Resources */,
+				BBA5954B224A2AB1009D5941 /* img_tab_01_select@3x.png in Resources */,
+				BBA5954C224A2AB1009D5941 /* img_mine_checkUpdate.png in Resources */,
+				BBA5954D224A2AB1009D5941 /* Main.storyboard in Resources */,
+				BBA5954E224A2AB1009D5941 /* img_thermos_moTimer@2x.png in Resources */,
+				BBA5954F224A2AB1009D5941 /* nodeLeakBig_abnormal@3x.png in Resources */,
+				BBA59550224A2AB1009D5941 /* thermostatSet_on@3x.png in Resources */,
+				BBA59551224A2AB1009D5941 /* thermostatKnob@3x.png in Resources */,
+				BBA59552224A2AB1009D5941 /* img_weekProgram_sleep.png in Resources */,
+				BBA59553224A2AB1009D5941 /* img_thermos_moTimer@3x.png in Resources */,
+				BBA59554224A2AB1009D5941 /* img_adddevice_valve@3x.png in Resources */,
+				BBA59555224A2AB1009D5941 /* img_mine_logout@3x.png in Resources */,
+				BBA59556224A2AB1009D5941 /* thermostatMoer@3x.png in Resources */,
+				BBA59557224A2AB1009D5941 /* img_houseManage@3x.png in Resources */,
+				BBA59558224A2AB1009D5941 /* valveNode_normal@2x.png in Resources */,
+				BBA59559224A2AB1009D5941 /* addFamily_uncheck.png in Resources */,
+				BBA5955A224A2AB1009D5941 /* img_tab_01_unselect@2x.png in Resources */,
+				BBA5955B224A2AB1009D5941 /* addFamily_uncheck@3x.png in Resources */,
+				BBA5955C224A2AB1009D5941 /* thermostat_max@2x.png in Resources */,
+				BBA5955D224A2AB1009D5941 /* valveTabMore@3x.png in Resources */,
+				BBA5955E224A2AB1009D5941 /* thermostatCircle_off@2x.png in Resources */,
+				BBA5955F224A2AB1009D5941 /* valveTabMore.png in Resources */,
+				BBA59560224A2AB1009D5941 /* img_houseUnelect@3x.png in Resources */,
+				BBA59561224A2AB1009D5941 /* img_tab_03_select@3x.png in Resources */,
+				BBA59562224A2AB1009D5941 /* addFamily_device@2x.png in Resources */,
+				BBA59563224A2AB1009D5941 /* img_houseSelect@2x.png in Resources */,
+				BBA59564224A2AB1009D5941 /* nodeBattery_abnormal@3x.png in Resources */,
+				BBA59565224A2AB1009D5941 /* nodeLeakSmall_normal@2x.png in Resources */,
+				BBA59566224A2AB1009D5941 /* thermostatMoer@2x.png in Resources */,
+				BBA59567224A2AB1009D5941 /* img_noSharer.png in Resources */,
+				BBA59568224A2AB1009D5941 /* img_launchTitle.png in Resources */,
+				BBA59569224A2AB1009D5941 /* img_mine_headerBG@2x.png in Resources */,
+				BBA5956A224A2AB1009D5941 /* img_wifipwd@2x.png in Resources */,
+				BBA5956B224A2AB1009D5941 /* nodeLeakBig_normal@2x.png in Resources */,
+				BBA5956C224A2AB1009D5941 /* Imag_retrieve_phoneuser@2x.png in Resources */,
+				BBA5956D224A2AB1009D5941 /* img_auto_off@3x.png in Resources */,
+				BBA5956E224A2AB1009D5941 /* pen.png in Resources */,
+				BBA5956F224A2AB1009D5941 /* valveSwitch_abnormal@3x.png in Resources */,
+				BBA59570224A2AB1009D5941 /* img_thermostat_off@3x.png in Resources */,
+				BBA59571224A2AB1009D5941 /* img_tab_03_unselect.png in Resources */,
+				BBA59572224A2AB1009D5941 /* valveLeak_normal.png in Resources */,
+				BBA59573224A2AB1009D5941 /* img_thermostat_off.png in Resources */,
+				BBA59574224A2AB1009D5941 /* img_mine_wechat@2x.png in Resources */,
+				BBA59575224A2AB1009D5941 /* img_tab_03_select@2x.png in Resources */,
+				BBA59576224A2AB1009D5941 /* nodeHeaderBtn@3x.png in Resources */,
+				BBA59577224A2AB1009D5941 /* thermostatKnob_On@3x.png in Resources */,
+				BBA59578224A2AB1009D5941 /* valveNode_selabnormal@2x.png in Resources */,
+				BBA59579224A2AB1009D5941 /* img_launchBG@3x.png in Resources */,
+				BBA5957A224A2AB1009D5941 /* img_tab_01_select@2x.png in Resources */,
+				BBA5957B224A2AB1009D5941 /* pen@2x.png in Resources */,
+				BBA5957C224A2AB1009D5941 /* img_autoLocation@3x.png in Resources */,
+				BBA5957D224A2AB1009D5941 /* img_ther_addTimerSwitch.png in Resources */,
+				BBA5957E224A2AB1009D5941 /* thermostatKnob@1x.png in Resources */,
+				BBA5957F224A2AB1009D5941 /* thermostatMoer@1x.png in Resources */,
+				BBA59580224A2AB1009D5941 /* img_homeSet.png in Resources */,
+				BBA59581224A2AB1009D5941 /* img_adddevice_wenkongqi@2x.png in Resources */,
+				BBA59582224A2AB1009D5941 /* addFamily_check.png in Resources */,
+				BBA59583224A2AB1009D5941 /* img_shareInfo.png in Resources */,
+				BBA59584224A2AB1009D5941 /* img_weekProgram_back@3x.png in Resources */,
+				BBA59585224A2AB1009D5941 /* addFamily_device@3x.png in Resources */,
+				BBA59586224A2AB1009D5941 /* valveSwitch_normal@3x.png in Resources */,
+				BBA59587224A2AB1009D5941 /* valveStatus_normal.png in Resources */,
+				BBA59588224A2AB1009D5941 /* img_headerBg@3x.png in Resources */,
+				BBA59589224A2AB1009D5941 /* img_valve_on@2x.png in Resources */,
+				BBA5958A224A2AB1009D5941 /* img_ther_addTimerWeek@2x.png in Resources */,
+				BBA5958B224A2AB1009D5941 /* img_adddevice_wenkongqi@3x.png in Resources */,
+				BBA5958C224A2AB1009D5941 /* valveSwitch_normal.png in Resources */,
+				BBA5958D224A2AB1009D5941 /* img_mine_checkUpdate@3x.png in Resources */,
+				BBA5958E224A2AB1009D5941 /* thermostat_min.png in Resources */,
+				BBA5958F224A2AB1009D5941 /* img_launchBG.png in Resources */,
+				BBA59590224A2AB1009D5941 /* img_ther_addTimerWeek.png in Resources */,
+				BBA59591224A2AB1009D5941 /* thermostat_-@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -2537,6 +3320,58 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBA593E3224A2AB1009D5941 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gleadSmart-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBA59592224A2AB1009D5941 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/WMPageController/WMPageController.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMPageController.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CDE5640370C0C592CDFE9FD3 /* [CP] Embed Pods Frameworks */ = {
@@ -2731,6 +3566,145 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BBA593E4224A2AB1009D5941 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBA593E5224A2AB1009D5941 /* ESPAES.m in Sources */,
+				BBA593E6224A2AB1009D5941 /* ViewController.m in Sources */,
+				BBA593E7224A2AB1009D5941 /* RDVTabBarItem.m in Sources */,
+				BBA593E8224A2AB1009D5941 /* LogOutCell.m in Sources */,
+				BBA593E9224A2AB1009D5941 /* NodeDetailCell.m in Sources */,
+				BBA593EA224A2AB1009D5941 /* PasswordLoginController.m in Sources */,
+				BBA593EB224A2AB1009D5941 /* WirelessValveController.m in Sources */,
+				BBA593EC224A2AB1009D5941 /* TherWeekProgramController.m in Sources */,
+				BBA593ED224A2AB1009D5941 /* UsernameViewController.m in Sources */,
+				BBA593EE224A2AB1009D5941 /* PhoneTFCell.m in Sources */,
+				BBA593EF224A2AB1009D5941 /* YSZCoreDataStackManager.m in Sources */,
+				BBA593F0224A2AB1009D5941 /* EspViewController.m in Sources */,
+				BBA593F1224A2AB1009D5941 /* ESP_CRC8.m in Sources */,
+				BBA593F2224A2AB1009D5941 /* NoHouseBridgingController.m in Sources */,
+				BBA593F3224A2AB1009D5941 /* HomeManagementController.m in Sources */,
+				BBA593F4224A2AB1009D5941 /* HouseManagementController.m in Sources */,
+				BBA593F5224A2AB1009D5941 /* TherWeekProgramCell.m in Sources */,
+				BBA593F6224A2AB1009D5941 /* SelectDeviceTypeController.m in Sources */,
+				BBA593F7224A2AB1009D5941 /* DeviceModel.m in Sources */,
+				BBA593F8224A2AB1009D5941 /* NSObject+Common.m in Sources */,
+				BBA593F9224A2AB1009D5941 /* UIColor+ColorChange.m in Sources */,
+				BBA593FA224A2AB1009D5941 /* HomeManagementCell.m in Sources */,
+				BBA593FB224A2AB1009D5941 /* UILabel+YBAttributeTextTapAction.m in Sources */,
+				BBA593FC224A2AB1009D5941 /* Database.m in Sources */,
+				BBA593FD224A2AB1009D5941 /* WeekProgramSetController.m in Sources */,
+				BBA593FE224A2AB1009D5941 /* HomeDeviceSelectController.m in Sources */,
+				BBA593FF224A2AB1009D5941 /* NodeModel.m in Sources */,
+				BBA59400224A2AB1009D5941 /* MainViewController.m in Sources */,
+				BBA59401224A2AB1009D5941 /* ESPTouchTaskParameter.m in Sources */,
+				BBA59402224A2AB1009D5941 /* NodeDetailViewController.m in Sources */,
+				BBA59403224A2AB1009D5941 /* ESPUDPSocketClient.m in Sources */,
+				BBA59404224A2AB1009D5941 /* NoHouseAddController.m in Sources */,
+				BBA59405224A2AB1009D5941 /* RDVTabBarController.m in Sources */,
+				BBA59406224A2AB1009D5941 /* AddFamilyTextCell.m in Sources */,
+				BBA59407224A2AB1009D5941 /* TherTimerCell.m in Sources */,
+				BBA59408224A2AB1009D5941 /* Network.m in Sources */,
+				BBA59409224A2AB1009D5941 /* ESPDatumCode.m in Sources */,
+				BBA5940A224A2AB1009D5941 /* FamilyMemberInfoCell.m in Sources */,
+				BBA5940B224A2AB1009D5941 /* RDVTabBar.m in Sources */,
+				BBA5940C224A2AB1009D5941 /* HouseManagementTableViewCell.m in Sources */,
+				BBA5940D224A2AB1009D5941 /* HouseSelectController.m in Sources */,
+				BBA5940E224A2AB1009D5941 /* HouseSettingController.m in Sources */,
+				BBA5940F224A2AB1009D5941 /* SharerInfoCell.m in Sources */,
+				BBA59410224A2AB1009D5941 /* DeviceTableViewCell.m in Sources */,
+				BBA59411224A2AB1009D5941 /* YAlertViewController.m in Sources */,
+				BBA59412224A2AB1009D5941 /* HouseModel.m in Sources */,
+				BBA59413224A2AB1009D5941 /* ShareDeviceSelectCell.m in Sources */,
+				BBA59414224A2AB1009D5941 /* ShareDeviceListCell.m in Sources */,
+				BBA59415224A2AB1009D5941 /* AFSecurityPolicy.m in Sources */,
+				BBA59416224A2AB1009D5941 /* alarmModel.m in Sources */,
+				BBA59417224A2AB1009D5941 /* AddMemberController.m in Sources */,
+				BBA59418224A2AB1009D5941 /* YRabbitMQ.m in Sources */,
+				BBA59419224A2AB1009D5941 /* NodeButton.m in Sources */,
+				BBA5941A224A2AB1009D5941 /* NodeInfoCell.m in Sources */,
+				BBA5941B224A2AB1009D5941 /* LoginViewController.m in Sources */,
+				BBA5941C224A2AB1009D5941 /* RegisterController.m in Sources */,
+				BBA5941D224A2AB1009D5941 /* ShareDeviceDetailController.m in Sources */,
+				BBA5941E224A2AB1009D5941 /* NSDate+Common.m in Sources */,
+				BBA5941F224A2AB1009D5941 /* ManagerSetCell.m in Sources */,
+				BBA59420224A2AB1009D5941 /* ThermostSettingController.m in Sources */,
+				BBA59421224A2AB1009D5941 /* DeviceViewController.m in Sources */,
+				BBA59422224A2AB1009D5941 /* ShareDeviceListController.m in Sources */,
+				BBA59423224A2AB1009D5941 /* AddFamilySelectCell.m in Sources */,
+				BBA59424224A2AB1009D5941 /* AccountViewController.m in Sources */,
+				BBA59425224A2AB1009D5941 /* APProcessController.m in Sources */,
+				BBA59426224A2AB1009D5941 /* AFNetworkReachabilityManager.m in Sources */,
+				BBA59427224A2AB1009D5941 /* TherWeekSelectController.m in Sources */,
+				BBA59428224A2AB1009D5941 /* AddRoomsTextCell.m in Sources */,
+				BBA59429224A2AB1009D5941 /* RegisterAccountController.m in Sources */,
+				BBA5942A224A2AB1009D5941 /* ConnectApNetController.m in Sources */,
+				BBA5942B224A2AB1009D5941 /* AFURLRequestSerialization.m in Sources */,
+				BBA5942C224A2AB1009D5941 /* ShareDeviceDetailCell.m in Sources */,
+				BBA5942D224A2AB1009D5941 /* HouseSelectCell.m in Sources */,
+				BBA5942E224A2AB1009D5941 /* ESPDataCode.m in Sources */,
+				BBA5942F224A2AB1009D5941 /* TherWeekSelCell.m in Sources */,
+				BBA59430224A2AB1009D5941 /* TextFieldCell.m in Sources */,
+				BBA59431224A2AB1009D5941 /* RoomModel.m in Sources */,
+				BBA59432224A2AB1009D5941 /* FamilyMemberController.m in Sources */,
+				BBA59433224A2AB1009D5941 /* UserModel.m in Sources */,
+				BBA59434224A2AB1009D5941 /* DeviceConnectView.m in Sources */,
+				BBA59435224A2AB1009D5941 /* FamilyLocationController.m in Sources */,
+				BBA59436224A2AB1009D5941 /* HouseShareController.m in Sources */,
+				BBA59437224A2AB1009D5941 /* SharerInputController.m in Sources */,
+				BBA59438224A2AB1009D5941 /* TouchTableView.m in Sources */,
+				BBA59439224A2AB1009D5941 /* UIButton+Common.m in Sources */,
+				BBA5943A224A2AB1009D5941 /* MineNormalCell.m in Sources */,
+				BBA5943B224A2AB1009D5941 /* AFHTTPSessionManager.m in Sources */,
+				BBA5943C224A2AB1009D5941 /* ESPTouchGenerator.m in Sources */,
+				BBA5943D224A2AB1009D5941 /* ESPTouchTask.m in Sources */,
+				BBA5943E224A2AB1009D5941 /* HouseSetCommonCell.m in Sources */,
+				BBA5943F224A2AB1009D5941 /* AddShareController.m in Sources */,
+				BBA59440224A2AB1009D5941 /* ESPUDPSocketServer.m in Sources */,
+				BBA59441224A2AB1009D5941 /* RetrievePasswordController.m in Sources */,
+				BBA59442224A2AB1009D5941 /* YTFAlertController.m in Sources */,
+				BBA59443224A2AB1009D5941 /* ESP_NetUtil.m in Sources */,
+				BBA59444224A2AB1009D5941 /* SharerRemarkController.m in Sources */,
+				BBA59445224A2AB1009D5941 /* AFURLSessionManager.m in Sources */,
+				BBA59446224A2AB1009D5941 /* AccountHeaderCell.m in Sources */,
+				BBA59447224A2AB1009D5941 /* AddFamilyViewController.m in Sources */,
+				BBA59448224A2AB1009D5941 /* FamilyMemberSetCell.m in Sources */,
+				BBA59449224A2AB1009D5941 /* MyHouseController.m in Sources */,
+				BBA5944A224A2AB1009D5941 /* MemberAccountCell.m in Sources */,
+				BBA5944B224A2AB1009D5941 /* ESPGuideCode.m in Sources */,
+				BBA5944C224A2AB1009D5941 /* TherAddTimerSwitchCell.m in Sources */,
+				BBA5944D224A2AB1009D5941 /* HomeDeviceCell.m in Sources */,
+				BBA5944E224A2AB1009D5941 /* AFURLResponseSerialization.m in Sources */,
+				BBA5944F224A2AB1009D5941 /* ESP_ByteUtil.m in Sources */,
+				BBA59450224A2AB1009D5941 /* MemberModel.m in Sources */,
+				BBA59451224A2AB1009D5941 /* main.m in Sources */,
+				BBA59452224A2AB1009D5941 /* AddHouseMemberCell.m in Sources */,
+				BBA59453224A2AB1009D5941 /* ModifyPasswordViewController.m in Sources */,
+				BBA59454224A2AB1009D5941 /* SelectDeviceTypeCell.m in Sources */,
+				BBA59455224A2AB1009D5941 /* TherSettingCell.m in Sources */,
+				BBA59456224A2AB1009D5941 /* MineViewController.m in Sources */,
+				BBA59457224A2AB1009D5941 /* KYDivisionPickerView.m in Sources */,
+				BBA59458224A2AB1009D5941 /* APNetworkController.m in Sources */,
+				BBA59459224A2AB1009D5941 /* ESP_WifiUtil.m in Sources */,
+				BBA5945A224A2AB1009D5941 /* ThermostatTimerController.m in Sources */,
+				BBA5945B224A2AB1009D5941 /* AppDelegate.m in Sources */,
+				BBA5945C224A2AB1009D5941 /* ThermostatController.m in Sources */,
+				BBA5945D224A2AB1009D5941 /* ThermostatAddTimerController.m in Sources */,
+				BBA5945E224A2AB1009D5941 /* AreaCodeCell.m in Sources */,
+				BBA5945F224A2AB1009D5941 /* HouseNameCell.m in Sources */,
+				BBA59460224A2AB1009D5941 /* AddRoomsViewController.m in Sources */,
+				BBA59461224A2AB1009D5941 /* TherAddTimerWeekCell.m in Sources */,
+				BBA59462224A2AB1009D5941 /* SharerModel.m in Sources */,
+				BBA59463224A2AB1009D5941 /* SharerDetailController.m in Sources */,
+				BBA59464224A2AB1009D5941 /* ESPTouchResult.m in Sources */,
+				BBA59465224A2AB1009D5941 /* HouseSetMemberCell.m in Sources */,
+				BBA59466224A2AB1009D5941 /* HomeDeviceController.m in Sources */,
+				BBA59467224A2AB1009D5941 /* PhoneVerifyCell.m in Sources */,
+				BBA59468224A2AB1009D5941 /* NSString+Common.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2892,15 +3866,20 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gleadSmart/gleadSmart-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					gleadSmart,
+				);
 				INFOPLIST_FILE = gleadSmart/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2918,15 +3897,20 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gleadSmart/gleadSmart-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					gleadSmart,
+				);
 				INFOPLIST_FILE = gleadSmart/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -3004,6 +3988,68 @@
 			};
 			name = Release;
 		};
+		BBA59597224A2AB1009D5941 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C91728F2E98E7E5ACCA018D /* Pods-gleadSmart.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gleadSmart/gleadSmart-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					jienuoIOT,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/jienuoIOT-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.jienuoIOT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		BBA59598224A2AB1009D5941 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gleadSmart/gleadSmart-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					jienuoIOT,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/jienuoIOT-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.jienuoIOT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3039,6 +4085,15 @@
 			buildConfigurations = (
 				BB49DFC321958868004E00A2 /* Debug */,
 				BB49DFC421958868004E00A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BBA59596224A2AB1009D5941 /* Build configuration list for PBXNativeTarget "jienuoIOT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBA59597224A2AB1009D5941 /* Debug */,
+				BBA59598224A2AB1009D5941 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
