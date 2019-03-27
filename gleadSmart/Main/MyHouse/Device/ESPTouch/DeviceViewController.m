@@ -69,6 +69,7 @@ NSString *const CellIdentifier_device = @"CellID_device";
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     
     Network *net = [Network shareNetwork];
+    net.isDeviceVC = YES;
     [net.udpSocket pauseReceiving];
     [net.udpTimer setFireDate:[NSDate distantFuture]];
 }

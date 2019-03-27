@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) int testSendCount;
 @property (nonatomic) int testRecieveCount;
 
+@property (nonatomic) BOOL isDeviceVC;//是否进入了设备配网页面，用来防止多个udp
+
 ///@brief TCPSocket
 @property (strong, nonatomic) GCDAsyncSocket *mySocket;
 ///@brief 连接上的设备

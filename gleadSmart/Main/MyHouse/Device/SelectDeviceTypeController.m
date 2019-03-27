@@ -34,6 +34,7 @@ static float HEIGHT_HEADER = 40.f;
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     
     Network *net = [Network shareNetwork];
+    net.isDeviceVC = NO;
     [net.udpSocket beginReceiving:nil];
     [net.udpTimer setFireDate:[NSDate date]];
 }

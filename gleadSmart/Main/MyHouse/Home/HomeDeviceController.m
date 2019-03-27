@@ -98,6 +98,11 @@ static CGFloat const Cell_Height = 72.f;
                     HomeDeviceCell *cell = [self.deviceTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1]];
                     cell.controlSwitch.enabled = YES;
                     cell.controlSwitch.on = [device.isOn boolValue];
+                    if ([device.isOn boolValue]) {
+                        cell.status.text = LocalString(@"已开启");
+                    }else{
+                        cell.status.text = LocalString(@"已关闭");
+                    }
                 });
             }
         }
@@ -115,6 +120,14 @@ static CGFloat const Cell_Height = 72.f;
                 HomeDeviceCell *cell = [self.deviceTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
                 cell.controlSwitch.enabled = YES;
                 cell.controlSwitch.on = [oldDevice.isOn boolValue];
+                
+                RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
+                NSString *status = room.name;
+                if ([device.isOn boolValue]) {
+                    cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
+                }else{
+                    cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
+                }
             });
         }
     }

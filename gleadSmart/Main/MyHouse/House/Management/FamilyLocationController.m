@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UIButton *autoLocationBtn;
 @property (strong, nonatomic) KYDivisionPickerView *locationPicker;
 @property (strong, nonatomic) UIButton *dismissButton;
+@property (strong, nonatomic) UIButton *confirmButton;
 
 @end
 
@@ -49,15 +50,17 @@
     self.autoLocationBtn = [self autoLocationBtn];
     self.locationPicker = [self locationPicker];
     self.dismissButton = [self dismissButton];
+    self.confirmButton = [self confirmButton];
 }
 
 #pragma mark - Lazy load
 -(UIView *)contentView{
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
-        _contentView.frame = CGRectMake(0, _contentOriginY, ScreenWidth, ScreenHeight - _contentOriginY);
+        _contentView.frame = CGRectMake(18.f, _contentOriginY, ScreenWidth - 36.f, ScreenHeight - _contentOriginY - 54.f - ySafeArea_Bottom);
         _contentView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1];
         [self.view addSubview:_contentView];
+        _contentView.layer.cornerRadius = 5.f;
     }
     return _contentView;
 }
@@ -65,7 +68,7 @@
 - (UIButton *)autoLocationBtn{
     if (!_autoLocationBtn) {
         _autoLocationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _autoLocationBtn.frame = CGRectMake(0, 0.f, ScreenWidth, 40.f);
+        _autoLocationBtn.frame = CGRectMake(0, 0.f, self.contentView.bounds.size.width, 40.f);
         [_autoLocationBtn addTarget:self action:@selector(autoLocation) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_autoLocationBtn];
         [self.contentView bringSubviewToFront:_autoLocationBtn];
@@ -106,12 +109,31 @@
 - (KYDivisionPickerView *)locationPicker{
     if (!_locationPicker) {
         _locationPicker = [[KYDivisionPickerView alloc] init];
-        _locationPicker.frame = CGRectMake(0, 40.f, ScreenWidth, ScreenHeight - 40.f - _contentOriginY);
+        _locationPicker.frame = CGRectMake(0, 40.f, self.contentView.bounds.size.width, self.contentView.bounds.size.height - 40.f);
         _locationPicker.adjustsFontSizeToFitWidth = YES;
         _locationPicker.divisionDelegate = self;
         [self.contentView addSubview:_locationPicker];
     }
     return _locationPicker;
+}
+
+- (UIButton *)confirmButton{
+    if (!_confirmButton) {
+        _confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_confirmButton setTitle:LocalString(@"确定") forState:UIControlStateNormal];
+        [_confirmButton setTitleColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0] forState:UIControlStateNormal];
+        [_confirmButton setBackgroundColor:[UIColor whiteColor]];
+        [_confirmButton addTarget:self action:@selector(confirmVC) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_confirmButton];
+        [_confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(343.f), 44.f));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(self.contentView.mas_bottom).offset(10.f);
+        }];
+        _confirmButton.layer.cornerRadius = 5.f;
+        
+    }
+    return _confirmButton;
 }
 
 #pragma mark - locationPicker delegate
@@ -184,6 +206,10 @@
 }
 
 - (void)dismissVC{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)confirmVC{
     [self dismissViewControllerAnimated:YES completion:nil];
     if (self.dismissBlock) {
         self.dismissBlock(self->house);

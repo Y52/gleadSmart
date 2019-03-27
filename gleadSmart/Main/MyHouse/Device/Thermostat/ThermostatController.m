@@ -245,6 +245,19 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
     
     self.statusLabel.attributedText = [self generateStringByTemperature:temp currentTemp:[self.device.indoorTemp floatValue]];//显示设置的温度
     self.thermostatView.transform = CGAffineTransformMakeRotation(angleInRadians - M_PI);//旋转,减M_PI是因为图片是朝向左的，x轴是朝右的，所以将角度减M_PI
+    //更新圆圈颜色
+    float needDiscolorationCircleCount = temp/(30.f/8);//除以一个间隔的温度
+    for (UIImageView *circle in self.circleView.subviews) {
+        if (circle.tag == 2000) {
+            //max min 图片
+            continue;
+        }
+        if (circle.tag <= (1000+needDiscolorationCircleCount)) {
+            circle.image = [UIImage imageNamed:@"thermostatCircle_on"];
+        }else{
+            circle.image = [UIImage imageNamed:@"thermostatCircle_off"];
+        }
+    }
 
     if (panGest.state == UIGestureRecognizerStateBegan) {
         

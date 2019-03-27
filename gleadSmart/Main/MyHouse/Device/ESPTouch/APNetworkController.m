@@ -38,6 +38,8 @@
     self.changeWifiButton = [self changeWifiButton];
     self.nextBtn = [self nextBtn];
     self.tipLabel = [self tipLabel];
+    [self applicationWillEnterForeground];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -46,6 +48,13 @@
 }
 
 #pragma mark - private methods
+- (void)applicationWillEnterForeground{
+    UIApplication *app = [UIApplication sharedApplication];
+    [[NSNotificationCenter defaultCenter]addObserverForName:UIApplicationWillEnterForegroundNotification  object:app queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [self getSSIDAndBSSID];
+    }];
+}
+
 - (NSDictionary *)fetchNetInfo
 {
     NSArray *interfaceNames = CFBridgingRelease(CNCopySupportedInterfaces());

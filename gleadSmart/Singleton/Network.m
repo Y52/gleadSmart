@@ -251,7 +251,9 @@ static int noUserInteractionHeartbeat = 0;
     dispatch_async(dispatch_get_main_queue(), ^{
         [NSObject showHudTipStr:LocalString(@"连接已断开")];
     });
-    [self.udpTimer setFireDate:[NSDate date]];
+    if (!_isDeviceVC) {
+        [self.udpTimer setFireDate:[NSDate date]];
+    }
     self.connectedDevice = nil;
 }
 
@@ -1140,6 +1142,19 @@ static int noUserInteractionHeartbeat = 0;
             if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //恢复出厂设置
                 NSLog(@"恢复出厂设置");
+            }
+        }
+            break;
+        
+        case 0x03:
+        {
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"ap发送ssid成功");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"apSendSSIDSucc" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"ap发送密码成功");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"apSendPasswordSucc" object:nil userInfo:nil];
             }
         }
             break;
