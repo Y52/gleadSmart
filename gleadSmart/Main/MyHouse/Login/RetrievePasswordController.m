@@ -221,7 +221,7 @@ static float HEIGHT_CELL = 50.f;
 }
 - (void)Sure{
     
-    if (([NSString validateMobile:_phone]) && (_code.length == 6) && (_pwText.length >= 6) && (_pwConText.length >= 6)) {
+    if (([NSString validateMobile:_phone]) && (_code.length == 6) && (_pwText.length >= 6) && (_pwConText.length >= 6) && [_pwText isEqualToString:_pwConText]) {
         [self savePassword];
     }else if(!([NSString validateMobile:_phone])) {
         [NSObject showHudTipStr:@"手机号格式错误"];
@@ -229,6 +229,10 @@ static float HEIGHT_CELL = 50.f;
         [NSObject showHudTipStr:@"请输入6位验证码"];
     }else if (!(_pwText.length >= 6 && _pwConText.length >= 6)){
         [NSObject showHudTipStr:@"密码不少于6位"];
+    }else if (![_pwText isEqualToString:_pwConText]){
+        [NSObject showHudTipStr:@"两次密码输入不同"];
+    }else{
+        [NSObject showHudTipStr:@"输入信息有误"];
     }
 }
 

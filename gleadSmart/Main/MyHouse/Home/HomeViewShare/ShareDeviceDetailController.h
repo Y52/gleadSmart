@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ShareDeviceDetailController : UIViewController
 
+@property (nonatomic, strong) NSString *houseUid;
+@property (nonatomic, strong) NSString *ownerName;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,7 +9,7 @@
 @interface OwnerModel : NSObject
 
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *ownerUid;
+@property (strong, nonatomic) NSString *houseUid;
 
 @end
 
@@ -84,7 +84,7 @@ static float HEIGHT_HEADER = 40.f;
                     if (![obj isKindOfClass:[NSNull class]]) {
                         OwnerModel *owner = [[OwnerModel alloc] init];
                         owner.name = [obj objectForKey:@"name"];
-                        owner.ownerUid = [obj objectForKey:@"ownerUid"];
+                        owner.houseUid = [obj objectForKey:@"houseUid"];
                         [self.ownerList addObject:owner];
                     }
                 }];
@@ -182,11 +182,12 @@ static float HEIGHT_HEADER = 40.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0) {
-        ShareDeviceDetailController *ShareDeviceDetailVC = [[ShareDeviceDetailController alloc] init];
-        [self.navigationController pushViewController:ShareDeviceDetailVC animated:YES];
-    }
     
+    OwnerModel *owner = self.ownerList[indexPath.row];
+    ShareDeviceDetailController *ShareDeviceDetailVC = [[ShareDeviceDetailController alloc] init];
+    ShareDeviceDetailVC.houseUid = owner.houseUid;
+    ShareDeviceDetailVC.ownerName = owner.name;
+    [self.navigationController pushViewController:ShareDeviceDetailVC animated:YES];
 }
 
 

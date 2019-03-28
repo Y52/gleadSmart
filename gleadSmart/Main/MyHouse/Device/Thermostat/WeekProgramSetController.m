@@ -56,7 +56,7 @@
 - (UIPickerView *)myPicker{
     if (!_myPicker) {
         UIView *view = [[UIView alloc] init];
-        view.frame = CGRectMake(20.f, ScreenHeight - 260.f - 50.f - ySafeArea_Bottom, ScreenWidth - 20.f*2, 260.f);
+        view.frame = CGRectMake(20.f, ScreenHeight - 260.f - 70.f - ySafeArea_Bottom, ScreenWidth - 20.f*2, 260.f);
         view.layer.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1].CGColor;
         [self.view addSubview:view];
         view.layer.cornerRadius = 5.f;
@@ -90,7 +90,7 @@
 - (UIButton *)confirmButton{
     if (!_confirmButton) {
         _confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _confirmButton.frame = CGRectMake(20.f, ScreenHeight - 44.f - ySafeArea_Bottom, ScreenWidth - 20.f*2, 44.f);
+        _confirmButton.frame = CGRectMake(20.f, ScreenHeight - 64.f - ySafeArea_Bottom, ScreenWidth - 20.f*2, 44.f);
         [_confirmButton setTitle:LocalString(@"完成") forState:UIControlStateNormal];
         [_confirmButton setTitleColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0] forState:UIControlStateNormal];
         [_confirmButton setBackgroundColor:[UIColor whiteColor]];

@@ -56,7 +56,7 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
     self.thermostatView = [self thermostatView];
     self.statusLabel = [self statusLabel];
     self.modeButton = [self modeButton];
-    self.timeButton = [self timeButton];
+    //self.timeButton = [self timeButton];
     self.controlButton = [self controlButton];
     self.setButton = [self setButton];
     self.circleView = [self circleView];
@@ -432,7 +432,8 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
     if (!_thermostatView) {
         _thermostatView = [[UIImageView alloc] init];
         _thermostatView.image = [UIImage imageNamed:@"thermostatKnob"];
-        [_thermostatView sizeToFit];
+        _thermostatView.contentMode = UIViewContentModeScaleAspectFit;
+        //[_thermostatView sizeToFit];
         [self.view addSubview:_thermostatView];
         [_thermostatView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(200.f, 200.f));
@@ -486,7 +487,7 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
         [self.view addSubview:_modeButton];
         [_modeButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51, 72));
-            make.right.equalTo(self.timeButton.mas_left).offset(-20.f);
+            make.right.equalTo(self.controlButton.mas_left).offset(-20.f);
             make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(30.f + ySafeArea_Bottom)));
         }];
         _modeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;//使图片和文字水平居中显示
@@ -499,7 +500,7 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
 }
 
 - (UIButton *)timeButton{
-    if (!_timeButton) {
+    if (0) {
         _timeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_timeButton setTitle:LocalString(@"定时") forState:UIControlStateNormal];
         [_timeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
@@ -535,7 +536,7 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
         [self.view addSubview:_controlButton];
         [_controlButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51, 72));
-            make.left.equalTo(self.view.mas_centerX).offset(10.f);
+            make.centerX.equalTo(self.view.mas_centerX);
             make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(30.f + ySafeArea_Bottom)));
         }];
         _controlButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;//使图片和文字水平居中显示

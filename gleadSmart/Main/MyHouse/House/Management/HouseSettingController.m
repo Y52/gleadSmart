@@ -306,6 +306,13 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
     switch (indexPath.section) {
         case 0:
             if (indexPath.row == 0) {
+                if ([self.house.auth integerValue]) {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您没有该权限") preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+                    [alertController addAction:cancelAction];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                    return;
+                }
                 YTFAlertController *alert = [[YTFAlertController alloc] init];
                 alert.lBlock = ^{
                 };
@@ -322,6 +329,13 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
                     [alert.rightBtn setTitle:LocalString(@"确认") forState:UIControlStateNormal];
                 }];
             }else if (indexPath.row == 2){
+                if ([self.house.auth integerValue]) {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您没有该权限") preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+                    [alertController addAction:cancelAction];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                    return;
+                }
                 FamilyLocationController *locaVC = [[FamilyLocationController alloc] init];
                 locaVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
                 locaVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -344,8 +358,8 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
                 shareVC.house = self.house;
                 [self.navigationController pushViewController:shareVC animated:YES];
             }else{
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您不是该家庭的管理员，无法分享设备") preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您没有该权限") preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
                 [alertController addAction:cancelAction];
                 [self presentViewController:alertController animated:YES completion:nil];
             }

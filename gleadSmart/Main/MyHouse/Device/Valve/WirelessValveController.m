@@ -280,10 +280,10 @@ CGFloat const nodeButtonWidth = 20.f;
 
     //取出mac
     NSString *mac = @"";
-    mac = [mac stringByAppendingString:[NSString HexByInt:[data[2] intValue]]];
-    mac = [mac stringByAppendingString:[NSString HexByInt:[data[3] intValue]]];
-    mac = [mac stringByAppendingString:[NSString HexByInt:[data[4] intValue]]];
     mac = [mac stringByAppendingString:[NSString HexByInt:[data[5] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[data[4] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[data[3] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[data[2] intValue]]];
     
     if (![self.device.mac isEqualToString:mac]) {
         return;
@@ -292,10 +292,10 @@ CGFloat const nodeButtonWidth = 20.f;
     //获取节点信息
     NodeModel *node = [[NodeModel alloc] init];
     node.mac = @"";
-    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
-    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
-    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
     node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
+    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
+    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
+    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
     UInt8 nodeInfo = [data[16] unsignedIntegerValue];
     if (nodeInfo & 0b00000010) {
         node.isLeak = YES;

@@ -103,10 +103,12 @@ static CGFloat const Cell_Height = 72.f;
                     }else{
                         cell.status.text = LocalString(@"已关闭");
                     }
+                    NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
+                    [self differenceShareDiveceAction:type isOnline:[device.isOnline boolValue] device:device cell:cell indexpath:[NSIndexPath indexPathForRow:i inSection:1]];
                 });
             }
         }
-        return;
+        //return;
     }
     
     for (int i = 0; i < self.deviceArray.count; i++) {
@@ -116,6 +118,7 @@ static CGFloat const Cell_Height = 72.f;
             oldDevice.mode = device.mode;
             oldDevice.modeTemp = device.modeTemp;
             oldDevice.indoorTemp = device.indoorTemp;
+            oldDevice.isOnline = device.isOnline;
             dispatch_async(dispatch_get_main_queue(), ^{
                 HomeDeviceCell *cell = [self.deviceTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
                 cell.controlSwitch.enabled = YES;
@@ -123,11 +126,15 @@ static CGFloat const Cell_Height = 72.f;
                 
                 RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
                 NSString *status = room.name;
+                if (room.roomUid == nil) {
+                    status = LocalString(@"未设置");
+                }
                 if ([device.isOn boolValue]) {
                     cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
                 }else{
                     cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
                 }
+                [self differenceDiveceAction:[oldDevice.type integerValue] isOnline:[oldDevice.isOnline boolValue] mac:oldDevice.mac cell:cell indexpath:[NSIndexPath indexPathForRow:i inSection:0]];
             });
         }
     }

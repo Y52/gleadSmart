@@ -44,7 +44,7 @@
             _leftImage = [[UIImageView alloc] init];
             [self.contentView addSubview:_leftImage];
             [_leftImage mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.size.mas_equalTo(CGSizeMake(30.f, 30.f));
                 make.left.equalTo(self.contentView.mas_left).offset(20.f);
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
@@ -57,8 +57,8 @@
             _deviceLabel.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_deviceLabel];
             [_deviceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(yAutoFit(60.f), 15.f));
-                make.left.equalTo(self.contentView.mas_left).offset(40.f);
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(200.f), 15.f));
+                make.left.equalTo(self.leftImage.mas_right).offset(10.f);
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
         }

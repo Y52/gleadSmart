@@ -19,7 +19,11 @@ static float HEIGHT_HEADER = 40.f;
 
 @end
 
-@implementation ShareDeviceDetailController
+@implementation ShareDeviceDetailController{
+    NSString *houseName;
+    NSString *ownerName;
+    NSMutableArray *deviceList;
+}
 
 #pragma mark - life cycle
 - (void)viewDidLoad {
@@ -27,8 +31,7 @@ static float HEIGHT_HEADER = 40.f;
     self.view.layer.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1].CGColor;
     self.navigationItem.title = LocalString(@"共享详情");
     self.deviceDetailTable = [self deviceDetailTable];
-    
-#warning TODO 共享设备详情页面
+    [self getHouseSharerInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -38,11 +41,63 @@ static float HEIGHT_HEADER = 40.f;
 }
 
 #pragma mark - private methods
-
+- (void)getHouseSharerInfo{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/share/ownerList/deviceList"];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    NSDictionary *parameters = @{@"houseUid":self.houseUid,@"ownerName":self.ownerName};
+    
+    [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            NSDictionary *data = [responseDic objectForKey:@"data"];
+            self->houseName = [data objectForKey:@"name"];
+            self->ownerName = [data objectForKey:@"ownerName"];
+            if ([[data objectForKey:@"deviceList"] isKindOfClass:[NSArray class]] && [[data objectForKey:@"deviceList"] count] > 0) {
+                if (!self->deviceList) {
+                    self->deviceList = [[NSMutableArray alloc] init];
+                }
+                [self->deviceList removeAllObjects];
+                
+                [[data objectForKey:@"deviceList"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    DeviceModel *device = [[DeviceModel alloc] init];
+                    device.name = [obj objectForKey:@"name"];
+                    device.mac = [obj objectForKey:@"mac"];
+                    [self->deviceList addObject:device];
+                }];
+            }
+            [self.deviceDetailTable reloadData];
+        }else{
+            [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"获取拥有者详细信息失败"];
+        });
+    }];
+}
 #pragma mark - setters and getters
-
-#pragma mark - Lazy Load
-
 - (UITableView *)deviceDetailTable{
     if (!_deviceDetailTable) {
         _deviceDetailTable = ({
@@ -74,8 +129,7 @@ static float HEIGHT_HEADER = 40.f;
         return 2;
     }
     if (section == 1) {
-       // return self.shareDeviceList.count;
-        return 2;
+        return deviceList.count;
     }
     return 0;
 }
@@ -90,24 +144,42 @@ static float HEIGHT_HEADER = 40.f;
     if (indexPath.section == 0){
         if (indexPath.row == 0) {
             cell.leftLabel.text = LocalString(@"共享来自");
-            cell.rightLabel.text = LocalString(@"杭州");
+            cell.rightLabel.text = houseName;
             return cell;
         }else{
             cell.leftLabel.text = LocalString(@"备注");
-            cell.rightLabel.text = LocalString(@"哈哈");
+            cell.rightLabel.text = ownerName;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
         }
     }else if (indexPath.section == 1){
-        if (indexPath.row == 0) {
-            cell.deviceLabel.text = LocalString(@"床头灯");
-            cell.leftImage.image = [UIImage imageNamed:@"img_mine_editPW"];
-            return cell;
-        }else{
-            cell.deviceLabel.text = LocalString(@"客厅小灯");
-            cell.leftImage.image = [UIImage imageNamed:@"img_mine_logout"];
-            return cell;
+        DeviceModel *device = deviceList[indexPath.row];
+        cell.deviceLabel.text = device.name;
+        
+        NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
+        switch (type) {
+            case 1:
+            {
+                cell.leftImage.image = [UIImage imageNamed:@"img_thermostat_on"];
+            }
+                break;
+                
+            case 2:
+            {
+                cell.leftImage.image = [UIImage imageNamed:@"img_valve_on"];
+            }
+                break;
+                
+            case 3:
+            {
+                cell.leftImage.image = [UIImage imageNamed:@"img_wallHob"];
+            }
+                break;
+                
+            default:
+                break;
         }
+        return cell;
     }else{
         return cell;
     }

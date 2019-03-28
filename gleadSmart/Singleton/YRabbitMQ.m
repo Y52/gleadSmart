@@ -184,7 +184,38 @@ static NSArray *_routingkeys = nil;
     NodeModel *node = [[NodeModel alloc] init];
     node.valveMac = valveMac;
     node.mac = nodeMac;
-    node.isLeak = leak;
+    switch ([leak integerValue]) {
+        case 0:
+        {
+            node.isLeak = NO;
+            node.isLowVoltage = NO;
+        }
+            break;
+            
+        case 2:
+        {
+            node.isLeak = YES;
+            node.isLowVoltage = NO;
+        }
+            break;
+            
+        case 1:
+        {
+            node.isLeak = NO;
+            node.isLowVoltage = YES;
+        }
+            break;
+            
+        case 3:
+        {
+            node.isLeak = YES;
+            node.isLowVoltage = YES;
+        }
+            break;
+            
+        default:
+            break;
+    }
     NSDictionary *userInfo = @{@"node":node};
     [[NSNotificationCenter defaultCenter] postNotificationName:@"valveHangingNodesRabbitmqReport" object:nil userInfo:userInfo];
 }

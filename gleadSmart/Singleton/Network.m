@@ -118,6 +118,7 @@ static int noUserInteractionHeartbeat = 0;
         
         _testSendCount = 0;
         _testRecieveCount = 0;
+        [self applicationWillEnterForeground];
     }
     return self;
 }
@@ -195,8 +196,8 @@ static int noUserInteractionHeartbeat = 0;
         }
         
         //只有绑定的网关才可以自动连接
-        if (![[Database shareInstance] queryDevice:mac]) {
-            NSLog(@"该家庭未绑定该网关");
+        if (![[Database shareInstance].currentHouse.mac isEqualToString:mac]) {
+            NSLog(@"该中央控制器不是当前家庭绑定的");
         }else{
             NSError *error;
             if ([self connectToHost:ipAddress onPort:16888 error:&error]) {
@@ -268,6 +269,16 @@ static int noUserInteractionHeartbeat = 0;
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
     //NSLog(@"发送了一条帧");
     _frameCount++;
+}
+
+- (void)applicationWillEnterForeground{
+    UIApplication *app = [UIApplication sharedApplication];
+    [[NSNotificationCenter defaultCenter]addObserverForName:UIApplicationWillEnterForegroundNotification  object:app queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        if (![self.mySocket isDisconnected]) {
+            NSLog(@"网关主动断开");
+            [self.mySocket disconnect];
+        }
+    }];
 }
 
 #pragma mark - AP配网组帧
@@ -1201,6 +1212,7 @@ static int noUserInteractionHeartbeat = 0;
                             device.mode = [NSNumber numberWithUnsignedInteger:mode];
                             device.modeTemp = modeTemp;
                             device.indoorTemp = indoorTemp;
+                            device.isOnline = @1;
                             userInfo = @{@"device":device,@"isShare":@0};
                         }
                     }
@@ -1211,6 +1223,7 @@ static int noUserInteractionHeartbeat = 0;
                             device.mode = [NSNumber numberWithUnsignedInteger:mode];
                             device.modeTemp = modeTemp;
                             device.indoorTemp = indoorTemp;
+                            device.isOnline = @1;
                             userInfo = @{@"device":device,@"isShare":@1};
                         }
                     }
@@ -1262,6 +1275,7 @@ static int noUserInteractionHeartbeat = 0;
                             device.mode = [NSNumber numberWithUnsignedInteger:mode];
                             device.modeTemp = modeTemp;
                             device.indoorTemp = indoorTemp;
+                            device.isOnline = @1;
                             userInfo = @{@"device":device,@"isShare":@0};
                         }
                     }
@@ -1272,6 +1286,7 @@ static int noUserInteractionHeartbeat = 0;
                             device.mode = [NSNumber numberWithUnsignedInteger:mode];
                             device.modeTemp = modeTemp;
                             device.indoorTemp = indoorTemp;
+                            device.isOnline = @1;
                             userInfo = @{@"device":device,@"isShare":@1};
                         }
                     }
@@ -1308,6 +1323,7 @@ static int noUserInteractionHeartbeat = 0;
                         device.mode = [NSNumber numberWithUnsignedInteger:mode];
                         device.modeTemp = modeTemp;
                         device.indoorTemp = indoorTemp;
+                        device.isOnline = @1;
                     }
                 }
                 for (DeviceModel *device in db.shareDeviceArray) {
@@ -1315,6 +1331,7 @@ static int noUserInteractionHeartbeat = 0;
                         device.mode = [NSNumber numberWithUnsignedInteger:mode];
                         device.modeTemp = modeTemp;
                         device.indoorTemp = indoorTemp;
+                        device.isOnline = @1;
                     }
                 }
                 
@@ -1465,10 +1482,10 @@ static int noUserInteractionHeartbeat = 0;
                     NodeModel *node = [[NodeModel alloc] init];
                     
                     node.mac = @"";
-                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[12 + k] intValue]]];
-                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[13 + k] intValue]]];
-                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[14 + k] intValue]]];
                     node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[15 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[14 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[13 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[12 + k] intValue]]];
                     UInt8 nodeInfo = [_recivedData69[16 + k] unsignedIntegerValue];
                     if (nodeInfo & 0b00000010) {
                         node.isLeak = YES;

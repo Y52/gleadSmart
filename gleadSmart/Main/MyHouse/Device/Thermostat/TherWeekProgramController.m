@@ -26,6 +26,8 @@ static CGFloat const Header_Height = 35.f;
     
     NSArray *_timeArray;
     NSArray *_tempArray;
+    
+    BOOL isWeekProgramGeted;
 }
 
 -(instancetype)init{
@@ -36,6 +38,7 @@ static CGFloat const Header_Height = 35.f;
         
         _timeArray = [self generateTimeArray];
         _tempArray = [self generateTempArray];
+        isWeekProgramGeted = NO;
     }
     return self;
 }
@@ -56,6 +59,7 @@ static CGFloat const Header_Height = 35.f;
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshWeekProgram" object:nil];
 }
 
@@ -138,6 +142,14 @@ static CGFloat const Header_Height = 35.f;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (!isWeekProgramGeted) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"稍等") message:LocalString(@"请等待温控器回复周程序信息") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
     NSInteger timeRow = [self.device.weekProgram[(indexPath.row + indexPath.section*4)*2] integerValue];
     NSInteger tempRow = [self.device.weekProgram[(indexPath.row + indexPath.section*4)*2+1] integerValue];
     
@@ -200,10 +212,13 @@ static CGFloat const Header_Height = 35.f;
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x12,@0x04,@0x00];
     [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
+    [SVProgressHUD show];
 }
 
 #pragma mark - NSNotification
 - (void)refreshWeekProgram{
+    isWeekProgramGeted = YES;
+    [SVProgressHUD dismiss];
     for (DeviceModel *device in [Network shareNetwork].deviceArray) {
         if ([device.mac isEqualToString:self.device.mac]) {
             self.device = device;
