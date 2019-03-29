@@ -323,6 +323,8 @@
 		BB63B60521B4151D00D77489 /* thermostat_-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B5FF21B4151D00D77489 /* thermostat_-@3x.png */; };
 		BB63B60621B4151D00D77489 /* thermostat_+.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60021B4151D00D77489 /* thermostat_+.png */; };
 		BB63B60721B4151D00D77489 /* thermostat_-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60121B4151D00D77489 /* thermostat_-@2x.png */; };
+		BB647BE9224E079700DCB992 /* PlugOutletController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB647BE7224E000800DCB992 /* PlugOutletController.m */; };
+		BB647BEA224E0C7C00DCB992 /* PlugOutletController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB647BE7224E000800DCB992 /* PlugOutletController.m */; };
 		BB6739DB22326801002E6239 /* NoHouseBridgingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DA22326801002E6239 /* NoHouseBridgingController.m */; };
 		BB6739DE223271AA002E6239 /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DD223271AA002E6239 /* NoHouseAddController.m */; };
 		BB73D54321EDCB1E004AEE18 /* JKVValue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; };
@@ -1353,6 +1355,8 @@
 		BB63B5FF21B4151D00D77489 /* thermostat_-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_-@3x.png"; sourceTree = "<group>"; };
 		BB63B60021B4151D00D77489 /* thermostat_+.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_+.png"; sourceTree = "<group>"; };
 		BB63B60121B4151D00D77489 /* thermostat_-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_-@2x.png"; sourceTree = "<group>"; };
+		BB647BE6224E000800DCB992 /* PlugOutletController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletController.h; sourceTree = "<group>"; };
+		BB647BE7224E000800DCB992 /* PlugOutletController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletController.m; sourceTree = "<group>"; };
 		BB6739D922326801002E6239 /* NoHouseBridgingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoHouseBridgingController.h; sourceTree = "<group>"; };
 		BB6739DA22326801002E6239 /* NoHouseBridgingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoHouseBridgingController.m; sourceTree = "<group>"; };
 		BB6739DC223271AA002E6239 /* NoHouseAddController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoHouseAddController.h; sourceTree = "<group>"; };
@@ -1817,6 +1821,7 @@
 				BB37DEF321A7DDCE00B2121B /* ESPTouch */,
 				BB37DF1321A7F6C800B2121B /* Thermostat */,
 				BB37DF1421A7F6D700B2121B /* Valve */,
+				BB647BE5224DFE5800DCB992 /* plugOutlet */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -2291,6 +2296,15 @@
 				BB8F5A8721B7EF1700E69094 /* TherTimerCell.m */,
 			);
 			path = Thermostat;
+			sourceTree = "<group>";
+		};
+		BB647BE5224DFE5800DCB992 /* plugOutlet */ = {
+			isa = PBXGroup;
+			children = (
+				BB647BE6224E000800DCB992 /* PlugOutletController.h */,
+				BB647BE7224E000800DCB992 /* PlugOutletController.m */,
+			);
+			path = plugOutlet;
 			sourceTree = "<group>";
 		};
 		BB7E7965221A5CEE0060A0CF /* Management */ = {
@@ -3457,6 +3471,7 @@
 				3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
 				BB2AD7A121AD70D6006DB83A /* HouseSettingController.m in Sources */,
+				BB647BEA224E0C7C00DCB992 /* PlugOutletController.m in Sources */,
 				BB7D9B9A221E4B4C00C5DFD1 /* SharerInfoCell.m in Sources */,
 				BB37DF1221A7F3AF00B2121B /* DeviceTableViewCell.m in Sources */,
 				BB00A4FF21BA25B7004E4051 /* YAlertViewController.m in Sources */,
@@ -3612,6 +3627,7 @@
 				BBA5940C224A2AB1009D5941 /* HouseManagementTableViewCell.m in Sources */,
 				BBA5940D224A2AB1009D5941 /* HouseSelectController.m in Sources */,
 				BBA5940E224A2AB1009D5941 /* HouseSettingController.m in Sources */,
+				BB647BE9224E079700DCB992 /* PlugOutletController.m in Sources */,
 				BBA5940F224A2AB1009D5941 /* SharerInfoCell.m in Sources */,
 				BBA59410224A2AB1009D5941 /* DeviceTableViewCell.m in Sources */,
 				BBA59411224A2AB1009D5941 /* YAlertViewController.m in Sources */,

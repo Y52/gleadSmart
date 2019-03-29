@@ -11,6 +11,7 @@
 #import "ThermostatController.h"
 #import "WirelessValveController.h"
 #import "ShareDeviceListController.h"
+#import "PlugOutletController.h"
 
 NSString *const CellIdentifier_HomeDevice = @"CellID_HomeDevice";
 static CGFloat const Cell_Height = 72.f;
@@ -429,8 +430,9 @@ static CGFloat const Cell_Height = 72.f;
             switch ([device.type integerValue]) {
                 case 1:
                 {
-                    ThermostatController *thermostatVC = [[ThermostatController alloc] init];
-                    thermostatVC.device = device;
+                    //ThermostatController *thermostatVC = [[ThermostatController alloc] init];
+                    //thermostatVC.device = device;
+                    PlugOutletController *thermostatVC = [[PlugOutletController alloc] init];
                     [self.navigationController pushViewController:thermostatVC animated:YES];
                 }
                     break;
