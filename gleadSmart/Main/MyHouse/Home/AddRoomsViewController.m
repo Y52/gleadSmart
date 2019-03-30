@@ -446,7 +446,7 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/room?houseUid=%@",self.houseUid];
+    NSString *url = [NSString stringWithFormat:@"%@/api/room?houseUid=%@",httpIpAddress,self.houseUid];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
 
     NSDictionary *parameters = @{@"name":cell.inputTF.text};

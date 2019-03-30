@@ -46,7 +46,7 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/share/sharer?sharerUid=%@",self.sharer.sharerUid];
+    NSString *url = [NSString stringWithFormat:@"%@/api/share/sharer?sharerUid=%@",httpIpAddress,self.sharer.sharerUid];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     NSLog(@"%@",url);
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -120,7 +120,10 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
     
     NSDictionary *parameters = @{@"shareUid":self.sharer.sharerUid,@"mac":mac};
     
-    [manager DELETE:@"http://gleadsmart.thingcom.cn/api/share/sharer/device" parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSString *url = [NSString stringWithFormat:@"%@/api/share/sharer/device",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+
+    [manager DELETE:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
         NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
         NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

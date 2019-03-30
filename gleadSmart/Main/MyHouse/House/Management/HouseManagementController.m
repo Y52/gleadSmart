@@ -189,7 +189,7 @@ static CGFloat const Header_Height = 25.f;
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
 
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house?houseUid=%@",houseUid];
+    NSString *url = [NSString stringWithFormat:@"%@/api/house?houseUid=%@",httpIpAddress,houseUid];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
 
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

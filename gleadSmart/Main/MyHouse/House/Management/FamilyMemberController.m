@@ -53,7 +53,7 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house/member/auth"];
+    NSString *url = [NSString stringWithFormat:@"%@/api/house/member/auth",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -125,7 +125,10 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
     
     NSDictionary *parameters = @{@"houseUid":self.house.houseUid,@"mobile":self.member.mobile};
     
-    [manager DELETE:@"http://gleadsmart.thingcom.cn/api/house/member" parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSString *url = [NSString stringWithFormat:@"%@/api/house/member",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+
+    [manager DELETE:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
         NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
         NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

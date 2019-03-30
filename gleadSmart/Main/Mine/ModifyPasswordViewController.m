@@ -116,7 +116,7 @@ static float HEIGHT_CELL = 50.f;
             
             NSString *url;
             if ([NSString validateMobile:self.phone]){
-                url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/util/sms?mobile=%@",self.phone];
+                url = [NSString stringWithFormat:@"%@/api/util/sms?mobile=%@",httpIpAddress,self.phone];
                 url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
             }else {
                 [NSObject showHudTipStr:LocalString(@"手机号码不正确")];
@@ -227,7 +227,7 @@ static float HEIGHT_CELL = 50.f;
     manager.requestSerializer.timeoutInterval = 6.f;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/user/password"];
+    NSString *url = [NSString stringWithFormat:@"%@/api/user/password",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

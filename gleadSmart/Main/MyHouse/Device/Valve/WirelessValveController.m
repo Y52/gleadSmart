@@ -558,7 +558,7 @@ CGFloat const nodeButtonWidth = 20.f;
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/valve?valveMac=%@",self.device.mac];
+    NSString *url = [NSString stringWithFormat:@"%@/api/valve?valveMac=%@",httpIpAddress,self.device.mac];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
@@ -622,7 +622,7 @@ CGFloat const nodeButtonWidth = 20.f;
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/valve/node"];
+    NSString *url = [NSString stringWithFormat:@"%@/api/valve/node",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     NSDictionary *parameters = @{@"valveMac":self.device.mac,@"mac":node.mac,@"number":number};
@@ -656,7 +656,7 @@ CGFloat const nodeButtonWidth = 20.f;
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/valve/node"];
+    NSString *url = [NSString stringWithFormat:@"%@/api/valve/node",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     NSDictionary *parameters = @{@"valveMac":self.device.mac,@"mac":node.mac,@"number":@0};
@@ -693,7 +693,7 @@ CGFloat const nodeButtonWidth = 20.f;
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/valve/warn?valveMac=%@",self.device.mac];
+    NSString *url = [NSString stringWithFormat:@"%@/api/valve/warn?valveMac=%@",httpIpAddress,self.device.mac];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     

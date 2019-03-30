@@ -338,7 +338,7 @@ static dispatch_once_t oneToken;
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house/device/list?houseUid=%@",house.houseUid];
+    NSString *url = [NSString stringWithFormat:@"%@/api/house/device/list?houseUid=%@",httpIpAddress,house.houseUid];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

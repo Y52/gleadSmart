@@ -65,6 +65,8 @@
 
 #define LocalString(x)      NSLocalizedString(x, nil)
 
+#define httpIpAddress @"http://gleadsmart.thingcom.cn"
+
 typedef enum : NSUInteger {
     yUnselect = 1000,
     ySelect,

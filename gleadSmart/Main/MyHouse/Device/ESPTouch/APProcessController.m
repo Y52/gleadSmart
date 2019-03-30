@@ -124,13 +124,29 @@
 }
 
 - (void)tcpSendSSID{
-    NSInteger length = self.ssid.length;
+    NSString *ssid;
     NSMutableArray *ssidArray = [[NSMutableArray alloc] init];
-    for (int i = 0; i < length; i++) {
-        int asciiCode = [self.ssid characterAtIndex:i];
-        NSNumber *asciiSSID = [NSNumber numberWithInt:asciiCode];
-        [ssidArray addObject:asciiSSID];
+    if ([self.ssid includeChinese]) {
+        ssid = [self.ssid stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet uppercaseLetterCharacterSet]];
+        NSMutableArray *array = [[ssid componentsSeparatedByString:@"%"] mutableCopy];
+        NSLog(@"%@",ssid);
+        [array removeObjectAtIndex:0];
+        for (int i = 0; i < array.count; i++) {
+            NSString *hexStr = array[i];
+            int hex = [NSString stringScanToInt:hexStr];
+            [ssidArray addObject:[NSNumber numberWithInt:hex]];
+        }
+    }else{
+        ssid = self.ssid;
+        NSInteger length = ssid.length;
+        ssidArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < length; i++) {
+            int asciiCode = [ssid characterAtIndex:i];
+            NSNumber *asciiSSID = [NSNumber numberWithInt:asciiCode];
+            [ssidArray addObject:asciiSSID];
+        }
     }
+
     UInt8 controlCode = 0x00;
     NSMutableArray *data = [@[@0xFE,@0x03,@0x01,@0x01] mutableCopy];
     [data addObjectsFromArray:ssidArray];

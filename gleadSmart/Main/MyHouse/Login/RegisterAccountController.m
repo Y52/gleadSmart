@@ -118,7 +118,7 @@ static float HEIGHT_CELL = 50.f;
                 
                 NSString *url;
                 if ([NSString validateMobile:self.phone]){
-                    url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/util/sms?mobile=%@",self.phone];
+                    url = [NSString stringWithFormat:@"%@/api/util/sms?mobile=%@",httpIpAddress,self.phone];
                     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
                 }else {
                     [NSObject showHudTipStr:LocalString(@"手机号码不正确")];
@@ -225,7 +225,10 @@ static float HEIGHT_CELL = 50.f;
         return;
     }
     
-    [manager POST:@"http://gleadsmart.thingcom.cn/api/user/register" parameters:parameters progress:nil
+    NSString *url = [NSString stringWithFormat:@"%@/api/user/register",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+
+    [manager POST:url parameters:parameters progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
               NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
               NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];

@@ -56,7 +56,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house?houseUid=%@",houseUid];
+    NSString *url = [NSString stringWithFormat:@"%@/api/house?houseUid=%@",httpIpAddress,houseUid];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -159,7 +159,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"http://gleadsmart.thingcom.cn/api/house?houseUid=%@",db.currentHouse.houseUid];
+    NSString *url = [NSString stringWithFormat:@"%@/api/house?houseUid=%@",httpIpAddress,db.currentHouse.houseUid];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
