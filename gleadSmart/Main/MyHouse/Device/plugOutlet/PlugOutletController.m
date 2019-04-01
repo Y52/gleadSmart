@@ -7,7 +7,7 @@
 //
 
 #import "PlugOutletController.h"
-
+#import "PlugOutletSettingController.h"
 @interface PlugOutletController ()
 
 @property (strong, nonatomic) UIButton *timeButton;
@@ -21,6 +21,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithHexString:@"EDEDEC"].CGColor;
+    
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightButton.frame = CGRectMake(0, 0, 30, 30);
+    [rightButton setTitle:@"完成" forState:UIControlStateNormal];
+    [rightButton setImage:[UIImage imageNamed:@"二维码"] forState:UIControlStateNormal];
+    [rightButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(goManage)			 forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
 
     self.timeButton = [self timeButton];
     self.delayButton = [self delayButton];
@@ -107,5 +117,10 @@
     return _electricityButton;
 }
 
+- (void)goManage{
+    PlugOutletSettingController *VC = [[PlugOutletSettingController alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
+    
+}
 
 @end
