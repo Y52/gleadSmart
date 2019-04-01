@@ -1,27 +1,27 @@
 //
-//  PlugOutletSettingController.m
+//  DeviceSettingController.m
 //  gleadSmart
 //
-//  Created by 安建伟 on 2019/4/1.
-//  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
+//  Created by 杭州轨物科技有限公司 on 2019/4/1.
+//  Copyright © 2019年 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "PlugOutletSettingController.h"
-#import "PlugOutletSettingCell.h"
+#import "DeviceSettingController.h"
+#import "DeviceSettingCell.h"
 #import "DeviceShareController.h"
 
-NSString *const CellIdentifier_PlugOutletSetting = @"CellID_PlugOutletSetting";
+NSString *const CellIdentifier_deviceSetting = @"CellID_deviceSetting";
 static float HEIGHT_CELL = 50.f;
 static float HEIGHT_HEADER = 40.f;
 
-@interface PlugOutletSettingController () <UITableViewDataSource,UITableViewDelegate>
+@interface DeviceSettingController ()
 
-@property (strong, nonatomic) UITableView *plugOutletSettingTable;
+@property (strong, nonatomic) UITableView *deviceSettingTable;
 @property (strong, nonatomic) UIButton *removeDeviceBtn;
 
 @end
 
-@implementation PlugOutletSettingController
+@implementation DeviceSettingController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,22 +29,27 @@ static float HEIGHT_HEADER = 40.f;
     
     self.navigationItem.title = LocalString(@"更多");
     
-    self.plugOutletSettingTable = [self plugOutletSettingTable];
+    self.deviceSettingTable = [self deviceSettingTable];
     self.removeDeviceBtn = [self removeDeviceBtn];
+
 }
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];    
+
+#pragma mark - private methods
+- (void)removeDevice{
+    NSLog(@"移除设备");
 }
-#pragma mark - Lazy Load
--(UITableView *)plugOutletSettingTable{
-    if (!_plugOutletSettingTable) {
-        _plugOutletSettingTable = ({
+
+
+#pragma mark - setters and getters
+-(UITableView *)deviceSettingTable{
+    if (!_deviceSettingTable) {
+        _deviceSettingTable = ({
             UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
             tableView.separatorColor = [UIColor clearColor];
-            [tableView registerClass:[PlugOutletSettingCell class] forCellReuseIdentifier:CellIdentifier_PlugOutletSetting];
+            [tableView registerClass:[DeviceSettingCell class] forCellReuseIdentifier:CellIdentifier_deviceSetting];
             [self.view addSubview:tableView];
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
@@ -53,7 +58,7 @@ static float HEIGHT_HEADER = 40.f;
             tableView;
         });
     }
-    return _plugOutletSettingTable;
+    return _deviceSettingTable;
 }
 
 - (UIButton *)removeDeviceBtn{
@@ -113,72 +118,47 @@ static float HEIGHT_HEADER = 40.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    DeviceSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_deviceSetting];
+    if (cell == nil) {
+        cell = [[DeviceSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_deviceSetting];
+    }
     switch (indexPath.section) {
         case 0:
         {
-            PlugOutletSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletSetting];
-            if (cell == nil) {
-                cell = [[PlugOutletSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletSetting];
-            }
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
             if (indexPath.row == 0) {
                 cell.leftName.text = LocalString(@"设备名称");
-                cell.rightName.text = LocalString(@"客厅插座");
+                cell.rightName.text = self.device.name;
             }
             if (indexPath.row == 1) {
                 cell.leftName.text = LocalString(@"设备位置");
-                cell.rightName.text = LocalString(@"客厅");
+                cell.rightName.text = self.device.roomName;
             }
-            return cell;
         }
             break;
             
         case 1:
         {
-            PlugOutletSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletSetting];
-            if (cell == nil) {
-                cell = [[PlugOutletSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletSetting];
-            }
-            return cell;
-        }
-            break;
-            
-        case 2:
-        {
-            PlugOutletSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletSetting];
-            if (cell == nil) {
-                cell = [[PlugOutletSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletSetting];
-            }
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
             if (self.device.isShare) {
-                cell.leftName.text = LocalString(@"检测固件更新");
+                cell.leftName.text = LocalString(@"设备信息");
             }else{
                 if (indexPath.row == 0) {
                     cell.leftName.text = LocalString(@"共享设备");
                 }
                 if (indexPath.row == 1) {
-                    cell.leftName.text = LocalString(@"检测固件更新");
+                    cell.leftName.text = LocalString(@"设备信息");
                 }
             }
             
-            return cell;
         }
             break;
         default:
-        {
-            PlugOutletSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletSetting];
-            if (cell == nil) {
-                cell = [[PlugOutletSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletSetting];
-            }
-            return cell;
-        }
             break;
-
     }
-    
+    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -191,18 +171,12 @@ static float HEIGHT_HEADER = 40.f;
                 
             }
             if (indexPath.row == 1) {
-              
+                
             }
         }
             break;
             
         case 1:
-        {
-           
-        }
-            break;
-            
-        case 2:
         {
             if (!self.device.isShare) {
                 if (indexPath.row == 0) {
@@ -250,26 +224,8 @@ static float HEIGHT_HEADER = 40.f;
             return headerView;
         }
             break;
+            
         case 1:
-        {
-            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT_HEADER + HEIGHT_CELL * 2 )];
-            textLabel.textColor = [UIColor colorWithHexString:@"999999"];
-            textLabel.font = [UIFont systemFontOfSize:13.f];
-            textLabel.textAlignment = NSTextAlignmentLeft;
-            textLabel.backgroundColor = [UIColor clearColor];
-            [headerView addSubview:textLabel];
-            textLabel.text = LocalString(@"支持的第三方控制");
-            
-            [textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(120, 13));
-                make.centerY.equalTo(headerView.mas_centerY);
-                make.left.equalTo(headerView.mas_left).offset(20);
-            }];
-            
-            return headerView;
-        }
-            break;
-        case 2:
         {
             UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT_HEADER*2 +HEIGHT_CELL * 4 )];
             textLabel.textColor = [UIColor colorWithHexString:@"999999"];
@@ -300,9 +256,4 @@ static float HEIGHT_HEADER = 40.f;
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return HEIGHT_HEADER;
 }
-
-- (void)removeDevice{
-    NSLog(@"移除设备");
-}
-
 @end

@@ -440,7 +440,6 @@ static dispatch_once_t oneToken;
                 }
             }
             if (success) {
-                NSLog(@"%d",self.shareDeviceArray.count);
                 success();
             }
         }else{

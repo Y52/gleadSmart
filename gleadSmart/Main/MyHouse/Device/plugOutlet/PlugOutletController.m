@@ -119,6 +119,7 @@
 
 - (void)goManage{
     PlugOutletSettingController *VC = [[PlugOutletSettingController alloc] init];
+    VC.device = self.device;
     [self.navigationController pushViewController:VC animated:YES];
     
 }

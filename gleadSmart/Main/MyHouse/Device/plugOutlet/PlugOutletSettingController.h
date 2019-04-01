@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PlugOutletSettingController : UIViewController
 
 @property (nonatomic) CGFloat filledSpcingHeight;
+@property (nonatomic, strong) DeviceModel *device;
 
 @end
 

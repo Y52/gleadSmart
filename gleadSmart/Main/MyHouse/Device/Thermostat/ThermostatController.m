@@ -9,6 +9,7 @@
 #import "ThermostatController.h"
 #import "ThermostatTimerController.h"
 #import "ThermostSettingController.h"
+#import "DeviceSettingController.h"
 
 #define ToRad(deg)      ( (M_PI * (deg)) / 180.0 )
 #define ToDeg(rad)      ( (180.0 * (rad)) / M_PI )
@@ -303,7 +304,9 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
 }
 
 - (void)moreSetting{
-    
+    DeviceSettingController *setVC = [[DeviceSettingController alloc] init];
+    setVC.device = self.device;
+    [self.navigationController pushViewController:setVC animated:YES];
 }
 
 - (void)addManualTemp{

@@ -19,6 +19,8 @@ NSString *const CellIdentifier_DeviceShare = @"CellIdentifier_DeviceShare";
 @property (nonatomic, strong) UIButton *addSharerButton;
 @property (nonatomic, strong) UITableView *sharerTable;
 
+@property (nonatomic, strong) UILabel *tipLabel;
+
 @property (nonatomic, strong) NSMutableArray *sharerList;
 
 @end
@@ -34,7 +36,10 @@ NSString *const CellIdentifier_DeviceShare = @"CellIdentifier_DeviceShare";
     self.noShareImageView = [self noShareImageView];
     self.addSharerButton = [self addSharerButton];
     self.sharerTable = [self sharerTable];
+    self.tipLabel = [self tipLabel];
     
+    [self reloadTableView];
+    [self getDeviceSharerInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -42,8 +47,6 @@ NSString *const CellIdentifier_DeviceShare = @"CellIdentifier_DeviceShare";
 }
 
 #pragma mark - private methods
-
-
 - (void)reloadTableView{
     if (self.sharerList.count > 0) {
         self.sharerTable.hidden = NO;
@@ -56,7 +59,62 @@ NSString *const CellIdentifier_DeviceShare = @"CellIdentifier_DeviceShare";
 //添加共享
 - (void)addSharer{
     AddDeviceShareController *addVC = [[AddDeviceShareController alloc] init];
+    addVC.device = self.device;
     [self.navigationController pushViewController:addVC animated:YES];
+}
+
+- (void)getDeviceSharerInfo{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/share/device/sharer?mac=%@&houseUid=%@",httpIpAddress,self.device.mac,db.currentHouse.houseUid];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            if (!self.sharerList) {
+                self.sharerList = [[NSMutableArray alloc] init];
+            }
+            [self.sharerList removeAllObjects];
+            if ([[responseDic objectForKey:@"data"] isKindOfClass:[NSArray class]] && [[responseDic objectForKey:@"data"] count] > 0) {
+                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (![obj isKindOfClass:[NSNull class]]) {
+                        SharerModel *sharer = [[SharerModel alloc] init];
+                        sharer.name = [obj objectForKey:@"name"];
+                        sharer.sharerUid = [obj objectForKey:@"shareUid"];
+                        sharer.mobile = [obj objectForKey:@"mobile"];
+                        [self.sharerList addObject:sharer];
+                    }
+                }];
+                [self reloadTableView];
+            }
+        }else{
+            [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"获取分享者列表失败"];
+        });
+    }];
 }
 
 #pragma mark - YBAttributeTapActionDelegate
@@ -67,30 +125,82 @@ NSString *const CellIdentifier_DeviceShare = @"CellIdentifier_DeviceShare";
 }
 
 #pragma mark - setter and getter
-//- (UILabel *)tipLabel{
-//    if (!_tipLabel) {
-//        UIView *backgroundView = [[UIView alloc] init];
-//        backgroundView.frame = CGRectMake(0, 0, ScreenWidth, 46);
-//        backgroundView.backgroundColor = [UIColor colorWithRed:213/255.0 green:227/255.0 blue:247/255.0 alpha:1.0];
-//        [self.view addSubview:backgroundView];
-//
-//        _tipLabel = [[UILabel alloc] init];
-//        _tipLabel.frame = CGRectMake(24, 0, ScreenWidth - 48, 46);
-//        _tipLabel.numberOfLines = 0;
-//        _tipLabel.textAlignment = NSTextAlignmentLeft;
-//        [backgroundView addSubview:_tipLabel];
-//
-//        NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:LocalString(@"如果是家中常住成员，建议您将他设为家庭成员，共享家中所有设备和智能场景。家庭设置") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.f],NSForegroundColorAttributeName:[UIColor colorWithRed:124/255.0 green:124/255.0 blue:123/255.0 alpha:1.0]}];
-//
-//        [string addAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0],NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:NSMakeRange(string.length - 4, 4)];
-//
-//        _tipLabel.attributedText = string;
-//
-//        _tipLabel.tag = 1000;
-//        [_tipLabel yb_addAttributeTapActionWithRanges:@[NSStringFromRange(NSMakeRange(string.length - 4, 4))] delegate:self];
-//    }
-//    return _tipLabel;
-//}
+- (UILabel *)tipLabel{
+    if (!_tipLabel) {
+        UIView *backgroundView = [[UIView alloc] init];
+        backgroundView.frame = CGRectMake(0, 0, ScreenWidth, 46);
+        backgroundView.backgroundColor = [UIColor colorWithRed:213/255.0 green:227/255.0 blue:247/255.0 alpha:1.0];
+        [self.view addSubview:backgroundView];
+
+        _tipLabel = [[UILabel alloc] init];
+        _tipLabel.frame = CGRectMake(24, 0, ScreenWidth - 48, 46);
+        _tipLabel.numberOfLines = 0;
+        _tipLabel.textAlignment = NSTextAlignmentLeft;
+        [backgroundView addSubview:_tipLabel];
+
+        NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:LocalString(@"如果是家中常住成员，建议您将他设为家庭成员，共享家中所有设备和智能场景。家庭设置") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.f],NSForegroundColorAttributeName:[UIColor colorWithRed:124/255.0 green:124/255.0 blue:123/255.0 alpha:1.0]}];
+
+        [string addAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0],NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:NSMakeRange(string.length - 4, 4)];
+
+        _tipLabel.attributedText = string;
+
+        _tipLabel.tag = 1000;
+        [_tipLabel yb_addAttributeTapActionWithRanges:@[NSStringFromRange(NSMakeRange(string.length - 4, 4))] delegate:self];
+    }
+    return _tipLabel;
+}
+
+- (void)removeSharerHttpDelMethod:(NSString *)sharerUid success:(void(^)(void))success failure:(void(^)(void))failure{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
+    
+    NSDictionary *parameters = @{@"shareUid":sharerUid,@"mac":self.device.mac};
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/share/device/sharer",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager DELETE:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            if (success) {
+                success();
+            }
+        }else{
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            if (failure) {
+                failure();
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        if (failure) {
+            failure();
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"移除分享失败"];
+        });
+    }];
+}
 
 - (UIImageView *)noShareImageView{
     if (!_noShareImageView) {
@@ -100,7 +210,7 @@ NSString *const CellIdentifier_DeviceShare = @"CellIdentifier_DeviceShare";
         [_noShareImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(130.f, 130.f));
             make.centerX.equalTo(self.view.mas_centerX);
-            make.top.equalTo(self.view.mas_bottom).offset(200.f);
+            make.top.equalTo(self.tipLabel.mas_bottom).offset(200.f);
         }];
         
         UILabel *noSharerLabel = [[UILabel alloc] init];
@@ -241,7 +351,15 @@ NSString *const CellIdentifier_DeviceShare = @"CellIdentifier_DeviceShare";
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        DeviceModel *device = self.sharerList[indexPath.row];
+        [self removeSharerHttpDelMethod:device.mac success:^{
+            [self.sharerList removeObject:device];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        } failure:^{
+            
+        }];
+    }
 }
 
 @end

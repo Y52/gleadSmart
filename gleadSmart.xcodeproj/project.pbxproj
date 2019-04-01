@@ -26,7 +26,6 @@
 		369C16A522255FD90079159E /* addRoom_hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A222255FD90079159E /* addRoom_hand@2x.png */; };
 		36B8F16722263FA200652CFA /* ShareDeviceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B8F16622263FA200652CFA /* ShareDeviceListCell.m */; };
 		36B8F16A22263FDE00652CFA /* ShareDeviceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B8F16922263FDE00652CFA /* ShareDeviceDetailCell.m */; };
-		36E3CF572251B5FE00F4195D /* PlugOutletSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF562251B5FE00F4195D /* PlugOutletSettingController.m */; };
 		36E3CF5B2251B9DE00F4195D /* PlugOutletSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF5A2251B9DE00F4195D /* PlugOutletSettingCell.m */; };
 		36E3CF622251F84900F4195D /* DeviceShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF612251F84900F4195D /* DeviceShareController.m */; };
 		36E3CF652252008C00F4195D /* AddDeviceShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF642252008C00F4195D /* AddDeviceShareController.m */; };
@@ -182,6 +181,12 @@
 		BB3D219C21AE7E2B002CB334 /* img_valve_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3D219921AE7E2A002CB334 /* img_valve_off.png */; };
 		BB3D219D21AE7E2B002CB334 /* img_valve_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3D219A21AE7E2B002CB334 /* img_valve_off@3x.png */; };
 		BB3D219E21AE7E2B002CB334 /* img_valve_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3D219B21AE7E2B002CB334 /* img_valve_off@2x.png */; };
+		BB3D754722523C1E007DDFD6 /* PlugOutletSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF562251B5FE00F4195D /* PlugOutletSettingController.m */; };
+		BB3D754822523C23007DDFD6 /* DeviceShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF612251F84900F4195D /* DeviceShareController.m */; };
+		BB3D754922523C27007DDFD6 /* AddDeviceShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF642252008C00F4195D /* AddDeviceShareController.m */; };
+		BB3D754A22523C57007DDFD6 /* PlugOutletSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF5A2251B9DE00F4195D /* PlugOutletSettingCell.m */; };
+		BB3D754D2252411D007DDFD6 /* DeviceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3D754C2252411D007DDFD6 /* DeviceSettingController.m */; };
+		BB3D7550225242D1007DDFD6 /* DeviceSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3D754F225242D1007DDFD6 /* DeviceSettingCell.m */; };
 		BB425F5721BF4DF400AB6EFB /* img_valve_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5421BF4DF400AB6EFB /* img_valve_on@3x.png */; };
 		BB425F5821BF4DF400AB6EFB /* img_valve_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5521BF4DF400AB6EFB /* img_valve_on.png */; };
 		BB425F5921BF4DF400AB6EFB /* img_valve_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5621BF4DF400AB6EFB /* img_valve_on@2x.png */; };
@@ -328,7 +333,6 @@
 		BB63B60621B4151D00D77489 /* thermostat_+.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60021B4151D00D77489 /* thermostat_+.png */; };
 		BB63B60721B4151D00D77489 /* thermostat_-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60121B4151D00D77489 /* thermostat_-@2x.png */; };
 		BB647BE9224E079700DCB992 /* PlugOutletController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB647BE7224E000800DCB992 /* PlugOutletController.m */; };
-		BB647BEA224E0C7C00DCB992 /* PlugOutletController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB647BE7224E000800DCB992 /* PlugOutletController.m */; };
 		BB6739DB22326801002E6239 /* NoHouseBridgingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DA22326801002E6239 /* NoHouseBridgingController.m */; };
 		BB6739DE223271AA002E6239 /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DD223271AA002E6239 /* NoHouseAddController.m */; };
 		BB73D54321EDCB1E004AEE18 /* JKVValue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; };
@@ -1189,6 +1193,10 @@
 		BB3D219921AE7E2A002CB334 /* img_valve_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_valve_off.png; sourceTree = "<group>"; };
 		BB3D219A21AE7E2B002CB334 /* img_valve_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_off@3x.png"; sourceTree = "<group>"; };
 		BB3D219B21AE7E2B002CB334 /* img_valve_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_off@2x.png"; sourceTree = "<group>"; };
+		BB3D754B2252411D007DDFD6 /* DeviceSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceSettingController.h; sourceTree = "<group>"; };
+		BB3D754C2252411D007DDFD6 /* DeviceSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSettingController.m; sourceTree = "<group>"; };
+		BB3D754E225242D1007DDFD6 /* DeviceSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceSettingCell.h; sourceTree = "<group>"; };
+		BB3D754F225242D1007DDFD6 /* DeviceSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSettingCell.m; sourceTree = "<group>"; };
 		BB425F5421BF4DF400AB6EFB /* img_valve_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_on@3x.png"; sourceTree = "<group>"; };
 		BB425F5521BF4DF400AB6EFB /* img_valve_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_valve_on.png; sourceTree = "<group>"; };
 		BB425F5621BF4DF400AB6EFB /* img_valve_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_on@2x.png"; sourceTree = "<group>"; };
@@ -1590,6 +1598,7 @@
 				36E3CF5A2251B9DE00F4195D /* PlugOutletSettingCell.m */,
 			);
 			name = plugOutlet;
+			path = Myhouse;
 			sourceTree = "<group>";
 		};
 		36E3CF5C2251F70700F4195D /* DeviceShare */ = {
@@ -1850,6 +1859,8 @@
 			children = (
 				BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */,
 				BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */,
+				BB3D754B2252411D007DDFD6 /* DeviceSettingController.h */,
+				BB3D754C2252411D007DDFD6 /* DeviceSettingController.m */,
 				36E3CF5C2251F70700F4195D /* DeviceShare */,
 				BB37DEF321A7DDCE00B2121B /* ESPTouch */,
 				BB37DF1321A7F6C800B2121B /* Thermostat */,
@@ -1998,6 +2009,7 @@
 				3E9E9B9821A2ABC600CA2B7D /* Home */,
 				BB37DF0F21A7F35500B2121B /* DeviceESP */,
 				BB37DF1521A7F6F100B2121B /* Valve */,
+				36E3CF582251B99700F4195D /* plugOutlet */,
 				3EA530A521AB9714000A6D26 /* Login */,
 				BB35290C219D0FAB00428DE9 /* Myhouse */,
 			);
@@ -2059,6 +2071,8 @@
 			children = (
 				BB37DF1121A7F3AF00B2121B /* DeviceTableViewCell.h */,
 				BB37DF1021A7F3AF00B2121B /* DeviceTableViewCell.m */,
+				BB3D754E225242D1007DDFD6 /* DeviceSettingCell.h */,
+				BB3D754F225242D1007DDFD6 /* DeviceSettingCell.m */,
 			);
 			path = DeviceESP;
 			sourceTree = "<group>";
@@ -2120,7 +2134,6 @@
 			children = (
 				3ECFF39D219EB00C00024D2C /* SelectDeviceTypeCell.h */,
 				3ECFF39E219EB00C00024D2C /* SelectDeviceTypeCell.m */,
-				36E3CF582251B99700F4195D /* plugOutlet */,
 			);
 			name = Device;
 			sourceTree = "<group>";
@@ -3497,6 +3510,7 @@
 				BB2AC0F021A8F156006DB83A /* ESPTouchTaskParameter.m in Sources */,
 				BBF6326B21BBBDE0006A23AC /* NodeDetailViewController.m in Sources */,
 				BB2AC0EF21A8F156006DB83A /* ESPUDPSocketClient.m in Sources */,
+				BB3D754D2252411D007DDFD6 /* DeviceSettingController.m in Sources */,
 				BB6739DE223271AA002E6239 /* NoHouseAddController.m in Sources */,
 				BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */,
 				3E56AD2221A6A6DD0089BA8F /* AddFamilyTextCell.m in Sources */,
@@ -3508,14 +3522,13 @@
 				3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
 				BB2AD7A121AD70D6006DB83A /* HouseSettingController.m in Sources */,
-				BB647BEA224E0C7C00DCB992 /* PlugOutletController.m in Sources */,
+				BB3D7550225242D1007DDFD6 /* DeviceSettingCell.m in Sources */,
 				BB7D9B9A221E4B4C00C5DFD1 /* SharerInfoCell.m in Sources */,
 				BB37DF1221A7F3AF00B2121B /* DeviceTableViewCell.m in Sources */,
 				BB00A4FF21BA25B7004E4051 /* YAlertViewController.m in Sources */,
 				BB2AC10E21A94F42006DB83A /* HouseModel.m in Sources */,
 				BBAB2813221B9D4F00E21041 /* ShareDeviceSelectCell.m in Sources */,
 				36B8F16722263FA200652CFA /* ShareDeviceListCell.m in Sources */,
-				36E3CF572251B5FE00F4195D /* PlugOutletSettingController.m in Sources */,
 				BB2AC10B21A94D63006DB83A /* AFSecurityPolicy.m in Sources */,
 				BB49B89821F5A8D100E32CF9 /* alarmModel.m in Sources */,
 				BB45BC4A21EF259E00504FF8 /* AddMemberController.m in Sources */,
@@ -3657,11 +3670,13 @@
 				BBA59402224A2AB1009D5941 /* NodeDetailViewController.m in Sources */,
 				BBA59403224A2AB1009D5941 /* ESPUDPSocketClient.m in Sources */,
 				BBA59404224A2AB1009D5941 /* NoHouseAddController.m in Sources */,
+				BB3D754A22523C57007DDFD6 /* PlugOutletSettingCell.m in Sources */,
 				BBA59405224A2AB1009D5941 /* RDVTabBarController.m in Sources */,
 				BBA59406224A2AB1009D5941 /* AddFamilyTextCell.m in Sources */,
 				BBA59407224A2AB1009D5941 /* TherTimerCell.m in Sources */,
 				BBA59408224A2AB1009D5941 /* Network.m in Sources */,
 				BBA59409224A2AB1009D5941 /* ESPDatumCode.m in Sources */,
+				BB3D754922523C27007DDFD6 /* AddDeviceShareController.m in Sources */,
 				BBA5940A224A2AB1009D5941 /* FamilyMemberInfoCell.m in Sources */,
 				BBA5940B224A2AB1009D5941 /* RDVTabBar.m in Sources */,
 				BBA5940C224A2AB1009D5941 /* HouseManagementTableViewCell.m in Sources */,
@@ -3674,6 +3689,7 @@
 				BBA59412224A2AB1009D5941 /* HouseModel.m in Sources */,
 				BBA59413224A2AB1009D5941 /* ShareDeviceSelectCell.m in Sources */,
 				BBA59414224A2AB1009D5941 /* ShareDeviceListCell.m in Sources */,
+				BB3D754722523C1E007DDFD6 /* PlugOutletSettingController.m in Sources */,
 				BBA59415224A2AB1009D5941 /* AFSecurityPolicy.m in Sources */,
 				BBA59416224A2AB1009D5941 /* alarmModel.m in Sources */,
 				BBA59417224A2AB1009D5941 /* AddMemberController.m in Sources */,
@@ -3727,6 +3743,7 @@
 				BBA59447224A2AB1009D5941 /* AddFamilyViewController.m in Sources */,
 				BBA59448224A2AB1009D5941 /* FamilyMemberSetCell.m in Sources */,
 				BBA59449224A2AB1009D5941 /* MyHouseController.m in Sources */,
+				BB3D754822523C23007DDFD6 /* DeviceShareController.m in Sources */,
 				BBA5944A224A2AB1009D5941 /* MemberAccountCell.m in Sources */,
 				BBA5944B224A2AB1009D5941 /* ESPGuideCode.m in Sources */,
 				BBA5944C224A2AB1009D5941 /* TherAddTimerSwitchCell.m in Sources */,

@@ -442,10 +442,15 @@ static CGFloat const Cell_Height = 72.f;
             switch ([device.type integerValue]) {
                 case 1:
                 {
-                    //ThermostatController *thermostatVC = [[ThermostatController alloc] init];
-                    //thermostatVC.device = device;
-                    PlugOutletController *thermostatVC = [[PlugOutletController alloc] init];
+                    #if gleadSmart
+                    ThermostatController *thermostatVC = [[ThermostatController alloc] init];
+                    thermostatVC.device = device;
                     [self.navigationController pushViewController:thermostatVC animated:YES];
+                    #elif jienuoIOT
+                    PlugOutletController *thermostatVC = [[PlugOutletController alloc] init];
+                    thermostatVC.device = device;
+                    [self.navigationController pushViewController:thermostatVC animated:YES];
+                    #endif
                 }
                     break;
                     
@@ -476,9 +481,15 @@ static CGFloat const Cell_Height = 72.f;
             switch (type) {
                 case 1:
                 {
+#if gleadSmart
                     ThermostatController *thermostatVC = [[ThermostatController alloc] init];
                     thermostatVC.device = device;
                     [self.navigationController pushViewController:thermostatVC animated:YES];
+#elif jienuoIOT
+                    PlugOutletController *thermostatVC = [[PlugOutletController alloc] init];
+                    thermostatVC.device = device;
+                    [self.navigationController pushViewController:thermostatVC animated:YES];
+#endif
                 }
                     break;
                     

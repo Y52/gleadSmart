@@ -11,6 +11,7 @@
 #import "NodeDetailViewController.h"
 #import "NodeButton.h"
 #import "alarmModel.h"
+#import "DeviceSettingController.h"
 
 NSString *const CellIdentifier_NodeDetail = @"CellID_NodeDetail";
 
@@ -141,7 +142,9 @@ CGFloat const nodeButtonWidth = 20.f;
 
 //tabbar rightbutton action
 - (void)moreSetting{
-    
+    DeviceSettingController *setVC = [[DeviceSettingController alloc] init];
+    setVC.device = self.device;
+    [self.navigationController pushViewController:setVC animated:YES];
 }
 
 //进入漏水节点详情

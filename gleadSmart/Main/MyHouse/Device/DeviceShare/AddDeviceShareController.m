@@ -56,7 +56,34 @@ NSString *const CellIdentifier_DeviceSharerInputAccount = @"CellID_DeviceSharerI
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
-    [SVProgressHUD dismiss];
+    
+    NSMutableArray *deviceDicArr = [[NSMutableArray alloc] init];
+    NSDictionary *dic = @{@"mac":self.device.mac,@"type":self.device.type};
+    [deviceDicArr addObject:dic];
+    NSDictionary *parameters = @{@"houseUid":db.currentHouse.houseUid,@"mobile":self->mobile,@"ownerUid":db.user.userId,@"deviceList":deviceDicArr};
+    NSLog(@"%@",parameters);
+    
+    [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [NSObject showHudTipStr:@"添加共享失败"];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"添加共享失败"];
+        });
+    }];
     
 }
 

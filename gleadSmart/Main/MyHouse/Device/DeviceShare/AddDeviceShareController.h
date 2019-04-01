@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AddDeviceShareController : UIViewController
 
+@property (nonatomic, strong) DeviceModel *device;
+
 @end
 
 NS_ASSUME_NONNULL_END
