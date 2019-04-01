@@ -21,7 +21,6 @@ static float HEIGHT_HEADER = 40.f;
 
 @implementation ShareDeviceDetailController{
     NSString *houseName;
-    NSString *ownerName;
     NSMutableArray *deviceList;
 }
 
@@ -68,7 +67,7 @@ static float HEIGHT_HEADER = 40.f;
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             NSDictionary *data = [responseDic objectForKey:@"data"];
             self->houseName = [data objectForKey:@"name"];
-            self->ownerName = [data objectForKey:@"ownerName"];
+            self.houseUid = [data objectForKey:@"houseUid"];
             if ([[data objectForKey:@"deviceList"] isKindOfClass:[NSArray class]] && [[data objectForKey:@"deviceList"] count] > 0) {
                 if (!self->deviceList) {
                     self->deviceList = [[NSMutableArray alloc] init];
@@ -94,6 +93,58 @@ static float HEIGHT_HEADER = 40.f;
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
             [NSObject showHudTipStr:@"获取拥有者详细信息失败"];
+        });
+    }];
+}
+
+- (void)removeSharerDevicceHttpDelMethod:(NSString *)mac success:(void(^)(void))success failure:(void(^)(void))failure{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
+    
+    NSDictionary *parameters = @{@"houseUid":self.houseUid,@"mac":mac};
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/share/house/device",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager DELETE:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            if (success) {
+                success();
+            }
+        }else{
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            if (failure) {
+                failure();
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        if (failure) {
+            failure();
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"移除设备失败"];
         });
     }];
 }
@@ -148,7 +199,7 @@ static float HEIGHT_HEADER = 40.f;
             return cell;
         }else{
             cell.leftLabel.text = LocalString(@"备注");
-            cell.rightLabel.text = ownerName;
+            cell.rightLabel.text = self.ownerName;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
         }
@@ -227,5 +278,24 @@ static float HEIGHT_HEADER = 40.f;
     
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        DeviceModel *device = self->deviceList[indexPath.row];
+        [self removeSharerDevicceHttpDelMethod:device.mac success:^{
+            [self->deviceList removeObject:device];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        } failure:^{
+            
+        }];
+    }
+}
 
 @end

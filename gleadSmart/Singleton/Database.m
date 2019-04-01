@@ -406,19 +406,16 @@ static dispatch_once_t oneToken;
                     [self insertNewRoom:room];
                     
                 }];
-                if (success) {
-                    success();
-                }
             }
             
             /*
              *取出共享内容
              */
+            if (!self.shareDeviceArray) {
+                self.shareDeviceArray = [[NSMutableArray alloc] init];
+            }
+            [self.shareDeviceArray removeAllObjects];
             if ([[dic objectForKey:@"shareHouse"] isKindOfClass:[NSArray class]] && [[dic objectForKey:@"shareHouse"] count] > 0) {
-                if (!self.shareDeviceArray) {
-                    self.shareDeviceArray = [[NSMutableArray alloc] init];
-                }
-                [self.shareDeviceArray removeAllObjects];
                 [[dic objectForKey:@"shareHouse"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     if ([[obj objectForKey:@"devices"] isKindOfClass:[NSArray class]] && [[obj objectForKey:@"devices"] count] > 0) {
                         [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj1, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -441,6 +438,10 @@ static dispatch_once_t oneToken;
                 for (DeviceModel *device in self.shareDeviceArray) {
                     [[Network shareNetwork] inquireShareDeviceInfoByOneNetdatastream:device];
                 }
+            }
+            if (success) {
+                NSLog(@"%d",self.shareDeviceArray.count);
+                success();
             }
         }else{
             [NSObject showHudTipStr:LocalString(@"获取家庭详细信息失败")];

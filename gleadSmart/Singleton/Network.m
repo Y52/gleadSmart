@@ -1099,6 +1099,7 @@ static int noUserInteractionHeartbeat = 0;
     }
 }
 
+#if gleadSmart
 - (void)handle68Message:(NSArray *)data
 {
     if (![self frameIsRight:data])
@@ -1571,9 +1572,22 @@ static int noUserInteractionHeartbeat = 0;
         default:
             break;
     }
-    
-    
 }
+#elif jienuoIOT
+- (void)handle68Message:(NSArray *)data
+{
+    if (![self frameIsRight:data])
+    {
+        //68帧数据错误
+        return;
+    }
+    if (_recivedData69)
+    {
+        [_recivedData69 removeAllObjects];
+        [_recivedData69 addObjectsFromArray:data];
+    }
+}
+#endif
 
 -(BOOL)frameIsRight:(NSArray *)data
 {

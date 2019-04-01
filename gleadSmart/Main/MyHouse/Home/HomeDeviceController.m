@@ -161,6 +161,18 @@ static CGFloat const Cell_Height = 72.f;
 
 - (void)shareInfo{
     ShareDeviceListController *vc = [[ShareDeviceListController alloc] init];
+    vc.popBlock = ^(void) {
+        [[Database shareInstance] getHouseHomeListAndDevice:[Database shareInstance].currentHouse success:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.deviceTable reloadData];
+                if (self.reloadBlock) {
+                    self.reloadBlock();//通知wmpage也刷新，不然只刷新table没有效果
+                }
+            });
+        } failure:^{
+
+        }];
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 

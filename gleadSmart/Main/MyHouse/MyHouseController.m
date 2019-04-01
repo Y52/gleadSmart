@@ -120,6 +120,9 @@ static CGFloat const gleadMenuItemMargin = 20.f;
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     HomeDeviceController *vc = [[HomeDeviceController alloc] init];
+    vc.reloadBlock = ^{
+        [self reloadData];
+    };
     vc.filledSpcingHeight = yAutoFit(gleadHeaderHeight) + tabbarHeight + ySafeArea_Bottom;
     if (index == 0) {
         vc.room = nil;
