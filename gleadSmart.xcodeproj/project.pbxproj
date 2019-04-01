@@ -26,6 +26,10 @@
 		369C16A522255FD90079159E /* addRoom_hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A222255FD90079159E /* addRoom_hand@2x.png */; };
 		36B8F16722263FA200652CFA /* ShareDeviceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B8F16622263FA200652CFA /* ShareDeviceListCell.m */; };
 		36B8F16A22263FDE00652CFA /* ShareDeviceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B8F16922263FDE00652CFA /* ShareDeviceDetailCell.m */; };
+		36E3CF572251B5FE00F4195D /* PlugOutletSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF562251B5FE00F4195D /* PlugOutletSettingController.m */; };
+		36E3CF5B2251B9DE00F4195D /* PlugOutletSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF5A2251B9DE00F4195D /* PlugOutletSettingCell.m */; };
+		36E3CF622251F84900F4195D /* DeviceShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF612251F84900F4195D /* DeviceShareController.m */; };
+		36E3CF652252008C00F4195D /* AddDeviceShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF642252008C00F4195D /* AddDeviceShareController.m */; };
 		36FD8C562236553300DE4D28 /* PhoneVerifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */; };
 		3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */; };
 		3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */; };
@@ -945,6 +949,14 @@
 		36B8F16622263FA200652CFA /* ShareDeviceListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceListCell.m; sourceTree = "<group>"; };
 		36B8F16822263FDE00652CFA /* ShareDeviceDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceDetailCell.h; sourceTree = "<group>"; };
 		36B8F16922263FDE00652CFA /* ShareDeviceDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceDetailCell.m; sourceTree = "<group>"; };
+		36E3CF552251B5FE00F4195D /* PlugOutletSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletSettingController.h; sourceTree = "<group>"; };
+		36E3CF562251B5FE00F4195D /* PlugOutletSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSettingController.m; sourceTree = "<group>"; };
+		36E3CF592251B9DE00F4195D /* PlugOutletSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletSettingCell.h; sourceTree = "<group>"; };
+		36E3CF5A2251B9DE00F4195D /* PlugOutletSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSettingCell.m; sourceTree = "<group>"; };
+		36E3CF602251F84900F4195D /* DeviceShareController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceShareController.h; sourceTree = "<group>"; };
+		36E3CF612251F84900F4195D /* DeviceShareController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceShareController.m; sourceTree = "<group>"; };
+		36E3CF632252008C00F4195D /* AddDeviceShareController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceShareController.h; sourceTree = "<group>"; };
+		36E3CF642252008C00F4195D /* AddDeviceShareController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceShareController.m; sourceTree = "<group>"; };
 		36FD8C542236553300DE4D28 /* PhoneVerifyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneVerifyCell.h; sourceTree = "<group>"; };
 		36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneVerifyCell.m; sourceTree = "<group>"; };
 		3E3AFFB821A7E74800EA8F1C /* HouseManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseManagementTableViewCell.h; sourceTree = "<group>"; };
@@ -1571,6 +1583,26 @@
 			path = ShareDevice;
 			sourceTree = "<group>";
 		};
+		36E3CF582251B99700F4195D /* plugOutlet */ = {
+			isa = PBXGroup;
+			children = (
+				36E3CF592251B9DE00F4195D /* PlugOutletSettingCell.h */,
+				36E3CF5A2251B9DE00F4195D /* PlugOutletSettingCell.m */,
+			);
+			name = plugOutlet;
+			sourceTree = "<group>";
+		};
+		36E3CF5C2251F70700F4195D /* DeviceShare */ = {
+			isa = PBXGroup;
+			children = (
+				36E3CF602251F84900F4195D /* DeviceShareController.h */,
+				36E3CF612251F84900F4195D /* DeviceShareController.m */,
+				36E3CF632252008C00F4195D /* AddDeviceShareController.h */,
+				36E3CF642252008C00F4195D /* AddDeviceShareController.m */,
+			);
+			path = DeviceShare;
+			sourceTree = "<group>";
+		};
 		3E9E9B9821A2ABC600CA2B7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1818,6 +1850,7 @@
 			children = (
 				BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */,
 				BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */,
+				36E3CF5C2251F70700F4195D /* DeviceShare */,
 				BB37DEF321A7DDCE00B2121B /* ESPTouch */,
 				BB37DF1321A7F6C800B2121B /* Thermostat */,
 				BB37DF1421A7F6D700B2121B /* Valve */,
@@ -2087,6 +2120,7 @@
 			children = (
 				3ECFF39D219EB00C00024D2C /* SelectDeviceTypeCell.h */,
 				3ECFF39E219EB00C00024D2C /* SelectDeviceTypeCell.m */,
+				36E3CF582251B99700F4195D /* plugOutlet */,
 			);
 			name = Device;
 			sourceTree = "<group>";
@@ -2303,6 +2337,8 @@
 			children = (
 				BB647BE6224E000800DCB992 /* PlugOutletController.h */,
 				BB647BE7224E000800DCB992 /* PlugOutletController.m */,
+				36E3CF552251B5FE00F4195D /* PlugOutletSettingController.h */,
+				36E3CF562251B5FE00F4195D /* PlugOutletSettingController.m */,
 			);
 			path = plugOutlet;
 			sourceTree = "<group>";
@@ -3430,6 +3466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB2AC0F221A8F156006DB83A /* ESPAES.m in Sources */,
+				36E3CF622251F84900F4195D /* DeviceShareController.m in Sources */,
 				BB49DF9521958864004E00A2 /* ViewController.m in Sources */,
 				BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */,
 				BB00A4FC21BA243E004E4051 /* LogOutCell.m in Sources */,
@@ -3478,6 +3515,7 @@
 				BB2AC10E21A94F42006DB83A /* HouseModel.m in Sources */,
 				BBAB2813221B9D4F00E21041 /* ShareDeviceSelectCell.m in Sources */,
 				36B8F16722263FA200652CFA /* ShareDeviceListCell.m in Sources */,
+				36E3CF572251B5FE00F4195D /* PlugOutletSettingController.m in Sources */,
 				BB2AC10B21A94D63006DB83A /* AFSecurityPolicy.m in Sources */,
 				BB49B89821F5A8D100E32CF9 /* alarmModel.m in Sources */,
 				BB45BC4A21EF259E00504FF8 /* AddMemberController.m in Sources */,
@@ -3507,6 +3545,7 @@
 				BB62E4D521B4E07600C0FA39 /* TherWeekSelCell.m in Sources */,
 				3EA530C121AB9B43000A6D26 /* TextFieldCell.m in Sources */,
 				BB2AC11121A94FE8006DB83A /* RoomModel.m in Sources */,
+				36E3CF5B2251B9DE00F4195D /* PlugOutletSettingCell.m in Sources */,
 				BBF8CAED22169FBA0030E921 /* FamilyMemberController.m in Sources */,
 				BB2AC0F721A93B1B006DB83A /* UserModel.m in Sources */,
 				BB37DF0D21A7EFC400B2121B /* DeviceConnectView.m in Sources */,
@@ -3532,6 +3571,7 @@
 				BBF8CAF42216A8460030E921 /* FamilyMemberSetCell.m in Sources */,
 				BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */,
 				BB45BC5521EF2EE800504FF8 /* MemberAccountCell.m in Sources */,
+				36E3CF652252008C00F4195D /* AddDeviceShareController.m in Sources */,
 				BB2AC0E721A8F156006DB83A /* ESPGuideCode.m in Sources */,
 				BB62E4C321B4D65E00C0FA39 /* TherAddTimerSwitchCell.m in Sources */,
 				BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */,
