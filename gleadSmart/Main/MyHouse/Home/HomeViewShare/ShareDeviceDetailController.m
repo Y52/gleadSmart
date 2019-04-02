@@ -36,7 +36,8 @@ static float HEIGHT_HEADER = 40.f;
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
-    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
 }
 
 #pragma mark - private methods

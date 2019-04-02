@@ -36,6 +36,7 @@ static CGFloat const Cell_Height = 50.f;
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self getHomeList];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 #pragma mark - Lazy Load
 -(UITableView *)homeManagementTable{

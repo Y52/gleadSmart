@@ -14,7 +14,7 @@ NSString *const CellIdentifier_deviceSetting = @"CellID_deviceSetting";
 static float HEIGHT_CELL = 50.f;
 static float HEIGHT_HEADER = 40.f;
 
-@interface DeviceSettingController ()
+@interface DeviceSettingController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *deviceSettingTable;
 @property (strong, nonatomic) UIButton *removeDeviceBtn;
@@ -32,6 +32,11 @@ static float HEIGHT_HEADER = 40.f;
     self.deviceSettingTable = [self deviceSettingTable];
     self.removeDeviceBtn = [self removeDeviceBtn];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 #pragma mark - private methods
@@ -84,7 +89,7 @@ static float HEIGHT_HEADER = 40.f;
 #pragma mark - UITableView delegate&datasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -96,11 +101,6 @@ static float HEIGHT_HEADER = 40.f;
         }
             break;
         case 1:
-        {
-            return 2;
-        }
-            break;
-        case 2:
         {
             if (self.device.isShare) {
                 return 1;
@@ -133,7 +133,8 @@ static float HEIGHT_HEADER = 40.f;
             }
             if (indexPath.row == 1) {
                 cell.leftName.text = LocalString(@"设备位置");
-                cell.rightName.text = self.device.roomName;
+                RoomModel *room = [[Database shareInstance] queryRoomWith:self.device.roomUid];
+                cell.rightName.text = room.name;
             }
         }
             break;

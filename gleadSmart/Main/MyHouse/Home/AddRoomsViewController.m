@@ -59,6 +59,7 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - Lazyload
@@ -450,6 +451,7 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
 
     NSDictionary *parameters = @{@"name":cell.inputTF.text};
+    NSLog(@"%@,%@",parameters,url);
     
     [manager POST:url parameters:parameters progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -489,67 +491,67 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
 -(void)hostbedRoom{
     NSLog(@"主卧");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"主卧";
+    cell.inputTF.text = LocalString(@"主卧");
 }
 
 -(void)secondarybedRoom{
     NSLog(@"次卧");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"次卧";
+    cell.inputTF.text = LocalString(@"次卧");
 }
 
 -(void)guestRoom{
     NSLog(@"客厅");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"客厅";
+    cell.inputTF.text = LocalString(@"客厅");
 }
 
 -(void)dinningRoom{
     NSLog(@"餐厅");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"餐厅";
+    cell.inputTF.text = LocalString(@"餐厅");
 }
 
 -(void)kitchenRoom{
     NSLog(@"厨房");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"厨房";
+    cell.inputTF.text = LocalString(@"厨房");
 }
 
 -(void)studyRoom{
     NSLog(@"书房");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"书房";
+    cell.inputTF.text = LocalString(@"书房");
 }
 
 -(void)balconyRoom{
     NSLog(@"阳台");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"阳台";
+    cell.inputTF.text = LocalString(@"阳台");
 }
 
 -(void)entranceRoom{
     NSLog(@"玄关");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"玄关";
+    cell.inputTF.text = LocalString(@"玄关");
 }
 
 -(void)cloakRoom{
     NSLog(@"衣帽间");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"衣帽间";
+    cell.inputTF.text = LocalString(@"衣帽间");
 }
 
 -(void)childrenRoom{
     NSLog(@"儿童房");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"儿童房";
+    cell.inputTF.text = LocalString(@"儿童房");
 }
 
 -(void)bathRoom{
     NSLog(@"卫生间");
     AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.inputTF.text = @"卫生间";
+    cell.inputTF.text = LocalString(@"卫生间");
 }
 
 @end

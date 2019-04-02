@@ -194,7 +194,7 @@
             
         }
         [SVProgressHUD dismiss];
-        [self dismissVC];
+        [self confirmVC];
     }];
     
 }

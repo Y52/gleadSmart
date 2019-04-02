@@ -68,6 +68,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
 -(NSArray *)defaultRoomList{
     if (!_defaultRoomList) {
         _defaultRoomList = @[@"主卧",@"次卧",@"客厅",@"餐厅",@"厨房",@"书房"];
+        [checkedRoomArray addObjectsFromArray:_defaultRoomList];
     }
     return _defaultRoomList;
 }
@@ -163,9 +164,9 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
                 cell = [[AddFamilySelectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_addFaminlySelect];
             }
             cell.backgroundColor = [UIColor clearColor];
-            cell.tag = yUnselect;
+            cell.tag = ySelect;
             cell.leftLabel.text = _defaultRoomList[indexPath.row];
-            cell.checkImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
+            cell.checkImage.image = [UIImage imageNamed:@"addFamily_check"];
             return cell;
         }
             break;
@@ -209,6 +210,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
             locaVC.dismissBlock = ^(HouseModel *house) {
                 AddFamilyTextCell *cell = [tableView cellForRowAtIndexPath:indexPath];
                 cell.inputTF.text = house.location;
+                NSLog(@"11111%@",house.location);
                 self->lon = house.lon;
                 self->lat = house.lat;
             };

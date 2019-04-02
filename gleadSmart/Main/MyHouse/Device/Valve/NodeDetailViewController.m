@@ -33,6 +33,7 @@ static CGFloat const Cell_Height = 44.f;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
     //self.navigationController.navigationBar.topItem.title = @"";
 }
 

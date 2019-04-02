@@ -392,6 +392,7 @@ static dispatch_once_t oneToken;
                         device.name = [obj objectForKey:@"deviceName"];
                         device.mac = [obj objectForKey:@"mac"];
                         device.roomUid = room.roomUid;
+                        device.roomName = room.name;
                         device.houseUid = house.houseUid;
                         if ([NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]] == 0x01) {
                             device.type = @0;
