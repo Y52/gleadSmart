@@ -112,6 +112,9 @@
         _locationPicker.frame = CGRectMake(0, 40.f, self.contentView.bounds.size.width, self.contentView.bounds.size.height - 40.f);
         _locationPicker.adjustsFontSizeToFitWidth = YES;
         _locationPicker.divisionDelegate = self;
+        [_locationPicker selectRow:0 inComponent:0 animated:YES];
+        [_locationPicker selectRow:0 inComponent:1 animated:YES];
+        [_locationPicker selectRow:0 inComponent:2 animated:YES];
         [self.contentView addSubview:_locationPicker];
     }
     return _locationPicker;
@@ -210,6 +213,12 @@
 }
 
 - (void)confirmVC{
+    if (![house.lon isKindOfClass:[NSNumber class]]) {
+        house.lon = [NSNumber numberWithFloat:116.41476250];
+        house.lat = [NSNumber numberWithFloat:39.91633050];
+        house.location = LocalString(@"北京市北京市东城区");
+        NSLog(@"%@",house.lon);
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
     if (self.dismissBlock) {
         self.dismissBlock(self->house);

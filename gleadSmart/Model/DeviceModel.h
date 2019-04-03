@@ -10,6 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, DeviceType) {
+    DeviceCenterlControl = 0,
+    DeviceThermostat = 1,
+    DeviceValve = 2,
+    DeviceWallhob = 3
+};
+
 @interface DeviceModel : NSObject
 
 @property (nonatomic) NSUInteger tag;
@@ -35,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///@brief 无线阀门拥有的属性
 @property (strong, nonatomic) NSMutableArray *nodeArray;
+@property (nonatomic) BOOL isUnusual;//是否异常(漏水、低电压)
 
 ///@brief 分享设备特有的属性
 @property (nonatomic) BOOL isShare;

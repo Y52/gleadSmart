@@ -47,6 +47,7 @@ static CGFloat const Cell_Height = 72.f;
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectDevicesWithRoom) name:@"refreshDeviceTable" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oneDeviceStatusUpdate:) name:@"oneDeviceStatusUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valveHangingNodesRabbitmqReport:) name:@"valveHangingNodesRabbitmqReport" object:nil];
     [self selectDevicesWithRoom];
 }
 
@@ -104,6 +105,9 @@ static CGFloat const Cell_Height = 72.f;
                     }else{
                         cell.status.text = LocalString(@"已关闭");
                     }
+                    if (shareDevice.isUnusual) {
+                        cell.status.text = LocalString(@"异常");
+                    }
                     NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
                     [self differenceShareDiveceAction:type isOnline:[device.isOnline boolValue] device:device cell:cell indexpath:[NSIndexPath indexPathForRow:i inSection:1]];
                 });
@@ -130,15 +134,51 @@ static CGFloat const Cell_Height = 72.f;
                 if (room.roomUid == nil) {
                     status = LocalString(@"未设置");
                 }
-                if ([device.isOn boolValue]) {
-                    cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
+                if (oldDevice.isUnusual) {
+                    cell.status.text = [status stringByAppendingString:LocalString(@" | 异常")];
                 }else{
-                    cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
+                    if ([device.isOn boolValue]) {
+                        cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
+                    }else{
+                        cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
+                    }
                 }
                 [self differenceDiveceAction:[oldDevice.type integerValue] isOnline:[oldDevice.isOnline boolValue] mac:oldDevice.mac cell:cell indexpath:[NSIndexPath indexPathForRow:i inSection:0]];
             });
         }
     }
+}
+
+- (void)valveHangingNodesRabbitmqReport:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    NodeModel *node = [userInfo objectForKey:@"node"];
+    NSString *valveMac = node.valveMac;
+    
+    for (int i = 0; i < self.deviceArray.count; i++) {
+        DeviceModel *oldDevice = self.deviceArray[i];
+        if ([valveMac isEqualToString:oldDevice.mac]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                HomeDeviceCell *cell = [self.deviceTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                RoomModel *room = [[Database shareInstance] queryRoomWith:oldDevice.roomUid];
+                NSString *status = room.name;
+                if (room.roomUid == nil) {
+                    status = LocalString(@"未设置");
+                }
+                if (node.isLeak || node.isLowVoltage) {
+                    oldDevice.isUnusual = YES;
+                    cell.status.text = [status stringByAppendingString:LocalString(@" | 异常")];
+                }else{
+                    oldDevice.isUnusual = NO;
+                    if ([oldDevice.isOn boolValue]) {
+                        cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
+                    }else{
+                        cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
+                    }
+                }
+            });
+        }
+    }
+
 }
 
 - (void)refreshTable{
@@ -252,12 +292,14 @@ static CGFloat const Cell_Height = 72.f;
             }
             
             //NSLog(@"%@---%@",device.isOn,device.mac);
-            if ([device.isOn boolValue]) {
-                cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
-                cell.controlSwitch.on = YES;
+            if (device.isUnusual) {
+                cell.status.text = [status stringByAppendingString:LocalString(@" | 异常")];
             }else{
-                cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
-                cell.controlSwitch.on = NO;
+                if ([device.isOn boolValue]) {
+                    cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
+                }else{
+                    cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
+                }
             }
             [self differenceDiveceAction:[device.type integerValue] isOnline:[device.isOnline boolValue] mac:device.mac cell:cell indexpath:indexPath];
         }
@@ -274,6 +316,9 @@ static CGFloat const Cell_Height = 72.f;
                 cell.status.text = LocalString(@"已关闭");
                 cell.controlSwitch.on = NO;
             }
+            if (device.isUnusual) {
+                cell.status.text = LocalString(@"异常");
+            }
             NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
             [self differenceShareDiveceAction:type isOnline:[device.isOnline boolValue] device:device cell:cell indexpath:indexPath];
         }
@@ -288,7 +333,7 @@ static CGFloat const Cell_Height = 72.f;
 - (void)differenceDiveceAction:(NSInteger)type isOnline:(BOOL)isOnline mac:(NSString *)mac cell:(HomeDeviceCell *)cell indexpath:(NSIndexPath *)indexPath{
     __block typeof(cell) blockCell = cell;
     switch (type) {
-        case 1:
+        case DeviceThermostat:
         {
             if (isOnline) {
                 cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_on"];
@@ -318,7 +363,7 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
-        case 2:
+        case DeviceValve:
         {
             if (isOnline) {
                 cell.deviceImage.image = [UIImage imageNamed:@"img_valve_on"];
@@ -348,7 +393,7 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
-        case 3:
+        case DeviceWallhob:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
         }
@@ -362,7 +407,7 @@ static CGFloat const Cell_Height = 72.f;
 - (void)differenceShareDiveceAction:(NSInteger)type isOnline:(BOOL)isOnline device:(DeviceModel *)device cell:(HomeDeviceCell *)cell indexpath:(NSIndexPath *)indexPath{
     __block typeof(cell) blockCell = cell;
     switch (type) {
-        case 1:
+        case DeviceThermostat:
         {
             if (isOnline) {
                 cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_on"];
@@ -392,7 +437,7 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
-        case 2:
+        case DeviceValve:
         {
             if (isOnline) {
                 cell.deviceImage.image = [UIImage imageNamed:@"img_valve_on"];
@@ -422,7 +467,7 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
-        case 3:
+        case DeviceWallhob:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
         }
@@ -479,7 +524,7 @@ static CGFloat const Cell_Height = 72.f;
             DeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
             NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
             switch (type) {
-                case 1:
+                case DeviceThermostat:
                 {
 #if gleadSmart
                     ThermostatController *thermostatVC = [[ThermostatController alloc] init];
@@ -493,7 +538,7 @@ static CGFloat const Cell_Height = 72.f;
                 }
                     break;
                     
-                case 2:
+                case DeviceValve:
                 {
                     WirelessValveController *valveVC = [[WirelessValveController alloc] init];
                     valveVC.device = device;
@@ -501,7 +546,7 @@ static CGFloat const Cell_Height = 72.f;
                 }
                     break;
                     
-                case 3:
+                case DeviceWallhob:
                 {
                     
                 }
@@ -585,8 +630,18 @@ static CGFloat const Cell_Height = 72.f;
                 DeviceModel *device = self.deviceArray[indexPath.row];
                 Network *net = [Network shareNetwork];
                 UInt8 controlCode = 0x00;
-                NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]]];//删除节点
+                NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]]];//删除节点
                 [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
+                [SVProgressHUD show];
+                net.isDeleted = NO;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    //异步等待10秒，如果未收到信息做如下处理
+                    sleep(10);
+                    if (!net.isDeleted) {
+                        [NSObject showHudTipStr:LocalString(@"删除失败，请再试一次")];
+                        [SVProgressHUD dismiss];
+                    }
+                });
             }
             break;
             
@@ -594,6 +649,4 @@ static CGFloat const Cell_Height = 72.f;
             break;
     }
 }
-
-
 @end

@@ -41,7 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///@brief Device Info
 @property (strong, nonatomic) NSMutableArray *deviceArray;
 
-
+///@brief 设备删除成功
+@property (nonatomic) BOOL isDeleted;
 
 ///@brief 连接
 - (BOOL)connectToHost:(NSString*)host onPort:(uint16_t)port error:(NSError **)errPtr;
@@ -58,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)handleOneNET69Message:(NSString *)cmmdReply;
 
 ///@brief 判断设备类型
-- (NSInteger)judgeDeviceTypeWith:(int)macByte2;
+- (DeviceType)judgeDeviceTypeWith:(int)macByte2;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -408,15 +408,6 @@ NSString *const CellIdentifier_device = @"CellID_device";
         return;
     }
     
-    [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        BOOL result = [db executeUpdate:@"INSERT INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.mac,@0,[Database shareInstance].currentHouse.houseUid];
-        if (result) {
-            NSLog(@"插入新网关到device成功");
-        }else{
-            NSLog(@"插入新网关到device失败");
-        }
-    }];
-    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     //设置超时时间
@@ -441,7 +432,14 @@ NSString *const CellIdentifier_device = @"CellID_device";
               
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
                   [NSObject showHudTipStr:LocalString(@"家庭绑定中央控制器成功")];
-                  
+                  [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+                      BOOL result = [db executeUpdate:@"INSERT INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.mac,@0,[Database shareInstance].currentHouse.houseUid];
+                      if (result) {
+                          NSLog(@"插入新网关到device成功");
+                      }else{
+                          NSLog(@"插入新网关到device失败");
+                      }
+                  }];
               }else{
                   [NSObject showHudTipStr:LocalString(@"家庭绑定中央控制器失败")];
               }

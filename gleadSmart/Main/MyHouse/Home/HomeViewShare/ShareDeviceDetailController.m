@@ -210,19 +210,19 @@ static float HEIGHT_HEADER = 40.f;
         
         NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
         switch (type) {
-            case 1:
+            case DeviceThermostat:
             {
                 cell.leftImage.image = [UIImage imageNamed:@"img_thermostat_on"];
             }
                 break;
                 
-            case 2:
+            case DeviceValve:
             {
                 cell.leftImage.image = [UIImage imageNamed:@"img_valve_on"];
             }
                 break;
                 
-            case 3:
+            case DeviceWallhob:
             {
                 cell.leftImage.image = [UIImage imageNamed:@"img_wallHob"];
             }

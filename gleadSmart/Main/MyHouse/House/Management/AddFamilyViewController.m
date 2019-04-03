@@ -288,6 +288,14 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
 
 #pragma mark - Action
 - (void)completeAddFamily{
+    if (self->checkedRoomArray.count <= 0 || [self->name isKindOfClass:[NSNull class]] || self->lon == NULL || self->lat == NULL) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"请填写正确信息,必须选择房间") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     Database *db = [Database shareInstance];

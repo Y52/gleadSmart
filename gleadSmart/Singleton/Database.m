@@ -190,7 +190,7 @@ static dispatch_once_t oneToken;
             device.roomUid = [set stringForColumn:@"roomUid"];
             device.type = [NSNumber numberWithInt:[set intForColumn:@"type"]];
             device.houseUid = houseUid;
-            NSLog(@"%@",device.name);
+            NSLog(@"%@,%@",device.name,device.mac);
             [deviceArray addObject:device];
         }
     }];

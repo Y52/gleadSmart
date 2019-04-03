@@ -55,7 +55,7 @@ NSString *const CellIdentifier_noHouseAddFaminlySelect = @"CellID_noHouseAddFami
 #pragma mark - private methods
 - (void)completeAddFamily{
     if (self->checkedRoomArray.count <= 0 || [self->name isKindOfClass:[NSNull class]] || self->lon == NULL || self->lat == NULL) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"请填写正确信息") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"请填写正确信息,必须选择房间") message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }];
         [alertController addAction:cancelAction];

@@ -447,11 +447,10 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
-    NSString *url = [NSString stringWithFormat:@"%@/api/room?houseUid=%@",httpIpAddress,self.houseUid];
+    NSString *url = [NSString stringWithFormat:@"%@/api/room",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
 
-    NSDictionary *parameters = @{@"name":cell.inputTF.text};
-    NSLog(@"%@,%@",parameters,url);
+    NSDictionary *parameters = @{@"name":cell.inputTF.text,@"houseUid":self.houseUid};
     
     [manager POST:url parameters:parameters progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -461,7 +460,7 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
               NSLog(@"success:%@",daetr);
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
                   [NSObject showHudTipStr:LocalString(@"成功添加房间")];
-                  [self.navigationController popToRootViewControllerAnimated:YES];
+                  [self.navigationController popViewControllerAnimated:YES];
               }else{
                   [NSObject showHudTipStr:LocalString(@"添加房间失败")];
               }

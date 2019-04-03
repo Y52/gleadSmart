@@ -148,7 +148,6 @@ static int noUserInteractionHeartbeat = 0;
 }
 
 - (void)broadcast{
-    
     if (_connectedDevice) {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             [self.udpTimer setFireDate:[NSDate distantFuture]];
@@ -163,7 +162,6 @@ static int noUserInteractionHeartbeat = 0;
     UInt16 port = 17888;
     
     [_udpSocket sendData:data toHost:host port:port withTimeout:timeout tag:200];
-    
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext{
@@ -367,7 +365,7 @@ static int noUserInteractionHeartbeat = 0;
             NSMutableArray *data69 = [[NSMutableArray alloc] init];
             [data69 addObject:[NSNumber numberWithUnsignedInteger:0x69]];
             [data69 addObject:[NSNumber numberWithUnsignedInteger:controlCode]];
-            if ([self judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]] == 0) {
+            if ([self judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]] == DeviceCenterlControl) {
                 [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(0, 2)]]]];
                 [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
                 [data69 addObject:[NSNumber numberWithInt:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(4, 2)]]]];
@@ -400,11 +398,14 @@ static int noUserInteractionHeartbeat = 0;
  @param recivedData69 中央控制器返回的69帧
  *从网关获取设备列表并进行数据库等的操作
  */
+
 - (void)inquireNode:(NSMutableArray *)recivedData69{
     Database *db = [Database shareInstance];
+    db.localDeviceArray = [db queryAllDevice:db.currentHouse.houseUid];
     if (!self.deviceArray) {
         self.deviceArray = [[NSMutableArray alloc] init];
     }
+    [self.deviceArray removeAllObjects];
     NSMutableArray *data = [[NSMutableArray alloc] init];
     [data addObjectsFromArray:recivedData69];
     int count = [data[12] intValue];
@@ -420,6 +421,7 @@ static int noUserInteractionHeartbeat = 0;
         //将中央控制器查询到的设备和服务器设备对比
         BOOL isExisted = NO;//防止重复显示以及刷新时重新添加设备到服务器
         for (DeviceModel *existedDevice in self.deviceArray) {
+            NSLog(@"%@",existedDevice.mac);
             if ([existedDevice.mac isEqualToString:device.mac]) {
                 existedDevice.isOnline = @0;
                 existedDevice.isOn = @0;
@@ -437,7 +439,7 @@ static int noUserInteractionHeartbeat = 0;
                 localDevice.type = device.type;
                 
                 [self.deviceArray addObject:localDevice];
-                
+                NSLog(@"%@",localDevice.mac);
                 [db.localDeviceArray removeObject:localDevice];
                 isLocal = YES;
                 break;
@@ -459,6 +461,7 @@ static int noUserInteractionHeartbeat = 0;
             __block typeof(self) blockSelf = self;
             [self addNewDeviceWith:device success:^{
                 [blockSelf.deviceArray addObject:device];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
             }];
         }
     }
@@ -467,8 +470,10 @@ static int noUserInteractionHeartbeat = 0;
      *将localDeviceArray剩余的device从服务器中删除，因为在网关中查找不到设备
      */
     for (DeviceModel *localDevice in db.localDeviceArray) {
-        //删除api还没做好
-        //[self removeOldDeviceWith:localDevice];
+        if ([localDevice.type integerValue] == 0) {
+            continue;//中央控制器
+        }
+        [self removeOldDeviceWith:localDevice];
     }
     
     //通知刷新设备
@@ -648,7 +653,10 @@ static int noUserInteractionHeartbeat = 0;
     if (!device.name) {
         device.name = device.mac;
     }
-    NSDictionary *parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":@"5bfcb08be4b0c54526650eec",@"houseUid":db.currentHouse.houseUid};
+    NSMutableArray *homeList = [db queryRoomsWith:db.currentHouse.houseUid];
+    RoomModel *room = homeList[0];//将新设备插入到家庭第一个房间
+    NSDictionary *parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":room.roomUid,@"houseUid":db.currentHouse.houseUid};
+    NSLog(@"%@",parameters);
     
     NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
@@ -699,12 +707,13 @@ static int noUserInteractionHeartbeat = 0;
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
-    NSLog(@"%@",db.user.userId);
-    NSDictionary *parameters = @{@"userId":db.user.userId,@"mac":device.mac};
+    NSDictionary *parameters = @{@"mac":device.mac,@"type":device.type};
     
     NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
 
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
+    
     [manager DELETE:url parameters:parameters
             success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
@@ -716,6 +725,7 @@ static int noUserInteractionHeartbeat = 0;
                      *在本地删除
                      */
                     [db deleteDevice:device.mac];
+                    NSLog(@"删除设备%@成功",device.mac);
                 }else{
                     
                 }
@@ -731,17 +741,17 @@ static int noUserInteractionHeartbeat = 0;
  *判断设备类型
  *设备种类；0表示中央控制器，1表示温控器，2表示无线水阀，3表示壁挂炉调节器
  */
-- (NSInteger)judgeDeviceTypeWith:(int)macByte2{
+- (DeviceType)judgeDeviceTypeWith:(int)macByte2{
     if (macByte2 >= 0x08 && macByte2 <= 0x0F) {
-        return 1;
+        return DeviceThermostat;
     }
     if (macByte2 >= 0x10 && macByte2 <= 0x17){
-        return 3;
+        return DeviceWallhob;
     }
     if (macByte2 >= 0x18 && macByte2 <= 0x1F) {
-        return 2;
+        return DeviceValve;
     }
-    return 0;
+    return DeviceCenterlControl;
 }
 
 #pragma mark - 分享设备方法
@@ -798,12 +808,12 @@ static int noUserInteractionHeartbeat = 0;
     
     NSString *datastreams = @"";
     switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
-        case 1:
+        case DeviceThermostat:
             datastreams = [datastreams stringByAppendingString:@"11"];
             datastreams = [datastreams stringByAppendingString:device.mac];
             break;
             
-        case 2:
+        case DeviceValve:
             datastreams = [datastreams stringByAppendingString:@"21"];
             datastreams = [datastreams stringByAppendingString:device.mac];
             break;
@@ -1099,7 +1109,6 @@ static int noUserInteractionHeartbeat = 0;
     }
 }
 
-#if gleadSmart
 - (void)handle68Message:(NSArray *)data
 {
     if (![self frameIsRight:data])
@@ -1151,6 +1160,14 @@ static int noUserInteractionHeartbeat = 0;
             if ([_recivedData69[10] unsignedIntegerValue] == 0x92 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 //在网节点删除
                 NSLog(@"在网节点删除");
+                self.isDeleted = YES;
+                
+                //获取家庭网关下所有下挂设备
+                UInt8 controlCode = 0x00;
+                NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+                [[Network shareNetwork] sendData69With:controlCode mac:db.currentHouse.mac data:data failuer:nil];
+
+                [NSObject showHudTipStr:LocalString(@"删除设备成功")];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //新增节点信息上报
@@ -1573,21 +1590,6 @@ static int noUserInteractionHeartbeat = 0;
             break;
     }
 }
-#elif jienuoIOT
-- (void)handle68Message:(NSArray *)data
-{
-    if (![self frameIsRight:data])
-    {
-        //68帧数据错误
-        return;
-    }
-    if (_recivedData69)
-    {
-        [_recivedData69 removeAllObjects];
-        [_recivedData69 addObjectsFromArray:data];
-    }
-}
-#endif
 
 -(BOOL)frameIsRight:(NSArray *)data
 {

@@ -17,6 +17,7 @@
 
 + (NSString *)HexByInt:(int)decimalInt{
     NSString *addressString = [NSString stringWithFormat:@"%02x",decimalInt];
+    addressString = [addressString uppercaseString];
     return addressString;
 }
 
