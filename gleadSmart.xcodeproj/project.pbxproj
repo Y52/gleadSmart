@@ -269,8 +269,6 @@
 		BB5B03CB21B90C48007AC2B1 /* img_mine_headerBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5B03C921B90C47007AC2B1 /* img_mine_headerBG@2x.png */; };
 		BB5B03CE21B91290007AC2B1 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B03CD21B91290007AC2B1 /* AccountViewController.m */; };
 		BB5CDC8521EC26F300C2B6FA /* YRabbitMQ.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5CDC8421EC26F300C2B6FA /* YRabbitMQ.m */; };
-		BB5CDC8721EC2FD800C2B6FA /* RMQClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */; };
-		BB5CDC8921EC3F8100C2B6FA /* RMQClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB62E4B321B4C0B700C0FA39 /* ThermostatTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4B221B4C0B700C0FA39 /* ThermostatTimerController.m */; };
 		BB62E4B721B4CB6A00C0FA39 /* img_thermos_moTimer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4B421B4CB6A00C0FA39 /* img_thermos_moTimer@3x.png */; };
 		BB62E4B821B4CB6A00C0FA39 /* img_thermos_moTimer.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4B521B4CB6A00C0FA39 /* img_thermos_moTimer.png */; };
@@ -335,8 +333,6 @@
 		BB647BE9224E079700DCB992 /* PlugOutletController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB647BE7224E000800DCB992 /* PlugOutletController.m */; };
 		BB6739DB22326801002E6239 /* NoHouseBridgingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DA22326801002E6239 /* NoHouseBridgingController.m */; };
 		BB6739DE223271AA002E6239 /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DD223271AA002E6239 /* NoHouseAddController.m */; };
-		BB73D54321EDCB1E004AEE18 /* JKVValue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; };
-		BB73D54421EDCB1E004AEE18 /* JKVValue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB73D54521EDD262004AEE18 /* YTFAlertController.m */; };
 		BB7AAE0E2254A14E00796DA1 /* 120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7AAE062254A14E00796DA1 /* 120@2x.png */; };
 		BB7AAE0F2254A14E00796DA1 /* 80@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7AAE072254A14E00796DA1 /* 80@2x.png */; };
@@ -537,8 +533,6 @@
 		BBA59466224A2AB1009D5941 /* HomeDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB835FA3219C03A300225B60 /* HomeDeviceController.m */; };
 		BBA59467224A2AB1009D5941 /* PhoneVerifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */; };
 		BBA59468224A2AB1009D5941 /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A401821991AA8004669CA /* NSString+Common.m */; };
-		BBA5946A224A2AB1009D5941 /* JKVValue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; };
-		BBA5946B224A2AB1009D5941 /* RMQClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */; };
 		BBA5946C224A2AB1009D5941 /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */; };
 		BBA5946E224A2AB1009D5941 /* img_adddevice_gateway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593D0224A266E009D5941 /* img_adddevice_gateway@2x.png */; };
 		BBA5946F224A2AB1009D5941 /* img_wallHob@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0A40A621997C99004669CA /* img_wallHob@3x.png */; };
@@ -832,8 +826,6 @@
 		BBA5958F224A2AB1009D5941 /* img_launchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2AD78C21ABD813006DB83A /* img_launchBG.png */; };
 		BBA59590224A2AB1009D5941 /* img_ther_addTimerWeek.png in Resources */ = {isa = PBXBuildFile; fileRef = BB62E4C621B4D9C900C0FA39 /* img_ther_addTimerWeek.png */; };
 		BBA59591224A2AB1009D5941 /* thermostat_-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB63B60121B4151D00D77489 /* thermostat_-@2x.png */; };
-		BBA59594224A2AB1009D5941 /* JKVValue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB73D54221EDCB1E004AEE18 /* JKVValue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BBA59595224A2AB1009D5941 /* RMQClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BBAB280F221B912400E21041 /* HomeDeviceSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */; };
 		BBAB2813221B9D4F00E21041 /* ShareDeviceSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB2812221B9D4F00E21041 /* ShareDeviceSelectCell.m */; };
 		BBF631FB21BB5B04006A23AC /* img_auto_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF631F321BB5B02006A23AC /* img_auto_on@3x.png */; };
@@ -885,6 +877,7 @@
 		BBF8CAF12216A4650030E921 /* FamilyMemberInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAF02216A4650030E921 /* FamilyMemberInfoCell.m */; };
 		BBF8CAF42216A8460030E921 /* FamilyMemberSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAF32216A8460030E921 /* FamilyMemberSetCell.m */; };
 		DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */; };
+		EA5B4E811AE37B2622ED917D /* Pods_jienuoIOT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B0EAF87229454E67D9D19C /* Pods_jienuoIOT.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -907,12 +900,10 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		BB5CDC8A21EC3F8200C2B6FA /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BB73D54421EDCB1E004AEE18 /* JKVValue.framework in Embed Frameworks */,
-				BB5CDC8921EC3F8100C2B6FA /* RMQClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -923,8 +914,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BBA59594224A2AB1009D5941 /* JKVValue.framework in Embed Frameworks */,
-				BBA59595224A2AB1009D5941 /* RMQClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -971,6 +960,7 @@
 		36E3CF642252008C00F4195D /* AddDeviceShareController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceShareController.m; sourceTree = "<group>"; };
 		36FD8C542236553300DE4D28 /* PhoneVerifyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneVerifyCell.h; sourceTree = "<group>"; };
 		36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneVerifyCell.m; sourceTree = "<group>"; };
+		3A5C98FE5F855BF995BC4CC2 /* Pods-jienuoIOT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jienuoIOT.release.xcconfig"; path = "Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT.release.xcconfig"; sourceTree = "<group>"; };
 		3E3AFFB821A7E74800EA8F1C /* HouseManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseManagementTableViewCell.h; sourceTree = "<group>"; };
 		3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseManagementTableViewCell.m; sourceTree = "<group>"; };
 		3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeManagementCell.m; sourceTree = "<group>"; };
@@ -995,6 +985,7 @@
 		3EA530C921AB9C88000A6D26 /* RetrievePasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrievePasswordController.m; sourceTree = "<group>"; };
 		3ECFF39D219EB00C00024D2C /* SelectDeviceTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectDeviceTypeCell.h; sourceTree = "<group>"; };
 		3ECFF39E219EB00C00024D2C /* SelectDeviceTypeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectDeviceTypeCell.m; sourceTree = "<group>"; };
+		88B0EAF87229454E67D9D19C /* Pods_jienuoIOT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_jienuoIOT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB00A4F121BA202C004E4051 /* AccountHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountHeaderCell.h; sourceTree = "<group>"; };
 		BB00A4F221BA202C004E4051 /* AccountHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountHeaderCell.m; sourceTree = "<group>"; };
 		BB00A4F421BA237A004E4051 /* img_account_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_account_header.png; sourceTree = "<group>"; };
@@ -1308,7 +1299,6 @@
 		BB5B03CD21B91290007AC2B1 /* AccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		BB5CDC8321EC26F300C2B6FA /* YRabbitMQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YRabbitMQ.h; sourceTree = "<group>"; };
 		BB5CDC8421EC26F300C2B6FA /* YRabbitMQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YRabbitMQ.m; sourceTree = "<group>"; };
-		BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RMQClient.framework; path = Carthage/Build/iOS/RMQClient.framework; sourceTree = "<group>"; };
 		BB62E4B121B4C0B700C0FA39 /* ThermostatTimerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThermostatTimerController.h; sourceTree = "<group>"; };
 		BB62E4B221B4C0B700C0FA39 /* ThermostatTimerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThermostatTimerController.m; sourceTree = "<group>"; };
 		BB62E4B421B4CB6A00C0FA39 /* img_thermos_moTimer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermos_moTimer@3x.png"; sourceTree = "<group>"; };
@@ -1389,7 +1379,6 @@
 		BB6739DA22326801002E6239 /* NoHouseBridgingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoHouseBridgingController.m; sourceTree = "<group>"; };
 		BB6739DC223271AA002E6239 /* NoHouseAddController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoHouseAddController.h; sourceTree = "<group>"; };
 		BB6739DD223271AA002E6239 /* NoHouseAddController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoHouseAddController.m; sourceTree = "<group>"; };
-		BB73D54221EDCB1E004AEE18 /* JKVValue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JKVValue.framework; path = Carthage/Build/iOS/JKVValue.framework; sourceTree = "<group>"; };
 		BB73D54521EDD262004AEE18 /* YTFAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTFAlertController.m; sourceTree = "<group>"; };
 		BB73D54621EDD262004AEE18 /* YTFAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTFAlertController.h; sourceTree = "<group>"; };
 		BB7AAE062254A14E00796DA1 /* 120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120@2x.png"; sourceTree = "<group>"; };
@@ -1529,6 +1518,7 @@
 		BBF8CAF02216A4650030E921 /* FamilyMemberInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyMemberInfoCell.m; sourceTree = "<group>"; };
 		BBF8CAF22216A8460030E921 /* FamilyMemberSetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyMemberSetCell.h; sourceTree = "<group>"; };
 		BBF8CAF32216A8460030E921 /* FamilyMemberSetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyMemberSetCell.m; sourceTree = "<group>"; };
+		F8A0445F45AA8D6F693D34C5 /* Pods-jienuoIOT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jienuoIOT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1536,8 +1526,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB73D54321EDCB1E004AEE18 /* JKVValue.framework in Frameworks */,
-				BB5CDC8721EC2FD800C2B6FA /* RMQClient.framework in Frameworks */,
 				DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1560,9 +1548,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBA5946A224A2AB1009D5941 /* JKVValue.framework in Frameworks */,
-				BBA5946B224A2AB1009D5941 /* RMQClient.framework in Frameworks */,
 				BBA5946C224A2AB1009D5941 /* Pods_gleadSmart.framework in Frameworks */,
+				EA5B4E811AE37B2622ED917D /* Pods_jienuoIOT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1574,6 +1561,8 @@
 			children = (
 				1C91728F2E98E7E5ACCA018D /* Pods-gleadSmart.debug.xcconfig */,
 				21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */,
+				F8A0445F45AA8D6F693D34C5 /* Pods-jienuoIOT.debug.xcconfig */,
+				3A5C98FE5F855BF995BC4CC2 /* Pods-jienuoIOT.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2208,7 +2197,6 @@
 		BB49DF8421958864004E00A2 = {
 			isa = PBXGroup;
 			children = (
-				BB73D54221EDCB1E004AEE18 /* JKVValue.framework */,
 				CFCEDBAD622E9D8465800F48 /* Frameworks */,
 				BB49DF8F21958864004E00A2 /* gleadSmart */,
 				BB49DFAB21958867004E00A2 /* gleadSmartTests */,
@@ -2647,8 +2635,8 @@
 		CFCEDBAD622E9D8465800F48 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BB5CDC8621EC2FD800C2B6FA /* RMQClient.framework */,
 				0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */,
+				88B0EAF87229454E67D9D19C /* Pods_jienuoIOT.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3436,7 +3424,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-gleadSmart-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-jienuoIOT-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3449,13 +3437,15 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/JKVValue/JKVValue.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/RMQClient/RMQClient.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/WMPageController/WMPageController.framework",
@@ -3465,31 +3455,37 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JKVValue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RMQClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMPageController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CDE5640370C0C592CDFE9FD3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/JKVValue/JKVValue.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/RMQClient/RMQClient.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/WMPageController/WMPageController.framework",
@@ -3499,9 +3495,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JKVValue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RMQClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMPageController.framework",
@@ -3509,7 +3507,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3971,8 +3968,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				DEVELOPMENT_TEAM = HL4DHZX78L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -3990,8 +3988,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GLEAD.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -4002,8 +4001,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				DEVELOPMENT_TEAM = HL4DHZX78L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4021,8 +4021,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GLEAD.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -4103,7 +4104,7 @@
 		};
 		BBA59597224A2AB1009D5941 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C91728F2E98E7E5ACCA018D /* Pods-gleadSmart.debug.xcconfig */;
+			baseConfigurationReference = F8A0445F45AA8D6F693D34C5 /* Pods-jienuoIOT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
@@ -4134,7 +4135,7 @@
 		};
 		BBA59598224A2AB1009D5941 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21953BDCD78E9AE75C963076 /* Pods-gleadSmart.release.xcconfig */;
+			baseConfigurationReference = 3A5C98FE5F855BF995BC4CC2 /* Pods-jienuoIOT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;

@@ -293,6 +293,7 @@ static float HEIGHT_HEADER = 40.f;
         [self removeSharerDevicceHttpDelMethod:device.mac success:^{
             [self->deviceList removeObject:device];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [NSObject showHudTipStr:LocalString(@"删除成功")];
         } failure:^{
             
         }];

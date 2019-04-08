@@ -355,6 +355,7 @@ NSString *const CellIdentifier_DeviceShare = @"CellIdentifier_DeviceShare";
         [self removeSharerHttpDelMethod:sharer.sharerUid success:^{
             [self.sharerList removeObject:sharer];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [NSObject showHudTipStr:LocalString(@"删除成功")];
         } failure:^{
             
         }];

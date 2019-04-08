@@ -267,6 +267,7 @@ static bool isDeleted = NO;
         [self removeSharerHttpDelMethod:owner success:^{
             [self.ownerList removeObject:owner];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [NSObject showHudTipStr:LocalString(@"删除成功")];
             isDeleted = YES;
         } failure:^{
             

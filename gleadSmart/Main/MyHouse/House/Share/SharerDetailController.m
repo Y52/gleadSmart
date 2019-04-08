@@ -359,6 +359,7 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
         [self removeSharerDevicceHttpDelMethod:device.mac success:^{
             [self.deviceList removeObject:device];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [NSObject showHudTipStr:LocalString(@"删除成功")];
         } failure:^{
             
         }];

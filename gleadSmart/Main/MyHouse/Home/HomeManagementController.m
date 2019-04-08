@@ -148,6 +148,8 @@ static CGFloat const Cell_Height = 50.f;
             
             //让表视图删除对应的行 //必须执行在移除数组后面
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [NSObject showHudTipStr:LocalString(@"删除成功")];
+
         }
             break;
         case UITableViewCellEditingStyleInsert:

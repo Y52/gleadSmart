@@ -198,6 +198,25 @@ static dispatch_once_t oneToken;
     return deviceArray;
 }
 
+- (NSMutableArray *)queryDevice:(NSString *)houseUid WithoutCenterlControlType:(NSNumber *)type{
+    NSMutableArray *deviceArray = [[NSMutableArray alloc] init];
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM device WHERE houseUid = ? AND type != ?",houseUid,type];
+        while ([set next]) {
+            DeviceModel *device = [[DeviceModel alloc] init];
+            device.mac = [set stringForColumn:@"mac"];
+            device.name = [set stringForColumn:@"name"];
+            device.roomUid = [set stringForColumn:@"roomUid"];
+            device.type = [NSNumber numberWithInt:[set intForColumn:@"type"]];
+            device.houseUid = houseUid;
+            NSLog(@"%@,%@",device.name,device.mac);
+            [deviceArray addObject:device];
+        }
+    }];
+    NSLog(@"%lu",(unsigned long)deviceArray.count);
+    return deviceArray;
+}
+
 - (NSMutableArray *)queryAllShareDevice{
     NSMutableArray *deviceArray = [[NSMutableArray alloc] init];
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {

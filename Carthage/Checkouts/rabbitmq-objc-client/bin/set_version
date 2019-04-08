@@ -1,6 +1,0 @@
-#!/bin/bash
-
-set -ex
-
-xcrun agvtool new-marketing-version $1
-xcrun agvtool next-version -all

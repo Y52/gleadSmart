@@ -418,6 +418,10 @@ static int noUserInteractionHeartbeat = 0;
         device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13 + i*4] intValue]]];
         device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[15 + i*4] intValue]]];
         
+        if ([device.type integerValue] == DeviceCenterlControl) {
+            continue;
+        }
+        
         //将中央控制器查询到的设备和服务器设备对比
         BOOL isExisted = NO;//防止重复显示以及刷新时重新添加设备到服务器
         for (DeviceModel *existedDevice in self.deviceArray) {
@@ -456,7 +460,6 @@ static int noUserInteractionHeartbeat = 0;
                 device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"温控器"),[device.mac substringWithRange:NSMakeRange(6, 2)]];
             }else if ([device.type integerValue] == 2){
                 device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"无线水阀"),[device.mac substringWithRange:NSMakeRange(6, 2)]];
-                NSLog(@"%@",device.name);
             }
             __block typeof(self) blockSelf = self;
             [self addNewDeviceWith:device success:^{
@@ -470,10 +473,15 @@ static int noUserInteractionHeartbeat = 0;
      *将localDeviceArray剩余的device从服务器中删除，因为在网关中查找不到设备
      */
     for (DeviceModel *localDevice in db.localDeviceArray) {
-        if ([localDevice.type integerValue] == 0) {
+        if ([localDevice.type integerValue] == DeviceCenterlControl) {
             continue;//中央控制器
         }
-        [self removeOldDeviceWith:localDevice];
+        [self removeOldDeviceWith:localDevice success:^{
+            //通知刷新设备
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+        } failure:^{
+            
+        }];
     }
     
     //通知刷新设备
@@ -693,7 +701,7 @@ static int noUserInteractionHeartbeat = 0;
 /*
  *删除设备
  */
-- (void)removeOldDeviceWith:(DeviceModel *)device{
+- (void)removeOldDeviceWith:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failure{
     Database *db = [Database shareInstance];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -726,13 +734,19 @@ static int noUserInteractionHeartbeat = 0;
                      */
                     [db deleteDevice:device.mac];
                     NSLog(@"删除设备%@成功",device.mac);
+                    if (success) {
+                        success();
+                    }
                 }else{
-                    
+                    if (failure) {
+                        failure();
+                    }
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 NSLog(@"Error:%@",error);
-                [NSObject showHudTipStr:LocalString(@"无法登录远程服务器，请检查网络状况")];
-                
+                if (failure) {
+                    failure();
+                }
             }
      ];
 }

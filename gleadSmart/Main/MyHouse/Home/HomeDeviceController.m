@@ -67,7 +67,7 @@ static CGFloat const Cell_Height = 72.f;
         allDevice = [Network shareNetwork].deviceArray;
     }else{
         //未得到回复信息，用本地or服务器存储的信息
-        allDevice = [Database shareInstance].localDeviceArray;
+        allDevice = [[Database shareInstance] queryDevice:[Database shareInstance].currentHouse.houseUid WithoutCenterlControlType:@0];
     }
     if (!_room) {
         //所有设备房间列表
@@ -632,16 +632,13 @@ static CGFloat const Cell_Height = 72.f;
                 UInt8 controlCode = 0x00;
                 NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]]];//删除节点
                 [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
-                [SVProgressHUD show];
-                net.isDeleted = NO;
-                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    //异步等待10秒，如果未收到信息做如下处理
-                    sleep(10);
-                    if (!net.isDeleted) {
-                        [NSObject showHudTipStr:LocalString(@"删除失败，请再试一次")];
-                        [SVProgressHUD dismiss];
-                    }
-                });
+                [net removeOldDeviceWith:device success:^{
+                    [self.deviceArray removeObject:device];
+                    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    [NSObject showHudTipStr:LocalString(@"删除设备成功")];
+                } failure:^{
+                    [NSObject showHudTipStr:LocalString(@"删除设备失败")];
+                }];
             }
             break;
             

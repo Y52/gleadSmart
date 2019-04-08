@@ -60,6 +60,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///@brief 判断设备类型
 - (DeviceType)judgeDeviceTypeWith:(int)macByte2;
+
+///@brief 服务器删除设备
+- (void)removeOldDeviceWith:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failure;
 @end
 
 NS_ASSUME_NONNULL_END

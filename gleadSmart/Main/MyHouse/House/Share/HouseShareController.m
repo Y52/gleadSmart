@@ -360,6 +360,7 @@ NSString *const CellIdentifier_SharerList = @"CellIdentifier_SharerList";
         [self removeSharerHttpDelMethod:sharer.sharerUid success:^{
             [self.sharerList removeObject:sharer];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [NSObject showHudTipStr:LocalString(@"删除成功")];
         } failure:^{
             
         }];

@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSMutableArray *)queryRoomsWith:(NSString *)houseUid;
 - (RoomModel *)queryRoomWith:(NSString *)roomUid;
 - (NSMutableArray *)queryAllDevice:(NSString *)houseUid;
+- (NSMutableArray *)queryDevice:(NSString *)houseUid WithoutCenterlControlType:(NSNumber *)type;
 - (DeviceModel *)queryGateway:(NSString *)houseUid;
 - (BOOL)queryDevice:(NSString *)mac;
 - (NSMutableArray *)queryDevicesWith:(NSString *)roomUid;
