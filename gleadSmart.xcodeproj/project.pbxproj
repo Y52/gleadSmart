@@ -152,6 +152,7 @@
 		BB2CB8A2221FA8B9001E6703 /* img_addShareCheck_notable@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2CB89F221FA8B8001E6703 /* img_addShareCheck_notable@3x.png */; };
 		BB2CB8A3221FA8B9001E6703 /* img_addShareCheck_notable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2CB8A0221FA8B8001E6703 /* img_addShareCheck_notable@2x.png */; };
 		BB2CB8A6221FE171001E6703 /* SharerRemarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2CB8A5221FE171001E6703 /* SharerRemarkController.m */; };
+		BB30C4FB225B4991000FBF28 /* StatusConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB30C4FA225B4991000FBF28 /* StatusConfirmController.m */; };
 		BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */; };
 		BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352911219D61B300428DE9 /* HouseSelectCell.m */; };
 		BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB352914219D63BC00428DE9 /* HouseSelectController.m */; };
@@ -1149,6 +1150,8 @@
 		BB2CB8A0221FA8B8001E6703 /* img_addShareCheck_notable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addShareCheck_notable@2x.png"; sourceTree = "<group>"; };
 		BB2CB8A4221FE171001E6703 /* SharerRemarkController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharerRemarkController.h; sourceTree = "<group>"; };
 		BB2CB8A5221FE171001E6703 /* SharerRemarkController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharerRemarkController.m; sourceTree = "<group>"; };
+		BB30C4F9225B4991000FBF28 /* StatusConfirmController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatusConfirmController.h; sourceTree = "<group>"; };
+		BB30C4FA225B4991000FBF28 /* StatusConfirmController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatusConfirmController.m; sourceTree = "<group>"; };
 		BB35290D219D0FC700428DE9 /* HomeDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceCell.h; sourceTree = "<group>"; };
 		BB35290E219D0FC700428DE9 /* HomeDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceCell.m; sourceTree = "<group>"; };
 		BB352910219D61B300428DE9 /* HouseSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSelectCell.h; sourceTree = "<group>"; };
@@ -2058,6 +2061,8 @@
 			children = (
 				BB37DF0021A7EFC300B2121B /* DeviceViewController.h */,
 				BB37DF0321A7EFC300B2121B /* DeviceViewController.m */,
+				BB30C4F9225B4991000FBF28 /* StatusConfirmController.h */,
+				BB30C4FA225B4991000FBF28 /* StatusConfirmController.m */,
 				BB37DF0421A7EFC400B2121B /* EspViewController.h */,
 				BB37DF0521A7EFC400B2121B /* EspViewController.m */,
 				BB37DF0921A7EFC400B2121B /* DeviceConnectView.h */,
@@ -3617,6 +3622,7 @@
 				BB2CB8A6221FE171001E6703 /* SharerRemarkController.m in Sources */,
 				BB2AC10821A94D63006DB83A /* AFURLSessionManager.m in Sources */,
 				BB00A4F321BA202C004E4051 /* AccountHeaderCell.m in Sources */,
+				BB30C4FB225B4991000FBF28 /* StatusConfirmController.m in Sources */,
 				3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */,
 				BBF8CAF42216A8460030E921 /* FamilyMemberSetCell.m in Sources */,
 				BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */,
