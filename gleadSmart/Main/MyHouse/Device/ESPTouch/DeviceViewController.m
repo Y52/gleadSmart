@@ -7,11 +7,11 @@
 //
 
 #import "DeviceViewController.h"
-#import "EspViewController.h"
 #import "GCDAsyncUdpSocket.h"
 #import "GCDAsyncSocket.h"
 #import "MJRefresh.h"
 #import "DeviceTableViewCell.h"
+#import "StatusConfirmController.h"
 
 #import <netdb.h>//解析udp获取的IP地址
 
@@ -449,8 +449,8 @@ NSString *const CellIdentifier_device = @"CellID_device";
 }
 
 - (void)goEsp{
-    EspViewController *EspVC = [[EspViewController alloc] init];
-    [self.navigationController pushViewController:EspVC animated:YES];
+    StatusConfirmController *StatusVC = [[StatusConfirmController alloc] init];
+    [self.navigationController pushViewController:StatusVC animated:YES];
     
 }
 
