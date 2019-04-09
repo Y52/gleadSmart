@@ -12,6 +12,7 @@
 #import "NodeButton.h"
 #import "alarmModel.h"
 #import "DeviceSettingController.h"
+#import "ValveAlertInfoController.h"
 
 NSString *const CellIdentifier_NodeDetail = @"CellID_NodeDetail";
 
@@ -1175,6 +1176,7 @@ CGFloat const nodeButtonWidth = 20.f;
     [headerButton setTitle:LocalString(@"查看所有节点漏水详情") forState:UIControlStateNormal];
     headerButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:13.f];
     headerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [headerButton addTarget:self action:@selector(CheckedOut) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:headerButton];
     
     return headerView;
@@ -1182,6 +1184,12 @@ CGFloat const nodeButtonWidth = 20.f;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return cellHeader_Height;
+}
+
+- (void)CheckedOut{
+    ValveAlertInfoController *ValveAlertVC = [[ValveAlertInfoController alloc] init];
+    ValveAlertVC.leakAlertInfo = self.leakageInfos;
+    [self.navigationController pushViewController:ValveAlertVC animated:YES];
 }
 
 @end
