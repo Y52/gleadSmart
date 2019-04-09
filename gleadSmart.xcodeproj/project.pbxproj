@@ -22,6 +22,7 @@
 		3604FD53225B707A00D0B97D /* img_Lamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD50225B707A00D0B97D /* img_Lamp.png */; };
 		3604FD54225B707A00D0B97D /* img_Lamp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD51225B707A00D0B97D /* img_Lamp@3x.png */; };
 		36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 36134F2B21E6E10100A7D98E /* NodeButton.m */; };
+		36330235225C844200E3EFAA /* ValveAlertInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36330234225C844200E3EFAA /* ValveAlertInfoController.m */; };
 		369C169B22250ECB0079159E /* AddRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169A22250ECA0079159E /* AddRoomsViewController.m */; };
 		369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169E222513E90079159E /* AddRoomsTextCell.m */; };
 		369C16A322255FD90079159E /* addRoom_hand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A022255FD90079159E /* addRoom_hand@3x.png */; };
@@ -946,6 +947,8 @@
 		3604FD51225B707A00D0B97D /* img_Lamp@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Lamp@3x.png"; sourceTree = "<group>"; };
 		36134F2A21E6E10100A7D98E /* NodeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeButton.h; sourceTree = "<group>"; };
 		36134F2B21E6E10100A7D98E /* NodeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeButton.m; sourceTree = "<group>"; };
+		36330233225C844200E3EFAA /* ValveAlertInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValveAlertInfoController.h; sourceTree = "<group>"; };
+		36330234225C844200E3EFAA /* ValveAlertInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ValveAlertInfoController.m; sourceTree = "<group>"; };
 		369C169922250ECA0079159E /* AddRoomsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRoomsViewController.h; sourceTree = "<group>"; };
 		369C169A22250ECA0079159E /* AddRoomsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRoomsViewController.m; sourceTree = "<group>"; };
 		369C169D222513E90079159E /* AddRoomsTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRoomsTextCell.h; sourceTree = "<group>"; };
@@ -2122,6 +2125,8 @@
 				BB37DEF421A7E59600B2121B /* WirelessValveController.m */,
 				BBF6326921BBBDE0006A23AC /* NodeDetailViewController.h */,
 				BBF6326A21BBBDE0006A23AC /* NodeDetailViewController.m */,
+				36330233225C844200E3EFAA /* ValveAlertInfoController.h */,
+				36330234225C844200E3EFAA /* ValveAlertInfoController.m */,
 			);
 			path = Valve;
 			sourceTree = "<group>";
@@ -3625,6 +3630,7 @@
 				BB2AC10721A94D63006DB83A /* AFHTTPSessionManager.m in Sources */,
 				BB2AC0EC21A8F156006DB83A /* ESPTouchGenerator.m in Sources */,
 				BB2AC0F321A8F156006DB83A /* ESPTouchTask.m in Sources */,
+				36330235225C844200E3EFAA /* ValveAlertInfoController.m in Sources */,
 				BB2AD7A721AD7F91006DB83A /* HouseSetCommonCell.m in Sources */,
 				BB7E7976221AA7780060A0CF /* AddShareController.m in Sources */,
 				BB2AC0EE21A8F156006DB83A /* ESPUDPSocketServer.m in Sources */,
