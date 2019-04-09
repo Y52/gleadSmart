@@ -532,6 +532,7 @@ CGFloat const nodeButtonWidth = 20.f;
 
 //获取所有下挂漏水节点
 - (void)getAllNode{
+    [SVProgressHUD show];
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x13,@0x04,@0x00];
     if (self.device.isShare) {
@@ -713,6 +714,7 @@ CGFloat const nodeButtonWidth = 20.f;
             if (!self.leakageInfos) {
                 self.leakageInfos = [[NSMutableArray alloc] init];
             }
+            [self.leakageInfos removeAllObjects];
             [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 alarmModel *alarm = [[alarmModel alloc] init];
                 alarm.room = [obj objectForKey:@"room"];

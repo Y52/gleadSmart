@@ -21,7 +21,7 @@
             _leftLabel.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_leftLabel];
             [_leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(50, 15));
+                make.size.mas_equalTo(CGSizeMake(200, 15));
                 make.left.equalTo(self.contentView.mas_left).offset((20));
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];

@@ -1552,6 +1552,7 @@ static int noUserInteractionHeartbeat = 0;
                 
                 //设备内容页面UI等刷新
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValveHangingNodes" object:nil userInfo:nil];
+                [SVProgressHUD dismiss];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x06 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //水阀恢复出厂设置
