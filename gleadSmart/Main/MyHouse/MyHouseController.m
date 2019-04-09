@@ -240,6 +240,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
         }
     }
     
+#warning todo 网关获取下挂设备，插座开关等获取状态
     //获取家庭网关下所有下挂设备
     UInt8 controlCode = 0x00;
     NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询

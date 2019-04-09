@@ -1150,6 +1150,7 @@ static int noUserInteractionHeartbeat = 0;
         case 0xFC:
         {
             //捷诺智能家居项目
+            [self jienuoIOTFrameHandle];
         }
             break;
             
@@ -1621,6 +1622,77 @@ static int noUserInteractionHeartbeat = 0;
                 [NSObject showHudTipStr:@"删除成功"];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"valveDeleteHangingNode" object:nil userInfo:nil];//删除节点后直接水阀页面节点重新生成
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)jienuoIOTFrameHandle{
+    //取出mac
+    NSString *mac = @"";
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
+
+    
+    Database *db = [Database shareInstance];
+    for (DeviceModel *device in self.deviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            //收到信息就上线
+            device.isOnline = @1;
+        }
+    }
+    switch ([_recivedData69[9] unsignedIntegerValue]) {
+        case 0x11:
+        {
+            //智能插座
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的开关状态");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"设置wifi智能插座的开关状态");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座当前日期时间");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                //在网节点查询
+                NSLog(@"设置wifi智能插座当前日期时间");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的闹钟");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"设置wifi智能插座的闹钟");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的延时开关");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"设置wifi智能插座的延时开关");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x10 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的电量（电压，电流，功率）");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x11 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的电压");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x12 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的电流");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x13 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的功率");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x20 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"设置wifi的SSID");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x21 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"设置wifi的密码");
             }
         }
             break;
