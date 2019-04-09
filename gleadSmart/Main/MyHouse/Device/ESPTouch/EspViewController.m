@@ -158,24 +158,11 @@
     }];
 }
 
-- (void)goAP{
-    APNetworkController *apVC = [[APNetworkController alloc] init];
-    [self.navigationController pushViewController:apVC animated:YES];
-}
+
 
 #pragma mark - setters and getters
 - (void)setNavItem{
     self.navigationItem.title = LocalString(@"添加设备");
-
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.frame = CGRectMake(0, 0, 60, 30);
-    [rightButton setTitle:LocalString(@"AP模式") forState:UIControlStateNormal];
-    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
-    [rightButton addTarget:self action:@selector(goAP) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.titleLabel.textAlignment = NSTextAlignmentRight;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
 }
 
 - (UIView *)backgroundView{

@@ -337,6 +337,17 @@
 		BB647BE9224E079700DCB992 /* PlugOutletController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB647BE7224E000800DCB992 /* PlugOutletController.m */; };
 		BB6739DB22326801002E6239 /* NoHouseBridgingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DA22326801002E6239 /* NoHouseBridgingController.m */; };
 		BB6739DE223271AA002E6239 /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DD223271AA002E6239 /* NoHouseAddController.m */; };
+		BB6C8D13225C361B00FD6472 /* img_nav_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6C8D10225C361B00FD6472 /* img_nav_back@2x.png */; };
+		BB6C8D14225C361B00FD6472 /* img_nav_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6C8D11225C361B00FD6472 /* img_nav_back@3x.png */; };
+		BB6C8D15225C361B00FD6472 /* img_nav_back.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6C8D12225C361B00FD6472 /* img_nav_back.png */; };
+		BB6C8D16225C362100FD6472 /* img_nav_back.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6C8D12225C361B00FD6472 /* img_nav_back.png */; };
+		BB6C8D17225C362300FD6472 /* img_nav_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6C8D10225C361B00FD6472 /* img_nav_back@2x.png */; };
+		BB6C8D18225C362500FD6472 /* img_nav_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6C8D11225C361B00FD6472 /* img_nav_back@3x.png */; };
+		BB6C8D1B225C3B8E00FD6472 /* APStatusConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6C8D1A225C3B8E00FD6472 /* APStatusConfirmController.m */; };
+		BB6C8D1D225C4F3500FD6472 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6C8D1C225C4F3500FD6472 /* NetworkExtension.framework */; };
+		BB6C8D1E225C4F4500FD6472 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6C8D1C225C4F3500FD6472 /* NetworkExtension.framework */; };
+		BB6C8D1F225C8DAC00FD6472 /* PlugOutletController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB647BE7224E000800DCB992 /* PlugOutletController.m */; };
+		BB6C8D20225C8DAF00FD6472 /* PlugOutletSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF562251B5FE00F4195D /* PlugOutletSettingController.m */; };
 		BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB73D54521EDD262004AEE18 /* YTFAlertController.m */; };
 		BB7AAE0E2254A14E00796DA1 /* 120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7AAE062254A14E00796DA1 /* 120@2x.png */; };
 		BB7AAE0F2254A14E00796DA1 /* 80@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7AAE072254A14E00796DA1 /* 80@2x.png */; };
@@ -1388,6 +1399,12 @@
 		BB6739DA22326801002E6239 /* NoHouseBridgingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoHouseBridgingController.m; sourceTree = "<group>"; };
 		BB6739DC223271AA002E6239 /* NoHouseAddController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoHouseAddController.h; sourceTree = "<group>"; };
 		BB6739DD223271AA002E6239 /* NoHouseAddController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoHouseAddController.m; sourceTree = "<group>"; };
+		BB6C8D10225C361B00FD6472 /* img_nav_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_nav_back@2x.png"; sourceTree = "<group>"; };
+		BB6C8D11225C361B00FD6472 /* img_nav_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_nav_back@3x.png"; sourceTree = "<group>"; };
+		BB6C8D12225C361B00FD6472 /* img_nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_nav_back.png; sourceTree = "<group>"; };
+		BB6C8D19225C3B8E00FD6472 /* APStatusConfirmController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APStatusConfirmController.h; sourceTree = "<group>"; };
+		BB6C8D1A225C3B8E00FD6472 /* APStatusConfirmController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APStatusConfirmController.m; sourceTree = "<group>"; };
+		BB6C8D1C225C4F3500FD6472 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		BB73D54521EDD262004AEE18 /* YTFAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTFAlertController.m; sourceTree = "<group>"; };
 		BB73D54621EDD262004AEE18 /* YTFAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTFAlertController.h; sourceTree = "<group>"; };
 		BB7AAE062254A14E00796DA1 /* 120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120@2x.png"; sourceTree = "<group>"; };
@@ -1536,6 +1553,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */,
+				BB6C8D1D225C4F3500FD6472 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1558,6 +1576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBA5946C224A2AB1009D5941 /* Pods_gleadSmart.framework in Frameworks */,
+				BB6C8D1E225C4F4500FD6472 /* NetworkExtension.framework in Frameworks */,
 				EA5B4E811AE37B2622ED917D /* Pods_jienuoIOT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1744,6 +1763,7 @@
 		BB0A404F21997A4B004669CA /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
+				BB6C8D0F225C35F900FD6472 /* nav_general */,
 				BB7AAE052254A14E00796DA1 /* appIcon */,
 				BB8AE4B522293CC70074118D /* 添加设备_slices */,
 				BB7E796A221A61F50060A0CF /* 我的共享_slices */,
@@ -1872,15 +1892,13 @@
 		BB21BF67219E66BE0067BC61 /* Device */ = {
 			isa = PBXGroup;
 			children = (
-				BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */,
-				BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */,
-				BB3D754B2252411D007DDFD6 /* DeviceSettingController.h */,
-				BB3D754C2252411D007DDFD6 /* DeviceSettingController.m */,
-				36E3CF5C2251F70700F4195D /* DeviceShare */,
 				BB37DEF321A7DDCE00B2121B /* ESPTouch */,
+				36E3CF5C2251F70700F4195D /* DeviceShare */,
 				BB37DF1321A7F6C800B2121B /* Thermostat */,
 				BB37DF1421A7F6D700B2121B /* Valve */,
 				BB647BE5224DFE5800DCB992 /* plugOutlet */,
+				BB3D754B2252411D007DDFD6 /* DeviceSettingController.h */,
+				BB3D754C2252411D007DDFD6 /* DeviceSettingController.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -2065,6 +2083,8 @@
 		BB37DEF321A7DDCE00B2121B /* ESPTouch */ = {
 			isa = PBXGroup;
 			children = (
+				BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */,
+				BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */,
 				BB37DF0021A7EFC300B2121B /* DeviceViewController.h */,
 				BB37DF0321A7EFC300B2121B /* DeviceViewController.m */,
 				BB30C4F9225B4991000FBF28 /* StatusConfirmController.h */,
@@ -2073,6 +2093,8 @@
 				BB37DF0521A7EFC400B2121B /* EspViewController.m */,
 				BB37DF0921A7EFC400B2121B /* DeviceConnectView.h */,
 				BB37DF0621A7EFC400B2121B /* DeviceConnectView.m */,
+				BB6C8D19225C3B8E00FD6472 /* APStatusConfirmController.h */,
+				BB6C8D1A225C3B8E00FD6472 /* APStatusConfirmController.m */,
 				BB8AE4B222292F890074118D /* APNetworkController.h */,
 				BB8AE4B322292F890074118D /* APNetworkController.m */,
 				BB63AACD222E05DC00DFC848 /* ConnectApNetController.h */,
@@ -2372,6 +2394,16 @@
 			path = plugOutlet;
 			sourceTree = "<group>";
 		};
+		BB6C8D0F225C35F900FD6472 /* nav_general */ = {
+			isa = PBXGroup;
+			children = (
+				BB6C8D12225C361B00FD6472 /* img_nav_back.png */,
+				BB6C8D10225C361B00FD6472 /* img_nav_back@2x.png */,
+				BB6C8D11225C361B00FD6472 /* img_nav_back@3x.png */,
+			);
+			path = nav_general;
+			sourceTree = "<group>";
+		};
 		BB7AAE052254A14E00796DA1 /* appIcon */ = {
 			isa = PBXGroup;
 			children = (
@@ -2649,6 +2681,7 @@
 		CFCEDBAD622E9D8465800F48 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB6C8D1C225C4F3500FD6472 /* NetworkExtension.framework */,
 				0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */,
 				88B0EAF87229454E67D9D19C /* Pods_jienuoIOT.framework */,
 			);
@@ -2747,6 +2780,9 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
+							com.apple.HotspotConfiguration = {
 								enabled = 1;
 							};
 							com.apple.WAC = {
@@ -2903,6 +2939,7 @@
 				BB62E4B821B4CB6A00C0FA39 /* img_thermos_moTimer.png in Resources */,
 				BB62E4CD21B4D9CA00C0FA39 /* img_ther_addTimerWeek@3x.png in Resources */,
 				BB5B036421B8CB6B007AC2B1 /* img_pwd_visiable@2x.png in Resources */,
+				BB6C8D13225C361B00FD6472 /* img_nav_back@2x.png in Resources */,
 				BB425FD821BF519700AB6EFB /* img_thermostat_off@2x.png in Resources */,
 				3604FD54225B707A00D0B97D /* img_Lamp@3x.png in Resources */,
 				BBF6320121BB5B04006A23AC /* img_manual_off@3x.png in Resources */,
@@ -2980,6 +3017,7 @@
 				BBA593DE224A266F009D5941 /* img_adddevice_wenkongqi.png in Resources */,
 				BB62E4F721B51CD900C0FA39 /* img_weekProgram_out@3x.png in Resources */,
 				BB62E4CB21B4D9CA00C0FA39 /* img_ther_addTimerSwitch@3x.png in Resources */,
+				BB6C8D14225C361B00FD6472 /* img_nav_back@3x.png in Resources */,
 				BBA593E0224A266F009D5941 /* img_adddevice_bigualu@2x.png in Resources */,
 				BB2CB8A1221FA8B9001E6703 /* img_addShareCheck_notable.png in Resources */,
 				BB7AAE0E2254A14E00796DA1 /* 120@2x.png in Resources */,
@@ -3084,6 +3122,7 @@
 				BB8B9E7321A6ADEB00E5D8B2 /* valveSwitch_normal@3x.png in Resources */,
 				BBF6325921BBAB34006A23AC /* valveStatus_normal.png in Resources */,
 				BB0A40C821997C99004669CA /* img_headerBg@3x.png in Resources */,
+				BB6C8D15225C361B00FD6472 /* img_nav_back.png in Resources */,
 				BB425F5921BF4DF400AB6EFB /* img_valve_on@2x.png in Resources */,
 				BB62E4CF21B4D9CA00C0FA39 /* img_ther_addTimerWeek@2x.png in Resources */,
 				BBA593D7224A266F009D5941 /* img_adddevice_wenkongqi@3x.png in Resources */,
@@ -3191,6 +3230,7 @@
 				BBA594B8224A2AB1009D5941 /* thermostat_max.png in Resources */,
 				BBA594B9224A2AB1009D5941 /* img_valve_off@3x.png in Resources */,
 				BBA594BA224A2AB1009D5941 /* img_wifipwd.png in Resources */,
+				BB6C8D17225C362300FD6472 /* img_nav_back@2x.png in Resources */,
 				BBA594BB224A2AB1009D5941 /* thermostatSet_on.png in Resources */,
 				BBA594BC224A2AB1009D5941 /* thermostatCircle_off@3x.png in Resources */,
 				BBA594BD224A2AB1009D5941 /* img_houseSelected@3x.png in Resources */,
@@ -3289,6 +3329,7 @@
 				BBA5951A224A2AB1009D5941 /* img_account_header@2x.png in Resources */,
 				BBA5951B224A2AB1009D5941 /* LaunchScreen.storyboard in Resources */,
 				BBA5951C224A2AB1009D5941 /* thermostatControl@3x.png in Resources */,
+				BB6C8D16225C362100FD6472 /* img_nav_back.png in Resources */,
 				BBA5951D224A2AB1009D5941 /* img_launchTitle@2x.png in Resources */,
 				BBA5951E224A2AB1009D5941 /* valveStatus_abnormal.png in Resources */,
 				BBA5951F224A2AB1009D5941 /* valveLeak_abnormal.png in Resources */,
@@ -3328,6 +3369,7 @@
 				BBA59541224A2AB1009D5941 /* Assets.xcassets in Resources */,
 				BBA59542224A2AB1009D5941 /* img_launchBG@2x.png in Resources */,
 				BBA59543224A2AB1009D5941 /* valveNode_selabnormal@3x.png in Resources */,
+				BB6C8D18225C362500FD6472 /* img_nav_back@3x.png in Resources */,
 				BBA59544224A2AB1009D5941 /* img_weekProgram_sleep@2x.png in Resources */,
 				BBA59545224A2AB1009D5941 /* img_wifipwd@3x.png in Resources */,
 				BBA59546224A2AB1009D5941 /* img_weatherBg.png in Resources */,
@@ -3533,6 +3575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB2AC0F221A8F156006DB83A /* ESPAES.m in Sources */,
+				BB6C8D1B225C3B8E00FD6472 /* APStatusConfirmController.m in Sources */,
 				36E3CF622251F84900F4195D /* DeviceShareController.m in Sources */,
 				BB49DF9521958864004E00A2 /* ViewController.m in Sources */,
 				BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */,
@@ -3605,6 +3648,7 @@
 				369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */,
 				BB2AD79821ABDD3E006DB83A /* RegisterAccountController.m in Sources */,
 				BB63AACF222E05DC00DFC848 /* ConnectApNetController.m in Sources */,
+				BB6C8D20225C8DAF00FD6472 /* PlugOutletSettingController.m in Sources */,
 				BB2AC10921A94D63006DB83A /* AFURLRequestSerialization.m in Sources */,
 				36B8F16A22263FDE00652CFA /* ShareDeviceDetailCell.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
@@ -3629,6 +3673,7 @@
 				BB7E7976221AA7780060A0CF /* AddShareController.m in Sources */,
 				BB2AC0EE21A8F156006DB83A /* ESPUDPSocketServer.m in Sources */,
 				3EA530CD21AB9C88000A6D26 /* RetrievePasswordController.m in Sources */,
+				BB6C8D1F225C8DAC00FD6472 /* PlugOutletController.m in Sources */,
 				BB73D54721EDD262004AEE18 /* YTFAlertController.m in Sources */,
 				BB2AC0E921A8F156006DB83A /* ESP_NetUtil.m in Sources */,
 				BB2CB8A6221FE171001E6703 /* SharerRemarkController.m in Sources */,

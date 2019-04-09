@@ -43,7 +43,7 @@ static CGFloat const Cell_Height = 50.f;
     [super viewWillAppear:animated];
     //[self.rdv_tabBarController setTabBarHidden:YES animated:YES];
 
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inquireHouseList) name:@"updateHouseList" object:nil];
     
     //更新家庭列表
@@ -52,7 +52,7 @@ static CGFloat const Cell_Height = 50.f;
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateHouseList" object:nil];
 }
 

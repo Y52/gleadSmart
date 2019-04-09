@@ -70,7 +70,7 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDevice) name:@"refreshThermostat" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSetBackModeTemp:) name:@"postSetBackModeTemp" object:nil];

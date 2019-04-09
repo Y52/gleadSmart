@@ -94,7 +94,8 @@ CGFloat const nodeButtonWidth = 20.f;
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
-    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+
     //设置navigationbar隐藏
     self.navigationController.navigationBar.translucent = YES;
     

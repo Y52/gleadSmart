@@ -1,16 +1,15 @@
 //
-//  StatusConfirmController.m
+//  APStatusConfirmController.m
 //  gleadSmart
 //
-//  Created by 杭州轨物科技有限公司 on 2019/4/8.
+//  Created by 杭州轨物科技有限公司 on 2019/4/9.
 //  Copyright © 2019年 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "StatusConfirmController.h"
-#import "EspViewController.h"
 #import "APStatusConfirmController.h"
+#import "APNetworkController.h"
 
-@interface StatusConfirmController ()
+@interface APStatusConfirmController ()
 
 @property (strong, nonatomic) UIImageView *LampImageView;
 @property (strong, nonatomic) UILabel *promptLabbel;
@@ -18,12 +17,12 @@
 
 @end
 
-@implementation StatusConfirmController
+@implementation APStatusConfirmController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
-    [self setNavItem];
+    self.navigationItem.title = LocalString(@"AP模式");
     
     self.promptLabbel = [self promptLabbel];
     self.LampImageView = [self LampImageView];
@@ -32,30 +31,11 @@
 
 #pragma mark - private methods
 -(void)Sure{
-    EspViewController *EspVC = [[EspViewController alloc] init];
-    [self.navigationController pushViewController:EspVC animated:YES];
-}
-
-- (void)goAP{
-    APStatusConfirmController *apVC = [[APStatusConfirmController alloc] init];
-    [self.navigationController pushViewController:apVC animated:YES];
+    APNetworkController *apvc = [[APNetworkController alloc] init];
+    [self.navigationController pushViewController:apvc animated:YES];
 }
 
 #pragma mark - getters and setters
-- (void)setNavItem{
-    self.navigationItem.title = LocalString(@"添加设备");
-    
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.frame = CGRectMake(0, 0, 60, 30);
-    [rightButton setTitle:LocalString(@"AP模式") forState:UIControlStateNormal];
-    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
-    [rightButton addTarget:self action:@selector(goAP) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.titleLabel.textAlignment = NSTextAlignmentRight;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
-}
-
 - (UIImageView *)LampImageView{
     if (!_LampImageView) {
         _LampImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_Lamp"]];
@@ -68,7 +48,7 @@
         }];
         
         UILabel *LampLabbel = [[UILabel alloc] init];
-        LampLabbel.text = LocalString(@"接通电源，请确认指示灯在快闪");
+        LampLabbel.text = LocalString(@"接通电源，请确认指示灯在慢闪");
         LampLabbel.font = [UIFont systemFontOfSize:13.f];
         LampLabbel.textColor = [UIColor colorWithRed:120/255.0 green:117/255.0 blue:117/255.0 alpha:1.0];
         LampLabbel.textAlignment = NSTextAlignmentCenter;
@@ -91,7 +71,7 @@
         _promptLabbel.adjustsFontSizeToFitWidth = YES;
         //添加下划线
         NSDictionary * underAttribtDic  = @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle],NSForegroundColorAttributeName:[UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0]};
-        NSMutableAttributedString * underAttr = [[NSMutableAttributedString alloc] initWithString:@"如何将指示灯设置为快闪？" attributes:underAttribtDic];
+        NSMutableAttributedString * underAttr = [[NSMutableAttributedString alloc] initWithString:@"如何将指示灯设置为慢闪？" attributes:underAttribtDic];
         _promptLabbel.attributedText = underAttr;
         [self.view addSubview:_promptLabbel];
         [_promptLabbel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -107,7 +87,7 @@
 - (UIButton *)SureBtn{
     if (!_SureBtn) {
         _SureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_SureBtn setTitle:LocalString(@"确认指示灯在快闪") forState:UIControlStateNormal];
+        [_SureBtn setTitle:LocalString(@"确认指示灯在慢闪") forState:UIControlStateNormal];
         [_SureBtn.titleLabel setFont:[UIFont systemFontOfSize:18.f]];
         [_SureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_SureBtn setBackgroundColor:[UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0]];
@@ -123,5 +103,6 @@
     }
     return _SureBtn;
 }
+
 
 @end

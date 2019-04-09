@@ -765,6 +765,9 @@ static int noUserInteractionHeartbeat = 0;
     if (macByte2 >= 0x18 && macByte2 <= 0x1F) {
         return DeviceValve;
     }
+    if (macByte2 >= 0x38 && macByte2 <= 0x3F) {
+        return DevicePlugOutlet;
+    }
     return DeviceCenterlControl;
 }
 
@@ -1136,6 +1139,27 @@ static int noUserInteractionHeartbeat = 0;
         [_recivedData69 addObjectsFromArray:data];
     }
     
+    switch ([_recivedData69[8] unsignedIntegerValue]) {
+        case 0xFE:
+        {
+            //洁利达暖通项目
+            [self gleadSmartFrameHandle];
+        }
+            break;
+            
+        case 0xFC:
+        {
+            //捷诺智能家居项目
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+- (void)gleadSmartFrameHandle{
     //取出mac
     NSString *mac = @"";
     if ([_recivedData69[9] unsignedIntegerValue] == 0x01 || [_recivedData69[9] unsignedIntegerValue] == 0x02) {
@@ -1149,7 +1173,7 @@ static int noUserInteractionHeartbeat = 0;
         mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
         mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
     }
-
+    
     Database *db = [Database shareInstance];
     for (DeviceModel *device in self.deviceArray) {
         if ([device.mac isEqualToString:mac]) {
@@ -1157,7 +1181,7 @@ static int noUserInteractionHeartbeat = 0;
             device.isOnline = @1;
         }
     }
-    
+
     switch ([_recivedData69[9] unsignedIntegerValue]) {
         case 0x01:
         case 0x02:
@@ -1180,7 +1204,7 @@ static int noUserInteractionHeartbeat = 0;
                 UInt8 controlCode = 0x00;
                 NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
                 [[Network shareNetwork] sendData69With:controlCode mac:db.currentHouse.mac data:data failuer:nil];
-
+                
                 [NSObject showHudTipStr:LocalString(@"删除设备成功")];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
@@ -1194,7 +1218,7 @@ static int noUserInteractionHeartbeat = 0;
             }
         }
             break;
-        
+            
         case 0x03:
         {
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
@@ -1270,13 +1294,13 @@ static int noUserInteractionHeartbeat = 0;
                 //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
-
+                
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 //开关温控器
                 NSLog(@"开关温控器");
                 NSDictionary *userInfo;
-
+                
                 NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
                 if ([isOn integerValue]) {
                     NSLog(@"%@",isOn);
@@ -1377,9 +1401,9 @@ static int noUserInteractionHeartbeat = 0;
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 NSLog(@"设置温控器模式温度");
-
+                
                 UInt8 modetemp = [_recivedData69[13] unsignedIntegerValue];
-
+                
                 if (modetemp & 0x80) {
                     modetemp = modetemp & 0x7F;
                     modetemp = -modetemp;
@@ -1388,7 +1412,7 @@ static int noUserInteractionHeartbeat = 0;
                 }
                 NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
                 NSDictionary *userInfo = @{@"modeTemp":modeTemp};
-
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"postSetBackModeTemp" object:nil userInfo:userInfo];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
@@ -1417,7 +1441,7 @@ static int noUserInteractionHeartbeat = 0;
                 //切换模式
                 NSLog(@"切换模式");
                 UInt8 mode = [_recivedData69[12] unsignedIntegerValue];
-
+                
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
                         device.mode = [NSNumber numberWithUnsignedInteger:mode];
@@ -1473,7 +1497,7 @@ static int noUserInteractionHeartbeat = 0;
                         userInfo = @{@"device":device,@"isShare":@1};
                     }
                 }
-
+                
                 NSLog(@"水阀开关回复:%lu",(unsigned long)[_recivedData69[12] unsignedIntegerValue]);
                 //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
@@ -1580,13 +1604,13 @@ static int noUserInteractionHeartbeat = 0;
                     [NSObject showHudTipStr:@"删除失败"];
                     return;
                 }
-
+                
                 NodeModel *deletedNode = [[NodeModel alloc] init];
                 deletedNode.mac = @"";
-                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
-                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
-                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
-                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[12] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[13] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[14] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[15] intValue]]];
                 
                 if ([deletedNode.mac intValue] == 0) {
                     NSLog(@"删除失败，设备为空");

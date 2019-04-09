@@ -9,10 +9,12 @@
 #import "SelectDeviceTypeController.h"
 #import "SelectDeviceTypeCell.h"
 #import "DeviceViewController.h"
+#import "StatusConfirmController.h"
 
 NSString *const CellIdentifier_SelectDeviceType = @"CellID_SelectDeviceType";
 static float HEIGHT_CELL = 50.f;
 static float HEIGHT_HEADER = 40.f;
+#define deviceCount 5;
 
 @interface SelectDeviceTypeController () <UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) UITableView *deviceTypeTable;
@@ -25,21 +27,43 @@ static float HEIGHT_HEADER = 40.f;
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1].CGColor;
     
-    self.navigationItem.title = LocalString(@"选择设备类型");
-    
+    [self setNavItem];
     self.deviceTypeTable = [self deviceTypeTable];
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+
     Network *net = [Network shareNetwork];
     net.isDeviceVC = NO;
     [net.udpSocket beginReceiving:nil];
     [net.udpTimer setFireDate:[NSDate date]];
 }
+
+#pragma mark - private methods
+- (void)cancelAction{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Lazy Load
--(UITableView *)deviceTypeTable{
+- (void)setNavItem{
+    self.navigationItem.title = LocalString(@"选择设备类型");
+    
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftButton.frame = CGRectMake(0, 0, 30, 30);
+    [leftButton setTitle:@"取消" forState:UIControlStateNormal];
+    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+    [leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+
+}
+
+- (UITableView *)deviceTypeTable{
     if (!_deviceTypeTable) {
         _deviceTypeTable = ({
             UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight) style:UITableViewStylePlain];
@@ -66,7 +90,7 @@ static float HEIGHT_HEADER = 40.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return deviceCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -100,6 +124,12 @@ static float HEIGHT_HEADER = 40.f;
             cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_valve"];
         }
             break;
+        case 4:
+        {
+            cell.deviceName.text = LocalString(@"插座");
+            cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_valve"];
+        }
+            break;
         default:
             break;
     }
@@ -111,6 +141,9 @@ static float HEIGHT_HEADER = 40.f;
     if (indexPath.row == 0) {
         DeviceViewController *gatewayVC = [[DeviceViewController alloc] init];
         [self.navigationController pushViewController:gatewayVC animated:YES];
+    }else if (indexPath.row == 4){
+        StatusConfirmController *scVC = [[StatusConfirmController alloc] init];
+        [self.navigationController pushViewController:scVC animated:YES];
     }
 }
 

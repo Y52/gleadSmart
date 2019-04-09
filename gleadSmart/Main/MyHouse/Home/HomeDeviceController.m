@@ -485,56 +485,11 @@ static CGFloat const Cell_Height = 72.f;
         {
             DeviceModel *device = self.deviceArray[indexPath.row];
             switch ([device.type integerValue]) {
-                case 1:
-                {
-                    #if gleadSmart
-                    ThermostatController *thermostatVC = [[ThermostatController alloc] init];
-                    thermostatVC.device = device;
-                    [self.navigationController pushViewController:thermostatVC animated:YES];
-                    #elif jienuoIOT
-                    PlugOutletController *thermostatVC = [[PlugOutletController alloc] init];
-                    thermostatVC.device = device;
-                    [self.navigationController pushViewController:thermostatVC animated:YES];
-                    #endif
-                }
-                    break;
-                    
-                case 2:
-                {
-                    WirelessValveController *valveVC = [[WirelessValveController alloc] init];
-                    valveVC.device = device;
-                    [self.navigationController pushViewController:valveVC animated:YES];
-                }
-                    break;
-                    
-                case 3:
-                {
-                    
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-        }
-            break;
-            
-        case 1:
-        {
-            DeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
-            NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
-            switch (type) {
                 case DeviceThermostat:
                 {
-#if gleadSmart
                     ThermostatController *thermostatVC = [[ThermostatController alloc] init];
                     thermostatVC.device = device;
                     [self.navigationController pushViewController:thermostatVC animated:YES];
-#elif jienuoIOT
-                    PlugOutletController *thermostatVC = [[PlugOutletController alloc] init];
-                    thermostatVC.device = device;
-                    [self.navigationController pushViewController:thermostatVC animated:YES];
-#endif
                 }
                     break;
                     
@@ -551,6 +506,53 @@ static CGFloat const Cell_Height = 72.f;
                     
                 }
                     break;
+                    
+                case DevicePlugOutlet:
+                {
+                    PlugOutletController *plugVC = [[PlugOutletController alloc] init];
+                    plugVC.device = device;
+                    [self.navigationController pushViewController:plugVC animated:YES];
+                }
+                    
+                default:
+                    break;
+            }
+        }
+            break;
+            
+        case 1:
+        {
+            DeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
+            NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
+            switch (type) {
+                case DeviceThermostat:
+                {
+                    ThermostatController *thermostatVC = [[ThermostatController alloc] init];
+                    thermostatVC.device = device;
+                    [self.navigationController pushViewController:thermostatVC animated:YES];
+                }
+                    break;
+                    
+                case DeviceValve:
+                {
+                    WirelessValveController *valveVC = [[WirelessValveController alloc] init];
+                    valveVC.device = device;
+                    [self.navigationController pushViewController:valveVC animated:YES];
+                }
+                    break;
+                    
+                case DeviceWallhob:
+                {
+                    
+                }
+                    break;
+                    
+                case DevicePlugOutlet:
+                {
+                    PlugOutletController *plugVC = [[PlugOutletController alloc] init];
+                    plugVC.device = device;
+                    [self.navigationController pushViewController:plugVC animated:YES];
+                }
                     
                 default:
                     break;

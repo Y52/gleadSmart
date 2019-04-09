@@ -95,15 +95,15 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
     
     //挡住了最上面的几个按钮的点击
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+
     [self reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    //[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)dealloc{
@@ -314,8 +314,9 @@ static CGFloat const gleadMenuItemMargin = 20.f;
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
-    SelectDeviceTypeController *SelectDeviceVC = [[SelectDeviceTypeController alloc] init];
-    [self.navigationController pushViewController:SelectDeviceVC animated:YES];
+    SelectDeviceTypeController *selectDeviceVC = [[SelectDeviceTypeController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:selectDeviceVC];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - kvo

@@ -10,6 +10,7 @@
 #import "GCDAsyncUdpSocket.h"
 #import "DeviceViewController.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
+#import <NetworkExtension/NEHotspotConfigurationManager.h>
 
 #import <netdb.h>//解析udp获取的IP地址
 
@@ -180,7 +181,7 @@ static bool isPasswordSendSucc = NO;
     isPasswordSendSucc = YES;
 }
 
-
+static int hotspotAlertTime = 3;
 - (void)confirmWifiName{
     if (!(isSSIDSendSucc && isPasswordSendSucc)) {
         return;
@@ -195,16 +196,36 @@ static bool isPasswordSendSucc = NO;
         }
     }else if(![ssid hasPrefix:@"ESP"] && [ssid isKindOfClass:[NSString class]]){
 #warning TODO 自动去连接要连接的Wi-Fi
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"配网成功") message:LocalString(@"您未连接到配网的Wi-Fi,会导致搜索不到设备，请注意切换Wi-Fi") preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            for (UIViewController *controller in self.navigationController.viewControllers) {
-                if ([controller isKindOfClass:[DeviceViewController class]]) {
-                    [self.navigationController popToViewController:controller animated:YES];
-                }
+        if (@available(iOS 11.0, *)) {
+            if (hotspotAlertTime > 0) {
+                hotspotAlertTime--;
+                return;
             }
-        }];
-        [alertController addAction:cancelAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+            hotspotAlertTime = 3;
+            NEHotspotConfiguration *hotspotConfig = [[NEHotspotConfiguration alloc] initWithSSID:self.ssid];
+            [[NEHotspotConfigurationManager sharedManager] applyConfiguration:hotspotConfig completionHandler:^(NSError * _Nullable error) {
+                NSLog(@"%@",error);
+                if (error && error.code != 13 && error.code != 7) {
+                    hotspotAlertTime = 0;//马上弹出框
+                }else if(error.code ==7){//error code = 7 ：用户点击了弹框取消按钮
+                    hotspotAlertTime = 0;
+                }else{// error code = 13 ：已连接
+                    hotspotAlertTime = 100000;
+                }
+            }];
+        } else {
+            //ios11以下版本逻辑
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"配网成功") message:LocalString(@"您未连接到配网的Wi-Fi,会导致搜索不到设备，请注意切换Wi-Fi") preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                for (UIViewController *controller in self.navigationController.viewControllers) {
+                    if ([controller isKindOfClass:[DeviceViewController class]]) {
+                        [self.navigationController popToViewController:controller animated:YES];
+                    }
+                }
+            }];
+            [alertController addAction:cancelAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
     }
 }
 
