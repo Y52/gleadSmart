@@ -18,6 +18,9 @@
 		36004A8B2227B64700C99215 /* img_retrieve_password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A882227B64700C99215 /* img_retrieve_password@3x.png */; };
 		36004A8C2227B64700C99215 /* img_retrieve_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A892227B64700C99215 /* img_retrieve_password.png */; };
 		36004A8F2227E96500C99215 /* UsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36004A8E2227E96500C99215 /* UsernameViewController.m */; };
+		3604FD52225B707A00D0B97D /* img_Lamp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD4F225B707A00D0B97D /* img_Lamp@2x.png */; };
+		3604FD53225B707A00D0B97D /* img_Lamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD50225B707A00D0B97D /* img_Lamp.png */; };
+		3604FD54225B707A00D0B97D /* img_Lamp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD51225B707A00D0B97D /* img_Lamp@3x.png */; };
 		36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 36134F2B21E6E10100A7D98E /* NodeButton.m */; };
 		369C169B22250ECB0079159E /* AddRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169A22250ECA0079159E /* AddRoomsViewController.m */; };
 		369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169E222513E90079159E /* AddRoomsTextCell.m */; };
@@ -938,6 +941,9 @@
 		36004A892227B64700C99215 /* img_retrieve_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_retrieve_password.png; sourceTree = "<group>"; };
 		36004A8D2227E96500C99215 /* UsernameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsernameViewController.h; sourceTree = "<group>"; };
 		36004A8E2227E96500C99215 /* UsernameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsernameViewController.m; sourceTree = "<group>"; };
+		3604FD4F225B707A00D0B97D /* img_Lamp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Lamp@2x.png"; sourceTree = "<group>"; };
+		3604FD50225B707A00D0B97D /* img_Lamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_Lamp.png; sourceTree = "<group>"; };
+		3604FD51225B707A00D0B97D /* img_Lamp@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Lamp@3x.png"; sourceTree = "<group>"; };
 		36134F2A21E6E10100A7D98E /* NodeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeButton.h; sourceTree = "<group>"; };
 		36134F2B21E6E10100A7D98E /* NodeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeButton.m; sourceTree = "<group>"; };
 		369C169922250ECA0079159E /* AddRoomsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRoomsViewController.h; sourceTree = "<group>"; };
@@ -2443,6 +2449,9 @@
 		BB8AE4B522293CC70074118D /* 添加设备_slices */ = {
 			isa = PBXGroup;
 			children = (
+				3604FD50225B707A00D0B97D /* img_Lamp.png */,
+				3604FD4F225B707A00D0B97D /* img_Lamp@2x.png */,
+				3604FD51225B707A00D0B97D /* img_Lamp@3x.png */,
 				BBA593D5224A266F009D5941 /* img_adddevice_bigualu.png */,
 				BBA593D4224A266E009D5941 /* img_adddevice_bigualu@2x.png */,
 				BBA593D3224A266E009D5941 /* img_adddevice_bigualu@3x.png */,
@@ -2895,6 +2904,7 @@
 				BB62E4CD21B4D9CA00C0FA39 /* img_ther_addTimerWeek@3x.png in Resources */,
 				BB5B036421B8CB6B007AC2B1 /* img_pwd_visiable@2x.png in Resources */,
 				BB425FD821BF519700AB6EFB /* img_thermostat_off@2x.png in Resources */,
+				3604FD54225B707A00D0B97D /* img_Lamp@3x.png in Resources */,
 				BBF6320121BB5B04006A23AC /* img_manual_off@3x.png in Resources */,
 				BB63B58421B3B94100D77489 /* thermostat_timing_on.png in Resources */,
 				BB5B03B921B90343007AC2B1 /* img_mine_aboutus.png in Resources */,
@@ -2946,6 +2956,7 @@
 				BB5B034321B8BD2F007AC2B1 /* img_login_phone@3x.png in Resources */,
 				BB62E4F921B51CD900C0FA39 /* img_weekProgram_getup.png in Resources */,
 				BB425FD421BF519700AB6EFB /* img_thermostat_on@3x.png in Resources */,
+				3604FD53225B707A00D0B97D /* img_Lamp.png in Resources */,
 				BB2AC12B21AB7F22006DB83A /* img_autoLocation@2x.png in Resources */,
 				BB0A40FC21997C99004669CA /* img_addDevice.png in Resources */,
 				BBF6323E21BBAB34006A23AC /* nodeHeaderBtn.png in Resources */,
@@ -3003,6 +3014,7 @@
 				BB1EB39521E44E2B0024603A /* valveNode_selabnormal@3x.png in Resources */,
 				BB62E4F521B51CD900C0FA39 /* img_weekProgram_sleep@2x.png in Resources */,
 				BB7E07FD222A343000E6658B /* img_wifipwd@3x.png in Resources */,
+				3604FD52225B707A00D0B97D /* img_Lamp@2x.png in Resources */,
 				BB0A40F321997C99004669CA /* img_weatherBg.png in Resources */,
 				BB2AD79521ABDA45006DB83A /* img_launchTitle@3x.png in Resources */,
 				BB52F9E521BE4149005FA33A /* img_tab_01_unselect.png in Resources */,
@@ -3976,7 +3988,7 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HL4DHZX78L;
+				DEVELOPMENT_TEAM = 5FAMV3D32N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -3994,7 +4006,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.GLEAD.gleadSmart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4009,7 +4021,7 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HL4DHZX78L;
+				DEVELOPMENT_TEAM = 5FAMV3D32N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4027,7 +4039,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.GLEAD.gleadSmart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
