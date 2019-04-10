@@ -30,6 +30,15 @@
     self.SureBtn = [self SureBtn];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    Network *net = [Network shareNetwork];
+    net.isDeviceVC = YES;
+    [net.udpSocket pauseReceiving];
+    [net.udpTimer setFireDate:[NSDate distantFuture]];
+}
+
 #pragma mark - private methods
 -(void)Sure{
     EspViewController *EspVC = [[EspViewController alloc] init];

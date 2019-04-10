@@ -82,13 +82,13 @@
     _cancelBtn = [self cancelBtn];
     [self startEsptouchConnect];
     
-//    [self sendSearchBroadcast];
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        sleep(10);
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.udpTimer setFireDate:[NSDate date]];
-//        });
-//    });
+    [self sendSearchBroadcast];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        sleep(10);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.udpTimer setFireDate:[NSDate date]];
+        });
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -102,94 +102,14 @@
     [_udpTimer setFireDate:[NSDate distantFuture]];
     [_udpTimer invalidate];
     _udpTimer = nil;
+    
 }
 
-#pragma mark - lazy load
-- (UIActivityIndicatorView *)spinner{
-    if (!_spinner) {
-        _spinner = [[UIActivityIndicatorView alloc] init];
-        [_spinner setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-        [_spinner setHidesWhenStopped:NO];
-        //[_spinner setColor:[UIColor blueColor]];
-        [self.view addSubview:_spinner];
-        [_spinner mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15.f, 15.f));
-            make.top.equalTo(self.view.mas_top).offset(yAutoFit(337.f));
-            make.left.equalTo(self.view.mas_left).offset(yAutoFit(128.5f));
-        }];
-        
-        UILabel *tipLabel = [[UILabel alloc] init];
-        tipLabel.text = LocalString(@"正在搜索设备...");
-        tipLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
-        tipLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
-        [self.view addSubview:tipLabel];
-        [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(100.f), 20.f));
-            make.centerY.equalTo(self.spinner.mas_centerY);
-            make.left.equalTo(self.spinner.mas_right).offset(8.f);
-        }];
+- (void)didMoveToParentViewController:(UIViewController *)parent{
+    [super didMoveToParentViewController:parent];
+    if (!parent) {
+        [self cancel];
     }
-    return _spinner;
-}
-
-- (UIImageView *)image{
-    if (!_image) {
-        _image = [[UIImageView alloc] init];
-        _image.image = [UIImage imageNamed:@""];
-        [self.view addSubview:_image];
-        
-        [_image mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(225.f), yAutoFit(150.f)));
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
-        }];
-        
-        UILabel *tipLabel1 = [[UILabel alloc] init];
-        tipLabel1.text = LocalString(@"请将手机尽量靠近路由器");
-        tipLabel1.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
-        tipLabel1.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
-        tipLabel1.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:tipLabel1];
-        
-        UILabel *tipLabel2 = [[UILabel alloc] init];
-        tipLabel2.text = LocalString(@"连接过程中请不要操作中央控制器");
-        tipLabel2.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
-        tipLabel2.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
-        tipLabel2.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:tipLabel2];
-        
-        [tipLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth, 20.f));
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.top.equalTo(self.image.mas_bottom).offset(18.f);
-        }];
-        [tipLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth, 20.f));
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.top.equalTo(tipLabel1.mas_bottom).offset(8.f);
-        }];
-    }
-    return _image;
-}
-
-- (UIButton *)cancelBtn{
-    if (!_cancelBtn) {
-        _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cancelBtn setTitleColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:1] forState:UIControlStateNormal];
-        [_cancelBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
-        [_cancelBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:16]];
-        [_cancelBtn setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8]];
-        [_cancelBtn setButtonStyleWithColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:1] Width:1.5 cornerRadius:18.f];
-        [_cancelBtn addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_cancelBtn];
-
-        [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(92.f, 36.f));
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.bottom.equalTo(self.view.mas_bottom).offset(-yAutoFit(40.f));
-        }];
-    }
-    return _cancelBtn;
 }
 
 #pragma mark - start Esptouch
@@ -234,13 +154,15 @@
                         [mutableStr appendString:[NSString stringWithFormat:@"\nthere's %lu more result(s) without showing\n",(unsigned long)([esptouchResultArray count] - count)]];
                     }
                     NSLog(@"esp信息%@",mutableStr);
-                    for (UIViewController *controller in self.navigationController.viewControllers) {
-                        if ([controller isKindOfClass:[DeviceViewController class]]) {
-                            [self.navigationController popToViewController:controller animated:YES];
-                        }
+//                    for (UIViewController *controller in self.navigationController.viewControllers) {
+//                        if ([controller isKindOfClass:[DeviceViewController class]]) {
+//                            [self.navigationController popToViewController:controller animated:YES];
+//                        }
+//                    }
+                    self->espDeviceIpAddr = [ESP_NetUtil descriptionInetAddr4ByData:firstResult.ipAddrData];
+                    if (self->espDeviceIpAddr==nil) {
+                        self->espDeviceIpAddr = [ESP_NetUtil descriptionInetAddr6ByData:firstResult.ipAddrData];
                     }
-                    self->espDeviceIpAddr = [[NSString alloc] initWithData:firstResult.ipAddrData encoding:NSUTF8StringEncoding];
-                    [NSObject showHudTipStr:LocalString(@"连接成功，请进行设备的选择")];
                 }
                 else
                 {
@@ -337,19 +259,39 @@
         NSString *ipAddress = [[NSString alloc] initWithBytes:host length:strlen(host) encoding:NSUTF8StringEncoding];
         NSLog(@"%@",ipAddress);
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            for (UIViewController *controller in self.navigationController.viewControllers) {
-                if ([controller isKindOfClass:[DeviceViewController class]]) {
-                    [self.navigationController popToViewController:controller animated:YES];
-                }
-            }
-            [NSObject showHudTipStr:LocalString(@"连接成功，请进行设备的选择")];
-        });
+        NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",msg);
+        NSString *mac = [msg substringWithRange:NSMakeRange(0, 8)];
+
+        NSLog(@"%@,%@",ipAddress,self->espDeviceIpAddr);
+        if ([ipAddress isEqualToString:self->espDeviceIpAddr]) {
+            DeviceModel *dModel = [[DeviceModel alloc] init];
+            
+            dModel.mac = mac;
+            dModel.ipAddress = ipAddress;
+            dModel.name = mac;
+            dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
+            [self bindDevice:dModel success:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+#warning todo 直接返回主界面并显示设备,以及设备tcp连接
+                    for (UIViewController *controller in self.navigationController.viewControllers) {
+                        if ([controller isKindOfClass:[DeviceViewController class]]) {
+                            [self.navigationController popToViewController:controller animated:YES];
+                        }
+                    }
+                    [NSObject showHudTipStr:LocalString(@"配网成功")];
+                });
+            } failure:^{
+                
+            }];
+            
+            
+        }
     }
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotConnect:(NSError *)error{
-    NSLog(@"断开连接");
+    NSLog(@"断开连接1");
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag{
@@ -366,6 +308,139 @@
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error{
     NSLog(@"没有发送数据");
+}
+
+#pragma mark - private methods
+- (void)bindDevice:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failur{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
+    [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
+    NSDictionary *parameters = @{@"mac":device.mac,@"name":device.name,@"type":device.type,@"houseUid":[Database shareInstance].currentHouse.houseUid};
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager POST:url parameters:parameters progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+              NSLog(@"success:%@",daetr);
+              
+              if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+                  [NSObject showHudTipStr:LocalString(@"绑定该设备成功")];
+                  [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+                      BOOL result = [db executeUpdate:@"INSERT INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.mac,device.type,[Database shareInstance].currentHouse.houseUid];
+                      if (result) {
+                          NSLog(@"插入设备到device成功");
+                      }else{
+                          NSLog(@"插入设备到device失败");
+                      }
+                  }];
+                  if (success) {
+                      success();
+                  }
+              }else{
+                  [NSObject showHudTipStr:LocalString(@"绑定该设备失败")];
+              }
+          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              NSLog(@"Error:%@",error);
+          }];
+}
+
+#pragma mark - setters and getters
+- (UIActivityIndicatorView *)spinner{
+    if (!_spinner) {
+        _spinner = [[UIActivityIndicatorView alloc] init];
+        [_spinner setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+        [_spinner setHidesWhenStopped:NO];
+        //[_spinner setColor:[UIColor blueColor]];
+        [self.view addSubview:_spinner];
+        [_spinner mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(15.f, 15.f));
+            make.top.equalTo(self.view.mas_top).offset(yAutoFit(337.f));
+            make.left.equalTo(self.view.mas_left).offset(yAutoFit(128.5f));
+        }];
+        
+        UILabel *tipLabel = [[UILabel alloc] init];
+        tipLabel.text = LocalString(@"正在搜索设备...");
+        tipLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+        tipLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
+        [self.view addSubview:tipLabel];
+        [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(100.f), 20.f));
+            make.centerY.equalTo(self.spinner.mas_centerY);
+            make.left.equalTo(self.spinner.mas_right).offset(8.f);
+        }];
+    }
+    return _spinner;
+}
+
+- (UIImageView *)image{
+    if (!_image) {
+        _image = [[UIImageView alloc] init];
+        _image.image = [UIImage imageNamed:@""];
+        [self.view addSubview:_image];
+        
+        [_image mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(225.f), yAutoFit(150.f)));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
+        }];
+        
+        UILabel *tipLabel1 = [[UILabel alloc] init];
+        tipLabel1.text = LocalString(@"请将手机尽量靠近路由器");
+        tipLabel1.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+        tipLabel1.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
+        tipLabel1.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:tipLabel1];
+        
+        UILabel *tipLabel2 = [[UILabel alloc] init];
+        tipLabel2.text = LocalString(@"连接过程中请不要操作设备");
+        tipLabel2.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+        tipLabel2.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
+        tipLabel2.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:tipLabel2];
+        
+        [tipLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth, 20.f));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(self.image.mas_bottom).offset(18.f);
+        }];
+        [tipLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth, 20.f));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(tipLabel1.mas_bottom).offset(8.f);
+        }];
+    }
+    return _image;
+}
+
+- (UIButton *)cancelBtn{
+    if (!_cancelBtn) {
+        _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_cancelBtn setTitleColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:1] forState:UIControlStateNormal];
+        [_cancelBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
+        [_cancelBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:16]];
+        [_cancelBtn setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8]];
+        [_cancelBtn setButtonStyleWithColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:1] Width:1.5 cornerRadius:18.f];
+        [_cancelBtn addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_cancelBtn];
+        
+        [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(92.f, 36.f));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.bottom.equalTo(self.view.mas_bottom).offset(-yAutoFit(40.f));
+        }];
+    }
+    return _cancelBtn;
 }
 
 @end

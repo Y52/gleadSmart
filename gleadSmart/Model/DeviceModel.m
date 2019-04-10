@@ -10,4 +10,11 @@
 
 @implementation DeviceModel
 
+- (GCDAsyncSocket *)socket{
+    if (!_socket) {
+        _socket = [[GCDAsyncSocket alloc] initWithDelegate:[Network shareNetwork] delegateQueue:dispatch_get_global_queue(0, 0)];
+    }
+    return _socket;
+}
+
 @end

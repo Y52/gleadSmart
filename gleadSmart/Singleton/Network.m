@@ -185,8 +185,26 @@ static int noUserInteractionHeartbeat = 0;
         NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"%@",msg);
         NSString *mac = [msg substringWithRange:NSMakeRange(0, 8)];
-        DeviceModel *device = [[DeviceModel alloc] init];
-        device.mac = mac;
+        
+        /*
+         *根据设备（网关、插座、开关）mac连接每个设备的tcp
+         */
+        for (DeviceModel *bindDevice in self.deviceArray) {
+            if ([bindDevice.type integerValue] == DeviceCenterlControl) {
+                continue;
+            }
+            if ([bindDevice.mac isEqualToString:mac]) {
+                if (!bindDevice.socket) {
+                    bindDevice.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+                }
+                if (![bindDevice.socket isDisconnected]) {
+                    NSLog(@"设备的socket主动断开");
+                    [bindDevice.socket disconnect];
+                }
+                NSError *error;
+                [bindDevice.socket connectToHost:ipAddress onPort:16888 error:&error];
+            }
+        }
         
         if (self.connectedDevice && [self.connectedDevice.mac isEqualToString:mac]) {
             //如果已经连接了这个设备，就不再重新连接了
@@ -199,7 +217,8 @@ static int noUserInteractionHeartbeat = 0;
         }else{
             NSError *error;
             if ([self connectToHost:ipAddress onPort:16888 error:&error]) {
-                self.connectedDevice = device;
+                self.connectedDevice = [[DeviceModel alloc] init];
+                self.connectedDevice.mac = mac;
             }
         }
     }
