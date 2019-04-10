@@ -15,6 +15,7 @@
 #import "ESPTouchDelegate.h"
 #import "ESPAES.h"
 #import "DeviceViewController.h"
+#import <netdb.h>
 
 @interface EspTouchDelegateImpl : NSObject<ESPTouchDelegate>
 
@@ -32,7 +33,7 @@
 
 @end
 
-@interface DeviceConnectView ()
+@interface DeviceConnectView () <GCDAsyncUdpSocketDelegate>
 
 @property (nonatomic, strong) NSCondition *condition;
 
@@ -43,9 +44,30 @@
 @property (nonatomic, strong) EspTouchDelegateImpl *espTouchDelegate;
 @property (atomic, strong) ESPTouchTask *esptouchTask;
 
+@property (strong, nonatomic) NSTimer *udpTimer;;
+@property (strong, nonatomic) GCDAsyncUdpSocket *udpSocket;
+
 @end
 
-@implementation DeviceConnectView
+@implementation DeviceConnectView{
+    NSString *espDeviceIpAddr;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        if (!_udpSocket) {
+            dispatch_queue_t queue = dispatch_queue_create("udpQueue", DISPATCH_QUEUE_SERIAL);
+            _udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:queue];
+        }
+        if (!_udpTimer) {
+            _udpTimer = [NSTimer scheduledTimerWithTimeInterval:5.f target:self selector:@selector(broadcast) userInfo:nil repeats:YES];
+            [_udpTimer setFireDate:[NSDate distantFuture]];
+        }
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,13 +81,27 @@
     _image =[self image];
     _cancelBtn = [self cancelBtn];
     [self startEsptouchConnect];
-    //[self fail];
+    
+//    [self sendSearchBroadcast];
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        sleep(10);
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.udpTimer setFireDate:[NSDate date]];
+//        });
+//    });
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //去掉返回键的文字
     self.navigationController.navigationBar.topItem.title = @"";
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_udpTimer setFireDate:[NSDate distantFuture]];
+    [_udpTimer invalidate];
+    _udpTimer = nil;
 }
 
 #pragma mark - lazy load
@@ -203,7 +239,7 @@
                             [self.navigationController popToViewController:controller animated:YES];
                         }
                     }
-                    //[NetWork shareNetWork].ipAddr = [[NSString alloc] initWithData:firstResult.ipAddrData encoding:NSUTF8StringEncoding];
+                    self->espDeviceIpAddr = [[NSString alloc] initWithData:firstResult.ipAddrData encoding:NSUTF8StringEncoding];
                     [NSObject showHudTipStr:LocalString(@"连接成功，请进行设备的选择")];
                 }
                 else
@@ -255,37 +291,81 @@
     [NSObject showHudTipStr:LocalString(@"取消配置，你可以重新选择配置")];
 }
 
-//- (void)fail{
-//    YAlertViewController *alert = [[YAlertViewController alloc] init];
-//    alert.lBlock = ^{
-//        [self.condition lock];
-//        if (self.esptouchTask != nil)
-//        {
-//            [self.esptouchTask interrupt];
-//        }
-//        [self.condition unlock];
-//        [self.navigationController popViewControllerAnimated:YES];
-//        [NSObject showHudTipStr:LocalString(@"取消配置，你可以重新选择配置")];
-//    };
-//    alert.rBlock = ^{
-//        [self.condition lock];
-//        if (self.esptouchTask != nil)
-//        {
-//            [self.esptouchTask interrupt];
-//        }
-//        [self.condition unlock];
-//        [self.navigationController popViewControllerAnimated:YES];
-//        [NSObject showHudTipStr:LocalString(@"取消配置，你可以重新选择配置")];
-//    };
-//    alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//    [self presentViewController:alert animated:NO completion:^{
-//        alert.WScale_alert = WScale;
-//        alert.HScale_alert = HScale;
-//        [alert showView];
-//        alert.titleLabel.text = LocalString(@"添加过程中出现了小问题");
-//        alert.messageLabel.text = LocalString(@"配置失败，请检测当前网络。请选择同一个Wi-Fi环境，再试一次吧~");
-//        [alert.leftBtn setTitle:LocalString(@"以后再说") forState:UIControlStateNormal];
-//        [alert.rightBtn setTitle:LocalString(@"重新添加") forState:UIControlStateNormal];
-//    }];
-//}
+#pragma mark - udp
+- (void)sendSearchBroadcast{
+    [_udpSocket localPort];
+    
+    NSError *error;
+    
+    //设置广播
+    [_udpSocket enableBroadcast:YES error:&error];
+    
+    //开启接收数据
+    [_udpSocket beginReceiving:&error];
+    if (error) {
+        NSLog(@"开启接收数据:%@",error);
+        return;
+    }
+    
+}
+
+- (void)broadcast{
+    NSString *host = @"255.255.255.255";
+    NSTimeInterval timeout = 2000;
+    NSString *request = @"whereareyou\r\n";
+    NSData *data = [NSData dataWithData:[request dataUsingEncoding:NSASCIIStringEncoding]];
+    UInt16 port = 17888;
+    
+    [_udpSocket sendData:data toHost:host port:port withTimeout:timeout tag:200];
+    
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext{
+    NSLog(@"UDP接收数据……………………………………………………");
+    if (1) {
+        /**
+         *获取IP地址
+         **/
+        // Copy data to a "sockaddr_storage" structure.
+        struct sockaddr_storage sa;
+        socklen_t salen = sizeof(sa);
+        [address getBytes:&sa length:salen];
+        // Get host from socket address as C string:
+        char host[NI_MAXHOST];
+        getnameinfo((struct sockaddr *)&sa, salen, host, sizeof(host), NULL, 0, NI_NUMERICHOST);
+        // Convert C string to NSString:
+        NSString *ipAddress = [[NSString alloc] initWithBytes:host length:strlen(host) encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",ipAddress);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            for (UIViewController *controller in self.navigationController.viewControllers) {
+                if ([controller isKindOfClass:[DeviceViewController class]]) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                }
+            }
+            [NSObject showHudTipStr:LocalString(@"连接成功，请进行设备的选择")];
+        });
+    }
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotConnect:(NSError *)error{
+    NSLog(@"断开连接");
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag{
+    NSLog(@"发送的消息");
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didConnectToAddress:(NSData *)address{
+    NSLog(@"已经连接");
+}
+
+- (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error{
+    NSLog(@"断开连接");
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error{
+    NSLog(@"没有发送数据");
+}
+
 @end

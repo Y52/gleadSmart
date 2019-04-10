@@ -128,7 +128,11 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
     [geocodel reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (placemarks.count > 0) {
             CLPlacemark *placeMark = placemarks[0];
-            self.house.location = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.subLocality];
+            if (placeMark.administrativeArea == NULL) {
+                self.house.location = [NSString stringWithFormat:@"%@%@",placeMark.locality,placeMark.subLocality];
+            }else{
+                self.house.location = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.subLocality];
+            }
             if (!self.house.location) {
                 self.house.location = @"无法定位当前城市";
             }
@@ -159,7 +163,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"%@/api/house?houseUid=%@",httpIpAddress,db.currentHouse.houseUid];
+    NSString *url = [NSString stringWithFormat:@"%@/api/house?houseUid=%@",httpIpAddress,self.house.houseUid];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -198,7 +202,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
 
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSLog(@"%@",self.house.auth);
+    NSLog(@"11111%@",self.house.auth);
     if ([self.house.auth intValue] == 0) {
         return 4;//管理员有添加成员的section
     }

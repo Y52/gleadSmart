@@ -51,6 +51,15 @@ static CGFloat const Header_Height = 25.f;
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
     [super didMoveToParentViewController:parent];
+    Database *data = [Database shareInstance];
+    if (data.currentHouse) {
+        //更新家庭信息，避免家庭设置中修改了家庭信息而主页面未改变
+        for (HouseModel *house in data.houseList) {
+            if ([data.currentHouse.houseUid isEqualToString:house.houseUid]) {
+                data.currentHouse = house;
+            }
+        }
+    }
     if (self.popBlock && !parent) {
         self.popBlock();
     }
