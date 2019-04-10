@@ -459,7 +459,6 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
               NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
               NSLog(@"success:%@",daetr);
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-                  [NSObject showHudTipStr:LocalString(@"成功添加房间")];
                   [self.navigationController popViewControllerAnimated:YES];
               }else{
                   [NSObject showHudTipStr:LocalString(@"添加房间失败")];
