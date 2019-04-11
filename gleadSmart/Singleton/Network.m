@@ -715,7 +715,7 @@ static int noUserInteractionHeartbeat = 0;
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
-    NSDictionary *parameters = @{@"mac":device.mac,@"type":device.type};
+    NSDictionary *parameters = @{@"mac":device.mac,@"type":device.type,@"apiKey":db.currentHouse.apiKey};
     
     NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];

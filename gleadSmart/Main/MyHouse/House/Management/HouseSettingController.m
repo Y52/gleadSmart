@@ -136,7 +136,9 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
             if (!self.house.location) {
                 self.house.location = @"无法定位当前城市";
             }
-            [self.houseSettingTable reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.houseSettingTable reloadData];
+            });
             
             /*看需求定义一个全局变量来接收赋值*/
             NSLog(@"----%@",placeMark.country);//当前国家
