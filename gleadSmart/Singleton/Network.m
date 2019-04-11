@@ -198,16 +198,22 @@ static int noUserInteractionHeartbeat = 0;
                     bindDevice.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
                 }
                 if (![bindDevice.socket isDisconnected]) {
-                    NSLog(@"设备的socket主动断开");
-                    [bindDevice.socket disconnect];
+                    [_lock unlock];
+                    return;
                 }
                 NSError *error;
-                [bindDevice.socket connectToHost:ipAddress onPort:16888 error:&error];
+                if ([bindDevice.socket connectToHost:ipAddress onPort:16888 error:&error]) {
+                    [_lock unlock];
+                    return;
+                }else{
+                    NSLog(@"%@",error);
+                }
             }
         }
         
         if (self.connectedDevice && [self.connectedDevice.mac isEqualToString:mac]) {
             //如果已经连接了这个设备，就不再重新连接了
+            [_lock unlock];
             return;
         }
         
@@ -240,6 +246,15 @@ static int noUserInteractionHeartbeat = 0;
 
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error{
     NSLog(@"断开连接");
+    //设置广播
+    [_udpSocket enableBroadcast:YES error:&error];
+    
+    //开启接收数据
+    [_udpSocket beginReceiving:&error];
+    if (error) {
+        NSLog(@"开启接收数据:%@",error);
+        return;
+    }
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error{
@@ -249,8 +264,9 @@ static int noUserInteractionHeartbeat = 0;
 #pragma mark - Tcp Delegate
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
+    
     NSLog(@"连接成功");
-    [self.udpTimer setFireDate:[NSDate distantFuture]];
+    //[self.udpTimer setFireDate:[NSDate distantFuture]];
     sleep(1.f);
     
     if ([self.connectedDevice.mac isEqualToString:[Database shareInstance].currentHouse.mac]) {
@@ -495,6 +511,11 @@ static int noUserInteractionHeartbeat = 0;
         if ([localDevice.type integerValue] == DeviceCenterlControl) {
             continue;//中央控制器
         }
+        if ([localDevice.type intValue] == DevicePlugOutlet) {
+            //插座
+            [self.deviceArray addObject:localDevice];
+        }
+        
         [self removeOldDeviceWith:localDevice success:^{
             //通知刷新设备
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];

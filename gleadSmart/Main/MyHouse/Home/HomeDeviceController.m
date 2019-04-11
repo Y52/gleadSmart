@@ -143,7 +143,7 @@ static CGFloat const Cell_Height = 72.f;
                         cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
                     }
                 }
-                [self differenceDiveceAction:[oldDevice.type integerValue] isOnline:[oldDevice.isOnline boolValue] mac:oldDevice.mac cell:cell indexpath:[NSIndexPath indexPathForRow:i inSection:0]];
+                [self differenceDiveceActionWithDevice:oldDevice cell:cell indexpath:[NSIndexPath indexPathForRow:i inSection:0]];
             });
         }
     }
@@ -301,7 +301,7 @@ static CGFloat const Cell_Height = 72.f;
                     cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
                 }
             }
-            [self differenceDiveceAction:[device.type integerValue] isOnline:[device.isOnline boolValue] mac:device.mac cell:cell indexpath:indexPath];
+            [self differenceDiveceActionWithDevice:device cell:cell indexpath:indexPath];
         }
             break;
             
@@ -330,12 +330,12 @@ static CGFloat const Cell_Height = 72.f;
     return cell;
 }
 
-- (void)differenceDiveceAction:(NSInteger)type isOnline:(BOOL)isOnline mac:(NSString *)mac cell:(HomeDeviceCell *)cell indexpath:(NSIndexPath *)indexPath{
+- (void)differenceDiveceActionWithDevice:(DeviceModel *)device cell:(HomeDeviceCell *)cell indexpath:(NSIndexPath *)indexPath{
     __block typeof(cell) blockCell = cell;
-    switch (type) {
+    switch ([device.type integerValue]) {
         case DeviceThermostat:
         {
-            if (isOnline) {
+            if (device.isOnline) {
                 cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_on"];
             }else{
                 cell.deviceImage.image = [UIImage imageNamed:@"img_thermostat_off"];
@@ -356,7 +356,7 @@ static CGFloat const Cell_Height = 72.f;
                 
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x12,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
-                [[Network shareNetwork] sendData69With:controlCode mac:mac data:data failuer:^{
+                [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data failuer:^{
                     blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
                 }];
             };
@@ -365,7 +365,7 @@ static CGFloat const Cell_Height = 72.f;
             
         case DeviceValve:
         {
-            if (isOnline) {
+            if (device.isOnline) {
                 cell.deviceImage.image = [UIImage imageNamed:@"img_valve_on"];
             }else{
                 cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
@@ -386,7 +386,7 @@ static CGFloat const Cell_Height = 72.f;
                 
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
-                [[Network shareNetwork] sendData69With:controlCode mac:mac data:data failuer:^{
+                [[Network shareNetwork] sendData69With:controlCode mac:device.mac data:data failuer:^{
                     blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
                 }];
             };
@@ -396,6 +396,29 @@ static CGFloat const Cell_Height = 72.f;
         case DeviceWallhob:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
+        }
+            break;
+            
+        case DevicePlugOutlet:
+        {
+            cell.switchBlock = ^(BOOL isOn) {
+//                blockCell.controlSwitch.enabled = NO;
+//                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//                    //异步等待4秒，如果未收到信息做如下处理
+//                    sleep(4);
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        DeviceModel *device = self.deviceArray[indexPath.row];
+//                        if ([device.isOn boolValue] != isOn) {
+//                            blockCell.controlSwitch.enabled = YES;
+//                            blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+//                        }
+//                    });
+//                });
+                
+                UInt8 controlCode = 0x01;
+                NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,[NSNumber numberWithBool:isOn]];
+                [device sendData69With:controlCode mac:device.mac data:data];
+            };
         }
             break;
             

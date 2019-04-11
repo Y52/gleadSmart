@@ -223,6 +223,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
  */
 - (void)getHouseHomeListAndDeviceWithDatabase{
     Database *db = [Database shareInstance];
+    Network *net = [Network shareNetwork];
     
     if (!self.homeList) {
         self.homeList = [[NSMutableArray alloc] init];
@@ -232,11 +233,15 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     
     db.localDeviceArray = [db queryAllDevice:db.currentHouse.houseUid];
     for (DeviceModel *device in db.localDeviceArray) {
-        if ([device.type intValue] == 0) {
+        if ([device.type intValue] == DeviceCenterlControl) {
             //获取中央控制器的mac并设置为当前家庭的mac
             db.currentHouse.mac = device.mac;
-            [db.localDeviceArray removeObject:device];
-            break;
+        }
+        
+        if ([device.type intValue] == DevicePlugOutlet) {
+            //插座
+            net.deviceArray = [[NSMutableArray alloc] init];
+            [net.deviceArray addObject:device];
         }
     }
     
