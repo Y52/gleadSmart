@@ -42,7 +42,7 @@ static CGFloat const Cell_Height = 50.f;
 -(UITableView *)homeManagementTable{
     if (!_homeManagementTable) {
         _homeManagementTable = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight - getRectNavAndStatusHight - 100.f) style:UITableViewStylePlain];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight - getRectNavAndStatusHight - 120.f) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
@@ -52,7 +52,7 @@ static CGFloat const Cell_Height = 50.f;
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
             tableView.estimatedSectionFooterHeight = 0;
-            tableView.scrollEnabled = NO;
+            tableView.scrollEnabled = YES;
             tableView.tableFooterView = [[UIView alloc] init];
             
             tableView;
@@ -76,7 +76,7 @@ static CGFloat const Cell_Height = 50.f;
         [self.view addSubview:_addRoomsBtn];
         [_addRoomsBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(284.f), 40.f));
-            make.bottom.equalTo(self.view.mas_bottom).offset(-60);
+            make.bottom.equalTo(self.homeManagementTable.mas_bottom).offset(yAutoFit(60.f));
             make.centerX.equalTo(self.view.mas_centerX);
         }];
     }
@@ -304,14 +304,17 @@ static CGFloat const Cell_Height = 50.f;
                 }
                 [self.homeList removeAllObjects];
                 [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    RoomModel *room = [[RoomModel alloc] init];
-                    room.name = [obj objectForKey:@"name"];
-                    room.roomUid = [obj objectForKey:@"roomUid"];
-                    room.deviceNumber = [obj objectForKey:@"deviceNumber"];
-                    room.houseUid = self.houseUid;
-                    [self.homeList addObject:room];
-                    
-                    [db insertNewRoom:room];
+                    if (![obj isKindOfClass:[NSNull class]]) {
+                        RoomModel *room = [[RoomModel alloc] init];
+                        room.name = [obj objectForKey:@"name"];
+                        room.roomUid = [obj objectForKey:@"roomUid"];
+                        room.deviceNumber = [obj objectForKey:@"deviceNumber"];
+                        room.houseUid = self.houseUid;
+                        [self.homeList addObject:room];
+                        
+                        [db insertNewRoom:room];
+                    }
+                
                 }];
                 [self.homeManagementTable reloadData];
             }
