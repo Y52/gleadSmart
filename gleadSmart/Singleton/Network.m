@@ -217,6 +217,12 @@ static int noUserInteractionHeartbeat = 0;
                 if ([bindDevice.socket connectToHost:ipAddress onPort:16888 error:&error]) {
                     //连接操作
                     [_lock unlock];
+                    
+                    //查询插座状态
+                    UInt8 controlCode = 0x01;
+                    NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
+                    [bindDevice sendData69With:controlCode mac:bindDevice.mac data:data];
+                    
                     return;
                 }else{
                     NSLog(@"%@",error);
@@ -1097,7 +1103,726 @@ static int noUserInteractionHeartbeat = 0;
     [self handle68Message:cmmdReplyData];
 }
 
+#pragma mark - Frame69 接收处理
+- (void)checkOutFrame:(NSData *)data{
+    if (_allMsg && data) {
+        [_allMsg removeAllObjects];
+        
+        //把读到的数据复制一份
+        NSData *recvBuffer = [NSData dataWithData:data];
+        NSUInteger recvLen = [recvBuffer length];
+        //NSLog(@"%lu",(unsigned long)recvLen);
+        UInt8 *recv = (UInt8 *)[recvBuffer bytes];
+        if (recvLen > 1000) {
+            return;
+        }
+        //把接收到的数据存放在recvData数组中
+        NSMutableArray *recvData = [[NSMutableArray alloc] init];
+        NSUInteger j = 0;
+        while (j < recvLen) {
+            [recvData addObject:[NSNumber numberWithUnsignedChar:recv[j]]];
+            j++;
+        }
+        //每从recvData中取出正确的一帧就删除recvData中这段数据
+        NSInteger i = 0;
+        while (i < recvData.count) {
+            //验证69帧的准确性
+            //数据缓冲区中数据的长度
+            NSUInteger recvDataLen = recvData.count;
+            
+            //数据不够一条完整的帧
+            if (recvDataLen < 10) {
+                return;
+            }
+            
+            //1 帧头匹配
+            if ([[recvData objectAtIndex:i] unsignedCharValue] == 0x69){
+                //22,23位是数据域长度
+                if ((i+7)>=recvLen) {
+                    i++;
+                    break;
+                }
+                int dataLen = [[recvData objectAtIndex:i+7] unsignedCharValue];
+                
+                NSInteger end = i + 7 + dataLen + 2;//帧尾0x17所在位置
+                //2.帧尾匹配
+                if ([recvData count] > end) {
+                    if ([[recvData objectAtIndex:end] unsignedIntegerValue] == 0x17) {
+                        //计算CS位 8＋数据域长度 ＝ 校验位前数据长度
+                        UInt8 cs = 0x00;
+                        for (int j = 0; j < 8 + dataLen; j++)
+                        {
+                            cs += [[recvData objectAtIndex:i+j] unsignedCharValue];
+                        }
+                        
+                        //3.校验位匹配
+                        if (cs == [[recvData objectAtIndex:end - 1] unsignedCharValue])
+                        {
+                            //存储这个帧命令
+                            NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:8+dataLen+2];
+                            for (int k = 0; k < 8+dataLen+2; k++)
+                            {
+                                //每次删后，后面位自动前移
+                                [array addObject:[recvData objectAtIndex:i]];
+                                //NSLog(@"%@", array);
+                                [recvData removeObjectAtIndex:i];
+                            }
+                            [_allMsg addObject:array];
+                            continue;
+                        }
+                    }else{
+                        NSLog(@"计算的字节长度不对");
+                    }
+                }
+            }
+            i++;
+        }
+        
+    }
+    [self distributeFrame];
+}
 
+- (void)distributeFrame{
+    if (!_allMsg) {
+        return;
+    }
+    //把每条数据分别处理
+    for (int i = 0; i < _allMsg.count; i++) {
+        //取出一帧
+        NSMutableArray *data = [[NSMutableArray alloc] init];
+        [data addObjectsFromArray:_allMsg[i]];
+        //NSLog(@"沾包解出的帧%d：%@",i,data);
+        
+        [self handle68Message:data];
+    }
+}
 
+- (void)handle68Message:(NSArray *)data
+{
+    if (![self frameIsRight:data])
+    {
+        //68帧数据错误
+        return;
+    }
+    if (_recivedData69)
+    {
+        [_recivedData69 removeAllObjects];
+        [_recivedData69 addObjectsFromArray:data];
+    }
+    
+    switch ([_recivedData69[8] unsignedIntegerValue]) {
+        case 0xFE:
+        {
+            NSLog(@"glead");
+            //洁利达暖通项目
+            [self gleadSmartFrameHandle];
+        }
+            break;
+            
+        case 0xFC:
+        {
+            NSLog(@"jienuo");
+            //捷诺智能家居项目
+            [self jienuoIOTFrameHandle];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+- (void)gleadSmartFrameHandle{
+    //取出mac
+    NSString *mac = @"";
+    if ([_recivedData69[9] unsignedIntegerValue] == 0x01 || [_recivedData69[9] unsignedIntegerValue] == 0x02) {
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
+    }else{
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
+        mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
+    }
+    
+    Database *db = [Database shareInstance];
+    for (DeviceModel *device in self.deviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            //收到信息就上线
+            device.isOnline = @1;
+        }
+    }
+    
+    switch ([_recivedData69[9] unsignedIntegerValue]) {
+        case 0x01:
+        case 0x02:
+        {
+            /*
+             *中央控制器
+             */
+            
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x45 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //在网节点查询
+                NSLog(@"在网节点查询");
+                [self inquireNode:_recivedData69];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x92 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                //在网节点删除
+                NSLog(@"在网节点删除");
+                self.isDeleted = YES;
+                
+                //获取家庭网关下所有下挂设备
+                UInt8 controlCode = 0x00;
+                NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+                [[Network shareNetwork] sendData69With:controlCode mac:db.currentHouse.mac data:data failuer:nil];
+                
+                [NSObject showHudTipStr:LocalString(@"删除设备成功")];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //新增节点信息上报
+                NSLog(@"新增节点信息上报");
+                [self addNode:_recivedData69];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //恢复出厂设置
+                NSLog(@"恢复出厂设置");
+            }
+        }
+            break;
+            
+        case 0x03:
+        {
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"ap发送ssid成功");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"apSendSSIDSucc" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"ap发送密码成功");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"apSendPasswordSucc" object:nil userInfo:nil];
+            }
+        }
+            break;
+            
+        case 0x12:
+        {
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"温控器状态");
+                NSDictionary *userInfo;
+                NSNumber *isOn;
+                if ([_recivedData69[1] unsignedIntegerValue] == 0x01) {
+                    //查询温控器状态
+                    isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                }else if ([_recivedData69[1] unsignedIntegerValue] == 0x85){
+                    //温控器状态主动上报
+                    isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[16] unsignedIntegerValue]];
+                }
+                
+                if (_recivedData69.count >= 18) {
+                    UInt8 mode = [_recivedData69[13] unsignedIntegerValue];
+                    UInt8 modetemp = [_recivedData69[14] unsignedIntegerValue];
+                    UInt8 indoortemp = [_recivedData69[15] unsignedIntegerValue];
+                    
+                    if (modetemp & 0x80) {
+                        modetemp = modetemp & 0x7F;
+                        modetemp = -modetemp;
+                    }else{
+                        modetemp = modetemp & 0x7F;
+                    }
+                    NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
+                    
+                    if (indoortemp & 0x80) {
+                        indoortemp = indoortemp & 0x7F;
+                        indoortemp = -indoortemp;
+                    }else{
+                        indoortemp = indoortemp & 0x7F;
+                    }
+                    NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
+                    
+                    for (DeviceModel *device in self.deviceArray) {
+                        if ([device.mac isEqualToString:mac]) {
+                            NSLog(@"%@",device.mac);
+                            device.isOn = isOn;
+                            device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                            device.modeTemp = modeTemp;
+                            device.indoorTemp = indoorTemp;
+                            device.isOnline = @1;
+                            userInfo = @{@"device":device,@"isShare":@0};
+                        }
+                    }
+                    for (DeviceModel *device in db.shareDeviceArray) {
+                        if ([device.mac isEqualToString:mac]) {
+                            NSLog(@"%@",device.mac);
+                            device.isOn = isOn;
+                            device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                            device.modeTemp = modeTemp;
+                            device.indoorTemp = indoorTemp;
+                            device.isOnline = @1;
+                            userInfo = @{@"device":device,@"isShare":@1};
+                        }
+                    }
+                }
+                
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
+                
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                //开关温控器
+                NSLog(@"开关温控器");
+                NSDictionary *userInfo;
+                
+                NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                if ([isOn integerValue]) {
+                    NSLog(@"%@",isOn);
+                    
+                    //打开温控器，通知温控器页面查询温度等
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"openThermostat" object:nil userInfo:nil];
+                }
+                
+                if (_recivedData69.count >= 18) {
+                    UInt8 mode = [_recivedData69[13] unsignedIntegerValue];
+                    UInt8 modetemp = [_recivedData69[14] unsignedIntegerValue];
+                    UInt8 indoortemp = [_recivedData69[15] unsignedIntegerValue];
+                    
+                    if (modetemp & 0x80) {
+                        modetemp = modetemp & 0x7F;
+                        modetemp = -modetemp;
+                    }else{
+                        modetemp = modetemp & 0x7F;
+                    }
+                    NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
+                    
+                    if (indoortemp & 0x80) {
+                        indoortemp = indoortemp & 0x7F;
+                        indoortemp = -indoortemp;
+                    }else{
+                        indoortemp = indoortemp & 0x7F;
+                    }
+                    NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
+                    
+                    for (DeviceModel *device in self.deviceArray) {
+                        if ([device.mac isEqualToString:mac]) {
+                            NSLog(@"%@",device.mac);
+                            device.isOn = isOn;
+                            device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                            device.modeTemp = modeTemp;
+                            device.indoorTemp = indoorTemp;
+                            device.isOnline = @1;
+                            userInfo = @{@"device":device,@"isShare":@0};
+                        }
+                    }
+                    for (DeviceModel *device in db.shareDeviceArray) {
+                        if ([device.mac isEqualToString:mac]) {
+                            NSLog(@"%@",device.mac);
+                            device.isOn = isOn;
+                            device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                            device.modeTemp = modeTemp;
+                            device.indoorTemp = indoorTemp;
+                            device.isOnline = @1;
+                            userInfo = @{@"device":device,@"isShare":@1};
+                        }
+                    }
+                }
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //查询温控器状态
+                NSLog(@"查询温控器状态");
+                UInt8 mode = [_recivedData69[12] unsignedIntegerValue];
+                UInt8 modetemp = [_recivedData69[13] unsignedIntegerValue];
+                UInt8 indoortemp = [_recivedData69[14] unsignedIntegerValue];
+                
+                if (modetemp & 0x80) {
+                    modetemp = modetemp & 0x7F;
+                    modetemp = -modetemp;
+                }else{
+                    modetemp = modetemp & 0x7F;
+                }
+                NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
+                
+                if (indoortemp & 0x80) {
+                    indoortemp = indoortemp & 0x7F;
+                    indoortemp = -indoortemp;
+                }else{
+                    indoortemp = indoortemp & 0x7F;
+                }
+                NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                        device.modeTemp = modeTemp;
+                        device.indoorTemp = indoorTemp;
+                        device.isOnline = @1;
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                        device.modeTemp = modeTemp;
+                        device.indoorTemp = indoorTemp;
+                        device.isOnline = @1;
+                    }
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"设置温控器模式温度");
+                
+                UInt8 modetemp = [_recivedData69[13] unsignedIntegerValue];
+                
+                if (modetemp & 0x80) {
+                    modetemp = modetemp & 0x7F;
+                    modetemp = -modetemp;
+                }else{
+                    modetemp = modetemp & 0x7F;
+                }
+                NSNumber *modeTemp = [NSNumber numberWithFloat:modetemp/2.f];
+                NSDictionary *userInfo = @{@"modeTemp":modeTemp};
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"postSetBackModeTemp" object:nil userInfo:userInfo];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"1111");
+                //查询周程序
+                NSLog(@"查询周程序");
+                NSMutableArray *weekProgram = [[NSMutableArray alloc] init];
+                for (int i = 0; i < 24; i++) {
+                    [weekProgram addObject:[NSNumber numberWithUnsignedInteger:[_recivedData69[12 + i] unsignedIntegerValue]]];
+                }
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.weekProgram = weekProgram;
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.weekProgram = weekProgram;
+                    }
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshWeekProgram" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                //切换模式
+                NSLog(@"切换模式");
+                UInt8 mode = [_recivedData69[12] unsignedIntegerValue];
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.mode = [NSNumber numberWithUnsignedInteger:mode];
+                    }
+                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"switchThermostatMode" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x07 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //查询补偿
+                NSLog(@"查询补偿");
+                UInt8 temp = [_recivedData69[12] unsignedIntegerValue];
+                if (temp * 0x80) {
+                    temp = temp & 0x7F;
+                }
+                NSNumber *compensate = [NSNumber numberWithUnsignedInteger:temp];
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.compensate = compensate;
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.compensate = compensate;
+                    }
+                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCompensate" object:nil userInfo:nil];
+            }
+        }
+            break;
+            
+        case 0x13:
+        {
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                //控制水阀状态
+                NSLog(@"控制水阀状态");
+                NSDictionary *userInfo;
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        userInfo = @{@"device":device,@"isShare":@0};
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        userInfo = @{@"device":device,@"isShare":@1};
+                    }
+                }
+                
+                NSLog(@"水阀开关回复:%lu",(unsigned long)[_recivedData69[12] unsignedIntegerValue]);
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //查询无线水阀状态
+                NSDictionary *userInfo;
+                NSLog(@"查询无线水阀状态");
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        device.isOnline = @1;
+                        userInfo = @{@"device":device,@"isShare":@0};
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        device.isOnline = @1;
+                        userInfo = @{@"device":device,@"isShare":@1};
+                    }
+                }
+                
+                //设备内容页面UI等刷新
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //下挂漏水节点状态上报
+                NSLog(@"下挂漏水节点状态上报");
+                
+                NSDictionary *userInfo = @{@"recivedData69":_recivedData69};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"valveHangingNodesReport" object:nil userInfo:userInfo];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //查询水阀下挂节点
+                NSLog(@"获得水阀下挂节点");
+                
+                NSMutableArray *nodeArray = [[NSMutableArray alloc] init];
+                NSInteger dataLenth = [_recivedData69[7] integerValue] - 4;
+                for (int k = 0; k < dataLenth; k=k+5) {
+                    NodeModel *node = [[NodeModel alloc] init];
+                    
+                    node.mac = @"";
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[15 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[14 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[13 + k] intValue]]];
+                    node.mac = [node.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[12 + k] intValue]]];
+                    UInt8 nodeInfo = [_recivedData69[16 + k] unsignedIntegerValue];
+                    if (nodeInfo & 0b00000010) {
+                        node.isLeak = YES;
+                    }else{
+                        node.isLeak = NO;
+                    }
+                    if (nodeInfo & 0b00000001){
+                        node.isLowVoltage = YES;
+                    }else{
+                        node.isLowVoltage = NO;
+                    }
+                    
+                    [nodeArray addObject:node];
+                }
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.nodeArray = nodeArray;
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.nodeArray = nodeArray;
+                    }
+                }
+                
+                //设备内容页面UI等刷新
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValveHangingNodes" object:nil userInfo:nil];
+                [SVProgressHUD dismiss];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x06 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //水阀恢复出厂设置
+                NSLog(@"水阀恢复出厂设置");
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        [device.nodeArray removeAllObjects];
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        [device.nodeArray removeAllObjects];
+                    }
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"valveReset" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x07 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                //水阀删除某个节点
+                NSLog(@"水阀删除某个节点");
+                
+                if ([_recivedData69[7] integerValue] == 4) {
+                    NSLog(@"删除失败，设备为空");
+                    [NSObject showHudTipStr:@"删除失败"];
+                    return;
+                }
+                
+                NodeModel *deletedNode = [[NodeModel alloc] init];
+                deletedNode.mac = @"";
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[12] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[13] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[14] intValue]]];
+                deletedNode.mac = [deletedNode.mac stringByAppendingString:[NSString HexByInt:[_recivedData69[15] intValue]]];
+                
+                if ([deletedNode.mac intValue] == 0) {
+                    NSLog(@"删除失败，设备为空");
+                    [NSObject showHudTipStr:@"删除失败"];
+                    return;
+                }
+                
+                [NSObject showHudTipStr:@"删除成功"];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"valveDeleteHangingNode" object:nil userInfo:nil];//删除节点后直接水阀页面节点重新生成
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)jienuoIOTFrameHandle{
+    //取出mac
+    NSString *mac = @"";
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[2] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
+    mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
+    
+    
+    Database *db = [Database shareInstance];
+    for (DeviceModel *device in self.deviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            //收到信息就上线
+            device.isOnline = @1;
+        }
+    }
+    switch ([_recivedData69[9] unsignedIntegerValue]) {
+        case 0x11:
+        {
+            //智能插座
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                //NSLog(@"查询wifi智能插座的开关状态");
+                
+            }
+            if (([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) || ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x01)) {
+                NSLog(@"查询或设置wifi智能插座的开关状态,或主动上报");
+                NSDictionary *userInfo;
+                
+                NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        NSLog(@"%@",device.mac);
+                        device.isOn = isOn;
+                        device.isOnline = @1;
+                        userInfo = @{@"device":device,@"isShare":@0};
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        NSLog(@"%@",device.mac);
+                        device.isOn = isOn;
+                        device.isOnline = @1;
+                        userInfo = @{@"device":device,@"isShare":@1};
+                    }
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座当前日期时间");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                //在网节点查询
+                NSLog(@"设置wifi智能插座当前日期时间");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的闹钟");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"设置wifi智能插座的闹钟");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的延时开关");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"设置wifi智能插座的延时开关");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x10 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的电量（电压，电流，功率）");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x11 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的电压");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x12 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的电流");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x13 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的功率");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x20 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"设置wifi的SSID");
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x21 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"设置wifi的密码");
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(BOOL)frameIsRight:(NSArray *)data
+{
+    NSUInteger count = data.count;
+    UInt8 front = [data[0] unsignedCharValue];
+    UInt8 end1 = [data[count-1] unsignedCharValue];
+    
+    //判断帧头帧尾
+    if (front != 0x69 || end1 != 0x17)
+    {
+        NSLog(@"帧头帧尾错误");
+        return NO;
+    }
+    //判断cs位
+    UInt8 csTemp = 0x00;
+    for (int i = 0; i < count - 2; i++)
+    {
+        csTemp += [data[i] unsignedCharValue];
+    }
+    if (csTemp != [data[count-2] unsignedCharValue])
+    {
+        NSLog(@"校验错误");
+        return NO;
+    }
+    return YES;
+}
 
 @end

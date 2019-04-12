@@ -120,10 +120,13 @@ static CGFloat const Cell_Height = 72.f;
         DeviceModel *oldDevice = self.deviceArray[i];
         if ([device.mac isEqualToString:oldDevice.mac]) {
             oldDevice.isOn = device.isOn;
+            oldDevice.isOnline = device.isOnline;
+
+            //温控器
             oldDevice.mode = device.mode;
             oldDevice.modeTemp = device.modeTemp;
             oldDevice.indoorTemp = device.indoorTemp;
-            oldDevice.isOnline = device.isOnline;
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 HomeDeviceCell *cell = [self.deviceTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
                 cell.controlSwitch.enabled = YES;
@@ -149,6 +152,7 @@ static CGFloat const Cell_Height = 72.f;
     }
 }
 
+//水阀异常
 - (void)valveHangingNodesRabbitmqReport:(NSNotification *)notification{
     NSDictionary *userInfo = [notification userInfo];
     NodeModel *node = [userInfo objectForKey:@"node"];
@@ -402,18 +406,18 @@ static CGFloat const Cell_Height = 72.f;
         case DevicePlugOutlet:
         {
             cell.switchBlock = ^(BOOL isOn) {
-//                blockCell.controlSwitch.enabled = NO;
-//                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//                    //异步等待4秒，如果未收到信息做如下处理
-//                    sleep(4);
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        DeviceModel *device = self.deviceArray[indexPath.row];
-//                        if ([device.isOn boolValue] != isOn) {
-//                            blockCell.controlSwitch.enabled = YES;
-//                            blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
-//                        }
-//                    });
-//                });
+                blockCell.controlSwitch.enabled = NO;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    //异步等待4秒，如果未收到信息做如下处理
+                    sleep(4);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        DeviceModel *device = self.deviceArray[indexPath.row];
+                        if ([device.isOn boolValue] != isOn) {
+                            blockCell.controlSwitch.enabled = YES;
+                            blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                        }
+                    });
+                });
                 
                 UInt8 controlCode = 0x01;
                 NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,[NSNumber numberWithBool:isOn]];
