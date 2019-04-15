@@ -278,7 +278,7 @@ static float HEIGHT_CELL = 50.f;
                       [SVProgressHUD dismiss];
                   });
               }else{
-                  [NSObject showHudTipStr:LocalString(@"注册用户失败，请检查验证码和密码是否填写错误")];
+                  [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
                   dispatch_async(dispatch_get_main_queue(), ^{
                       [SVProgressHUD dismiss];
                   });
