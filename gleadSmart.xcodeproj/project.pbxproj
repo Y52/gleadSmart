@@ -404,6 +404,7 @@
 		BB8B9E8121A6ADEB00E5D8B2 /* nodeBattery_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E6F21A6ADEB00E5D8B2 /* nodeBattery_normal.png */; };
 		BB8B9E8221A6ADEB00E5D8B2 /* valveStatus_abnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7021A6ADEB00E5D8B2 /* valveStatus_abnormal.png */; };
 		BB8B9E8321A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png */; };
+		BB8CBA342264726F0002A3AB /* jienuoIOT-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB8CBA332264726F0002A3AB /* jienuoIOT-Info.plist */; };
 		BB8F5A8821B7EF1700E69094 /* TherTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8F5A8721B7EF1700E69094 /* TherTimerCell.m */; };
 		BBA593D6224A266F009D5941 /* img_adddevice_wenkongqi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CA224A266D009D5941 /* img_adddevice_wenkongqi@2x.png */; };
 		BBA593D7224A266F009D5941 /* img_adddevice_wenkongqi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA593CB224A266E009D5941 /* img_adddevice_wenkongqi@3x.png */; };
@@ -1474,6 +1475,7 @@
 		BB8B9E6F21A6ADEB00E5D8B2 /* nodeBattery_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeBattery_normal.png; sourceTree = "<group>"; };
 		BB8B9E7021A6ADEB00E5D8B2 /* valveStatus_abnormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveStatus_abnormal.png; sourceTree = "<group>"; };
 		BB8B9E7121A6ADEB00E5D8B2 /* nodeLeakBig_abnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakBig_abnormal@2x.png"; sourceTree = "<group>"; };
+		BB8CBA332264726F0002A3AB /* jienuoIOT-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "jienuoIOT-Info.plist"; sourceTree = "<group>"; };
 		BB8F5A8621B7EF1700E69094 /* TherTimerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TherTimerCell.h; sourceTree = "<group>"; };
 		BB8F5A8721B7EF1700E69094 /* TherTimerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TherTimerCell.m; sourceTree = "<group>"; };
 		BBA593CA224A266D009D5941 /* img_adddevice_wenkongqi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_wenkongqi@2x.png"; sourceTree = "<group>"; };
@@ -1489,7 +1491,6 @@
 		BBA593D4224A266E009D5941 /* img_adddevice_bigualu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_bigualu@2x.png"; sourceTree = "<group>"; };
 		BBA593D5224A266F009D5941 /* img_adddevice_bigualu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_adddevice_bigualu.png; sourceTree = "<group>"; };
 		BBA59599224A2AB1009D5941 /* jienuoIOT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jienuoIOT.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBA5959A224A2AB1009D5941 /* jienuoIOT-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "jienuoIOT-Info.plist"; path = "/Users/guiwukeji/Desktop/iOSCoding/gleadsmart/gleadSmart/jienuoIOT-Info.plist"; sourceTree = "<absolute>"; };
 		BBAB280D221B912400E21041 /* HomeDeviceSelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceSelectController.h; sourceTree = "<group>"; };
 		BBAB280E221B912400E21041 /* HomeDeviceSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceSelectController.m; sourceTree = "<group>"; };
 		BBAB2811221B9D4F00E21041 /* ShareDeviceSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceSelectCell.h; sourceTree = "<group>"; };
@@ -2656,7 +2657,7 @@
 		BBA5959B224A2BCB009D5941 /* jienuoIOT */ = {
 			isa = PBXGroup;
 			children = (
-				BBA5959A224A2AB1009D5941 /* jienuoIOT-Info.plist */,
+				BB8CBA332264726F0002A3AB /* jienuoIOT-Info.plist */,
 			);
 			path = jienuoIOT;
 			sourceTree = "<group>";
@@ -3411,6 +3412,7 @@
 				BBA59565224A2AB1009D5941 /* nodeLeakSmall_normal@2x.png in Resources */,
 				BBA59566224A2AB1009D5941 /* thermostatMoer@2x.png in Resources */,
 				BBA59567224A2AB1009D5941 /* img_noSharer.png in Resources */,
+				BB8CBA342264726F0002A3AB /* jienuoIOT-Info.plist in Resources */,
 				BBA59568224A2AB1009D5941 /* img_launchTitle.png in Resources */,
 				BBA59569224A2AB1009D5941 /* img_mine_headerBG@2x.png in Resources */,
 				BBA5956A224A2AB1009D5941 /* img_wifipwd@2x.png in Resources */,
