@@ -125,6 +125,14 @@ static float HEIGHT_CELL = 50.f;
             
         };
         cell.BtnBlock = ^BOOL{
+            PhoneVerifyCell *cell1 = [self.retrieveTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+            [cell1.codeTF resignFirstResponder];
+            PhoneTFCell *cell2 = [self.retrieveTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];;
+            [cell2.phoneTF resignFirstResponder];
+            TextFieldCell *cell3 = [self.retrieveTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+            [cell3.textField resignFirstResponder];
+            TextFieldCell *cell4 = [self.retrieveTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+            [cell4.textField resignFirstResponder];
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             //设置超时时间
             [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
@@ -222,6 +230,14 @@ static float HEIGHT_CELL = 50.f;
 - (void)Sure{
     
     if (([NSString validateMobile:_phone]) && (_code.length == 6) && (_pwText.length >= 6) && (_pwConText.length >= 6) && [_pwText isEqualToString:_pwConText]) {
+        PhoneVerifyCell *cell1 = [self.retrieveTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        [cell1.codeTF resignFirstResponder];
+        PhoneTFCell *cell2 = [self.retrieveTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];;
+        [cell2.phoneTF resignFirstResponder];
+        TextFieldCell *cell3 = [self.retrieveTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        [cell3.textField resignFirstResponder];
+        TextFieldCell *cell4 = [self.retrieveTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+        [cell4.textField resignFirstResponder];
         [self savePassword];
     }else if(!([NSString validateMobile:_phone])) {
         [NSObject showHudTipStr:@"手机号格式错误"];

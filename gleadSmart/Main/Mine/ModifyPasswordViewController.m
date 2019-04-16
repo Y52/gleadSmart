@@ -61,7 +61,7 @@ static float HEIGHT_CELL = 50.f;
             [_SureBtn setTitle:LocalString(@"确定") forState:UIControlStateNormal];
             [_SureBtn.titleLabel setFont:[UIFont systemFontOfSize:18.f]];
             [_SureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [_SureBtn setBackgroundColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:1]];
+            [_SureBtn setBackgroundColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:0.4]];
             [_SureBtn addTarget:self action:@selector(Sure) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:_SureBtn];
             [_SureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -108,6 +108,15 @@ static float HEIGHT_CELL = 50.f;
             
         };
         cell.BtnBlock = ^BOOL{
+            PhoneVerifyCell *cell1 = [self.modifyTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+            [cell1.codeTF resignFirstResponder];
+            PhoneTFCell *cell2 = [self.modifyTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];;
+            [cell2.phoneTF resignFirstResponder];
+            TextFieldCell *cell3 = [self.modifyTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+            [cell3.textField resignFirstResponder];
+            TextFieldCell *cell4 = [self.modifyTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+            [cell4.textField resignFirstResponder];
+            
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             //设置超时时间
             [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
@@ -195,13 +204,26 @@ static float HEIGHT_CELL = 50.f;
 #pragma mark - Actions
 
 - (void)textFieldChange{
+    if (![_code isEqualToString:@""] && ![_phone isEqualToString:@""] && ![_pwText isEqualToString:@""] && ![_pwConText isEqualToString:@""]) {
+        [_SureBtn setBackgroundColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:1]];
+    }else{
+        [_SureBtn setBackgroundColor:[UIColor colorWithRed:71/255.0 green:120/255.0 blue:204/255.0 alpha:0.4]];
+    }
 
 }
 
 - (void)Sure{
-
+    
     if (([NSString validateMobile:_phone]) && (_code.length == 6) && (_pwText.length >= 6) && (_pwConText.length >= 6) && [_pwText isEqualToString:_pwConText]) {
-         [self modifyPasswordByApi];
+        PhoneVerifyCell *cell1 = [self.modifyTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        [cell1.codeTF resignFirstResponder];
+        PhoneTFCell *cell2 = [self.modifyTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];;
+        [cell2.phoneTF resignFirstResponder];
+        TextFieldCell *cell3 = [self.modifyTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        [cell3.textField resignFirstResponder];
+        TextFieldCell *cell4 = [self.modifyTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+        [cell4.textField resignFirstResponder];
+        [self modifyPasswordByApi];
     }else if(!([NSString validateMobile:_phone])) {
         [NSObject showHudTipStr:@"手机号格式错误"];
     }else if (!(_code.length == 6)){
