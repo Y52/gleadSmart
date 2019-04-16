@@ -140,12 +140,12 @@ static dispatch_once_t oneToken;
 - (NSMutableArray *)queryRoomsWith:(NSString *)houseUid{
     NSMutableArray *roomArray = [[NSMutableArray alloc] init];
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        FMResultSet *set = [db executeQuery:@"SELECT * FROM room WHERE houseUid = ?",houseUid];
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM room WHERE houseUid = ? ORDER BY sortId",houseUid];
         while ([set next]) {
             RoomModel *room = [[RoomModel alloc] init];
             room.roomUid = [set stringForColumn:@"roomUid"];
             room.name = [set stringForColumn:@"name"];
-            
+            room.sortId = [NSNumber numberWithInt:[set intForColumn:@"sortId"]];
             room.houseUid = houseUid;
             [roomArray addObject:room];
         }
@@ -282,7 +282,7 @@ static dispatch_once_t oneToken;
 - (BOOL)insertNewRoom:(RoomModel *)room{
     static BOOL result = NO;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        result = [db executeUpdate:@"REPLACE INTO room (roomUid,houseUid,name) VALUES (?,?,?)",room.roomUid,room.houseUid,room.name];
+        result = [db executeUpdate:@"REPLACE INTO room (roomUid,houseUid,name,sortId) VALUES (?,?,?,?)",room.roomUid,room.houseUid,room.name,room.sortId];
     }];
     return result;
 }
@@ -431,6 +431,7 @@ static dispatch_once_t oneToken;
                     RoomModel *room = [[RoomModel alloc] init];
                     room.name = [obj objectForKey:@"roomName"];
                     room.roomUid = [obj objectForKey:@"roomUid"];
+                    room.sortId = [obj objectForKey:@"sortId"];
                     room.houseUid = house.houseUid;
                     room.deviceArray = [[NSMutableArray alloc] init];
                     

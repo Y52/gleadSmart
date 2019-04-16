@@ -177,6 +177,9 @@ static CGFloat const Cell_Height = 50.f;
     [_homeList exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
     //让表视图对应的行进行移动
     [tableView exchangeSubviewAtIndex:sourceIndexPath.row withSubviewAtIndex:destinationIndexPath.row];
+    for (RoomModel *room in self.homeList) {
+        NSLog(@"adadadafgg%@%@",room.name,room.sortId);
+    }
 }
 
 
