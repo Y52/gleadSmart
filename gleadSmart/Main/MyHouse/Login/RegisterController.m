@@ -210,7 +210,7 @@
               db.houseList = [db queryAllHouse];
               NSLog(@"%lu",db.houseList.count);
               if (db.houseList.count > 0) {
-                  db.currentHouse = db.houseList[0];
+                  db.currentHouse = db.houseList[db.houseList.count-1];
               }
               
               //RabbitMQ topic routingkeys生成

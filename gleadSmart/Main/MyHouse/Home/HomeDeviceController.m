@@ -500,6 +500,12 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
+        case DevicePlugOutlet:
+        {
+            
+        }
+            break;
+            
         default:
             break;
     }

@@ -378,10 +378,10 @@
 		BB7ECC0822657642005CD1B8 /* img_plugClock@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF522657640005CD1B8 /* img_plugClock@3x.png */; };
 		BB7ECC0922657642005CD1B8 /* kaiguan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF622657640005CD1B8 /* kaiguan@3x.png */; };
 		BB7ECC0A22657642005CD1B8 /* kaiguan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF622657640005CD1B8 /* kaiguan@3x.png */; };
-		BB7ECC0B22657642005CD1B8 /* cz_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF722657640005CD1B8 /* cz_icon@3x.png */; };
-		BB7ECC0C22657642005CD1B8 /* cz_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF722657640005CD1B8 /* cz_icon@3x.png */; };
-		BB7ECC0D22657642005CD1B8 /* cz_iconnight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF822657641005CD1B8 /* cz_iconnight@2x.png */; };
-		BB7ECC0E22657642005CD1B8 /* cz_iconnight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF822657641005CD1B8 /* cz_iconnight@2x.png */; };
+		BB7ECC0B22657642005CD1B8 /* img_plugView_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF722657640005CD1B8 /* img_plugView_on@3x.png */; };
+		BB7ECC0C22657642005CD1B8 /* img_plugView_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF722657640005CD1B8 /* img_plugView_on@3x.png */; };
+		BB7ECC0D22657642005CD1B8 /* img_plugView_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF822657641005CD1B8 /* img_plugView_off@2x.png */; };
+		BB7ECC0E22657642005CD1B8 /* img_plugView_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF822657641005CD1B8 /* img_plugView_off@2x.png */; };
 		BB7ECC0F22657642005CD1B8 /* img_plug_delayTime@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF922657641005CD1B8 /* img_plug_delayTime@2x.png */; };
 		BB7ECC1022657642005CD1B8 /* img_plug_delayTime@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBF922657641005CD1B8 /* img_plug_delayTime@2x.png */; };
 		BB7ECC1122657642005CD1B8 /* img_plugClock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFA22657641005CD1B8 /* img_plugClock@2x.png */; };
@@ -390,16 +390,16 @@
 		BB7ECC1422657642005CD1B8 /* img_plug_delayTime@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFB22657641005CD1B8 /* img_plug_delayTime@3x.png */; };
 		BB7ECC1522657642005CD1B8 /* dl_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFC22657641005CD1B8 /* dl_background@3x.png */; };
 		BB7ECC1622657642005CD1B8 /* dl_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFC22657641005CD1B8 /* dl_background@3x.png */; };
-		BB7ECC1722657642005CD1B8 /* cz_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFD22657641005CD1B8 /* cz_icon@2x.png */; };
-		BB7ECC1822657642005CD1B8 /* cz_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFD22657641005CD1B8 /* cz_icon@2x.png */; };
+		BB7ECC1722657642005CD1B8 /* img_plugView_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFD22657641005CD1B8 /* img_plugView_on@2x.png */; };
+		BB7ECC1822657642005CD1B8 /* img_plugView_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFD22657641005CD1B8 /* img_plugView_on@2x.png */; };
 		BB7ECC1922657642005CD1B8 /* youjiantou@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFE22657641005CD1B8 /* youjiantou@3x.png */; };
 		BB7ECC1A22657642005CD1B8 /* youjiantou@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFE22657641005CD1B8 /* youjiantou@3x.png */; };
 		BB7ECC1B22657642005CD1B8 /* dl_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFF22657641005CD1B8 /* dl_background@2x.png */; };
 		BB7ECC1C22657642005CD1B8 /* dl_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECBFF22657641005CD1B8 /* dl_background@2x.png */; };
 		BB7ECC1D22657642005CD1B8 /* img_plug_electricity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECC0022657641005CD1B8 /* img_plug_electricity@3x.png */; };
 		BB7ECC1E22657642005CD1B8 /* img_plug_electricity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECC0022657641005CD1B8 /* img_plug_electricity@3x.png */; };
-		BB7ECC1F22657642005CD1B8 /* cz_iconnight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECC0122657641005CD1B8 /* cz_iconnight@3x.png */; };
-		BB7ECC2022657642005CD1B8 /* cz_iconnight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECC0122657641005CD1B8 /* cz_iconnight@3x.png */; };
+		BB7ECC1F22657642005CD1B8 /* img_plugView_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECC0122657641005CD1B8 /* img_plugView_off@3x.png */; };
+		BB7ECC2022657642005CD1B8 /* img_plugView_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECC0122657641005CD1B8 /* img_plugView_off@3x.png */; };
 		BB7ECC2122657642005CD1B8 /* youjiantou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECC0222657641005CD1B8 /* youjiantou@2x.png */; };
 		BB7ECC2222657642005CD1B8 /* youjiantou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7ECC0222657641005CD1B8 /* youjiantou@2x.png */; };
 		BB835FA4219C03A300225B60 /* HomeDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB835FA3219C03A300225B60 /* HomeDeviceController.m */; };
@@ -1473,17 +1473,17 @@
 		BB7ECBF422657640005CD1B8 /* kaiguan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kaiguan@2x.png"; sourceTree = "<group>"; };
 		BB7ECBF522657640005CD1B8 /* img_plugClock@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plugClock@3x.png"; sourceTree = "<group>"; };
 		BB7ECBF622657640005CD1B8 /* kaiguan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kaiguan@3x.png"; sourceTree = "<group>"; };
-		BB7ECBF722657640005CD1B8 /* cz_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cz_icon@3x.png"; sourceTree = "<group>"; };
-		BB7ECBF822657641005CD1B8 /* cz_iconnight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cz_iconnight@2x.png"; sourceTree = "<group>"; };
+		BB7ECBF722657640005CD1B8 /* img_plugView_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plugView_on@3x.png"; sourceTree = "<group>"; };
+		BB7ECBF822657641005CD1B8 /* img_plugView_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plugView_off@2x.png"; sourceTree = "<group>"; };
 		BB7ECBF922657641005CD1B8 /* img_plug_delayTime@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plug_delayTime@2x.png"; sourceTree = "<group>"; };
 		BB7ECBFA22657641005CD1B8 /* img_plugClock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plugClock@2x.png"; sourceTree = "<group>"; };
 		BB7ECBFB22657641005CD1B8 /* img_plug_delayTime@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plug_delayTime@3x.png"; sourceTree = "<group>"; };
 		BB7ECBFC22657641005CD1B8 /* dl_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dl_background@3x.png"; sourceTree = "<group>"; };
-		BB7ECBFD22657641005CD1B8 /* cz_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cz_icon@2x.png"; sourceTree = "<group>"; };
+		BB7ECBFD22657641005CD1B8 /* img_plugView_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plugView_on@2x.png"; sourceTree = "<group>"; };
 		BB7ECBFE22657641005CD1B8 /* youjiantou@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youjiantou@3x.png"; sourceTree = "<group>"; };
 		BB7ECBFF22657641005CD1B8 /* dl_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dl_background@2x.png"; sourceTree = "<group>"; };
 		BB7ECC0022657641005CD1B8 /* img_plug_electricity@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plug_electricity@3x.png"; sourceTree = "<group>"; };
-		BB7ECC0122657641005CD1B8 /* cz_iconnight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cz_iconnight@3x.png"; sourceTree = "<group>"; };
+		BB7ECC0122657641005CD1B8 /* img_plugView_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plugView_off@3x.png"; sourceTree = "<group>"; };
 		BB7ECC0222657641005CD1B8 /* youjiantou@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youjiantou@2x.png"; sourceTree = "<group>"; };
 		BB835FA2219C03A300225B60 /* HomeDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceController.h; sourceTree = "<group>"; };
 		BB835FA3219C03A300225B60 /* HomeDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceController.m; sourceTree = "<group>"; };
@@ -2525,10 +2525,10 @@
 		BB7ECBF222657374005CD1B8 /* 插座 */ = {
 			isa = PBXGroup;
 			children = (
-				BB7ECBFD22657641005CD1B8 /* cz_icon@2x.png */,
-				BB7ECBF722657640005CD1B8 /* cz_icon@3x.png */,
-				BB7ECBF822657641005CD1B8 /* cz_iconnight@2x.png */,
-				BB7ECC0122657641005CD1B8 /* cz_iconnight@3x.png */,
+				BB7ECBFD22657641005CD1B8 /* img_plugView_on@2x.png */,
+				BB7ECBF722657640005CD1B8 /* img_plugView_on@3x.png */,
+				BB7ECBF822657641005CD1B8 /* img_plugView_off@2x.png */,
+				BB7ECC0122657641005CD1B8 /* img_plugView_off@3x.png */,
 				BB7ECBFF22657641005CD1B8 /* dl_background@2x.png */,
 				BB7ECBFC22657641005CD1B8 /* dl_background@3x.png */,
 				BB7ECBF922657641005CD1B8 /* img_plug_delayTime@2x.png */,
@@ -3047,7 +3047,7 @@
 				BB2AC12121AA8A64006DB83A /* addFamily_device.png in Resources */,
 				BB7ECC1322657642005CD1B8 /* img_plug_delayTime@3x.png in Resources */,
 				BB62E4F621B51CD900C0FA39 /* img_weekProgram_out.png in Resources */,
-				BB7ECC1F22657642005CD1B8 /* cz_iconnight@3x.png in Resources */,
+				BB7ECC1F22657642005CD1B8 /* img_plugView_off@3x.png in Resources */,
 				BB52F9E821BE4149005FA33A /* img_tab_03_select.png in Resources */,
 				BB63B58B21B3DB6900D77489 /* thermostatCircle_on@2x.png in Resources */,
 				BB8B9E7521A6ADEB00E5D8B2 /* nodeSet_normal@2x.png in Resources */,
@@ -3126,7 +3126,7 @@
 				BB5B03BD21B90343007AC2B1 /* img_mine_logout@2x.png in Resources */,
 				BB425FD521BF519700AB6EFB /* img_thermostat_on.png in Resources */,
 				BB00A4F721BA237B004E4051 /* img_account_header.png in Resources */,
-				BB7ECC1722657642005CD1B8 /* cz_icon@2x.png in Resources */,
+				BB7ECC1722657642005CD1B8 /* img_plugView_on@2x.png in Resources */,
 				BB7E7970221A61F50060A0CF /* img_noSharer@2x.png in Resources */,
 				BB0A40F121997C99004669CA /* img_houseSelect.png in Resources */,
 				BB63B60321B4151D00D77489 /* thermostat_+@2x.png in Resources */,
@@ -3161,7 +3161,7 @@
 				BBA593D9224A266F009D5941 /* img_adddevice_valve@3x.png in Resources */,
 				BB5B03C521B90343007AC2B1 /* img_mine_logout@3x.png in Resources */,
 				BB8B9DCA21A6815000E5D8B2 /* thermostatMoer@3x.png in Resources */,
-				BB7ECC0B22657642005CD1B8 /* cz_icon@3x.png in Resources */,
+				BB7ECC0B22657642005CD1B8 /* img_plugView_on@3x.png in Resources */,
 				BB352919219D95B500428DE9 /* img_houseManage@3x.png in Resources */,
 				BBF6324121BBAB34006A23AC /* valveNode_normal@2x.png in Resources */,
 				BB2AC11C21AA8A64006DB83A /* addFamily_uncheck.png in Resources */,
@@ -3225,7 +3225,7 @@
 				BB2AD78F21ABD813006DB83A /* img_launchBG.png in Resources */,
 				BB62E4CC21B4D9CA00C0FA39 /* img_ther_addTimerWeek.png in Resources */,
 				BB63B60721B4151D00D77489 /* thermostat_-@2x.png in Resources */,
-				BB7ECC0D22657642005CD1B8 /* cz_iconnight@2x.png in Resources */,
+				BB7ECC0D22657642005CD1B8 /* img_plugView_off@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3338,7 +3338,7 @@
 				BBA594C0224A2AB1009D5941 /* img_mine_aboutus@2x.png in Resources */,
 				BB7ECC0822657642005CD1B8 /* img_plugClock@3x.png in Resources */,
 				BBA594C1224A2AB1009D5941 /* thermostat_+@3x.png in Resources */,
-				BB7ECC2022657642005CD1B8 /* cz_iconnight@3x.png in Resources */,
+				BB7ECC2022657642005CD1B8 /* img_plugView_off@3x.png in Resources */,
 				BBA594C2224A2AB1009D5941 /* thermostat_timing_on@2x.png in Resources */,
 				BBA594C3224A2AB1009D5941 /* valveStatus_abnormal@3x.png in Resources */,
 				BBA594C4224A2AB1009D5941 /* img_retrieve_password@2x.png in Resources */,
@@ -3361,7 +3361,7 @@
 				BBA594D5224A2AB1009D5941 /* thermostat_timing@2x.png in Resources */,
 				BBA594D6224A2AB1009D5941 /* img_headerBg@2x.png in Resources */,
 				BBA594D7224A2AB1009D5941 /* thermostatKnob@2x.png in Resources */,
-				BB7ECC0C22657642005CD1B8 /* cz_icon@3x.png in Resources */,
+				BB7ECC0C22657642005CD1B8 /* img_plugView_on@3x.png in Resources */,
 				BBA594D8224A2AB1009D5941 /* img_thermos_moTimer.png in Resources */,
 				BBA594D9224A2AB1009D5941 /* img_ther_addTimerWeek@3x.png in Resources */,
 				BBA594DA224A2AB1009D5941 /* img_pwd_visiable@2x.png in Resources */,
@@ -3443,7 +3443,7 @@
 				BBA59523224A2AB1009D5941 /* img_weekProgram_out@3x.png in Resources */,
 				BBA59524224A2AB1009D5941 /* img_ther_addTimerSwitch@3x.png in Resources */,
 				BBA59525224A2AB1009D5941 /* img_adddevice_bigualu@2x.png in Resources */,
-				BB7ECC1822657642005CD1B8 /* cz_icon@2x.png in Resources */,
+				BB7ECC1822657642005CD1B8 /* img_plugView_on@2x.png in Resources */,
 				BBA59526224A2AB1009D5941 /* img_addShareCheck_notable.png in Resources */,
 				BBA59527224A2AB1009D5941 /* img_wallHob.png in Resources */,
 				BBA59528224A2AB1009D5941 /* valveStatus_abnormal@2x.png in Resources */,
@@ -3522,7 +3522,7 @@
 				BBA5956D224A2AB1009D5941 /* img_auto_off@3x.png in Resources */,
 				BBA5956E224A2AB1009D5941 /* pen.png in Resources */,
 				BBA5956F224A2AB1009D5941 /* valveSwitch_abnormal@3x.png in Resources */,
-				BB7ECC0E22657642005CD1B8 /* cz_iconnight@2x.png in Resources */,
+				BB7ECC0E22657642005CD1B8 /* img_plugView_off@2x.png in Resources */,
 				BBA59570224A2AB1009D5941 /* img_thermostat_off@3x.png in Resources */,
 				BBA59571224A2AB1009D5941 /* img_tab_03_unselect.png in Resources */,
 				BBA59572224A2AB1009D5941 /* valveLeak_normal.png in Resources */,

@@ -322,7 +322,11 @@
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
     [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
-    NSDictionary *parameters = @{@"mac":device.mac,@"name":device.name,@"type":device.type,@"houseUid":[Database shareInstance].currentHouse.houseUid};
+    
+    Database *db = [Database shareInstance];
+    NSMutableArray *roomArr = [db queryRoomsWith:db.currentHouse.houseUid];
+    RoomModel *room = roomArr[roomArr.count-1];
+    NSDictionary *parameters = @{@"mac":device.mac,@"name":device.name,@"type":device.type,@"houseUid":db.currentHouse.houseUid,@"roomUid":room.roomUid};
     
     NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];

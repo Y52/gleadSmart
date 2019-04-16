@@ -186,6 +186,19 @@ static int noUserInteractionHeartbeat = 0;
         NSLog(@"%@",msg);
         NSString *mac = [msg substringWithRange:NSMakeRange(0, 8)];
         
+//        DeviceModel *dModel = [[DeviceModel alloc] init];
+//        
+//        dModel.mac = mac;
+//        dModel.ipAddress = ipAddress;
+//        dModel.name = mac;
+//        dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
+//
+//        [self bindDevice:dModel success:^{
+//            
+//        } failure:^{
+//            
+//        }];
+//        return;
         /*
          *根据设备（网关、插座、开关）mac连接每个设备的tcp
          */
@@ -249,6 +262,54 @@ static int noUserInteractionHeartbeat = 0;
     }
     [_lock unlock];
 }
+
+- (void)bindDevice:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failur{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
+    [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
+    
+    Database *db = [Database shareInstance];
+    RoomModel *room = [[db queryRoomsWith:db.currentHouse.houseUid] objectAtIndex:1];
+    NSDictionary *parameters = @{@"mac":device.mac,@"name":device.name,@"type":device.type,@"houseUid":db.currentHouse.houseUid,@"roomUid":room.roomUid};
+
+    NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager POST:url parameters:parameters progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+              NSLog(@"success:%@",daetr);
+              
+              if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+                  [NSObject showHudTipStr:LocalString(@"绑定该设备成功")];
+                  [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+                      BOOL result = [db executeUpdate:@"INSERT INTO device (mac,name,type,houseUid,roomUid) VALUES (?,?,?,?,?)",device.mac,device.mac,device.type,[Database shareInstance].currentHouse.houseUid,room.roomUid];
+                      if (result) {
+                          NSLog(@"插入设备到device成功");
+                      }else{
+                          NSLog(@"插入设备到device失败");
+                      }
+                  }];
+                  if (success) {
+                      success();
+                  }
+              }else{
+                  [NSObject showHudTipStr:LocalString(@"绑定该设备失败")];
+              }
+          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              NSLog(@"Error:%@",error);
+          }];
+}
+
 
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotConnect:(NSError *)error{
@@ -1752,7 +1813,7 @@ static int noUserInteractionHeartbeat = 0;
                 }
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
-
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshPlugOutletUI" object:nil userInfo:userInfo];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"查询wifi智能插座当前日期时间");

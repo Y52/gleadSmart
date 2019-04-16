@@ -282,7 +282,8 @@ static dispatch_once_t oneToken;
 - (BOOL)insertNewRoom:(RoomModel *)room{
     static BOOL result = NO;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        result = [db executeUpdate:@"REPLACE INTO room (roomUid,houseUid,name,sortId) VALUES (?,?,?,?)",room.roomUid,room.houseUid,room.name,room.sortId];
+        result =
+        [db executeUpdate:@"REPLACE INTO room (roomUid,houseUid,name,sortId) VALUES (?,?,?,?)",room.roomUid,room.houseUid,room.name,room.sortId];
     }];
     return result;
 }
