@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^switchBlock)(BOOL isOn);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ManagerSetCell : UITableViewCell
 
 @property (nonatomic,strong) UILabel *leftLabel;
 @property (nonatomic,strong) UISwitch *controlSwitch;
+@property (nonatomic) switchBlock switchBlock;
 
 @end
 

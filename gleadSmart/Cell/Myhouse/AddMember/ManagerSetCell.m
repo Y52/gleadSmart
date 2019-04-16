@@ -32,6 +32,7 @@
             _controlSwitch = [[UISwitch alloc] init];
             _controlSwitch.transform = CGAffineTransformMakeScale(0.9, 0.9);
             [_controlSwitch setOn:NO animated:YES];
+            [_controlSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
             [self.contentView addSubview:_controlSwitch];
             [_controlSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.right.equalTo(self.contentView.mas_right).offset(-24.f);
@@ -49,5 +50,10 @@
     return self;
 }
 
+- (void)switchAction:(UISwitch *)mySwitch{
+    if (self.switchBlock) {
+        self.switchBlock(mySwitch.isOn);
+    }
+}
 
 @end

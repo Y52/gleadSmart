@@ -10,6 +10,7 @@
 #import "PlugOutletSettingController.h"
 @interface PlugOutletController ()
 
+@property (nonatomic, strong) UIImageView *buttonTablecloth;
 @property (strong, nonatomic) UIButton *timeButton;
 @property (strong, nonatomic) UIButton *delayButton;
 @property (strong, nonatomic) UIButton *electricityButton;
@@ -21,17 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithHexString:@"EDEDEC"].CGColor;
-    
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.frame = CGRectMake(0, 0, 30, 30);
-    [rightButton setTitle:@"完成" forState:UIControlStateNormal];
-    [rightButton setImage:[UIImage imageNamed:@"二维码"] forState:UIControlStateNormal];
-    [rightButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
-    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(goManage)			 forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
+    [self setNavItem];
 
+    self.buttonTablecloth = [self buttonTablecloth];
     self.timeButton = [self timeButton];
     self.delayButton = [self delayButton];
     self.electricityButton = [self electricityButton];
@@ -45,12 +38,36 @@
 }
 
 #pragma mark - setters and getters
+- (void)setNavItem{
+    self.navigationItem.title = LocalString(@"客厅插座");
+    
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightButton.frame = CGRectMake(0, 0, 30, 30);
+    [rightButton setImage:[UIImage imageNamed:@"thermostatMoer"] forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(goManage) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+}
+
+- (UIImageView *)buttonTablecloth{
+    if (!_buttonTablecloth) {
+        _buttonTablecloth = [[UIImageView alloc] init];
+        [self.view insertSubview:_buttonTablecloth atIndex:0];
+        [_buttonTablecloth mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(355.f), 84.f));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(30.f + ySafeArea_Bottom)));
+        }];
+    }
+    return _buttonTablecloth;
+}
+
 - (UIButton *)timeButton{
     if (!_timeButton) {
         _timeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_timeButton setTitle:LocalString(@"定时") forState:UIControlStateNormal];
         [_timeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
-        [_timeButton setImage:[UIImage imageNamed:@"img_manual_off"] forState:UIControlStateNormal];
+        [_timeButton setImage:[UIImage imageNamed:@"img_plugClock"] forState:UIControlStateNormal];
         [_timeButton.imageView sizeThatFits:CGSizeMake(51.f, 51.f)];
         _timeButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.f];
         [_timeButton addTarget:self action:@selector(modeSwitchAction) forControlEvents:UIControlEventTouchUpInside];
@@ -74,7 +91,7 @@
         _delayButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_delayButton setTitle:LocalString(@"延时") forState:UIControlStateNormal];
         [_delayButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
-        [_delayButton setImage:[UIImage imageNamed:@"thermostatControl"] forState:UIControlStateNormal];
+        [_delayButton setImage:[UIImage imageNamed:@"img_plug_delayTime"] forState:UIControlStateNormal];
         [_delayButton.imageView sizeThatFits:CGSizeMake(51.f, 51.f)];
         _delayButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.f];
         [_delayButton addTarget:self action:@selector(controlThermostat) forControlEvents:UIControlEventTouchUpInside];
@@ -99,10 +116,10 @@
         _electricityButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_electricityButton setTitle:LocalString(@"电量") forState:UIControlStateNormal];
         [_electricityButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
-        [_electricityButton setImage:[UIImage imageNamed:@"thermostatSet"] forState:UIControlStateNormal];
+        [_electricityButton setImage:[UIImage imageNamed:@"img_plug_electricity"] forState:UIControlStateNormal];
         [_electricityButton.imageView sizeThatFits:CGSizeMake(51.f, 51.f)];
         _electricityButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.f];
-        [_electricityButton addTarget:self action:@selector(thermostatSetting) forControlEvents:UIControlEventTouchUpInside];
+        [_electricityButton addTarget:self action:@selector(img_plug_electricity) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_electricityButton];
         [_electricityButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51.f, 72));
