@@ -56,7 +56,7 @@ NSString *const CellIdentifier_AddMemberManagerSet = @"CellID_AddMemberManagerSe
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
     NSDictionary *parameters = @{@"houseUid":self.houseUid,@"mobile":self->mobile,@"auth":isManager};
-
+    
     [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
         NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
@@ -95,7 +95,7 @@ NSString *const CellIdentifier_AddMemberManagerSet = @"CellID_AddMemberManagerSe
     [rightButton addTarget:self action:@selector(memberAdd) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBarButton;
-
+    
 }
 
 - (UITableView *)addMemberTable{
