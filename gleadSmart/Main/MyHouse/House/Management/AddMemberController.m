@@ -24,6 +24,7 @@ NSString *const CellIdentifier_AddMemberManagerSet = @"CellID_AddMemberManagerSe
 
 @implementation AddMemberController{
     NSString *mobile;
+    NSNumber *isManager;
 }
 
 #pragma mark - life cycle
@@ -54,8 +55,8 @@ NSString *const CellIdentifier_AddMemberManagerSet = @"CellID_AddMemberManagerSe
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
-    NSDictionary *parameters = @{@"houseUid":self.houseUid,@"mobile":self->mobile,@"auth":@1};
-
+    NSDictionary *parameters = @{@"houseUid":self.houseUid,@"mobile":self->mobile,@"auth":isManager};
+    
     [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
         NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
@@ -94,7 +95,7 @@ NSString *const CellIdentifier_AddMemberManagerSet = @"CellID_AddMemberManagerSe
     [rightButton addTarget:self action:@selector(memberAdd) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBarButton;
-
+    
 }
 
 - (UITableView *)addMemberTable{
@@ -185,6 +186,13 @@ NSString *const CellIdentifier_AddMemberManagerSet = @"CellID_AddMemberManagerSe
                 cell = [[ManagerSetCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_AddMemberManagerSet];
             }
             cell.leftLabel.text = LocalString(@"设为管理员");
+            cell.switchBlock = ^(BOOL isOn) {
+                if (isOn) {
+                    self->isManager = @0;
+                }else{
+                    self->isManager = @1;
+                }
+            };
             return cell;
         }
             break;
