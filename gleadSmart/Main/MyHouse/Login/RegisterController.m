@@ -187,14 +187,19 @@
                           house.lat = [obj objectForKey:@"lat"];
                           //本地数据库更新家庭信息
                           [db insertNewHouse:house];
+                          
                           for (HouseModel *localHouse in localHouseArr) {
                               if ([localHouse.houseUid isEqualToString:house.houseUid]) {
+                                  //存在的移除掉，剩下的就是本地未删除的
                                   [localHouseArr removeObject:localHouse];
                                   break;
                               }
                           }
                       }];
-#warning 剩下的家庭删除掉
+                      for (HouseModel *localHouse in localHouseArr) {
+                          //删除掉本地未删除的家庭，做同步
+                          [db deleteHouse:localHouse.houseUid];
+                      }
                   }
               }else{
                   //自动登录失败，使用本地保存的信息

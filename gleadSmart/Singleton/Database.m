@@ -370,6 +370,7 @@ static dispatch_once_t oneToken;
             NSLog(@"删除家庭失败");
             return;
         }
+        NSLog(@"删除家庭成功");
     }];
     return result;
 }
