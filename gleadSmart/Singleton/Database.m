@@ -347,6 +347,33 @@ static dispatch_once_t oneToken;
     return result;
 }
 
+- (BOOL)deleteHouse:(NSString *)houseUid{
+    static BOOL result = YES;
+    [_queueDB inTransaction:^(FMDatabase * _Nonnull db, BOOL * _Nonnull rollback) {
+        result = [db executeUpdate:@"delete from room where houseUid = ?",houseUid];
+        if (!result) {
+            *rollback = YES;
+            NSLog(@"删除关联房间失败");
+            return;
+        }
+        
+        result = [db executeUpdate:@"delete from device where houseUid = ?",houseUid];
+        if (!result) {
+            *rollback = YES;
+            NSLog(@"删除关联设备失败");
+            return;
+        }
+        
+        result = [db executeUpdate:@"delete from house where houseUid = ?",houseUid];
+        if (!result) {
+            *rollback = YES;
+            NSLog(@"删除家庭失败");
+            return;
+        }
+    }];
+    return result;
+}
+
 #pragma mark - API methods and update database
 - (void)getHouseHomeListAndDevice:(HouseModel *)house success:(void(^)(void))success failure:(void(^)(void))failure{
     //[SVProgressHUD show];

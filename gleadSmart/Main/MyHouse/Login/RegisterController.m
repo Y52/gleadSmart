@@ -174,6 +174,7 @@
                   
                   //获取家庭列表和信息，每次登录更新数据库
                   if ([[dic objectForKey:@"houses"] count] > 0) {
+                      NSMutableArray *localHouseArr = [db queryAllHouse];
                       [[dic objectForKey:@"houses"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                           HouseModel *house = [[HouseModel alloc] init];
                           house.houseUid = [obj objectForKey:@"houseUid"];
@@ -186,7 +187,14 @@
                           house.lat = [obj objectForKey:@"lat"];
                           //本地数据库更新家庭信息
                           [db insertNewHouse:house];
+                          for (HouseModel *localHouse in localHouseArr) {
+                              if ([localHouse.houseUid isEqualToString:house.houseUid]) {
+                                  [localHouseArr removeObject:localHouse];
+                                  break;
+                              }
+                          }
                       }];
+#warning 剩下的家庭删除掉
                   }
               }else{
                   //自动登录失败，使用本地保存的信息
