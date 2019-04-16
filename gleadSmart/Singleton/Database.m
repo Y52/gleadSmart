@@ -75,7 +75,7 @@ static dispatch_once_t oneToken;
         }else{
             NSLog(@"创建表house失败");
         }
-        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS room (roomUid text PRIMARY KEY,houseUid text NOT NULl,name text NOT NULL)"];
+        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS room (roomUid text PRIMARY KEY,houseUid text NOT NULl,name text NOT NULL,sortId integer)"];
         if (result) {
             NSLog(@"创建表room成功");
         }else{
@@ -140,11 +140,12 @@ static dispatch_once_t oneToken;
 - (NSMutableArray *)queryRoomsWith:(NSString *)houseUid{
     NSMutableArray *roomArray = [[NSMutableArray alloc] init];
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        FMResultSet *set = [db executeQuery:@"SELECT * FROM room WHERE houseUid = ?",houseUid];
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM room WHERE houseUid = ? ORDER BY sortId",houseUid];
         while ([set next]) {
             RoomModel *room = [[RoomModel alloc] init];
             room.roomUid = [set stringForColumn:@"roomUid"];
             room.name = [set stringForColumn:@"name"];
+            room.sortId = [NSNumber numberWithInt:[set intForColumn:@"sortId"]];
             room.houseUid = houseUid;
             [roomArray addObject:room];
         }
@@ -281,7 +282,7 @@ static dispatch_once_t oneToken;
 - (BOOL)insertNewRoom:(RoomModel *)room{
     static BOOL result = NO;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        result = [db executeUpdate:@"REPLACE INTO room (roomUid,houseUid,name) VALUES (?,?,?)",room.roomUid,room.houseUid,room.name];
+        result = [db executeUpdate:@"REPLACE INTO room (roomUid,houseUid,name,sortId) VALUES (?,?,?,?)",room.roomUid,room.houseUid,room.name,room.sortId];
     }];
     return result;
 }
@@ -347,6 +348,34 @@ static dispatch_once_t oneToken;
     return result;
 }
 
+- (BOOL)deleteHouse:(NSString *)houseUid{
+    static BOOL result = YES;
+    [_queueDB inTransaction:^(FMDatabase * _Nonnull db, BOOL * _Nonnull rollback) {
+        result = [db executeUpdate:@"delete from room where houseUid = ?",houseUid];
+        if (!result) {
+            *rollback = YES;
+            NSLog(@"删除关联房间失败");
+            return;
+        }
+        
+        result = [db executeUpdate:@"delete from device where houseUid = ?",houseUid];
+        if (!result) {
+            *rollback = YES;
+            NSLog(@"删除关联设备失败");
+            return;
+        }
+        
+        result = [db executeUpdate:@"delete from house where houseUid = ?",houseUid];
+        if (!result) {
+            *rollback = YES;
+            NSLog(@"删除家庭失败");
+            return;
+        }
+        NSLog(@"删除家庭成功");
+    }];
+    return result;
+}
+
 #pragma mark - API methods and update database
 - (void)getHouseHomeListAndDevice:(HouseModel *)house success:(void(^)(void))success failure:(void(^)(void))failure{
     //[SVProgressHUD show];
@@ -402,6 +431,7 @@ static dispatch_once_t oneToken;
                     RoomModel *room = [[RoomModel alloc] init];
                     room.name = [obj objectForKey:@"roomName"];
                     room.roomUid = [obj objectForKey:@"roomUid"];
+                    room.sortId = [obj objectForKey:@"sortId"];
                     room.houseUid = house.houseUid;
                     room.deviceArray = [[NSMutableArray alloc] init];
                     

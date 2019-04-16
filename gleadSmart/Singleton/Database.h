@@ -57,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)deleteDevice:(NSString *)mac;
 - (BOOL)deleteRoom:(NSString *)roomUid;
 - (BOOL)deleteShareDevice:(NSString *)mac;
+- (BOOL)deleteHouse:(NSString *)houseUid;
 
 ///@brief API
 - (void)getHouseHomeListAndDevice:(HouseModel *)house success:(void(^)(void))success failure:(void(^)(void))failure;

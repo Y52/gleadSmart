@@ -44,6 +44,7 @@ static CGFloat const Cell_Height = 50.f;
         _homeManagementTable = ({
             UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight - getRectNavAndStatusHight - 120.f) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
+            tableView.separatorStyle = UIAccessibilityTraitNone;
             tableView.dataSource = self;
             tableView.delegate = self;
             tableView.separatorColor = [UIColor whiteColor];
@@ -176,6 +177,9 @@ static CGFloat const Cell_Height = 50.f;
     [_homeList exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
     //让表视图对应的行进行移动
     [tableView exchangeSubviewAtIndex:sourceIndexPath.row withSubviewAtIndex:destinationIndexPath.row];
+    for (RoomModel *room in self.homeList) {
+        NSLog(@"adadadafgg%@%@",room.name,room.sortId);
+    }
 }
 
 
@@ -222,7 +226,7 @@ static CGFloat const Cell_Height = 50.f;
         });
     }];
 }
-
+//删除房间列表的API
 - (void)deleteroomsByApi:(RoomModel *)room{
     
     [SVProgressHUD show];
@@ -270,9 +274,52 @@ static CGFloat const Cell_Height = 50.f;
     }];
 }
 
+//移动房间列表的API
+- (void)MoveRoomsByApi{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/room/sort",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
+    
+    NSMutableArray *roomsDicArr = [[NSMutableArray alloc] init];
+    for (RoomModel *room in self.homeList) {
+        NSDictionary *dic = @{@"sortId":room.sortId,@"roomUid":room.roomUid};
+        [roomsDicArr addObject:dic];
+        NSLog(@"adadadafgg%@%@",room.name,room.sortId);
+    }
+    NSDictionary *parameters = @{@"roomSort":roomsDicArr};
+    [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            NSLog(@"adasfdfgdfgfg%@",daetr);
+        }else{
+            [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        [NSObject showHudTipStr:LocalString(@"移动房间失败")];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+}
 #pragma mark - Actions
 /*
- *用于更新房间列表，现在不需要用到
+ *更新房间列表
  */
 - (void)getHomeList{
     [SVProgressHUD show];
@@ -309,6 +356,7 @@ static CGFloat const Cell_Height = 50.f;
                         room.name = [obj objectForKey:@"name"];
                         room.roomUid = [obj objectForKey:@"roomUid"];
                         room.deviceNumber = [obj objectForKey:@"deviceNumber"];
+                        room.sortId = [obj objectForKey:@"sortId"];
                         room.houseUid = self.houseUid;
                         [self.homeList addObject:room];
                         
@@ -349,6 +397,15 @@ static CGFloat const Cell_Height = 50.f;
 -(void)editTableView:(UIBarButtonItem *)sender {
     [self.homeManagementTable setEditing:!self.homeManagementTable.editing animated:YES];
     //   isEditing editing的getter方法的 新名字
+    if ([sender.title isEqualToString:@"完成"]) {
+        
+        for (int i = 0; i < self.homeList.count ; i++) {
+            RoomModel *room = self.homeList[i];
+            room.sortId = [NSNumber numberWithInteger: i];
+            
+        }
+        [self MoveRoomsByApi];
+    }
     sender.title = self.homeManagementTable.isEditing ? @"完成" : @"编辑";
   
 }

@@ -34,6 +34,8 @@ NSString *const CellIdentifier_AddMemberManagerSet = @"CellID_AddMemberManagerSe
     
     [self setNavItem];
     self.addMemberTable = [self addMemberTable];
+    
+    isManager = @1;//默认设置为非管理员
 }
 
 #pragma mark - private methods
