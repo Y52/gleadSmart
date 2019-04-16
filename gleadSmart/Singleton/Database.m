@@ -75,7 +75,7 @@ static dispatch_once_t oneToken;
         }else{
             NSLog(@"创建表house失败");
         }
-        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS room (roomUid text PRIMARY KEY,houseUid text NOT NULl,name text NOT NULL)"];
+        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS room (roomUid text PRIMARY KEY,houseUid text NOT NULl,name text NOT NULL,sortId integer)"];
         if (result) {
             NSLog(@"创建表room成功");
         }else{
@@ -145,6 +145,7 @@ static dispatch_once_t oneToken;
             RoomModel *room = [[RoomModel alloc] init];
             room.roomUid = [set stringForColumn:@"roomUid"];
             room.name = [set stringForColumn:@"name"];
+            
             room.houseUid = houseUid;
             [roomArray addObject:room];
         }

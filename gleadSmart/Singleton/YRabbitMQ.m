@@ -170,6 +170,17 @@ static NSArray *_routingkeys = nil;
 - (void)analyzeMessageTypeD:(NSDictionary *)dic{
     NSString *houseUid = [dic objectForKey:@"houseUid"];
     NSNumber *option = [dic objectForKey:@"option"];// 0表示将其添加到家庭，1表示将其删除了
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([option integerValue] == 0) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"收到分享") message:LocalString(@"您收到家庭的分享") preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel handler:nil];
+            [alertController addAction:cancelAction];
+            [[self getCurrentVC] presentViewController:alertController animated:YES completion:nil];
+        }else{
+            
+        }
+    });
 }
 
 /*
@@ -232,6 +243,84 @@ static NSArray *_routingkeys = nil;
         [_conn close];
         _conn = nil;
     }
+}
+
+#pragma mark - VC的操作
+
+//获取当前屏幕显示的viewcontroller
+- (UIViewController *)getCurrentVC
+{
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
+    while (currentVC.presentedViewController && ![currentVC.presentedViewController isKindOfClass:[YAlertViewController class]]) {
+        currentVC = [self getCurrentVCFrom:currentVC.presentedViewController];
+    }
+    return currentVC;
+}
+
+- (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC
+{
+    UIViewController *currentVC;
+    
+    //    if ([rootVC presentedViewController]) {
+    //        // 视图是被presented出来的
+    //        rootVC = [rootVC presentedViewController];
+    //    }
+    
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        // 根视图为UITabBarController
+        
+        currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
+        
+    } else if ([rootVC isKindOfClass:[UINavigationController class]]){
+        // 根视图为UINavigationController
+        
+        currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
+        
+    } else {
+        // 根视图为非导航类
+        
+        currentVC = rootVC;
+    }
+    
+    return currentVC;
+}
+
+- (void)restoreRootViewController:(UIViewController *)rootViewController {
+    
+    typedef void (^Animation)(void);
+    
+    UIWindow* window = [UIApplication sharedApplication].keyWindow;
+    
+    
+    
+    rootViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    Animation animation = ^{
+        
+        BOOL oldState = [UIView areAnimationsEnabled];
+        
+        [UIView setAnimationsEnabled:NO];
+        
+        window.rootViewController = rootViewController;
+        
+        [UIView setAnimationsEnabled:oldState];
+        
+    };
+    
+    
+    
+    [UIView transitionWithView:window
+     
+                      duration:0.5f
+     
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+     
+                    animations:animation
+     
+                    completion:nil];
+    
 }
 
 @end
