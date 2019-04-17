@@ -174,14 +174,14 @@ static CGFloat const Cell_Height = 50.f;
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     //修改数据源
-    [_homeList exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    //[_homeList exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    RoomModel *room = [_homeList objectAtIndex:sourceIndexPath.row];
+    [_homeList removeObjectAtIndex:sourceIndexPath.row];
+    [_homeList insertObject: room atIndex:destinationIndexPath.row];
     //让表视图对应的行进行移动
     [tableView exchangeSubviewAtIndex:sourceIndexPath.row withSubviewAtIndex:destinationIndexPath.row];
-    for (RoomModel *room in self.homeList) {
-        NSLog(@"adadadafgg%@%@",room.name,room.sortId);
-    }
+ 
 }
-
 
 #pragma mark - private methods
 - (void)modifyEditedHomebyApi{
@@ -293,7 +293,6 @@ static CGFloat const Cell_Height = 50.f;
     for (RoomModel *room in self.homeList) {
         NSDictionary *dic = @{@"sortId":room.sortId,@"roomUid":room.roomUid};
         [roomsDicArr addObject:dic];
-        NSLog(@"adadadafgg%@%@",room.name,room.sortId);
     }
     NSDictionary *parameters = @{@"roomSort":roomsDicArr};
     [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -302,7 +301,6 @@ static CGFloat const Cell_Height = 50.f;
         NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-            NSLog(@"adasfdfgdfgfg%@",daetr);
         }else{
             [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
         }
@@ -398,7 +396,7 @@ static CGFloat const Cell_Height = 50.f;
     [self.homeManagementTable setEditing:!self.homeManagementTable.editing animated:YES];
     //   isEditing editing的getter方法的 新名字
     if ([sender.title isEqualToString:@"完成"]) {
-        
+        [self.homeManagementTable reloadData];
         for (int i = 0; i < self.homeList.count ; i++) {
             RoomModel *room = self.homeList[i];
             room.sortId = [NSNumber numberWithInteger: i];
