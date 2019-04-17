@@ -33,6 +33,93 @@
 		36E3CF5B2251B9DE00F4195D /* PlugOutletSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF5A2251B9DE00F4195D /* PlugOutletSettingCell.m */; };
 		36E3CF622251F84900F4195D /* DeviceShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF612251F84900F4195D /* DeviceShareController.m */; };
 		36E3CF652252008C00F4195D /* AddDeviceShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF642252008C00F4195D /* AddDeviceShareController.m */; };
+		36E4F61322670A05006A9E6D /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F48722670A05006A9E6D /* NSObject+YYModel.m */; };
+		36E4F61422670A05006A9E6D /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F48822670A05006A9E6D /* YYClassInfo.m */; };
+		36E4F61522670A05006A9E6D /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F48B22670A05006A9E6D /* SRWebSocket.m */; };
+		36E4F61622670A05006A9E6D /* CKMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F48F22670A05006A9E6D /* CKMemoryCache.m */; };
+		36E4F61722670A05006A9E6D /* CKFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F49122670A05006A9E6D /* CKFileCache.m */; };
+		36E4F61822670A05006A9E6D /* CKCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F49522670A05006A9E6D /* CKCache.m */; };
+		36E4F61922670A05006A9E6D /* CKNullCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F49622670A05006A9E6D /* CKNullCache.m */; };
+		36E4F61A22670A05006A9E6D /* CKCacheContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F49822670A05006A9E6D /* CKCacheContent.m */; };
+		36E4F61B22670A05006A9E6D /* QNUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F49F22670A05006A9E6D /* QNUploadManager.m */; };
+		36E4F61C22670A05006A9E6D /* QNConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4A022670A05006A9E6D /* QNConfiguration.m */; };
+		36E4F61D22670A05006A9E6D /* QNResumeUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4A222670A05006A9E6D /* QNResumeUpload.m */; };
+		36E4F61E22670A05006A9E6D /* QNUpToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4A422670A05006A9E6D /* QNUpToken.m */; };
+		36E4F61F22670A05006A9E6D /* QNFormUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4A722670A05006A9E6D /* QNFormUpload.m */; };
+		36E4F62022670A05006A9E6D /* QNUploadOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4A822670A05006A9E6D /* QNUploadOption.m */; };
+		36E4F62122670A05006A9E6D /* QNPHAssetResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4AA22670A05006A9E6D /* QNPHAssetResource.m */; };
+		36E4F62222670A05006A9E6D /* QNCrc32.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4AB22670A05006A9E6D /* QNCrc32.m */; };
+		36E4F62322670A05006A9E6D /* QNUrlSafeBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4AE22670A05006A9E6D /* QNUrlSafeBase64.m */; };
+		36E4F62422670A05006A9E6D /* QNFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4B222670A05006A9E6D /* QNFile.m */; };
+		36E4F62522670A05006A9E6D /* QNEtag.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4B322670A05006A9E6D /* QNEtag.m */; };
+		36E4F62622670A05006A9E6D /* QNSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4B522670A05006A9E6D /* QNSystem.m */; };
+		36E4F62722670A05006A9E6D /* QNAsyncRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4B822670A05006A9E6D /* QNAsyncRun.m */; };
+		36E4F62822670A05006A9E6D /* QNALAssetFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4BA22670A05006A9E6D /* QNALAssetFile.m */; };
+		36E4F62922670A05006A9E6D /* QNPHAssetFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4BB22670A05006A9E6D /* QNPHAssetFile.m */; };
+		36E4F62A22670A05006A9E6D /* QN_GTM_Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4BC22670A05006A9E6D /* QN_GTM_Base64.m */; };
+		36E4F62B22670A05006A9E6D /* QNUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4C222670A05006A9E6D /* QNUserAgent.m */; };
+		36E4F62C22670A05006A9E6D /* QNResponseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4C422670A05006A9E6D /* QNResponseInfo.m */; };
+		36E4F62D22670A05006A9E6D /* QNSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4C622670A05006A9E6D /* QNSessionManager.m */; };
+		36E4F62E22670A05006A9E6D /* QNDes.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4CA22670A05006A9E6D /* QNDes.m */; };
+		36E4F62F22670A05006A9E6D /* QNHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4CB22670A05006A9E6D /* QNHex.m */; };
+		36E4F63022670A05006A9E6D /* QNIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4CC22670A05006A9E6D /* QNIP.m */; };
+		36E4F63122670A05006A9E6D /* QNTxtResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4D222670A05006A9E6D /* QNTxtResolver.m */; };
+		36E4F63222670A05006A9E6D /* QNHijackingDetectWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4D622670A05006A9E6D /* QNHijackingDetectWrapper.m */; };
+		36E4F63322670A05006A9E6D /* QNResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4D822670A05006A9E6D /* QNResolver.m */; };
+		36E4F63422670A05006A9E6D /* QNResolvUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4D922670A05006A9E6D /* QNResolvUtil.m */; };
+		36E4F63522670A05006A9E6D /* QNHosts.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4DA22670A05006A9E6D /* QNHosts.m */; };
+		36E4F63622670A05006A9E6D /* QNDnsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4DD22670A05006A9E6D /* QNDnsManager.m */; };
+		36E4F63722670A05006A9E6D /* QNNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4E122670A05006A9E6D /* QNNetworkInfo.m */; };
+		36E4F63822670A05006A9E6D /* QNDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4E222670A05006A9E6D /* QNDomain.m */; };
+		36E4F63922670A05006A9E6D /* QNRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4E422670A05006A9E6D /* QNRecord.m */; };
+		36E4F63A22670A05006A9E6D /* QNDnspodFree.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4E722670A05006A9E6D /* QNDnspodFree.m */; };
+		36E4F63B22670A05006A9E6D /* QNDnspodEnterprise.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4EA22670A05006A9E6D /* QNDnspodEnterprise.m */; };
+		36E4F63C22670A05006A9E6D /* QNFileRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4EC22670A05006A9E6D /* QNFileRecorder.m */; };
+		36E4F63D22670A05006A9E6D /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F4F122670A05006A9E6D /* libUMessage_Sdk_1.4.0.a */; };
+		36E4F63E22670A05006A9E6D /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4F522670A05006A9E6D /* UIProgressView+AFNetworking.m */; };
+		36E4F63F22670A05006A9E6D /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4F722670A05006A9E6D /* UIRefreshControl+AFNetworking.m */; };
+		36E4F64022670A05006A9E6D /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F4FA22670A05006A9E6D /* AFNetworkActivityIndicatorManager.m */; };
+		36E4F64122670A05006A9E6D /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F50022670A05006A9E6D /* UIImageView+AFNetworking.m */; };
+		36E4F64222670A05006A9E6D /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F50322670A05006A9E6D /* UIButton+AFNetworking.m */; };
+		36E4F64322670A05006A9E6D /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F50422670A05006A9E6D /* UIActivityIndicatorView+AFNetworking.m */; };
+		36E4F64422670A05006A9E6D /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F50522670A05006A9E6D /* UIWebView+AFNetworking.m */; };
+		36E4F64522670A05006A9E6D /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F50622670A05006A9E6D /* AFAutoPurgingImageCache.m */; };
+		36E4F64622670A05006A9E6D /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F50822670A05006A9E6D /* AFImageDownloader.m */; };
+		36E4F64D22670A05006A9E6D /* WifiLinkEasyConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F51922670A05006A9E6D /* WifiLinkEasyConfig.m */; };
+		36E4F64E22670A05006A9E6D /* EasyConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F51C22670A05006A9E6D /* EasyConfig.a */; };
+		36E4F64F22670A06006A9E6D /* libiot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F51E22670A05006A9E6D /* libiot.a */; };
+		36E4F65022670A06006A9E6D /* WifiLinkSmartConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F51F22670A05006A9E6D /* WifiLinkSmartConnection.m */; };
+		36E4F65122670A06006A9E6D /* WifiLinkOneShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F52322670A05006A9E6D /* WifiLinkOneShot.m */; };
+		36E4F65222670A06006A9E6D /* libConfiguration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F52422670A05006A9E6D /* libConfiguration.a */; };
+		36E4F65322670A06006A9E6D /* MarvellSmartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F52922670A05006A9E6D /* MarvellSmartConfig.m */; };
+		36E4F65422670A06006A9E6D /* WifiLinkMarvell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F52C22670A05006A9E6D /* WifiLinkMarvell.m */; };
+		36E4F65522670A06006A9E6D /* WifiLinkCC3x.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F52F22670A05006A9E6D /* WifiLinkCC3x.m */; };
+		36E4F65622670A06006A9E6D /* libFTC_DEBUG_ARM_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F53022670A05006A9E6D /* libFTC_DEBUG_ARM_64.a */; };
+		36E4F65722670A06006A9E6D /* WifiLinkHF.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F53422670A05006A9E6D /* WifiLinkHF.m */; };
+		36E4F65822670A06006A9E6D /* libsmartlinklib_7x.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F53522670A05006A9E6D /* libsmartlinklib_7x.a */; };
+		36E4F65922670A06006A9E6D /* EasyLinkForAXZWifiLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F53C22670A05006A9E6D /* EasyLinkForAXZWifiLink.m */; };
+		36E4F65A22670A06006A9E6D /* MXCHIPAirlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F53D22670A05006A9E6D /* MXCHIPAirlink.m */; };
+		36E4F65B22670A06006A9E6D /* libEasyLink.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F54022670A05006A9E6D /* libEasyLink.a */; };
+		36E4F65C22670A06006A9E6D /* WifiLinkEasyLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F54122670A05006A9E6D /* WifiLinkEasyLink.m */; };
+		36E4F65D22670A06006A9E6D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F54422670A05006A9E6D /* libcrypto.a */; };
+		36E4F65E22670A06006A9E6D /* WifiLinkCooee.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F54622670A05006A9E6D /* WifiLinkCooee.m */; };
+		36E4F65F22670A06006A9E6D /* libcooee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F54722670A05006A9E6D /* libcooee.a */; };
+		36E4F66022670A06006A9E6D /* WifiLinkSimpleConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F54A22670A05006A9E6D /* WifiLinkSimpleConfig.m */; };
+		36E4F66322670A06006A9E6D /* libLibSimpleConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F55022670A05006A9E6D /* libLibSimpleConfig.a */; };
+		36E4F66422670A06006A9E6D /* WifiLinkGuBei.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F55522670A05006A9E6D /* WifiLinkGuBei.m */; };
+		36E4F66522670A06006A9E6D /* libBLEasyConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F55722670A05006A9E6D /* libBLEasyConfig.a */; };
+		36E4F66622670A06006A9E6D /* libXlwDevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F55922670A05006A9E6D /* libXlwDevice.a */; };
+		36E4F66722670A06006A9E6D /* WifiLinkXlw.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F55C22670A05006A9E6D /* WifiLinkXlw.m */; };
+		36E4F66822670A06006A9E6D /* LTLinklib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F56022670A05006A9E6D /* LTLinklib.a */; };
+		36E4F66922670A06006A9E6D /* WifiLinkLTLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F56122670A05006A9E6D /* WifiLinkLTLink.m */; };
+		36E4F66A22670A06006A9E6D /* WifiLinkCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F56322670A05006A9E6D /* WifiLinkCustom.m */; };
+		36E4F67B22670A06006A9E6D /* aes_cbc.c in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F58F22670A05006A9E6D /* aes_cbc.c */; };
+		36E4F67C22670A06006A9E6D /* aes_core.c in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F59122670A05006A9E6D /* aes_core.c */; };
+		36E4F67D22670A06006A9E6D /* libAbleCloudLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F59422670A05006A9E6D /* libAbleCloudLib.a */; };
+		36E4F67E22670A06006A9E6D /* libAbleCloudLib_Simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F61222670A05006A9E6D /* libAbleCloudLib_Simulator.a */; };
+		36E4F68022670C55006A9E6D /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F67F22670C55006A9E6D /* libicucore.tbd */; };
+		36E4F68222670C63006A9E6D /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F68122670C63006A9E6D /* libresolv.tbd */; };
+		36E4F68422670C73006A9E6D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E4F68322670C73006A9E6D /* libz.tbd */; };
 		36FD8C562236553300DE4D28 /* PhoneVerifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */; };
 		3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */; };
 		3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */; };
@@ -979,6 +1066,270 @@
 		36E3CF612251F84900F4195D /* DeviceShareController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceShareController.m; sourceTree = "<group>"; };
 		36E3CF632252008C00F4195D /* AddDeviceShareController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceShareController.h; sourceTree = "<group>"; };
 		36E3CF642252008C00F4195D /* AddDeviceShareController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceShareController.m; sourceTree = "<group>"; };
+		36E4F48622670A05006A9E6D /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
+		36E4F48722670A05006A9E6D /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
+		36E4F48822670A05006A9E6D /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
+		36E4F48922670A05006A9E6D /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		36E4F48B22670A05006A9E6D /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		36E4F48C22670A05006A9E6D /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		36E4F48D22670A05006A9E6D /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		36E4F48F22670A05006A9E6D /* CKMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKMemoryCache.m; sourceTree = "<group>"; };
+		36E4F49022670A05006A9E6D /* CKCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCache.h; sourceTree = "<group>"; };
+		36E4F49122670A05006A9E6D /* CKFileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKFileCache.m; sourceTree = "<group>"; };
+		36E4F49222670A05006A9E6D /* CKCacheContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCacheContent.h; sourceTree = "<group>"; };
+		36E4F49322670A05006A9E6D /* CKNullCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKNullCache.h; sourceTree = "<group>"; };
+		36E4F49422670A05006A9E6D /* CKMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKMemoryCache.h; sourceTree = "<group>"; };
+		36E4F49522670A05006A9E6D /* CKCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCache.m; sourceTree = "<group>"; };
+		36E4F49622670A05006A9E6D /* CKNullCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKNullCache.m; sourceTree = "<group>"; };
+		36E4F49722670A05006A9E6D /* CacheKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheKit.h; sourceTree = "<group>"; };
+		36E4F49822670A05006A9E6D /* CKCacheContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCacheContent.m; sourceTree = "<group>"; };
+		36E4F49922670A05006A9E6D /* CKFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKFileCache.h; sourceTree = "<group>"; };
+		36E4F49C22670A05006A9E6D /* QNResumeUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNResumeUpload.h; sourceTree = "<group>"; };
+		36E4F49D22670A05006A9E6D /* QNUploadOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUploadOption.h; sourceTree = "<group>"; };
+		36E4F49E22670A05006A9E6D /* QNFormUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNFormUpload.h; sourceTree = "<group>"; };
+		36E4F49F22670A05006A9E6D /* QNUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNUploadManager.m; sourceTree = "<group>"; };
+		36E4F4A022670A05006A9E6D /* QNConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNConfiguration.m; sourceTree = "<group>"; };
+		36E4F4A122670A05006A9E6D /* QNUpToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUpToken.h; sourceTree = "<group>"; };
+		36E4F4A222670A05006A9E6D /* QNResumeUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNResumeUpload.m; sourceTree = "<group>"; };
+		36E4F4A322670A05006A9E6D /* QNUploadOption+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QNUploadOption+Private.h"; sourceTree = "<group>"; };
+		36E4F4A422670A05006A9E6D /* QNUpToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNUpToken.m; sourceTree = "<group>"; };
+		36E4F4A522670A05006A9E6D /* QNConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNConfiguration.h; sourceTree = "<group>"; };
+		36E4F4A622670A05006A9E6D /* QNUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUploadManager.h; sourceTree = "<group>"; };
+		36E4F4A722670A05006A9E6D /* QNFormUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNFormUpload.m; sourceTree = "<group>"; };
+		36E4F4A822670A05006A9E6D /* QNUploadOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNUploadOption.m; sourceTree = "<group>"; };
+		36E4F4AA22670A05006A9E6D /* QNPHAssetResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNPHAssetResource.m; sourceTree = "<group>"; };
+		36E4F4AB22670A05006A9E6D /* QNCrc32.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNCrc32.m; sourceTree = "<group>"; };
+		36E4F4AC22670A05006A9E6D /* QNFileDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNFileDelegate.h; sourceTree = "<group>"; };
+		36E4F4AD22670A05006A9E6D /* QNALAssetFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNALAssetFile.h; sourceTree = "<group>"; };
+		36E4F4AE22670A05006A9E6D /* QNUrlSafeBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNUrlSafeBase64.m; sourceTree = "<group>"; };
+		36E4F4AF22670A05006A9E6D /* QNAsyncRun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNAsyncRun.h; sourceTree = "<group>"; };
+		36E4F4B022670A05006A9E6D /* QN_GTM_Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QN_GTM_Base64.h; sourceTree = "<group>"; };
+		36E4F4B122670A05006A9E6D /* QNPHAssetFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNPHAssetFile.h; sourceTree = "<group>"; };
+		36E4F4B222670A05006A9E6D /* QNFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNFile.m; sourceTree = "<group>"; };
+		36E4F4B322670A05006A9E6D /* QNEtag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNEtag.m; sourceTree = "<group>"; };
+		36E4F4B422670A05006A9E6D /* QNVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNVersion.h; sourceTree = "<group>"; };
+		36E4F4B522670A05006A9E6D /* QNSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNSystem.m; sourceTree = "<group>"; };
+		36E4F4B622670A05006A9E6D /* QNCrc32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNCrc32.h; sourceTree = "<group>"; };
+		36E4F4B722670A05006A9E6D /* QNPHAssetResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNPHAssetResource.h; sourceTree = "<group>"; };
+		36E4F4B822670A05006A9E6D /* QNAsyncRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNAsyncRun.m; sourceTree = "<group>"; };
+		36E4F4B922670A05006A9E6D /* QNUrlSafeBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUrlSafeBase64.h; sourceTree = "<group>"; };
+		36E4F4BA22670A05006A9E6D /* QNALAssetFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNALAssetFile.m; sourceTree = "<group>"; };
+		36E4F4BB22670A05006A9E6D /* QNPHAssetFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNPHAssetFile.m; sourceTree = "<group>"; };
+		36E4F4BC22670A05006A9E6D /* QN_GTM_Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QN_GTM_Base64.m; sourceTree = "<group>"; };
+		36E4F4BD22670A05006A9E6D /* QNSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNSystem.h; sourceTree = "<group>"; };
+		36E4F4BE22670A05006A9E6D /* QNEtag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNEtag.h; sourceTree = "<group>"; };
+		36E4F4BF22670A05006A9E6D /* QNFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNFile.h; sourceTree = "<group>"; };
+		36E4F4C122670A05006A9E6D /* QNResponseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNResponseInfo.h; sourceTree = "<group>"; };
+		36E4F4C222670A05006A9E6D /* QNUserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNUserAgent.m; sourceTree = "<group>"; };
+		36E4F4C322670A05006A9E6D /* QNSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNSessionManager.h; sourceTree = "<group>"; };
+		36E4F4C422670A05006A9E6D /* QNResponseInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNResponseInfo.m; sourceTree = "<group>"; };
+		36E4F4C522670A05006A9E6D /* QNHttpDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNHttpDelegate.h; sourceTree = "<group>"; };
+		36E4F4C622670A05006A9E6D /* QNSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNSessionManager.m; sourceTree = "<group>"; };
+		36E4F4C722670A05006A9E6D /* QNUserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNUserAgent.h; sourceTree = "<group>"; };
+		36E4F4CA22670A05006A9E6D /* QNDes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNDes.m; sourceTree = "<group>"; };
+		36E4F4CB22670A05006A9E6D /* QNHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNHex.m; sourceTree = "<group>"; };
+		36E4F4CC22670A05006A9E6D /* QNIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNIP.m; sourceTree = "<group>"; };
+		36E4F4CD22670A05006A9E6D /* QNDes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDes.h; sourceTree = "<group>"; };
+		36E4F4CE22670A05006A9E6D /* QNHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNHex.h; sourceTree = "<group>"; };
+		36E4F4CF22670A05006A9E6D /* QNIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNIP.h; sourceTree = "<group>"; };
+		36E4F4D122670A05006A9E6D /* QNHijackingDetectWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNHijackingDetectWrapper.h; sourceTree = "<group>"; };
+		36E4F4D222670A05006A9E6D /* QNTxtResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNTxtResolver.m; sourceTree = "<group>"; };
+		36E4F4D322670A05006A9E6D /* QNResolvUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNResolvUtil.h; sourceTree = "<group>"; };
+		36E4F4D422670A05006A9E6D /* QNResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNResolver.h; sourceTree = "<group>"; };
+		36E4F4D522670A05006A9E6D /* QNHosts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNHosts.h; sourceTree = "<group>"; };
+		36E4F4D622670A05006A9E6D /* QNHijackingDetectWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNHijackingDetectWrapper.m; sourceTree = "<group>"; };
+		36E4F4D722670A05006A9E6D /* QNTxtResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNTxtResolver.h; sourceTree = "<group>"; };
+		36E4F4D822670A05006A9E6D /* QNResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNResolver.m; sourceTree = "<group>"; };
+		36E4F4D922670A05006A9E6D /* QNResolvUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNResolvUtil.m; sourceTree = "<group>"; };
+		36E4F4DA22670A05006A9E6D /* QNHosts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNHosts.m; sourceTree = "<group>"; };
+		36E4F4DC22670A05006A9E6D /* QNNetworkInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNNetworkInfo.h; sourceTree = "<group>"; };
+		36E4F4DD22670A05006A9E6D /* QNDnsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNDnsManager.m; sourceTree = "<group>"; };
+		36E4F4DE22670A05006A9E6D /* QNDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDomain.h; sourceTree = "<group>"; };
+		36E4F4DF22670A05006A9E6D /* QNRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNRecord.h; sourceTree = "<group>"; };
+		36E4F4E022670A05006A9E6D /* QNResolverDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNResolverDelegate.h; sourceTree = "<group>"; };
+		36E4F4E122670A05006A9E6D /* QNNetworkInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNNetworkInfo.m; sourceTree = "<group>"; };
+		36E4F4E222670A05006A9E6D /* QNDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNDomain.m; sourceTree = "<group>"; };
+		36E4F4E322670A05006A9E6D /* QNDnsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDnsManager.h; sourceTree = "<group>"; };
+		36E4F4E422670A05006A9E6D /* QNRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNRecord.m; sourceTree = "<group>"; };
+		36E4F4E522670A05006A9E6D /* HappyDNS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HappyDNS.h; sourceTree = "<group>"; };
+		36E4F4E722670A05006A9E6D /* QNDnspodFree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNDnspodFree.m; sourceTree = "<group>"; };
+		36E4F4E822670A05006A9E6D /* QNDnspodEnterprise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDnspodEnterprise.h; sourceTree = "<group>"; };
+		36E4F4E922670A05006A9E6D /* QNDnspodFree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNDnspodFree.h; sourceTree = "<group>"; };
+		36E4F4EA22670A05006A9E6D /* QNDnspodEnterprise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNDnspodEnterprise.m; sourceTree = "<group>"; };
+		36E4F4EC22670A05006A9E6D /* QNFileRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNFileRecorder.m; sourceTree = "<group>"; };
+		36E4F4ED22670A05006A9E6D /* QNFileRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNFileRecorder.h; sourceTree = "<group>"; };
+		36E4F4EE22670A05006A9E6D /* QNRecorderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNRecorderDelegate.h; sourceTree = "<group>"; };
+		36E4F4EF22670A05006A9E6D /* QiniuSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuSDK.h; sourceTree = "<group>"; };
+		36E4F4F122670A05006A9E6D /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
+		36E4F4F222670A05006A9E6D /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		36E4F4F522670A05006A9E6D /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
+		36E4F4F622670A05006A9E6D /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
+		36E4F4F722670A05006A9E6D /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
+		36E4F4F822670A05006A9E6D /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		36E4F4F922670A05006A9E6D /* AFImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageDownloader.h; sourceTree = "<group>"; };
+		36E4F4FA22670A05006A9E6D /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		36E4F4FB22670A05006A9E6D /* AFAutoPurgingImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAutoPurgingImageCache.h; sourceTree = "<group>"; };
+		36E4F4FC22670A05006A9E6D /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
+		36E4F4FD22670A05006A9E6D /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
+		36E4F4FE22670A05006A9E6D /* UIImage+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AFNetworking.h"; sourceTree = "<group>"; };
+		36E4F4FF22670A05006A9E6D /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
+		36E4F50022670A05006A9E6D /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		36E4F50122670A05006A9E6D /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+AFNetworking.h"; sourceTree = "<group>"; };
+		36E4F50222670A05006A9E6D /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
+		36E4F50322670A05006A9E6D /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
+		36E4F50422670A05006A9E6D /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
+		36E4F50522670A05006A9E6D /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		36E4F50622670A05006A9E6D /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAutoPurgingImageCache.m; sourceTree = "<group>"; };
+		36E4F50722670A05006A9E6D /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		36E4F50822670A05006A9E6D /* AFImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageDownloader.m; sourceTree = "<group>"; };
+		36E4F51922670A05006A9E6D /* WifiLinkEasyConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkEasyConfig.m; sourceTree = "<group>"; };
+		36E4F51A22670A05006A9E6D /* WifiLinkEasyConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkEasyConfig.h; sourceTree = "<group>"; };
+		36E4F51B22670A05006A9E6D /* EasyConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyConfig.h; sourceTree = "<group>"; };
+		36E4F51C22670A05006A9E6D /* EasyConfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = EasyConfig.a; sourceTree = "<group>"; };
+		36E4F51E22670A05006A9E6D /* libiot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiot.a; sourceTree = "<group>"; };
+		36E4F51F22670A05006A9E6D /* WifiLinkSmartConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkSmartConnection.m; sourceTree = "<group>"; };
+		36E4F52022670A05006A9E6D /* WifiLinkSmartConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkSmartConnection.h; sourceTree = "<group>"; };
+		36E4F52122670A05006A9E6D /* SmartConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartConnection.h; sourceTree = "<group>"; };
+		36E4F52322670A05006A9E6D /* WifiLinkOneShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkOneShot.m; sourceTree = "<group>"; };
+		36E4F52422670A05006A9E6D /* libConfiguration.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libConfiguration.a; sourceTree = "<group>"; };
+		36E4F52522670A05006A9E6D /* OneShotConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneShotConfig.h; sourceTree = "<group>"; };
+		36E4F52622670A05006A9E6D /* WifiLinkOneShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkOneShot.h; sourceTree = "<group>"; };
+		36E4F52722670A05006A9E6D /* ManualConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManualConfig.h; sourceTree = "<group>"; };
+		36E4F52922670A05006A9E6D /* MarvellSmartConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvellSmartConfig.m; sourceTree = "<group>"; };
+		36E4F52A22670A05006A9E6D /* WifiLinkMarvell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkMarvell.h; sourceTree = "<group>"; };
+		36E4F52B22670A05006A9E6D /* MarvellSmartConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvellSmartConfig.h; sourceTree = "<group>"; };
+		36E4F52C22670A05006A9E6D /* WifiLinkMarvell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkMarvell.m; sourceTree = "<group>"; };
+		36E4F52E22670A05006A9E6D /* FirstTimeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTimeConfig.h; sourceTree = "<group>"; };
+		36E4F52F22670A05006A9E6D /* WifiLinkCC3x.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkCC3x.m; sourceTree = "<group>"; };
+		36E4F53022670A05006A9E6D /* libFTC_DEBUG_ARM_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFTC_DEBUG_ARM_64.a; sourceTree = "<group>"; };
+		36E4F53122670A05006A9E6D /* WifiLinkCC3x.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkCC3x.h; sourceTree = "<group>"; };
+		36E4F53322670A05006A9E6D /* HFSmartLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFSmartLink.h; sourceTree = "<group>"; };
+		36E4F53422670A05006A9E6D /* WifiLinkHF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkHF.m; sourceTree = "<group>"; };
+		36E4F53522670A05006A9E6D /* libsmartlinklib_7x.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsmartlinklib_7x.a; sourceTree = "<group>"; };
+		36E4F53622670A05006A9E6D /* smartlinklib_7x.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smartlinklib_7x.h; sourceTree = "<group>"; };
+		36E4F53722670A05006A9E6D /* WifiLinkHF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkHF.h; sourceTree = "<group>"; };
+		36E4F53822670A05006A9E6D /* HFSmartLinkDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFSmartLinkDeviceInfo.h; sourceTree = "<group>"; };
+		36E4F53A22670A05006A9E6D /* EASYLINK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASYLINK.h; sourceTree = "<group>"; };
+		36E4F53B22670A05006A9E6D /* AXZWifiLinkProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXZWifiLinkProtocol.h; sourceTree = "<group>"; };
+		36E4F53C22670A05006A9E6D /* EasyLinkForAXZWifiLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyLinkForAXZWifiLink.m; sourceTree = "<group>"; };
+		36E4F53D22670A05006A9E6D /* MXCHIPAirlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXCHIPAirlink.m; sourceTree = "<group>"; };
+		36E4F53E22670A05006A9E6D /* WifiLinkEasyLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkEasyLink.h; sourceTree = "<group>"; };
+		36E4F53F22670A05006A9E6D /* EasyLinkForAXZWifiLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyLinkForAXZWifiLink.h; sourceTree = "<group>"; };
+		36E4F54022670A05006A9E6D /* libEasyLink.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEasyLink.a; sourceTree = "<group>"; };
+		36E4F54122670A05006A9E6D /* WifiLinkEasyLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkEasyLink.m; sourceTree = "<group>"; };
+		36E4F54222670A05006A9E6D /* MXCHIPAirlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXCHIPAirlink.h; sourceTree = "<group>"; };
+		36E4F54422670A05006A9E6D /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		36E4F54522670A05006A9E6D /* WifiLinkCooee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkCooee.h; sourceTree = "<group>"; };
+		36E4F54622670A05006A9E6D /* WifiLinkCooee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkCooee.m; sourceTree = "<group>"; };
+		36E4F54722670A05006A9E6D /* libcooee.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcooee.a; sourceTree = "<group>"; };
+		36E4F54822670A05006A9E6D /* Cooee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cooee.h; sourceTree = "<group>"; };
+		36E4F54A22670A05006A9E6D /* WifiLinkSimpleConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkSimpleConfig.m; sourceTree = "<group>"; };
+		36E4F54B22670A05006A9E6D /* SimpleConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleConfig.h; sourceTree = "<group>"; };
+		36E4F54E22670A05006A9E6D /* WifiLinkSimpleConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkSimpleConfig.h; sourceTree = "<group>"; };
+		36E4F55022670A05006A9E6D /* libLibSimpleConfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLibSimpleConfig.a; sourceTree = "<group>"; };
+		36E4F55222670A05006A9E6D /* LibSimpleConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibSimpleConfig.h; sourceTree = "<group>"; };
+		36E4F55422670A05006A9E6D /* BLEasyConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEasyConfig.h; sourceTree = "<group>"; };
+		36E4F55522670A05006A9E6D /* WifiLinkGuBei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkGuBei.m; sourceTree = "<group>"; };
+		36E4F55622670A05006A9E6D /* WifiLinkGuBei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkGuBei.h; sourceTree = "<group>"; };
+		36E4F55722670A05006A9E6D /* libBLEasyConfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBLEasyConfig.a; sourceTree = "<group>"; };
+		36E4F55922670A05006A9E6D /* libXlwDevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXlwDevice.a; sourceTree = "<group>"; };
+		36E4F55A22670A05006A9E6D /* WifiLinkXlw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkXlw.h; sourceTree = "<group>"; };
+		36E4F55B22670A05006A9E6D /* XlwDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XlwDevice.h; sourceTree = "<group>"; };
+		36E4F55C22670A05006A9E6D /* WifiLinkXlw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkXlw.m; sourceTree = "<group>"; };
+		36E4F55E22670A05006A9E6D /* WifiLinkLTLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkLTLink.h; sourceTree = "<group>"; };
+		36E4F55F22670A05006A9E6D /* LTLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTLink.h; sourceTree = "<group>"; };
+		36E4F56022670A05006A9E6D /* LTLinklib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = LTLinklib.a; sourceTree = "<group>"; };
+		36E4F56122670A05006A9E6D /* WifiLinkLTLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkLTLink.m; sourceTree = "<group>"; };
+		36E4F56322670A05006A9E6D /* WifiLinkCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiLinkCustom.m; sourceTree = "<group>"; };
+		36E4F56422670A05006A9E6D /* WifiLinkCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiLinkCustom.h; sourceTree = "<group>"; };
+		36E4F58F22670A05006A9E6D /* aes_cbc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aes_cbc.c; sourceTree = "<group>"; };
+		36E4F59022670A05006A9E6D /* aes_ac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes_ac.h; sourceTree = "<group>"; };
+		36E4F59122670A05006A9E6D /* aes_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aes_core.c; sourceTree = "<group>"; };
+		36E4F59222670A05006A9E6D /* aes_cbc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes_cbc.h; sourceTree = "<group>"; };
+		36E4F59322670A05006A9E6D /* aes_locl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes_locl.h; sourceTree = "<group>"; };
+		36E4F59422670A05006A9E6D /* libAbleCloudLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAbleCloudLib.a; sourceTree = "<group>"; };
+		36E4F59722670A05006A9E6D /* ACRankingValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRankingValue.h; sourceTree = "<group>"; };
+		36E4F59822670A05006A9E6D /* ACRankingCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRankingCount.h; sourceTree = "<group>"; };
+		36E4F59A22670A05006A9E6D /* ACDeviceActive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceActive.h; sourceTree = "<group>"; };
+		36E4F59C22670A05006A9E6D /* ACContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACContext.h; sourceTree = "<group>"; };
+		36E4F59E22670A05006A9E6D /* ACMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMsg.h; sourceTree = "<group>"; };
+		36E4F5A022670A05006A9E6D /* ACClassTopicMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACClassTopicMessage.h; sourceTree = "<group>"; };
+		36E4F5A122670A05006A9E6D /* ACDeviceTopicMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceTopicMessage.h; sourceTree = "<group>"; };
+		36E4F5A222670A05006A9E6D /* ACPushReceive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPushReceive.h; sourceTree = "<group>"; };
+		36E4F5A322670A05006A9E6D /* ACTopicMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTopicMessage.h; sourceTree = "<group>"; };
+		36E4F5A422670A05006A9E6D /* ACCustomTopicMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCustomTopicMessage.h; sourceTree = "<group>"; };
+		36E4F5A622670A05006A9E6D /* ACLocalDeviceDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLocalDeviceDetail.h; sourceTree = "<group>"; };
+		36E4F5A722670A05006A9E6D /* ACLocalDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLocalDevice.h; sourceTree = "<group>"; };
+		36E4F5A922670A05006A9E6D /* ACProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACProduct.h; sourceTree = "<group>"; };
+		36E4F5AB22670A05006A9E6D /* ACFeedBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFeedBack.h; sourceTree = "<group>"; };
+		36E4F5AD22670A05006A9E6D /* ACFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFileInfo.h; sourceTree = "<group>"; };
+		36E4F5AF22670A05006A9E6D /* ACDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDevice.h; sourceTree = "<group>"; };
+		36E4F5B022670A05006A9E6D /* ACDevicePropertySearchOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDevicePropertySearchOption.h; sourceTree = "<group>"; };
+		36E4F5B222670A05006A9E6D /* ACWifiInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACWifiInfo.h; sourceTree = "<group>"; };
+		36E4F5B422670A05006A9E6D /* ACUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUserInfo.h; sourceTree = "<group>"; };
+		36E4F5B622670A05006A9E6D /* ACOTAUpgradeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOTAUpgradeInfo.h; sourceTree = "<group>"; };
+		36E4F5B722670A05006A9E6D /* ACOTAFileMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOTAFileMeta.h; sourceTree = "<group>"; };
+		36E4F5B822670A05006A9E6D /* ACOTACheckInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOTACheckInfo.h; sourceTree = "<group>"; };
+		36E4F5BB22670A05006A9E6D /* ACUserTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUserTask.h; sourceTree = "<group>"; };
+		36E4F5BC22670A05006A9E6D /* ACUserCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUserCommand.h; sourceTree = "<group>"; };
+		36E4F5BD22670A05006A9E6D /* ACUserTaskGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUserTaskGroup.h; sourceTree = "<group>"; };
+		36E4F5BE22670A05006A9E6D /* ACTimerTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTimerTask.h; sourceTree = "<group>"; };
+		36E4F5BF22670A05006A9E6D /* ACTimeRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTimeRule.h; sourceTree = "<group>"; };
+		36E4F5C122670A05006A9E6D /* ACDeviceTaskGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceTaskGroup.h; sourceTree = "<group>"; };
+		36E4F5C222670A05006A9E6D /* ACDeviceTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceTask.h; sourceTree = "<group>"; };
+		36E4F5C322670A05006A9E6D /* ACDeviceCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceCommand.h; sourceTree = "<group>"; };
+		36E4F5C522670A05006A9E6D /* ACDeviceMsgOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceMsgOption.h; sourceTree = "<group>"; };
+		36E4F5C622670A05006A9E6D /* ACDeviceMsgHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceMsgHead.h; sourceTree = "<group>"; };
+		36E4F5C722670A05006A9E6D /* ACDeviceMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceMsg.h; sourceTree = "<group>"; };
+		36E4F5C822670A05006A9E6D /* ACDeviceMsgSecHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceMsgSecHead.h; sourceTree = "<group>"; };
+		36E4F5C922670A05006A9E6D /* ACDeviceMsgPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceMsgPayload.h; sourceTree = "<group>"; };
+		36E4F5CB22670A05006A9E6D /* ACClassTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACClassTopic.h; sourceTree = "<group>"; };
+		36E4F5CC22670A05006A9E6D /* ACDeviceTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceTopic.h; sourceTree = "<group>"; };
+		36E4F5CD22670A05006A9E6D /* ACPushTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPushTable.h; sourceTree = "<group>"; };
+		36E4F5CE22670A05006A9E6D /* ACCustomTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCustomTopic.h; sourceTree = "<group>"; };
+		36E4F5CF22670A05006A9E6D /* ACTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTopic.h; sourceTree = "<group>"; };
+		36E4F5D122670A05006A9E6D /* ACWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACWeather.h; sourceTree = "<group>"; };
+		36E4F5D222670A05006A9E6D /* ACAQI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAQI.h; sourceTree = "<group>"; };
+		36E4F5D322670A05006A9E6D /* ACPM25.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPM25.h; sourceTree = "<group>"; };
+		36E4F5D522670A05006A9E6D /* ACBindUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACBindUser.h; sourceTree = "<group>"; };
+		36E4F5D722670A05006A9E6D /* ACMemoryCacheLocalDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMemoryCacheLocalDevice.h; sourceTree = "<group>"; };
+		36E4F5D822670A05006A9E6D /* ACUserDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUserDevice.h; sourceTree = "<group>"; };
+		36E4F5DA22670A05006A9E6D /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACObject.h; sourceTree = "<group>"; };
+		36E4F5DB22670A05006A9E6D /* ACloudLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACloudLib.h; sourceTree = "<group>"; };
+		36E4F5DE22670A05006A9E6D /* ACDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceManager.h; sourceTree = "<group>"; };
+		36E4F5E022670A05006A9E6D /* ACNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNotificationManager.h; sourceTree = "<group>"; };
+		36E4F5E222670A05006A9E6D /* ACCustomDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCustomDataManager.h; sourceTree = "<group>"; };
+		36E4F5E422670A05006A9E6D /* ACLocalRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLocalRequest.h; sourceTree = "<group>"; };
+		36E4F5E522670A05006A9E6D /* ACDeviceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceClient.h; sourceTree = "<group>"; };
+		36E4F5E622670A05006A9E6D /* ACLocalRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLocalRequestQueue.h; sourceTree = "<group>"; };
+		36E4F5E822670A05006A9E6D /* ACWifiLinkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACWifiLinkManager.h; sourceTree = "<group>"; };
+		36E4F5E922670A05006A9E6D /* ACWifiLinkProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACWifiLinkProtocol.h; sourceTree = "<group>"; };
+		36E4F5EB22670A05006A9E6D /* ACPushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPushManager.h; sourceTree = "<group>"; };
+		36E4F5ED22670A05006A9E6D /* ACWeatherManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACWeatherManager.h; sourceTree = "<group>"; };
+		36E4F5EF22670A05006A9E6D /* ACFindDevicesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFindDevicesManager.h; sourceTree = "<group>"; };
+		36E4F5F022670A05006A9E6D /* ACQueryDeviceStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACQueryDeviceStateManager.h; sourceTree = "<group>"; };
+		36E4F5F222670A05006A9E6D /* ACDeviceTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceTimerManager.h; sourceTree = "<group>"; };
+		36E4F5F322670A05006A9E6D /* ACTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTimerManager.h; sourceTree = "<group>"; };
+		36E4F5F422670A05006A9E6D /* ACUserTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACUserTimerManager.h; sourceTree = "<group>"; };
+		36E4F5F622670A05006A9E6D /* ACAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAccountManager.h; sourceTree = "<group>"; };
+		36E4F5F822670A05006A9E6D /* ACHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACHelper.h; sourceTree = "<group>"; };
+		36E4F5F922670A05006A9E6D /* ACloudLibConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACloudLibConst.h; sourceTree = "<group>"; };
+		36E4F5FB22670A05006A9E6D /* ACDeviceDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDeviceDataManager.h; sourceTree = "<group>"; };
+		36E4F5FD22670A05006A9E6D /* ACProductManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACProductManager.h; sourceTree = "<group>"; };
+		36E4F5FF22670A05006A9E6D /* ACBindManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACBindManager.h; sourceTree = "<group>"; };
+		36E4F60122670A05006A9E6D /* ACClassDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACClassDataManager.h; sourceTree = "<group>"; };
+		36E4F60322670A05006A9E6D /* ACACL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACACL.h; sourceTree = "<group>"; };
+		36E4F60522670A05006A9E6D /* ACCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCache.h; sourceTree = "<group>"; };
+		36E4F60722670A05006A9E6D /* ACKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACKeyChain.h; sourceTree = "<group>"; };
+		36E4F60922670A05006A9E6D /* ACFeedBackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFeedBackManager.h; sourceTree = "<group>"; };
+		36E4F60B22670A05006A9E6D /* ACServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACServiceClient.h; sourceTree = "<group>"; };
+		36E4F60D22670A05006A9E6D /* ACFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFileManager.h; sourceTree = "<group>"; };
+		36E4F60F22670A05006A9E6D /* ACOTAManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACOTAManager.h; sourceTree = "<group>"; };
+		36E4F61122670A05006A9E6D /* ACRankingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACRankingManager.h; sourceTree = "<group>"; };
+		36E4F61222670A05006A9E6D /* libAbleCloudLib_Simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAbleCloudLib_Simulator.a; sourceTree = "<group>"; };
+		36E4F67F22670C55006A9E6D /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		36E4F68122670C63006A9E6D /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		36E4F68322670C73006A9E6D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		36FD8C542236553300DE4D28 /* PhoneVerifyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneVerifyCell.h; sourceTree = "<group>"; };
 		36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneVerifyCell.m; sourceTree = "<group>"; };
 		3A5C98FE5F855BF995BC4CC2 /* Pods-jienuoIOT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jienuoIOT.release.xcconfig"; path = "Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT.release.xcconfig"; sourceTree = "<group>"; };
@@ -1555,8 +1906,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E4F68422670C73006A9E6D /* libz.tbd in Frameworks */,
+				36E4F68222670C63006A9E6D /* libresolv.tbd in Frameworks */,
+				36E4F68022670C55006A9E6D /* libicucore.tbd in Frameworks */,
+				36E4F64F22670A06006A9E6D /* libiot.a in Frameworks */,
+				36E4F63D22670A05006A9E6D /* libUMessage_Sdk_1.4.0.a in Frameworks */,
+				36E4F66522670A06006A9E6D /* libBLEasyConfig.a in Frameworks */,
+				36E4F66622670A06006A9E6D /* libXlwDevice.a in Frameworks */,
+				36E4F66822670A06006A9E6D /* LTLinklib.a in Frameworks */,
+				36E4F65222670A06006A9E6D /* libConfiguration.a in Frameworks */,
 				DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */,
+				36E4F65822670A06006A9E6D /* libsmartlinklib_7x.a in Frameworks */,
+				36E4F66322670A06006A9E6D /* libLibSimpleConfig.a in Frameworks */,
+				36E4F67E22670A06006A9E6D /* libAbleCloudLib_Simulator.a in Frameworks */,
+				36E4F67D22670A06006A9E6D /* libAbleCloudLib.a in Frameworks */,
 				BB6C8D1D225C4F3500FD6472 /* NetworkExtension.framework in Frameworks */,
+				36E4F65F22670A06006A9E6D /* libcooee.a in Frameworks */,
+				36E4F65D22670A06006A9E6D /* libcrypto.a in Frameworks */,
+				36E4F65622670A06006A9E6D /* libFTC_DEBUG_ARM_64.a in Frameworks */,
+				36E4F64E22670A05006A9E6D /* EasyConfig.a in Frameworks */,
+				36E4F65B22670A06006A9E6D /* libEasyLink.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1646,6 +2015,906 @@
 				36E3CF642252008C00F4195D /* AddDeviceShareController.m */,
 			);
 			path = DeviceShare;
+			sourceTree = "<group>";
+		};
+		36E4F48322670A05006A9E6D /* ACloudLib */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F48422670A05006A9E6D /* Ablecloud_Sdk_Extra_Frameworks */,
+				36E4F59422670A05006A9E6D /* libAbleCloudLib.a */,
+				36E4F59522670A05006A9E6D /* Model */,
+				36E4F5DB22670A05006A9E6D /* ACloudLib.h */,
+				36E4F5DC22670A05006A9E6D /* Services */,
+				36E4F61222670A05006A9E6D /* libAbleCloudLib_Simulator.a */,
+			);
+			path = ACloudLib;
+			sourceTree = "<group>";
+		};
+		36E4F48422670A05006A9E6D /* Ablecloud_Sdk_Extra_Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F48522670A05006A9E6D /* YYkit */,
+				36E4F48A22670A05006A9E6D /* SRWebSocket */,
+				36E4F48E22670A05006A9E6D /* CacheKit */,
+				36E4F49A22670A05006A9E6D /* QiniuSDK */,
+				36E4F4F022670A05006A9E6D /* UMessage_Sdk_1.4.0 */,
+				36E4F4F322670A05006A9E6D /* AFNetworking */,
+				36E4F51722670A05006A9E6D /* SmartConfig */,
+				36E4F58E22670A05006A9E6D /* AES */,
+			);
+			path = Ablecloud_Sdk_Extra_Frameworks;
+			sourceTree = "<group>";
+		};
+		36E4F48522670A05006A9E6D /* YYkit */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F48622670A05006A9E6D /* YYClassInfo.h */,
+				36E4F48722670A05006A9E6D /* NSObject+YYModel.m */,
+				36E4F48822670A05006A9E6D /* YYClassInfo.m */,
+				36E4F48922670A05006A9E6D /* NSObject+YYModel.h */,
+			);
+			path = YYkit;
+			sourceTree = "<group>";
+		};
+		36E4F48A22670A05006A9E6D /* SRWebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F48B22670A05006A9E6D /* SRWebSocket.m */,
+				36E4F48C22670A05006A9E6D /* SocketRocket-Prefix.pch */,
+				36E4F48D22670A05006A9E6D /* SRWebSocket.h */,
+			);
+			path = SRWebSocket;
+			sourceTree = "<group>";
+		};
+		36E4F48E22670A05006A9E6D /* CacheKit */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F48F22670A05006A9E6D /* CKMemoryCache.m */,
+				36E4F49022670A05006A9E6D /* CKCache.h */,
+				36E4F49122670A05006A9E6D /* CKFileCache.m */,
+				36E4F49222670A05006A9E6D /* CKCacheContent.h */,
+				36E4F49322670A05006A9E6D /* CKNullCache.h */,
+				36E4F49422670A05006A9E6D /* CKMemoryCache.h */,
+				36E4F49522670A05006A9E6D /* CKCache.m */,
+				36E4F49622670A05006A9E6D /* CKNullCache.m */,
+				36E4F49722670A05006A9E6D /* CacheKit.h */,
+				36E4F49822670A05006A9E6D /* CKCacheContent.m */,
+				36E4F49922670A05006A9E6D /* CKFileCache.h */,
+			);
+			path = CacheKit;
+			sourceTree = "<group>";
+		};
+		36E4F49A22670A05006A9E6D /* QiniuSDK */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F49B22670A05006A9E6D /* Storage */,
+				36E4F4A922670A05006A9E6D /* Common */,
+				36E4F4C022670A05006A9E6D /* Http */,
+				36E4F4C822670A05006A9E6D /* HappyDNS */,
+				36E4F4EB22670A05006A9E6D /* Recorder */,
+				36E4F4EF22670A05006A9E6D /* QiniuSDK.h */,
+			);
+			path = QiniuSDK;
+			sourceTree = "<group>";
+		};
+		36E4F49B22670A05006A9E6D /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F49C22670A05006A9E6D /* QNResumeUpload.h */,
+				36E4F49D22670A05006A9E6D /* QNUploadOption.h */,
+				36E4F49E22670A05006A9E6D /* QNFormUpload.h */,
+				36E4F49F22670A05006A9E6D /* QNUploadManager.m */,
+				36E4F4A022670A05006A9E6D /* QNConfiguration.m */,
+				36E4F4A122670A05006A9E6D /* QNUpToken.h */,
+				36E4F4A222670A05006A9E6D /* QNResumeUpload.m */,
+				36E4F4A322670A05006A9E6D /* QNUploadOption+Private.h */,
+				36E4F4A422670A05006A9E6D /* QNUpToken.m */,
+				36E4F4A522670A05006A9E6D /* QNConfiguration.h */,
+				36E4F4A622670A05006A9E6D /* QNUploadManager.h */,
+				36E4F4A722670A05006A9E6D /* QNFormUpload.m */,
+				36E4F4A822670A05006A9E6D /* QNUploadOption.m */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		36E4F4A922670A05006A9E6D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4AA22670A05006A9E6D /* QNPHAssetResource.m */,
+				36E4F4AB22670A05006A9E6D /* QNCrc32.m */,
+				36E4F4AC22670A05006A9E6D /* QNFileDelegate.h */,
+				36E4F4AD22670A05006A9E6D /* QNALAssetFile.h */,
+				36E4F4AE22670A05006A9E6D /* QNUrlSafeBase64.m */,
+				36E4F4AF22670A05006A9E6D /* QNAsyncRun.h */,
+				36E4F4B022670A05006A9E6D /* QN_GTM_Base64.h */,
+				36E4F4B122670A05006A9E6D /* QNPHAssetFile.h */,
+				36E4F4B222670A05006A9E6D /* QNFile.m */,
+				36E4F4B322670A05006A9E6D /* QNEtag.m */,
+				36E4F4B422670A05006A9E6D /* QNVersion.h */,
+				36E4F4B522670A05006A9E6D /* QNSystem.m */,
+				36E4F4B622670A05006A9E6D /* QNCrc32.h */,
+				36E4F4B722670A05006A9E6D /* QNPHAssetResource.h */,
+				36E4F4B822670A05006A9E6D /* QNAsyncRun.m */,
+				36E4F4B922670A05006A9E6D /* QNUrlSafeBase64.h */,
+				36E4F4BA22670A05006A9E6D /* QNALAssetFile.m */,
+				36E4F4BB22670A05006A9E6D /* QNPHAssetFile.m */,
+				36E4F4BC22670A05006A9E6D /* QN_GTM_Base64.m */,
+				36E4F4BD22670A05006A9E6D /* QNSystem.h */,
+				36E4F4BE22670A05006A9E6D /* QNEtag.h */,
+				36E4F4BF22670A05006A9E6D /* QNFile.h */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		36E4F4C022670A05006A9E6D /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4C122670A05006A9E6D /* QNResponseInfo.h */,
+				36E4F4C222670A05006A9E6D /* QNUserAgent.m */,
+				36E4F4C322670A05006A9E6D /* QNSessionManager.h */,
+				36E4F4C422670A05006A9E6D /* QNResponseInfo.m */,
+				36E4F4C522670A05006A9E6D /* QNHttpDelegate.h */,
+				36E4F4C622670A05006A9E6D /* QNSessionManager.m */,
+				36E4F4C722670A05006A9E6D /* QNUserAgent.h */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
+		36E4F4C822670A05006A9E6D /* HappyDNS */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4C922670A05006A9E6D /* Util */,
+				36E4F4D022670A05006A9E6D /* Local */,
+				36E4F4DB22670A05006A9E6D /* Common */,
+				36E4F4E522670A05006A9E6D /* HappyDNS.h */,
+				36E4F4E622670A05006A9E6D /* Http */,
+			);
+			path = HappyDNS;
+			sourceTree = "<group>";
+		};
+		36E4F4C922670A05006A9E6D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4CA22670A05006A9E6D /* QNDes.m */,
+				36E4F4CB22670A05006A9E6D /* QNHex.m */,
+				36E4F4CC22670A05006A9E6D /* QNIP.m */,
+				36E4F4CD22670A05006A9E6D /* QNDes.h */,
+				36E4F4CE22670A05006A9E6D /* QNHex.h */,
+				36E4F4CF22670A05006A9E6D /* QNIP.h */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		36E4F4D022670A05006A9E6D /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4D122670A05006A9E6D /* QNHijackingDetectWrapper.h */,
+				36E4F4D222670A05006A9E6D /* QNTxtResolver.m */,
+				36E4F4D322670A05006A9E6D /* QNResolvUtil.h */,
+				36E4F4D422670A05006A9E6D /* QNResolver.h */,
+				36E4F4D522670A05006A9E6D /* QNHosts.h */,
+				36E4F4D622670A05006A9E6D /* QNHijackingDetectWrapper.m */,
+				36E4F4D722670A05006A9E6D /* QNTxtResolver.h */,
+				36E4F4D822670A05006A9E6D /* QNResolver.m */,
+				36E4F4D922670A05006A9E6D /* QNResolvUtil.m */,
+				36E4F4DA22670A05006A9E6D /* QNHosts.m */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		36E4F4DB22670A05006A9E6D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4DC22670A05006A9E6D /* QNNetworkInfo.h */,
+				36E4F4DD22670A05006A9E6D /* QNDnsManager.m */,
+				36E4F4DE22670A05006A9E6D /* QNDomain.h */,
+				36E4F4DF22670A05006A9E6D /* QNRecord.h */,
+				36E4F4E022670A05006A9E6D /* QNResolverDelegate.h */,
+				36E4F4E122670A05006A9E6D /* QNNetworkInfo.m */,
+				36E4F4E222670A05006A9E6D /* QNDomain.m */,
+				36E4F4E322670A05006A9E6D /* QNDnsManager.h */,
+				36E4F4E422670A05006A9E6D /* QNRecord.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		36E4F4E622670A05006A9E6D /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4E722670A05006A9E6D /* QNDnspodFree.m */,
+				36E4F4E822670A05006A9E6D /* QNDnspodEnterprise.h */,
+				36E4F4E922670A05006A9E6D /* QNDnspodFree.h */,
+				36E4F4EA22670A05006A9E6D /* QNDnspodEnterprise.m */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
+		36E4F4EB22670A05006A9E6D /* Recorder */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4EC22670A05006A9E6D /* QNFileRecorder.m */,
+				36E4F4ED22670A05006A9E6D /* QNFileRecorder.h */,
+				36E4F4EE22670A05006A9E6D /* QNRecorderDelegate.h */,
+			);
+			path = Recorder;
+			sourceTree = "<group>";
+		};
+		36E4F4F022670A05006A9E6D /* UMessage_Sdk_1.4.0 */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4F122670A05006A9E6D /* libUMessage_Sdk_1.4.0.a */,
+				36E4F4F222670A05006A9E6D /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.4.0;
+			sourceTree = "<group>";
+		};
+		36E4F4F322670A05006A9E6D /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4F422670A05006A9E6D /* UIKit+AFNetworking */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		36E4F4F422670A05006A9E6D /* UIKit+AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F4F522670A05006A9E6D /* UIProgressView+AFNetworking.m */,
+				36E4F4F622670A05006A9E6D /* UIButton+AFNetworking.h */,
+				36E4F4F722670A05006A9E6D /* UIRefreshControl+AFNetworking.m */,
+				36E4F4F822670A05006A9E6D /* UIImageView+AFNetworking.h */,
+				36E4F4F922670A05006A9E6D /* AFImageDownloader.h */,
+				36E4F4FA22670A05006A9E6D /* AFNetworkActivityIndicatorManager.m */,
+				36E4F4FB22670A05006A9E6D /* AFAutoPurgingImageCache.h */,
+				36E4F4FC22670A05006A9E6D /* UIWebView+AFNetworking.h */,
+				36E4F4FD22670A05006A9E6D /* UIActivityIndicatorView+AFNetworking.h */,
+				36E4F4FE22670A05006A9E6D /* UIImage+AFNetworking.h */,
+				36E4F4FF22670A05006A9E6D /* UIProgressView+AFNetworking.h */,
+				36E4F50022670A05006A9E6D /* UIImageView+AFNetworking.m */,
+				36E4F50122670A05006A9E6D /* UIKit+AFNetworking.h */,
+				36E4F50222670A05006A9E6D /* UIRefreshControl+AFNetworking.h */,
+				36E4F50322670A05006A9E6D /* UIButton+AFNetworking.m */,
+				36E4F50422670A05006A9E6D /* UIActivityIndicatorView+AFNetworking.m */,
+				36E4F50522670A05006A9E6D /* UIWebView+AFNetworking.m */,
+				36E4F50622670A05006A9E6D /* AFAutoPurgingImageCache.m */,
+				36E4F50722670A05006A9E6D /* AFNetworkActivityIndicatorManager.h */,
+				36E4F50822670A05006A9E6D /* AFImageDownloader.m */,
+			);
+			path = "UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		36E4F51722670A05006A9E6D /* SmartConfig */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F51822670A05006A9E6D /* EasyConfig3.0 */,
+				36E4F51D22670A05006A9E6D /* SmartConnection */,
+				36E4F52222670A05006A9E6D /* OneShot */,
+				36E4F52822670A05006A9E6D /* Marvell */,
+				36E4F52D22670A05006A9E6D /* CC3x */,
+				36E4F53222670A05006A9E6D /* os_SmartLink */,
+				36E4F53922670A05006A9E6D /* EasyLink */,
+				36E4F54322670A05006A9E6D /* Cooee */,
+				36E4F54922670A05006A9E6D /* LibSimpleConfig */,
+				36E4F55322670A05006A9E6D /* GuBei */,
+				36E4F55822670A05006A9E6D /* libXlwDevice */,
+				36E4F55D22670A05006A9E6D /* LTLink */,
+				36E4F56222670A05006A9E6D /* Custom */,
+			);
+			path = SmartConfig;
+			sourceTree = "<group>";
+		};
+		36E4F51822670A05006A9E6D /* EasyConfig3.0 */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F51922670A05006A9E6D /* WifiLinkEasyConfig.m */,
+				36E4F51A22670A05006A9E6D /* WifiLinkEasyConfig.h */,
+				36E4F51B22670A05006A9E6D /* EasyConfig.h */,
+				36E4F51C22670A05006A9E6D /* EasyConfig.a */,
+			);
+			path = EasyConfig3.0;
+			sourceTree = "<group>";
+		};
+		36E4F51D22670A05006A9E6D /* SmartConnection */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F51E22670A05006A9E6D /* libiot.a */,
+				36E4F51F22670A05006A9E6D /* WifiLinkSmartConnection.m */,
+				36E4F52022670A05006A9E6D /* WifiLinkSmartConnection.h */,
+				36E4F52122670A05006A9E6D /* SmartConnection.h */,
+			);
+			path = SmartConnection;
+			sourceTree = "<group>";
+		};
+		36E4F52222670A05006A9E6D /* OneShot */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F52322670A05006A9E6D /* WifiLinkOneShot.m */,
+				36E4F52422670A05006A9E6D /* libConfiguration.a */,
+				36E4F52522670A05006A9E6D /* OneShotConfig.h */,
+				36E4F52622670A05006A9E6D /* WifiLinkOneShot.h */,
+				36E4F52722670A05006A9E6D /* ManualConfig.h */,
+			);
+			path = OneShot;
+			sourceTree = "<group>";
+		};
+		36E4F52822670A05006A9E6D /* Marvell */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F52922670A05006A9E6D /* MarvellSmartConfig.m */,
+				36E4F52A22670A05006A9E6D /* WifiLinkMarvell.h */,
+				36E4F52B22670A05006A9E6D /* MarvellSmartConfig.h */,
+				36E4F52C22670A05006A9E6D /* WifiLinkMarvell.m */,
+			);
+			path = Marvell;
+			sourceTree = "<group>";
+		};
+		36E4F52D22670A05006A9E6D /* CC3x */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F52E22670A05006A9E6D /* FirstTimeConfig.h */,
+				36E4F52F22670A05006A9E6D /* WifiLinkCC3x.m */,
+				36E4F53022670A05006A9E6D /* libFTC_DEBUG_ARM_64.a */,
+				36E4F53122670A05006A9E6D /* WifiLinkCC3x.h */,
+			);
+			path = CC3x;
+			sourceTree = "<group>";
+		};
+		36E4F53222670A05006A9E6D /* os_SmartLink */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F53322670A05006A9E6D /* HFSmartLink.h */,
+				36E4F53422670A05006A9E6D /* WifiLinkHF.m */,
+				36E4F53522670A05006A9E6D /* libsmartlinklib_7x.a */,
+				36E4F53622670A05006A9E6D /* smartlinklib_7x.h */,
+				36E4F53722670A05006A9E6D /* WifiLinkHF.h */,
+				36E4F53822670A05006A9E6D /* HFSmartLinkDeviceInfo.h */,
+			);
+			path = os_SmartLink;
+			sourceTree = "<group>";
+		};
+		36E4F53922670A05006A9E6D /* EasyLink */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F53A22670A05006A9E6D /* EASYLINK.h */,
+				36E4F53B22670A05006A9E6D /* AXZWifiLinkProtocol.h */,
+				36E4F53C22670A05006A9E6D /* EasyLinkForAXZWifiLink.m */,
+				36E4F53D22670A05006A9E6D /* MXCHIPAirlink.m */,
+				36E4F53E22670A05006A9E6D /* WifiLinkEasyLink.h */,
+				36E4F53F22670A05006A9E6D /* EasyLinkForAXZWifiLink.h */,
+				36E4F54022670A05006A9E6D /* libEasyLink.a */,
+				36E4F54122670A05006A9E6D /* WifiLinkEasyLink.m */,
+				36E4F54222670A05006A9E6D /* MXCHIPAirlink.h */,
+			);
+			path = EasyLink;
+			sourceTree = "<group>";
+		};
+		36E4F54322670A05006A9E6D /* Cooee */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F54422670A05006A9E6D /* libcrypto.a */,
+				36E4F54522670A05006A9E6D /* WifiLinkCooee.h */,
+				36E4F54622670A05006A9E6D /* WifiLinkCooee.m */,
+				36E4F54722670A05006A9E6D /* libcooee.a */,
+				36E4F54822670A05006A9E6D /* Cooee.h */,
+			);
+			path = Cooee;
+			sourceTree = "<group>";
+		};
+		36E4F54922670A05006A9E6D /* LibSimpleConfig */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F54A22670A05006A9E6D /* WifiLinkSimpleConfig.m */,
+				36E4F54B22670A05006A9E6D /* SimpleConfig.h */,
+				36E4F54E22670A05006A9E6D /* WifiLinkSimpleConfig.h */,
+				36E4F55022670A05006A9E6D /* libLibSimpleConfig.a */,
+				36E4F55222670A05006A9E6D /* LibSimpleConfig.h */,
+			);
+			path = LibSimpleConfig;
+			sourceTree = "<group>";
+		};
+		36E4F55322670A05006A9E6D /* GuBei */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F55422670A05006A9E6D /* BLEasyConfig.h */,
+				36E4F55522670A05006A9E6D /* WifiLinkGuBei.m */,
+				36E4F55622670A05006A9E6D /* WifiLinkGuBei.h */,
+				36E4F55722670A05006A9E6D /* libBLEasyConfig.a */,
+			);
+			path = GuBei;
+			sourceTree = "<group>";
+		};
+		36E4F55822670A05006A9E6D /* libXlwDevice */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F55922670A05006A9E6D /* libXlwDevice.a */,
+				36E4F55A22670A05006A9E6D /* WifiLinkXlw.h */,
+				36E4F55B22670A05006A9E6D /* XlwDevice.h */,
+				36E4F55C22670A05006A9E6D /* WifiLinkXlw.m */,
+			);
+			path = libXlwDevice;
+			sourceTree = "<group>";
+		};
+		36E4F55D22670A05006A9E6D /* LTLink */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F55E22670A05006A9E6D /* WifiLinkLTLink.h */,
+				36E4F55F22670A05006A9E6D /* LTLink.h */,
+				36E4F56022670A05006A9E6D /* LTLinklib.a */,
+				36E4F56122670A05006A9E6D /* WifiLinkLTLink.m */,
+			);
+			path = LTLink;
+			sourceTree = "<group>";
+		};
+		36E4F56222670A05006A9E6D /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F56322670A05006A9E6D /* WifiLinkCustom.m */,
+				36E4F56422670A05006A9E6D /* WifiLinkCustom.h */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		36E4F58E22670A05006A9E6D /* AES */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F58F22670A05006A9E6D /* aes_cbc.c */,
+				36E4F59022670A05006A9E6D /* aes_ac.h */,
+				36E4F59122670A05006A9E6D /* aes_core.c */,
+				36E4F59222670A05006A9E6D /* aes_cbc.h */,
+				36E4F59322670A05006A9E6D /* aes_locl.h */,
+			);
+			path = AES;
+			sourceTree = "<group>";
+		};
+		36E4F59522670A05006A9E6D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F59622670A05006A9E6D /* ACRanking */,
+				36E4F59922670A05006A9E6D /* ACDeviceActive */,
+				36E4F59B22670A05006A9E6D /* ACContext */,
+				36E4F59D22670A05006A9E6D /* ACMsg */,
+				36E4F59F22670A05006A9E6D /* ACPushReceive */,
+				36E4F5A522670A05006A9E6D /* ACLocalDevice */,
+				36E4F5A822670A05006A9E6D /* ACProduct */,
+				36E4F5AA22670A05006A9E6D /* ACFeedBack */,
+				36E4F5AC22670A05006A9E6D /* ACFileInfo */,
+				36E4F5AE22670A05006A9E6D /* ACDevice */,
+				36E4F5B122670A05006A9E6D /* ACAPInfo */,
+				36E4F5B322670A05006A9E6D /* ACUserInfo */,
+				36E4F5B522670A05006A9E6D /* ACOTA */,
+				36E4F5B922670A05006A9E6D /* ACTimerTask */,
+				36E4F5C422670A05006A9E6D /* ACDeviceMsg */,
+				36E4F5CA22670A05006A9E6D /* ACPushTable */,
+				36E4F5D022670A05006A9E6D /* ACWeather */,
+				36E4F5D422670A05006A9E6D /* ACBindUser */,
+				36E4F5D622670A05006A9E6D /* ACUserDevice */,
+				36E4F5D922670A05006A9E6D /* ACObject */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		36E4F59622670A05006A9E6D /* ACRanking */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F59722670A05006A9E6D /* ACRankingValue.h */,
+				36E4F59822670A05006A9E6D /* ACRankingCount.h */,
+			);
+			path = ACRanking;
+			sourceTree = "<group>";
+		};
+		36E4F59922670A05006A9E6D /* ACDeviceActive */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F59A22670A05006A9E6D /* ACDeviceActive.h */,
+			);
+			path = ACDeviceActive;
+			sourceTree = "<group>";
+		};
+		36E4F59B22670A05006A9E6D /* ACContext */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F59C22670A05006A9E6D /* ACContext.h */,
+			);
+			path = ACContext;
+			sourceTree = "<group>";
+		};
+		36E4F59D22670A05006A9E6D /* ACMsg */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F59E22670A05006A9E6D /* ACMsg.h */,
+			);
+			path = ACMsg;
+			sourceTree = "<group>";
+		};
+		36E4F59F22670A05006A9E6D /* ACPushReceive */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5A022670A05006A9E6D /* ACClassTopicMessage.h */,
+				36E4F5A122670A05006A9E6D /* ACDeviceTopicMessage.h */,
+				36E4F5A222670A05006A9E6D /* ACPushReceive.h */,
+				36E4F5A322670A05006A9E6D /* ACTopicMessage.h */,
+				36E4F5A422670A05006A9E6D /* ACCustomTopicMessage.h */,
+			);
+			path = ACPushReceive;
+			sourceTree = "<group>";
+		};
+		36E4F5A522670A05006A9E6D /* ACLocalDevice */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5A622670A05006A9E6D /* ACLocalDeviceDetail.h */,
+				36E4F5A722670A05006A9E6D /* ACLocalDevice.h */,
+			);
+			path = ACLocalDevice;
+			sourceTree = "<group>";
+		};
+		36E4F5A822670A05006A9E6D /* ACProduct */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5A922670A05006A9E6D /* ACProduct.h */,
+			);
+			path = ACProduct;
+			sourceTree = "<group>";
+		};
+		36E4F5AA22670A05006A9E6D /* ACFeedBack */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5AB22670A05006A9E6D /* ACFeedBack.h */,
+			);
+			path = ACFeedBack;
+			sourceTree = "<group>";
+		};
+		36E4F5AC22670A05006A9E6D /* ACFileInfo */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5AD22670A05006A9E6D /* ACFileInfo.h */,
+			);
+			path = ACFileInfo;
+			sourceTree = "<group>";
+		};
+		36E4F5AE22670A05006A9E6D /* ACDevice */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5AF22670A05006A9E6D /* ACDevice.h */,
+				36E4F5B022670A05006A9E6D /* ACDevicePropertySearchOption.h */,
+			);
+			path = ACDevice;
+			sourceTree = "<group>";
+		};
+		36E4F5B122670A05006A9E6D /* ACAPInfo */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5B222670A05006A9E6D /* ACWifiInfo.h */,
+			);
+			path = ACAPInfo;
+			sourceTree = "<group>";
+		};
+		36E4F5B322670A05006A9E6D /* ACUserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5B422670A05006A9E6D /* ACUserInfo.h */,
+			);
+			path = ACUserInfo;
+			sourceTree = "<group>";
+		};
+		36E4F5B522670A05006A9E6D /* ACOTA */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5B622670A05006A9E6D /* ACOTAUpgradeInfo.h */,
+				36E4F5B722670A05006A9E6D /* ACOTAFileMeta.h */,
+				36E4F5B822670A05006A9E6D /* ACOTACheckInfo.h */,
+			);
+			path = ACOTA;
+			sourceTree = "<group>";
+		};
+		36E4F5B922670A05006A9E6D /* ACTimerTask */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5BA22670A05006A9E6D /* user */,
+				36E4F5BE22670A05006A9E6D /* ACTimerTask.h */,
+				36E4F5BF22670A05006A9E6D /* ACTimeRule.h */,
+				36E4F5C022670A05006A9E6D /* device */,
+			);
+			path = ACTimerTask;
+			sourceTree = "<group>";
+		};
+		36E4F5BA22670A05006A9E6D /* user */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5BB22670A05006A9E6D /* ACUserTask.h */,
+				36E4F5BC22670A05006A9E6D /* ACUserCommand.h */,
+				36E4F5BD22670A05006A9E6D /* ACUserTaskGroup.h */,
+			);
+			path = user;
+			sourceTree = "<group>";
+		};
+		36E4F5C022670A05006A9E6D /* device */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5C122670A05006A9E6D /* ACDeviceTaskGroup.h */,
+				36E4F5C222670A05006A9E6D /* ACDeviceTask.h */,
+				36E4F5C322670A05006A9E6D /* ACDeviceCommand.h */,
+			);
+			path = device;
+			sourceTree = "<group>";
+		};
+		36E4F5C422670A05006A9E6D /* ACDeviceMsg */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5C522670A05006A9E6D /* ACDeviceMsgOption.h */,
+				36E4F5C622670A05006A9E6D /* ACDeviceMsgHead.h */,
+				36E4F5C722670A05006A9E6D /* ACDeviceMsg.h */,
+				36E4F5C822670A05006A9E6D /* ACDeviceMsgSecHead.h */,
+				36E4F5C922670A05006A9E6D /* ACDeviceMsgPayload.h */,
+			);
+			path = ACDeviceMsg;
+			sourceTree = "<group>";
+		};
+		36E4F5CA22670A05006A9E6D /* ACPushTable */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5CB22670A05006A9E6D /* ACClassTopic.h */,
+				36E4F5CC22670A05006A9E6D /* ACDeviceTopic.h */,
+				36E4F5CD22670A05006A9E6D /* ACPushTable.h */,
+				36E4F5CE22670A05006A9E6D /* ACCustomTopic.h */,
+				36E4F5CF22670A05006A9E6D /* ACTopic.h */,
+			);
+			path = ACPushTable;
+			sourceTree = "<group>";
+		};
+		36E4F5D022670A05006A9E6D /* ACWeather */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5D122670A05006A9E6D /* ACWeather.h */,
+				36E4F5D222670A05006A9E6D /* ACAQI.h */,
+				36E4F5D322670A05006A9E6D /* ACPM25.h */,
+			);
+			path = ACWeather;
+			sourceTree = "<group>";
+		};
+		36E4F5D422670A05006A9E6D /* ACBindUser */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5D522670A05006A9E6D /* ACBindUser.h */,
+			);
+			path = ACBindUser;
+			sourceTree = "<group>";
+		};
+		36E4F5D622670A05006A9E6D /* ACUserDevice */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5D722670A05006A9E6D /* ACMemoryCacheLocalDevice.h */,
+				36E4F5D822670A05006A9E6D /* ACUserDevice.h */,
+			);
+			path = ACUserDevice;
+			sourceTree = "<group>";
+		};
+		36E4F5D922670A05006A9E6D /* ACObject */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5DA22670A05006A9E6D /* ACObject.h */,
+			);
+			path = ACObject;
+			sourceTree = "<group>";
+		};
+		36E4F5DC22670A05006A9E6D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5DD22670A05006A9E6D /* ACDeviceManager */,
+				36E4F5DF22670A05006A9E6D /* ACNotificationManager */,
+				36E4F5E122670A05006A9E6D /* ACCustomDataManager */,
+				36E4F5E322670A05006A9E6D /* ACDeviceClient */,
+				36E4F5E722670A05006A9E6D /* ACWifiLinkManager */,
+				36E4F5EA22670A05006A9E6D /* ACPushManager */,
+				36E4F5EC22670A05006A9E6D /* ACWeatherManager */,
+				36E4F5EE22670A05006A9E6D /* ACFindDevicesManager */,
+				36E4F5F122670A05006A9E6D /* ACTimerManager */,
+				36E4F5F522670A05006A9E6D /* ACAccountManager */,
+				36E4F5F722670A05006A9E6D /* ACHelper */,
+				36E4F5FA22670A05006A9E6D /* ACDeviceDataManager */,
+				36E4F5FC22670A05006A9E6D /* ACProductManager */,
+				36E4F5FE22670A05006A9E6D /* ACBindManager */,
+				36E4F60022670A05006A9E6D /* ACClassDataManager */,
+				36E4F60222670A05006A9E6D /* ACACL */,
+				36E4F60422670A05006A9E6D /* ACCache */,
+				36E4F60622670A05006A9E6D /* ACKeyChain */,
+				36E4F60822670A05006A9E6D /* ACFeedBackManager */,
+				36E4F60A22670A05006A9E6D /* ACServiceClient */,
+				36E4F60C22670A05006A9E6D /* ACFileManager */,
+				36E4F60E22670A05006A9E6D /* ACOTAManager */,
+				36E4F61022670A05006A9E6D /* ACRankingManager */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		36E4F5DD22670A05006A9E6D /* ACDeviceManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5DE22670A05006A9E6D /* ACDeviceManager.h */,
+			);
+			path = ACDeviceManager;
+			sourceTree = "<group>";
+		};
+		36E4F5DF22670A05006A9E6D /* ACNotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5E022670A05006A9E6D /* ACNotificationManager.h */,
+			);
+			path = ACNotificationManager;
+			sourceTree = "<group>";
+		};
+		36E4F5E122670A05006A9E6D /* ACCustomDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5E222670A05006A9E6D /* ACCustomDataManager.h */,
+			);
+			path = ACCustomDataManager;
+			sourceTree = "<group>";
+		};
+		36E4F5E322670A05006A9E6D /* ACDeviceClient */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5E422670A05006A9E6D /* ACLocalRequest.h */,
+				36E4F5E522670A05006A9E6D /* ACDeviceClient.h */,
+				36E4F5E622670A05006A9E6D /* ACLocalRequestQueue.h */,
+			);
+			path = ACDeviceClient;
+			sourceTree = "<group>";
+		};
+		36E4F5E722670A05006A9E6D /* ACWifiLinkManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5E822670A05006A9E6D /* ACWifiLinkManager.h */,
+				36E4F5E922670A05006A9E6D /* ACWifiLinkProtocol.h */,
+			);
+			path = ACWifiLinkManager;
+			sourceTree = "<group>";
+		};
+		36E4F5EA22670A05006A9E6D /* ACPushManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5EB22670A05006A9E6D /* ACPushManager.h */,
+			);
+			path = ACPushManager;
+			sourceTree = "<group>";
+		};
+		36E4F5EC22670A05006A9E6D /* ACWeatherManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5ED22670A05006A9E6D /* ACWeatherManager.h */,
+			);
+			path = ACWeatherManager;
+			sourceTree = "<group>";
+		};
+		36E4F5EE22670A05006A9E6D /* ACFindDevicesManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5EF22670A05006A9E6D /* ACFindDevicesManager.h */,
+				36E4F5F022670A05006A9E6D /* ACQueryDeviceStateManager.h */,
+			);
+			path = ACFindDevicesManager;
+			sourceTree = "<group>";
+		};
+		36E4F5F122670A05006A9E6D /* ACTimerManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5F222670A05006A9E6D /* ACDeviceTimerManager.h */,
+				36E4F5F322670A05006A9E6D /* ACTimerManager.h */,
+				36E4F5F422670A05006A9E6D /* ACUserTimerManager.h */,
+			);
+			path = ACTimerManager;
+			sourceTree = "<group>";
+		};
+		36E4F5F522670A05006A9E6D /* ACAccountManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5F622670A05006A9E6D /* ACAccountManager.h */,
+			);
+			path = ACAccountManager;
+			sourceTree = "<group>";
+		};
+		36E4F5F722670A05006A9E6D /* ACHelper */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5F822670A05006A9E6D /* ACHelper.h */,
+				36E4F5F922670A05006A9E6D /* ACloudLibConst.h */,
+			);
+			path = ACHelper;
+			sourceTree = "<group>";
+		};
+		36E4F5FA22670A05006A9E6D /* ACDeviceDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5FB22670A05006A9E6D /* ACDeviceDataManager.h */,
+			);
+			path = ACDeviceDataManager;
+			sourceTree = "<group>";
+		};
+		36E4F5FC22670A05006A9E6D /* ACProductManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5FD22670A05006A9E6D /* ACProductManager.h */,
+			);
+			path = ACProductManager;
+			sourceTree = "<group>";
+		};
+		36E4F5FE22670A05006A9E6D /* ACBindManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F5FF22670A05006A9E6D /* ACBindManager.h */,
+			);
+			path = ACBindManager;
+			sourceTree = "<group>";
+		};
+		36E4F60022670A05006A9E6D /* ACClassDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F60122670A05006A9E6D /* ACClassDataManager.h */,
+			);
+			path = ACClassDataManager;
+			sourceTree = "<group>";
+		};
+		36E4F60222670A05006A9E6D /* ACACL */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F60322670A05006A9E6D /* ACACL.h */,
+			);
+			path = ACACL;
+			sourceTree = "<group>";
+		};
+		36E4F60422670A05006A9E6D /* ACCache */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F60522670A05006A9E6D /* ACCache.h */,
+			);
+			path = ACCache;
+			sourceTree = "<group>";
+		};
+		36E4F60622670A05006A9E6D /* ACKeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F60722670A05006A9E6D /* ACKeyChain.h */,
+			);
+			path = ACKeyChain;
+			sourceTree = "<group>";
+		};
+		36E4F60822670A05006A9E6D /* ACFeedBackManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F60922670A05006A9E6D /* ACFeedBackManager.h */,
+			);
+			path = ACFeedBackManager;
+			sourceTree = "<group>";
+		};
+		36E4F60A22670A05006A9E6D /* ACServiceClient */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F60B22670A05006A9E6D /* ACServiceClient.h */,
+			);
+			path = ACServiceClient;
+			sourceTree = "<group>";
+		};
+		36E4F60C22670A05006A9E6D /* ACFileManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F60D22670A05006A9E6D /* ACFileManager.h */,
+			);
+			path = ACFileManager;
+			sourceTree = "<group>";
+		};
+		36E4F60E22670A05006A9E6D /* ACOTAManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F60F22670A05006A9E6D /* ACOTAManager.h */,
+			);
+			path = ACOTAManager;
+			sourceTree = "<group>";
+		};
+		36E4F61022670A05006A9E6D /* ACRankingManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E4F61122670A05006A9E6D /* ACRankingManager.h */,
+			);
+			path = ACRankingManager;
 			sourceTree = "<group>";
 		};
 		3E9E9B9821A2ABC600CA2B7D /* Home */ = {
@@ -2235,6 +3504,7 @@
 		BB49DF8421958864004E00A2 = {
 			isa = PBXGroup;
 			children = (
+				36E4F48322670A05006A9E6D /* ACloudLib */,
 				CFCEDBAD622E9D8465800F48 /* Frameworks */,
 				BB49DF8F21958864004E00A2 /* gleadSmart */,
 				BB49DFAB21958867004E00A2 /* gleadSmartTests */,
@@ -2686,6 +3956,9 @@
 		CFCEDBAD622E9D8465800F48 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36E4F68322670C73006A9E6D /* libz.tbd */,
+				36E4F68122670C63006A9E6D /* libresolv.tbd */,
+				36E4F67F22670C55006A9E6D /* libicucore.tbd */,
 				BB6C8D1C225C4F3500FD6472 /* NetworkExtension.framework */,
 				0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */,
 				88B0EAF87229454E67D9D19C /* Pods_jienuoIOT.framework */,
@@ -3581,6 +4854,9 @@
 			files = (
 				BB2AC0F221A8F156006DB83A /* ESPAES.m in Sources */,
 				BB6C8D1B225C3B8E00FD6472 /* APStatusConfirmController.m in Sources */,
+				36E4F65922670A06006A9E6D /* EasyLinkForAXZWifiLink.m in Sources */,
+				36E4F64222670A05006A9E6D /* UIButton+AFNetworking.m in Sources */,
+				36E4F62422670A05006A9E6D /* QNFile.m in Sources */,
 				36E3CF622251F84900F4195D /* DeviceShareController.m in Sources */,
 				BB49DF9521958864004E00A2 /* ViewController.m in Sources */,
 				BB0A404E219970D3004669CA /* RDVTabBarItem.m in Sources */,
@@ -3589,17 +4865,22 @@
 				3EA530CA21AB9C88000A6D26 /* PasswordLoginController.m in Sources */,
 				BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */,
 				BB62E4DE21B5155000C0FA39 /* TherWeekProgramController.m in Sources */,
+				36E4F63122670A05006A9E6D /* QNTxtResolver.m in Sources */,
 				36004A8F2227E96500C99215 /* UsernameViewController.m in Sources */,
 				3EA530BF21AB9B43000A6D26 /* PhoneTFCell.m in Sources */,
 				BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */,
 				BB37DF0C21A7EFC400B2121B /* EspViewController.m in Sources */,
 				BB2AC0ED21A8F156006DB83A /* ESP_CRC8.m in Sources */,
+				36E4F63422670A05006A9E6D /* QNResolvUtil.m in Sources */,
 				BB6739DB22326801002E6239 /* NoHouseBridgingController.m in Sources */,
 				BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */,
 				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
 				BB62E4E121B517F100C0FA39 /* TherWeekProgramCell.m in Sources */,
 				BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */,
+				36E4F62022670A05006A9E6D /* QNUploadOption.m in Sources */,
+				36E4F61F22670A05006A9E6D /* QNFormUpload.m in Sources */,
 				BB37DF1821A7FCBF00B2121B /* DeviceModel.m in Sources */,
+				36E4F65722670A06006A9E6D /* WifiLinkHF.m in Sources */,
 				BB0A403221991AA8004669CA /* NSObject+Common.m in Sources */,
 				BB0A403021991AA8004669CA /* UIColor+ColorChange.m in Sources */,
 				3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */,
@@ -3612,59 +4893,97 @@
 				BB2AC0F021A8F156006DB83A /* ESPTouchTaskParameter.m in Sources */,
 				BBF6326B21BBBDE0006A23AC /* NodeDetailViewController.m in Sources */,
 				BB2AC0EF21A8F156006DB83A /* ESPUDPSocketClient.m in Sources */,
+				36E4F66422670A06006A9E6D /* WifiLinkGuBei.m in Sources */,
+				36E4F64522670A05006A9E6D /* AFAutoPurgingImageCache.m in Sources */,
 				BB3D754D2252411D007DDFD6 /* DeviceSettingController.m in Sources */,
+				36E4F66922670A06006A9E6D /* WifiLinkLTLink.m in Sources */,
+				36E4F66A22670A06006A9E6D /* WifiLinkCustom.m in Sources */,
 				BB6739DE223271AA002E6239 /* NoHouseAddController.m in Sources */,
 				BB0A404D219970D3004669CA /* RDVTabBarController.m in Sources */,
 				3E56AD2221A6A6DD0089BA8F /* AddFamilyTextCell.m in Sources */,
 				BB8F5A8821B7EF1700E69094 /* TherTimerCell.m in Sources */,
 				BB35292B219DA7EC00428DE9 /* Network.m in Sources */,
 				BB2AC0F421A8F156006DB83A /* ESPDatumCode.m in Sources */,
+				36E4F65322670A06006A9E6D /* MarvellSmartConfig.m in Sources */,
+				36E4F64322670A05006A9E6D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				BBF8CAF12216A4650030E921 /* FamilyMemberInfoCell.m in Sources */,
+				36E4F65522670A06006A9E6D /* WifiLinkCC3x.m in Sources */,
 				BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */,
 				3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
 				BB2AD7A121AD70D6006DB83A /* HouseSettingController.m in Sources */,
+				36E4F63322670A05006A9E6D /* QNResolver.m in Sources */,
 				BB3D7550225242D1007DDFD6 /* DeviceSettingCell.m in Sources */,
+				36E4F63622670A05006A9E6D /* QNDnsManager.m in Sources */,
+				36E4F61922670A05006A9E6D /* CKNullCache.m in Sources */,
 				BB7D9B9A221E4B4C00C5DFD1 /* SharerInfoCell.m in Sources */,
+				36E4F64122670A05006A9E6D /* UIImageView+AFNetworking.m in Sources */,
+				36E4F62622670A05006A9E6D /* QNSystem.m in Sources */,
 				BB37DF1221A7F3AF00B2121B /* DeviceTableViewCell.m in Sources */,
+				36E4F63022670A05006A9E6D /* QNIP.m in Sources */,
 				BB00A4FF21BA25B7004E4051 /* YAlertViewController.m in Sources */,
+				36E4F61B22670A05006A9E6D /* QNUploadManager.m in Sources */,
 				BB2AC10E21A94F42006DB83A /* HouseModel.m in Sources */,
+				36E4F62D22670A05006A9E6D /* QNSessionManager.m in Sources */,
 				BBAB2813221B9D4F00E21041 /* ShareDeviceSelectCell.m in Sources */,
 				36B8F16722263FA200652CFA /* ShareDeviceListCell.m in Sources */,
+				36E4F61322670A05006A9E6D /* NSObject+YYModel.m in Sources */,
 				BB2AC10B21A94D63006DB83A /* AFSecurityPolicy.m in Sources */,
+				36E4F62B22670A05006A9E6D /* QNUserAgent.m in Sources */,
 				BB49B89821F5A8D100E32CF9 /* alarmModel.m in Sources */,
 				BB45BC4A21EF259E00504FF8 /* AddMemberController.m in Sources */,
 				BB5CDC8521EC26F300C2B6FA /* YRabbitMQ.m in Sources */,
+				36E4F61E22670A05006A9E6D /* QNUpToken.m in Sources */,
+				36E4F61722670A05006A9E6D /* CKFileCache.m in Sources */,
 				36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */,
 				BBF6326E21BBC472006A23AC /* NodeInfoCell.m in Sources */,
 				3EA530CC21AB9C88000A6D26 /* LoginViewController.m in Sources */,
+				36E4F62222670A05006A9E6D /* QNCrc32.m in Sources */,
 				3EA530CB21AB9C88000A6D26 /* RegisterController.m in Sources */,
 				BB8A74382226374A008B2439 /* ShareDeviceDetailController.m in Sources */,
 				BB0A403521991AA8004669CA /* NSDate+Common.m in Sources */,
 				BB45BC5821EF305E00504FF8 /* ManagerSetCell.m in Sources */,
+				36E4F63B22670A05006A9E6D /* QNDnspodEnterprise.m in Sources */,
+				36E4F62F22670A05006A9E6D /* QNHex.m in Sources */,
 				BB62E4D821B5110800C0FA39 /* ThermostSettingController.m in Sources */,
 				BB37DF0B21A7EFC400B2121B /* DeviceViewController.m in Sources */,
 				BB8A743522263707008B2439 /* ShareDeviceListController.m in Sources */,
 				3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */,
+				36E4F63F22670A05006A9E6D /* UIRefreshControl+AFNetworking.m in Sources */,
+				36E4F64422670A05006A9E6D /* UIWebView+AFNetworking.m in Sources */,
 				BB5B03CE21B91290007AC2B1 /* AccountViewController.m in Sources */,
+				36E4F65C22670A06006A9E6D /* WifiLinkEasyLink.m in Sources */,
+				36E4F63A22670A05006A9E6D /* QNDnspodFree.m in Sources */,
 				BB63AAD2222E156B00DFC848 /* APProcessController.m in Sources */,
 				BB2AC10A21A94D63006DB83A /* AFNetworkReachabilityManager.m in Sources */,
+				36E4F61622670A05006A9E6D /* CKMemoryCache.m in Sources */,
+				36E4F64022670A05006A9E6D /* AFNetworkActivityIndicatorManager.m in Sources */,
+				36E4F62E22670A05006A9E6D /* QNDes.m in Sources */,
 				BB62E4D221B4DD7C00C0FA39 /* TherWeekSelectController.m in Sources */,
 				369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */,
 				BB2AD79821ABDD3E006DB83A /* RegisterAccountController.m in Sources */,
+				36E4F62C22670A05006A9E6D /* QNResponseInfo.m in Sources */,
 				BB63AACF222E05DC00DFC848 /* ConnectApNetController.m in Sources */,
 				BB6C8D20225C8DAF00FD6472 /* PlugOutletSettingController.m in Sources */,
+				36E4F67B22670A06006A9E6D /* aes_cbc.c in Sources */,
 				BB2AC10921A94D63006DB83A /* AFURLRequestSerialization.m in Sources */,
 				36B8F16A22263FDE00652CFA /* ShareDeviceDetailCell.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
+				36E4F65E22670A06006A9E6D /* WifiLinkCooee.m in Sources */,
+				36E4F65122670A06006A9E6D /* WifiLinkOneShot.m in Sources */,
+				36E4F62322670A05006A9E6D /* QNUrlSafeBase64.m in Sources */,
 				BB2AC0F121A8F156006DB83A /* ESPDataCode.m in Sources */,
 				BB62E4D521B4E07600C0FA39 /* TherWeekSelCell.m in Sources */,
+				36E4F63E22670A05006A9E6D /* UIProgressView+AFNetworking.m in Sources */,
 				3EA530C121AB9B43000A6D26 /* TextFieldCell.m in Sources */,
 				BB2AC11121A94FE8006DB83A /* RoomModel.m in Sources */,
 				36E3CF5B2251B9DE00F4195D /* PlugOutletSettingCell.m in Sources */,
 				BBF8CAED22169FBA0030E921 /* FamilyMemberController.m in Sources */,
 				BB2AC0F721A93B1B006DB83A /* UserModel.m in Sources */,
 				BB37DF0D21A7EFC400B2121B /* DeviceConnectView.m in Sources */,
+				36E4F61D22670A05006A9E6D /* QNResumeUpload.m in Sources */,
+				36E4F62122670A05006A9E6D /* QNPHAssetResource.m in Sources */,
+				36E4F64D22670A05006A9E6D /* WifiLinkEasyConfig.m in Sources */,
 				BB2AC12721AA9EF1006DB83A /* FamilyLocationController.m in Sources */,
 				BB7E7969221A5D6D0060A0CF /* HouseShareController.m in Sources */,
 				BB2AA50F221D061100AF3968 /* SharerInputController.m in Sources */,
@@ -3672,10 +4991,18 @@
 				BB0A403121991AA8004669CA /* UIButton+Common.m in Sources */,
 				BB5B037121B90194007AC2B1 /* MineNormalCell.m in Sources */,
 				BB2AC10721A94D63006DB83A /* AFHTTPSessionManager.m in Sources */,
+				36E4F62522670A05006A9E6D /* QNEtag.m in Sources */,
+				36E4F66022670A06006A9E6D /* WifiLinkSimpleConfig.m in Sources */,
+				36E4F62922670A05006A9E6D /* QNPHAssetFile.m in Sources */,
 				BB2AC0EC21A8F156006DB83A /* ESPTouchGenerator.m in Sources */,
+				36E4F65A22670A06006A9E6D /* MXCHIPAirlink.m in Sources */,
+				36E4F63922670A05006A9E6D /* QNRecord.m in Sources */,
+				36E4F61C22670A05006A9E6D /* QNConfiguration.m in Sources */,
+				36E4F65422670A06006A9E6D /* WifiLinkMarvell.m in Sources */,
 				BB2AC0F321A8F156006DB83A /* ESPTouchTask.m in Sources */,
 				36330235225C844200E3EFAA /* ValveAlertInfoController.m in Sources */,
 				BB2AD7A721AD7F91006DB83A /* HouseSetCommonCell.m in Sources */,
+				36E4F66722670A06006A9E6D /* WifiLinkXlw.m in Sources */,
 				BB7E7976221AA7780060A0CF /* AddShareController.m in Sources */,
 				BB2AC0EE21A8F156006DB83A /* ESPUDPSocketServer.m in Sources */,
 				3EA530CD21AB9C88000A6D26 /* RetrievePasswordController.m in Sources */,
@@ -3687,9 +5014,12 @@
 				BB00A4F321BA202C004E4051 /* AccountHeaderCell.m in Sources */,
 				BB30C4FB225B4991000FBF28 /* StatusConfirmController.m in Sources */,
 				3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */,
+				36E4F65022670A06006A9E6D /* WifiLinkSmartConnection.m in Sources */,
 				BBF8CAF42216A8460030E921 /* FamilyMemberSetCell.m in Sources */,
 				BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */,
 				BB45BC5521EF2EE800504FF8 /* MemberAccountCell.m in Sources */,
+				36E4F62A22670A05006A9E6D /* QN_GTM_Base64.m in Sources */,
+				36E4F61522670A05006A9E6D /* SRWebSocket.m in Sources */,
 				36E3CF652252008C00F4195D /* AddDeviceShareController.m in Sources */,
 				BB2AC0E721A8F156006DB83A /* ESPGuideCode.m in Sources */,
 				BB62E4C321B4D65E00C0FA39 /* TherAddTimerSwitchCell.m in Sources */,
@@ -3702,19 +5032,31 @@
 				36004A7A222784E700C99215 /* ModifyPasswordViewController.m in Sources */,
 				3ECFF39F219EB00C00024D2C /* SelectDeviceTypeCell.m in Sources */,
 				BB62E4DB21B5132200C0FA39 /* TherSettingCell.m in Sources */,
+				36E4F63822670A05006A9E6D /* QNDomain.m in Sources */,
+				36E4F67C22670A06006A9E6D /* aes_core.c in Sources */,
+				36E4F61A22670A05006A9E6D /* CKCacheContent.m in Sources */,
+				36E4F61422670A05006A9E6D /* YYClassInfo.m in Sources */,
 				BB5B036D21B90069007AC2B1 /* MineViewController.m in Sources */,
 				BB2ACC5C21AB9712006DB83A /* KYDivisionPickerView.m in Sources */,
+				36E4F63C22670A05006A9E6D /* QNFileRecorder.m in Sources */,
+				36E4F63722670A05006A9E6D /* QNNetworkInfo.m in Sources */,
 				BB8AE4B422292F890074118D /* APNetworkController.m in Sources */,
+				36E4F64622670A05006A9E6D /* AFImageDownloader.m in Sources */,
 				BB2AC0EB21A8F156006DB83A /* ESP_WifiUtil.m in Sources */,
 				BB62E4B321B4C0B700C0FA39 /* ThermostatTimerController.m in Sources */,
 				BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */,
 				BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */,
+				36E4F63222670A05006A9E6D /* QNHijackingDetectWrapper.m in Sources */,
 				BB62E4BC21B4D1D200C0FA39 /* ThermostatAddTimerController.m in Sources */,
 				BB45BC5221EF290600504FF8 /* AreaCodeCell.m in Sources */,
 				BB2AD79E21AD4828006DB83A /* HouseNameCell.m in Sources */,
+				36E4F61822670A05006A9E6D /* CKCache.m in Sources */,
 				369C169B22250ECB0079159E /* AddRoomsViewController.m in Sources */,
+				36E4F62822670A05006A9E6D /* QNALAssetFile.m in Sources */,
+				36E4F62722670A05006A9E6D /* QNAsyncRun.m in Sources */,
 				BB62E4C021B4D57900C0FA39 /* TherAddTimerWeekCell.m in Sources */,
 				BB7D9BA0221EA71000C5DFD1 /* SharerModel.m in Sources */,
+				36E4F63522670A05006A9E6D /* QNHosts.m in Sources */,
 				BB7D9B9D221E8FA300C5DFD1 /* SharerDetailController.m in Sources */,
 				BB2AC0E821A8F156006DB83A /* ESPTouchResult.m in Sources */,
 				BB2AD7AA21AD8063006DB83A /* HouseSetMemberCell.m in Sources */,
@@ -4040,6 +5382,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4056,6 +5399,22 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/UMessage_Sdk_1.4.0",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/EasyConfig3.0",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/SmartConnection",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/OneShot",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/CC3x",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/os_SmartLink",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/EasyLink",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/Cooee",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/LibSimpleConfig",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/GuBei",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/libXlwDevice",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/LTLink",
+					"$(PROJECT_DIR)/ACloudLib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4073,6 +5432,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4089,6 +5449,22 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/UMessage_Sdk_1.4.0",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/EasyConfig3.0",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/SmartConnection",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/OneShot",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/CC3x",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/os_SmartLink",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/EasyLink",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/Cooee",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/LibSimpleConfig",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/GuBei",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/libXlwDevice",
+					"$(PROJECT_DIR)/ACloudLib/Ablecloud_Sdk_Extra_Frameworks/SmartConfig/LTLink",
+					"$(PROJECT_DIR)/ACloudLib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -67,7 +67,7 @@
 
 #define httpIpAddress @"http://gleadsmart.thingcom.cn"
 
-typedef enum : NSUInteger {
+typedef enum  NSUInteger {
     yUnselect = 1000,
     ySelect,
     yUp,
