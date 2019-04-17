@@ -77,7 +77,9 @@ static NSArray *_routingkeys = nil;
         //把Json转为dic
         NSError *err;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:message.body options:NSJSONReadingMutableContainers error:&err];
-        [self analyzeMessageType:dic];
+        if ([message.routingKey isEqualToString:[Database shareInstance].user.userId]) {
+            [self analyzeMessageType:dic];
+        }
 
     }];
 }
@@ -170,15 +172,35 @@ static NSArray *_routingkeys = nil;
 - (void)analyzeMessageTypeD:(NSDictionary *)dic{
     NSString *houseUid = [dic objectForKey:@"houseUid"];
     NSNumber *option = [dic objectForKey:@"option"];// 0表示将其添加到家庭，1表示将其删除了
+    NSString *houseName = [dic objectForKey:@"name"];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([option integerValue] == 0) {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"收到分享") message:LocalString(@"您收到家庭的分享") preferredStyle:UIAlertControllerStyleAlert];
+            NSString *message = [NSString stringWithFormat:@"您收到其他用户分享家庭的:%@",houseName];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"收到分享") message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel handler:nil];
             [alertController addAction:cancelAction];
             [[self getCurrentVC] presentViewController:alertController animated:YES completion:nil];
         }else{
+            Database *db = [Database shareInstance];
+            [db deleteHouse:houseUid];
             
+            if ([houseUid isEqualToString:db.currentHouse.houseUid]) {
+                NSString *title = [NSString stringWithFormat:@"您已被移出了家庭\"%@\"",houseName];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:LocalString(@"已无法操作该家庭") preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil];
+                [alertController addAction:cancelAction];
+                [[self getCurrentVC] presentViewController:alertController animated:YES completion:nil];
+                
+                [db.houseList removeAllObjects];
+                db.houseList = [db queryAllHouse];
+                if (db.houseList.count > 0) {
+                    db.currentHouse = db.houseList[0];
+                }else{
+                    db.currentHouse = nil;
+                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitMQUpdateHouse" object:nil userInfo:nil];
+            }
         }
     });
 }

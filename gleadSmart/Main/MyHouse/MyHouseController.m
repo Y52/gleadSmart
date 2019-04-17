@@ -88,6 +88,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
 //    [net addObserver:self forKeyPath:@"testSendCount" options:NSKeyValueObservingOptionNew context:nil];
 //    [net addObserver:self forKeyPath:@"testRecieveCount" options:NSKeyValueObservingOptionNew context:nil];
 
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -98,11 +99,18 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
     [self reloadData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rabbitMQUpdateHouse) name:@"rabbitMQUpdateHouse" object:nil];
+    
+    if (![self.houseButton.titleLabel.text isEqualToString:[Database shareInstance].currentHouse.name]) {
+        [self rabbitMQUpdateHouse];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"rabbitMQUpdateHouse" object:nil];
+
     //[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
@@ -186,7 +194,6 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     
     NSString *url = [NSString stringWithFormat:@"https://free-api.heweather.com/s6/weather/now?location=%@,%@&key=%@",db.currentHouse.lon,db.currentHouse.lat,@"6efda5ac4ceb40ffb4c07d7ff740d628"];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-    NSLog(@"%@",url);
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
@@ -330,6 +337,17 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     }
 }
 
+#pragma mark - nsnotification
+- (void)rabbitMQUpdateHouse{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self getHouseHomeListAndDevice];
+        if (![Database shareInstance].currentHouse) {
+            [self.houseButton setTitle:LocalString(@"请选择家庭") forState:UIControlStateNormal];
+        }else{
+            [self.houseButton setTitle:[Database shareInstance].currentHouse.name forState:UIControlStateNormal];
+        }
+    });
+}
 
 #pragma mark - Lazy load
 -(UIView *)headerView{
