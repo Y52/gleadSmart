@@ -396,7 +396,6 @@ static CGFloat const Cell_Height = 50.f;
     [self.homeManagementTable setEditing:!self.homeManagementTable.editing animated:YES];
     //   isEditing editing的getter方法的 新名字
     if ([sender.title isEqualToString:@"完成"]) {
-        [self.homeManagementTable reloadData];
         for (int i = 0; i < self.homeList.count ; i++) {
             RoomModel *room = self.homeList[i];
             room.sortId = [NSNumber numberWithInteger: i];
