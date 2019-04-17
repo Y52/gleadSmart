@@ -69,11 +69,13 @@
         self.buttonTablecloth.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
         self.buttonTablecloth.layer.shadowOpacity = 1;
         self.view.layer.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1.0].CGColor;
+        self.plugStatusLabel.text = LocalString(@"插座已开启");
     }else{
         self.plugView.image = [UIImage imageNamed:@"img_plugView_off"];
         self.buttonTablecloth.backgroundColor = [UIColor colorWithRed:6/255.0 green:30/255.0 blue:59/255.0 alpha:1.0];
         self.buttonTablecloth.layer.shadowOpacity = 0;
         self.view.layer.backgroundColor = [UIColor colorWithRed:3/255.0 green:18/255.0 blue:36/255.0 alpha:1.0].CGColor;
+        self.plugStatusLabel.text = LocalString(@"插座已关闭");
     }
 }
 
