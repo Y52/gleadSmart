@@ -144,7 +144,7 @@ static CGFloat const Cell_Height = 50.f;
             RoomModel *room = _homeList[indexPath.row];
             [self deleteroomsByApi:room success:^{
                 //修改数据源，在刷新 tableView
-                [_homeList removeObjectAtIndex:indexPath.row];
+                [self.homeList removeObjectAtIndex:indexPath.row];
                 
                 //让表视图删除对应的行 //必须执行在移除数组后面
                 [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -152,7 +152,7 @@ static CGFloat const Cell_Height = 50.f;
             } failure:^{
                 
             }];
-            
+
         }
             break;
         case UITableViewCellEditingStyleInsert:
@@ -228,6 +228,7 @@ static CGFloat const Cell_Height = 50.f;
         });
     }];
 }
+
 //删除房间列表的API
 - (void)deleteroomsByApi:(RoomModel *)room success:(void(^)(void))success failure:(void(^)(void))failure{
     
@@ -283,6 +284,7 @@ static CGFloat const Cell_Height = 50.f;
         });
     }];
 }
+
 
 //移动房间列表的API
 - (void)MoveRoomsByApi{
