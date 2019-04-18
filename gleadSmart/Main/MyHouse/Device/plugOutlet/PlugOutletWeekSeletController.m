@@ -38,19 +38,22 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
     
     self.defaultWeekList = [self defaultWeekList];
     self.addWeekTable = [self addWeekTable];
-    
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
 
+- (void)didMoveToParentViewController:(UIViewController *)parent{
+    [super didMoveToParentViewController:parent];
+    if (self.popBlock && !parent) {
+        self.popBlock(self->checkedWeekArray);
+    }
+}
+
+
 #pragma mark - Lazyload
-
-
--(NSArray *)defaultWeekList{
+- (NSArray *)defaultWeekList{
     if (!_defaultWeekList) {
         _defaultWeekList = @[@"星期日",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六"];
         [checkedWeekArray addObjectsFromArray:_defaultWeekList];
@@ -132,12 +135,4 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
 {
     return HEIGHT_HEADER;
 }
-
-- (void)didMoveToParentViewController:(UIViewController *)parent{
-    [super didMoveToParentViewController:parent];
-    if (self.popBlock && !parent) {
-        self.popBlock(self->checkedWeekArray);
-    }
-}
-
 @end

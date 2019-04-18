@@ -52,6 +52,22 @@ static float HEIGHT_CELL = 50.f;
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
 }
 
+- (NSString *)getWeekString{
+    NSString *weekStr = @"";
+    if (self.weekArray.count <= 0) {
+        return weekStr;
+    }
+    for (int i = 0; i < self.weekArray.count; i++) {
+        NSString *week = self.weekArray[i];
+        weekStr = [weekStr stringByAppendingString:week];
+        weekStr = [weekStr stringByAppendingString:@"、"];
+    }
+    if (![weekStr isEqualToString:@""]) {
+        weekStr = [weekStr substringToIndex:weekStr.length-1];
+    }
+    return weekStr;
+}
+
 #pragma mark - setters and getters
 - (void)setNavItem{
     self.navigationItem.title = LocalString(@"添加定时");
@@ -184,7 +200,7 @@ static float HEIGHT_CELL = 50.f;
             }
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.leftLabel.text = LocalString(@"重复");
-            cell.rightLabel.text = LocalString(@"星期二");
+            cell.rightLabel.text = [self getWeekString];
             return cell;
         }
             break;
@@ -212,7 +228,11 @@ static float HEIGHT_CELL = 50.f;
         {
             PlugOutletWeekSeletController *WeekVC = [[PlugOutletWeekSeletController alloc] init];
             WeekVC.popBlock = ^(NSMutableArray *week){
-                [self.weekArray addObject:week];
+                if (!self.weekArray) {
+                    self.weekArray = [[NSMutableArray alloc] init];
+                }
+                [self.weekArray removeAllObjects];
+                [self.weekArray addObjectsFromArray:week];
                 [self.AddTimingTable reloadData];
             };
             [self.navigationController pushViewController:WeekVC animated:YES];

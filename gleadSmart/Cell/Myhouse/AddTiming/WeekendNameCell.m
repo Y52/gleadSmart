@@ -22,7 +22,7 @@
             _leftLabel.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_leftLabel];
             [_leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(200, 15));
+                make.size.mas_equalTo(CGSizeMake(60, 15));
                 make.left.equalTo(self.contentView.mas_left).offset((20));
                 make.centerY.equalTo(self.contentView.mas_centerY);
             }];
@@ -36,7 +36,7 @@
             _rightLabel.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_rightLabel];
             [_rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(150, 30));
+                make.size.mas_equalTo(CGSizeMake(ScreenWidth - 60, 30));
                 make.centerY.equalTo(self.contentView.mas_centerY);
                 make.right.equalTo(self.contentView.mas_right);
             }];
