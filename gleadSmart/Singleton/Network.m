@@ -1829,9 +1829,14 @@ static int noUserInteractionHeartbeat = 0;
                 NSLog(@"设置wifi智能插座的闹钟");
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"设置wifi智能插座的闹钟项列表");
+                NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"getClockList" object:nil userInfo:userInfo];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"查询wifi智能插座的延时开关");
             }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 NSLog(@"设置wifi智能插座的延时开关");
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x10 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {

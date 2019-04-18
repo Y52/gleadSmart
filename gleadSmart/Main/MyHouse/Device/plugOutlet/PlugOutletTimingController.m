@@ -5,6 +5,94 @@
 //  Created by 安建伟 on 2019/4/17.
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
+typedef NS_ENUM(NSUInteger, clockAction) {
+    clockActionNone = 0,
+    clockActionOpen = 1,
+    clockActionClose = 2,
+};
+
+@interface clockModel : NSObject
+
+@property (nonatomic) int week;
+@property (nonatomic) int hour;
+@property (nonatomic) int minute;
+@property (nonatomic) BOOL isOn;
+@property (nonatomic) clockAction action;
+
+- (NSString *)getWeekString;
+- (NSString *)getTimeString;
+- (NSString *)getClockActionString;
+@end
+
+@implementation clockModel
+
+- (NSString *)getWeekString{
+    self.week = self.week & 0xFF;
+    NSString *weekStr = @"";
+    if (self.week & 0x80) {
+        return LocalString(@"仅一次");
+    }else{
+        if (self.week & 0x40) {
+            weekStr = [weekStr stringByAppendingString:LocalString(@"周日、")];
+        }
+        if (self.week & 0x20){
+            weekStr = [weekStr stringByAppendingString:LocalString(@"周一、")];
+        }
+        if (self.week & 0x10){
+            weekStr = [weekStr stringByAppendingString:LocalString(@"周二、")];
+        }
+        if (self.week & 0x08){
+            weekStr = [weekStr stringByAppendingString:LocalString(@"周三、")];
+        }
+        if (self.week & 0x04){
+            weekStr = [weekStr stringByAppendingString:LocalString(@"周四、")];
+        }
+        if (self.week & 0x02){
+            weekStr = [weekStr stringByAppendingString:LocalString(@"周五、")];
+        }
+        if (self.week & 0x01){
+            weekStr = [weekStr stringByAppendingString:LocalString(@"周六、")];
+        }
+        if (![weekStr isEqualToString:@""]) {
+            weekStr = [weekStr substringToIndex:weekStr.length - 1];
+        }
+    }
+    return weekStr;
+}
+
+- (NSString *)getTimeString{
+    return [NSString stringWithFormat:@"%02d:%02d",self.hour,self.minute];
+}
+
+- (NSString *)getClockActionString{
+    switch (self.action) {
+        case clockActionNone:
+        {
+            
+        }
+            break;
+            
+        case clockActionOpen:
+        {
+            return LocalString(@"开关: 开");
+
+        }
+            break;
+            
+        case clockActionClose:
+        {
+            return LocalString(@"开关: 关");
+
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return @"";
+}
+@end
+
 
 #import "PlugOutletTimingController.h"
 #import "PlugOutletAddTimingController.h"
@@ -13,7 +101,6 @@
 NSString *const CellIdentifier_PlugOutletTimingCell = @"CellID_PlugOutletTiming";
 
 CGFloat const cellAddTiming_Height = 68.f;
-static float HEIGHT_HEADER = 20.f;
 static float HEIGHT_FOOT = 20.f;
 
 @interface PlugOutletTimingController () <UITableViewDataSource,UITableViewDelegate>
@@ -35,6 +122,7 @@ static float HEIGHT_FOOT = 20.f;
     
     self.TimingTable = [self TimingTable];
     self.AddTimingBtn = [self AddTimingBtn];
+    [self getClockListBySocket];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -42,12 +130,60 @@ static float HEIGHT_FOOT = 20.f;
     self.navigationController.navigationBar.translucent = NO;
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getClockList:) name:@"getClockList" object:nil];
     
 }
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getClockList" object:nil];
+}
 #pragma mark - private methods
+- (void)getClockListBySocket{
+    UInt8 controlCode = 0x00;
+    NSArray *data = @[@0xFC,@0x11,@0x03,@0x00];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
+}
+
 - (void)addTiming{
     PlugOutletAddTimingController *addVC = [[PlugOutletAddTimingController alloc] init];
+    addVC.device = self.device;
     [self.navigationController pushViewController:addVC animated:YES];
+}
+
+#pragma mark - nsnotification
+- (void)getClockList:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    NSMutableArray *frame = [userInfo objectForKey:@"frame"];
+    NSString *mac= [userInfo objectForKey:@"mac"];
+
+    if ([mac isEqualToString:self.device.mac]) {
+        if (!self.clockList) {
+            self.clockList = [[NSMutableArray alloc] init];
+        }
+        [self.clockList removeAllObjects];
+        
+        for (int i = 0; i < 5; i++) {
+            if (![frame[13+i*6] intValue]) {
+                //无效状态
+                continue;
+            }
+            clockModel *clock = [[clockModel alloc] init];
+            if ([frame[13+i*6] intValue] == 1) {
+                clock.isOn = YES;
+            }else{
+                clock.isOn = NO;
+            }
+            clock.week = [frame[14+i*6] intValue];
+            clock.hour = [frame[15+i*6] intValue];
+            clock.minute = [frame[16+i*6] intValue];
+            clock.action = [frame[17+i*6] intValue];
+            [self.clockList addObject:clock];
+        }
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.TimingTable reloadData];
+    });
 }
 
 #pragma mark - setters and getters
@@ -111,10 +247,11 @@ static float HEIGHT_FOOT = 20.f;
         cell = [[PlugOutletSaveAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletTimingCell];
     }
     cell.backgroundColor = [UIColor whiteColor];
-    cell.hourName.text = LocalString(@"10:37");
-    cell.weekendName.text = LocalString(@"星期二");
-    cell.status.text = LocalString(@"开关:关");
-    cell.plugSwitch.on = NO;
+    clockModel *clock = self.clockList[indexPath.row];
+    cell.hourName.text = [clock getTimeString];
+    cell.weekendName.text = [clock getWeekString];
+    cell.status.text = [clock getClockActionString];
+    cell.plugSwitch.on = clock.isOn;
     return cell;
 }
 
@@ -128,7 +265,7 @@ static float HEIGHT_FOOT = 20.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return HEIGHT_HEADER;
+    return 0;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     

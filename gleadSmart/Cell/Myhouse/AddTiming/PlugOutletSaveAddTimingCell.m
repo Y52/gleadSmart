@@ -18,7 +18,7 @@
         if (!_hourName) {
             _hourName = [[UILabel alloc] init];
             _hourName.textColor = [UIColor colorWithHexString:@"4A4A4A"];
-            _hourName.font = [UIFont fontWithName:@"Helvetica" size:15];
+            _hourName.font = [UIFont fontWithName:@"Helvetica" size:18];
             _hourName.textAlignment = NSTextAlignmentLeft;
             _hourName.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_hourName];
@@ -32,12 +32,12 @@
         if (!_weekendName) {
             _weekendName = [[UILabel alloc] init];
             _weekendName.textColor = [UIColor colorWithHexString:@"4A4A4A"];
-            _weekendName.font = [UIFont fontWithName:@"Helvetica" size:15];
+            _weekendName.font = [UIFont fontWithName:@"Helvetica" size:13];
             _weekendName.textAlignment = NSTextAlignmentLeft;
-            _weekendName.adjustsFontSizeToFitWidth = YES;
+            //_weekendName.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_weekendName];
             [_weekendName mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(yAutoFit(150.f), yAutoFit(15.f)));
+                make.size.mas_equalTo(CGSizeMake(ScreenWidth - 80.f, yAutoFit(15.f)));
                 make.left.equalTo(self.contentView.mas_left).offset(yAutoFit(20.f));
                 make.top.equalTo(self.contentView.mas_centerY).offset(3.5);
             }];

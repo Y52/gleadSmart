@@ -289,7 +289,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:hsVC];
     nav.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:nav animated:YES completion:nil];
+    [self presentViewController:nav animated:NO completion:nil];
 }
 
 - (void)homeSetting{

@@ -43,6 +43,13 @@ static float HEIGHT_CELL = 50.f;
     
 }
 
+#pragma mark - private methods
+- (void)setClockListBySocket{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,@0x01];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
+}
+
 #pragma mark - setters and getters
 - (void)setNavItem{
     self.navigationItem.title = LocalString(@"添加定时");

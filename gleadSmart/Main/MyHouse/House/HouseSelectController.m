@@ -230,7 +230,7 @@ static CGFloat const Cell_Height = 50.f;
         }
     }
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
     if (self.dismissBlock) {
         self.dismissBlock();
     }

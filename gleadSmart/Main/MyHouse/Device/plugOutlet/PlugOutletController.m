@@ -102,6 +102,7 @@
 - (void)plugClock{
     
     PlugOutletTimingController *timingVC = [[PlugOutletTimingController alloc] init];
+    timingVC.device = self.device;
     [self.navigationController pushViewController:timingVC animated:YES];
 }
 
