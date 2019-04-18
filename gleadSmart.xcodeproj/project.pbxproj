@@ -21,6 +21,8 @@
 		3604FD52225B707A00D0B97D /* img_Lamp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD4F225B707A00D0B97D /* img_Lamp@2x.png */; };
 		3604FD53225B707A00D0B97D /* img_Lamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD50225B707A00D0B97D /* img_Lamp.png */; };
 		3604FD54225B707A00D0B97D /* img_Lamp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD51225B707A00D0B97D /* img_Lamp@3x.png */; };
+		36069FD52268682400347D7F /* PlugOutletWeekSeletController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36069FD42268682400347D7F /* PlugOutletWeekSeletController.m */; };
+		36069FD822686B1100347D7F /* PlugOutletWeekSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36069FD722686B1100347D7F /* PlugOutletWeekSelectCell.m */; };
 		36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 36134F2B21E6E10100A7D98E /* NodeButton.m */; };
 		36330235225C844200E3EFAA /* ValveAlertInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36330234225C844200E3EFAA /* ValveAlertInfoController.m */; };
 		369C169B22250ECB0079159E /* AddRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169A22250ECA0079159E /* AddRoomsViewController.m */; };
@@ -994,6 +996,10 @@
 		3604FD4F225B707A00D0B97D /* img_Lamp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Lamp@2x.png"; sourceTree = "<group>"; };
 		3604FD50225B707A00D0B97D /* img_Lamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_Lamp.png; sourceTree = "<group>"; };
 		3604FD51225B707A00D0B97D /* img_Lamp@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Lamp@3x.png"; sourceTree = "<group>"; };
+		36069FD32268682400347D7F /* PlugOutletWeekSeletController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletWeekSeletController.h; sourceTree = "<group>"; };
+		36069FD42268682400347D7F /* PlugOutletWeekSeletController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletWeekSeletController.m; sourceTree = "<group>"; };
+		36069FD622686B1100347D7F /* PlugOutletWeekSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletWeekSelectCell.h; sourceTree = "<group>"; };
+		36069FD722686B1100347D7F /* PlugOutletWeekSelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletWeekSelectCell.m; sourceTree = "<group>"; };
 		36134F2A21E6E10100A7D98E /* NodeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeButton.h; sourceTree = "<group>"; };
 		36134F2B21E6E10100A7D98E /* NodeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeButton.m; sourceTree = "<group>"; };
 		36330233225C844200E3EFAA /* ValveAlertInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValveAlertInfoController.h; sourceTree = "<group>"; };
@@ -1722,6 +1728,8 @@
 				36E4F68C226745AF006A9E6D /* WeekendNameCell.m */,
 				36E4F692226750E2006A9E6D /* PlugOutletSaveAddTimingCell.h */,
 				36E4F693226750E2006A9E6D /* PlugOutletSaveAddTimingCell.m */,
+				36069FD622686B1100347D7F /* PlugOutletWeekSelectCell.h */,
+				36069FD722686B1100347D7F /* PlugOutletWeekSelectCell.m */,
 			);
 			path = AddTiming;
 			sourceTree = "<group>";
@@ -2478,6 +2486,8 @@
 				36E4F68F22674DCA006A9E6D /* PlugOutletTimingController.m */,
 				36E4F685226712BD006A9E6D /* PlugOutletAddTimingController.h */,
 				36E4F686226712BD006A9E6D /* PlugOutletAddTimingController.m */,
+				36069FD32268682400347D7F /* PlugOutletWeekSeletController.h */,
+				36069FD42268682400347D7F /* PlugOutletWeekSeletController.m */,
 			);
 			path = plugOutlet;
 			sourceTree = "<group>";
@@ -3726,6 +3736,7 @@
 				BB00A4FC21BA243E004E4051 /* LogOutCell.m in Sources */,
 				BB37DEFF21A7E8D600B2121B /* NodeDetailCell.m in Sources */,
 				3EA530CA21AB9C88000A6D26 /* PasswordLoginController.m in Sources */,
+				36069FD822686B1100347D7F /* PlugOutletWeekSelectCell.m in Sources */,
 				BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */,
 				BB62E4DE21B5155000C0FA39 /* TherWeekProgramController.m in Sources */,
 				36004A8F2227E96500C99215 /* UsernameViewController.m in Sources */,
@@ -3850,6 +3861,7 @@
 				36E4F68D226745AF006A9E6D /* WeekendNameCell.m in Sources */,
 				BB2AC0EB21A8F156006DB83A /* ESP_WifiUtil.m in Sources */,
 				BB62E4B321B4C0B700C0FA39 /* ThermostatTimerController.m in Sources */,
+				36069FD52268682400347D7F /* PlugOutletWeekSeletController.m in Sources */,
 				BB49DF9221958864004E00A2 /* AppDelegate.m in Sources */,
 				BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */,
 				BB62E4BC21B4D1D200C0FA39 /* ThermostatAddTimerController.m in Sources */,
