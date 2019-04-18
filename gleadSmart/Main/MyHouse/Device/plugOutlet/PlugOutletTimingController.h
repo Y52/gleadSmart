@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PlugOutletSaveTimingController : UIViewController
+@interface PlugOutletTimingController : UIViewController
 
 @end
 

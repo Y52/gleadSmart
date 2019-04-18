@@ -6,23 +6,26 @@
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "PlugOutletSaveTimingController.h"
+#import "PlugOutletTimingController.h"
+#import "PlugOutletAddTimingController.h"
 #import "PlugOutletSaveAddTimingCell.h"
 
-NSString *const CellIdentifier_PlugOutletSaveAddTimingCell = @"CellID_PlugOutletSaveAddTiming";
+NSString *const CellIdentifier_PlugOutletTimingCell = @"CellID_PlugOutletTiming";
 
 CGFloat const cellAddTiming_Height = 68.f;
 static float HEIGHT_HEADER = 20.f;
 static float HEIGHT_FOOT = 20.f;
 
-@interface PlugOutletSaveTimingController () <UITableViewDataSource,UITableViewDelegate>
+@interface PlugOutletTimingController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *TimingTable;
 @property (nonatomic, strong) UIButton *AddTimingBtn;
 
+@property (nonatomic, strong) NSMutableArray *clockList;
+
 @end
 
-@implementation PlugOutletSaveTimingController
+@implementation PlugOutletTimingController
 
 #pragma mark - life circle
 - (void)viewDidLoad {
@@ -41,7 +44,11 @@ static float HEIGHT_FOOT = 20.f;
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
 }
-#pragma mark - Actions
+#pragma mark - private methods
+- (void)addTiming{
+    PlugOutletAddTimingController *addVC = [[PlugOutletAddTimingController alloc] init];
+    [self.navigationController pushViewController:addVC animated:YES];
+}
 
 #pragma mark - setters and getters
 - (UITableView *)TimingTable{
@@ -53,7 +60,7 @@ static float HEIGHT_FOOT = 20.f;
             tableView.delegate = self;
             tableView.separatorColor = [UIColor clearColor];
             tableView.scrollEnabled = NO;
-            [tableView registerClass:[PlugOutletSaveAddTimingCell class] forCellReuseIdentifier:CellIdentifier_PlugOutletSaveAddTimingCell];
+            [tableView registerClass:[PlugOutletSaveAddTimingCell class] forCellReuseIdentifier:CellIdentifier_PlugOutletTimingCell];
             [self.view addSubview:tableView];
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
@@ -72,7 +79,7 @@ static float HEIGHT_FOOT = 20.f;
         [_AddTimingBtn setTitle:LocalString(@"添加定时") forState:UIControlStateNormal];
         [_AddTimingBtn setTitleColor:[UIColor colorWithHexString:@"639DF8"] forState:UIControlStateNormal];
         [_AddTimingBtn setBackgroundColor:[UIColor whiteColor]];
-        [_AddTimingBtn addTarget:self action:@selector(Addtiming) forControlEvents:UIControlEventTouchUpInside];
+        [_AddTimingBtn addTarget:self action:@selector(addTiming) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_AddTimingBtn];
         [_AddTimingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(276.f), 44.f));
@@ -94,38 +101,20 @@ static float HEIGHT_FOOT = 20.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return self.clockList.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PlugOutletSaveAddTimingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletSaveAddTimingCell];
+    PlugOutletSaveAddTimingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletTimingCell];
     if (cell == nil) {
-        cell = [[PlugOutletSaveAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletSaveAddTimingCell];
+        cell = [[PlugOutletSaveAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletTimingCell];
     }
     cell.backgroundColor = [UIColor whiteColor];
-    switch (indexPath.row) {
-        case 0:
-        {
-            cell.hourName.text = LocalString(@"10:37");
-            cell.weekendName.text = LocalString(@"星期二");
-            cell.status.text = LocalString(@"开关:开");
-            cell.plugSwitch.on = YES;
-        }
-            break;
-            
-        case 1:
-        {
-            cell.hourName.text = LocalString(@"10:37");
-            cell.weekendName.text = LocalString(@"星期二");
-            cell.status.text = LocalString(@"开关:关");
-            cell.plugSwitch.on = NO;
-        }
-            break;
-            
-        default:
-            break;
-    }
+    cell.hourName.text = LocalString(@"10:37");
+    cell.weekendName.text = LocalString(@"星期二");
+    cell.status.text = LocalString(@"开关:关");
+    cell.plugSwitch.on = NO;
     return cell;
 }
 

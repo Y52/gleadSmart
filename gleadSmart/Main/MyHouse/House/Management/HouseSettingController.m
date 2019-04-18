@@ -113,8 +113,71 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
 
 //移除家庭
 - (void)removeHouse{
-    
+    YAlertViewController *alert = [[YAlertViewController alloc] init];
+    alert.lBlock = ^{
+        
+    };
+    alert.rBlock = ^{
+        [self removeHouseHttpDelMethod];
+    };
+    alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:alert animated:NO completion:^{
+        [alert showView];
+        alert.titleLabel.text = LocalString(@"警告");
+        alert.messageLabel.text = LocalString(@"确定移除该家庭吗，所有信息都会被删除？");
+        [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
+        [alert.rightBtn setTitle:LocalString(@"确认") forState:UIControlStateNormal];
+    }];
 }
+
+- (void)removeHouseHttpDelMethod{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/house?houseUid=%@",httpIpAddress,self.house.houseUid];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager DELETE:url parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            for (HouseModel *house in db.houseList) {
+                if ([house.houseUid isEqualToString:self.house.houseUid]) {
+                    [db.houseList removeObject:house];
+                    break;
+                }
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"移除家庭失败"];
+        });
+    }];
+}
+
 
 /**
  根据经纬度获取地理位置详细信息

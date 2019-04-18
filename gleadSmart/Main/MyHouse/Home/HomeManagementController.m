@@ -142,15 +142,17 @@ static CGFloat const Cell_Height = 50.f;
         {
         
             RoomModel *room = _homeList[indexPath.row];
-            [self deleteroomsByApi:room];
+            [self deleteroomsByApi:room success:^{
+                //修改数据源，在刷新 tableView
+                [_homeList removeObjectAtIndex:indexPath.row];
+                
+                //让表视图删除对应的行 //必须执行在移除数组后面
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [NSObject showHudTipStr:LocalString(@"删除成功")];
+            } failure:^{
+                
+            }];
             
-            //修改数据源，在刷新 tableView
-            [_homeList removeObjectAtIndex:indexPath.row];
-            
-            //让表视图删除对应的行 //必须执行在移除数组后面
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [NSObject showHudTipStr:LocalString(@"删除成功")];
-
         }
             break;
         case UITableViewCellEditingStyleInsert:
@@ -227,7 +229,7 @@ static CGFloat const Cell_Height = 50.f;
     }];
 }
 //删除房间列表的API
-- (void)deleteroomsByApi:(RoomModel *)room{
+- (void)deleteroomsByApi:(RoomModel *)room success:(void(^)(void))success failure:(void(^)(void))failure{
     
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -258,9 +260,14 @@ static CGFloat const Cell_Height = 50.f;
             //[NSObject showHudTipStr:@"删除房间成功"];
             [[Database shareInstance] deleteRoom:room.roomUid];
             [self.homeManagementTable reloadData];
-            
+            if (success) {
+                success();
+            }
         }else{
             [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
+            if (failure) {
+                failure();
+            }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
@@ -270,6 +277,9 @@ static CGFloat const Cell_Height = 50.f;
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
             NSLog(@"%@",error);
+            if (failure) {
+                failure();
+            }
         });
     }];
 }

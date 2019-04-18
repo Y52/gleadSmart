@@ -9,18 +9,16 @@
 #import "PlugOutletAddTimingController.h"
 #import "PlugOutletAddTimingCell.h"
 #import "WeekendNameCell.h"
-#import "PlugOutletSaveTimingController.h"
 
 NSString *const CellIdentifier_PlugOutletAddTiming = @"CellID_PlugOutletAddTimingCell";
 NSString *const CellIdentifier_WeekendName = @"CellID_WeekendNameCell";
 static float HEIGHT_CELL = 50.f;
-static float HEIGHT_HEADER = 30.f;
 
 @interface PlugOutletAddTimingController () <UIPickerViewDataSource,UIPickerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UIPickerView *TimePicker;
-@property (nonatomic, strong) NSMutableArray  *HoursArray;
-@property (nonatomic, strong) NSMutableArray  *SecondArray;
+@property (nonatomic, strong) NSMutableArray *HoursArray;
+@property (nonatomic, strong) NSMutableArray *SecondArray;
 
 @property (strong, nonatomic) UITableView *AddTimingTable;
 
@@ -45,8 +43,7 @@ static float HEIGHT_HEADER = 30.f;
     
 }
 
-#pragma mark - Lazy Load
-
+#pragma mark - setters and getters
 - (void)setNavItem{
     self.navigationItem.title = LocalString(@"添加定时");
     
@@ -55,7 +52,7 @@ static float HEIGHT_HEADER = 30.f;
     [rightButton setTitle:@"保存" forState:UIControlStateNormal];
     [rightButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
     [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(Save) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton addTarget:self action:@selector(saveClock) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
@@ -64,7 +61,7 @@ static float HEIGHT_HEADER = 30.f;
 -(UITableView *)AddTimingTable{
     if (!_AddTimingTable) {
         _AddTimingTable = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 400, ScreenWidth, HEIGHT_HEADER + 100) style:UITableViewStylePlain];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 245.f, ScreenWidth, HEIGHT_CELL * 2) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
@@ -83,10 +80,9 @@ static float HEIGHT_HEADER = 30.f;
 }
 
 -(UIPickerView *)TimePicker{
-    
     if (!_TimePicker) {
         _TimePicker = [[UIPickerView alloc] init];
-        _TimePicker.backgroundColor = [UIColor clearColor];
+        _TimePicker.backgroundColor = [UIColor whiteColor];
         self.HoursArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23"]];
         self.SecondArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59"]];
         self.TimePicker.dataSource = self;
@@ -95,17 +91,16 @@ static float HEIGHT_HEADER = 30.f;
         [self.view addSubview:_TimePicker];
         
         [_TimePicker mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth,yAutoFit(195)));
-            make.top.equalTo(self.view.mas_top).offset(44 + ScreenHeight * 0.05 + 64);
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth,195.f));
+            make.top.equalTo(self.view.mas_top).offset(20.f);
             make.centerX.equalTo(self.view.mas_centerX);
         }];
-        
     }
         return _TimePicker;
 }
 
 //自定义pick view的字体和颜色
--(UIView *) pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+-(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel* pickerLabel = (UILabel*)view;
     if (!pickerLabel){
         pickerLabel = [[UILabel alloc] init];
@@ -144,6 +139,7 @@ static float HEIGHT_HEADER = 30.f;
         return self.SecondArray.count;
     }
 }
+
 // 返回的是component列的行显示的内容
 - (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
@@ -207,13 +203,11 @@ static float HEIGHT_HEADER = 30.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return HEIGHT_HEADER;
+    return 0;
 }
 
-- (void)Save{
+- (void)saveClock{
     
-    PlugOutletSaveTimingController *SaveVC = [[PlugOutletSaveTimingController alloc] init];
-    [self.navigationController pushViewController:SaveVC animated:YES];
 }
 
 @end

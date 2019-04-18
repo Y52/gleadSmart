@@ -36,7 +36,7 @@
 		36E4F687226712BD006A9E6D /* PlugOutletAddTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F686226712BD006A9E6D /* PlugOutletAddTimingController.m */; };
 		36E4F68A22672A89006A9E6D /* PlugOutletAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F68922672A89006A9E6D /* PlugOutletAddTimingCell.m */; };
 		36E4F68D226745AF006A9E6D /* WeekendNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F68C226745AF006A9E6D /* WeekendNameCell.m */; };
-		36E4F69022674DCA006A9E6D /* PlugOutletSaveTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F68F22674DCA006A9E6D /* PlugOutletSaveTimingController.m */; };
+		36E4F69022674DCA006A9E6D /* PlugOutletTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F68F22674DCA006A9E6D /* PlugOutletTimingController.m */; };
 		36E4F694226750E2006A9E6D /* PlugOutletSaveAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E4F693226750E2006A9E6D /* PlugOutletSaveAddTimingCell.m */; };
 		36FD8C562236553300DE4D28 /* PhoneVerifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD8C552236553300DE4D28 /* PhoneVerifyCell.m */; };
 		3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */; };
@@ -1023,8 +1023,8 @@
 		36E4F68922672A89006A9E6D /* PlugOutletAddTimingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletAddTimingCell.m; sourceTree = "<group>"; };
 		36E4F68B226745AF006A9E6D /* WeekendNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeekendNameCell.h; sourceTree = "<group>"; };
 		36E4F68C226745AF006A9E6D /* WeekendNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeekendNameCell.m; sourceTree = "<group>"; };
-		36E4F68E22674DCA006A9E6D /* PlugOutletSaveTimingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletSaveTimingController.h; sourceTree = "<group>"; };
-		36E4F68F22674DCA006A9E6D /* PlugOutletSaveTimingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSaveTimingController.m; sourceTree = "<group>"; };
+		36E4F68E22674DCA006A9E6D /* PlugOutletTimingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletTimingController.h; sourceTree = "<group>"; };
+		36E4F68F22674DCA006A9E6D /* PlugOutletTimingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletTimingController.m; sourceTree = "<group>"; };
 		36E4F692226750E2006A9E6D /* PlugOutletSaveAddTimingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletSaveAddTimingCell.h; sourceTree = "<group>"; };
 		36E4F693226750E2006A9E6D /* PlugOutletSaveAddTimingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSaveAddTimingCell.m; sourceTree = "<group>"; };
 		36FD8C542236553300DE4D28 /* PhoneVerifyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneVerifyCell.h; sourceTree = "<group>"; };
@@ -2474,10 +2474,10 @@
 				BB647BE7224E000800DCB992 /* PlugOutletController.m */,
 				36E3CF552251B5FE00F4195D /* PlugOutletSettingController.h */,
 				36E3CF562251B5FE00F4195D /* PlugOutletSettingController.m */,
+				36E4F68E22674DCA006A9E6D /* PlugOutletTimingController.h */,
+				36E4F68F22674DCA006A9E6D /* PlugOutletTimingController.m */,
 				36E4F685226712BD006A9E6D /* PlugOutletAddTimingController.h */,
 				36E4F686226712BD006A9E6D /* PlugOutletAddTimingController.m */,
-				36E4F68E22674DCA006A9E6D /* PlugOutletSaveTimingController.h */,
-				36E4F68F22674DCA006A9E6D /* PlugOutletSaveTimingController.m */,
 			);
 			path = plugOutlet;
 			sourceTree = "<group>";
@@ -3776,7 +3776,7 @@
 				BB5CDC8521EC26F300C2B6FA /* YRabbitMQ.m in Sources */,
 				36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */,
 				BBF6326E21BBC472006A23AC /* NodeInfoCell.m in Sources */,
-				36E4F69022674DCA006A9E6D /* PlugOutletSaveTimingController.m in Sources */,
+				36E4F69022674DCA006A9E6D /* PlugOutletTimingController.m in Sources */,
 				3EA530CC21AB9C88000A6D26 /* LoginViewController.m in Sources */,
 				3EA530CB21AB9C88000A6D26 /* RegisterController.m in Sources */,
 				BB8A74382226374A008B2439 /* ShareDeviceDetailController.m in Sources */,

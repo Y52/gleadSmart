@@ -100,7 +100,7 @@ NSString *const CellIdentifier_FamilyMemberSet = @"CellID_FamilyMemberSet";
     alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:alert animated:NO completion:^{
         [alert showView];
-        alert.titleLabel.text = LocalString(@"提示");
+        alert.titleLabel.text = LocalString(@"警告");
         alert.messageLabel.text = LocalString(@"确定移除该成员吗？");
         [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
         [alert.rightBtn setTitle:LocalString(@"确认") forState:UIControlStateNormal];

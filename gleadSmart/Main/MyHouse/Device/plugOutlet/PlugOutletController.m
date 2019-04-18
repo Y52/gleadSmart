@@ -8,7 +8,8 @@
 
 #import "PlugOutletController.h"
 #import "PlugOutletSettingController.h"
-#import "PlugOutletAddTimingController.h"
+#import "PlugOutletTimingController.h"
+
 @interface PlugOutletController ()
 
 @property (nonatomic, strong) UIImageView *plugView;
@@ -100,8 +101,8 @@
 
 - (void)plugClock{
     
-    PlugOutletAddTimingController *AddTimingVC = [[PlugOutletAddTimingController alloc] init];
-    [self.navigationController pushViewController:AddTimingVC animated:YES];
+    PlugOutletTimingController *timingVC = [[PlugOutletTimingController alloc] init];
+    [self.navigationController pushViewController:timingVC animated:YES];
 }
 
 - (void)plugDelay{
