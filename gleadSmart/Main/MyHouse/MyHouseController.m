@@ -12,6 +12,7 @@
 #import "SelectDeviceTypeController.h"
 #import "HomeManagementController.h"
 #import "HouseManagementController.h"
+#import "PlugOutletAddTimingController.h"
 
 static CGFloat const gleadHeaderHeight = 225.f;
 static CGFloat const gleadWeatherViewWidth = 335.f;

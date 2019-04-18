@@ -9,6 +9,7 @@
 #import "PlugOutletAddTimingController.h"
 #import "PlugOutletAddTimingCell.h"
 #import "WeekendNameCell.h"
+#import "PlugOutletWeekSeletController.h"
 
 NSString *const CellIdentifier_PlugOutletAddTiming = @"CellID_PlugOutletAddTimingCell";
 NSString *const CellIdentifier_WeekendName = @"CellID_WeekendNameCell";
@@ -19,6 +20,7 @@ static float HEIGHT_CELL = 50.f;
 @property (strong, nonatomic) UIPickerView *TimePicker;
 @property (nonatomic, strong) NSMutableArray *HoursArray;
 @property (nonatomic, strong) NSMutableArray *SecondArray;
+@property (nonatomic, strong) NSMutableArray *weekArray;
 
 @property (strong, nonatomic) UITableView *AddTimingTable;
 
@@ -94,7 +96,11 @@ static float HEIGHT_CELL = 50.f;
         self.SecondArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59"]];
         self.TimePicker.dataSource = self;
         self.TimePicker.delegate = self;
-        [self.TimePicker selectRow:0 inComponent:0 animated:YES];
+        //在当前选择上显示一个透明窗口
+        self.TimePicker.showsSelectionIndicator = YES;
+        //初始化，自动转一圈，避免第一次是数组第一个值造成留白
+        [self.TimePicker selectRow:[self.HoursArray count]/2 inComponent:0 animated:YES];
+        [self.TimePicker selectRow:[self.SecondArray count]/2 inComponent:1 animated:YES];
         [self.view addSubview:_TimePicker];
         
         [_TimePicker mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -103,7 +109,7 @@ static float HEIGHT_CELL = 50.f;
             make.centerX.equalTo(self.view.mas_centerX);
         }];
     }
-        return _TimePicker;
+    return _TimePicker;
 }
 
 //自定义pick view的字体和颜色
@@ -130,7 +136,7 @@ static float HEIGHT_CELL = 50.f;
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component __TVOS_PROHIBITED{
-    return 160;
+    return self.view.frame.size.width / 2;
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component __TVOS_PROHIBITED {
@@ -201,6 +207,25 @@ static float HEIGHT_CELL = 50.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.row) {
+        case 0:
+        {
+            PlugOutletWeekSeletController *WeekVC = [[PlugOutletWeekSeletController alloc] init];
+            WeekVC.popBlock = ^(NSMutableArray *week){
+                [self.weekArray addObject:week];
+                [self.AddTimingTable reloadData];
+            };
+            [self.navigationController pushViewController:WeekVC animated:YES];
+            
+        }
+            break;
+            
+        default:
+        {
+            
+        }
+            break;
+    }
     
 }
 
