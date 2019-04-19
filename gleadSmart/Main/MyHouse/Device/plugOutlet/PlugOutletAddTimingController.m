@@ -38,6 +38,7 @@ static float HEIGHT_CELL = 50.f;
     [self setNavItem];
     self.timePicker = [self timePicker];
     self.addTimingTable = [self addTimingTable];
+    self.clock = [[ClockModel alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
