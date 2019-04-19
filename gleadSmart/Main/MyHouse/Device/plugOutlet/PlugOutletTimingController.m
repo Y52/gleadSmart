@@ -5,98 +5,12 @@
 //  Created by 安建伟 on 2019/4/17.
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
-typedef NS_ENUM(NSUInteger, clockAction) {
-    clockActionNone = 0,
-    clockActionOpen = 1,
-    clockActionClose = 2,
-};
-
-@interface clockModel : NSObject
-
-@property (nonatomic) int week;
-@property (nonatomic) int hour;
-@property (nonatomic) int minute;
-@property (nonatomic) BOOL isOn;
-@property (nonatomic) clockAction action;
-
-- (NSString *)getWeekString;
-- (NSString *)getTimeString;
-- (NSString *)getClockActionString;
-@end
-
-@implementation clockModel
-
-- (NSString *)getWeekString{
-    self.week = self.week & 0xFF;
-    NSString *weekStr = @"";
-    if (self.week & 0x80) {
-        return LocalString(@"仅一次");
-    }else{
-        if (self.week & 0x40) {
-            weekStr = [weekStr stringByAppendingString:LocalString(@"周日、")];
-        }
-        if (self.week & 0x20){
-            weekStr = [weekStr stringByAppendingString:LocalString(@"周一、")];
-        }
-        if (self.week & 0x10){
-            weekStr = [weekStr stringByAppendingString:LocalString(@"周二、")];
-        }
-        if (self.week & 0x08){
-            weekStr = [weekStr stringByAppendingString:LocalString(@"周三、")];
-        }
-        if (self.week & 0x04){
-            weekStr = [weekStr stringByAppendingString:LocalString(@"周四、")];
-        }
-        if (self.week & 0x02){
-            weekStr = [weekStr stringByAppendingString:LocalString(@"周五、")];
-        }
-        if (self.week & 0x01){
-            weekStr = [weekStr stringByAppendingString:LocalString(@"周六、")];
-        }
-        if (![weekStr isEqualToString:@""]) {
-            weekStr = [weekStr substringToIndex:weekStr.length - 1];
-        }
-    }
-    return weekStr;
-}
-
-- (NSString *)getTimeString{
-    return [NSString stringWithFormat:@"%02d:%02d",self.hour,self.minute];
-}
-
-- (NSString *)getClockActionString{
-    switch (self.action) {
-        case clockActionNone:
-        {
-            
-        }
-            break;
-            
-        case clockActionOpen:
-        {
-            return LocalString(@"开关: 开");
-
-        }
-            break;
-            
-        case clockActionClose:
-        {
-            return LocalString(@"开关: 关");
-
-        }
-            break;
-            
-        default:
-            break;
-    }
-    return @"";
-}
-@end
 
 
 #import "PlugOutletTimingController.h"
 #import "PlugOutletAddTimingController.h"
 #import "PlugOutletSaveAddTimingCell.h"
+#import "ClockModel.h"
 
 NSString *const CellIdentifier_PlugOutletTimingCell = @"CellID_PlugOutletTiming";
 
@@ -168,7 +82,7 @@ static float HEIGHT_FOOT = 20.f;
                 //无效状态
                 continue;
             }
-            clockModel *clock = [[clockModel alloc] init];
+            ClockModel *clock = [[ClockModel alloc] init];
             if ([frame[13+i*6] intValue] == 1) {
                 clock.isOn = YES;
             }else{
@@ -247,7 +161,7 @@ static float HEIGHT_FOOT = 20.f;
         cell = [[PlugOutletSaveAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletTimingCell];
     }
     cell.backgroundColor = [UIColor whiteColor];
-    clockModel *clock = self.clockList[indexPath.row];
+    ClockModel *clock = self.clockList[indexPath.row];
     cell.hourName.text = [clock getTimeString];
     cell.weekendName.text = [clock getWeekString];
     cell.status.text = [clock getClockActionString];

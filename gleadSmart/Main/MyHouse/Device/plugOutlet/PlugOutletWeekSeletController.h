@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ClockModel;
 
 NS_ASSUME_NONNULL_BEGIN
-typedef void(^popBlock)(NSMutableArray *week);
+typedef void(^popBlock)(ClockModel *clock);
 
 @interface PlugOutletWeekSeletController : UIViewController
 
 @property (nonatomic) popBlock popBlock;
-
+@property (nonatomic, strong) ClockModel *clock;
 @end
 
 NS_ASSUME_NONNULL_END

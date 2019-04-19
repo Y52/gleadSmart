@@ -932,6 +932,8 @@
 		BBF8CAED22169FBA0030E921 /* FamilyMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAEC22169FBA0030E921 /* FamilyMemberController.m */; };
 		BBF8CAF12216A4650030E921 /* FamilyMemberInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAF02216A4650030E921 /* FamilyMemberInfoCell.m */; };
 		BBF8CAF42216A8460030E921 /* FamilyMemberSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAF32216A8460030E921 /* FamilyMemberSetCell.m */; };
+		BBFF328C2269693900D1BA20 /* ClockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFF328B2269693900D1BA20 /* ClockModel.m */; };
+		BBFF328D2269693900D1BA20 /* ClockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFF328B2269693900D1BA20 /* ClockModel.m */; };
 		DC9E14ECA0B823590DF53981 /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B80A304BBB477714B090028 /* Pods_gleadSmart.framework */; };
 		EA5B4E811AE37B2622ED917D /* Pods_jienuoIOT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B0EAF87229454E67D9D19C /* Pods_jienuoIOT.framework */; };
 /* End PBXBuildFile section */
@@ -1617,6 +1619,8 @@
 		BBF8CAF02216A4650030E921 /* FamilyMemberInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyMemberInfoCell.m; sourceTree = "<group>"; };
 		BBF8CAF22216A8460030E921 /* FamilyMemberSetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyMemberSetCell.h; sourceTree = "<group>"; };
 		BBF8CAF32216A8460030E921 /* FamilyMemberSetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyMemberSetCell.m; sourceTree = "<group>"; };
+		BBFF328A2269693900D1BA20 /* ClockModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClockModel.h; sourceTree = "<group>"; };
+		BBFF328B2269693900D1BA20 /* ClockModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClockModel.m; sourceTree = "<group>"; };
 		F8A0445F45AA8D6F693D34C5 /* Pods-jienuoIOT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jienuoIOT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1950,6 +1954,8 @@
 				BB49B89721F5A8D100E32CF9 /* alarmModel.m */,
 				BB7D9B9E221EA71000C5DFD1 /* SharerModel.h */,
 				BB7D9B9F221EA71000C5DFD1 /* SharerModel.m */,
+				BBFF328A2269693900D1BA20 /* ClockModel.h */,
+				BBFF328B2269693900D1BA20 /* ClockModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3806,6 +3812,7 @@
 				BB63AACF222E05DC00DFC848 /* ConnectApNetController.m in Sources */,
 				BB6C8D20225C8DAF00FD6472 /* PlugOutletSettingController.m in Sources */,
 				BB2AC10921A94D63006DB83A /* AFURLRequestSerialization.m in Sources */,
+				BBFF328C2269693900D1BA20 /* ClockModel.m in Sources */,
 				36B8F16A22263FDE00652CFA /* ShareDeviceDetailCell.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
 				BB2AC0F121A8F156006DB83A /* ESPDataCode.m in Sources */,
@@ -4008,6 +4015,7 @@
 				BB3D754822523C23007DDFD6 /* DeviceShareController.m in Sources */,
 				BBA5944A224A2AB1009D5941 /* MemberAccountCell.m in Sources */,
 				BBA5944B224A2AB1009D5941 /* ESPGuideCode.m in Sources */,
+				BBFF328D2269693900D1BA20 /* ClockModel.m in Sources */,
 				BBA5944C224A2AB1009D5941 /* TherAddTimerSwitchCell.m in Sources */,
 				BBA5944D224A2AB1009D5941 /* HomeDeviceCell.m in Sources */,
 				BBA5944E224A2AB1009D5941 /* AFURLResponseSerialization.m in Sources */,

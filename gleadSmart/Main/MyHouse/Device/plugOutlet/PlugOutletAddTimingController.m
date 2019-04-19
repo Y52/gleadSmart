@@ -10,6 +10,7 @@
 #import "PlugOutletAddTimingCell.h"
 #import "WeekendNameCell.h"
 #import "PlugOutletWeekSeletController.h"
+#import "ClockModel.h"
 
 NSString *const CellIdentifier_PlugOutletAddTiming = @"CellID_PlugOutletAddTimingCell";
 NSString *const CellIdentifier_WeekendName = @"CellID_WeekendNameCell";
@@ -20,9 +21,10 @@ static float HEIGHT_CELL = 50.f;
 @property (strong, nonatomic) UIPickerView *TimePicker;
 @property (nonatomic, strong) NSMutableArray *HoursArray;
 @property (nonatomic, strong) NSMutableArray *SecondArray;
-@property (nonatomic, strong) NSMutableArray *weekArray;
 
 @property (strong, nonatomic) UITableView *AddTimingTable;
+
+@property (nonatomic, strong) ClockModel *clock;
 
 @end
 
@@ -35,6 +37,7 @@ static float HEIGHT_CELL = 50.f;
     [self setNavItem];
     self.TimePicker = [self TimePicker];
     self.AddTimingTable = [self AddTimingTable];
+    self.clock = [[ClockModel alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -50,22 +53,6 @@ static float HEIGHT_CELL = 50.f;
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,@0x01];
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
-}
-
-- (NSString *)getWeekString{
-    NSString *weekStr = @"";
-    if (self.weekArray.count <= 0) {
-        return weekStr;
-    }
-    for (int i = 0; i < self.weekArray.count; i++) {
-        NSString *week = self.weekArray[i];
-        weekStr = [weekStr stringByAppendingString:week];
-        weekStr = [weekStr stringByAppendingString:@"、"];
-    }
-    if (![weekStr isEqualToString:@""]) {
-        weekStr = [weekStr substringToIndex:weekStr.length-1];
-    }
-    return weekStr;
 }
 
 #pragma mark - setters and getters
@@ -200,7 +187,7 @@ static float HEIGHT_CELL = 50.f;
             }
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.leftLabel.text = LocalString(@"重复");
-            cell.rightLabel.text = [self getWeekString];
+            cell.rightLabel.text = [self.clock getWeekString];
             return cell;
         }
             break;
@@ -227,12 +214,9 @@ static float HEIGHT_CELL = 50.f;
         case 0:
         {
             PlugOutletWeekSeletController *WeekVC = [[PlugOutletWeekSeletController alloc] init];
-            WeekVC.popBlock = ^(NSMutableArray *week){
-                if (!self.weekArray) {
-                    self.weekArray = [[NSMutableArray alloc] init];
-                }
-                [self.weekArray removeAllObjects];
-                [self.weekArray addObjectsFromArray:week];
+            WeekVC.clock = self.clock;
+            WeekVC.popBlock = ^(ClockModel *clock){
+                self.clock = clock;
                 [self.AddTimingTable reloadData];
             };
             [self.navigationController pushViewController:WeekVC animated:YES];

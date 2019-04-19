@@ -8,6 +8,7 @@
 
 #import "PlugOutletWeekSeletController.h"
 #import "PlugOutletWeekSelectCell.h"
+#import "ClockModel.h"
 
 static float HEIGHT_HEADER = 20.f;
 NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWeekSelect";
@@ -21,13 +22,9 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
 @end
 
 @implementation PlugOutletWeekSeletController
-{
-    NSMutableArray *checkedWeekArray;
-}
 
 - (instancetype)init{
     if (self) {
-        self->checkedWeekArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -47,16 +44,14 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
 - (void)didMoveToParentViewController:(UIViewController *)parent{
     [super didMoveToParentViewController:parent];
     if (self.popBlock && !parent) {
-        self.popBlock(self->checkedWeekArray);
+        self.popBlock(self.clock);
     }
 }
-
 
 #pragma mark - Lazyload
 - (NSArray *)defaultWeekList{
     if (!_defaultWeekList) {
-        _defaultWeekList = @[@"星期日",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六"];
-        [checkedWeekArray addObjectsFromArray:_defaultWeekList];
+        _defaultWeekList = @[@"周日",@"周一",@"周二",@"周三",@"周四",@"周五",@"周六"];
     }
     return _defaultWeekList;
 }
@@ -88,7 +83,6 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     return _defaultWeekList.count;
 }
 
@@ -99,9 +93,14 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
         cell = [[PlugOutletWeekSelectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletWeekSelectCell];
     }
     cell.backgroundColor = [UIColor clearColor];
-    cell.tag = ySelect;
     cell.leftLabel.text = _defaultWeekList[indexPath.row];
-    cell.checkImage.image = [UIImage imageNamed:@"addFamily_check"];
+    if (self.clock.week & (0x40 >> indexPath.row)) {
+        cell.tag = ySelect;
+        cell.checkImage.image = [UIImage imageNamed:@"addFamily_check"];
+    }else{
+        cell.tag = yUnselect;
+        cell.checkImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
+    }
     return cell;
 }
 
@@ -112,16 +111,11 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
     if (cell.tag == yUnselect) {
         cell.tag = ySelect;
         cell.checkImage.image = [UIImage imageNamed:@"addFamily_check"];
-        [self->checkedWeekArray addObject:cell.leftLabel.text];
+        [self.clock setMyWeek:self.clock.week | (0x40 >> indexPath.row)];
     }else{
         cell.tag = yUnselect;
         cell.checkImage.image = [UIImage imageNamed:@"addFamily_uncheck"];
-        for (NSString *weekName in self->checkedWeekArray) {
-            if ([cell.leftLabel.text isEqualToString:weekName]) {
-                [self->checkedWeekArray removeObject:weekName];
-                break;
-            }
-        }
+        [self.clock setMyWeek:self.clock.week & ~(0x40 >> indexPath.row)];
     }
 }
 
