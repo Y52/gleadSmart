@@ -169,8 +169,8 @@ static float HEIGHT_CELL = 50.f;
 
 -(void)pickerViewLoaded: (NSInteger)component {
     NSUInteger max = 16384;
-    NSUInteger base10 = (max / 2) - (max / 2) % (component ? _hoursArray.count : _secondArray.count);
-    [_timePicker selectRow:[_timePicker selectedRowInComponent:component] % (component ? _hoursArray.count : _secondArray.count) + base10 inComponent:component animated:NO];
+    NSUInteger base10 = (max / 2) - (max / 2) % (component ? _secondArray.count : _hoursArray.count);
+    [_timePicker selectRow:[_timePicker selectedRowInComponent:component] % (component ? _secondArray.count : _hoursArray.count) + base10 inComponent:component animated:NO];
 }
 
 #pragma mark - UITableView delegate&datasource
@@ -223,7 +223,7 @@ static float HEIGHT_CELL = 50.f;
             WeekVC.clock = self.clock;
             WeekVC.popBlock = ^(ClockModel *clock){
                 self.clock = clock;
-                [self.AddTimingTable reloadData];
+                [self.addTimingTable reloadData];
             };
             [self.navigationController pushViewController:WeekVC animated:YES];
             
