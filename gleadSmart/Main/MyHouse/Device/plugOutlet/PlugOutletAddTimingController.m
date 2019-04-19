@@ -17,12 +17,12 @@ static float HEIGHT_CELL = 50.f;
 
 @interface PlugOutletAddTimingController () <UIPickerViewDataSource,UIPickerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
-@property (strong, nonatomic) UIPickerView *TimePicker;
-@property (nonatomic, strong) NSMutableArray *HoursArray;
-@property (nonatomic, strong) NSMutableArray *SecondArray;
+@property (strong, nonatomic) UIPickerView *timePicker;
+@property (nonatomic, strong) NSMutableArray *hoursArray;
+@property (nonatomic, strong) NSMutableArray *secondArray;
 @property (nonatomic, strong) NSMutableArray *weekArray;
 
-@property (strong, nonatomic) UITableView *AddTimingTable;
+@property (strong, nonatomic) UITableView *addTimingTable;
 
 @end
 
@@ -33,8 +33,8 @@ static float HEIGHT_CELL = 50.f;
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1.0].CGColor;
     [self setNavItem];
-    self.TimePicker = [self TimePicker];
-    self.AddTimingTable = [self AddTimingTable];
+    self.timePicker = [self timePicker];
+    self.addTimingTable = [self addTimingTable];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -83,9 +83,9 @@ static float HEIGHT_CELL = 50.f;
     
 }
 
--(UITableView *)AddTimingTable{
-    if (!_AddTimingTable) {
-        _AddTimingTable = ({
+-(UITableView *)addTimingTable{
+    if (!_addTimingTable) {
+        _addTimingTable = ({
             UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 245.f, ScreenWidth, HEIGHT_CELL * 2) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
@@ -101,38 +101,38 @@ static float HEIGHT_CELL = 50.f;
             tableView;
         });
     }
-    return _AddTimingTable;
+    return _addTimingTable;
 }
 
--(UIPickerView *)TimePicker{
-    if (!_TimePicker) {
-        _TimePicker = [[UIPickerView alloc] init];
-        _TimePicker.backgroundColor = [UIColor whiteColor];
-        self.HoursArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23"]];
-        self.SecondArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59"]];
-        self.TimePicker.dataSource = self;
-        self.TimePicker.delegate = self;
+-(UIPickerView *)timePicker{
+    if (!_timePicker) {
+        _timePicker = [[UIPickerView alloc] init];
+        _timePicker.backgroundColor = [UIColor whiteColor];
+        self.hoursArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23"]];
+        self.secondArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59"]];
+        self.timePicker.dataSource = self;
+        self.timePicker.delegate = self;
         //在当前选择上显示一个透明窗口
-        self.TimePicker.showsSelectionIndicator = YES;
+        self.timePicker.showsSelectionIndicator = YES;
         //初始化，自动转一圈，避免第一次是数组第一个值造成留白
-        [self.TimePicker selectRow:[self.HoursArray count]/2 inComponent:0 animated:YES];
-        [self.TimePicker selectRow:[self.SecondArray count]/2 inComponent:1 animated:YES];
-        [self.view addSubview:_TimePicker];
+        [self.timePicker selectRow:[self.hoursArray count] inComponent:0 animated:YES];
+        [self.timePicker selectRow:[self.secondArray count] inComponent:1 animated:YES];
+        [self.view addSubview:_timePicker];
         
-        [_TimePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_timePicker mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(ScreenWidth,195.f));
             make.top.equalTo(self.view.mas_top).offset(20.f);
             make.centerX.equalTo(self.view.mas_centerX);
         }];
     }
-    return _TimePicker;
+    return _timePicker;
 }
 
 //自定义pick view的字体和颜色
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel* pickerLabel = (UILabel*)view;
     if (!pickerLabel){
-        pickerLabel = [[UILabel alloc] init];
+        pickerLabel = [[UILabel alloc] initWithFrame:CGRectMake(12.0f, 0.0f, [pickerView rowSizeForComponent:component].width-12, [pickerView rowSizeForComponent:component].height)];
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
         [pickerLabel setFont:[UIFont boldSystemFontOfSize:18]];
@@ -162,22 +162,28 @@ static float HEIGHT_CELL = 50.f;
 // 返回多少行
 - (NSInteger)pickerView:(UIPickerView *)pickerView  numberOfRowsInComponent:(NSInteger)component
 {
-    if (component == 0){
-        return self.HoursArray.count;
-    }else{
-        return self.SecondArray.count;
-    }
+    return 16384;
 }
 
 // 返回的是component列的行显示的内容
 - (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
     if (component == 0){
-        return self.HoursArray[row];
+        return self.hoursArray[row % _hoursArray.count];
     }else{
-        return self.SecondArray[row];
+        return self.secondArray[row % _secondArray.count];
     }
     
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component  {
+    [self pickerViewLoaded:component];
+}
+
+-(void)pickerViewLoaded: (NSInteger)component {
+    NSUInteger max = 16384;
+    NSUInteger base10 = (max / 2) - (max / 2) % (component ? _hoursArray.count : _secondArray.count);
+    [_timePicker selectRow:[_timePicker selectedRowInComponent:component] % (component ? _hoursArray.count : _secondArray.count) + base10 inComponent:component animated:NO];
 }
 
 #pragma mark - UITableView delegate&datasource
@@ -211,9 +217,9 @@ static float HEIGHT_CELL = 50.f;
             if (cell == nil) {
                 cell = [[PlugOutletAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletAddTiming];
             }
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             cell.leftName.text = LocalString(@"开关");
             cell.timeSwitch.on = YES;
-            
             return cell;
         }
             break;
@@ -233,7 +239,7 @@ static float HEIGHT_CELL = 50.f;
                 }
                 [self.weekArray removeAllObjects];
                 [self.weekArray addObjectsFromArray:week];
-                [self.AddTimingTable reloadData];
+                [self.addTimingTable reloadData];
             };
             [self.navigationController pushViewController:WeekVC animated:YES];
             

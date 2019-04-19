@@ -105,8 +105,8 @@ static float HEIGHT_FOOT = 20.f;
 
 @interface PlugOutletTimingController () <UITableViewDataSource,UITableViewDelegate>
 
-@property (strong, nonatomic) UITableView *TimingTable;
-@property (nonatomic, strong) UIButton *AddTimingBtn;
+@property (strong, nonatomic) UITableView *timingTable;
+@property (nonatomic, strong) UIButton *addTimingBtn;
 
 @property (nonatomic, strong) NSMutableArray *clockList;
 
@@ -120,8 +120,8 @@ static float HEIGHT_FOOT = 20.f;
     self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
     self.navigationItem.title = LocalString(@"添加设备");
     
-    self.TimingTable = [self TimingTable];
-    self.AddTimingBtn = [self AddTimingBtn];
+    self.timingTable = [self timingTable];
+    self.addTimingBtn = [self addTimingBtn];
     [self getClockListBySocket];
 }
 
@@ -182,14 +182,14 @@ static float HEIGHT_FOOT = 20.f;
         }
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.TimingTable reloadData];
+        [self.timingTable reloadData];
     });
 }
 
 #pragma mark - setters and getters
-- (UITableView *)TimingTable{
-    if (!_TimingTable) {
-        _TimingTable = ({
+- (UITableView *)timingTable{
+    if (!_timingTable) {
+        _timingTable = ({
             TouchTableView *tableView = [[TouchTableView alloc] initWithFrame:CGRectMake(0.f, 0.f, ScreenWidth, ScreenHeight - getRectNavAndStatusHight)];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
@@ -206,28 +206,28 @@ static float HEIGHT_FOOT = 20.f;
             tableView;
         });
     }
-    return _TimingTable;
+    return _timingTable;
 }
 
-- (UIButton *)AddTimingBtn{
-    if (!_AddTimingBtn) {
-        _AddTimingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_AddTimingBtn setTitle:LocalString(@"添加定时") forState:UIControlStateNormal];
-        [_AddTimingBtn setTitleColor:[UIColor colorWithHexString:@"639DF8"] forState:UIControlStateNormal];
-        [_AddTimingBtn setBackgroundColor:[UIColor whiteColor]];
-        [_AddTimingBtn addTarget:self action:@selector(addTiming) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_AddTimingBtn];
-        [_AddTimingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UIButton *)addTimingBtn{
+    if (!_addTimingBtn) {
+        _addTimingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_addTimingBtn setTitle:LocalString(@"添加定时") forState:UIControlStateNormal];
+        [_addTimingBtn setTitleColor:[UIColor colorWithHexString:@"639DF8"] forState:UIControlStateNormal];
+        [_addTimingBtn setBackgroundColor:[UIColor whiteColor]];
+        [_addTimingBtn addTarget:self action:@selector(addTiming) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_addTimingBtn];
+        [_addTimingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(276.f), 44.f));
             make.centerX.equalTo(self.view.mas_centerX);
             make.top.equalTo(self.view.mas_bottom).offset(-100.f);
         }];
-        _AddTimingBtn.layer.cornerRadius = 22.f;
-        _AddTimingBtn.layer.borderWidth = 1.f;
-        _AddTimingBtn.layer.borderColor = [UIColor colorWithHexString:@"3987F8"].CGColor;
+        _addTimingBtn.layer.cornerRadius = 22.f;
+        _addTimingBtn.layer.borderWidth = 1.f;
+        _addTimingBtn.layer.borderColor = [UIColor colorWithHexString:@"3987F8"].CGColor;
         
     }
-    return _AddTimingBtn;
+    return _addTimingBtn;
 }
 
 #pragma mark - UITableView delegate&datasource

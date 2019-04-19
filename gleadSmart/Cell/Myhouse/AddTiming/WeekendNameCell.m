@@ -36,7 +36,7 @@
             _rightLabel.adjustsFontSizeToFitWidth = YES;
             [self.contentView addSubview:_rightLabel];
             [_rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(ScreenWidth - 60, 30));
+                make.size.mas_equalTo(CGSizeMake(ScreenWidth - 100, 30));
                 make.centerY.equalTo(self.contentView.mas_centerY);
                 make.right.equalTo(self.contentView.mas_right);
             }];
