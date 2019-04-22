@@ -69,7 +69,14 @@ static float HEIGHT_FOOT = 20.f;
     PlugOutletAddTimingController *addVC = [[PlugOutletAddTimingController alloc] init];
     addVC.device = self.device;
     addVC.clock = [[ClockModel alloc] init];
-    addVC.clock.number = (int)self.clockList.count;
+    for (int i = 0; i < self.clockList.count; i++) {
+        ClockModel *clock = self.clockList[i];
+        if (addVC.clock.number == clock.number) {
+            addVC.clock.number++;
+        }else{
+            break;
+        }
+    }
     [self.navigationController pushViewController:addVC animated:YES];
 }
 
@@ -91,6 +98,7 @@ static float HEIGHT_FOOT = 20.f;
                 continue;
             }
             ClockModel *clock = [[ClockModel alloc] init];
+            clock.number = [frame[12+i*6] intValue] & 0x0f;
             if ([frame[13+i*6] intValue] == 1) {
                 clock.isOn = YES;
             }else{

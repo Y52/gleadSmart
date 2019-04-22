@@ -14,6 +14,7 @@
     self = [super init];
     if (self) {
         self.week = 0x80;
+        self.number = 0;
     }
     return self;
 }

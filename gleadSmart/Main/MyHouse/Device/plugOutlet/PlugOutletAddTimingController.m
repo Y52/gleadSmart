@@ -127,8 +127,16 @@ static bool plugSeted = NO;
     if (!_timePicker) {
         _timePicker = [[UIPickerView alloc] init];
         _timePicker.backgroundColor = [UIColor whiteColor];
-        self.hoursArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23"]];
-        self.minutesArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59"]];
+        self.hoursArray = [[NSMutableArray alloc] init];
+        self.minutesArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 24; i++) {
+            [self.hoursArray addObject:[NSString stringWithFormat:@"%02d",i]];
+        }
+        for (int i = 0; i < 60; i++) {
+            [self.minutesArray addObject:[NSString stringWithFormat:@"%02d",i]];
+        }
+        //self.hoursArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23"]];
+        //self.minutesArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59"]];
         self.timePicker.dataSource = self;
         self.timePicker.delegate = self;
         //在当前选择上显示一个透明窗口
@@ -201,13 +209,13 @@ static bool plugSeted = NO;
 
 -(void)pickerViewLoaded: (NSInteger)component {
     NSUInteger max = 16384;
-    NSUInteger base10 = (max / 2) - (max / 2) % (component ? _secondArray.count : _hoursArray.count);
-    [_timePicker selectRow:[_timePicker selectedRowInComponent:component] % (component ? _secondArray.count : _hoursArray.count) + base10 inComponent:component animated:NO];
+    NSUInteger base10 = (max / 2) - (max / 2) % (component ? _minutesArray.count : _hoursArray.count);
+    [_timePicker selectRow:[_timePicker selectedRowInComponent:component] % (component ? _minutesArray.count : _hoursArray.count) + base10 inComponent:component animated:NO];
     
     if (component == 0) {
         self.clock.hour = (int)[_timePicker selectedRowInComponent:component] % _hoursArray.count;
     }else{
-        self.clock.minute = (int)[_timePicker selectedRowInComponent:component] % _secondArray.count;
+        self.clock.minute = (int)[_timePicker selectedRowInComponent:component] % _minutesArray.count;
     }
 }
 
