@@ -20,7 +20,7 @@ static float HEIGHT_CELL = 50.f;
 
 @property (strong, nonatomic) UIPickerView *timePicker;
 @property (nonatomic, strong) NSMutableArray *hoursArray;
-@property (nonatomic, strong) NSMutableArray *secondArray;
+@property (nonatomic, strong) NSMutableArray *minutesArray;
 @property (nonatomic, strong) NSMutableArray *weekArray;
 
 @property (strong, nonatomic) UITableView *addTimingTable;
@@ -97,14 +97,14 @@ static float HEIGHT_CELL = 50.f;
         _timePicker = [[UIPickerView alloc] init];
         _timePicker.backgroundColor = [UIColor whiteColor];
         self.hoursArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23"]];
-        self.secondArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59"]];
+        self.minutesArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59"]];
         self.timePicker.dataSource = self;
         self.timePicker.delegate = self;
         //在当前选择上显示一个透明窗口
         self.timePicker.showsSelectionIndicator = YES;
         //初始化，自动转一圈，避免第一次是数组第一个值造成留白
         [self.timePicker selectRow:[self.hoursArray count] inComponent:0 animated:YES];
-        [self.timePicker selectRow:[self.secondArray count] inComponent:1 animated:YES];
+        [self.timePicker selectRow:[self.minutesArray count] inComponent:1 animated:YES];
         [self.view addSubview:_timePicker];
         
         [_timePicker mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,7 +159,7 @@ static float HEIGHT_CELL = 50.f;
     if (component == 0){
         return self.hoursArray[row % _hoursArray.count];
     }else{
-        return self.secondArray[row % _secondArray.count];
+        return self.minutesArray[row % _minutesArray.count];
     }
     
 }
@@ -170,8 +170,8 @@ static float HEIGHT_CELL = 50.f;
 
 -(void)pickerViewLoaded: (NSInteger)component {
     NSUInteger max = 16384;
-    NSUInteger base10 = (max / 2) - (max / 2) % (component ? _secondArray.count : _hoursArray.count);
-    [_timePicker selectRow:[_timePicker selectedRowInComponent:component] % (component ? _secondArray.count : _hoursArray.count) + base10 inComponent:component animated:NO];
+    NSUInteger base10 = (max / 2) - (max / 2) % (component ? _minutesArray.count : _hoursArray.count);
+    [_timePicker selectRow:[_timePicker selectedRowInComponent:component] % (component ? _minutesArray.count : _hoursArray.count) + base10 inComponent:component animated:NO];
 }
 
 #pragma mark - UITableView delegate&datasource
