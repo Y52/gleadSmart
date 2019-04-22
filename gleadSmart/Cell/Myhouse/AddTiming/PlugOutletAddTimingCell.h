@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^switchBlock)(BOOL isOn);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PlugOutletAddTimingCell : UITableViewCell
@@ -15,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UILabel *leftName;
 @property (strong, nonatomic) UILabel *rightName;
 @property (strong, nonatomic) UISwitch *timeSwitch;
+@property (nonatomic, strong) switchBlock switchBlock;
 
 @end
 

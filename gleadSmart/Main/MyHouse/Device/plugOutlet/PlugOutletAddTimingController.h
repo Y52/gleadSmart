@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ClockModel;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PlugOutletAddTimingController : UIViewController
 
 @property (nonatomic, strong) DeviceModel *device;
+@property (nonatomic, strong) ClockModel *clock;
 
 @end
 

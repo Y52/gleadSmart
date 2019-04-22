@@ -63,7 +63,9 @@
 
 
 - (void)switchAction{
-    NSLog(@"打开开关");
+    if (self.switchBlock) {
+        self.switchBlock(self.timeSwitch.isOn);
+    }
 }
 
 @end

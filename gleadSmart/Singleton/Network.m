@@ -1827,6 +1827,7 @@ static int noUserInteractionHeartbeat = 0;
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 NSLog(@"设置wifi智能插座的闹钟");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetClock" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"设置wifi智能插座的闹钟项列表");

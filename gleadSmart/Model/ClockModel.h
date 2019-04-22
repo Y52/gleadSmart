@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ClockModel : NSObject
 
+@property (nonatomic) int number;
 @property (nonatomic) int week;
 @property (nonatomic) int hour;
 @property (nonatomic) int minute;

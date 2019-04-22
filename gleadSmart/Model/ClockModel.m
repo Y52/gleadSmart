@@ -9,6 +9,15 @@
 #import "ClockModel.h"
 
 @implementation ClockModel
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.week = 0x80;
+    }
+    return self;
+}
+
 -(void)setMyWeek:(int)week{
     if (week & 0x7f) {
         //有选择某一天

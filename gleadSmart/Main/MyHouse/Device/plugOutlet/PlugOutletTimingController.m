@@ -36,7 +36,6 @@ static float HEIGHT_FOOT = 20.f;
     
     self.timingTable = [self timingTable];
     self.addTimingBtn = [self addTimingBtn];
-    [self getClockListBySocket];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -45,7 +44,7 @@ static float HEIGHT_FOOT = 20.f;
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getClockList:) name:@"getClockList" object:nil];
-    
+    [self getClockListBySocket];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -60,8 +59,17 @@ static float HEIGHT_FOOT = 20.f;
 }
 
 - (void)addTiming{
+    if (self.clockList.count >= 4) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"定时器数量已经达到额度") message:LocalString(@"请先删除一个定时再添加") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
     PlugOutletAddTimingController *addVC = [[PlugOutletAddTimingController alloc] init];
     addVC.device = self.device;
+    addVC.clock = [[ClockModel alloc] init];
+    addVC.clock.number = (int)self.clockList.count;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

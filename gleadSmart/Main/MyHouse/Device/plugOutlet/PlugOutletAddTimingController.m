@@ -25,7 +25,6 @@ static float HEIGHT_CELL = 50.f;
 
 @property (strong, nonatomic) UITableView *addTimingTable;
 
-@property (nonatomic, strong) ClockModel *clock;
 
 @end
 
@@ -38,7 +37,6 @@ static float HEIGHT_CELL = 50.f;
     [self setNavItem];
     self.timePicker = [self timePicker];
     self.addTimingTable = [self addTimingTable];
-    self.clock = [[ClockModel alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -46,14 +44,47 @@ static float HEIGHT_CELL = 50.f;
     self.navigationController.navigationBar.translucent = NO;
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plugoutSetClock) name:@"plugoutSetClock" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"plugoutSetClock" object:nil];
 }
 
 #pragma mark - private methods
 - (void)setClockListBySocket{
     UInt8 controlCode = 0x01;
-    NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,@0x01];
+    NSNumber *A = [NSNumber numberWithInt:self.clock.number];
+    NSNumber *B = @1;
+    NSNumber *C = [NSNumber numberWithInt:self.clock.week];
+    NSNumber *D = [NSNumber numberWithInt:self.clock.hour];
+    NSNumber *E = [NSNumber numberWithInt:self.clock.minute];
+    NSNumber *F = [NSNumber numberWithBool:self.clock.isOn];
+    NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,A,B,C,D,E,F];
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
+    
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        //异步等待4秒，如果未收到信息做如下处理
+        sleep(4);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (plugSeted == NO) {
+                [SVProgressHUD dismiss];
+                [NSObject showHudTipStr:LocalString(@"设置失败，请重试")];
+            }
+        });
+    });
+}
+
+#pragma mark - notification
+static bool plugSeted = NO;
+- (void)plugoutSetClock{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+        plugSeted = YES;
+        [self.navigationController popViewControllerAnimated:YES];
+    });
 }
 
 #pragma mark - setters and getters
@@ -65,7 +96,7 @@ static float HEIGHT_CELL = 50.f;
     [rightButton setTitle:@"保存" forState:UIControlStateNormal];
     [rightButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
     [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(saveClock) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton addTarget:self action:@selector(setClockListBySocket) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
@@ -172,6 +203,12 @@ static float HEIGHT_CELL = 50.f;
     NSUInteger max = 16384;
     NSUInteger base10 = (max / 2) - (max / 2) % (component ? _secondArray.count : _hoursArray.count);
     [_timePicker selectRow:[_timePicker selectedRowInComponent:component] % (component ? _secondArray.count : _hoursArray.count) + base10 inComponent:component animated:NO];
+    
+    if (component == 0) {
+        self.clock.hour = (int)[_timePicker selectedRowInComponent:component] % _hoursArray.count;
+    }else{
+        self.clock.minute = (int)[_timePicker selectedRowInComponent:component] % _secondArray.count;
+    }
 }
 
 #pragma mark - UITableView delegate&datasource
@@ -208,6 +245,10 @@ static float HEIGHT_CELL = 50.f;
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             cell.leftName.text = LocalString(@"开关");
             cell.timeSwitch.on = YES;
+            self.clock.isOn = YES;
+            cell.switchBlock = ^(BOOL isOn) {
+                self.clock.isOn = isOn;
+            };
             return cell;
         }
             break;
@@ -248,9 +289,4 @@ static float HEIGHT_CELL = 50.f;
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0;
 }
-
-- (void)saveClock{
-    
-}
-
 @end
