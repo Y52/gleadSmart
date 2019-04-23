@@ -117,7 +117,7 @@
 
 #pragma mark - setters and getters
 - (void)setNavItem{
-    self.navigationItem.title = LocalString(@"客厅插座");
+    self.navigationItem.title = LocalString(@"插座");
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 30, 30);

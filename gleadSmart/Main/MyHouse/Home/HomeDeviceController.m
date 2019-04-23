@@ -12,6 +12,7 @@
 #import "WirelessValveController.h"
 #import "ShareDeviceListController.h"
 #import "PlugOutletController.h"
+#import "MulSwitchController.h"
 
 NSString *const CellIdentifier_HomeDevice = @"CellID_HomeDevice";
 static CGFloat const Cell_Height = 72.f;
@@ -426,6 +427,12 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
+        case DeviceMulSwitch:
+        {
+            
+        }
+            break;
+            
         default:
             break;
     }
@@ -506,6 +513,12 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
+        case DeviceMulSwitch:
+        {
+            
+        }
+            break;
+            
         default:
             break;
     }
@@ -542,10 +555,23 @@ static CGFloat const Cell_Height = 72.f;
                     
                 case DevicePlugOutlet:
                 {
+                    MulSwitchController *switchVC = [[MulSwitchController alloc] init];
+                    switchVC.device = device;
+                    [self.navigationController pushViewController:switchVC animated:YES];
+                    return;
                     PlugOutletController *plugVC = [[PlugOutletController alloc] init];
                     plugVC.device = device;
                     [self.navigationController pushViewController:plugVC animated:YES];
                 }
+                    break;
+                    
+                case DeviceMulSwitch:
+                {
+                    MulSwitchController *switchVC = [[MulSwitchController alloc] init];
+                    switchVC.device = device;
+                    [self.navigationController pushViewController:switchVC animated:YES];
+                }
+                    break;
                     
                 default:
                     break;
@@ -586,6 +612,13 @@ static CGFloat const Cell_Height = 72.f;
                     plugVC.device = device;
                     [self.navigationController pushViewController:plugVC animated:YES];
                 }
+                    break;
+                    
+                case DeviceMulSwitch:
+                {
+                    
+                }
+                    break;
                     
                 default:
                     break;

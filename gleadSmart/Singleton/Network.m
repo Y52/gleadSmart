@@ -899,6 +899,9 @@ static int noUserInteractionHeartbeat = 0;
     if (macByte2 >= 0x38 && macByte2 <= 0x3F) {
         return DevicePlugOutlet;
     }
+    if (macByte2 >= 0x48 && macByte2 <= 0x4F) {
+        return DeviceMulSwitch;
+    }
     return DeviceCenterlControl;
 }
 

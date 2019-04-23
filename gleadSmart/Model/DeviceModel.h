@@ -16,7 +16,8 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
     DeviceThermostat = 1,
     DeviceValve = 2,
     DeviceWallhob = 3,
-    DevicePlugOutlet = 4
+    DevicePlugOutlet = 4,
+    DeviceMulSwitch = 5
 };
 
 @interface DeviceModel : NSObject
