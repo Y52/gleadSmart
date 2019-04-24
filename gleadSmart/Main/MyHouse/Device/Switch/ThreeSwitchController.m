@@ -1,18 +1,19 @@
 //
-//  MulSwitchController.m
+//  ThreeSwitchController.m
 //  gleadSmart
 //
-//  Created by 杭州轨物科技有限公司 on 2019/4/23.
-//  Copyright © 2019年 杭州轨物科技有限公司. All rights reserved.
+//  Created by 安建伟 on 2019/4/24.
+//  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "MulSwitchController.h"
+#import "ThreeSwitchController.h"
 #import "DeviceSettingController.h"
 #import "MulSwitchTimingSetingController.h"
 
 #define buttonGap ((ScreenWidth - 51*4)/5)
 
-@interface MulSwitchController ()
+@interface ThreeSwitchController ()
+
 @property (nonatomic, strong) UIView *mulSwitchView;
 @property (nonatomic, strong) UIView *mulSwitchCloth;
 
@@ -23,15 +24,15 @@
 
 @end
 
-@implementation MulSwitchController
+@implementation ThreeSwitchController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1.0].CGColor;
     [self setNavItem];
-
+    
     self.mulSwitchView = [self mulSwitchView];
-    self.mulSwitchCloth = [self mulSwitchCloth_4];
+    self.mulSwitchCloth = [self mulSwitchCloth_3];
     self.openAllButton = [self openAllButton];
     self.timeButton = [self timeButton];
     //self.delayButton = [self delayButton];不要了
@@ -124,7 +125,7 @@
         _mulSwitchView.layer.shadowOffset = CGSizeMake(0,9);
         _mulSwitchView.layer.shadowOpacity = 1;
         _mulSwitchView.layer.shadowRadius = 12;
-
+        
         
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_switchback_back"]];
         image.frame = CGRectMake(0, 0, yAutoFit(290.f), 280.f);
@@ -134,12 +135,12 @@
     return _mulSwitchView;
 }
 
-- (UIView *)mulSwitchCloth_4{
+- (UIView *)mulSwitchCloth_3{
     if (!_mulSwitchCloth) {
         _mulSwitchCloth = [[UIView alloc] init];
         [_mulSwitchView addSubview:_mulSwitchCloth];
         [_mulSwitchCloth mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(270.f), 120.f));
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(202.5f), 120.f));
             make.centerX.equalTo(self.mulSwitchView.mas_centerX);
             make.centerY.equalTo(self.mulSwitchView.mas_centerY);
         }];
@@ -149,15 +150,15 @@
         _mulSwitchCloth.layer.shadowOpacity = 1;
         _mulSwitchCloth.layer.shadowRadius = 25;
         _mulSwitchCloth.layer.cornerRadius = 2.5;
-
-        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_4switch_back"]];
-        image.frame = CGRectMake(0, 0, yAutoFit(270.f), 120.f);
+        
+        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_3switch_back"]];
+        image.frame = CGRectMake(0, 0, yAutoFit(202.5f), 120.f);
         image.contentMode = UIViewContentModeScaleAspectFit;
         [_mulSwitchCloth addSubview:image];
-        //分开四路开关
-        for (int i = 0; i < 4; i++) {
+        //分开三路开关
+        for (int i = 0; i < 3; i++) {
             UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            switchButton.frame = CGRectMake(i*(yAutoFit(270.f)/4), 0, yAutoFit(270.f)/4, 120.f);
+            switchButton.frame = CGRectMake(i*(yAutoFit(202.5f)/3), 0, yAutoFit(202.5f)/3, 120.f);
             switchButton.tag = yUnselect;
             [switchButton setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
             [switchButton.imageView setClipsToBounds:YES];

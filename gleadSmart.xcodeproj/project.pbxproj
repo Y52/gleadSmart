@@ -54,6 +54,9 @@
 		36FF8E692270472300FAB5DE /* MulSwitchAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FF8E682270472300FAB5DE /* MulSwitchAddTimingCell.m */; };
 		36FF8E6C2270496000FAB5DE /* MulSwitchWeekSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FF8E6B2270496000FAB5DE /* MulSwitchWeekSelectCell.m */; };
 		36FF8E7022704D9E00FAB5DE /* MulSwitchWeekSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FF8E6F22704D9E00FAB5DE /* MulSwitchWeekSelectController.m */; };
+		36FF8E7322706B8500FAB5DE /* OneSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FF8E7222706B8500FAB5DE /* OneSwitchController.m */; };
+		36FF8E7622706BD600FAB5DE /* TwoSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FF8E7522706BD600FAB5DE /* TwoSwitchController.m */; };
+		36FF8E7922706C0C00FAB5DE /* ThreeSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FF8E7822706C0C00FAB5DE /* ThreeSwitchController.m */; };
 		3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */; };
 		3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBB21A7E75100EA8F1C /* HomeManagementCell.m */; };
 		3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AFFBE21A7E7EA00EA8F1C /* AddFamilyViewController.m */; };
@@ -1133,6 +1136,12 @@
 		36FF8E6D22704BF500FAB5DE /* PlugOutletWeekSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletWeekSelectController.h; sourceTree = "<group>"; };
 		36FF8E6E22704D9E00FAB5DE /* MulSwitchWeekSelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MulSwitchWeekSelectController.h; sourceTree = "<group>"; };
 		36FF8E6F22704D9E00FAB5DE /* MulSwitchWeekSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MulSwitchWeekSelectController.m; sourceTree = "<group>"; };
+		36FF8E7122706B8500FAB5DE /* OneSwitchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneSwitchController.h; sourceTree = "<group>"; };
+		36FF8E7222706B8500FAB5DE /* OneSwitchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneSwitchController.m; sourceTree = "<group>"; };
+		36FF8E7422706BD600FAB5DE /* TwoSwitchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwoSwitchController.h; sourceTree = "<group>"; };
+		36FF8E7522706BD600FAB5DE /* TwoSwitchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwoSwitchController.m; sourceTree = "<group>"; };
+		36FF8E7722706C0C00FAB5DE /* ThreeSwitchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreeSwitchController.h; sourceTree = "<group>"; };
+		36FF8E7822706C0C00FAB5DE /* ThreeSwitchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreeSwitchController.m; sourceTree = "<group>"; };
 		3A5C98FE5F855BF995BC4CC2 /* Pods-jienuoIOT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jienuoIOT.release.xcconfig"; path = "Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT.release.xcconfig"; sourceTree = "<group>"; };
 		3E3AFFB821A7E74800EA8F1C /* HouseManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseManagementTableViewCell.h; sourceTree = "<group>"; };
 		3E3AFFB921A7E74900EA8F1C /* HouseManagementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseManagementTableViewCell.m; sourceTree = "<group>"; };
@@ -2942,6 +2951,12 @@
 			children = (
 				BBA26E3A226EF61200C5C0F4 /* MulSwitchController.h */,
 				BBA26E3B226EF61200C5C0F4 /* MulSwitchController.m */,
+				36FF8E7122706B8500FAB5DE /* OneSwitchController.h */,
+				36FF8E7222706B8500FAB5DE /* OneSwitchController.m */,
+				36FF8E7422706BD600FAB5DE /* TwoSwitchController.h */,
+				36FF8E7522706BD600FAB5DE /* TwoSwitchController.m */,
+				36FF8E7722706C0C00FAB5DE /* ThreeSwitchController.h */,
+				36FF8E7822706C0C00FAB5DE /* ThreeSwitchController.m */,
 				36FF8E542270187200FAB5DE /* MulSwitchTimingSetingController.h */,
 				36FF8E552270187200FAB5DE /* MulSwitchTimingSetingController.m */,
 				36FF8E512270161300FAB5DE /* MulSwitchTimingController.h */,
@@ -4016,6 +4031,7 @@
 				BB6739DB22326801002E6239 /* NoHouseBridgingController.m in Sources */,
 				BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */,
 				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
+				36FF8E7322706B8500FAB5DE /* OneSwitchController.m in Sources */,
 				BB62E4E121B517F100C0FA39 /* TherWeekProgramCell.m in Sources */,
 				BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */,
 				BB37DF1821A7FCBF00B2121B /* DeviceModel.m in Sources */,
@@ -4043,6 +4059,7 @@
 				BB2AC0F421A8F156006DB83A /* ESPDatumCode.m in Sources */,
 				BBF8CAF12216A4650030E921 /* FamilyMemberInfoCell.m in Sources */,
 				BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */,
+				36FF8E7622706BD600FAB5DE /* TwoSwitchController.m in Sources */,
 				3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
 				BB2AD7A121AD70D6006DB83A /* HouseSettingController.m in Sources */,
@@ -4058,6 +4075,7 @@
 				BB49B89821F5A8D100E32CF9 /* alarmModel.m in Sources */,
 				BB45BC4A21EF259E00504FF8 /* AddMemberController.m in Sources */,
 				BB5CDC8521EC26F300C2B6FA /* YRabbitMQ.m in Sources */,
+				36FF8E7922706C0C00FAB5DE /* ThreeSwitchController.m in Sources */,
 				36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */,
 				BBF6326E21BBC472006A23AC /* NodeInfoCell.m in Sources */,
 				36E4F69022674DCA006A9E6D /* PlugOutletTimingController.m in Sources */,

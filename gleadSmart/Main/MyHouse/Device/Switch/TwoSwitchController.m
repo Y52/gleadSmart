@@ -1,18 +1,19 @@
 //
-//  MulSwitchController.m
+//  TwoSwitchController.m
 //  gleadSmart
 //
-//  Created by 杭州轨物科技有限公司 on 2019/4/23.
-//  Copyright © 2019年 杭州轨物科技有限公司. All rights reserved.
+//  Created by 安建伟 on 2019/4/24.
+//  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "MulSwitchController.h"
+#import "TwoSwitchController.h"
 #import "DeviceSettingController.h"
 #import "MulSwitchTimingSetingController.h"
 
 #define buttonGap ((ScreenWidth - 51*4)/5)
 
-@interface MulSwitchController ()
+@interface TwoSwitchController ()
+
 @property (nonatomic, strong) UIView *mulSwitchView;
 @property (nonatomic, strong) UIView *mulSwitchCloth;
 
@@ -23,15 +24,15 @@
 
 @end
 
-@implementation MulSwitchController
+@implementation TwoSwitchController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1.0].CGColor;
     [self setNavItem];
-
+    
     self.mulSwitchView = [self mulSwitchView];
-    self.mulSwitchCloth = [self mulSwitchCloth_4];
+    self.mulSwitchCloth = [self mulSwitchCloth_2];
     self.openAllButton = [self openAllButton];
     self.timeButton = [self timeButton];
     //self.delayButton = [self delayButton];不要了
@@ -77,15 +78,17 @@
     
 }
 
+
 - (void)switchClick:(UIButton *)sender{
     if (sender.tag == yUnselect) {
         sender.tag = ySelect;
-        [sender setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"img_switch2_on"] forState:UIControlStateNormal];
     }else{
         sender.tag = yUnselect;
-        [sender setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"img_switch2_off"] forState:UIControlStateNormal];
     }
 }
+
 
 #pragma mark - setters & getters
 - (void)setBackgroundColor{
@@ -124,7 +127,7 @@
         _mulSwitchView.layer.shadowOffset = CGSizeMake(0,9);
         _mulSwitchView.layer.shadowOpacity = 1;
         _mulSwitchView.layer.shadowRadius = 12;
-
+        
         
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_switchback_back"]];
         image.frame = CGRectMake(0, 0, yAutoFit(290.f), 280.f);
@@ -134,7 +137,7 @@
     return _mulSwitchView;
 }
 
-- (UIView *)mulSwitchCloth_4{
+- (UIView *)mulSwitchCloth_2{
     if (!_mulSwitchCloth) {
         _mulSwitchCloth = [[UIView alloc] init];
         [_mulSwitchView addSubview:_mulSwitchCloth];
@@ -149,17 +152,17 @@
         _mulSwitchCloth.layer.shadowOpacity = 1;
         _mulSwitchCloth.layer.shadowRadius = 25;
         _mulSwitchCloth.layer.cornerRadius = 2.5;
-
+        
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_4switch_back"]];
         image.frame = CGRectMake(0, 0, yAutoFit(270.f), 120.f);
         image.contentMode = UIViewContentModeScaleAspectFit;
         [_mulSwitchCloth addSubview:image];
-        //分开四路开关
-        for (int i = 0; i < 4; i++) {
+        //分开两路开关
+        for (int i = 0; i < 2; i++) {
             UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            switchButton.frame = CGRectMake(i*(yAutoFit(270.f)/4), 0, yAutoFit(270.f)/4, 120.f);
+            switchButton.frame = CGRectMake(i*(yAutoFit(270.f)/2), 0, yAutoFit(270.f)/2, 120.f);
             switchButton.tag = yUnselect;
-            [switchButton setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+            [switchButton setImage:[UIImage imageNamed:@"img_switch2_off"] forState:UIControlStateNormal];
             [switchButton.imageView setClipsToBounds:YES];
             switchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
             [switchButton addTarget:self action:@selector(switchClick:) forControlEvents:UIControlEventTouchUpInside];

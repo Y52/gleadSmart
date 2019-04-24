@@ -13,6 +13,9 @@
 #import "ShareDeviceListController.h"
 #import "PlugOutletController.h"
 #import "MulSwitchController.h"
+#import "OneSwitchController.h"
+#import "TwoSwitchController.h"
+#import "ThreeSwitchController.h"
 
 NSString *const CellIdentifier_HomeDevice = @"CellID_HomeDevice";
 static CGFloat const Cell_Height = 72.f;
@@ -558,6 +561,17 @@ static CGFloat const Cell_Height = 72.f;
                     MulSwitchController *switchVC = [[MulSwitchController alloc] init];
                     switchVC.device = device;
                     [self.navigationController pushViewController:switchVC animated:YES];
+//                    OneSwitchController *switchVC = [[OneSwitchController alloc] init];
+//                    switchVC.device = device;
+//                    [self.navigationController pushViewController:switchVC animated:YES];
+//
+//                    TwoSwitchController *switchVC = [[TwoSwitchController alloc] init];
+//                    switchVC.device = device;
+//                    [self.navigationController pushViewController:switchVC animated:YES];
+//
+//                    ThreeSwitchController *switchVC = [[ThreeSwitchController alloc] init];
+//                    switchVC.device = device;
+//                    [self.navigationController pushViewController:switchVC animated:YES];
                     return;
                     PlugOutletController *plugVC = [[PlugOutletController alloc] init];
                     plugVC.device = device;
