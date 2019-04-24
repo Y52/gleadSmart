@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^popBlock)(ClockModel *clock);
 
-@interface PlugOutletWeekSeletController : UIViewController
+@interface PlugOutletWeekSelectController : UIViewController
 
 @property (nonatomic) popBlock popBlock;
 @property (nonatomic, strong) ClockModel *clock;

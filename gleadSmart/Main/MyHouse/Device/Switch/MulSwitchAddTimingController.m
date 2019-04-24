@@ -1,22 +1,22 @@
 //
-//  PlugOutletAddTimingController.m
+//  MulSwitchAddTimingController.m
 //  gleadSmart
 //
-//  Created by 安建伟 on 2019/4/17.
+//  Created by 安建伟 on 2019/4/24.
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "PlugOutletAddTimingController.h"
-#import "PlugOutletAddTimingCell.h"
+#import "MulSwitchAddTimingController.h"
+#import "MulSwitchAddTimingCell.h"
 #import "WeekendNameCell.h"
-#import "PlugOutletWeekSelectController.h"
+#import "MulSwitchWeekSelectController.h"
 #import "ClockModel.h"
 
-NSString *const CellIdentifier_PlugOutletAddTiming = @"CellID_PlugOutletAddTimingCell";
-NSString *const CellIdentifier_WeekendName = @"CellID_WeekendNameCell";
+NSString *const CellIdentifier_MulSwitchAddTiming = @"CellID_MulSwitchAddTimingCell";
+NSString *const CellIdentifier_WeekName = @"CellID_WeekNameCell";
 static float HEIGHT_CELL = 50.f;
 
-@interface PlugOutletAddTimingController () <UIPickerViewDataSource,UIPickerViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface MulSwitchAddTimingController () <UIPickerViewDataSource,UIPickerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UIPickerView *timePicker;
 @property (nonatomic, strong) NSMutableArray *hoursArray;
@@ -25,11 +25,9 @@ static float HEIGHT_CELL = 50.f;
 
 @property (strong, nonatomic) UITableView *addTimingTable;
 
-
 @end
 
-@implementation PlugOutletAddTimingController
-
+@implementation MulSwitchAddTimingController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -110,8 +108,8 @@ static bool plugSeted = NO;
             tableView.dataSource = self;
             tableView.delegate = self;
             //tableView.separatorColor = [UIColor clearColor];
-            [tableView registerClass:[PlugOutletAddTimingCell class] forCellReuseIdentifier:CellIdentifier_PlugOutletAddTiming];
-            [tableView registerClass:[WeekendNameCell class] forCellReuseIdentifier:CellIdentifier_WeekendName];
+            [tableView registerClass:[MulSwitchAddTimingCell class] forCellReuseIdentifier:CellIdentifier_MulSwitchAddTiming];
+            [tableView registerClass:[WeekendNameCell class] forCellReuseIdentifier:CellIdentifier_WeekName];
             [self.view addSubview:tableView];
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
@@ -233,9 +231,9 @@ static bool plugSeted = NO;
     switch (indexPath.row) {
         case 0:
         {
-            WeekendNameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_WeekendName];
+            WeekendNameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_WeekName];
             if (cell == nil) {
-                cell = [[WeekendNameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_WeekendName];
+                cell = [[WeekendNameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_WeekName];
             }
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.leftLabel.text = LocalString(@"重复");
@@ -246,9 +244,9 @@ static bool plugSeted = NO;
             
         default:
         {
-            PlugOutletAddTimingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletAddTiming];
+            MulSwitchAddTimingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_MulSwitchAddTiming];
             if (cell == nil) {
-                cell = [[PlugOutletAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletAddTiming];
+                cell = [[MulSwitchAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_MulSwitchAddTiming];
             }
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             cell.leftName.text = LocalString(@"开关");
@@ -269,7 +267,7 @@ static bool plugSeted = NO;
     switch (indexPath.row) {
         case 0:
         {
-            PlugOutletWeekSelectController *WeekVC = [[PlugOutletWeekSelectController alloc] init];
+            MulSwitchWeekSelectController *WeekVC = [[MulSwitchWeekSelectController alloc] init];
             WeekVC.clock = self.clock;
             WeekVC.popBlock = ^(ClockModel *clock){
                 self.clock = clock;
@@ -297,4 +295,5 @@ static bool plugSeted = NO;
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0;
 }
+
 @end
