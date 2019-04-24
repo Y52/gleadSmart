@@ -1831,9 +1831,10 @@ static int noUserInteractionHeartbeat = 0;
             if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 NSLog(@"设置wifi智能插座的闹钟");
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetClock" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteClock" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"设置wifi智能插座的闹钟项列表");
+                NSLog(@"查询wifi智能插座的闹钟项列表");
                 NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"getClockList" object:nil userInfo:userInfo];
             }
@@ -1842,6 +1843,13 @@ static int noUserInteractionHeartbeat = 0;
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 NSLog(@"设置wifi智能插座的延时开关");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetDelay" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteDelayClock" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的延时开关列表");
+                NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"getdelayclockList" object:nil userInfo:userInfo];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x10 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"查询wifi智能插座的电量（电压，电流，功率）");

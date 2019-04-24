@@ -18,6 +18,11 @@
 		36004A8B2227B64700C99215 /* img_retrieve_password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A882227B64700C99215 /* img_retrieve_password@3x.png */; };
 		36004A8C2227B64700C99215 /* img_retrieve_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 36004A892227B64700C99215 /* img_retrieve_password.png */; };
 		36004A8F2227E96500C99215 /* UsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36004A8E2227E96500C99215 /* UsernameViewController.m */; };
+		3603D928226EE89500E0F86E /* PlugOutletDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3603D927226EE89500E0F86E /* PlugOutletDelayController.m */; };
+		3603D92B226EEA6A00E0F86E /* PlugOutletAddDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3603D92A226EEA6A00E0F86E /* PlugOutletAddDelayController.m */; };
+		3603D92E226EEAFB00E0F86E /* PlugOutletAddDelayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3603D92D226EEAFB00E0F86E /* PlugOutletAddDelayCell.m */; };
+		3603D931226EEB8700E0F86E /* PlugOutletSaveAddDelayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3603D930226EEB8700E0F86E /* PlugOutletSaveAddDelayCell.m */; };
+		3603D934226F017B00E0F86E /* DelayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3603D933226F017B00E0F86E /* DelayModel.m */; };
 		3604FD52225B707A00D0B97D /* img_Lamp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD4F225B707A00D0B97D /* img_Lamp@2x.png */; };
 		3604FD53225B707A00D0B97D /* img_Lamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD50225B707A00D0B97D /* img_Lamp.png */; };
 		3604FD54225B707A00D0B97D /* img_Lamp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD51225B707A00D0B97D /* img_Lamp@3x.png */; };
@@ -1052,6 +1057,16 @@
 		36004A892227B64700C99215 /* img_retrieve_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_retrieve_password.png; sourceTree = "<group>"; };
 		36004A8D2227E96500C99215 /* UsernameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsernameViewController.h; sourceTree = "<group>"; };
 		36004A8E2227E96500C99215 /* UsernameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsernameViewController.m; sourceTree = "<group>"; };
+		3603D926226EE89500E0F86E /* PlugOutletDelayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletDelayController.h; sourceTree = "<group>"; };
+		3603D927226EE89500E0F86E /* PlugOutletDelayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletDelayController.m; sourceTree = "<group>"; };
+		3603D929226EEA6A00E0F86E /* PlugOutletAddDelayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletAddDelayController.h; sourceTree = "<group>"; };
+		3603D92A226EEA6A00E0F86E /* PlugOutletAddDelayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletAddDelayController.m; sourceTree = "<group>"; };
+		3603D92C226EEAFB00E0F86E /* PlugOutletAddDelayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletAddDelayCell.h; sourceTree = "<group>"; };
+		3603D92D226EEAFB00E0F86E /* PlugOutletAddDelayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletAddDelayCell.m; sourceTree = "<group>"; };
+		3603D92F226EEB8700E0F86E /* PlugOutletSaveAddDelayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletSaveAddDelayCell.h; sourceTree = "<group>"; };
+		3603D930226EEB8700E0F86E /* PlugOutletSaveAddDelayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSaveAddDelayCell.m; sourceTree = "<group>"; };
+		3603D932226F017B00E0F86E /* DelayModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DelayModel.h; sourceTree = "<group>"; };
+		3603D933226F017B00E0F86E /* DelayModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DelayModel.m; sourceTree = "<group>"; };
 		3604FD4F225B707A00D0B97D /* img_Lamp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Lamp@2x.png"; sourceTree = "<group>"; };
 		3604FD50225B707A00D0B97D /* img_Lamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_Lamp.png; sourceTree = "<group>"; };
 		3604FD51225B707A00D0B97D /* img_Lamp@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Lamp@3x.png"; sourceTree = "<group>"; };
@@ -1821,6 +1836,10 @@
 				36E4F693226750E2006A9E6D /* PlugOutletSaveAddTimingCell.m */,
 				36069FD622686B1100347D7F /* PlugOutletWeekSelectCell.h */,
 				36069FD722686B1100347D7F /* PlugOutletWeekSelectCell.m */,
+				3603D92C226EEAFB00E0F86E /* PlugOutletAddDelayCell.h */,
+				3603D92D226EEAFB00E0F86E /* PlugOutletAddDelayCell.m */,
+				3603D92F226EEB8700E0F86E /* PlugOutletSaveAddDelayCell.h */,
+				3603D930226EEB8700E0F86E /* PlugOutletSaveAddDelayCell.m */,
 			);
 			path = AddTiming;
 			sourceTree = "<group>";
@@ -2044,6 +2063,8 @@
 				BB7D9B9F221EA71000C5DFD1 /* SharerModel.m */,
 				BBFF328A2269693900D1BA20 /* ClockModel.h */,
 				BBFF328B2269693900D1BA20 /* ClockModel.m */,
+				3603D932226F017B00E0F86E /* DelayModel.h */,
+				3603D933226F017B00E0F86E /* DelayModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2583,6 +2604,10 @@
 				36E4F686226712BD006A9E6D /* PlugOutletAddTimingController.m */,
 				36069FD32268682400347D7F /* PlugOutletWeekSeletController.h */,
 				36069FD42268682400347D7F /* PlugOutletWeekSeletController.m */,
+				3603D926226EE89500E0F86E /* PlugOutletDelayController.h */,
+				3603D927226EE89500E0F86E /* PlugOutletDelayController.m */,
+				3603D929226EEA6A00E0F86E /* PlugOutletAddDelayController.h */,
+				3603D92A226EEA6A00E0F86E /* PlugOutletAddDelayController.m */,
 			);
 			path = plugOutlet;
 			sourceTree = "<group>";
@@ -3933,6 +3958,7 @@
 				3EA530CA21AB9C88000A6D26 /* PasswordLoginController.m in Sources */,
 				36069FD822686B1100347D7F /* PlugOutletWeekSelectCell.m in Sources */,
 				BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */,
+				3603D92B226EEA6A00E0F86E /* PlugOutletAddDelayController.m in Sources */,
 				BB62E4DE21B5155000C0FA39 /* TherWeekProgramController.m in Sources */,
 				36004A8F2227E96500C99215 /* UsernameViewController.m in Sources */,
 				3EA530BF21AB9B43000A6D26 /* PhoneTFCell.m in Sources */,
@@ -3953,6 +3979,7 @@
 				BB62E4FC21B521F100C0FA39 /* WeekProgramSetController.m in Sources */,
 				BBAB280F221B912400E21041 /* HomeDeviceSelectController.m in Sources */,
 				BB52F9ED21BE6B03005FA33A /* NodeModel.m in Sources */,
+				3603D934226F017B00E0F86E /* DelayModel.m in Sources */,
 				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
 				BB2AC0F021A8F156006DB83A /* ESPTouchTaskParameter.m in Sources */,
 				BBF6326B21BBBDE0006A23AC /* NodeDetailViewController.m in Sources */,
@@ -3970,6 +3997,7 @@
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
 				BB2AD7A121AD70D6006DB83A /* HouseSettingController.m in Sources */,
 				BB3D7550225242D1007DDFD6 /* DeviceSettingCell.m in Sources */,
+				3603D92E226EEAFB00E0F86E /* PlugOutletAddDelayCell.m in Sources */,
 				BB7D9B9A221E4B4C00C5DFD1 /* SharerInfoCell.m in Sources */,
 				BB37DF1221A7F3AF00B2121B /* DeviceTableViewCell.m in Sources */,
 				BB00A4FF21BA25B7004E4051 /* YAlertViewController.m in Sources */,
@@ -3994,6 +4022,7 @@
 				3E56AD2521A6A7160089BA8F /* AddFamilySelectCell.m in Sources */,
 				BB5B03CE21B91290007AC2B1 /* AccountViewController.m in Sources */,
 				BB63AAD2222E156B00DFC848 /* APProcessController.m in Sources */,
+				3603D931226EEB8700E0F86E /* PlugOutletSaveAddDelayCell.m in Sources */,
 				BB2AC10A21A94D63006DB83A /* AFNetworkReachabilityManager.m in Sources */,
 				BB62E4D221B4DD7C00C0FA39 /* TherWeekSelectController.m in Sources */,
 				369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */,
@@ -4034,6 +4063,7 @@
 				BB2AC10821A94D63006DB83A /* AFURLSessionManager.m in Sources */,
 				BB00A4F321BA202C004E4051 /* AccountHeaderCell.m in Sources */,
 				BB30C4FB225B4991000FBF28 /* StatusConfirmController.m in Sources */,
+				3603D928226EE89500E0F86E /* PlugOutletDelayController.m in Sources */,
 				3E3AFFC021A7E7EB00EA8F1C /* AddFamilyViewController.m in Sources */,
 				BBF8CAF42216A8460030E921 /* FamilyMemberSetCell.m in Sources */,
 				BB49774B219A6B5E00427197 /* MyHouseController.m in Sources */,

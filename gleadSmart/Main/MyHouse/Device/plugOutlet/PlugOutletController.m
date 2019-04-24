@@ -9,6 +9,7 @@
 #import "PlugOutletController.h"
 #import "PlugOutletSettingController.h"
 #import "PlugOutletTimingController.h"
+#import "PlugOutletDelayController.h"
 
 @interface PlugOutletController ()
 
@@ -107,7 +108,9 @@
 }
 
 - (void)plugDelay{
-    
+    PlugOutletDelayController *DelayVC = [[PlugOutletDelayController alloc] init];
+    DelayVC.device = self.device;
+    [self.navigationController pushViewController:DelayVC animated:YES];
 }
 
 - (void)plugElectricity{
