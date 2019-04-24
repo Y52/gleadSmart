@@ -75,6 +75,16 @@
     
 }
 
+- (void)switchClick:(UIButton *)sender{
+    if (sender.tag == yUnselect) {
+        sender.tag = ySelect;
+        [sender setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+    }else{
+        sender.tag = yUnselect;
+        [sender setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - setters & getters
 - (void)setBackgroundColor{
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -100,15 +110,22 @@
 - (UIView *)mulSwitchView{
     if (!_mulSwitchView) {
         _mulSwitchView = [[UIView alloc] init];
+        _mulSwitchView.backgroundColor = [UIColor clearColor];
         [self.view addSubview:_mulSwitchView];
         [_mulSwitchView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(280.f), 270.f));
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(290.f), 280.f));
             make.centerX.equalTo(self.view.mas_centerX);
             make.top.equalTo(self.view.mas_top).offset(100.f);
         }];
         
+        _mulSwitchView.layer.shadowColor = [UIColor colorWithRed:10/255.0 green:56/255.0 blue:106/255.0 alpha:0.49].CGColor;
+        _mulSwitchView.layer.shadowOffset = CGSizeMake(0,9);
+        _mulSwitchView.layer.shadowOpacity = 1;
+        _mulSwitchView.layer.shadowRadius = 12;
+
+        
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_switchback_back"]];
-        image.frame = CGRectMake(0, 0, yAutoFit(280.f), 270.f);
+        image.frame = CGRectMake(0, 0, yAutoFit(290.f), 280.f);
         image.contentMode = UIViewContentModeScaleAspectFit;
         [_mulSwitchView addSubview:image];
     }
@@ -125,9 +142,15 @@
             make.centerY.equalTo(self.mulSwitchView.mas_centerY);
         }];
         
+        _mulSwitchCloth.layer.shadowColor = [UIColor colorWithRed:10/255.0 green:46/255.0 blue:84/255.0 alpha:0.66].CGColor;
+        _mulSwitchCloth.layer.shadowOffset = CGSizeMake(0,6);
+        _mulSwitchCloth.layer.shadowOpacity = 1;
+        _mulSwitchCloth.layer.shadowRadius = 25;
+        _mulSwitchCloth.layer.cornerRadius = 2.5;
+
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_4switch_back"]];
         image.frame = CGRectMake(0, 0, yAutoFit(270.f), 120.f);
-        image.contentMode = UIViewContentModeScaleAspectFill;
+        image.contentMode = UIViewContentModeScaleAspectFit;
         [_mulSwitchCloth addSubview:image];
         
     }
@@ -137,13 +160,12 @@
 - (void)setSwitchUI{
     for (int i = 0; i < 4; i++) {
         UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        switchButton.frame = CGRectMake(i*(yAutoFit(270.f)/4), 0, yAutoFit(270.f)/4, self.mulSwitchCloth.bounds.size.height);
-        switchButton.tag = i+1000;
+        switchButton.frame = CGRectMake(i*(yAutoFit(270.f)/4), 0, yAutoFit(270.f)/4, 120.f);
+        switchButton.tag = yUnselect;
         [switchButton setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         [switchButton.imageView setClipsToBounds:YES];
         switchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [switchButton setClipsToBounds:YES];
-        switchButton.contentMode = UIViewContentModeScaleAspectFit;
+        [switchButton addTarget:self action:@selector(switchClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.mulSwitchCloth addSubview:switchButton];
     }
 }
