@@ -33,7 +33,7 @@
     [self setSwitchUI];
     self.openAllButton = [self openAllButton];
     self.timeButton = [self timeButton];
-    self.delayButton = [self delayButton];
+    //self.delayButton = [self delayButton];不要了
     self.closeAllButton = [self closeAllButton];
     
     [self setBackgroundColor];
@@ -156,7 +156,7 @@
         [self.view addSubview:_openAllButton];
         [_openAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51, 51));
-            make.left.equalTo(self.view.mas_left).offset(buttonGap);
+            make.right.equalTo(self.timeButton.mas_left).offset(-40.f);
             make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(80.f + ySafeArea_Bottom)));
         }];
         
@@ -183,7 +183,7 @@
         [self.view addSubview:_timeButton];
         [_timeButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51, 51));
-            make.left.equalTo(self.openAllButton.mas_right).offset(buttonGap);
+            make.centerX.equalTo(self.view.mas_centerX);
             make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(80.f + ySafeArea_Bottom)));
         }];
         
@@ -238,7 +238,7 @@
         [self.view addSubview:_closeAllButton];
         [_closeAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51.f, 51));
-            make.left.equalTo(self.delayButton.mas_right).offset(buttonGap);
+            make.left.equalTo(self.timeButton.mas_right).offset(40.f);
             make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(80.f + ySafeArea_Bottom)));
         }];
         
