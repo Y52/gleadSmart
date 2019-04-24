@@ -1,27 +1,26 @@
 //
-//  PlugOutletWeekSeletController.m
+//  MulSwitchWeekSelectController.m
 //  gleadSmart
 //
-//  Created by 安建伟 on 2019/4/18.
+//  Created by 安建伟 on 2019/4/24.
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "PlugOutletWeekSeletController.h"
-#import "PlugOutletWeekSelectCell.h"
+#import "MulSwitchWeekSelectController.h"
+#import "MulSwitchWeekSelectCell.h"
 #import "ClockModel.h"
 
 static float HEIGHT_HEADER = 20.f;
-NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWeekSelect";
+NSString *const CellIdentifier_MulSwitchWeekSelectCell = @"CellID_MulSwitchWeekSelect";
 
-@interface PlugOutletWeekSeletController () <UITableViewDataSource,UITableViewDelegate>
+@interface MulSwitchWeekSelectController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *addWeekTable;
 @property (strong, nonatomic) NSArray *defaultWeekList;
 
-
 @end
 
-@implementation PlugOutletWeekSeletController
+@implementation MulSwitchWeekSelectController
 
 - (instancetype)init{
     if (self) {
@@ -64,7 +63,7 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
             tableView.separatorColor = [UIColor colorWithRed:232/255.0 green:231/255.0 blue:231/255.0 alpha:1.0];
             tableView.dataSource = self;
             tableView.delegate = self;
-            [tableView registerClass:[PlugOutletWeekSelectCell class] forCellReuseIdentifier:CellIdentifier_PlugOutletWeekSelectCell];
+            [tableView registerClass:[MulSwitchWeekSelectCell class] forCellReuseIdentifier:CellIdentifier_MulSwitchWeekSelectCell];
             [self.view addSubview:tableView];
             tableView.scrollEnabled = NO;
             tableView.estimatedRowHeight = 0;
@@ -88,9 +87,9 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    PlugOutletWeekSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletWeekSelectCell];
+    MulSwitchWeekSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_MulSwitchWeekSelectCell];
     if (cell == nil) {
-        cell = [[PlugOutletWeekSelectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletWeekSelectCell];
+        cell = [[MulSwitchWeekSelectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_MulSwitchWeekSelectCell];
     }
     cell.backgroundColor = [UIColor clearColor];
     cell.leftLabel.text = _defaultWeekList[indexPath.row];
@@ -107,7 +106,7 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    PlugOutletWeekSelectCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    MulSwitchWeekSelectCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell.tag == yUnselect) {
         cell.tag = ySelect;
         cell.checkImage.image = [UIImage imageNamed:@"addFamily_check"];
@@ -129,4 +128,5 @@ NSString *const CellIdentifier_PlugOutletWeekSelectCell = @"CellID_PlugOutletWee
 {
     return HEIGHT_HEADER;
 }
+
 @end

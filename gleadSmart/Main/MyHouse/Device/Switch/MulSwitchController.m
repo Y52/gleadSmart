@@ -7,6 +7,8 @@
 //
 
 #import "MulSwitchController.h"
+#import "DeviceSettingController.h"
+#import "MulSwitchTimingSetingController.h"
 
 #define buttonGap ((ScreenWidth - 51*4)/5)
 
@@ -56,7 +58,9 @@
 #pragma mark - private methods
 
 - (void)goSetting{
-    
+    DeviceSettingController *VC = [[DeviceSettingController alloc] init];
+    VC.device = self.device;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)mulSwitchAllOpen{
@@ -65,10 +69,9 @@
 
 - (void)mulSwitchClock{
     
-}
-
-- (void)mulSwitchDelay{
-    
+    MulSwitchTimingSetingController *SetingVC = [[MulSwitchTimingSetingController alloc] init];
+    SetingVC.device = self.device;
+    [self.navigationController pushViewController:SetingVC animated:YES];
 }
 
 - (void)mulSwitchAllClose{
