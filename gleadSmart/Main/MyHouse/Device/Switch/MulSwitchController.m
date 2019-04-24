@@ -30,6 +30,7 @@
 
     self.mulSwitchView = [self mulSwitchView];
     self.mulSwitchCloth = [self mulSwitchCloth];
+    [self setSwitchUI];
     self.openAllButton = [self openAllButton];
     self.timeButton = [self timeButton];
     self.delayButton = [self delayButton];
@@ -131,6 +132,20 @@
         
     }
     return _mulSwitchCloth;
+}
+
+- (void)setSwitchUI{
+    for (int i = 0; i < 4; i++) {
+        UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        switchButton.frame = CGRectMake(i*(yAutoFit(270.f)/4), 0, yAutoFit(270.f)/4, self.mulSwitchCloth.bounds.size.height);
+        switchButton.tag = i+1000;
+        [switchButton setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+        [switchButton.imageView setClipsToBounds:YES];
+        switchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [switchButton setClipsToBounds:YES];
+        switchButton.contentMode = UIViewContentModeScaleAspectFit;
+        [self.mulSwitchCloth addSubview:switchButton];
+    }
 }
 
 - (UIButton *)openAllButton{
