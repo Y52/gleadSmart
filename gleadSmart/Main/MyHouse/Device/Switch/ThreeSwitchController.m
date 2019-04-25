@@ -38,7 +38,7 @@
     //self.delayButton = [self delayButton];不要了
     self.closeAllButton = [self closeAllButton];
     
-    [self setBackgroundColor];
+    [self setBackgroundColor_3];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -57,28 +57,28 @@
 
 #pragma mark - private methods
 
-- (void)goSetting{
+- (void)goSetting_3{
     DeviceSettingController *VC = [[DeviceSettingController alloc] init];
     VC.device = self.device;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
-- (void)mulSwitchAllOpen{
+- (void)mulSwitchAllOpen_3{
     
 }
 
-- (void)mulSwitchClock{
+- (void)mulSwitchClock_3{
     
     MulSwitchTimingSetingController *SetingVC = [[MulSwitchTimingSetingController alloc] init];
     SetingVC.device = self.device;
     [self.navigationController pushViewController:SetingVC animated:YES];
 }
 
-- (void)mulSwitchAllClose{
+- (void)mulSwitchAllClose_3{
     
 }
 
-- (void)switchClick:(UIButton *)sender{
+- (void)switchClickThree:(UIButton *)sender{
     if (sender.tag == yUnselect) {
         sender.tag = ySelect;
         [sender setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
@@ -89,7 +89,7 @@
 }
 
 #pragma mark - setters & getters
-- (void)setBackgroundColor{
+- (void)setBackgroundColor_3{
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.view.bounds;
     gradient.colors = @[(id)[UIColor colorWithHexString:@"62A5EE"].CGColor,(id)[UIColor colorWithHexString:@"1665BB"].CGColor];
@@ -105,7 +105,7 @@
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 30, 30);
     [rightButton setImage:[UIImage imageNamed:@"thermostatMoer"] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(goSetting) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton addTarget:self action:@selector(goSetting_3) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBarButton;
 }
@@ -163,7 +163,7 @@
             [switchButton setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
             [switchButton.imageView setClipsToBounds:YES];
             switchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-            [switchButton addTarget:self action:@selector(switchClick:) forControlEvents:UIControlEventTouchUpInside];
+            [switchButton addTarget:self action:@selector(switchClickThree:) forControlEvents:UIControlEventTouchUpInside];
             [self.mulSwitchCloth addSubview:switchButton];
         }
     }
@@ -174,7 +174,7 @@
     if (!_openAllButton) {
         _openAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_openAllButton setImage:[UIImage imageNamed:@"img_switch_allopen"] forState:UIControlStateNormal];
-        [_openAllButton addTarget:self action:@selector(mulSwitchAllOpen) forControlEvents:UIControlEventTouchUpInside];
+        [_openAllButton addTarget:self action:@selector(mulSwitchAllOpen_3) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_openAllButton];
         [_openAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51, 51));
@@ -201,7 +201,7 @@
     if (!_timeButton) {
         _timeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_timeButton setImage:[UIImage imageNamed:@"img_switch_clock"] forState:UIControlStateNormal];
-        [_timeButton addTarget:self action:@selector(mulSwitchClock) forControlEvents:UIControlEventTouchUpInside];
+        [_timeButton addTarget:self action:@selector(mulSwitchClock_3) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_timeButton];
         [_timeButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51, 51));
@@ -256,7 +256,7 @@
     if (!_closeAllButton) {
         _closeAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_closeAllButton setImage:[UIImage imageNamed:@"img_switch_allclose"] forState:UIControlStateNormal];
-        [_closeAllButton addTarget:self action:@selector(mulSwitchAllClose) forControlEvents:UIControlEventTouchUpInside];
+        [_closeAllButton addTarget:self action:@selector(mulSwitchAllClose_3) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_closeAllButton];
         [_closeAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51.f, 51));

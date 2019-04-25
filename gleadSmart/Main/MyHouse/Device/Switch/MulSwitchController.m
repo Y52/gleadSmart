@@ -13,13 +13,13 @@
 #define buttonGap ((ScreenWidth - 51*4)/5)
 
 @interface MulSwitchController ()
-@property (nonatomic, strong) UIView *mulSwitchView;
-@property (nonatomic, strong) UIView *mulSwitchCloth;
+@property (nonatomic, strong) UIView *mulSwitchView_4;
+@property (nonatomic, strong) UIView *mulSwitchCloth_4;
 
-@property (strong, nonatomic) UIButton *openAllButton;
-@property (strong, nonatomic) UIButton *timeButton;
+@property (strong, nonatomic) UIButton *openAllButton_4;
+@property (strong, nonatomic) UIButton *timeButton_4;
 @property (strong, nonatomic) UIButton *delayButton;
-@property (strong, nonatomic) UIButton *closeAllButton;
+@property (strong, nonatomic) UIButton *closeAllButton_4;
 
 @end
 
@@ -30,14 +30,14 @@
     self.view.layer.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1.0].CGColor;
     [self setNavItem];
 
-    self.mulSwitchView = [self mulSwitchView];
-    self.mulSwitchCloth = [self mulSwitchCloth_4];
-    self.openAllButton = [self openAllButton];
-    self.timeButton = [self timeButton];
+    self.mulSwitchView_4 = [self mulSwitchView_4];
+    self.mulSwitchCloth_4 = [self mulSwitchCloth_4];
+    self.openAllButton_4 = [self openAllButton_4];
+    self.timeButton_4 = [self timeButton_4];
     //self.delayButton = [self delayButton];不要了
-    self.closeAllButton = [self closeAllButton];
+    self.closeAllButton_4 = [self closeAllButton_4];
     
-    [self setBackgroundColor];
+    [self setBackgroundColor_4];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -88,7 +88,7 @@
 }
 
 #pragma mark - setters & getters
-- (void)setBackgroundColor{
+- (void)setBackgroundColor_4{
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.view.bounds;
     gradient.colors = @[(id)[UIColor colorWithHexString:@"62A5EE"].CGColor,(id)[UIColor colorWithHexString:@"1665BB"].CGColor];
@@ -109,51 +109,51 @@
     self.navigationItem.rightBarButtonItem = rightBarButton;
 }
 
-- (UIView *)mulSwitchView{
-    if (!_mulSwitchView) {
-        _mulSwitchView = [[UIView alloc] init];
-        _mulSwitchView.backgroundColor = [UIColor clearColor];
-        [self.view addSubview:_mulSwitchView];
-        [_mulSwitchView mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UIView *)mulSwitchView_4{
+    if (!_mulSwitchView_4) {
+        _mulSwitchView_4 = [[UIView alloc] init];
+        _mulSwitchView_4.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:_mulSwitchView_4];
+        [_mulSwitchView_4 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(290.f), 280.f));
             make.centerX.equalTo(self.view.mas_centerX);
             make.top.equalTo(self.view.mas_top).offset(100.f);
         }];
         
-        _mulSwitchView.layer.shadowColor = [UIColor colorWithRed:10/255.0 green:56/255.0 blue:106/255.0 alpha:0.49].CGColor;
-        _mulSwitchView.layer.shadowOffset = CGSizeMake(0,9);
-        _mulSwitchView.layer.shadowOpacity = 1;
-        _mulSwitchView.layer.shadowRadius = 12;
+        _mulSwitchView_4.layer.shadowColor = [UIColor colorWithRed:10/255.0 green:56/255.0 blue:106/255.0 alpha:0.49].CGColor;
+        _mulSwitchView_4.layer.shadowOffset = CGSizeMake(0,9);
+        _mulSwitchView_4.layer.shadowOpacity = 1;
+        _mulSwitchView_4.layer.shadowRadius = 12;
 
         
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_switchback_back"]];
         image.frame = CGRectMake(0, 0, yAutoFit(290.f), 280.f);
         image.contentMode = UIViewContentModeScaleAspectFit;
-        [_mulSwitchView addSubview:image];
+        [_mulSwitchView_4 addSubview:image];
     }
-    return _mulSwitchView;
+    return _mulSwitchView_4;
 }
 
 - (UIView *)mulSwitchCloth_4{
-    if (!_mulSwitchCloth) {
-        _mulSwitchCloth = [[UIView alloc] init];
-        [_mulSwitchView addSubview:_mulSwitchCloth];
-        [_mulSwitchCloth mas_makeConstraints:^(MASConstraintMaker *make) {
+    if (!_mulSwitchCloth_4) {
+        _mulSwitchCloth_4 = [[UIView alloc] init];
+        [_mulSwitchView_4 addSubview:_mulSwitchCloth_4];
+        [_mulSwitchCloth_4 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(270.f), 120.f));
-            make.centerX.equalTo(self.mulSwitchView.mas_centerX);
-            make.centerY.equalTo(self.mulSwitchView.mas_centerY);
+            make.centerX.equalTo(self.mulSwitchView_4.mas_centerX);
+            make.centerY.equalTo(self.mulSwitchView_4.mas_centerY);
         }];
         
-        _mulSwitchCloth.layer.shadowColor = [UIColor colorWithRed:10/255.0 green:46/255.0 blue:84/255.0 alpha:0.66].CGColor;
-        _mulSwitchCloth.layer.shadowOffset = CGSizeMake(0,6);
-        _mulSwitchCloth.layer.shadowOpacity = 1;
-        _mulSwitchCloth.layer.shadowRadius = 25;
-        _mulSwitchCloth.layer.cornerRadius = 2.5;
+        _mulSwitchCloth_4.layer.shadowColor = [UIColor colorWithRed:10/255.0 green:46/255.0 blue:84/255.0 alpha:0.66].CGColor;
+        _mulSwitchCloth_4.layer.shadowOffset = CGSizeMake(0,6);
+        _mulSwitchCloth_4.layer.shadowOpacity = 1;
+        _mulSwitchCloth_4.layer.shadowRadius = 25;
+        _mulSwitchCloth_4.layer.cornerRadius = 2.5;
 
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_4switch_back"]];
         image.frame = CGRectMake(0, 0, yAutoFit(270.f), 120.f);
         image.contentMode = UIViewContentModeScaleAspectFit;
-        [_mulSwitchCloth addSubview:image];
+        [_mulSwitchCloth_4 addSubview:image];
         //分开四路开关
         for (int i = 0; i < 4; i++) {
             UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -163,21 +163,21 @@
             [switchButton.imageView setClipsToBounds:YES];
             switchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
             [switchButton addTarget:self action:@selector(switchClick:) forControlEvents:UIControlEventTouchUpInside];
-            [self.mulSwitchCloth addSubview:switchButton];
+            [self.mulSwitchCloth_4 addSubview:switchButton];
         }
     }
-    return _mulSwitchCloth;
+    return _mulSwitchCloth_4;
 }
 
-- (UIButton *)openAllButton{
-    if (!_openAllButton) {
-        _openAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_openAllButton setImage:[UIImage imageNamed:@"img_switch_allopen"] forState:UIControlStateNormal];
-        [_openAllButton addTarget:self action:@selector(mulSwitchAllOpen) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_openAllButton];
-        [_openAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UIButton *)openAllButton_4{
+    if (!_openAllButton_4) {
+        _openAllButton_4 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_openAllButton_4 setImage:[UIImage imageNamed:@"img_switch_allopen"] forState:UIControlStateNormal];
+        [_openAllButton_4 addTarget:self action:@selector(mulSwitchAllOpen) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_openAllButton_4];
+        [_openAllButton_4 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51, 51));
-            make.right.equalTo(self.timeButton.mas_left).offset(-40.f);
+            make.right.equalTo(self.timeButton_4.mas_left).offset(-40.f);
             make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(80.f + ySafeArea_Bottom)));
         }];
         
@@ -189,20 +189,20 @@
         [self.view addSubview:openAllLabel];
         [openAllLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(60, 15));
-            make.centerX.equalTo(self.openAllButton.mas_centerX);
-            make.top.equalTo(self.openAllButton.mas_bottom);
+            make.centerX.equalTo(self.openAllButton_4.mas_centerX);
+            make.top.equalTo(self.openAllButton_4.mas_bottom);
         }];
     }
-    return _openAllButton;
+    return _openAllButton_4;
 }
 
-- (UIButton *)timeButton{
-    if (!_timeButton) {
-        _timeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_timeButton setImage:[UIImage imageNamed:@"img_switch_clock"] forState:UIControlStateNormal];
-        [_timeButton addTarget:self action:@selector(mulSwitchClock) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_timeButton];
-        [_timeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UIButton *)timeButton_4{
+    if (!_timeButton_4) {
+        _timeButton_4 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_timeButton_4 setImage:[UIImage imageNamed:@"img_switch_clock"] forState:UIControlStateNormal];
+        [_timeButton_4 addTarget:self action:@selector(mulSwitchClock) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_timeButton_4];
+        [_timeButton_4 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51, 51));
             make.centerX.equalTo(self.view.mas_centerX);
             make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(80.f + ySafeArea_Bottom)));
@@ -216,11 +216,11 @@
         [self.view addSubview:timeLabel];
         [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(60, 15));
-            make.centerX.equalTo(self.timeButton.mas_centerX);
-            make.top.equalTo(self.timeButton.mas_bottom);
+            make.centerX.equalTo(self.timeButton_4.mas_centerX);
+            make.top.equalTo(self.timeButton_4.mas_bottom);
         }];
     }
-    return _timeButton;
+    return _timeButton_4;
 }
 
 - (UIButton *)delayButton{
@@ -231,7 +231,7 @@
         [self.view addSubview:_delayButton];
         [_delayButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51, 51));
-            make.left.equalTo(self.timeButton.mas_right).offset(buttonGap);
+            make.left.equalTo(self.timeButton_4.mas_right).offset(buttonGap);
             make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(80.f + ySafeArea_Bottom)));
         }];
         
@@ -251,15 +251,15 @@
     return _delayButton;
 }
 
-- (UIButton *)closeAllButton{
-    if (!_closeAllButton) {
-        _closeAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_closeAllButton setImage:[UIImage imageNamed:@"img_switch_allclose"] forState:UIControlStateNormal];
-        [_closeAllButton addTarget:self action:@selector(mulSwitchAllClose) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_closeAllButton];
-        [_closeAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UIButton *)closeAllButton_4{
+    if (!_closeAllButton_4) {
+        _closeAllButton_4 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_closeAllButton_4 setImage:[UIImage imageNamed:@"img_switch_allclose"] forState:UIControlStateNormal];
+        [_closeAllButton_4 addTarget:self action:@selector(mulSwitchAllClose) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_closeAllButton_4];
+        [_closeAllButton_4 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51.f, 51));
-            make.left.equalTo(self.timeButton.mas_right).offset(40.f);
+            make.left.equalTo(self.timeButton_4.mas_right).offset(40.f);
             make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(80.f + ySafeArea_Bottom)));
         }];
         
@@ -271,12 +271,12 @@
         [self.view addSubview:clodeAllLabel];
         [clodeAllLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(60, 15));
-            make.centerX.equalTo(self.closeAllButton.mas_centerX);
-            make.top.equalTo(self.closeAllButton.mas_bottom);
+            make.centerX.equalTo(self.closeAllButton_4.mas_centerX);
+            make.top.equalTo(self.closeAllButton_4.mas_bottom);
         }];
         
     }
-    return _closeAllButton;
+    return _closeAllButton_4;
 }
 
 @end
