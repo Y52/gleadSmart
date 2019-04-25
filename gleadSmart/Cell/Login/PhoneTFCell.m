@@ -33,6 +33,7 @@
             _phoneTF.font = [UIFont fontWithName:@"Arial" size:15.f];
             //_phoneTF.textColor = [UIColor colorWithHexString:@"222222"];
             //_phoneTF.borderStyle = UITextBorderStyleRoundedRect;
+            _phoneTF.keyboardType = UIKeyboardTypePhonePad;
             _phoneTF.clearButtonMode = UITextFieldViewModeWhileEditing;
             _phoneTF.autocorrectionType = UITextAutocorrectionTypeNo;
             _phoneTF.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;

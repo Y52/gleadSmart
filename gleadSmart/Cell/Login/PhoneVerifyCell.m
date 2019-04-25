@@ -32,6 +32,7 @@
             _codeTF.placeholder = LocalString(@"请输入验证码");
             _codeTF.font = [UIFont fontWithName:@"Arial" size:15.0f];
             _codeTF.textColor = [UIColor colorWithHexString:@"222222"];
+            _codeTF.keyboardType = UIKeyboardTypeNumberPad;
             //_codeTF.borderStyle = UITextBorderStyleRoundedRect;
             //_codeTF.clearButtonMode = UITextFieldViewModeWhileEditing;
             _codeTF.autocorrectionType = UITextAutocorrectionTypeNo;
