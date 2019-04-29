@@ -72,8 +72,11 @@
     NSDictionary *userInfo = [notification userInfo];
     NSNumber *threshold = [userInfo objectForKey:@"getThreshold"];
     NSNumber *temp = [userInfo objectForKey:@"temp"];
-    _middletemperatureLabel.text = [NSString stringWithFormat:@"%d℃",[threshold intValue]];
-    _currenttemperatureLabel.text = [NSString stringWithFormat:@"当前温度：%d℃",[temp intValue]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.middletemperatureLabel.text = [NSString stringWithFormat:@"%d℃",[threshold intValue]];
+        self.currenttemperatureLabel.text = [NSString stringWithFormat:@"当前温度：%d℃",[temp intValue]];
+    });
+    
     [SVProgressHUD dismiss];
 }
 
@@ -82,7 +85,10 @@
     thresholdSeted = YES;
     NSDictionary *userInfo = [notification userInfo];
     NSNumber *threshold = [userInfo objectForKey:@"setThreshold"];
-    _middletemperatureLabel.text = [NSString stringWithFormat:@"%d℃",[threshold intValue]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+       self.middletemperatureLabel.text = [NSString stringWithFormat:@"%d℃",[threshold intValue]];
+    });
+    
     [SVProgressHUD dismiss];
 }
 
