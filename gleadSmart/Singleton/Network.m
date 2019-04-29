@@ -1623,6 +1623,20 @@ static int noUserInteractionHeartbeat = 0;
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"valveDeleteHangingNode" object:nil userInfo:nil];//删除节点后直接水阀页面节点重新生成
             }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x09 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+               
+                NSLog(@"查询水阀阈值");
+                NSString *getThreshold = [NSString HexByInt:[_recivedData69[12] intValue]];
+                NSDictionary *userInfo = @{@"getThreshold":getThreshold};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"getValveThreshold" object:nil userInfo:userInfo];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x09 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+               
+                NSLog(@"设置水阀阈值");
+                NSString *setThreshold = [NSString HexByInt:[_recivedData69[12] intValue]];
+                NSDictionary *userInfo = @{@"setThreshold":setThreshold};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"setValveThreshold" object:nil userInfo:userInfo];
+            }
         }
             break;
             

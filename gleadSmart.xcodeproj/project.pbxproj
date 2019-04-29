@@ -22,8 +22,8 @@
 		360149272271936E00EA6B97 /* valveTemperature_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 360149252271936E00EA6B97 /* valveTemperature_normal@2x.png */; };
 		3601492A227194F300EA6B97 /* temperatureSet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36014928227194F200EA6B97 /* temperatureSet@3x.png */; };
 		3601492B227194F300EA6B97 /* temperatureSet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36014929227194F300EA6B97 /* temperatureSet@2x.png */; };
-		3601492E227194FE00EA6B97 /* yh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3601492C227194FE00EA6B97 /* yh@2x.png */; };
-		3601492F227194FE00EA6B97 /* yh@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3601492D227194FE00EA6B97 /* yh@3x.png */; };
+		3601492E227194FE00EA6B97 /* currenttemperature@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3601492C227194FE00EA6B97 /* currenttemperature@2x.png */; };
+		3601492F227194FE00EA6B97 /* currenttemperature@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3601492D227194FE00EA6B97 /* currenttemperature@3x.png */; };
 		360149322271A95F00EA6B97 /* valveTemperature_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 360149302271A95F00EA6B97 /* valveTemperature_abnormal@2x.png */; };
 		360149332271A95F00EA6B97 /* valveTemperature_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 360149312271A95F00EA6B97 /* valveTemperature_abnormal@3x.png */; };
 		360149362271B25700EA6B97 /* SetTemperatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 360149352271B25700EA6B97 /* SetTemperatureController.m */; };
@@ -966,8 +966,8 @@
 		360149252271936E00EA6B97 /* valveTemperature_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTemperature_normal@2x.png"; sourceTree = "<group>"; };
 		36014928227194F200EA6B97 /* temperatureSet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "temperatureSet@3x.png"; sourceTree = "<group>"; };
 		36014929227194F300EA6B97 /* temperatureSet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "temperatureSet@2x.png"; sourceTree = "<group>"; };
-		3601492C227194FE00EA6B97 /* yh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yh@2x.png"; sourceTree = "<group>"; };
-		3601492D227194FE00EA6B97 /* yh@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yh@3x.png"; sourceTree = "<group>"; };
+		3601492C227194FE00EA6B97 /* currenttemperature@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currenttemperature@2x.png"; sourceTree = "<group>"; };
+		3601492D227194FE00EA6B97 /* currenttemperature@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currenttemperature@3x.png"; sourceTree = "<group>"; };
 		360149302271A95F00EA6B97 /* valveTemperature_abnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTemperature_abnormal@2x.png"; sourceTree = "<group>"; };
 		360149312271A95F00EA6B97 /* valveTemperature_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTemperature_abnormal@3x.png"; sourceTree = "<group>"; };
 		360149342271B25700EA6B97 /* SetTemperatureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTemperatureController.h; sourceTree = "<group>"; };
@@ -2611,8 +2611,8 @@
 		BB8B9E5F21A6ADEB00E5D8B2 /* 无线阀门_slices */ = {
 			isa = PBXGroup;
 			children = (
-				3601492C227194FE00EA6B97 /* yh@2x.png */,
-				3601492D227194FE00EA6B97 /* yh@3x.png */,
+				3601492C227194FE00EA6B97 /* currenttemperature@2x.png */,
+				3601492D227194FE00EA6B97 /* currenttemperature@3x.png */,
 				36014929227194F300EA6B97 /* temperatureSet@2x.png */,
 				36014928227194F200EA6B97 /* temperatureSet@3x.png */,
 				360149252271936E00EA6B97 /* valveTemperature_normal@2x.png */,
@@ -3012,7 +3012,7 @@
 				BB8B9E7221A6ADEB00E5D8B2 /* valveSwitch_normal@2x.png in Resources */,
 				BB1EB38F21E44C7A0024603A /* valveNode_abnormal@2x.png in Resources */,
 				BB3D219E21AE7E2B002CB334 /* img_valve_off@2x.png in Resources */,
-				3601492E227194FE00EA6B97 /* yh@2x.png in Resources */,
+				3601492E227194FE00EA6B97 /* currenttemperature@2x.png in Resources */,
 				3601492A227194F300EA6B97 /* temperatureSet@3x.png in Resources */,
 				BB352922219D968500428DE9 /* img_houseSelected@2x.png in Resources */,
 				BB0A40D821997C99004669CA /* img_weatherBg@3x.png in Resources */,
@@ -3149,7 +3149,7 @@
 				BB2AD78D21ABD813006DB83A /* img_launchBG@3x.png in Resources */,
 				BB0A40B221997C99004669CA /* img_tab_01_select@2x.png in Resources */,
 				BB5B03B221B90343007AC2B1 /* pen@2x.png in Resources */,
-				3601492F227194FE00EA6B97 /* yh@3x.png in Resources */,
+				3601492F227194FE00EA6B97 /* currenttemperature@3x.png in Resources */,
 				BB2AC12C21AB7F22006DB83A /* img_autoLocation@3x.png in Resources */,
 				BB62E4CA21B4D9CA00C0FA39 /* img_ther_addTimerSwitch.png in Resources */,
 				BB8B9DC421A6815000E5D8B2 /* thermostatKnob@1x.png in Resources */,

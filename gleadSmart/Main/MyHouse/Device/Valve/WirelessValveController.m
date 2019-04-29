@@ -13,6 +13,7 @@
 #import "alarmModel.h"
 #import "DeviceSettingController.h"
 #import "ValveAlertInfoController.h"
+#import "SetTemperatureController.h"
 
 NSString *const CellIdentifier_NodeDetail = @"CellID_NodeDetail";
 
@@ -1274,6 +1275,9 @@ CGFloat const nodeButtonWidth = 20.f;
 
 - (void)temperatureSet{
     
+    SetTemperatureController *SetVC = [[SetTemperatureController alloc] init];
+    SetVC.device = self.device;
+    [self.navigationController pushViewController:SetVC animated:YES];
 }
 
 @end
