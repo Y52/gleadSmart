@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NodeDetailViewController : UIViewController
+@interface NTCNodeDetailViewController : UIViewController
 
 @property (nonatomic, strong) NodeModel *node;
 @property (nonatomic, strong) DeviceModel *device;

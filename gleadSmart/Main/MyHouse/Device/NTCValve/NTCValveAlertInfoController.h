@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ValveAlertInfoController : UIViewController
+@interface NTCValveAlertInfoController : UIViewController
 
 ///@brief 漏水报警情况
 @property (nonatomic, strong) NSMutableArray *leakAlertInfo;

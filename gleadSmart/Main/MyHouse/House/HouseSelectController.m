@@ -187,6 +187,7 @@ static CGFloat const Cell_Height = 50.f;
                     house.houseUid = [obj objectForKey:@"houseUid"];
                     house.name = [obj objectForKey:@"name"];
                     house.auth = [obj objectForKey:@"auth"];
+                    house.mac = [obj objectForKey:@"mac"];
                     [db.houseList addObject:house];
                      
                     [db insertNewHouse:house];

@@ -768,6 +768,9 @@ static int noUserInteractionHeartbeat = 0;
     if (macByte2 >= 0x38 && macByte2 <= 0x3F) {
         return DevicePlugOutlet;
     }
+    if (macByte2 >= 0x40 && macByte2 <= 0x47) {
+        return DeviceNTCValve;
+    }
     return DeviceCenterlControl;
 }
 
@@ -1623,19 +1626,20 @@ static int noUserInteractionHeartbeat = 0;
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"valveDeleteHangingNode" object:nil userInfo:nil];//删除节点后直接水阀页面节点重新生成
             }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x09 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x08 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                
                 NSLog(@"查询水阀阈值");
-                NSString *getThreshold = [NSString HexByInt:[_recivedData69[12] intValue]];
-                NSDictionary *userInfo = @{@"getThreshold":getThreshold};
+                NSNumber *getThreshold = [NSNumber numberWithInt:[_recivedData69[12] intValue]];
+                NSNumber *temp = [NSNumber numberWithInt:[_recivedData69[13] intValue]];
+                NSDictionary *userInfo = @{@"getThreshold":getThreshold,@"temp":temp};
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"getValveThreshold" object:nil userInfo:userInfo];
             }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x09 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x08 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                
                 NSLog(@"设置水阀阈值");
-                NSString *setThreshold = [NSString HexByInt:[_recivedData69[12] intValue]];
+                NSNumber *setThreshold = [NSNumber numberWithInt:[_recivedData69[12] intValue]];
                 NSDictionary *userInfo = @{@"setThreshold":setThreshold};
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"setValveThreshold" object:nil userInfo:userInfo];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"setValveThresholdSucc" object:nil userInfo:userInfo];
             }
         }
             break;
