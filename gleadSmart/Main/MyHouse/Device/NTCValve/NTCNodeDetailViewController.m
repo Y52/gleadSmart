@@ -6,20 +6,20 @@
 //  Copyright © 2018年 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "NodeDetailViewController.h"
+#import "NTCNodeDetailViewController.h"
 #import "NodeInfoCell.h"
 
-NSString *const CellIdentifier_ValveDetailInfo = @"CellID_ValveDetailInfo";
-static CGFloat const Cell_Height = 44.f;
+NSString *const CellIdentifier_NTCValveDetailInfo = @"CellID_NTCValveDetailInfo";
+static CGFloat const Cell_NTCHeight = 44.f;
 
-@interface NodeDetailViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface NTCNodeDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *nodeDetailTable;
 @property (nonatomic, strong) UIButton *deleteButton;
 
 @end
 
-@implementation NodeDetailViewController
+@implementation NTCNodeDetailViewController
 
 #pragma mark - life circle
 - (void)viewDidLoad {
@@ -71,7 +71,7 @@ static CGFloat const Cell_Height = 44.f;
             tableView.delegate = self;
             tableView.separatorColor = [UIColor clearColor];
             tableView.scrollEnabled = NO;
-            [tableView registerClass:[NodeInfoCell class] forCellReuseIdentifier:CellIdentifier_ValveDetailInfo];
+            [tableView registerClass:[NodeInfoCell class] forCellReuseIdentifier:CellIdentifier_NTCValveDetailInfo];
             [self.view addSubview:tableView];
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
@@ -117,9 +117,9 @@ static CGFloat const Cell_Height = 44.f;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NodeInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_ValveDetailInfo];
+    NodeInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_NTCValveDetailInfo];
     if (cell == nil) {
-        cell = [[NodeInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_ValveDetailInfo];
+        cell = [[NodeInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_NTCValveDetailInfo];
     }
     cell.backgroundColor = [UIColor whiteColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -157,7 +157,7 @@ static CGFloat const Cell_Height = 44.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return Cell_Height;
+    return Cell_NTCHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SetTemperatureController : UIViewController
+@interface NTCSetTemperatureController : UIViewController
 
 @property (strong, nonatomic) DeviceModel *device;
 

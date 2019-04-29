@@ -12,6 +12,7 @@
 #import "WirelessValveController.h"
 #import "ShareDeviceListController.h"
 #import "PlugOutletController.h"
+#import "NTCWirelessValveController.h"
 
 NSString *const CellIdentifier_HomeDevice = @"CellID_HomeDevice";
 static CGFloat const Cell_Height = 72.f;
@@ -393,6 +394,36 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
+        case DeviceNTCValve:
+        {
+            if (isOnline) {
+                cell.deviceImage.image = [UIImage imageNamed:@"img_valve_on"];
+            }else{
+                cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
+            }
+            cell.switchBlock = ^(BOOL isOn) {
+                blockCell.controlSwitch.enabled = NO;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    //异步等待4秒，如果未收到信息做如下处理
+                    sleep(4);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        DeviceModel *device = self.deviceArray[indexPath.row];
+                        if ([device.isOn boolValue] != isOn) {
+                            blockCell.controlSwitch.enabled = YES;
+                            blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                        }
+                    });
+                });
+                
+                UInt8 controlCode = 0x01;
+                NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
+                [[Network shareNetwork] sendData69With:controlCode mac:mac data:data failuer:^{
+                    blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                }];
+            };
+        }
+            break;
+            
         case DeviceWallhob:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
@@ -467,6 +498,36 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
+        case DeviceNTCValve:
+        {
+            if (isOnline) {
+                cell.deviceImage.image = [UIImage imageNamed:@"img_valve_on"];
+            }else{
+                cell.deviceImage.image = [UIImage imageNamed:@"img_valve_off"];
+            }
+            cell.switchBlock = ^(BOOL isOn) {
+                blockCell.controlSwitch.enabled = NO;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    //异步等待4秒，如果未收到信息做如下处理
+                    sleep(4);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        DeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
+                        if ([device.isOn boolValue] != isOn) {
+                            blockCell.controlSwitch.enabled = YES;
+                            blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                        }
+                    });
+                });
+                
+                UInt8 controlCode = 0x01;
+                NSArray *data = @[@0xFE,@0x13,@0x01,@0x01,[NSNumber numberWithBool:isOn]];
+                [[Network shareNetwork] sendData69With:controlCode shareDevice:device data:data failure:^{
+                    blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                }];
+            };
+        }
+            break;
+            
         case DeviceWallhob:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
@@ -496,6 +557,14 @@ static CGFloat const Cell_Height = 72.f;
                 case DeviceValve:
                 {
                     WirelessValveController *valveVC = [[WirelessValveController alloc] init];
+                    valveVC.device = device;
+                    [self.navigationController pushViewController:valveVC animated:YES];
+                }
+                    break;
+                    
+                case DeviceNTCValve:
+                {
+                    NTCWirelessValveController *valveVC = [[NTCWirelessValveController alloc] init];
                     valveVC.device = device;
                     [self.navigationController pushViewController:valveVC animated:YES];
                 }
@@ -536,6 +605,14 @@ static CGFloat const Cell_Height = 72.f;
                 case DeviceValve:
                 {
                     WirelessValveController *valveVC = [[WirelessValveController alloc] init];
+                    valveVC.device = device;
+                    [self.navigationController pushViewController:valveVC animated:YES];
+                }
+                    break;
+                    
+                case DeviceNTCValve:
+                {
+                    NTCWirelessValveController *valveVC = [[NTCWirelessValveController alloc] init];
                     valveVC.device = device;
                     [self.navigationController pushViewController:valveVC animated:YES];
                 }

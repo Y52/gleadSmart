@@ -6,22 +6,22 @@
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "ValveAlertInfoController.h"
+#import "NTCValveAlertInfoController.h"
 #import "NodeDetailCell.h"
 #import "alarmModel.h"
 
 
-NSString *const CellIdentifier_ValveAlert = @"CellID_ValveAlert";
+NSString *const CellIdentifier_NTCValveAlert = @"CellID_NTCValveAlert";
 
-CGFloat const cellAlert_Height = 44.f;
+CGFloat const cellAlert_NTCHeight = 44.f;
 
-@interface ValveAlertInfoController () <UITableViewDataSource,UITableViewDelegate>
+@interface NTCValveAlertInfoController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *nodeLeakDetailTable;
 
 @end
 
-@implementation ValveAlertInfoController
+@implementation NTCValveAlertInfoController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +41,7 @@ CGFloat const cellAlert_Height = 44.f;
             tableView.delegate = self;
             tableView.separatorColor = [UIColor colorWithRed:191/255.0 green:191/255.0 blue:191/255.0 alpha:1];
             tableView.scrollEnabled = NO;
-            [tableView registerClass:[NodeDetailCell class] forCellReuseIdentifier:CellIdentifier_ValveAlert];
+            [tableView registerClass:[NodeDetailCell class] forCellReuseIdentifier:CellIdentifier_NTCValveAlert];
             [self.view addSubview:tableView];
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
@@ -70,9 +70,9 @@ CGFloat const cellAlert_Height = 44.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NodeDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_ValveAlert];
+    NodeDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_NTCValveAlert];
     if (cell == nil) {
-        cell = [[NodeDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_ValveAlert];
+        cell = [[NodeDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_NTCValveAlert];
     }
     alarmModel *alarm = [self.leakAlertInfo objectAtIndex:indexPath.row];
     cell.leakImage.image = [UIImage imageNamed:@"nodeLeakBig_abnormal"];
@@ -88,7 +88,7 @@ CGFloat const cellAlert_Height = 44.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return cellAlert_Height;
+    return cellAlert_NTCHeight;
 }
 
 

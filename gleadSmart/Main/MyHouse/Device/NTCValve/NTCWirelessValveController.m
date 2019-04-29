@@ -6,38 +6,44 @@
 //  Copyright © 2018年 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "WirelessValveController.h"
+#import "NTCWirelessValveController.h"
 #import "NodeDetailCell.h"
-#import "NodeDetailViewController.h"
+#import "NTCNodeDetailViewController.h"
 #import "NodeButton.h"
 #import "alarmModel.h"
 #import "DeviceSettingController.h"
-#import "ValveAlertInfoController.h"
+#import "NTCValveAlertInfoController.h"
+#import "NTCSetTemperatureController.h"
 
-NSString *const CellIdentifier_NodeDetail = @"CellID_NodeDetail";
+NSString *const CellIdentifier_NTCNodeDetail = @"CellID_NTCNodeDetail";
 
-CGFloat const cell_Height = 44.f;
-CGFloat const cellHeader_Height = 30.f;
-CGFloat const nodeButtonWidth = 20.f;
+CGFloat const cell_NTCHeight = 44.f;
+CGFloat const cellHeader_NTCHeight = 30.f;
+CGFloat const nodeButtonWidthNTC = 20.f;
 
-@interface WirelessValveController () <UITableViewDelegate, UITableViewDataSource>
+
+@interface NTCWirelessValveController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UIImageView *headerBgImage;
 
 @property (strong, nonatomic) UIView *leakStatusView;
 @property (strong, nonatomic) UIImageView *leakImage;
 @property (strong, nonatomic) UILabel *leakLabel;
-@property (strong, nonatomic) UIImageView *leakMark;
+//@property (strong, nonatomic) UIImageView *leakMark;
 
 @property (strong, nonatomic) UIView *valveStatusView;
 @property (strong, nonatomic) UIImageView *valveImage;
 @property (strong, nonatomic) UILabel *valveLabel;
-@property (strong, nonatomic) UIImageView *valveMark;
+//@property (strong, nonatomic) UIImageView *valveMark;
 
 @property (strong, nonatomic) UIView *switchStatusView;
 @property (strong, nonatomic) UIImageView *switchImage;
 @property (strong, nonatomic) UILabel *switchLabel;
-@property (strong, nonatomic) UIImageView *switchMark;
+//@property (strong, nonatomic) UIImageView *switchMark;
+
+@property (strong, nonatomic) UIView *temperatureStatusView;
+@property (strong, nonatomic) UIImageView *temperatureImage;
+@property (strong, nonatomic) UILabel *temperatureLabel;
 
 @property (strong, nonatomic) NSMutableArray *nodeArray;
 @property (strong, nonatomic) UIScrollView *nodesView;
@@ -52,12 +58,15 @@ CGFloat const nodeButtonWidth = 20.f;
 @property (strong, nonatomic) UITableView *nodeLeakDetailTable;
 
 @property (strong, nonatomic) UIButton *controlSwitchButton;
+@property (strong, nonatomic) UIButton *temperatureSetButton;
 
 ///@brief 漏水报警情况
 @property (nonatomic, strong) NSMutableArray *leakageInfos;
 @end
 
-@implementation WirelessValveController
+@implementation NTCWirelessValveController{
+    BOOL allNodeGeted;
+}
 
 #pragma mark - life cycle
 - (void)viewDidLoad {
@@ -69,23 +78,28 @@ CGFloat const nodeButtonWidth = 20.f;
     self.leakStatusView = [self leakStatusView];
     self.leakImage = [self leakImage];
     self.leakLabel = [self leakLabel];
-    self.leakMark = [self leakMark];
+    //self.leakMark = [self leakMark];
     self.valveStatusView = [self valveStatusView];
     self.valveImage = [self valveImage];
     self.valveLabel = [self valveLabel];
-    self.valveMark = [self valveMark];
+    //self.valveMark = [self valveMark];
+    self.temperatureStatusView = [self temperatureStatusView];
+    self.temperatureImage = [self temperatureImage];
+    self.temperatureLabel = [self temperatureLabel];
     self.switchStatusView = [self switchStatusView];
     self.switchImage = [self switchImage];
     self.switchLabel = [self switchLabel];
-    self.switchMark = [self switchMark];
+    //self.switchMark = [self switchMark];
     self.nodesView = [self nodesView];
     self.nodeLeakStatusButton = [self nodeLeakStatusButton];
     self.nodeBatteryButton = [self nodeBatteryButton];
     self.nodeSetViewButton = [self nodeSetViewButton];
     self.nodeLeakDetailTable = [self nodeLeakDetailTable];
     self.controlSwitchButton = [self controlSwitchButton];
+    self.temperatureSetButton = [self temperatureSetButton];
     
     [self getAllNode];
+    [self getValveTemperature];
 
     [self refreshDevice];//更新水阀的状态UI
     [self nodeLeakageAlarmInfoHttpGet];
@@ -105,6 +119,9 @@ CGFloat const nodeButtonWidth = 20.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valveNodeRabbitmqReport:) name:@"valveHangingNodesRabbitmqReport" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valveReset) name:@"valveReset" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshValveNodesUI) name:@"valveDeleteHangingNode" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getValveThreshold:) name:@"getValveThreshold" object:nil];
+    
+    allNodeGeted = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -115,6 +132,8 @@ CGFloat const nodeButtonWidth = 20.f;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveHangingNodesRabbitmqReport" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveReset" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"valveDeleteHangingNode" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getValveThreshold" object:nil];
+
 }
 #pragma mark - private methods
 //更新内容的kvc
@@ -154,7 +173,7 @@ CGFloat const nodeButtonWidth = 20.f;
         [NSObject showHudTipStr:@"当前没有选中漏水节点"];
         return;
     }
-    NodeDetailViewController *detailVC = [[NodeDetailViewController alloc] init];
+    NTCNodeDetailViewController *detailVC = [[NTCNodeDetailViewController alloc] init];
     for (int i = 0; i < self.device.nodeArray.count; i++) {
         NodeModel *node = self.device.nodeArray[i];
         if (node.isSelected) {
@@ -179,11 +198,11 @@ CGFloat const nodeButtonWidth = 20.f;
         if (hasLeak) {
             self.leakImage.image = [UIImage imageNamed:@"valveLeak_abnormal"];
             self.leakLabel.text = LocalString(@"漏水");
-            self.leakMark.hidden = NO;
+            //self.leakMark.hidden = NO;
         }else{
             self.leakImage.image = [UIImage imageNamed:@"valveLeak_normal"];
             self.leakLabel.text = LocalString(@"正常");
-            self.leakMark.hidden = YES;
+            //self.leakMark.hidden = YES;
         }
     });
 }
@@ -216,7 +235,7 @@ CGFloat const nodeButtonWidth = 20.f;
         }
         
         CGFloat height = 181.f - ScreenWidth / 3.f;
-        self.nodesView.contentSize = CGSizeMake((20.f + nodeButtonWidth) * length + nodeButtonWidth + ScreenWidth/2.f, height);
+        self.nodesView.contentSize = CGSizeMake((20.f + nodeButtonWidthNTC) * length + nodeButtonWidthNTC + ScreenWidth/2.f, height);
         
         UIView *lineFlag;
         for (int i = 0; i < length; i++) {
@@ -248,7 +267,7 @@ CGFloat const nodeButtonWidth = 20.f;
             [self.nodesView addSubview:nodeButton];
             
             [nodeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(nodeButtonWidth, nodeButtonWidth));
+                make.size.mas_equalTo(CGSizeMake(nodeButtonWidthNTC, nodeButtonWidthNTC));
                 if (i == 0) {
                     make.centerX.equalTo(self.nodesView.mas_centerX);
                 }else{
@@ -398,7 +417,7 @@ CGFloat const nodeButtonWidth = 20.f;
     [self.nodesView addSubview:nodeButton];
     
     [nodeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(nodeButtonWidth, nodeButtonWidth));
+        make.size.mas_equalTo(CGSizeMake(nodeButtonWidthNTC, nodeButtonWidthNTC));
         if (!lastButton) {
             make.centerX.equalTo(self.nodesView.mas_centerX);
         }else{
@@ -437,6 +456,7 @@ CGFloat const nodeButtonWidth = 20.f;
 
 //刷新节点UI的notification@selector，即获得了节点信息帧
 - (void)refreshValveNodesUI{
+    allNodeGeted = YES;
     for (DeviceModel *device in [Network shareNetwork].deviceArray) {
         if ([device.mac isEqualToString:self.device.mac]) {
             self.device = device;
@@ -466,7 +486,7 @@ CGFloat const nodeButtonWidth = 20.f;
     }
 
     NSInteger index = nodeButton.tag - 1000;
-    CGFloat xoffset = index * (20.f + nodeButtonWidth);
+    CGFloat xoffset = index * (20.f + nodeButtonWidthNTC);
     CGFloat yoffset = self.nodesView.contentOffset.y;
     [UIView animateWithDuration:0.5 animations:^{
         self.nodesView.contentOffset = CGPointMake(xoffset, yoffset);
@@ -533,7 +553,6 @@ CGFloat const nodeButtonWidth = 20.f;
 
 //获取所有下挂漏水节点
 - (void)getAllNode{
-    [SVProgressHUD show];
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x13,@0x04,@0x00];
     if (self.device.isShare) {
@@ -541,6 +560,35 @@ CGFloat const nodeButtonWidth = 20.f;
     }else{
         [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
     }
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        //异步等待4秒，如果未收到信息做如下处理
+        sleep(10);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!self->allNodeGeted) {
+                [NSObject showHudTipStr:LocalString(@"查询漏水节点失败")];
+                [SVProgressHUD dismiss];
+            }
+        });
+    });
+}
+
+- (void)getValveTemperature{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFE,@0x13,@0x08,@0x00];
+    if (self.device.isShare) {
+        [[Network shareNetwork] sendData69With:controlCode shareDevice:self.device data:data failure:nil];
+    }else{
+        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
+    }
+}
+
+//水阀温度上报收到通知
+- (void)getValveThreshold:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    NSNumber *threshold = [userInfo objectForKey:@"getThreshold"];
+    NSNumber *temp = [userInfo objectForKey:@"temp"];
+    _temperatureLabel.text = [NSString stringWithFormat:@"温度:%d℃",[temp intValue]];
 }
 
 - (NSMutableArray *)sortLeakageInfosByDate:(NSMutableArray *)arr{
@@ -768,27 +816,27 @@ CGFloat const nodeButtonWidth = 20.f;
         _leakStatusView = [[UIView alloc] init];
         [self.view addSubview:_leakStatusView];
         [_leakStatusView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth / 3.f, ScreenWidth / 3.f));
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth / 4.f, ScreenWidth / 4.f));
             make.left.equalTo(self.view.mas_left);
-            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight);
+            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight +20.f);
         }];
         
-        UIView *line1 = [[UIView alloc] init];
-        line1.backgroundColor = [UIColor colorWithHexString:@"ADC1CE"];
-        [self.view addSubview:line1];
-        [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth, 1.f));
-            make.left.equalTo(self.view.mas_left);
-            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight);
-        }];
-        
+//        UIView *line1 = [[UIView alloc] init];
+//        line1.backgroundColor = [UIColor colorWithHexString:@"ADC1CE"];
+//        [self.view addSubview:line1];
+//        [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(ScreenWidth, 1.f));
+//            make.left.equalTo(self.view.mas_left);
+//            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight +20.f);
+//        }];
+
         UIView *line2 = [[UIView alloc] init];
         line2.backgroundColor = [UIColor colorWithHexString:@"ADC1CE"];
         [self.view addSubview:line2];
         [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(ScreenWidth, 1.f));
             make.left.equalTo(self.view.mas_left);
-            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight + ScreenWidth / 3.f);
+            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight +20.f + ScreenWidth / 4.f);
         }];
     }
     return _leakStatusView;
@@ -797,6 +845,7 @@ CGFloat const nodeButtonWidth = 20.f;
 - (UIImageView *)leakImage{
     if (!_leakImage) {
         _leakImage = [[UIImageView alloc] init];
+        _leakImage.contentMode = UIViewContentModeScaleAspectFit;
         _leakImage.image = [UIImage imageNamed:@"valveLeak_normal"];
         [self.leakStatusView addSubview:_leakImage];
         [_leakImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -825,38 +874,38 @@ CGFloat const nodeButtonWidth = 20.f;
     return _leakLabel;
 }
 
-- (UIImageView *)leakMark{
-    if (!_leakMark) {
-        _leakMark = [[UIImageView alloc] init];
-        _leakMark.image = [UIImage imageNamed:@"valveAlertMark"];
-        _leakMark.hidden = YES;
-        [self.leakStatusView addSubview:_leakMark];
-        [_leakMark mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(30.f), yAutoFit(30.f)));
-            make.top.equalTo(self.leakStatusView.mas_top);
-            make.right.equalTo(self.leakStatusView.mas_right);
-        }];
-    }
-    return _leakMark;
-}
+//- (UIImageView *)leakMark{
+//    if (!_leakMark) {
+//        _leakMark = [[UIImageView alloc] init];
+//        _leakMark.image = [UIImage imageNamed:@"valveAlertMark"];
+//        _leakMark.hidden = YES;
+//        [self.leakStatusView addSubview:_leakMark];
+//        [_leakMark mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(yAutoFit(30.f), yAutoFit(30.f)));
+//            make.top.equalTo(self.leakStatusView.mas_top);
+//            make.right.equalTo(self.leakStatusView.mas_right);
+//        }];
+//    }
+//    return _leakMark;
+//}
 
 - (UIView *)valveStatusView{
     if (!_valveStatusView) {
-        UIView *line = [[UIView alloc] init];
-        line.backgroundColor = [UIColor colorWithHexString:@"ADC1CE"];
-        [self.view addSubview:line];
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(1.f, ScreenWidth / 3.f));
-            make.left.equalTo(self.leakStatusView.mas_right);
-            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight);
-        }];
+//        UIView *line = [[UIView alloc] init];
+//        line.backgroundColor = [UIColor colorWithHexString:@"ADC1CE"];
+//        [self.view addSubview:line];
+//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(1.f, ScreenWidth / 3.f));
+//            make.left.equalTo(self.leakStatusView.mas_right);
+//            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight);
+//        }];
         
         _valveStatusView = [[UIView alloc] init];
         [self.view addSubview:_valveStatusView];
         [_valveStatusView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth / 3.f, ScreenWidth / 3.f));
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth / 4.f, ScreenWidth / 4.f));
             make.left.equalTo(self.leakStatusView.mas_right);
-            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight);
+            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight +20.f);
         }];
     }
     return _valveStatusView;
@@ -865,6 +914,7 @@ CGFloat const nodeButtonWidth = 20.f;
 - (UIImageView *)valveImage{
     if (!_valveImage) {
         _valveImage = [[UIImageView alloc] init];
+        _valveImage.contentMode = UIViewContentModeScaleAspectFit;
         _valveImage.image = [UIImage imageNamed:@"valveStatus_normal"];
         [self.valveStatusView addSubview:_valveImage];
         [_valveImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -894,38 +944,85 @@ CGFloat const nodeButtonWidth = 20.f;
     return _valveLabel;
 }
 
-- (UIImageView *)valveMark{
-    if (!_valveMark) {
-        _valveMark = [[UIImageView alloc] init];
-        _valveMark.image = [UIImage imageNamed:@"valveAlertMark"];
-        _valveMark.hidden = YES;
-        [self.valveStatusView addSubview:_valveMark];
-        [_valveMark mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(30.f), yAutoFit(30.f)));
-            make.top.equalTo(self.valveStatusView.mas_top);
-            make.right.equalTo(self.valveStatusView.mas_right);
+//- (UIImageView *)valveMark{
+//    if (!_valveMark) {
+//        _valveMark = [[UIImageView alloc] init];
+//        _valveMark.image = [UIImage imageNamed:@"valveAlertMark"];
+//        _valveMark.hidden = YES;
+//        [self.valveStatusView addSubview:_valveMark];
+//        [_valveMark mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(yAutoFit(30.f), yAutoFit(30.f)));
+//            make.top.equalTo(self.valveStatusView.mas_top);
+//            make.right.equalTo(self.valveStatusView.mas_right);
+//        }];
+//    }
+//    return _valveMark;
+//}
+//温度显示
+- (UIView *)temperatureStatusView{
+    if (!_temperatureStatusView) {
+        _temperatureStatusView = [[UIView alloc] init];
+        [self.view addSubview:_temperatureStatusView];
+        [_temperatureStatusView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth / 4.f, ScreenWidth / 4.f));
+            make.left.equalTo(self.valveStatusView.mas_right);
+            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight +20.f);
         }];
     }
-    return _valveMark;
+    return _temperatureStatusView;
 }
 
+- (UIImageView *)temperatureImage{
+    if (!_temperatureImage) {
+        _temperatureImage = [[UIImageView alloc] init];
+        _temperatureImage.image = [UIImage imageNamed:@"valveTemperature_normal"];
+        _temperatureImage.contentMode = UIViewContentModeScaleAspectFit;
+        [self.temperatureStatusView addSubview:_temperatureImage];
+        [_temperatureImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(60.f), yAutoFit(60.f)));
+            make.centerX.equalTo(self.temperatureStatusView.mas_centerX);
+            make.centerY.equalTo(self.temperatureStatusView.mas_centerY).offset(-yAutoFit(15.f));
+        }];
+    }
+    return _valveImage;
+}
+
+- (UILabel *)temperatureLabel{
+    if (!_temperatureLabel) {
+        _temperatureLabel = [[UILabel alloc] init];
+        _temperatureLabel.text = LocalString(@"温度:0℃");
+        _temperatureLabel.textAlignment = NSTextAlignmentCenter;
+        _temperatureLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
+        _temperatureLabel.font = [UIFont fontWithName:@"Helvetica" size:14.f];
+        _temperatureLabel.adjustsFontSizeToFitWidth = YES;
+        [self.temperatureStatusView addSubview:_temperatureLabel];
+        [_temperatureLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(80.f), yAutoFit(13.f)));
+            make.centerX.equalTo(self.temperatureStatusView.mas_centerX);
+            make.top.equalTo(self.temperatureImage.mas_bottom).offset(yAutoFit(5.f));
+        }];
+    }
+    return _temperatureLabel;
+}
+
+//水阀开关
 - (UIView *)switchStatusView{
     if (!_switchStatusView) {
-        UIView *line = [[UIView alloc] init];
-        line.backgroundColor = [UIColor colorWithHexString:@"ADC1CE"];
-        [self.view addSubview:line];
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(1.f, ScreenWidth / 3.f));
-            make.left.equalTo(self.valveStatusView.mas_right);
-            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight);
-        }];
+//        UIView *line = [[UIView alloc] init];
+//        line.backgroundColor = [UIColor colorWithHexString:@"ADC1CE"];
+//        [self.view addSubview:line];
+//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(1.f, ScreenWidth / 3.f));
+//            make.left.equalTo(self.valveStatusView.mas_right);
+//            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight);
+//        }];
         
         _switchStatusView = [[UIView alloc] init];
         [self.view addSubview:_switchStatusView];
         [_switchStatusView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth / 3.f, ScreenWidth / 3.f));
-            make.left.equalTo(self.valveStatusView.mas_right);
-            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight);
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth / 4.f, ScreenWidth / 4.f));
+            make.left.equalTo(self.temperatureStatusView.mas_right);
+            make.top.equalTo(self.mas_topLayoutGuideTop).offset(getRectNavAndStatusHight +20.f);
 
         }];
     }
@@ -936,6 +1033,7 @@ CGFloat const nodeButtonWidth = 20.f;
     if (!_switchImage) {
         _switchImage = [[UIImageView alloc] init];
         _switchImage.image = [UIImage imageNamed:@"valveSwitch_normal"];
+        _switchImage.contentMode = UIViewContentModeScaleAspectFit;
         [self.switchStatusView addSubview:_switchImage];
         [_switchImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(60.f), yAutoFit(60.f)));
@@ -963,20 +1061,20 @@ CGFloat const nodeButtonWidth = 20.f;
     return _switchLabel;
 }
 
--(UIImageView *)switchMark{
-    if (!_switchMark) {
-        _switchMark = [[UIImageView alloc] init];
-        _switchMark.image = [UIImage imageNamed:@"valveAlertMark"];
-        _switchMark.hidden = YES;
-        [self.switchStatusView addSubview:_switchMark];
-        [_switchMark mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(30.f), yAutoFit(30.f)));
-            make.top.equalTo(self.switchStatusView.mas_top);
-            make.right.equalTo(self.switchStatusView.mas_right);
-        }];
-    }
-    return _switchMark;
-}
+//-(UIImageView *)switchMark{
+//    if (!_switchMark) {
+//        _switchMark = [[UIImageView alloc] init];
+//        _switchMark.image = [UIImage imageNamed:@"valveAlertMark"];
+//        _switchMark.hidden = YES;
+//        [self.switchStatusView addSubview:_switchMark];
+//        [_switchMark mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(yAutoFit(30.f), yAutoFit(30.f)));
+//            make.top.equalTo(self.switchStatusView.mas_top);
+//            make.right.equalTo(self.switchStatusView.mas_right);
+//        }];
+//    }
+//    return _switchMark;
+//}
 
 - (UIView *)nodesView{
     if (!_nodesView) {
@@ -1086,7 +1184,7 @@ CGFloat const nodeButtonWidth = 20.f;
             tableView.delegate = self;
             tableView.separatorColor = [UIColor colorWithRed:191/255.0 green:191/255.0 blue:191/255.0 alpha:1];
             tableView.scrollEnabled = NO;
-            [tableView registerClass:[NodeDetailCell class] forCellReuseIdentifier:CellIdentifier_NodeDetail];
+            [tableView registerClass:[NodeDetailCell class] forCellReuseIdentifier:CellIdentifier_NTCNodeDetail];
             [self.view addSubview:tableView];
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
@@ -1095,7 +1193,7 @@ CGFloat const nodeButtonWidth = 20.f;
             tableView;
         });
         [_nodeLeakDetailTable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth, cellHeader_Height + cell_Height * 3));
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth, cellHeader_NTCHeight + cell_NTCHeight * 3));
             make.top.equalTo(self.nodeLeakStatusLabel.mas_bottom).offset(yAutoFit(15.f));
             make.centerX.equalTo(self.view.mas_centerX);
         }];
@@ -1116,7 +1214,7 @@ CGFloat const nodeButtonWidth = 20.f;
         [self.view addSubview:_controlSwitchButton];
         [_controlSwitchButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(51.f, 70.f));
-            make.centerX.equalTo(self.view.mas_centerX);
+            make.right.equalTo(self.view.mas_centerX).offset(yAutoFit(-25.f));
             make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(30.f + ySafeArea_Bottom)));
         }];
         _controlSwitchButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;//使图片和文字水平居中显示
@@ -1126,6 +1224,31 @@ CGFloat const nodeButtonWidth = 20.f;
                                                          _controlSwitchButton.titleLabel.bounds.size.width)];//图片距离右边框距离减少图片的宽度，其它不边
     }
     return _controlSwitchButton;
+}
+
+- (UIButton *)temperatureSetButton{
+    if (!_temperatureSetButton) {
+        _temperatureSetButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_temperatureSetButton setTitle:LocalString(@"设置温度") forState:UIControlStateNormal];
+        [_temperatureSetButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
+        [_temperatureSetButton setImage:[UIImage imageNamed:@"temperatureSet"] forState:UIControlStateNormal];
+        _temperatureSetButton.tag = yUnselect;
+        //[_controlSwitchButton.imageView sizeThatFits:CGSizeMake(51.f, 51.f)];
+        _temperatureSetButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:17.f];
+        [_temperatureSetButton addTarget:self action:@selector(temperatureSet) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_temperatureSetButton];
+        [_temperatureSetButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(80.f, 70.f));
+            make.left.equalTo(self.view.mas_centerX).offset(yAutoFit(25.f));
+            make.bottom.equalTo(self.view.mas_bottom).offset(yAutoFit(-(30.f + ySafeArea_Bottom)));
+        }];
+        _temperatureSetButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;//使图片和文字水平居中显示
+        [_temperatureSetButton setTitleEdgeInsets:UIEdgeInsetsMake(_temperatureSetButton.imageView.frame.size.height + _temperatureSetButton.imageView.frame.origin.y + 10.f, -
+                                                                  _temperatureSetButton.imageView.frame.size.width, 0.0, 5.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
+        [_temperatureSetButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, -
+                                                                  _temperatureSetButton.titleLabel.bounds.size.width)];//图片距离右边框距离减少图片的宽度，其它不边
+    }
+    return _temperatureSetButton;
 }
 
 #pragma mark - UITableView delegate&datasource
@@ -1143,9 +1266,9 @@ CGFloat const nodeButtonWidth = 20.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NodeDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_NodeDetail];
+    NodeDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_NTCNodeDetail];
     if (cell == nil) {
-        cell = [[NodeDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_NodeDetail];
+        cell = [[NodeDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_NTCNodeDetail];
     }
     alarmModel *alarm = [self.leakageInfos objectAtIndex:indexPath.row];
     cell.leakImage.image = [UIImage imageNamed:@"nodeLeakBig_abnormal"];
@@ -1161,11 +1284,11 @@ CGFloat const nodeButtonWidth = 20.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return cell_Height;
+    return cell_NTCHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, cellHeader_Height)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, cellHeader_NTCHeight)];
     headerView.layer.backgroundColor = [UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1].CGColor;
     
     UIButton *headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1182,13 +1305,20 @@ CGFloat const nodeButtonWidth = 20.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return cellHeader_Height;
+    return cellHeader_NTCHeight;
 }
 
 - (void)CheckedOut{
-    ValveAlertInfoController *ValveAlertVC = [[ValveAlertInfoController alloc] init];
+    NTCValveAlertInfoController *ValveAlertVC = [[NTCValveAlertInfoController alloc] init];
     ValveAlertVC.leakAlertInfo = self.leakageInfos;
     [self.navigationController pushViewController:ValveAlertVC animated:YES];
+}
+
+- (void)temperatureSet{
+    
+    NTCSetTemperatureController *SetVC = [[NTCSetTemperatureController alloc] init];
+    SetVC.device = self.device;
+    [self.navigationController pushViewController:SetVC animated:YES];
 }
 
 @end

@@ -26,12 +26,12 @@
 		3601492F227194FE00EA6B97 /* currenttemperature@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3601492D227194FE00EA6B97 /* currenttemperature@3x.png */; };
 		360149322271A95F00EA6B97 /* valveTemperature_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 360149302271A95F00EA6B97 /* valveTemperature_abnormal@2x.png */; };
 		360149332271A95F00EA6B97 /* valveTemperature_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 360149312271A95F00EA6B97 /* valveTemperature_abnormal@3x.png */; };
-		360149362271B25700EA6B97 /* SetTemperatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 360149352271B25700EA6B97 /* SetTemperatureController.m */; };
+		360149362271B25700EA6B97 /* NTCSetTemperatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 360149352271B25700EA6B97 /* NTCSetTemperatureController.m */; };
 		3604FD52225B707A00D0B97D /* img_Lamp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD4F225B707A00D0B97D /* img_Lamp@2x.png */; };
 		3604FD53225B707A00D0B97D /* img_Lamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD50225B707A00D0B97D /* img_Lamp.png */; };
 		3604FD54225B707A00D0B97D /* img_Lamp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3604FD51225B707A00D0B97D /* img_Lamp@3x.png */; };
 		36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 36134F2B21E6E10100A7D98E /* NodeButton.m */; };
-		36330235225C844200E3EFAA /* ValveAlertInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36330234225C844200E3EFAA /* ValveAlertInfoController.m */; };
+		36330235225C844200E3EFAA /* NTCValveAlertInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36330234225C844200E3EFAA /* NTCValveAlertInfoController.m */; };
 		369C169B22250ECB0079159E /* AddRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169A22250ECA0079159E /* AddRoomsViewController.m */; };
 		369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C169E222513E90079159E /* AddRoomsTextCell.m */; };
 		369C16A322255FD90079159E /* addRoom_hand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C16A022255FD90079159E /* addRoom_hand@3x.png */; };
@@ -183,7 +183,7 @@
 		BB37DED321A7984000B2121B /* thermostat_timing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED121A7983F00B2121B /* thermostat_timing@2x.png */; };
 		BB37DED721A798A100B2121B /* thermostatKnob_On@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB37DED521A798A100B2121B /* thermostatKnob_On@3x.png */; };
 		BB37DEF221A7AB3700B2121B /* YSZCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF121A7AB3700B2121B /* YSZCoreDataStackManager.m */; };
-		BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF421A7E59600B2121B /* WirelessValveController.m */; };
+		BB37DEF821A7E59600B2121B /* NTCWirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF421A7E59600B2121B /* NTCWirelessValveController.m */; };
 		BB37DEF921A7E59600B2121B /* ThermostatController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF721A7E59600B2121B /* ThermostatController.m */; };
 		BB37DEFF21A7E8D600B2121B /* NodeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEFD21A7E8D600B2121B /* NodeDetailCell.m */; };
 		BB37DF0B21A7EFC400B2121B /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DF0321A7EFC300B2121B /* DeviceViewController.m */; };
@@ -201,6 +201,9 @@
 		BB3D754A22523C57007DDFD6 /* PlugOutletSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E3CF5A2251B9DE00F4195D /* PlugOutletSettingCell.m */; };
 		BB3D754D2252411D007DDFD6 /* DeviceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3D754C2252411D007DDFD6 /* DeviceSettingController.m */; };
 		BB3D7550225242D1007DDFD6 /* DeviceSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3D754F225242D1007DDFD6 /* DeviceSettingCell.m */; };
+		BB41EEF6227698A10048A96A /* ValveAlertInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB41EEF0227698A10048A96A /* ValveAlertInfoController.m */; };
+		BB41EEF7227698A10048A96A /* NodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB41EEF3227698A10048A96A /* NodeDetailViewController.m */; };
+		BB41EEF8227698A10048A96A /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB41EEF5227698A10048A96A /* WirelessValveController.m */; };
 		BB425F5721BF4DF400AB6EFB /* img_valve_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5421BF4DF400AB6EFB /* img_valve_on@3x.png */; };
 		BB425F5821BF4DF400AB6EFB /* img_valve_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5521BF4DF400AB6EFB /* img_valve_on.png */; };
 		BB425F5921BF4DF400AB6EFB /* img_valve_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB425F5621BF4DF400AB6EFB /* img_valve_on@2x.png */; };
@@ -432,7 +435,7 @@
 		BBA593E8224A2AB1009D5941 /* LogOutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB00A4FB21BA243E004E4051 /* LogOutCell.m */; };
 		BBA593E9224A2AB1009D5941 /* NodeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEFD21A7E8D600B2121B /* NodeDetailCell.m */; };
 		BBA593EA224A2AB1009D5941 /* PasswordLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530C321AB9C88000A6D26 /* PasswordLoginController.m */; };
-		BBA593EB224A2AB1009D5941 /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF421A7E59600B2121B /* WirelessValveController.m */; };
+		BBA593EB224A2AB1009D5941 /* NTCWirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB37DEF421A7E59600B2121B /* NTCWirelessValveController.m */; };
 		BBA593EC224A2AB1009D5941 /* TherWeekProgramController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62E4DD21B5155000C0FA39 /* TherWeekProgramController.m */; };
 		BBA593ED224A2AB1009D5941 /* UsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36004A8E2227E96500C99215 /* UsernameViewController.m */; };
 		BBA593EE224A2AB1009D5941 /* PhoneTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA530B921AB9B42000A6D26 /* PhoneTFCell.m */; };
@@ -455,7 +458,7 @@
 		BBA593FF224A2AB1009D5941 /* NodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB52F9EC21BE6B03005FA33A /* NodeModel.m */; };
 		BBA59400224A2AB1009D5941 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A404321996F4A004669CA /* MainViewController.m */; };
 		BBA59401224A2AB1009D5941 /* ESPTouchTaskParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0DE21A8F156006DB83A /* ESPTouchTaskParameter.m */; };
-		BBA59402224A2AB1009D5941 /* NodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326A21BBBDE0006A23AC /* NodeDetailViewController.m */; };
+		BBA59402224A2AB1009D5941 /* NTCNodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326A21BBBDE0006A23AC /* NTCNodeDetailViewController.m */; };
 		BBA59403224A2AB1009D5941 /* ESPUDPSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2AC0DD21A8F156006DB83A /* ESPUDPSocketClient.m */; };
 		BBA59404224A2AB1009D5941 /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6739DD223271AA002E6239 /* NoHouseAddController.m */; };
 		BBA59405224A2AB1009D5941 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0A404A219970D3004669CA /* RDVTabBarController.m */; };
@@ -896,7 +899,7 @@
 		BBF6326421BBAB34006A23AC /* valveStatus_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323121BBAB33006A23AC /* valveStatus_normal@3x.png */; };
 		BBF6326521BBAB34006A23AC /* valveHeader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323221BBAB33006A23AC /* valveHeader@3x.png */; };
 		BBF6326621BBAB34006A23AC /* valveSwitch_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF6323321BBAB33006A23AC /* valveSwitch_abnormal@2x.png */; };
-		BBF6326B21BBBDE0006A23AC /* NodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326A21BBBDE0006A23AC /* NodeDetailViewController.m */; };
+		BBF6326B21BBBDE0006A23AC /* NTCNodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326A21BBBDE0006A23AC /* NTCNodeDetailViewController.m */; };
 		BBF6326E21BBC472006A23AC /* NodeInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6326D21BBC472006A23AC /* NodeInfoCell.m */; };
 		BBF8CAED22169FBA0030E921 /* FamilyMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAEC22169FBA0030E921 /* FamilyMemberController.m */; };
 		BBF8CAF12216A4650030E921 /* FamilyMemberInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF8CAF02216A4650030E921 /* FamilyMemberInfoCell.m */; };
@@ -970,15 +973,15 @@
 		3601492D227194FE00EA6B97 /* currenttemperature@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currenttemperature@3x.png"; sourceTree = "<group>"; };
 		360149302271A95F00EA6B97 /* valveTemperature_abnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTemperature_abnormal@2x.png"; sourceTree = "<group>"; };
 		360149312271A95F00EA6B97 /* valveTemperature_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTemperature_abnormal@3x.png"; sourceTree = "<group>"; };
-		360149342271B25700EA6B97 /* SetTemperatureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTemperatureController.h; sourceTree = "<group>"; };
-		360149352271B25700EA6B97 /* SetTemperatureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTemperatureController.m; sourceTree = "<group>"; };
+		360149342271B25700EA6B97 /* NTCSetTemperatureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTCSetTemperatureController.h; sourceTree = "<group>"; };
+		360149352271B25700EA6B97 /* NTCSetTemperatureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NTCSetTemperatureController.m; sourceTree = "<group>"; };
 		3604FD4F225B707A00D0B97D /* img_Lamp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Lamp@2x.png"; sourceTree = "<group>"; };
 		3604FD50225B707A00D0B97D /* img_Lamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_Lamp.png; sourceTree = "<group>"; };
 		3604FD51225B707A00D0B97D /* img_Lamp@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Lamp@3x.png"; sourceTree = "<group>"; };
 		36134F2A21E6E10100A7D98E /* NodeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeButton.h; sourceTree = "<group>"; };
 		36134F2B21E6E10100A7D98E /* NodeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeButton.m; sourceTree = "<group>"; };
-		36330233225C844200E3EFAA /* ValveAlertInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValveAlertInfoController.h; sourceTree = "<group>"; };
-		36330234225C844200E3EFAA /* ValveAlertInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ValveAlertInfoController.m; sourceTree = "<group>"; };
+		36330233225C844200E3EFAA /* NTCValveAlertInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTCValveAlertInfoController.h; sourceTree = "<group>"; };
+		36330234225C844200E3EFAA /* NTCValveAlertInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NTCValveAlertInfoController.m; sourceTree = "<group>"; };
 		369C169922250ECA0079159E /* AddRoomsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRoomsViewController.h; sourceTree = "<group>"; };
 		369C169A22250ECA0079159E /* AddRoomsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRoomsViewController.m; sourceTree = "<group>"; };
 		369C169D222513E90079159E /* AddRoomsTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRoomsTextCell.h; sourceTree = "<group>"; };
@@ -1213,8 +1216,8 @@
 		BB37DED521A798A100B2121B /* thermostatKnob_On@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatKnob_On@3x.png"; sourceTree = "<group>"; };
 		BB37DEF021A7AB3700B2121B /* YSZCoreDataStackManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSZCoreDataStackManager.h; sourceTree = "<group>"; };
 		BB37DEF121A7AB3700B2121B /* YSZCoreDataStackManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSZCoreDataStackManager.m; sourceTree = "<group>"; };
-		BB37DEF421A7E59600B2121B /* WirelessValveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WirelessValveController.m; sourceTree = "<group>"; };
-		BB37DEF521A7E59600B2121B /* WirelessValveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessValveController.h; sourceTree = "<group>"; };
+		BB37DEF421A7E59600B2121B /* NTCWirelessValveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTCWirelessValveController.m; sourceTree = "<group>"; };
+		BB37DEF521A7E59600B2121B /* NTCWirelessValveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTCWirelessValveController.h; sourceTree = "<group>"; };
 		BB37DEF621A7E59600B2121B /* ThermostatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThermostatController.h; sourceTree = "<group>"; };
 		BB37DEF721A7E59600B2121B /* ThermostatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThermostatController.m; sourceTree = "<group>"; };
 		BB37DEFD21A7E8D600B2121B /* NodeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeDetailCell.m; sourceTree = "<group>"; };
@@ -1238,6 +1241,12 @@
 		BB3D754C2252411D007DDFD6 /* DeviceSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSettingController.m; sourceTree = "<group>"; };
 		BB3D754E225242D1007DDFD6 /* DeviceSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceSettingCell.h; sourceTree = "<group>"; };
 		BB3D754F225242D1007DDFD6 /* DeviceSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSettingCell.m; sourceTree = "<group>"; };
+		BB41EEF0227698A10048A96A /* ValveAlertInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValveAlertInfoController.m; sourceTree = "<group>"; };
+		BB41EEF1227698A10048A96A /* ValveAlertInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValveAlertInfoController.h; sourceTree = "<group>"; };
+		BB41EEF2227698A10048A96A /* NodeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeDetailViewController.h; sourceTree = "<group>"; };
+		BB41EEF3227698A10048A96A /* NodeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeDetailViewController.m; sourceTree = "<group>"; };
+		BB41EEF4227698A10048A96A /* WirelessValveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessValveController.h; sourceTree = "<group>"; };
+		BB41EEF5227698A10048A96A /* WirelessValveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WirelessValveController.m; sourceTree = "<group>"; };
 		BB425F5421BF4DF400AB6EFB /* img_valve_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_on@3x.png"; sourceTree = "<group>"; };
 		BB425F5521BF4DF400AB6EFB /* img_valve_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_valve_on.png; sourceTree = "<group>"; };
 		BB425F5621BF4DF400AB6EFB /* img_valve_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_on@2x.png"; sourceTree = "<group>"; };
@@ -1556,8 +1565,8 @@
 		BBF6323121BBAB33006A23AC /* valveStatus_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_normal@3x.png"; sourceTree = "<group>"; };
 		BBF6323221BBAB33006A23AC /* valveHeader@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveHeader@3x.png"; sourceTree = "<group>"; };
 		BBF6323321BBAB33006A23AC /* valveSwitch_abnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveSwitch_abnormal@2x.png"; sourceTree = "<group>"; };
-		BBF6326921BBBDE0006A23AC /* NodeDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeDetailViewController.h; sourceTree = "<group>"; };
-		BBF6326A21BBBDE0006A23AC /* NodeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeDetailViewController.m; sourceTree = "<group>"; };
+		BBF6326921BBBDE0006A23AC /* NTCNodeDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTCNodeDetailViewController.h; sourceTree = "<group>"; };
+		BBF6326A21BBBDE0006A23AC /* NTCNodeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NTCNodeDetailViewController.m; sourceTree = "<group>"; };
 		BBF6326C21BBC472006A23AC /* NodeInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeInfoCell.h; sourceTree = "<group>"; };
 		BBF6326D21BBC472006A23AC /* NodeInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeInfoCell.m; sourceTree = "<group>"; };
 		BBF8CAEB22169FBA0030E921 /* FamilyMemberController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyMemberController.h; sourceTree = "<group>"; };
@@ -1918,6 +1927,7 @@
 				36E3CF5C2251F70700F4195D /* DeviceShare */,
 				BB37DF1321A7F6C800B2121B /* Thermostat */,
 				BB37DF1421A7F6D700B2121B /* Valve */,
+				BB41EEEF227697D40048A96A /* NTCValve */,
 				BB647BE5224DFE5800DCB992 /* plugOutlet */,
 				BB3D754B2252411D007DDFD6 /* DeviceSettingController.h */,
 				BB3D754C2252411D007DDFD6 /* DeviceSettingController.m */,
@@ -2162,14 +2172,12 @@
 		BB37DF1421A7F6D700B2121B /* Valve */ = {
 			isa = PBXGroup;
 			children = (
-				BB37DEF521A7E59600B2121B /* WirelessValveController.h */,
-				BB37DEF421A7E59600B2121B /* WirelessValveController.m */,
-				BBF6326921BBBDE0006A23AC /* NodeDetailViewController.h */,
-				BBF6326A21BBBDE0006A23AC /* NodeDetailViewController.m */,
-				36330233225C844200E3EFAA /* ValveAlertInfoController.h */,
-				36330234225C844200E3EFAA /* ValveAlertInfoController.m */,
-				360149342271B25700EA6B97 /* SetTemperatureController.h */,
-				360149352271B25700EA6B97 /* SetTemperatureController.m */,
+				BB41EEF4227698A10048A96A /* WirelessValveController.h */,
+				BB41EEF5227698A10048A96A /* WirelessValveController.m */,
+				BB41EEF2227698A10048A96A /* NodeDetailViewController.h */,
+				BB41EEF3227698A10048A96A /* NodeDetailViewController.m */,
+				BB41EEF1227698A10048A96A /* ValveAlertInfoController.h */,
+				BB41EEF0227698A10048A96A /* ValveAlertInfoController.m */,
 			);
 			path = Valve;
 			sourceTree = "<group>";
@@ -2183,6 +2191,21 @@
 				BBF6326D21BBC472006A23AC /* NodeInfoCell.m */,
 			);
 			path = Valve;
+			sourceTree = "<group>";
+		};
+		BB41EEEF227697D40048A96A /* NTCValve */ = {
+			isa = PBXGroup;
+			children = (
+				BB37DEF521A7E59600B2121B /* NTCWirelessValveController.h */,
+				BB37DEF421A7E59600B2121B /* NTCWirelessValveController.m */,
+				BBF6326921BBBDE0006A23AC /* NTCNodeDetailViewController.h */,
+				BBF6326A21BBBDE0006A23AC /* NTCNodeDetailViewController.m */,
+				36330233225C844200E3EFAA /* NTCValveAlertInfoController.h */,
+				36330234225C844200E3EFAA /* NTCValveAlertInfoController.m */,
+				360149342271B25700EA6B97 /* NTCSetTemperatureController.h */,
+				360149352271B25700EA6B97 /* NTCSetTemperatureController.m */,
+			);
+			path = NTCValve;
 			sourceTree = "<group>";
 		};
 		BB45BC4B21EF280700504FF8 /* HouseSelect */ = {
@@ -3616,7 +3639,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				360149362271B25700EA6B97 /* SetTemperatureController.m in Sources */,
+				360149362271B25700EA6B97 /* NTCSetTemperatureController.m in Sources */,
 				BB2AC0F221A8F156006DB83A /* ESPAES.m in Sources */,
 				BB6C8D1B225C3B8E00FD6472 /* APStatusConfirmController.m in Sources */,
 				36E3CF622251F84900F4195D /* DeviceShareController.m in Sources */,
@@ -3625,7 +3648,7 @@
 				BB00A4FC21BA243E004E4051 /* LogOutCell.m in Sources */,
 				BB37DEFF21A7E8D600B2121B /* NodeDetailCell.m in Sources */,
 				3EA530CA21AB9C88000A6D26 /* PasswordLoginController.m in Sources */,
-				BB37DEF821A7E59600B2121B /* WirelessValveController.m in Sources */,
+				BB37DEF821A7E59600B2121B /* NTCWirelessValveController.m in Sources */,
 				BB62E4DE21B5155000C0FA39 /* TherWeekProgramController.m in Sources */,
 				36004A8F2227E96500C99215 /* UsernameViewController.m in Sources */,
 				3EA530BF21AB9B43000A6D26 /* PhoneTFCell.m in Sources */,
@@ -3634,6 +3657,7 @@
 				BB2AC0ED21A8F156006DB83A /* ESP_CRC8.m in Sources */,
 				BB6739DB22326801002E6239 /* NoHouseBridgingController.m in Sources */,
 				BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */,
+				BB41EEF8227698A10048A96A /* WirelessValveController.m in Sources */,
 				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
 				BB62E4E121B517F100C0FA39 /* TherWeekProgramCell.m in Sources */,
 				BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */,
@@ -3643,12 +3667,13 @@
 				3E3AFFBD21A7E75100EA8F1C /* HomeManagementCell.m in Sources */,
 				BB7E7973221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.m in Sources */,
 				BB37DF1B21A7FF0600B2121B /* Database.m in Sources */,
+				BB41EEF6227698A10048A96A /* ValveAlertInfoController.m in Sources */,
 				BB62E4FC21B521F100C0FA39 /* WeekProgramSetController.m in Sources */,
 				BBAB280F221B912400E21041 /* HomeDeviceSelectController.m in Sources */,
 				BB52F9ED21BE6B03005FA33A /* NodeModel.m in Sources */,
 				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
 				BB2AC0F021A8F156006DB83A /* ESPTouchTaskParameter.m in Sources */,
-				BBF6326B21BBBDE0006A23AC /* NodeDetailViewController.m in Sources */,
+				BBF6326B21BBBDE0006A23AC /* NTCNodeDetailViewController.m in Sources */,
 				BB2AC0EF21A8F156006DB83A /* ESPUDPSocketClient.m in Sources */,
 				BB3D754D2252411D007DDFD6 /* DeviceSettingController.m in Sources */,
 				BB6739DE223271AA002E6239 /* NoHouseAddController.m in Sources */,
@@ -3675,6 +3700,7 @@
 				BB5CDC8521EC26F300C2B6FA /* YRabbitMQ.m in Sources */,
 				36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */,
 				BBF6326E21BBC472006A23AC /* NodeInfoCell.m in Sources */,
+				BB41EEF7227698A10048A96A /* NodeDetailViewController.m in Sources */,
 				3EA530CC21AB9C88000A6D26 /* LoginViewController.m in Sources */,
 				3EA530CB21AB9C88000A6D26 /* RegisterController.m in Sources */,
 				BB8A74382226374A008B2439 /* ShareDeviceDetailController.m in Sources */,
@@ -3712,7 +3738,7 @@
 				BB2AC10721A94D63006DB83A /* AFHTTPSessionManager.m in Sources */,
 				BB2AC0EC21A8F156006DB83A /* ESPTouchGenerator.m in Sources */,
 				BB2AC0F321A8F156006DB83A /* ESPTouchTask.m in Sources */,
-				36330235225C844200E3EFAA /* ValveAlertInfoController.m in Sources */,
+				36330235225C844200E3EFAA /* NTCValveAlertInfoController.m in Sources */,
 				BB2AD7A721AD7F91006DB83A /* HouseSetCommonCell.m in Sources */,
 				BB7E7976221AA7780060A0CF /* AddShareController.m in Sources */,
 				BB2AC0EE21A8F156006DB83A /* ESPUDPSocketServer.m in Sources */,
@@ -3788,7 +3814,7 @@
 				BBA593E8224A2AB1009D5941 /* LogOutCell.m in Sources */,
 				BBA593E9224A2AB1009D5941 /* NodeDetailCell.m in Sources */,
 				BBA593EA224A2AB1009D5941 /* PasswordLoginController.m in Sources */,
-				BBA593EB224A2AB1009D5941 /* WirelessValveController.m in Sources */,
+				BBA593EB224A2AB1009D5941 /* NTCWirelessValveController.m in Sources */,
 				BBA593EC224A2AB1009D5941 /* TherWeekProgramController.m in Sources */,
 				BBA593ED224A2AB1009D5941 /* UsernameViewController.m in Sources */,
 				BBA593EE224A2AB1009D5941 /* PhoneTFCell.m in Sources */,
@@ -3811,7 +3837,7 @@
 				BBA593FF224A2AB1009D5941 /* NodeModel.m in Sources */,
 				BBA59400224A2AB1009D5941 /* MainViewController.m in Sources */,
 				BBA59401224A2AB1009D5941 /* ESPTouchTaskParameter.m in Sources */,
-				BBA59402224A2AB1009D5941 /* NodeDetailViewController.m in Sources */,
+				BBA59402224A2AB1009D5941 /* NTCNodeDetailViewController.m in Sources */,
 				BBA59403224A2AB1009D5941 /* ESPUDPSocketClient.m in Sources */,
 				BBA59404224A2AB1009D5941 /* NoHouseAddController.m in Sources */,
 				BB3D754A22523C57007DDFD6 /* PlugOutletSettingCell.m in Sources */,

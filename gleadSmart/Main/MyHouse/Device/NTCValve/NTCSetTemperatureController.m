@@ -6,9 +6,9 @@
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "SetTemperatureController.h"
+#import "NTCSetTemperatureController.h"
 
-@interface SetTemperatureController () <UITextFieldDelegate>
+@interface NTCSetTemperatureController () <UITextFieldDelegate>
 
 @property (strong, nonatomic) UIImageView *setheaderImage;
 @property (strong, nonatomic) UIView *settemperatureView;
@@ -20,11 +20,13 @@
 @property (strong, nonatomic) UITextField *setTF;
 @property (strong, nonatomic) UIButton *sureButton;
 
-@property (nonatomic) int number;//0:不发送,1:可以发送
 
 @end
 
-@implementation SetTemperatureController
+@implementation NTCSetTemperatureController{
+    BOOL thresholdGeted;
+    BOOL thresholdSeted;
+}
 
 #pragma mark - life cycle
 - (void)viewDidLoad {
@@ -39,7 +41,6 @@
     self.settemperatureLabel = [self settemperatureLabel];
     self.setTF = [self setTF];
     self.sureButton = [self sureButton];
-    _number = 0;//默认不发送数据
     [self getValveTemperature];
 }
 
@@ -50,25 +51,99 @@
     //设置navigationbar隐藏
     self.navigationController.navigationBar.translucent = YES;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setValveThreshold:) name:@"setValveThreshold" object:nil];
-    
-}
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getValveThreshold:) name:@"getValveThreshold" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setValveThresholdSucc:) name:@"setValveThresholdSucc" object:nil];
 
-//水阀温度上报收到通知
-- (void)setValveThreshold:(NSNotification *)notification{
-    NSDictionary *userInfo = [notification userInfo];
-    NSString *data = [userInfo objectForKey:@"setThreshold"];
-    //[self handleSetValveThreshold:data];
+    thresholdGeted = NO;
+    thresholdSeted = NO;
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"setValveThreshold" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"setValveThresholdSucc" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getValveThreshold" object:nil];
+}
+
+#pragma mark - notification
+//水阀温度上报收到通知
+- (void)getValveThreshold:(NSNotification *)notification{
+    thresholdGeted = YES;
+    NSDictionary *userInfo = [notification userInfo];
+    NSNumber *threshold = [userInfo objectForKey:@"getThreshold"];
+    NSNumber *temp = [userInfo objectForKey:@"temp"];
+    _middletemperatureLabel.text = [NSString stringWithFormat:@"%d℃",[threshold intValue]];
+    _currenttemperatureLabel.text = [NSString stringWithFormat:@"当前温度：%d℃",[temp intValue]];
+    [SVProgressHUD dismiss];
+}
+
+//水阀设置阈值成功同志
+- (void)setValveThresholdSucc:(NSNotification *)notification{
+    thresholdSeted = YES;
+    NSDictionary *userInfo = [notification userInfo];
+    NSNumber *threshold = [userInfo objectForKey:@"setThreshold"];
+    _middletemperatureLabel.text = [NSString stringWithFormat:@"%d℃",[threshold intValue]];
+    [SVProgressHUD dismiss];
+}
+
+#pragma mark - private methods
+- (void)getValveTemperature{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFE,@0x13,@0x08,@0x00];
+    if (self.device.isShare) {
+        [[Network shareNetwork] sendData69With:controlCode shareDevice:self.device data:data failure:nil];
+    }else{
+        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
+    }
+    
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        //异步等待4秒，如果未收到信息做如下处理
+        sleep(6);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!self->thresholdGeted) {
+                [NSObject showHudTipStr:LocalString(@"查询当前阈值失败")];
+                [SVProgressHUD dismiss];
+            }
+        });
+    });
+}
+
+- (void)setValveTemperature{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFE,@0x13,@0x08,@0x01,[NSNumber numberWithFloat:[self.setTF.text floatValue]]];
+    if (self.device.isShare) {
+        [[Network shareNetwork] sendData69With:controlCode shareDevice:self.device data:data failure:nil];
+    }else{
+        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
+    }
+    
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        //异步等待4秒，如果未收到信息做如下处理
+        sleep(6);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!self->thresholdSeted) {
+                [NSObject showHudTipStr:LocalString(@"查询当前阈值失败")];
+                [SVProgressHUD dismiss];
+            }
+        });
+    });
+}
+
+- (void)textFieldTextChange:(UITextField *)textField{
+    if (self.setTF.text.length >2) {
+        _setTF.text = [_setTF.text substringWithRange:NSMakeRange(0, 2)];
+    }
+    if ([_setTF.text intValue] >= 35 && [_setTF.text intValue] <= 60){
+        _sureButton.enabled = YES;
+    }else{
+        _sureButton.enabled = NO;
+    }
+    
 }
 
 #pragma mark - getters and setters
-
 - (UIImageView *)setheaderImage{
     if (!_setheaderImage) {
         _setheaderImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_headerBg"]];
@@ -113,7 +188,7 @@
 - (UILabel *)currenttemperatureLabel{
     if (!_currenttemperatureLabel) {
         _currenttemperatureLabel = [[UILabel alloc] init];
-        _currenttemperatureLabel.text = LocalString(@"当前温度：20℃");
+        _currenttemperatureLabel.text = LocalString(@"当前温度：0℃");
         _currenttemperatureLabel.textAlignment = NSTextAlignmentCenter;
         _currenttemperatureLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
         _currenttemperatureLabel.font = [UIFont fontWithName:@"Helvetica" size:14.f];
@@ -130,7 +205,6 @@
 - (UILabel *)middletemperatureLabel{
     if (!_middletemperatureLabel) {
         _middletemperatureLabel = [[UILabel alloc] init];
-        _middletemperatureLabel.text = LocalString(@"20℃");
         _middletemperatureLabel.textAlignment = NSTextAlignmentCenter;
         _middletemperatureLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
         _middletemperatureLabel.font = [UIFont fontWithName:@"Helvetica" size:30.f];
@@ -173,7 +247,7 @@
         _setTF.autocorrectionType = UITextAutocorrectionTypeNo;
         _setTF.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _setTF.borderStyle = UITextBorderStyleRoundedRect;
-        _setTF.keyboardType = UIKeyboardTypePhonePad;
+        _setTF.keyboardType = UIKeyboardTypeNumberPad;
         [_setTF addTarget:self action:@selector(textFieldTextChange:) forControlEvents:UIControlEventEditingChanged];
         [self.view addSubview:_setTF];
         [_setTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -195,8 +269,8 @@
         [_sureButton.titleLabel setFont:[UIFont systemFontOfSize:18.f]];
         [_sureButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_sureButton setBackgroundColor:[UIColor colorWithRed:97/255.0 green:168/255.0 blue:233/255.0 alpha:1.0]];
-        [_sureButton addTarget:self action:@selector(sure) forControlEvents:UIControlEventTouchUpInside];
-        _sureButton.enabled = YES;
+        [_sureButton addTarget:self action:@selector(setValveTemperature) forControlEvents:UIControlEventTouchUpInside];
+        _sureButton.enabled = NO;
         [self.view addSubview:_sureButton];
         [_sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(262.f),yAutoFit(44.f)));
@@ -207,50 +281,8 @@
         _sureButton.layer.borderWidth = 1.0;
         _sureButton.layer.borderColor = [UIColor whiteColor].CGColor;
         _sureButton.layer.cornerRadius = 20.f;
-        
-        
     }
     return _sureButton;
-}
-
-- (void)getValveTemperature{
-    
-    UInt8 controlCode = 0x00;
-    NSArray *data = @[@0xFE,@0x13,@0x09,@0x00,[NSNumber numberWithFloat:[self.setTF.text floatValue]]];
-    if (self.device.isShare) {
-        [[Network shareNetwork] sendData69With:controlCode shareDevice:self.device data:data failure:nil];
-    }else{
-        [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
-    }
-}
-
-- (void)sure{
-    NSLog(@"水阀阈值");
-    if (_number == 1) {
-        UInt8 controlCode = 0x01;
-        NSArray *data = @[@0xFE,@0x13,@0x09,@0x01,[NSNumber numberWithFloat:[self.setTF.text floatValue]]];
-        if (self.device.isShare) {
-            [[Network shareNetwork] sendData69With:controlCode shareDevice:self.device data:data failure:nil];
-        }else{
-            [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
-        }
-        [NSObject showHudTipStr:LocalString(@"数据发送成功")];
-    }else{
-        [NSObject showHudTipStr:LocalString(@"数据发送失败")];
-    }
-    
-}
-
-- (void)textFieldTextChange:(UITextField *)textField{
-    if (self.setTF.text.length >2) {
-        _setTF.text = [_setTF.text substringWithRange:NSMakeRange(0, 2)];
-    }
-    if ( [_setTF.text intValue] >= 35 && [_setTF.text intValue] <= 60  ){
-        _number = 1;
-    }else{
-        _number = 0;
-    }
-    
 }
 
 @end
