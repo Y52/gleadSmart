@@ -436,23 +436,25 @@ static dispatch_once_t oneToken;
                     room.deviceArray = [[NSMutableArray alloc] init];
                     
                     //获取房间内关联的所有设备
-                    [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        DeviceModel *device = [[DeviceModel alloc] init];
-                        device.name = [obj objectForKey:@"deviceName"];
-                        device.mac = [obj objectForKey:@"mac"];
-                        device.roomUid = room.roomUid;
-                        device.roomName = room.name;
-                        device.houseUid = house.houseUid;
-                        if ([NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]] == 0x01) {
-                            device.type = @0;
-                        }else{
-                            device.type = [NSNumber numberWithInteger:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]];
-                        }
-                        if ([device.mac isKindOfClass:[NSString class]] && device.mac.length > 0) {
-                            //插入房间的设备
-                            [self insertNewDevice:device];
-                        }
-                    }];
+                    if ([[obj objectForKey:@"devices"] count] > 0) {
+                        [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            DeviceModel *device = [[DeviceModel alloc] init];
+                            device.name = [obj objectForKey:@"deviceName"];
+                            device.mac = [obj objectForKey:@"mac"];
+                            device.roomUid = room.roomUid;
+                            device.roomName = room.name;
+                            device.houseUid = house.houseUid;
+                            if ([NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]] == 0x01) {
+                                device.type = @0;
+                            }else{
+                                device.type = [NSNumber numberWithInteger:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]];
+                            }
+                            if ([device.mac isKindOfClass:[NSString class]] && device.mac.length > 0) {
+                                //插入房间的设备
+                                [self insertNewDevice:device];
+                            }
+                        }];
+                    }
                     [self insertNewRoom:room];
                     
                 }];
