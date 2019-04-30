@@ -350,6 +350,12 @@ static int noUserInteractionHeartbeat = 0;
  *发送帧组成模版
  */
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data failuer:(nullable void(^)(void))failure{
+    if ([mac isKindOfClass:[NSNull class]]) {
+        [NSObject showHudTipStr:@"当前家庭没有添加中央控制器"];
+        [SVProgressHUD dismiss];
+        return;
+    }
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         dispatch_sync(self->_queue, ^{
             
