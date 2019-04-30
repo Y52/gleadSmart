@@ -244,7 +244,7 @@
               [db initDB];
               db.houseList = [db queryAllHouse];
               if (db.houseList.count > 0) {
-                  db.currentHouse = db.houseList[0];
+                  db.currentHouse = db.houseList[db.houseList.count-1];
               }
               
               //进入主页面

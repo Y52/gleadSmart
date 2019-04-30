@@ -546,13 +546,14 @@ static int noUserInteractionHeartbeat = 0;
     for (DeviceModel *device in deviceArray) {
         //每个设备发送状态查询帧
         switch ([self judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]) {
-            case 1:
+            case DeviceThermostat:
                 datastreams = [datastreams stringByAppendingString:@"11"];
                 datastreams = [datastreams stringByAppendingString:device.mac];
                 datastreams = [datastreams stringByAppendingString:@","];
                 break;
                 
-            case 2:
+            case DeviceValve:
+            case DeviceNTCValve:
                 datastreams = [datastreams stringByAppendingString:@"21"];
                 datastreams = [datastreams stringByAppendingString:device.mac];
                 datastreams = [datastreams stringByAppendingString:@","];
@@ -605,6 +606,8 @@ static int noUserInteractionHeartbeat = 0;
                 {
                     device.isOnline = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x80];
                     device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x01];
+                    device.isUnusual = [value unsignedIntegerValue] & 0x40;
+                    device.isTemperatureAlarm = [value unsignedIntegerValue] & 0x20;
                 }
                     break;
                     
@@ -759,7 +762,6 @@ static int noUserInteractionHeartbeat = 0;
 
 /*
  *判断设备类型
- *设备种类；0表示中央控制器，1表示温控器，2表示无线水阀，3表示壁挂炉调节器
  */
 - (DeviceType)judgeDeviceTypeWith:(int)macByte2{
     if (macByte2 >= 0x08 && macByte2 <= 0x0F) {
@@ -1497,17 +1499,19 @@ static int noUserInteractionHeartbeat = 0;
                 NSDictionary *userInfo;
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
-                        device.isOn = [NSNumber numberWithUnsignedInteger:([_recivedData69[12] unsignedIntegerValue] & 0x01)];
-                        device.isTemperatureAlarm = [_recivedData69[12] unsignedIntegerValue] & 0x04;
                         device.isOnline = @1;
+                        device.isOn = [NSNumber numberWithUnsignedInteger:([_recivedData69[12] unsignedIntegerValue] & 0x01)];
+                        device.isUnusual = [_recivedData69[12] unsignedIntegerValue] & 0x02;
+                        device.isTemperatureAlarm = [_recivedData69[12] unsignedIntegerValue] & 0x04;
                         userInfo = @{@"device":device,@"isShare":@1};
                     }
                 }
                 for (DeviceModel *device in db.shareDeviceArray) {
                     if ([device.mac isEqualToString:mac]) {
-                        device.isOn = [NSNumber numberWithUnsignedInteger:([_recivedData69[12] unsignedIntegerValue] & 0x01)];
-                        device.isTemperatureAlarm = [_recivedData69[12] unsignedIntegerValue] & 0x04;
                         device.isOnline = @1;
+                        device.isOn = [NSNumber numberWithUnsignedInteger:([_recivedData69[12] unsignedIntegerValue] & 0x01)];
+                        device.isUnusual = [_recivedData69[12] unsignedIntegerValue] & 0x02;
+                        device.isTemperatureAlarm = [_recivedData69[12] unsignedIntegerValue] & 0x04;
                         userInfo = @{@"device":device,@"isShare":@1};
                     }
                 }
@@ -1523,17 +1527,19 @@ static int noUserInteractionHeartbeat = 0;
                 NSLog(@"查询无线水阀状态");
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {
-                        device.isOn = [NSNumber numberWithUnsignedInteger:([_recivedData69[12] unsignedIntegerValue] & 0x01)];
-                        device.isTemperatureAlarm = [_recivedData69[12] unsignedIntegerValue] & 0x04;
                         device.isOnline = @1;
+                        device.isOn = [NSNumber numberWithUnsignedInteger:([_recivedData69[12] unsignedIntegerValue] & 0x01)];
+                        device.isUnusual = [_recivedData69[12] unsignedIntegerValue] & 0x02;
+                        device.isTemperatureAlarm = [_recivedData69[12] unsignedIntegerValue] & 0x04;
                         userInfo = @{@"device":device,@"isShare":@0};
                     }
                 }
                 for (DeviceModel *device in db.shareDeviceArray) {
                     if ([device.mac isEqualToString:mac]) {
-                         device.isOn = [NSNumber numberWithUnsignedInteger:([_recivedData69[12] unsignedIntegerValue] & 0x01)];
-                        device.isTemperatureAlarm = [_recivedData69[12] unsignedIntegerValue] & 0x04;
                         device.isOnline = @1;
+                        device.isOn = [NSNumber numberWithUnsignedInteger:([_recivedData69[12] unsignedIntegerValue] & 0x01)];
+                        device.isUnusual = [_recivedData69[12] unsignedIntegerValue] & 0x02;
+                        device.isTemperatureAlarm = [_recivedData69[12] unsignedIntegerValue] & 0x04;
                         userInfo = @{@"device":device,@"isShare":@1};
                     }
                 }

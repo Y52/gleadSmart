@@ -149,7 +149,7 @@ CGFloat const nodeButtonWidthNTC = 20.f;
 //更新UI
 - (void)UITransformationByStatus{
     dispatch_async(dispatch_get_main_queue(), ^{
-        //NSLog(@"%@",self.device.isOn);
+        NSLog(@"11111%@",self.device.isOn);
         if ([self.device.isOn boolValue]) {
             [self.controlSwitchButton setImage:[UIImage imageNamed:@"thermostatControl_on"] forState:UIControlStateNormal];
             [self valveStatus:YES];
@@ -565,17 +565,15 @@ CGFloat const nodeButtonWidthNTC = 20.f;
     }else{
         [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
     }
-    [SVProgressHUD show];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        //异步等待4秒，如果未收到信息做如下处理
-        sleep(10);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (!self->allNodeGeted) {
-                [NSObject showHudTipStr:LocalString(@"查询漏水节点失败")];
-                [SVProgressHUD dismiss];
-            }
-        });
-    });
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        //异步等待4秒，如果未收到信息做如下处理
+//        sleep(10);
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (!self->allNodeGeted) {
+//                [NSObject showHudTipStr:LocalString(@"查询漏水节点失败")];
+//            }
+//        });
+//    });
 }
 
 - (void)getValveTemperature{
@@ -992,7 +990,7 @@ CGFloat const nodeButtonWidthNTC = 20.f;
             make.centerY.equalTo(self.temperatureStatusView.mas_centerY).offset(-yAutoFit(15.f));
         }];
     }
-    return _valveImage;
+    return _temperatureImage;
 }
 
 - (UILabel *)temperatureLabel{
