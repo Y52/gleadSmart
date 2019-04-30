@@ -151,6 +151,8 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 - (void)valveHangingNodesRabbitmqReport:(NSNotification *)notification{
+#warning 修改，节点漏水或低电压的主页面表现先不做，以后改成图片变红色
+    return;
     NSDictionary *userInfo = [notification userInfo];
     NodeModel *node = [userInfo objectForKey:@"node"];
     NSString *valveMac = node.valveMac;
@@ -166,15 +168,9 @@ static CGFloat const Cell_Height = 72.f;
                     status = LocalString(@"未设置");
                 }
                 if (node.isLeak || node.isLowVoltage) {
-                    oldDevice.isUnusual = YES;
-                    cell.status.text = [status stringByAppendingString:LocalString(@" | 异常")];
+                    
                 }else{
-                    oldDevice.isUnusual = NO;
-                    if ([oldDevice.isOn boolValue]) {
-                        cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
-                    }else{
-                        cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
-                    }
+                    
                 }
             });
         }
