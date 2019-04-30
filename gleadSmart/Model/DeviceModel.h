@@ -47,6 +47,9 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
 @property (strong, nonatomic) NSMutableArray *nodeArray;
 @property (nonatomic) BOOL isUnusual;//是否异常(漏水、低电压)
 
+///@brief 无线混水阀门拥有的属性
+@property (nonatomic) BOOL isTemperatureAlarm;//是否温度报警
+
 ///@brief 分享设备特有的属性
 @property (nonatomic) BOOL isShare;
 @property (nonatomic, strong) NSString *apiKey;
