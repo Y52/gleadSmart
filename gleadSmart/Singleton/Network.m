@@ -78,7 +78,7 @@ static int noUserInteractionHeartbeat = 0;
             dispatch_source_set_timer(_noUserInteractionHeartbeatTimer, dispatch_walltime(NULL, 0), 1.f * NSEC_PER_SEC, 0);
             dispatch_source_set_event_handler(_noUserInteractionHeartbeatTimer, ^{
                 noUserInteractionHeartbeat++;
-                if (noUserInteractionHeartbeat == 60 && [[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
+                if (![[Database shareInstance].currentHouse.mac isKindOfClass:[NSNull class]] && noUserInteractionHeartbeat == 60 && [[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
 
                     dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.f * NSEC_PER_SEC);
                     dispatch_semaphore_wait(self.sendSignal, time);
