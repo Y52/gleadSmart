@@ -1,5 +1,5 @@
 //
-//  MulSwitchAddTimingController.h
+//  TwoSwitchController.h
 //  gleadSmart
 //
 //  Created by 安建伟 on 2019/4/24.
@@ -10,12 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ClockModel;
-
-@interface MulSwitchAddTimingController : UIViewController
+@interface TwoSwitchController : UIViewController
 
 @property (nonatomic, strong) DeviceModel *device;
-@property (nonatomic, strong) ClockModel *clock;
 
 @end
 

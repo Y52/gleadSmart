@@ -75,23 +75,23 @@ NSString *const CellIdentifier_MulSwitchSetingCell = @"CellID_MulSwitchSeting";
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.row) {
         case 0:
-            cell.deviceImage.image = [UIImage imageNamed:@"img_mine_checkUpdate"];
+            cell.deviceImage.image = [UIImage imageNamed:@"img_switch_allopen"];
             cell.leftLabel.text = @"开关1";
             
             break;
         case 1:
-            cell.deviceImage.image = [UIImage imageNamed:@"img_mine_checkUpdate"];
+            cell.deviceImage.image = [UIImage imageNamed:@"img_switch_allopen"];
             cell.leftLabel.text = @"开关2";
             
             break;
         case 2:
-            cell.deviceImage.image = [UIImage imageNamed:@"img_mine_checkUpdate"];
+            cell.deviceImage.image = [UIImage imageNamed:@"img_switch_allopen"];
             cell.leftLabel.text = @"开关3";
             
             break;
             
         default:
-            cell.deviceImage.image = [UIImage imageNamed:@"img_mine_checkUpdate"];
+            cell.deviceImage.image = [UIImage imageNamed:@"img_switch_allopen"];
             cell.leftLabel.text = @"开关4";
             break;
     }

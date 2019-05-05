@@ -241,6 +241,9 @@
 		354EF55AD66BAA5AE0E1F906FB1DBEED /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = A37B0543958C8E985B098CC1212C6A50 /* Network.m */; };
 		3581BEC59185814B004DD1B9FFB790E4 /* ESPAES.m in Sources */ = {isa = PBXBuildFile; fileRef = F789B46B0694D8CB107F0C43B3E0A7C9 /* ESPAES.m */; };
 		35F5F26A13D9FF2F653DC00FCC9696E6 /* img_tab_03_unselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD3FF0A2B7DB898369CC6DC9D2E2C6C8 /* img_tab_03_unselect@3x.png */; };
+		3604B4F4227F06BC001F6382 /* OneSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4EE227F06BB001F6382 /* OneSwitchController.m */; };
+		3604B4F5227F06BC001F6382 /* TwoSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4F2227F06BC001F6382 /* TwoSwitchController.m */; };
+		3604B4F6227F06BC001F6382 /* ThreeSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4F3227F06BC001F6382 /* ThreeSwitchController.m */; };
 		3693E470DBEA5E27447C6154780EDB16 /* MemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A783708AE47329E84A32057E8E88B2C5 /* MemberModel.m */; };
 		36BD5C934295C3C0C24A86FF8759B110 /* PasswordLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2FA0747A658151A6991FB381B10270 /* PasswordLoginController.m */; };
 		36E241C8FFFCDB30079685560310395A /* img_account_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B52A8A238C321BC9DFD0173E7E330CC /* img_account_header@2x.png */; };
@@ -1157,6 +1160,12 @@
 		35449D345676A32714524E62D7244524 /* img_adddevice_wenkongqi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_wenkongqi@3x.png"; sourceTree = "<group>"; };
 		35BFBE5FBEC1F466D1053C1DFCD99D04 /* img_switch2_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch2_off@3x.png"; sourceTree = "<group>"; };
 		35C3CC0DEC8567BC97DF96DDF99C9123 /* Pods-gleadSmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.release.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.release.xcconfig"; sourceTree = "<group>"; };
+		3604B4EE227F06BB001F6382 /* OneSwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneSwitchController.m; sourceTree = "<group>"; };
+		3604B4EF227F06BB001F6382 /* TwoSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoSwitchController.h; sourceTree = "<group>"; };
+		3604B4F0227F06BB001F6382 /* OneSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneSwitchController.h; sourceTree = "<group>"; };
+		3604B4F1227F06BC001F6382 /* ThreeSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeSwitchController.h; sourceTree = "<group>"; };
+		3604B4F2227F06BC001F6382 /* TwoSwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoSwitchController.m; sourceTree = "<group>"; };
+		3604B4F3227F06BC001F6382 /* ThreeSwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeSwitchController.m; sourceTree = "<group>"; };
 		3624013F11D4417BC8E68FD00C97DBC6 /* img_2switch_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_2switch_back@2x.png"; sourceTree = "<group>"; };
 		366389A83BAA2B2AD86C88E118E01D4E /* DelayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayModel.h; sourceTree = "<group>"; };
 		367AB32567CA6F853528C79179A99D01 /* valveSwitch_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveSwitch_normal.png; sourceTree = "<group>"; };
@@ -2117,6 +2126,29 @@
 			path = RDVTabbarController;
 			sourceTree = "<group>";
 		};
+		3DA7BCE67F53EB940A3A2E847BB15FDA /* 插座 */ = {
+			isa = PBXGroup;
+			children = (
+				82C2DE835B83CECC282A8BD6AD6D6B9C /* dl_background@2x.png */,
+				8AF8849F652C0D93865FD31F4AF8D1C4 /* dl_background@3x.png */,
+				542C7730649BF99A12FFCE58180B81D1 /* img_plugClock@2x.png */,
+				70067C20BECC498D55D82E4EB3ADD19B /* img_plugClock@3x.png */,
+				DA8C7FCF4134B75BFAF55EA3F55B6D75 /* img_plugView_off@2x.png */,
+				8868D6B715F2A596555891369A589740 /* img_plugView_off@3x.png */,
+				A3AE02CEB2B9488C8A8AA35AC7AB89B6 /* img_plugView_on@2x.png */,
+				7CDDBEFEA414138B88A4CF22D2BFF3EA /* img_plugView_on@3x.png */,
+				EC48EF378329092D3697EF8B82F015D0 /* img_plug_delayTime@2x.png */,
+				48F0C0FEAAB385A760504D86292E19C9 /* img_plug_delayTime@3x.png */,
+				E1201B9A51C5DAB34BD62BB4F36BDDFF /* img_plug_electricity@2x.png */,
+				80B319A1DAF4D3592BC631424E81A128 /* img_plug_electricity@3x.png */,
+				2E960BEB2C3DB1C44DFCBFC3BD17D3CA /* kaiguan@2x.png */,
+				330D1D3FF55E952552AB72AC2A77E0C3 /* kaiguan@3x.png */,
+				D9BCF425FB3DE446E2A534452D2DA61A /* youjiantou@2x.png */,
+				6A71D7AEC8B2D70E239366D609CBFC2C /* youjiantou@3x.png */,
+			);
+			path = "插座";
+			sourceTree = "<group>";
+		};
 		41CC4457716E4EE2F2E4D433651C6D16 /* Management */ = {
 			isa = PBXGroup;
 			children = (
@@ -2613,6 +2645,12 @@
 		908B8719349059A25685980AEC62A377 /* Switch */ = {
 			isa = PBXGroup;
 			children = (
+				3604B4F0227F06BB001F6382 /* OneSwitchController.h */,
+				3604B4EE227F06BB001F6382 /* OneSwitchController.m */,
+				3604B4EF227F06BB001F6382 /* TwoSwitchController.h */,
+				3604B4F2227F06BC001F6382 /* TwoSwitchController.m */,
+				3604B4F1227F06BC001F6382 /* ThreeSwitchController.h */,
+				3604B4F3227F06BC001F6382 /* ThreeSwitchController.m */,
 				39D7DC0B5C435298BD5781DA153D548F /* MulSwitchAddTimingController.h */,
 				91AC05FCEF3342B429D839E39F2BC503 /* MulSwitchAddTimingController.m */,
 				7D93A9B69FDA37E89EF63F1B6BE44A35 /* MulSwitchController.h */,
@@ -2757,64 +2795,6 @@
 				0E4C51BB713403A9222FC1E677C6A21A /* ShareDevice */,
 			);
 			path = Myhouse;
-			sourceTree = "<group>";
-		};
-		3DA7BCE67F53EB940A3A2E847BB15FDA /* 插座 */ = {
-			isa = PBXGroup;
-			children = (
-				82C2DE835B83CECC282A8BD6AD6D6B9C /* dl_background@2x.png */,
-				8AF8849F652C0D93865FD31F4AF8D1C4 /* dl_background@3x.png */,
-				542C7730649BF99A12FFCE58180B81D1 /* img_plugClock@2x.png */,
-				70067C20BECC498D55D82E4EB3ADD19B /* img_plugClock@3x.png */,
-				DA8C7FCF4134B75BFAF55EA3F55B6D75 /* img_plugView_off@2x.png */,
-				8868D6B715F2A596555891369A589740 /* img_plugView_off@3x.png */,
-				A3AE02CEB2B9488C8A8AA35AC7AB89B6 /* img_plugView_on@2x.png */,
-				7CDDBEFEA414138B88A4CF22D2BFF3EA /* img_plugView_on@3x.png */,
-				EC48EF378329092D3697EF8B82F015D0 /* img_plug_delayTime@2x.png */,
-				48F0C0FEAAB385A760504D86292E19C9 /* img_plug_delayTime@3x.png */,
-				E1201B9A51C5DAB34BD62BB4F36BDDFF /* img_plug_electricity@2x.png */,
-				80B319A1DAF4D3592BC631424E81A128 /* img_plug_electricity@3x.png */,
-				2E960BEB2C3DB1C44DFCBFC3BD17D3CA /* kaiguan@2x.png */,
-				330D1D3FF55E952552AB72AC2A77E0C3 /* kaiguan@3x.png */,
-				D9BCF425FB3DE446E2A534452D2DA61A /* youjiantou@2x.png */,
-				6A71D7AEC8B2D70E239366D609CBFC2C /* youjiantou@3x.png */,
-			);
-			path = "插座";
-			sourceTree = "<group>";
-		};
-		FE01D4D7FA884D55D63D938AD00B0B86 /* 开关 */ = {
-			isa = PBXGroup;
-			children = (
-				3624013F11D4417BC8E68FD00C97DBC6 /* img_2switch_back@2x.png */,
-				6C6A39285B3E1DCBFF624F289FAAE2D5 /* img_2switch_back@3x.png */,
-				BC611C53D6DD6F657EC2F1994F908A1D /* img_3switch_back@2x.png */,
-				483DAEED6446326C8D04D9C02BDAB6BB /* img_3switch_back@3x.png */,
-				AD9F8FD6EF2FF6876D3AA426BA90F480 /* img_4switch_back@2x.png */,
-				75ED1D8D3854E349F24DB62AF7030A54 /* img_4switch_back@3x.png */,
-				7A6C7289DC85EE1C752DCB378C9294B5 /* img_switch1_off@2x.png */,
-				E1D8F0AAAC107360566947379DE37CB4 /* img_switch1_off@3x.png */,
-				F8FA68FBF86A50D60BC6B64992F713DF /* img_switch1_on@2x.png */,
-				7A729E9DA378EB6A8CF2004671D18C10 /* img_switch1_on@3x.png */,
-				3D154635499FD00B4EEB844F03781FA8 /* img_switch2_off@2x.png */,
-				35BFBE5FBEC1F466D1053C1DFCD99D04 /* img_switch2_off@3x.png */,
-				D100176DF3C46597DEAEB7A260108F9A /* img_switch2_on@2x.png */,
-				89852BAFB2F816E440B63CAF11C4B32F /* img_switch2_on@3x.png */,
-				4715B942EC01BB1376E2EBB3DA1B325A /* img_switch3_off@2x.png */,
-				B8B83673C06FB442CB75ADC6D89C8863 /* img_switch3_off@3x.png */,
-				11E5A5DDC4ECDA4EB975EE75564DAC9D /* img_switch3_on@2x.png */,
-				4D532BF82E4021D6B3D472E3F6399F60 /* img_switch3_on@3x.png */,
-				D14CB50A563E6D14CF7C5AE81D0B7F64 /* img_switch_allclose@2x.png */,
-				0A69DC216C756A30114F889A7043E6BF /* img_switch_allclose@3x.png */,
-				0993D89385D21C165FD6F4E58F21E6BC /* img_switch_allopen@2x.png */,
-				89C864025544E5627FC14E995A746E85 /* img_switch_allopen@3x.png */,
-				DF1729B000D0EBF094BA24A23AFAF4AD /* img_switch_clock@2x.png */,
-				B72D489B2B6191FEC9EB9D1816F752CF /* img_switch_clock@3x.png */,
-				FE72B0069D5D9201E75C976C3E9BB4B0 /* img_switch_delay@2x.png */,
-				0D1C78AA623D31BFA508961FCF8B604C /* img_switch_delay@3x.png */,
-				FBBAFB66D2692D12B56296C24056F131 /* img_switchback_back@2x.png */,
-				3C8FDBA04E15B865D43D50B2BEBAD0A1 /* img_switchback_back@3x.png */,
-			);
-			path = "开关";
 			sourceTree = "<group>";
 		};
 		BDE1492BC852F8B171AE1D21FCA4E2F8 /* Products */ = {
@@ -3023,6 +3003,41 @@
 				51EB668B4F86480F8F22E9590C963C0F /* SharerRemarkController.m */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		FE01D4D7FA884D55D63D938AD00B0B86 /* 开关 */ = {
+			isa = PBXGroup;
+			children = (
+				3624013F11D4417BC8E68FD00C97DBC6 /* img_2switch_back@2x.png */,
+				6C6A39285B3E1DCBFF624F289FAAE2D5 /* img_2switch_back@3x.png */,
+				BC611C53D6DD6F657EC2F1994F908A1D /* img_3switch_back@2x.png */,
+				483DAEED6446326C8D04D9C02BDAB6BB /* img_3switch_back@3x.png */,
+				AD9F8FD6EF2FF6876D3AA426BA90F480 /* img_4switch_back@2x.png */,
+				75ED1D8D3854E349F24DB62AF7030A54 /* img_4switch_back@3x.png */,
+				7A6C7289DC85EE1C752DCB378C9294B5 /* img_switch1_off@2x.png */,
+				E1D8F0AAAC107360566947379DE37CB4 /* img_switch1_off@3x.png */,
+				F8FA68FBF86A50D60BC6B64992F713DF /* img_switch1_on@2x.png */,
+				7A729E9DA378EB6A8CF2004671D18C10 /* img_switch1_on@3x.png */,
+				3D154635499FD00B4EEB844F03781FA8 /* img_switch2_off@2x.png */,
+				35BFBE5FBEC1F466D1053C1DFCD99D04 /* img_switch2_off@3x.png */,
+				D100176DF3C46597DEAEB7A260108F9A /* img_switch2_on@2x.png */,
+				89852BAFB2F816E440B63CAF11C4B32F /* img_switch2_on@3x.png */,
+				4715B942EC01BB1376E2EBB3DA1B325A /* img_switch3_off@2x.png */,
+				B8B83673C06FB442CB75ADC6D89C8863 /* img_switch3_off@3x.png */,
+				11E5A5DDC4ECDA4EB975EE75564DAC9D /* img_switch3_on@2x.png */,
+				4D532BF82E4021D6B3D472E3F6399F60 /* img_switch3_on@3x.png */,
+				D14CB50A563E6D14CF7C5AE81D0B7F64 /* img_switch_allclose@2x.png */,
+				0A69DC216C756A30114F889A7043E6BF /* img_switch_allclose@3x.png */,
+				0993D89385D21C165FD6F4E58F21E6BC /* img_switch_allopen@2x.png */,
+				89C864025544E5627FC14E995A746E85 /* img_switch_allopen@3x.png */,
+				DF1729B000D0EBF094BA24A23AFAF4AD /* img_switch_clock@2x.png */,
+				B72D489B2B6191FEC9EB9D1816F752CF /* img_switch_clock@3x.png */,
+				FE72B0069D5D9201E75C976C3E9BB4B0 /* img_switch_delay@2x.png */,
+				0D1C78AA623D31BFA508961FCF8B604C /* img_switch_delay@3x.png */,
+				FBBAFB66D2692D12B56296C24056F131 /* img_switchback_back@2x.png */,
+				3C8FDBA04E15B865D43D50B2BEBAD0A1 /* img_switchback_back@3x.png */,
+			);
+			path = "开关";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4169,6 +4184,7 @@
 				B7653EDD4F07833ABEF83419D7E1A9BA /* HomeDeviceController.m in Sources */,
 				91E45E6C1F8EE9463D3E9A9AB8F21B50 /* HomeDeviceSelectController.m in Sources */,
 				E76AF66057E4C22587BDF19F39C00993 /* HomeManagementCell.m in Sources */,
+				3604B4F4227F06BC001F6382 /* OneSwitchController.m in Sources */,
 				101AE56EB69F6A6B727707C34AA1467C /* HomeManagementController.m in Sources */,
 				BE7433844BB387E36AA271E7F29D8CD2 /* HouseManagementController.m in Sources */,
 				17F9868ED9DB89474A495C8C608F3725 /* HouseManagementTableViewCell.m in Sources */,
@@ -4256,6 +4272,7 @@
 				8FF08F7EDBEA2C593A7D3ED76AD89BBE /* TherAddTimerWeekCell.m in Sources */,
 				A5C561A58C865678B60C7D58A779A7F1 /* TherSettingCell.m in Sources */,
 				09ADAEF888D156E03EA1F2AA584B528D /* TherTimerCell.m in Sources */,
+				3604B4F5227F06BC001F6382 /* TwoSwitchController.m in Sources */,
 				6A2737F09BB7D2D63E062FA37ABB1645 /* TherWeekProgramCell.m in Sources */,
 				5745748DC3358600EE283A8070F40E3F /* TherWeekProgramController.m in Sources */,
 				DC46C0650B58A4FF3525F15B57B298EB /* TherWeekSelCell.m in Sources */,
@@ -4268,6 +4285,7 @@
 				98F0D1BE7065A145FC96A313AA72CD76 /* UIButton+Common.m in Sources */,
 				C562DBCD04C87EEE0604A63D7B4EB417 /* UIColor+ColorChange.m in Sources */,
 				75F963399C5D950AEFE5E95A7E1A59ED /* UILabel+YBAttributeTextTapAction.m in Sources */,
+				3604B4F6227F06BC001F6382 /* ThreeSwitchController.m in Sources */,
 				B3841F183F2A45433A614DD4E836CE7C /* UserModel.m in Sources */,
 				D64B936DF3F5D28E527B6EA96365663D /* UsernameViewController.m in Sources */,
 				EA45863F686FF8354DB5C9FB9DE31253 /* ValveAlertInfoController.m in Sources */,
