@@ -113,7 +113,7 @@ static int noUserInteractionHeartbeat = 0;
         _allMsg = [[NSMutableArray alloc] init];
         _lock = [[NSLock alloc] init];
         _queue = dispatch_queue_create("com.thingcom.queue", DISPATCH_QUEUE_SERIAL);
-        _frameCount = arc4random() % 255;
+        _frameCount = arc4random() % 255;//计数器随机，不能每次都是从0开始发，中央控制器那边不好处理
         [self sendSearchBroadcast];
         
         _testSendCount = 0;
@@ -193,6 +193,10 @@ static int noUserInteractionHeartbeat = 0;
             return;
         }
         
+        if ([[Database shareInstance].currentHouse.mac isKindOfClass:[NSNull class]]) {
+            return;
+        }
+
         //只有绑定的网关才可以自动连接
         if (![[Database shareInstance].currentHouse.mac isEqualToString:mac]) {
             NSLog(@"该中央控制器不是当前家庭绑定的");
