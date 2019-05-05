@@ -1,19 +1,19 @@
 //
-//  PlugOutletSettingController.h
+//  PlugOutletAddTimingController.h
 //  gleadSmart
 //
-//  Created by 安建伟 on 2019/4/1.
+//  Created by 安建伟 on 2019/4/17.
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
+@class ClockModel;
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PlugOutletSettingController : UIViewController
+@interface PlugOutletAddTimingController : UIViewController
 
-@property (nonatomic) CGFloat filledSpcingHeight;
 @property (nonatomic, strong) DeviceModel *device;
+@property (nonatomic, strong) ClockModel *clock;
 
 @end
 

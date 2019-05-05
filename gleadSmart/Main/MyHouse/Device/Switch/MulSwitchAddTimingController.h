@@ -1,8 +1,8 @@
 //
-//  PlugOutletSettingController.h
+//  MulSwitchAddTimingController.h
 //  gleadSmart
 //
-//  Created by 安建伟 on 2019/4/1.
+//  Created by 安建伟 on 2019/4/24.
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
@@ -10,10 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PlugOutletSettingController : UIViewController
+@class ClockModel;
 
-@property (nonatomic) CGFloat filledSpcingHeight;
+@interface MulSwitchAddTimingController : UIViewController
+
 @property (nonatomic, strong) DeviceModel *device;
+@property (nonatomic, strong) ClockModel *clock;
 
 @end
 

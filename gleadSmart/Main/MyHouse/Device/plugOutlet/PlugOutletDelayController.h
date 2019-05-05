@@ -1,8 +1,8 @@
 //
-//  PlugOutletSettingController.h
+//  PlugOutletDelayController.h
 //  gleadSmart
 //
-//  Created by 安建伟 on 2019/4/1.
+//  Created by 安建伟 on 2019/4/23.
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
@@ -10,9 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PlugOutletSettingController : UIViewController
+@interface PlugOutletDelayController : UIViewController
 
-@property (nonatomic) CGFloat filledSpcingHeight;
 @property (nonatomic, strong) DeviceModel *device;
 
 @end
