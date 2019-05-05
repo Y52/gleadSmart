@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -55,6 +56,14 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
 @property (nonatomic, strong) NSString *apiKey;
 @property (nonatomic, strong) NSString *deviceId;
 @property (nonatomic, strong) NSString *shareDeviceHouseMac;
+
+///@brief 需要tcp连接的设备
+@property (strong, nonatomic) GCDAsyncSocket *socket;
+@property (nonatomic) dispatch_semaphore_t sendSignal;//设备通信锁
+@property (nonatomic) dispatch_queue_t queue;//设备通信线程
+
+///@brief 设备socket发帧
+- (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data;
 
 @end
 

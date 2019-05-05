@@ -680,6 +680,8 @@
 		BA10BAF504BA5772F97F7758A6BF7EC9 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEC253DAC801F4C270E7603C299928 /* AFNetworkReachabilityManager.m */; };
 		BA43C1C8DEC5F1AD661CEA2E2A8C3603 /* img_wallHob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A70610DF8D91BBF42E7F5A99D40160 /* img_wallHob@2x.png */; };
 		BB0FE2F7F493DDE8A4747626FF69BE8A /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE2F22BCCDF3189299FD71E16EB5C68 /* RDVTabBarItem.m */; };
+		BB1F349D227EDBAF000937ED /* ClockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F349B227EDBAF000937ED /* ClockModel.m */; };
+		BB1F349E227EDBAF000937ED /* DelayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F349C227EDBAF000937ED /* DelayModel.m */; };
 		BBACD65E4CE4050F281BFF75293101DC /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */; };
 		BBED11018EEF75677A4A4B0EB91CB50F /* img_ther_addTimerSwitch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF326CB45C32724F7009A6732B37108E /* img_ther_addTimerSwitch@2x.png */; };
 		BC42FC2F4108CBC11EFA469901A8EC2D /* thermostatSet_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B47A1EC308F2F47B7E47F3B379FEDC4 /* thermostatSet_on.png */; };
@@ -1456,6 +1458,10 @@
 		BA32968D7F640B597C949F20288619F4 /* addFamily_uncheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addFamily_uncheck@3x.png"; sourceTree = "<group>"; };
 		BA55A4DAFC3221CAB82E13718748436B /* valveNode_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_normal@3x.png"; sourceTree = "<group>"; };
 		BA57AC696C1EF7DE44EA5523323CEF10 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB1F3499227EDBAF000937ED /* ClockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockModel.h; sourceTree = "<group>"; };
+		BB1F349A227EDBAF000937ED /* DelayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayModel.h; sourceTree = "<group>"; };
+		BB1F349B227EDBAF000937ED /* ClockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockModel.m; sourceTree = "<group>"; };
+		BB1F349C227EDBAF000937ED /* DelayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayModel.m; sourceTree = "<group>"; };
 		BB5CE1616DADF6B37F074AE81CB3D8EF /* nodeBattery_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeBattery_normal@3x.png"; sourceTree = "<group>"; };
 		BCCFAFCD4C12F63A3F250A729BB80519 /* img_addDevice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addDevice@2x.png"; sourceTree = "<group>"; };
 		BD1273BB75C4015B79584FA6F8BD9915 /* valveStatus_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_abnormal@3x.png"; sourceTree = "<group>"; };
@@ -1927,6 +1933,10 @@
 		2D5F770BA2570650C7FF75B2A514D231 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BB1F3499227EDBAF000937ED /* ClockModel.h */,
+				BB1F349B227EDBAF000937ED /* ClockModel.m */,
+				BB1F349A227EDBAF000937ED /* DelayModel.h */,
+				BB1F349C227EDBAF000937ED /* DelayModel.m */,
 				216B3BEC99ED55B5359E4E8FB81EC1CD /* DeviceModel.h */,
 				0BB8F0838327CCC27ACDFB097AF2BAD7 /* DeviceModel.m */,
 				65AAED19BABD68699FB2F074BF1E66CF /* HouseModel.h */,
@@ -2512,6 +2522,23 @@
 			path = Login_slices;
 			sourceTree = "<group>";
 		};
+		908B8719349059A25685980AEC62A377 /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				39D7DC0B5C435298BD5781DA153D548F /* MulSwitchAddTimingController.h */,
+				91AC05FCEF3342B429D839E39F2BC503 /* MulSwitchAddTimingController.m */,
+				7D93A9B69FDA37E89EF63F1B6BE44A35 /* MulSwitchController.h */,
+				4E159C9A30BA6F33095B9D60DF9A4CBC /* MulSwitchController.m */,
+				D49B243ECF0B8B10706C051B4E019E1C /* MulSwitchTimingController.h */,
+				DC516E356B38803A5BEF1C540760DB73 /* MulSwitchTimingController.m */,
+				B062F72416405D4D0E76718BA521C0D2 /* MulSwitchTimingSetingController.h */,
+				A6CFC2BD40F18C80B26C8B0F321B3CFB /* MulSwitchTimingSetingController.m */,
+				76CE24586241CF134BCFA0D75058072B /* MulSwitchWeekSelectController.h */,
+				E3CB059DA2F455157C7F4DA494D7E62F /* MulSwitchWeekSelectController.m */,
+			);
+			path = Switch;
+			sourceTree = "<group>";
+		};
 		99FA72921DC7BDC4D884EF17F45E31C2 /* Device */ = {
 			isa = PBXGroup;
 			children = (
@@ -2644,44 +2671,6 @@
 			path = Myhouse;
 			sourceTree = "<group>";
 		};
-		EE7D7101BAAF5F4A9C9905A57EF19AB6 /* plugOutlet */ = {
-			isa = PBXGroup;
-			children = (
-				D1F409D77D4D01158002DCF236F62FBE /* PlugOutletAddDelayController.h */,
-				B4C4AF5950797B161A9613034FC0FE45 /* PlugOutletAddDelayController.m */,
-				56D0BA8F817A2FD412150A2933389FB8 /* PlugOutletAddTimingController.h */,
-				7BE15A0A0F3529DFE855A2C106C11FB9 /* PlugOutletAddTimingController.m */,
-				FE9DBC36893ABA5F410C756F68A0044C /* PlugOutletController.h */,
-				9557C486348BC450901BA8C7C3FFD0BF /* PlugOutletController.m */,
-				E296C3CB08CA275CE591A179F5913B6A /* PlugOutletDelayController.h */,
-				4138EA160EE4F7D1C361D73E3B7022C6 /* PlugOutletDelayController.m */,
-				C01BA74A6AC91B6AC23FC642EBFC1C0F /* PlugOutletSettingController.h */,
-				41D97867D9255014834BFE4D2DC39A8F /* PlugOutletSettingController.m */,
-				3E12DC9206C7050A05189FC081B2BBCC /* PlugOutletTimingController.h */,
-				7524728465C46673151B7670D3C7A002 /* PlugOutletTimingController.m */,
-				EE3233D552E4CEF8C1C604E0AC98BA78 /* PlugOutletWeekSelectController.h */,
-				48AD9DD67833CFADA73C7334ED5B006B /* PlugOutletWeekSelectController.m */,
-			);
-			path = plugOutlet;
-			sourceTree = "<group>";
-		};
-		908B8719349059A25685980AEC62A377 /* Switch */ = {
-			isa = PBXGroup;
-			children = (
-				39D7DC0B5C435298BD5781DA153D548F /* MulSwitchAddTimingController.h */,
-				91AC05FCEF3342B429D839E39F2BC503 /* MulSwitchAddTimingController.m */,
-				7D93A9B69FDA37E89EF63F1B6BE44A35 /* MulSwitchController.h */,
-				4E159C9A30BA6F33095B9D60DF9A4CBC /* MulSwitchController.m */,
-				D49B243ECF0B8B10706C051B4E019E1C /* MulSwitchTimingController.h */,
-				DC516E356B38803A5BEF1C540760DB73 /* MulSwitchTimingController.m */,
-				B062F72416405D4D0E76718BA521C0D2 /* MulSwitchTimingSetingController.h */,
-				A6CFC2BD40F18C80B26C8B0F321B3CFB /* MulSwitchTimingSetingController.m */,
-				76CE24586241CF134BCFA0D75058072B /* MulSwitchWeekSelectController.h */,
-				E3CB059DA2F455157C7F4DA494D7E62F /* MulSwitchWeekSelectController.m */,
-			);
-			path = Switch;
-			sourceTree = "<group>";
-		};
 		BDE1492BC852F8B171AE1D21FCA4E2F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -2786,6 +2775,27 @@
 				45E35A9151571667E406EA13C3EBDE92 /* FamilyMemberSetCell.m */,
 			);
 			path = FamilyMember;
+			sourceTree = "<group>";
+		};
+		EE7D7101BAAF5F4A9C9905A57EF19AB6 /* plugOutlet */ = {
+			isa = PBXGroup;
+			children = (
+				D1F409D77D4D01158002DCF236F62FBE /* PlugOutletAddDelayController.h */,
+				B4C4AF5950797B161A9613034FC0FE45 /* PlugOutletAddDelayController.m */,
+				56D0BA8F817A2FD412150A2933389FB8 /* PlugOutletAddTimingController.h */,
+				7BE15A0A0F3529DFE855A2C106C11FB9 /* PlugOutletAddTimingController.m */,
+				FE9DBC36893ABA5F410C756F68A0044C /* PlugOutletController.h */,
+				9557C486348BC450901BA8C7C3FFD0BF /* PlugOutletController.m */,
+				E296C3CB08CA275CE591A179F5913B6A /* PlugOutletDelayController.h */,
+				4138EA160EE4F7D1C361D73E3B7022C6 /* PlugOutletDelayController.m */,
+				C01BA74A6AC91B6AC23FC642EBFC1C0F /* PlugOutletSettingController.h */,
+				41D97867D9255014834BFE4D2DC39A8F /* PlugOutletSettingController.m */,
+				3E12DC9206C7050A05189FC081B2BBCC /* PlugOutletTimingController.h */,
+				7524728465C46673151B7670D3C7A002 /* PlugOutletTimingController.m */,
+				EE3233D552E4CEF8C1C604E0AC98BA78 /* PlugOutletWeekSelectController.h */,
+				48AD9DD67833CFADA73C7334ED5B006B /* PlugOutletWeekSelectController.m */,
+			);
+			path = plugOutlet;
 			sourceTree = "<group>";
 		};
 		EF0AE5E1811C4DBF8873F6F9756D1916 /* AddMember */ = {
@@ -3934,6 +3944,7 @@
 				4C69EE7C1BFA06358339F94ADDE826DA /* AppDelegate.m in Sources */,
 				126CF54FCDE432286373C262CFB3DDBF /* AreaCodeCell.m in Sources */,
 				441593096157A79703E7A991C86F335C /* ConnectApNetController.m in Sources */,
+				BB1F349E227EDBAF000937ED /* DelayModel.m in Sources */,
 				E317E724ACA06B499490ABE1E5F70D67 /* Database.m in Sources */,
 				6D8C43BF90FC997A3B52B5B524D9E919 /* DeviceConnectView.m in Sources */,
 				AA2ADE2EE5BC371E943DBD11530F3E27 /* DeviceModel.m in Sources */,
@@ -4037,6 +4048,7 @@
 				E0814D6BF60F82748E58B7785118BBDB /* SelectDeviceTypeCell.m in Sources */,
 				92E36ED2A1EFB5CE2EB19F5687F9D9C0 /* SelectDeviceTypeController.m in Sources */,
 				FC9C8A916AA060D504D70683C38D0F61 /* ShareDeviceDetailCell.m in Sources */,
+				BB1F349D227EDBAF000937ED /* ClockModel.m in Sources */,
 				CC2A3068C7F2DF49BBE9FB884118299C /* ShareDeviceDetailController.m in Sources */,
 				8D235C418464CC4A267E1FDD8CACACE6 /* ShareDeviceListCell.m in Sources */,
 				5B8CE0FE71B761676130504CBE6FF2AA /* ShareDeviceListController.m in Sources */,
