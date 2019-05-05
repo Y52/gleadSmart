@@ -166,6 +166,7 @@
 		26C1BBB65AF274938FEEC96AE8B809D4 /* nodeBattery_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5CE1616DADF6B37F074AE81CB3D8EF /* nodeBattery_normal@3x.png */; };
 		26F968D4BB5678D3ECCF4F8CE3179102 /* nodeLeakBig_abnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 06E0F4168EDFE4081CE6FEC419DD57FA /* nodeLeakBig_abnormal.png */; };
 		27B6B34E6F34DC102EF49DB10E19C244 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = CB305682F3A89C73C20431EE3FFBEFF9 /* AFURLResponseSerialization.m */; };
+		27C7AEDAF6058AEE46E806DCF75F0E22 /* ClockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBF5EA4820D39E78916AA795B20B68 /* ClockModel.m */; };
 		27EA30BB6FCBE7783FEBE13EEAA6F4BB /* thermostatCircle_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E5854DA6AA728A2C24B6CDE8FAD779 /* thermostatCircle_on.png */; };
 		27F9018033CC325EAB94067F6675187F /* img_tab_03_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE790E0433FB7A059A3D9144FB80C99 /* img_tab_03_select@2x.png */; };
 		2850853B8929DC2BFDF1F2DE415CEE56 /* HouseSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64EA19E9739F49C8B1DD9F7B3971E064 /* HouseSelectCell.m */; };
@@ -549,6 +550,7 @@
 		9481BB23F3068632839E8B1C9F646014 /* SharerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 890ABD7839445DEC1E14CF0B97F81303 /* SharerDetailController.m */; };
 		948E08E0D9F57175E104D9F8E5C41920 /* valveStatus_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 442CD80F37C4FC24376E88F8D15155AD /* valveStatus_normal.png */; };
 		94AFC7EDBA34DF369C826FB6762A8271 /* img_mine_headerBG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22332A8536610E94C8A481CF79AD0466 /* img_mine_headerBG@3x.png */; };
+		94B436A1E663CFED1DBB9BC96FC98051 /* DelayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 060272D5995FF7B1A6CEA22675F8076E /* DelayModel.m */; };
 		94BD01A33201E0FDCDA8824EA1ECFEA1 /* valveSwitch_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA72D937755F4F4AAEB3633242E3D649 /* valveSwitch_normal@2x.png */; };
 		94D9A789203D831AEBCDBC3AA7C48179 /* addRoom_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = 49050A8374C87199D87B4BD6DF81E628 /* addRoom_hand.png */; };
 		9536A7CBBF0F08BEBC4FFC9A223C7784 /* thermostatKnob@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD479C2D3E5AF3A075FF8C4F538FB1AD /* thermostatKnob@1x.png */; };
@@ -680,8 +682,6 @@
 		BA10BAF504BA5772F97F7758A6BF7EC9 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEC253DAC801F4C270E7603C299928 /* AFNetworkReachabilityManager.m */; };
 		BA43C1C8DEC5F1AD661CEA2E2A8C3603 /* img_wallHob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A70610DF8D91BBF42E7F5A99D40160 /* img_wallHob@2x.png */; };
 		BB0FE2F7F493DDE8A4747626FF69BE8A /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE2F22BCCDF3189299FD71E16EB5C68 /* RDVTabBarItem.m */; };
-		BB1F349D227EDBAF000937ED /* ClockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F349B227EDBAF000937ED /* ClockModel.m */; };
-		BB1F349E227EDBAF000937ED /* DelayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F349C227EDBAF000937ED /* DelayModel.m */; };
 		BBACD65E4CE4050F281BFF75293101DC /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */; };
 		BBED11018EEF75677A4A4B0EB91CB50F /* img_ther_addTimerSwitch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF326CB45C32724F7009A6732B37108E /* img_ther_addTimerSwitch@2x.png */; };
 		BC42FC2F4108CBC11EFA469901A8EC2D /* thermostatSet_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B47A1EC308F2F47B7E47F3B379FEDC4 /* thermostatSet_on.png */; };
@@ -982,6 +982,7 @@
 		05749C90F5B9E382EF75CE7442FB207F /* img_login_phone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_login_phone@3x.png"; sourceTree = "<group>"; };
 		05A3BF5985BEFB28EB361DCB73323B4C /* valveTemperature_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTemperature_normal@2x.png"; sourceTree = "<group>"; };
 		05CE7AEE7907B5B849459C8C9E1AF4CF /* HouseNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseNameCell.h; sourceTree = "<group>"; };
+		060272D5995FF7B1A6CEA22675F8076E /* DelayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayModel.m; sourceTree = "<group>"; };
 		06D9D46CF17FB585C2E108AD8320E770 /* thermostat_+@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_+@2x.png"; sourceTree = "<group>"; };
 		06E0F4168EDFE4081CE6FEC419DD57FA /* nodeLeakBig_abnormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeLeakBig_abnormal.png; sourceTree = "<group>"; };
 		06E2FFEA5BBBB56A4F994999BE785AFA /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -1105,6 +1106,7 @@
 		350DC94CC98742725BB9A45684D10BEA /* img_mine_houseManage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_mine_houseManage.png; sourceTree = "<group>"; };
 		35449D345676A32714524E62D7244524 /* img_adddevice_wenkongqi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_wenkongqi@3x.png"; sourceTree = "<group>"; };
 		35C3CC0DEC8567BC97DF96DDF99C9123 /* Pods-gleadSmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.release.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.release.xcconfig"; sourceTree = "<group>"; };
+		366389A83BAA2B2AD86C88E118E01D4E /* DelayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayModel.h; sourceTree = "<group>"; };
 		367AB32567CA6F853528C79179A99D01 /* valveSwitch_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveSwitch_normal.png; sourceTree = "<group>"; };
 		36C9151A73CDCC7A44897EB31411F3F9 /* img_nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_nav_back.png; sourceTree = "<group>"; };
 		37216C47A7ACEE60A2B8FC473474E9A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1253,6 +1255,7 @@
 		67B1C10A15ECE6C3D2DA7FC395EB1E99 /* ModifyPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordViewController.h; sourceTree = "<group>"; };
 		6808B29D750C682AB01FF22C477A9943 /* MulSwitchWeekSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchWeekSelectCell.h; sourceTree = "<group>"; };
 		6ABFB7499F2F5BEBA5371391E816CF9E /* ESP_WifiUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESP_WifiUtil.h; sourceTree = "<group>"; };
+		6ADBF5EA4820D39E78916AA795B20B68 /* ClockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockModel.m; sourceTree = "<group>"; };
 		6AEAE4E827B9261B333ACC68951FB837 /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
 		6AF1EEA30DDAD0E3D0516016383A3492 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		6B387D29FABF406982B246F339E3A260 /* FamilyMemberInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyMemberInfoCell.h; sourceTree = "<group>"; };
@@ -1339,6 +1342,7 @@
 		8B52A8A238C321BC9DFD0173E7E330CC /* img_account_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_account_header@2x.png"; sourceTree = "<group>"; };
 		8BAF1D310788275ABC1BC3D2889DD824 /* img_autoLocation@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_autoLocation@3x.png"; sourceTree = "<group>"; };
 		8BE660DFFAD71C7FD12940B7A8EB2A61 /* img_wifipwd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_wifipwd@2x.png"; sourceTree = "<group>"; };
+		8BF9C7BFBFA030C497C2382AB93162F6 /* ClockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockModel.h; sourceTree = "<group>"; };
 		8BFBD99F66F537ADA66B08E8A8055133 /* valveLeak_abnormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveLeak_abnormal.png; sourceTree = "<group>"; };
 		8DE85587BF1D2071948CA4931BD25C38 /* nodeSet_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeSet_normal@2x.png"; sourceTree = "<group>"; };
 		8E324CB10E5754D1FA75E64D241D74B1 /* NTCWirelessValveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTCWirelessValveController.h; sourceTree = "<group>"; };
@@ -1458,10 +1462,6 @@
 		BA32968D7F640B597C949F20288619F4 /* addFamily_uncheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addFamily_uncheck@3x.png"; sourceTree = "<group>"; };
 		BA55A4DAFC3221CAB82E13718748436B /* valveNode_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_normal@3x.png"; sourceTree = "<group>"; };
 		BA57AC696C1EF7DE44EA5523323CEF10 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB1F3499227EDBAF000937ED /* ClockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockModel.h; sourceTree = "<group>"; };
-		BB1F349A227EDBAF000937ED /* DelayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayModel.h; sourceTree = "<group>"; };
-		BB1F349B227EDBAF000937ED /* ClockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockModel.m; sourceTree = "<group>"; };
-		BB1F349C227EDBAF000937ED /* DelayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayModel.m; sourceTree = "<group>"; };
 		BB5CE1616DADF6B37F074AE81CB3D8EF /* nodeBattery_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeBattery_normal@3x.png"; sourceTree = "<group>"; };
 		BCCFAFCD4C12F63A3F250A729BB80519 /* img_addDevice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addDevice@2x.png"; sourceTree = "<group>"; };
 		BD1273BB75C4015B79584FA6F8BD9915 /* valveStatus_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_abnormal@3x.png"; sourceTree = "<group>"; };
@@ -1933,10 +1933,10 @@
 		2D5F770BA2570650C7FF75B2A514D231 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BB1F3499227EDBAF000937ED /* ClockModel.h */,
-				BB1F349B227EDBAF000937ED /* ClockModel.m */,
-				BB1F349A227EDBAF000937ED /* DelayModel.h */,
-				BB1F349C227EDBAF000937ED /* DelayModel.m */,
+				8BF9C7BFBFA030C497C2382AB93162F6 /* ClockModel.h */,
+				6ADBF5EA4820D39E78916AA795B20B68 /* ClockModel.m */,
+				366389A83BAA2B2AD86C88E118E01D4E /* DelayModel.h */,
+				060272D5995FF7B1A6CEA22675F8076E /* DelayModel.m */,
 				216B3BEC99ED55B5359E4E8FB81EC1CD /* DeviceModel.h */,
 				0BB8F0838327CCC27ACDFB097AF2BAD7 /* DeviceModel.m */,
 				65AAED19BABD68699FB2F074BF1E66CF /* HouseModel.h */,
@@ -3943,9 +3943,10 @@
 				83CD03E8953C44CB2F5F1233F7F74967 /* AddShareController.m in Sources */,
 				4C69EE7C1BFA06358339F94ADDE826DA /* AppDelegate.m in Sources */,
 				126CF54FCDE432286373C262CFB3DDBF /* AreaCodeCell.m in Sources */,
+				27C7AEDAF6058AEE46E806DCF75F0E22 /* ClockModel.m in Sources */,
 				441593096157A79703E7A991C86F335C /* ConnectApNetController.m in Sources */,
-				BB1F349E227EDBAF000937ED /* DelayModel.m in Sources */,
 				E317E724ACA06B499490ABE1E5F70D67 /* Database.m in Sources */,
+				94B436A1E663CFED1DBB9BC96FC98051 /* DelayModel.m in Sources */,
 				6D8C43BF90FC997A3B52B5B524D9E919 /* DeviceConnectView.m in Sources */,
 				AA2ADE2EE5BC371E943DBD11530F3E27 /* DeviceModel.m in Sources */,
 				30853A6D89CF98CAD0152F79A35C3CD8 /* DeviceSettingCell.m in Sources */,
@@ -4048,7 +4049,6 @@
 				E0814D6BF60F82748E58B7785118BBDB /* SelectDeviceTypeCell.m in Sources */,
 				92E36ED2A1EFB5CE2EB19F5687F9D9C0 /* SelectDeviceTypeController.m in Sources */,
 				FC9C8A916AA060D504D70683C38D0F61 /* ShareDeviceDetailCell.m in Sources */,
-				BB1F349D227EDBAF000937ED /* ClockModel.m in Sources */,
 				CC2A3068C7F2DF49BBE9FB884118299C /* ShareDeviceDetailController.m in Sources */,
 				8D235C418464CC4A267E1FDD8CACACE6 /* ShareDeviceListCell.m in Sources */,
 				5B8CE0FE71B761676130504CBE6FF2AA /* ShareDeviceListController.m in Sources */,
