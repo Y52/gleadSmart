@@ -51,6 +51,7 @@
 		09A9EF725AFC541D75E50DB768D54DAA /* valveNode_selnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 864AB94C88432428242207E5A8165AF5 /* valveNode_selnormal@2x.png */; };
 		09ADAEF888D156E03EA1F2AA584B528D /* TherTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 716CE6D0530D65CDF551EC235E361E85 /* TherTimerCell.m */; };
 		09E7342C2CCCCFB6AA41EF772959AB87 /* img_homeSet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 982C53AEEABFDC277F2F9F83FC647E11 /* img_homeSet@3x.png */; };
+		0A313DBEC48910E57E5ADD74856B8012 /* PlugOutletController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9557C486348BC450901BA8C7C3FFD0BF /* PlugOutletController.m */; };
 		0A84283DB2452AF04765A95F71B21D38 /* ESPGuideCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 17216D61AC320CA2780C8242D9EF4293 /* ESPGuideCode.m */; };
 		0AC4ABC45DDAD4B11F711B6C2FDADDE9 /* valveSwitch_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16103FF4C56E83BC1A916FA85D8C07C4 /* valveSwitch_normal@3x.png */; };
 		0B524FBADCD6BA8A23C29BAFB2F99B31 /* AccountHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF5A92A5AE907B49CC96B1B24ED114E /* AccountHeaderCell.m */; };
@@ -74,6 +75,7 @@
 		1132E2E479182F94730446FF80156F8C /* ThermostatController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B8B2DFBA1400CCF819D5A69AEAC538 /* ThermostatController.m */; };
 		115BFA8D419ABB173F104A22461D6D8A /* img_mine_aboutus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F760B8097FCF257F694A5360EBACB66F /* img_mine_aboutus@2x.png */; };
 		11687291AC4AF5795E039DDD450F6B06 /* valveSwitch_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA72D937755F4F4AAEB3633242E3D649 /* valveSwitch_normal@2x.png */; };
+		1189F4451BF6D9BECDCDC49D9F89424F /* MulSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E159C9A30BA6F33095B9D60DF9A4CBC /* MulSwitchController.m */; };
 		11B002FA467BC2200A9FF5D235EA0CA8 /* img_adddevice_bigualu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12E8D9E2530967A7183B0F11233410B2 /* img_adddevice_bigualu@3x.png */; };
 		11BFD0E6BAC9A119F349A6DAD837869B /* img_valve_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DF57297A164AE3E90305C7673E9BFC9 /* img_valve_on@3x.png */; };
 		11DA049F1418D302A7887C2C99E5B2BE /* img_homeSet.png in Resources */ = {isa = PBXBuildFile; fileRef = C7FF1F6DE89878824322547788896EF7 /* img_homeSet.png */; };
@@ -131,6 +133,7 @@
 		1ED29E96CEE9FEFA02B7B5A755FDCB4D /* img_shareInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11C0D80CE50C796D6E8BDBAC8CA88048 /* img_shareInfo@2x.png */; };
 		1EEB0900A0A92CAD8B1DC0D6054FF796 /* TouchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C666BDEBFA1746B1264666CE0191A04 /* TouchTableView.m */; };
 		1F5FE94FFF74A13D0B2DAB5C4783ADD9 /* img_login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A490532567FF887EB09A750394FAEA5C /* img_login_bg@2x.png */; };
+		1F994AFBDB7CDA416ADFD0EB3A0FECFC /* MulSwitchTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC516E356B38803A5BEF1C540760DB73 /* MulSwitchTimingController.m */; };
 		1FC4F01D7896A8F517FEA5E23F12C31B /* img_houseManage.png in Resources */ = {isa = PBXBuildFile; fileRef = EE886FD8A8A077E0BF0F27C429DACDDE /* img_houseManage.png */; };
 		1FCD70B38B0C796215D55114F8ED329B /* img_wifipwd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2BF9336B2134D8DA8219CA8CAA06E8 /* img_wifipwd.png */; };
 		1FF956C495F55CCDC84441E0279D54C6 /* pen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5CD6AB3E0D97742ED75F83A50C1FFA /* pen@2x.png */; };
@@ -192,9 +195,11 @@
 		2C1EB33E644F290B89D370B9894FF025 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF33BBD485AAACD2E896EC03FAF4BC0 /* AppDelegate.m */; };
 		2C41D79BC2560868DF2F9669774AD60D /* img_thermostat_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E5325251E32DEAB35F97F1538A15E4 /* img_thermostat_on@3x.png */; };
 		2DA0CDE98E88ECF614DE3A92540A6787 /* img_tab_03_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 263FFB49DDAA7B81C8DFCBB870AB8485 /* img_tab_03_unselect.png */; };
+		2DB6B9160BBDBBCAE670313193268542 /* PlugOutletAddTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE15A0A0F3529DFE855A2C106C11FB9 /* PlugOutletAddTimingController.m */; };
 		2DC9732E902B3258EEB8BD31F311CC91 /* thermostatSet@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF3EC04220D6A06C661DCBF908DF291 /* thermostatSet@1x.png */; };
 		2E04A67EF469F21C24F2B09060E81B7A /* thermostatKnob@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD479C2D3E5AF3A075FF8C4F538FB1AD /* thermostatKnob@1x.png */; };
 		2E0B454C0C8F2734F342DAFD7BAEAE46 /* img_retrieve_password.png in Resources */ = {isa = PBXBuildFile; fileRef = B3CF80A71CA1EFC7C9DFF80C544EA46E /* img_retrieve_password.png */; };
+		2E36A554D6180CCE48D956A3256958D1 /* PlugOutletAddDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C4AF5950797B161A9613034FC0FE45 /* PlugOutletAddDelayController.m */; };
 		2E47C75A77C6D8AF347108524A5C00C4 /* img_tab_03_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B59ECF5FE5136AE9B0A67E7E067790 /* img_tab_03_select@3x.png */; };
 		2E7FB19016E34E920727F077A8937D0B /* img_ther_addTimerSwitch.png in Resources */ = {isa = PBXBuildFile; fileRef = 4678803F056E21ADAEA127B5B3CFD6B9 /* img_ther_addTimerSwitch.png */; };
 		2EBA10B9AF7717CEDDC9BA56492E7F52 /* img_manual_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA21D38024B333714FA30F329082BEA4 /* img_manual_on@3x.png */; };
@@ -382,6 +387,7 @@
 		64FCA41CBF58625AA4D6C5EB97A036E9 /* img_weekProgram_out@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E36399AA45BFD5EE0BEC2DA9FF02F /* img_weekProgram_out@3x.png */; };
 		656A20055D35F832076132FD7404A2B3 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE2F22BCCDF3189299FD71E16EB5C68 /* RDVTabBarItem.m */; };
 		65BAD3F9B93967FE4DC099096EDF2CA2 /* img_weatherBg.png in Resources */ = {isa = PBXBuildFile; fileRef = FAE3BAF75B83238CE7656CCE04C9C5A7 /* img_weatherBg.png */; };
+		6632708248AF747B7A3386D2B0580971 /* MulSwitchTimingSetingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CFC2BD40F18C80B26C8B0F321B3CFB /* MulSwitchTimingSetingController.m */; };
 		66363F12FB9D0841D1F63DBB74181CFD /* img_adddevice_gateway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C7BC4EDF1771FBF2AA25DDC0090A69 /* img_adddevice_gateway@2x.png */; };
 		669513B1531A2163C305628A2425CA1E /* img_account_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B52A8A238C321BC9DFD0173E7E330CC /* img_account_header@2x.png */; };
 		66EF71BB7F594F79C54D2391B817FB62 /* SharerInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98FF5CD73BD0EFE9C540FBC404B483FD /* SharerInputController.m */; };
@@ -422,6 +428,7 @@
 		72B20DE5C09C749E81AD5F8DDEDDF864 /* FamilyMemberSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E35A9151571667E406EA13C3EBDE92 /* FamilyMemberSetCell.m */; };
 		72DE594673683493585528C34239F4BD /* img_login_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5D1287A9BDE516537171F0590CD681 /* img_login_phone@2x.png */; };
 		72E2AD0AFF2F2FC552211C1F42CC1199 /* pen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D4232D4C0FDD3E6699D18D7863822 /* pen@3x.png */; };
+		72E3064BEC5F0A5AD700039A6B2848F7 /* MulSwitchAddTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC05FCEF3342B429D839E39F2BC503 /* MulSwitchAddTimingController.m */; };
 		72E3F39167162093B517DA110527AD8C /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8F0838327CCC27ACDFB097AF2BAD7 /* DeviceModel.m */; };
 		7375471520DAD26F0CFAC441EC313B39 /* img_retrieve_password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D17AD74249142CF17BF6C5F70D3C91 /* img_retrieve_password@3x.png */; };
 		73A69EEEFABF9C88D6144250966F6C2B /* img_weekProgram_getup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E0476F52D5D684F9B0A7AF5738E8AB /* img_weekProgram_getup@2x.png */; };
@@ -477,6 +484,7 @@
 		8331DB8C9EACA60A2F4414908DC5676A /* img_Lamp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8011E1C077F398A68FECF74D5B9B4FB2 /* img_Lamp@2x.png */; };
 		835F3CBCD45B109938D04B77E929327F /* valveNode_selabnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD29F7703F8526A07E177DCE3F572E75 /* valveNode_selabnormal@3x.png */; };
 		83CD03E8953C44CB2F5F1233F7F74967 /* AddShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A346B4745352B065BF1D990BCB3893 /* AddShareController.m */; };
+		83D80B334D0A06787691229ECACAFB0D /* PlugOutletWeekSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AD9DD67833CFADA73C7334ED5B006B /* PlugOutletWeekSelectController.m */; };
 		83E50F54F70ABF49226082484D95FFCD /* ESPTouchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30A3381FBF2BC6D5A530E052CE1041 /* ESPTouchResult.m */; };
 		841FA9DE3B5762045AB4242271C3DA09 /* img_login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 041746696838B352A62634DC3C287446 /* img_login_bg.png */; };
 		844308CF02EF0FA3F8D61440AA8AACE3 /* thermostat_timing_on.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6654221211A7E053A5B5683A42FA96 /* thermostat_timing_on.png */; };
@@ -672,18 +680,6 @@
 		BA10BAF504BA5772F97F7758A6BF7EC9 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEC253DAC801F4C270E7603C299928 /* AFNetworkReachabilityManager.m */; };
 		BA43C1C8DEC5F1AD661CEA2E2A8C3603 /* img_wallHob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A70610DF8D91BBF42E7F5A99D40160 /* img_wallHob@2x.png */; };
 		BB0FE2F7F493DDE8A4747626FF69BE8A /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE2F22BCCDF3189299FD71E16EB5C68 /* RDVTabBarItem.m */; };
-		BB1F348D227EDAA3000937ED /* PlugOutletAddTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3474227EDAA3000937ED /* PlugOutletAddTimingController.m */; };
-		BB1F348E227EDAA3000937ED /* PlugOutletAddDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3477227EDAA3000937ED /* PlugOutletAddDelayController.m */; };
-		BB1F348F227EDAA3000937ED /* PlugOutletDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3478227EDAA3000937ED /* PlugOutletDelayController.m */; };
-		BB1F3490227EDAA3000937ED /* PlugOutletTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3479227EDAA3000937ED /* PlugOutletTimingController.m */; };
-		BB1F3491227EDAA3000937ED /* PlugOutletController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F347A227EDAA3000937ED /* PlugOutletController.m */; };
-		BB1F3492227EDAA3000937ED /* PlugOutletWeekSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F347C227EDAA3000937ED /* PlugOutletWeekSelectController.m */; };
-		BB1F3493227EDAA3000937ED /* PlugOutletSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F347D227EDAA3000937ED /* PlugOutletSettingController.m */; };
-		BB1F3494227EDAA3000937ED /* MulSwitchTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3483227EDAA3000937ED /* MulSwitchTimingController.m */; };
-		BB1F3495227EDAA3000937ED /* MulSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3485227EDAA3000937ED /* MulSwitchController.m */; };
-		BB1F3496227EDAA3000937ED /* MulSwitchTimingSetingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3489227EDAA3000937ED /* MulSwitchTimingSetingController.m */; };
-		BB1F3497227EDAA3000937ED /* MulSwitchWeekSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F348B227EDAA3000937ED /* MulSwitchWeekSelectController.m */; };
-		BB1F3498227EDAA3000937ED /* MulSwitchAddTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F348C227EDAA3000937ED /* MulSwitchAddTimingController.m */; };
 		BBACD65E4CE4050F281BFF75293101DC /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */; };
 		BBED11018EEF75677A4A4B0EB91CB50F /* img_ther_addTimerSwitch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF326CB45C32724F7009A6732B37108E /* img_ther_addTimerSwitch@2x.png */; };
 		BC42FC2F4108CBC11EFA469901A8EC2D /* thermostatSet_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B47A1EC308F2F47B7E47F3B379FEDC4 /* thermostatSet_on.png */; };
@@ -695,6 +691,7 @@
 		BE7433844BB387E36AA271E7F29D8CD2 /* HouseManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2033156074AFDF26A11ED97785292417 /* HouseManagementController.m */; };
 		BF08E99700B2262E5B7B191F25C60799 /* TherWeekSelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C918FC3742B81F7EB5B0C2234C3B118E /* TherWeekSelCell.m */; };
 		BF60E3A08D01DAA532C2A141C028B496 /* HouseShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6741B8974F2C841924A4C4D40A3E78 /* HouseShareController.m */; };
+		C0114A9306015296485BB917530BB4AD /* PlugOutletSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D97867D9255014834BFE4D2DC39A8F /* PlugOutletSettingController.m */; };
 		C01A8A0C81190899F717D2B14CE91FB0 /* img_launchTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A94D566C159EC23F55691A0C144BBE /* img_launchTitle.png */; };
 		C055F06F29117A626520DCF032ED88CE /* MyHouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CE7AFD5E857CE93D3BCB5F97A5B6F1 /* MyHouseController.m */; };
 		C066668EDD5781874A231236B589F4D3 /* valveNode_selnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71F665FCA998C2037532AF6E45732239 /* valveNode_selnormal@3x.png */; };
@@ -709,6 +706,7 @@
 		C1D534FB530BD5E2E57C6CE66C512A4D /* img_adddevice_wenkongqi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C8969D02CE2D43FB9D75DD7322C081 /* img_adddevice_wenkongqi@2x.png */; };
 		C221086D50E5767AD3319CA620505FFC /* StatusConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F1CBDF488F0986DB38563B5AC6FC31 /* StatusConfirmController.m */; };
 		C231661C6564D217C3C91C5AB67A3EA7 /* YTFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ABD0B1C2BDA3D8FBF9953B63D7486C /* YTFAlertController.m */; };
+		C3807EF4A61AC40C947838B77269F7F5 /* PlugOutletTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7524728465C46673151B7670D3C7A002 /* PlugOutletTimingController.m */; };
 		C382A84F8F054C113A16881F3E1091B4 /* img_weekProgram_sleep.png in Resources */ = {isa = PBXBuildFile; fileRef = 33B9788504B61516DB9491523B25DC10 /* img_weekProgram_sleep.png */; };
 		C433778DCC935C304FE916EFB3CA7CD2 /* valveHeader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A7EFF2552228C9D66CEE2AF9EF41FED /* valveHeader@3x.png */; };
 		C4430AD67993F18A47C553812DA013A2 /* img_tab_01_unselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE80429861716CE0E9746398C4356C61 /* img_tab_01_unselect@2x.png */; };
@@ -756,6 +754,7 @@
 		D11BCC7BE75F1F38B076396EB276C10B /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 29ABE0327F6A603816A1812D5700897F /* RDVTabBar.m */; };
 		D1A8D8FBCA4052B80F0CFE2DAC5F17F7 /* ESPAES.m in Sources */ = {isa = PBXBuildFile; fileRef = F789B46B0694D8CB107F0C43B3E0A7C9 /* ESPAES.m */; };
 		D1B63F2B0E2D929C8070A00D2B79CA05 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CCDB01D346C26DEFA2047CAA1620BC /* MineViewController.m */; };
+		D1F3A124D76703B9F850B004E452F780 /* MulSwitchWeekSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CB059DA2F455157C7F4DA494D7E62F /* MulSwitchWeekSelectController.m */; };
 		D21B4E2838DD57B6F6532F509E0B76A7 /* img_ther_addTimerWeek@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0C5A8E35796EE2120FB4EB418B8FF3 /* img_ther_addTimerWeek@2x.png */; };
 		D29FC948AA8AD87AF4A7B33E4C2956F3 /* 120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274E6FCB0E723442A28FE9E253B25CC4 /* 120@2x.png */; };
 		D2C6C3CD96E70F1BCC741661939A23E0 /* img_tab_01_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C27E464F091B2879209EA7BACA301C /* img_tab_01_select.png */; };
@@ -765,6 +764,7 @@
 		D3E89C55923F5E46E170F0CCA3E0FFC6 /* thermostatSet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D09E826E305966C78E4F33F81A034DE /* thermostatSet@3x.png */; };
 		D45A45727C1B6509BF691C403C39BAC1 /* temperatureSet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8316ADD849F43975E0EA4D15FDBDFFBF /* temperatureSet@2x.png */; };
 		D51E9B1111D7CBD4DE140F0234B58F7E /* img_login_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E8CABC4ADE4474EDD9D3CA907B56EF /* img_login_header@2x.png */; };
+		D55F8F358D6CC057BA344AD28BE0282F /* PlugOutletDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4138EA160EE4F7D1C361D73E3B7022C6 /* PlugOutletDelayController.m */; };
 		D576525324636BD588C7DCE7395B2270 /* img_houseManage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD36F95DACD666AC540B299CF46BAD9 /* img_houseManage@3x.png */; };
 		D59A14915FD368A6660DE1667869BDF5 /* img_login_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = C3178387A4A710DBA6190C43B98D7ED7 /* img_login_phone.png */; };
 		D5F17FEAE0DE6072C919757E67FE60BF /* img_mine_account@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A74D87DED075085EF7C0AFE7059134D /* img_mine_account@3x.png */; };
@@ -1114,6 +1114,7 @@
 		38FFFCA10FFA73B670A953E16A210495 /* SelectDeviceTypeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectDeviceTypeController.m; sourceTree = "<group>"; };
 		396F6246883621F496A6004455B2108A /* thermostat_timing_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_timing_on@3x.png"; sourceTree = "<group>"; };
 		39AFD63DB2F7E4F2378B26D8DF7C5692 /* ThermostatAddTimerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThermostatAddTimerController.m; sourceTree = "<group>"; };
+		39D7DC0B5C435298BD5781DA153D548F /* MulSwitchAddTimingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchAddTimingController.h; sourceTree = "<group>"; };
 		39DA8F5DFB69CF3C16536B5B0D9A70D5 /* thermostatCircle_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermostatCircle_off.png; sourceTree = "<group>"; };
 		39DD91CF5B9B919C4173659F3CEC5CE5 /* AccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		39E4C8D81E4ACF7CFDC5D3B0625DCF70 /* APNetworkController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APNetworkController.h; sourceTree = "<group>"; };
@@ -1125,6 +1126,7 @@
 		3DF6A20154FAF6DFDA41BF26D4FB2373 /* 180@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "180@2x.png"; sourceTree = "<group>"; };
 		3DF813ECF557DBC0B5F6AA8661FB06C3 /* valveHeader@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveHeader@1x.png"; sourceTree = "<group>"; };
 		3E0DE4DBAC18DD942C85B1771FCFDF41 /* img_shareInfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_shareInfo.png; sourceTree = "<group>"; };
+		3E12DC9206C7050A05189FC081B2BBCC /* PlugOutletTimingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletTimingController.h; sourceTree = "<group>"; };
 		3E2BF9336B2134D8DA8219CA8CAA06E8 /* img_wifipwd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_wifipwd.png; sourceTree = "<group>"; };
 		3E5838C082AFBDE26811CFF31B3D4BBD /* FamilyLocationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyLocationController.h; sourceTree = "<group>"; };
 		3E5A6271F0E125EFD9C7320360718BB8 /* valveHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveHeader@2x.png"; sourceTree = "<group>"; };
@@ -1138,8 +1140,10 @@
 		40E239CA1F6A27594897B42B40386441 /* img_mine_checkUpdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_mine_checkUpdate.png; sourceTree = "<group>"; };
 		40EC4DE03F580127AD499F42F8BF6A31 /* ThermostatAddTimerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThermostatAddTimerController.h; sourceTree = "<group>"; };
 		411C26798B958C645A49EACE213E94B5 /* img_manual_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_manual_on@2x.png"; sourceTree = "<group>"; };
+		4138EA160EE4F7D1C361D73E3B7022C6 /* PlugOutletDelayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletDelayController.m; sourceTree = "<group>"; };
 		413A599E3D32EE342ACA325A7E2DF11D /* valveNode_selabnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selabnormal@2x.png"; sourceTree = "<group>"; };
 		41CF9BBDD9DDD02F026942CBB696CC03 /* PlugOutletSaveAddDelayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSaveAddDelayCell.m; sourceTree = "<group>"; };
+		41D97867D9255014834BFE4D2DC39A8F /* PlugOutletSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSettingController.m; sourceTree = "<group>"; };
 		4204DF0EA176CBBFD6B8CC808D5F2763 /* EspViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EspViewController.h; sourceTree = "<group>"; };
 		431084A0D95479B2B780F87418F500D7 /* HouseSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSelectCell.h; sourceTree = "<group>"; };
 		43346812DE2BE5B8737F78AAAF6C39F3 /* APProcessController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APProcessController.h; sourceTree = "<group>"; };
@@ -1163,6 +1167,7 @@
 		4812F925B5D0A2374F86D922001E8891 /* img_launchBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_launchBG@2x.png"; sourceTree = "<group>"; };
 		4885C2B1A50C71F0852863BABB135DF1 /* MineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		48AA11257F11DB1A78886703088FB335 /* WeekendNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekendNameCell.m; sourceTree = "<group>"; };
+		48AD9DD67833CFADA73C7334ED5B006B /* PlugOutletWeekSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletWeekSelectController.m; sourceTree = "<group>"; };
 		49050A8374C87199D87B4BD6DF81E628 /* addRoom_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addRoom_hand.png; sourceTree = "<group>"; };
 		49ABD0B1C2BDA3D8FBF9953B63D7486C /* YTFAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTFAlertController.m; sourceTree = "<group>"; };
 		49CE2B7EFB8CD3C5032DB16B7106FB7F /* valveLeak_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveLeak_normal@3x.png"; sourceTree = "<group>"; };
@@ -1179,6 +1184,7 @@
 		4CD84C986FFB549F117D2D755E95E652 /* HomeDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceCell.m; sourceTree = "<group>"; };
 		4D0152DF60DC6482EA1E22733B16217F /* ESP_NetUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESP_NetUtil.m; sourceTree = "<group>"; };
 		4D7DE86551A9585022573574D2EB16CD /* img_autoLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_autoLocation.png; sourceTree = "<group>"; };
+		4E159C9A30BA6F33095B9D60DF9A4CBC /* MulSwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchController.m; sourceTree = "<group>"; };
 		4E3A2E11635272A1AE9C9DE70ABCD901 /* ESPDataCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPDataCode.h; sourceTree = "<group>"; };
 		4F028013865D41C2068D891351EEE397 /* UsernameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsernameViewController.m; sourceTree = "<group>"; };
 		507F66339B336FBC363BE81B9C098966 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1196,6 +1202,7 @@
 		550F3E4776732175E3B5305E81CE771D /* ValveAlertInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValveAlertInfoController.m; sourceTree = "<group>"; };
 		566E4C39BC521F545C0C8AAF5F6BA90C /* HouseSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSettingController.h; sourceTree = "<group>"; };
 		5680DF2253AE96E3480AB16BC04F9559 /* NSObject+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Common.h"; sourceTree = "<group>"; };
+		56D0BA8F817A2FD412150A2933389FB8 /* PlugOutletAddTimingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletAddTimingController.h; sourceTree = "<group>"; };
 		56D6EEB74B24C1E5EEAA046BC526BFB1 /* HouseSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseSettingController.m; sourceTree = "<group>"; };
 		570FD2948B582496DE0ED8F17ACB0D05 /* Pods-jienuoIOT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jienuoIOT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT.debug.xcconfig"; sourceTree = "<group>"; };
 		5773539D63A23A38607F52E20838B0C7 /* ManagerSetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerSetCell.m; sourceTree = "<group>"; };
@@ -1268,8 +1275,10 @@
 		72A601E887F1535BC884E86023BD6AA2 /* AddRoomsTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRoomsTextCell.h; sourceTree = "<group>"; };
 		7374CA5321128FC62F7DAED519FC2699 /* NSObject+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Common.m"; sourceTree = "<group>"; };
 		739A97F276C225CB337930B698CA5DE1 /* addFamily_uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addFamily_uncheck.png; sourceTree = "<group>"; };
+		7524728465C46673151B7670D3C7A002 /* PlugOutletTimingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletTimingController.m; sourceTree = "<group>"; };
 		75AC6B27AFE52ED354D1C702BF846F32 /* NTCWirelessValveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTCWirelessValveController.m; sourceTree = "<group>"; };
 		762E573BF4E7DD318107338D9B330C31 /* valveStatus_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_normal@3x.png"; sourceTree = "<group>"; };
+		76CE24586241CF134BCFA0D75058072B /* MulSwitchWeekSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchWeekSelectController.h; sourceTree = "<group>"; };
 		76D5A4F09EC1B5A7B88F1AFBA68107D2 /* img_tab_02_unselect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_02_unselect@3x.png"; sourceTree = "<group>"; };
 		776AACA57FD1946E8482E957C6E1AD7C /* img_mine_aboutus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_mine_aboutus@3x.png"; sourceTree = "<group>"; };
 		77802FC3E2A3CC0DC150F968AE579D2D /* AddFamilySelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFamilySelectCell.h; sourceTree = "<group>"; };
@@ -1281,8 +1290,10 @@
 		7A789E61DFE66BBD8D1D23603B4F86CE /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		7B31E0821C75D98FC4C167DA0C661511 /* img_manual_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_manual_off@2x.png"; sourceTree = "<group>"; };
 		7BC9E677A480DA747490F9D4FADA29ED /* UILabel+YBAttributeTextTapAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+YBAttributeTextTapAction.m"; sourceTree = "<group>"; };
+		7BE15A0A0F3529DFE855A2C106C11FB9 /* PlugOutletAddTimingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletAddTimingController.m; sourceTree = "<group>"; };
 		7D09E826E305966C78E4F33F81A034DE /* thermostatSet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatSet@3x.png"; sourceTree = "<group>"; };
 		7D0D2F6CFBD37B5469940BFBD4DDD62F /* valveStatus_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_normal@2x.png"; sourceTree = "<group>"; };
+		7D93A9B69FDA37E89EF63F1B6BE44A35 /* MulSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchController.h; sourceTree = "<group>"; };
 		7DA56BAA2F991CA1B334E7870C5FC1BA /* img_retrieve_verify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_retrieve_verify.png; sourceTree = "<group>"; };
 		7DF57297A164AE3E90305C7673E9BFC9 /* img_valve_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_valve_on@3x.png"; sourceTree = "<group>"; };
 		7E7F7EF3A7E3F0A84E8EFDFD34006D04 /* HouseSelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseSelectController.h; sourceTree = "<group>"; };
@@ -1333,12 +1344,14 @@
 		91078790D452590067E74388A03FA776 /* img_houseSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_houseSelect.png; sourceTree = "<group>"; };
 		913CA6F3A60EB20121A4902B3A671F01 /* DeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceViewController.h; sourceTree = "<group>"; };
 		91A70610DF8D91BBF42E7F5A99D40160 /* img_wallHob@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_wallHob@2x.png"; sourceTree = "<group>"; };
+		91AC05FCEF3342B429D839E39F2BC503 /* MulSwitchAddTimingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchAddTimingController.m; sourceTree = "<group>"; };
 		9241390D703637301B9AC36CBA21E973 /* img_noSharer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_noSharer.png; sourceTree = "<group>"; };
 		92A6F08629BBC5FADDC307E3726C7F26 /* valveSwitch_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveSwitch_abnormal@3x.png"; sourceTree = "<group>"; };
 		9388A6617DB17262408ED6C8ACEB3F9C /* img_mine_wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_mine_wechat@2x.png"; sourceTree = "<group>"; };
 		93D4F7F59DA21A79ED7C88007E01FDE6 /* DeviceConnectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceConnectView.h; sourceTree = "<group>"; };
 		9453E1EDC7FBD75ECC7542E9F59CC59B /* ShareDeviceSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceSelectCell.h; sourceTree = "<group>"; };
 		94C27E464F091B2879209EA7BACA301C /* img_tab_01_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_tab_01_select.png; sourceTree = "<group>"; };
+		9557C486348BC450901BA8C7C3FFD0BF /* PlugOutletController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletController.m; sourceTree = "<group>"; };
 		95A7ECC12385730D4EA34DA240090C64 /* ThermostatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThermostatController.h; sourceTree = "<group>"; };
 		95C2374D068421C91FFB40A763376F65 /* nodeLeakSmall_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeLeakSmall_normal.png; sourceTree = "<group>"; };
 		960830D6232B963BEE71CF49A0ECC2B0 /* ESPDataCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPDataCode.m; sourceTree = "<group>"; };
@@ -1389,6 +1402,7 @@
 		A5DF6BFA65B3318448873C3C7E9FAEC4 /* ESPDatumCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPDatumCode.h; sourceTree = "<group>"; };
 		A64A42B2935416601E0D72258E22AA04 /* PlugOutletWeekSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletWeekSelectCell.h; sourceTree = "<group>"; };
 		A6AF883BE9967DF24A0CC0FE55F7F3EA /* DeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceViewController.m; sourceTree = "<group>"; };
+		A6CFC2BD40F18C80B26C8B0F321B3CFB /* MulSwitchTimingSetingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchTimingSetingController.m; sourceTree = "<group>"; };
 		A736B94903128F7B9676C6E7C2973373 /* AccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		A76EDBD4202D002C4E1BFED0332F8AE2 /* img_houseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_houseSelected.png; sourceTree = "<group>"; };
 		A783708AE47329E84A32057E8E88B2C5 /* MemberModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemberModel.m; sourceTree = "<group>"; };
@@ -1412,6 +1426,7 @@
 		AE311741CE8928EB92A5809B6FC8275F /* img_mine_editPW@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_mine_editPW@3x.png"; sourceTree = "<group>"; };
 		AE6654221211A7E053A5B5683A42FA96 /* thermostat_timing_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermostat_timing_on.png; sourceTree = "<group>"; };
 		AEEEBB71C89ABA3ABF65B05F26E76181 /* nodeLeakSmall_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeLeakSmall_normal@3x.png"; sourceTree = "<group>"; };
+		B062F72416405D4D0E76718BA521C0D2 /* MulSwitchTimingSetingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchTimingSetingController.h; sourceTree = "<group>"; };
 		B0E5325251E32DEAB35F97F1538A15E4 /* img_thermostat_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_thermostat_on@3x.png"; sourceTree = "<group>"; };
 		B0EA5185222DDCAC3EB7F05E0FAF637D /* valveTemperature_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTemperature_normal@3x.png"; sourceTree = "<group>"; };
 		B194CA7DB111E1D235072AE35F3A621C /* gleadSmartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gleadSmartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1420,6 +1435,7 @@
 		B2DACBDF308B3FB7F7AC0A67746112D7 /* img_houseManage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseManage@2x.png"; sourceTree = "<group>"; };
 		B3CF80A71CA1EFC7C9DFF80C544EA46E /* img_retrieve_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_retrieve_password.png; sourceTree = "<group>"; };
 		B3E1EAFA6531C0149DE1A6035A5A958A /* HouseSetMemberCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseSetMemberCell.m; sourceTree = "<group>"; };
+		B4C4AF5950797B161A9613034FC0FE45 /* PlugOutletAddDelayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletAddDelayController.m; sourceTree = "<group>"; };
 		B4F39D410F2134A7F2C2357965F3C6D4 /* valveSwitch_abnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveSwitch_abnormal@2x.png"; sourceTree = "<group>"; };
 		B4F85679464FABD69E22F1C5AD9B1614 /* thermostat_max@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_max@2x.png"; sourceTree = "<group>"; };
 		B552627CDF2A04A30A1BA064D7E5C766 /* MulSwitchSetingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchSetingCell.m; sourceTree = "<group>"; };
@@ -1440,30 +1456,6 @@
 		BA32968D7F640B597C949F20288619F4 /* addFamily_uncheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addFamily_uncheck@3x.png"; sourceTree = "<group>"; };
 		BA55A4DAFC3221CAB82E13718748436B /* valveNode_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_normal@3x.png"; sourceTree = "<group>"; };
 		BA57AC696C1EF7DE44EA5523323CEF10 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB1F3474227EDAA3000937ED /* PlugOutletAddTimingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletAddTimingController.m; sourceTree = "<group>"; };
-		BB1F3475227EDAA3000937ED /* PlugOutletSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletSettingController.h; sourceTree = "<group>"; };
-		BB1F3476227EDAA3000937ED /* PlugOutletWeekSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletWeekSelectController.h; sourceTree = "<group>"; };
-		BB1F3477227EDAA3000937ED /* PlugOutletAddDelayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletAddDelayController.m; sourceTree = "<group>"; };
-		BB1F3478227EDAA3000937ED /* PlugOutletDelayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletDelayController.m; sourceTree = "<group>"; };
-		BB1F3479227EDAA3000937ED /* PlugOutletTimingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletTimingController.m; sourceTree = "<group>"; };
-		BB1F347A227EDAA3000937ED /* PlugOutletController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletController.m; sourceTree = "<group>"; };
-		BB1F347B227EDAA3000937ED /* PlugOutletAddTimingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletAddTimingController.h; sourceTree = "<group>"; };
-		BB1F347C227EDAA3000937ED /* PlugOutletWeekSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletWeekSelectController.m; sourceTree = "<group>"; };
-		BB1F347D227EDAA3000937ED /* PlugOutletSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSettingController.m; sourceTree = "<group>"; };
-		BB1F347E227EDAA3000937ED /* PlugOutletController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletController.h; sourceTree = "<group>"; };
-		BB1F347F227EDAA3000937ED /* PlugOutletTimingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletTimingController.h; sourceTree = "<group>"; };
-		BB1F3480227EDAA3000937ED /* PlugOutletDelayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletDelayController.h; sourceTree = "<group>"; };
-		BB1F3481227EDAA3000937ED /* PlugOutletAddDelayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletAddDelayController.h; sourceTree = "<group>"; };
-		BB1F3483227EDAA3000937ED /* MulSwitchTimingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchTimingController.m; sourceTree = "<group>"; };
-		BB1F3484227EDAA3000937ED /* MulSwitchTimingSetingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchTimingSetingController.h; sourceTree = "<group>"; };
-		BB1F3485227EDAA3000937ED /* MulSwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchController.m; sourceTree = "<group>"; };
-		BB1F3486227EDAA3000937ED /* MulSwitchWeekSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchWeekSelectController.h; sourceTree = "<group>"; };
-		BB1F3487227EDAA3000937ED /* MulSwitchAddTimingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchAddTimingController.h; sourceTree = "<group>"; };
-		BB1F3488227EDAA3000937ED /* MulSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchController.h; sourceTree = "<group>"; };
-		BB1F3489227EDAA3000937ED /* MulSwitchTimingSetingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchTimingSetingController.m; sourceTree = "<group>"; };
-		BB1F348A227EDAA3000937ED /* MulSwitchTimingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchTimingController.h; sourceTree = "<group>"; };
-		BB1F348B227EDAA3000937ED /* MulSwitchWeekSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchWeekSelectController.m; sourceTree = "<group>"; };
-		BB1F348C227EDAA3000937ED /* MulSwitchAddTimingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchAddTimingController.m; sourceTree = "<group>"; };
 		BB5CE1616DADF6B37F074AE81CB3D8EF /* nodeBattery_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeBattery_normal@3x.png"; sourceTree = "<group>"; };
 		BCCFAFCD4C12F63A3F250A729BB80519 /* img_addDevice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addDevice@2x.png"; sourceTree = "<group>"; };
 		BD1273BB75C4015B79584FA6F8BD9915 /* valveStatus_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_abnormal@3x.png"; sourceTree = "<group>"; };
@@ -1475,6 +1467,7 @@
 		BFC5910ACD746EB1D084807B57AA300C /* AreaCodeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AreaCodeCell.h; sourceTree = "<group>"; };
 		BFE2F22BCCDF3189299FD71E16EB5C68 /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
 		C005AC03A5AC97AC50B0332F62E93D6C /* img_wifipwd@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_wifipwd@3x.png"; sourceTree = "<group>"; };
+		C01BA74A6AC91B6AC23FC642EBFC1C0F /* PlugOutletSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletSettingController.h; sourceTree = "<group>"; };
 		C0EAC00DC5CF188E18AC3138D6AF134B /* img_login_header@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_login_header@3x.png"; sourceTree = "<group>"; };
 		C18318C77F1AF295436E4B7A2F8DF51E /* img_pwd_visiable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_pwd_visiable.png; sourceTree = "<group>"; };
 		C1EDCE6FF45C97AA82794BC2E828A762 /* valveAlertMark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveAlertMark@3x.png"; sourceTree = "<group>"; };
@@ -1522,10 +1515,12 @@
 		D10AFE9FF7F964338BFA40FBCC7C4D4C /* img_mine_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_mine_header.png; sourceTree = "<group>"; };
 		D158060B1CC7ACBA70000213F4A0A841 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		D1B8B2DFBA1400CCF819D5A69AEAC538 /* ThermostatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThermostatController.m; sourceTree = "<group>"; };
+		D1F409D77D4D01158002DCF236F62FBE /* PlugOutletAddDelayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletAddDelayController.h; sourceTree = "<group>"; };
 		D1FC69669FBD7DAD7C0815A8F571C0E2 /* ESPVersionMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPVersionMacro.h; sourceTree = "<group>"; };
 		D3DCAF4E038E94408A39FC880CDF6160 /* img_weekProgram_out@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_weekProgram_out@2x.png"; sourceTree = "<group>"; };
 		D445EBE380F436FBDA2B1BA3939BE695 /* DeviceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTableViewCell.m; sourceTree = "<group>"; };
 		D45966D0300BDD129619D3188A2B79F2 /* img_tab_03_unselect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_03_unselect@2x.png"; sourceTree = "<group>"; };
+		D49B243ECF0B8B10706C051B4E019E1C /* MulSwitchTimingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchTimingController.h; sourceTree = "<group>"; };
 		D5BBFFC8D406E8DDBC479447F693F151 /* NTCSetTemperatureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NTCSetTemperatureController.m; sourceTree = "<group>"; };
 		D63BD1F1C711261D7A37EE8DB6DC9DD3 /* PlugOutletSaveAddTimingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSaveAddTimingCell.m; sourceTree = "<group>"; };
 		D6465441207E437B859D60D3BB769A51 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
@@ -1546,6 +1541,7 @@
 		DB100A6D216C6D2667C81857889D2E32 /* SelectDeviceTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectDeviceTypeCell.h; sourceTree = "<group>"; };
 		DB3314C0D19815E2B06D25E20AA05F53 /* ESPTouchTaskParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPTouchTaskParameter.h; sourceTree = "<group>"; };
 		DBE885495495279D53B495B1354F5958 /* img_houseSelect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseSelect@3x.png"; sourceTree = "<group>"; };
+		DC516E356B38803A5BEF1C540760DB73 /* MulSwitchTimingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchTimingController.m; sourceTree = "<group>"; };
 		DD3FF0A2B7DB898369CC6DC9D2E2C6C8 /* img_tab_03_unselect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_03_unselect@3x.png"; sourceTree = "<group>"; };
 		DD43B3D551AE788B9DEE705D9B300BEF /* NodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeModel.m; sourceTree = "<group>"; };
 		DD8881B8C6B99281F96B76B66B3F75B1 /* valveTabMore@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTabMore@3x.png"; sourceTree = "<group>"; };
@@ -1560,8 +1556,10 @@
 		E0B7C09B458040E595C8605F1BAAFC32 /* img_addShareCheck_notable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_addShareCheck_notable.png; sourceTree = "<group>"; };
 		E2013E27538F858DC9BC7EA3D846E62D /* img_houseSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_houseSelected@3x.png"; sourceTree = "<group>"; };
 		E223B7AB664C9A7A348F1DAB3461B834 /* thermostatKnob@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatKnob@2x.png"; sourceTree = "<group>"; };
+		E296C3CB08CA275CE591A179F5913B6A /* PlugOutletDelayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletDelayController.h; sourceTree = "<group>"; };
 		E34A9496D5311AD69584F2E61DD39403 /* MineNormalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineNormalCell.h; sourceTree = "<group>"; };
 		E3586400B7AED87C78092F5764328B16 /* NodeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeButton.m; sourceTree = "<group>"; };
+		E3CB059DA2F455157C7F4DA494D7E62F /* MulSwitchWeekSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchWeekSelectController.m; sourceTree = "<group>"; };
 		E3EEFDF75E14A70E3B34DC7BFAD820DD /* RetrievePasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrievePasswordController.h; sourceTree = "<group>"; };
 		E42A60D5AA503DE5BE72836687471F88 /* ESPUDPSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPUDPSocketClient.h; sourceTree = "<group>"; };
 		E4B5A6A6641B98669699EA23E151CADE /* LogOutCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogOutCell.m; sourceTree = "<group>"; };
@@ -1588,6 +1586,7 @@
 		ED47A9AE3C8F1DEFD2C87760F3477B54 /* thermostat_-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostat_-.png"; sourceTree = "<group>"; };
 		EDF8D1DB8F30B0847501A02699CE7A6F /* RegisterAccountController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterAccountController.m; sourceTree = "<group>"; };
 		EE2696EF9E6FAAC0C913A3AD0FDEEA10 /* img_shareInfo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_shareInfo@3x.png"; sourceTree = "<group>"; };
+		EE3233D552E4CEF8C1C604E0AC98BA78 /* PlugOutletWeekSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletWeekSelectController.h; sourceTree = "<group>"; };
 		EE6F03F1E1EB1D4C8C6E598B8A2C5155 /* YSZCoreDataStackManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSZCoreDataStackManager.m; sourceTree = "<group>"; };
 		EE886FD8A8A077E0BF0F27C429DACDDE /* img_houseManage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_houseManage.png; sourceTree = "<group>"; };
 		EFF74E5FC5D74D60F18DDFA9537CE696 /* addFamily_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addFamily_check.png; sourceTree = "<group>"; };
@@ -1632,6 +1631,7 @@
 		FDB2E9648703C959773D114B49417740 /* MyHouseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyHouseController.h; sourceTree = "<group>"; };
 		FE2FA0747A658151A6991FB381B10270 /* PasswordLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordLoginController.m; sourceTree = "<group>"; };
 		FE85C7F703C45790F304C2C8975DB387 /* img_headerBg@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_headerBg@1x.png"; sourceTree = "<group>"; };
+		FE9DBC36893ABA5F410C756F68A0044C /* PlugOutletController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletController.h; sourceTree = "<group>"; };
 		FEF3EC04220D6A06C661DCBF908DF291 /* thermostatSet@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatSet@1x.png"; sourceTree = "<group>"; };
 		FF6D24B0FEAD4E2B7945E448A7C453CE /* Pods-jienuoIOT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jienuoIOT.release.xcconfig"; path = "Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2515,13 +2515,13 @@
 		99FA72921DC7BDC4D884EF17F45E31C2 /* Device */ = {
 			isa = PBXGroup;
 			children = (
-				BB1F3473227EDAA3000937ED /* plugOutlet */,
-				BB1F3482227EDAA3000937ED /* Switch */,
 				CDED2F18F2F1E6026C88AEA33FDBB421 /* DeviceShare */,
 				697589DA8994F369FD585377185C60A9 /* ESPTouch */,
 				754419574199C14C87BF3F239F0F3455 /* NTCValve */,
+				908B8719349059A25685980AEC62A377 /* Switch */,
 				F04884D24547B779801286C945794E00 /* Thermostat */,
 				058F5B134B8A039CA1731B8A58AC9808 /* Valve */,
+				EE7D7101BAAF5F4A9C9905A57EF19AB6 /* plugOutlet */,
 				A88B6787AD8DA60CBDFF8F9466729CE9 /* DeviceSettingController.h */,
 				B9F15FDEE07315D694041C72C71FB75C /* DeviceSettingController.m */,
 			);
@@ -2644,40 +2644,40 @@
 			path = Myhouse;
 			sourceTree = "<group>";
 		};
-		BB1F3473227EDAA3000937ED /* plugOutlet */ = {
+		EE7D7101BAAF5F4A9C9905A57EF19AB6 /* plugOutlet */ = {
 			isa = PBXGroup;
 			children = (
-				BB1F3474227EDAA3000937ED /* PlugOutletAddTimingController.m */,
-				BB1F3475227EDAA3000937ED /* PlugOutletSettingController.h */,
-				BB1F3476227EDAA3000937ED /* PlugOutletWeekSelectController.h */,
-				BB1F3477227EDAA3000937ED /* PlugOutletAddDelayController.m */,
-				BB1F3478227EDAA3000937ED /* PlugOutletDelayController.m */,
-				BB1F3479227EDAA3000937ED /* PlugOutletTimingController.m */,
-				BB1F347A227EDAA3000937ED /* PlugOutletController.m */,
-				BB1F347B227EDAA3000937ED /* PlugOutletAddTimingController.h */,
-				BB1F347C227EDAA3000937ED /* PlugOutletWeekSelectController.m */,
-				BB1F347D227EDAA3000937ED /* PlugOutletSettingController.m */,
-				BB1F347E227EDAA3000937ED /* PlugOutletController.h */,
-				BB1F347F227EDAA3000937ED /* PlugOutletTimingController.h */,
-				BB1F3480227EDAA3000937ED /* PlugOutletDelayController.h */,
-				BB1F3481227EDAA3000937ED /* PlugOutletAddDelayController.h */,
+				D1F409D77D4D01158002DCF236F62FBE /* PlugOutletAddDelayController.h */,
+				B4C4AF5950797B161A9613034FC0FE45 /* PlugOutletAddDelayController.m */,
+				56D0BA8F817A2FD412150A2933389FB8 /* PlugOutletAddTimingController.h */,
+				7BE15A0A0F3529DFE855A2C106C11FB9 /* PlugOutletAddTimingController.m */,
+				FE9DBC36893ABA5F410C756F68A0044C /* PlugOutletController.h */,
+				9557C486348BC450901BA8C7C3FFD0BF /* PlugOutletController.m */,
+				E296C3CB08CA275CE591A179F5913B6A /* PlugOutletDelayController.h */,
+				4138EA160EE4F7D1C361D73E3B7022C6 /* PlugOutletDelayController.m */,
+				C01BA74A6AC91B6AC23FC642EBFC1C0F /* PlugOutletSettingController.h */,
+				41D97867D9255014834BFE4D2DC39A8F /* PlugOutletSettingController.m */,
+				3E12DC9206C7050A05189FC081B2BBCC /* PlugOutletTimingController.h */,
+				7524728465C46673151B7670D3C7A002 /* PlugOutletTimingController.m */,
+				EE3233D552E4CEF8C1C604E0AC98BA78 /* PlugOutletWeekSelectController.h */,
+				48AD9DD67833CFADA73C7334ED5B006B /* PlugOutletWeekSelectController.m */,
 			);
 			path = plugOutlet;
 			sourceTree = "<group>";
 		};
-		BB1F3482227EDAA3000937ED /* Switch */ = {
+		908B8719349059A25685980AEC62A377 /* Switch */ = {
 			isa = PBXGroup;
 			children = (
-				BB1F3483227EDAA3000937ED /* MulSwitchTimingController.m */,
-				BB1F3484227EDAA3000937ED /* MulSwitchTimingSetingController.h */,
-				BB1F3485227EDAA3000937ED /* MulSwitchController.m */,
-				BB1F3486227EDAA3000937ED /* MulSwitchWeekSelectController.h */,
-				BB1F3487227EDAA3000937ED /* MulSwitchAddTimingController.h */,
-				BB1F3488227EDAA3000937ED /* MulSwitchController.h */,
-				BB1F3489227EDAA3000937ED /* MulSwitchTimingSetingController.m */,
-				BB1F348A227EDAA3000937ED /* MulSwitchTimingController.h */,
-				BB1F348B227EDAA3000937ED /* MulSwitchWeekSelectController.m */,
-				BB1F348C227EDAA3000937ED /* MulSwitchAddTimingController.m */,
+				39D7DC0B5C435298BD5781DA153D548F /* MulSwitchAddTimingController.h */,
+				91AC05FCEF3342B429D839E39F2BC503 /* MulSwitchAddTimingController.m */,
+				7D93A9B69FDA37E89EF63F1B6BE44A35 /* MulSwitchController.h */,
+				4E159C9A30BA6F33095B9D60DF9A4CBC /* MulSwitchController.m */,
+				D49B243ECF0B8B10706C051B4E019E1C /* MulSwitchTimingController.h */,
+				DC516E356B38803A5BEF1C540760DB73 /* MulSwitchTimingController.m */,
+				B062F72416405D4D0E76718BA521C0D2 /* MulSwitchTimingSetingController.h */,
+				A6CFC2BD40F18C80B26C8B0F321B3CFB /* MulSwitchTimingSetingController.m */,
+				76CE24586241CF134BCFA0D75058072B /* MulSwitchWeekSelectController.h */,
+				E3CB059DA2F455157C7F4DA494D7E62F /* MulSwitchWeekSelectController.m */,
 			);
 			path = Switch;
 			sourceTree = "<group>";
@@ -3921,9 +3921,7 @@
 				495BB39576B86CBA7A009ED4242A5085 /* APProcessController.m in Sources */,
 				586E00FEDB08C6B20A1B805149C5FB82 /* APStatusConfirmController.m in Sources */,
 				3F22DBD8270B8A288D5B77C52AC7E423 /* AccountHeaderCell.m in Sources */,
-				BB1F3494227EDAA3000937ED /* MulSwitchTimingController.m in Sources */,
 				776892966EE36F009805FFCA24A05367 /* AccountViewController.m in Sources */,
-				BB1F348F227EDAA3000937ED /* PlugOutletDelayController.m in Sources */,
 				2851F929D2B4CC053AEA9C05EBE12521 /* AddDeviceShareController.m in Sources */,
 				291FB34389886CC11273B24EFABB8702 /* AddFamilySelectCell.m in Sources */,
 				B8B7A93955131C976B54EF66F388270E /* AddFamilyTextCell.m in Sources */,
@@ -3944,7 +3942,6 @@
 				1EA0CAA13B6CC400411A3E9962532905 /* DeviceShareController.m in Sources */,
 				235434830B71293A044D5569E5CF5325 /* DeviceTableViewCell.m in Sources */,
 				3CEE969EE81A5F518434B7C90DBB339A /* DeviceViewController.m in Sources */,
-				BB1F3492227EDAA3000937ED /* PlugOutletWeekSelectController.m in Sources */,
 				3581BEC59185814B004DD1B9FFB790E4 /* ESPAES.m in Sources */,
 				22151175A6453DD7359F4AA8A430D695 /* ESPDataCode.m in Sources */,
 				E318F201C41E6CDED65E108BDD386FCB /* ESPDatumCode.m in Sources */,
@@ -3989,11 +3986,15 @@
 				FAD06484FBA0F41A664C9A0C3FBDCFE4 /* MineNormalCell.m in Sources */,
 				91BF98673F071B89ABF732D0B1A46BE5 /* MineViewController.m in Sources */,
 				F4FD710E02A92A7906C1D08CEE890BA0 /* ModifyPasswordViewController.m in Sources */,
-				BB1F3498227EDAA3000937ED /* MulSwitchAddTimingController.m in Sources */,
 				18D922965997B4052CA829383F290A18 /* MulSwitchAddTimingCell.m in Sources */,
+				72E3064BEC5F0A5AD700039A6B2848F7 /* MulSwitchAddTimingController.m in Sources */,
+				1189F4451BF6D9BECDCDC49D9F89424F /* MulSwitchController.m in Sources */,
 				07CDDB3CE6036864BE0DB2EDCB2A0B89 /* MulSwitchSaveAddTimingCell.m in Sources */,
 				9E8361C826044C75454F722BB3FEC0A7 /* MulSwitchSetingCell.m in Sources */,
+				1F994AFBDB7CDA416ADFD0EB3A0FECFC /* MulSwitchTimingController.m in Sources */,
+				6632708248AF747B7A3386D2B0580971 /* MulSwitchTimingSetingController.m in Sources */,
 				698951DD3935A41EF51C189315FC4AA2 /* MulSwitchWeekSelectCell.m in Sources */,
+				D1F3A124D76703B9F850B004E452F780 /* MulSwitchWeekSelectController.m in Sources */,
 				C64450445B08550FD4BCFA7592EE2A96 /* MyHouseController.m in Sources */,
 				11F703E7442B6C6BD1DA8764C0E869AF /* NSDate+Common.m in Sources */,
 				C1B46C7345B6ADBCEC8A156DCC8142EB /* NSObject+Common.m in Sources */,
@@ -4001,12 +4002,10 @@
 				1DD32DEF053448828F20D92ED73CC84A /* NTCNodeDetailViewController.m in Sources */,
 				95602BE64E7B0F2DD10150CC7006D8E5 /* NTCSetTemperatureController.m in Sources */,
 				9A3C1F054FFE67622EF5AF5B030389D2 /* NTCValveAlertInfoController.m in Sources */,
-				BB1F3497227EDAA3000937ED /* MulSwitchWeekSelectController.m in Sources */,
 				241B2C692C002A0138F57984865BFF9B /* NTCWirelessValveController.m in Sources */,
 				354EF55AD66BAA5AE0E1F906FB1DBEED /* Network.m in Sources */,
 				37072A994D24530D66D96159C618DA2C /* NoHouseAddController.m in Sources */,
 				17D32468466FA5286796FBDC1F99C4F8 /* NoHouseBridgingController.m in Sources */,
-				BB1F3495227EDAA3000937ED /* MulSwitchController.m in Sources */,
 				BCA324EEF55E56C7A484ADC6A7E98EF9 /* NodeButton.m in Sources */,
 				3B1C7061F5FBF17150D46ABCC4D2256F /* NodeDetailCell.m in Sources */,
 				E03C90626BB5B51CE56CC7037F4AB733 /* NodeDetailViewController.m in Sources */,
@@ -4016,26 +4015,29 @@
 				F8803B519C2915072A84CD07F7D5C9EA /* PhoneTFCell.m in Sources */,
 				16A08720656B381545EEF8207BF1F19F /* PhoneVerifyCell.m in Sources */,
 				0631F2634997620D326B38D7AA05E7E6 /* PlugOutletAddDelayCell.m in Sources */,
+				2E36A554D6180CCE48D956A3256958D1 /* PlugOutletAddDelayController.m in Sources */,
 				6ECF978C166691C1BB6622F51D98FC71 /* PlugOutletAddTimingCell.m in Sources */,
+				2DB6B9160BBDBBCAE670313193268542 /* PlugOutletAddTimingController.m in Sources */,
+				0A313DBEC48910E57E5ADD74856B8012 /* PlugOutletController.m in Sources */,
+				D55F8F358D6CC057BA344AD28BE0282F /* PlugOutletDelayController.m in Sources */,
 				9D4B444C0A60A795A3AAA37331282625 /* PlugOutletSaveAddDelayCell.m in Sources */,
 				640342ABC12FF5D9F3C84391824A1237 /* PlugOutletSaveAddTimingCell.m in Sources */,
-				BB1F3493227EDAA3000937ED /* PlugOutletSettingController.m in Sources */,
-				BB1F348E227EDAA3000937ED /* PlugOutletAddDelayController.m in Sources */,
 				F57F9404DBD11847E930A079070E067A /* PlugOutletSettingCell.m in Sources */,
+				C0114A9306015296485BB917530BB4AD /* PlugOutletSettingController.m in Sources */,
+				C3807EF4A61AC40C947838B77269F7F5 /* PlugOutletTimingController.m in Sources */,
 				3E35C52B2483FFEAA4EBD09CB8018809 /* PlugOutletWeekSelectCell.m in Sources */,
+				83D80B334D0A06787691229ECACAFB0D /* PlugOutletWeekSelectController.m in Sources */,
 				D11BCC7BE75F1F38B076396EB276C10B /* RDVTabBar.m in Sources */,
 				00F0CA59DBA8694984F51FE83C814AA7 /* RDVTabBarController.m in Sources */,
 				BB0FE2F7F493DDE8A4747626FF69BE8A /* RDVTabBarItem.m in Sources */,
 				1BE637E3B3F97FDC1DD3DD2BAFDFB5A3 /* RegisterAccountController.m in Sources */,
 				E8E70DA72851AFE3BFC03B8E5767FACF /* RegisterController.m in Sources */,
 				9C340243937CA7E064F7B03B981C9C90 /* RetrievePasswordController.m in Sources */,
-				BB1F3491227EDAA3000937ED /* PlugOutletController.m in Sources */,
 				6891CADA053D70B7827796D2BC98F5B0 /* RoomModel.m in Sources */,
 				E0814D6BF60F82748E58B7785118BBDB /* SelectDeviceTypeCell.m in Sources */,
 				92E36ED2A1EFB5CE2EB19F5687F9D9C0 /* SelectDeviceTypeController.m in Sources */,
 				FC9C8A916AA060D504D70683C38D0F61 /* ShareDeviceDetailCell.m in Sources */,
 				CC2A3068C7F2DF49BBE9FB884118299C /* ShareDeviceDetailController.m in Sources */,
-				BB1F348D227EDAA3000937ED /* PlugOutletAddTimingController.m in Sources */,
 				8D235C418464CC4A267E1FDD8CACACE6 /* ShareDeviceListCell.m in Sources */,
 				5B8CE0FE71B761676130504CBE6FF2AA /* ShareDeviceListController.m in Sources */,
 				E84CEA3749CC121EBC9FF05403C66290 /* ShareDeviceSelectCell.m in Sources */,
@@ -4047,7 +4049,6 @@
 				C221086D50E5767AD3319CA620505FFC /* StatusConfirmController.m in Sources */,
 				7B76B2A5DADD2DC9695794405C01CF27 /* TextFieldCell.m in Sources */,
 				331CF391D4F85467AF1FA69DE5BB380D /* TherAddTimerSwitchCell.m in Sources */,
-				BB1F3496227EDAA3000937ED /* MulSwitchTimingSetingController.m in Sources */,
 				8FF08F7EDBEA2C593A7D3ED76AD89BBE /* TherAddTimerWeekCell.m in Sources */,
 				A5C561A58C865678B60C7D58A779A7F1 /* TherSettingCell.m in Sources */,
 				09ADAEF888D156E03EA1F2AA584B528D /* TherTimerCell.m in Sources */,
@@ -4057,7 +4058,6 @@
 				DE184A9B84C00E4E8F518DB4CFE24E6A /* TherWeekSelectController.m in Sources */,
 				8F153D27D55BAB4477F5C19C61372A79 /* ThermostSettingController.m in Sources */,
 				D6B1D1A83E8BA648EB7304314FE00720 /* ThermostatAddTimerController.m in Sources */,
-				BB1F3490227EDAA3000937ED /* PlugOutletTimingController.m in Sources */,
 				1132E2E479182F94730446FF80156F8C /* ThermostatController.m in Sources */,
 				E5A97F4B32D1A614FDAF52FD6AF4C29D /* ThermostatTimerController.m in Sources */,
 				1EEB0900A0A92CAD8B1DC0D6054FF796 /* TouchTableView.m in Sources */,
