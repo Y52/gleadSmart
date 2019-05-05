@@ -107,6 +107,16 @@
 		BB1EB39521E44E2B0024603A /* valveNode_selabnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39121E44E2A0024603A /* valveNode_selabnormal@3x.png */; };
 		BB1EB39621E44E2B0024603A /* valveNode_selnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39221E44E2A0024603A /* valveNode_selnormal@2x.png */; };
 		BB1EB39721E44E2B0024603A /* valveNode_selabnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB39321E44E2B0024603A /* valveNode_selabnormal@2x.png */; };
+		BB1F345C227ED994000937ED /* MulSwitchSaveAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3455227ED994000937ED /* MulSwitchSaveAddTimingCell.m */; };
+		BB1F345D227ED994000937ED /* MulSwitchAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3458227ED994000937ED /* MulSwitchAddTimingCell.m */; };
+		BB1F345E227ED994000937ED /* MulSwitchSetingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F345A227ED994000937ED /* MulSwitchSetingCell.m */; };
+		BB1F345F227ED994000937ED /* MulSwitchWeekSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F345B227ED994000937ED /* MulSwitchWeekSelectCell.m */; };
+		BB1F346D227ED99D000937ED /* PlugOutletAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3464227ED99D000937ED /* PlugOutletAddTimingCell.m */; };
+		BB1F346E227ED99D000937ED /* PlugOutletWeekSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3467227ED99D000937ED /* PlugOutletWeekSelectCell.m */; };
+		BB1F346F227ED99D000937ED /* WeekendNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3468227ED99D000937ED /* WeekendNameCell.m */; };
+		BB1F3470227ED99D000937ED /* PlugOutletSaveAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F3469227ED99D000937ED /* PlugOutletSaveAddTimingCell.m */; };
+		BB1F3471227ED99D000937ED /* PlugOutletSaveAddDelayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F346A227ED99D000937ED /* PlugOutletSaveAddDelayCell.m */; };
+		BB1F3472227ED99D000937ED /* PlugOutletAddDelayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1F346B227ED99D000937ED /* PlugOutletAddDelayCell.m */; };
 		BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */; };
 		BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF63219E66210067BC61 /* HomeManagementController.m */; };
 		BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB21BF69219E66F30067BC61 /* HouseManagementController.m */; };
@@ -1095,6 +1105,26 @@
 		BB1EB39121E44E2A0024603A /* valveNode_selabnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selabnormal@3x.png"; sourceTree = "<group>"; };
 		BB1EB39221E44E2A0024603A /* valveNode_selnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selnormal@2x.png"; sourceTree = "<group>"; };
 		BB1EB39321E44E2B0024603A /* valveNode_selabnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_selabnormal@2x.png"; sourceTree = "<group>"; };
+		BB1F3454227ED994000937ED /* MulSwitchAddTimingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchAddTimingCell.h; sourceTree = "<group>"; };
+		BB1F3455227ED994000937ED /* MulSwitchSaveAddTimingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchSaveAddTimingCell.m; sourceTree = "<group>"; };
+		BB1F3456227ED994000937ED /* MulSwitchSetingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchSetingCell.h; sourceTree = "<group>"; };
+		BB1F3457227ED994000937ED /* MulSwitchWeekSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchWeekSelectCell.h; sourceTree = "<group>"; };
+		BB1F3458227ED994000937ED /* MulSwitchAddTimingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchAddTimingCell.m; sourceTree = "<group>"; };
+		BB1F3459227ED994000937ED /* MulSwitchSaveAddTimingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulSwitchSaveAddTimingCell.h; sourceTree = "<group>"; };
+		BB1F345A227ED994000937ED /* MulSwitchSetingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchSetingCell.m; sourceTree = "<group>"; };
+		BB1F345B227ED994000937ED /* MulSwitchWeekSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulSwitchWeekSelectCell.m; sourceTree = "<group>"; };
+		BB1F3461227ED99D000937ED /* PlugOutletWeekSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletWeekSelectCell.h; sourceTree = "<group>"; };
+		BB1F3462227ED99D000937ED /* PlugOutletSaveAddTimingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletSaveAddTimingCell.h; sourceTree = "<group>"; };
+		BB1F3463227ED99D000937ED /* WeekendNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekendNameCell.h; sourceTree = "<group>"; };
+		BB1F3464227ED99D000937ED /* PlugOutletAddTimingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletAddTimingCell.m; sourceTree = "<group>"; };
+		BB1F3465227ED99D000937ED /* PlugOutletAddDelayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletAddDelayCell.h; sourceTree = "<group>"; };
+		BB1F3466227ED99D000937ED /* PlugOutletSaveAddDelayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletSaveAddDelayCell.h; sourceTree = "<group>"; };
+		BB1F3467227ED99D000937ED /* PlugOutletWeekSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletWeekSelectCell.m; sourceTree = "<group>"; };
+		BB1F3468227ED99D000937ED /* WeekendNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekendNameCell.m; sourceTree = "<group>"; };
+		BB1F3469227ED99D000937ED /* PlugOutletSaveAddTimingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSaveAddTimingCell.m; sourceTree = "<group>"; };
+		BB1F346A227ED99D000937ED /* PlugOutletSaveAddDelayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletSaveAddDelayCell.m; sourceTree = "<group>"; };
+		BB1F346B227ED99D000937ED /* PlugOutletAddDelayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletAddDelayCell.m; sourceTree = "<group>"; };
+		BB1F346C227ED99D000937ED /* PlugOutletAddTimingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletAddTimingCell.h; sourceTree = "<group>"; };
 		BB21BF5F219E625C0067BC61 /* SelectDeviceTypeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectDeviceTypeController.h; sourceTree = "<group>"; };
 		BB21BF60219E625C0067BC61 /* SelectDeviceTypeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectDeviceTypeController.m; sourceTree = "<group>"; };
 		BB21BF62219E66210067BC61 /* HomeManagementController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeManagementController.h; sourceTree = "<group>"; };
@@ -1872,6 +1902,40 @@
 			path = "我的家_slices";
 			sourceTree = "<group>";
 		};
+		BB1F3453227ED994000937ED /* MulSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				BB1F3454227ED994000937ED /* MulSwitchAddTimingCell.h */,
+				BB1F3455227ED994000937ED /* MulSwitchSaveAddTimingCell.m */,
+				BB1F3456227ED994000937ED /* MulSwitchSetingCell.h */,
+				BB1F3457227ED994000937ED /* MulSwitchWeekSelectCell.h */,
+				BB1F3458227ED994000937ED /* MulSwitchAddTimingCell.m */,
+				BB1F3459227ED994000937ED /* MulSwitchSaveAddTimingCell.h */,
+				BB1F345A227ED994000937ED /* MulSwitchSetingCell.m */,
+				BB1F345B227ED994000937ED /* MulSwitchWeekSelectCell.m */,
+			);
+			path = MulSwitch;
+			sourceTree = "<group>";
+		};
+		BB1F3460227ED99D000937ED /* AddTiming */ = {
+			isa = PBXGroup;
+			children = (
+				BB1F3461227ED99D000937ED /* PlugOutletWeekSelectCell.h */,
+				BB1F3462227ED99D000937ED /* PlugOutletSaveAddTimingCell.h */,
+				BB1F3463227ED99D000937ED /* WeekendNameCell.h */,
+				BB1F3464227ED99D000937ED /* PlugOutletAddTimingCell.m */,
+				BB1F3465227ED99D000937ED /* PlugOutletAddDelayCell.h */,
+				BB1F3466227ED99D000937ED /* PlugOutletSaveAddDelayCell.h */,
+				BB1F3467227ED99D000937ED /* PlugOutletWeekSelectCell.m */,
+				BB1F3468227ED99D000937ED /* WeekendNameCell.m */,
+				BB1F3469227ED99D000937ED /* PlugOutletSaveAddTimingCell.m */,
+				BB1F346A227ED99D000937ED /* PlugOutletSaveAddDelayCell.m */,
+				BB1F346B227ED99D000937ED /* PlugOutletAddDelayCell.m */,
+				BB1F346C227ED99D000937ED /* PlugOutletAddTimingCell.h */,
+			);
+			path = AddTiming;
+			sourceTree = "<group>";
+		};
 		BB21BF5B219E54E20067BC61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2069,6 +2133,7 @@
 		BB35290B219D0FA300428DE9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				BB1F3453227ED994000937ED /* MulSwitch */,
 				BB5B036E21B9017E007AC2B1 /* Mine */,
 				BB62E4BD21B4D54A00C0FA39 /* Thermostat */,
 				3E9E9B9821A2ABC600CA2B7D /* Home */,
@@ -2084,6 +2149,7 @@
 		BB35290C219D0FAB00428DE9 /* Myhouse */ = {
 			isa = PBXGroup;
 			children = (
+				BB1F3460227ED99D000937ED /* AddTiming */,
 				36B8F16422263F6900652CFA /* ShareDevice */,
 				369C169C222513600079159E /* AddRooms */,
 				BBAB2810221B9D2C00E21041 /* AddShare */,
@@ -3657,9 +3723,11 @@
 				BB2AC0ED21A8F156006DB83A /* ESP_CRC8.m in Sources */,
 				BB6739DB22326801002E6239 /* NoHouseBridgingController.m in Sources */,
 				BB21BF64219E66210067BC61 /* HomeManagementController.m in Sources */,
+				BB1F345E227ED994000937ED /* MulSwitchSetingCell.m in Sources */,
 				BB41EEF8227698A10048A96A /* WirelessValveController.m in Sources */,
 				BB21BF6A219E66F30067BC61 /* HouseManagementController.m in Sources */,
 				BB62E4E121B517F100C0FA39 /* TherWeekProgramCell.m in Sources */,
+				BB1F346E227ED99D000937ED /* PlugOutletWeekSelectCell.m in Sources */,
 				BB21BF61219E625C0067BC61 /* SelectDeviceTypeController.m in Sources */,
 				BB37DF1821A7FCBF00B2121B /* DeviceModel.m in Sources */,
 				BB0A403221991AA8004669CA /* NSObject+Common.m in Sources */,
@@ -3668,10 +3736,12 @@
 				BB7E7973221A860E0060A0CF /* UILabel+YBAttributeTextTapAction.m in Sources */,
 				BB37DF1B21A7FF0600B2121B /* Database.m in Sources */,
 				BB41EEF6227698A10048A96A /* ValveAlertInfoController.m in Sources */,
+				BB1F3470227ED99D000937ED /* PlugOutletSaveAddTimingCell.m in Sources */,
 				BB62E4FC21B521F100C0FA39 /* WeekProgramSetController.m in Sources */,
 				BBAB280F221B912400E21041 /* HomeDeviceSelectController.m in Sources */,
 				BB52F9ED21BE6B03005FA33A /* NodeModel.m in Sources */,
 				BB0A404421996F4A004669CA /* MainViewController.m in Sources */,
+				BB1F3472227ED99D000937ED /* PlugOutletAddDelayCell.m in Sources */,
 				BB2AC0F021A8F156006DB83A /* ESPTouchTaskParameter.m in Sources */,
 				BBF6326B21BBBDE0006A23AC /* NTCNodeDetailViewController.m in Sources */,
 				BB2AC0EF21A8F156006DB83A /* ESPUDPSocketClient.m in Sources */,
@@ -3683,6 +3753,7 @@
 				BB35292B219DA7EC00428DE9 /* Network.m in Sources */,
 				BB2AC0F421A8F156006DB83A /* ESPDatumCode.m in Sources */,
 				BBF8CAF12216A4650030E921 /* FamilyMemberInfoCell.m in Sources */,
+				BB1F346D227ED99D000937ED /* PlugOutletAddTimingCell.m in Sources */,
 				BB0A404C219970D3004669CA /* RDVTabBar.m in Sources */,
 				3E3AFFBA21A7E74900EA8F1C /* HouseManagementTableViewCell.m in Sources */,
 				BB352915219D63BC00428DE9 /* HouseSelectController.m in Sources */,
@@ -3699,6 +3770,7 @@
 				BB45BC4A21EF259E00504FF8 /* AddMemberController.m in Sources */,
 				BB5CDC8521EC26F300C2B6FA /* YRabbitMQ.m in Sources */,
 				36134F2C21E6E10100A7D98E /* NodeButton.m in Sources */,
+				BB1F346F227ED99D000937ED /* WeekendNameCell.m in Sources */,
 				BBF6326E21BBC472006A23AC /* NodeInfoCell.m in Sources */,
 				BB41EEF7227698A10048A96A /* NodeDetailViewController.m in Sources */,
 				3EA530CC21AB9C88000A6D26 /* LoginViewController.m in Sources */,
@@ -3713,6 +3785,7 @@
 				BB5B03CE21B91290007AC2B1 /* AccountViewController.m in Sources */,
 				BB63AAD2222E156B00DFC848 /* APProcessController.m in Sources */,
 				BB2AC10A21A94D63006DB83A /* AFNetworkReachabilityManager.m in Sources */,
+				BB1F345C227ED994000937ED /* MulSwitchSaveAddTimingCell.m in Sources */,
 				BB62E4D221B4DD7C00C0FA39 /* TherWeekSelectController.m in Sources */,
 				369C169F222513E90079159E /* AddRoomsTextCell.m in Sources */,
 				BB2AD79821ABDD3E006DB83A /* RegisterAccountController.m in Sources */,
@@ -3721,6 +3794,7 @@
 				BB2AC10921A94D63006DB83A /* AFURLRequestSerialization.m in Sources */,
 				36B8F16A22263FDE00652CFA /* ShareDeviceDetailCell.m in Sources */,
 				BB352912219D61B300428DE9 /* HouseSelectCell.m in Sources */,
+				BB1F345F227ED994000937ED /* MulSwitchWeekSelectCell.m in Sources */,
 				BB2AC0F121A8F156006DB83A /* ESPDataCode.m in Sources */,
 				BB62E4D521B4E07600C0FA39 /* TherWeekSelCell.m in Sources */,
 				3EA530C121AB9B43000A6D26 /* TextFieldCell.m in Sources */,
@@ -3760,6 +3834,7 @@
 				BB35290F219D0FC700428DE9 /* HomeDeviceCell.m in Sources */,
 				BB2AC10621A94D63006DB83A /* AFURLResponseSerialization.m in Sources */,
 				BB2AC0EA21A8F156006DB83A /* ESP_ByteUtil.m in Sources */,
+				BB1F3471227ED99D000937ED /* PlugOutletSaveAddDelayCell.m in Sources */,
 				BB2AD7A421AD78F0006DB83A /* MemberModel.m in Sources */,
 				BB49DFA321958867004E00A2 /* main.m in Sources */,
 				BB45BC4721EF1F6900504FF8 /* AddHouseMemberCell.m in Sources */,
@@ -3778,6 +3853,7 @@
 				BB2AD79E21AD4828006DB83A /* HouseNameCell.m in Sources */,
 				369C169B22250ECB0079159E /* AddRoomsViewController.m in Sources */,
 				BB62E4C021B4D57900C0FA39 /* TherAddTimerWeekCell.m in Sources */,
+				BB1F345D227ED994000937ED /* MulSwitchAddTimingCell.m in Sources */,
 				BB7D9BA0221EA71000C5DFD1 /* SharerModel.m in Sources */,
 				BB7D9B9D221E8FA300C5DFD1 /* SharerDetailController.m in Sources */,
 				BB2AC0E821A8F156006DB83A /* ESPTouchResult.m in Sources */,
