@@ -55,7 +55,7 @@ static int noUserInteractionHeartbeat = 0;
             _mySocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:queue];
         }
         if (!_sendSignal) {
-            _sendSignal = dispatch_semaphore_create(0);
+            _sendSignal = dispatch_semaphore_create(1);
         }
         if (!_recivedData69) {
             _recivedData69 = [[NSMutableArray alloc] init];
@@ -188,12 +188,58 @@ static int noUserInteractionHeartbeat = 0;
         DeviceModel *device = [[DeviceModel alloc] init];
         device.mac = mac;
         
+        /*
+         *根据设备（网关、插座、开关）mac连接每个设备的tcp
+         */
+        for (DeviceModel *bindDevice in self.deviceArray) {
+            if ([bindDevice.type integerValue] == DeviceCenterlControl) {
+                continue;
+            }
+            if ([bindDevice.mac isEqualToString:mac]) {
+                /*
+                 *初始化
+                 */
+                if (!bindDevice.socket) {
+                    bindDevice.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+                }
+                if (!bindDevice.queue) {
+                    bindDevice.queue = dispatch_queue_create((char *)[bindDevice.mac UTF8String], DISPATCH_QUEUE_SERIAL);
+                }
+                if (!bindDevice.sendSignal) {
+                    bindDevice.sendSignal = dispatch_semaphore_create(1);
+                }
+                
+                if (![bindDevice.socket isDisconnected]) {
+                    //已经连接了
+                    [_lock unlock];
+                    return;
+                }
+                
+                NSError *error;
+                if ([bindDevice.socket connectToHost:ipAddress onPort:16888 error:&error]) {
+                    //连接操作
+                    [_lock unlock];
+                    
+                    //查询插座状态
+                    UInt8 controlCode = 0x01;
+                    NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
+                    [bindDevice sendData69With:controlCode mac:bindDevice.mac data:data];
+                    
+                    return;
+                }else{
+                    NSLog(@"%@",error);
+                }
+            }
+        }
+
         if (self.connectedDevice && [self.connectedDevice.mac isEqualToString:mac]) {
             //如果已经连接了这个设备，就不再重新连接了
+            [_lock unlock];
             return;
         }
         
         if ([[Database shareInstance].currentHouse.mac isKindOfClass:[NSNull class]]) {
+            [_lock unlock];
             return;
         }
 
@@ -212,7 +258,7 @@ static int noUserInteractionHeartbeat = 0;
 
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotConnect:(NSError *)error{
-    NSLog(@"断开连接");
+    NSLog(@"断开连接1");
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag{
@@ -224,7 +270,16 @@ static int noUserInteractionHeartbeat = 0;
 }
 
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error{
-    NSLog(@"断开连接");
+    NSLog(@"断开连接2");
+    //设置广播
+    [_udpSocket enableBroadcast:YES error:&error];
+    
+    //开启接收数据
+    [_udpSocket beginReceiving:&error];
+    if (error) {
+        NSLog(@"开启接收数据:%@",error);
+        return;
+    }
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error{
@@ -235,7 +290,7 @@ static int noUserInteractionHeartbeat = 0;
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
     NSLog(@"连接成功");
-    [self.udpTimer setFireDate:[NSDate distantFuture]];
+    //[self.udpTimer setFireDate:[NSDate distantFuture]];
     sleep(1.f);
     
     if ([self.connectedDevice.mac isEqualToString:[Database shareInstance].currentHouse.mac]) {
@@ -266,6 +321,17 @@ static int noUserInteractionHeartbeat = 0;
     NSLog(@"socket成功收到帧, tag: %ld", tag);
     [self checkOutFrame:data];
     [_mySocket readDataWithTimeout:-1 tag:1];
+    
+    for (DeviceModel *device in self.deviceArray) {
+        if (device.socket == sock) {
+            [device.socket readDataWithTimeout:-1 tag:1];
+            
+            //以下操作保证收到上报帧或者回复帧后只有一个信号量，不会一次发出多条帧
+            dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC);
+            dispatch_semaphore_wait(device.sendSignal, time);
+            dispatch_semaphore_signal(device.sendSignal);//收到信息增加信号量
+        }
+    }
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
@@ -485,6 +551,10 @@ static int noUserInteractionHeartbeat = 0;
     for (DeviceModel *localDevice in db.localDeviceArray) {
         if ([localDevice.type integerValue] == DeviceCenterlControl) {
             continue;//中央控制器
+        }
+        if ([localDevice.type intValue] == DevicePlugOutlet) {
+            //插座
+            [self.deviceArray addObject:localDevice];
         }
         [self removeOldDeviceWith:localDevice success:^{
             //通知刷新设备
@@ -782,6 +852,9 @@ static int noUserInteractionHeartbeat = 0;
     }
     if (macByte2 >= 0x40 && macByte2 <= 0x47) {
         return DeviceNTCValve;
+    }
+    if (macByte2 >= 0x48 && macByte2 <= 0x4F) {
+        return DeviceMulSwitch;
     }
     return DeviceCenterlControl;
 }
@@ -1116,6 +1189,8 @@ static int noUserInteractionHeartbeat = 0;
                             [_allMsg addObject:array];
                             continue;
                         }
+                    }else{
+                        NSLog(@"计算的字节长度不对");
                     }
                 }
             }
@@ -1678,7 +1753,7 @@ static int noUserInteractionHeartbeat = 0;
     mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[3] intValue]]];
     mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[4] intValue]]];
     mac = [mac stringByAppendingString:[NSString HexByInt:[_recivedData69[5] intValue]]];
-
+    
     
     Database *db = [Database shareInstance];
     for (DeviceModel *device in self.deviceArray) {
@@ -1692,10 +1767,34 @@ static int noUserInteractionHeartbeat = 0;
         {
             //智能插座
             if ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"查询wifi智能插座的开关状态");
+                //NSLog(@"查询wifi智能插座的开关状态");
+                
             }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
-                NSLog(@"设置wifi智能插座的开关状态");
+            if (([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) || ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x01)) {
+                NSLog(@"查询或设置wifi智能插座的开关状态,或主动上报");
+                NSDictionary *userInfo;
+                
+                NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        NSLog(@"%@",device.mac);
+                        device.isOn = isOn;
+                        device.isOnline = @1;
+                        userInfo = @{@"device":device,@"isShare":@0};
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        NSLog(@"%@",device.mac);
+                        device.isOn = isOn;
+                        device.isOnline = @1;
+                        userInfo = @{@"device":device,@"isShare":@1};
+                    }
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshPlugOutletUI" object:nil userInfo:userInfo];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"查询wifi智能插座当前日期时间");
@@ -1709,12 +1808,26 @@ static int noUserInteractionHeartbeat = 0;
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 NSLog(@"设置wifi智能插座的闹钟");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetClock" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteClock" object:nil userInfo:nil];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的闹钟项列表");
+                NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"getClockList" object:nil userInfo:userInfo];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"查询wifi智能插座的延时开关");
             }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                 NSLog(@"设置wifi智能插座的延时开关");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetDelay" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteDelayClock" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"查询wifi智能插座的延时开关列表");
+                NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"getdelayclockList" object:nil userInfo:userInfo];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x10 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 NSLog(@"查询wifi智能插座的电量（电压，电流，功率）");
