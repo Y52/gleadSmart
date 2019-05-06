@@ -709,7 +709,7 @@ static int noUserInteractionHeartbeat = 0;
     device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
     device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
     device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
-    device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[13] intValue]]];
+    //device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[13] intValue]]];
     
     /*
      ～未保存过，需要上传到服务器，保存到本地～
@@ -744,9 +744,15 @@ static int noUserInteractionHeartbeat = 0;
     if (!device.name) {
         device.name = device.mac;
     }
+    NSDictionary *parameters;
     NSMutableArray *homeList = [db queryRoomsWith:db.currentHouse.houseUid];
-    RoomModel *room = homeList[0];//将新设备插入到家庭第一个房间
-    NSDictionary *parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":room.roomUid,@"houseUid":db.currentHouse.houseUid};
+    if (homeList.count <= 0) {
+        [NSObject showHudTipStr:LocalString(@"当前家庭还没有添加房间，请尽快添加")];
+        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":db.currentHouse.houseUid,@"houseUid":db.currentHouse.houseUid};
+    }else{
+        RoomModel *room = homeList[0];//将新设备插入到家庭第一个房间
+        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":room.roomUid,@"houseUid":db.currentHouse.houseUid};
+    }
     NSLog(@"%@",parameters);
     
     NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];

@@ -79,6 +79,10 @@ static NSArray *_routingkeys = nil;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:message.body options:NSJSONReadingMutableContainers error:&err];
         if ([message.routingKey isEqualToString:[Database shareInstance].user.userId]) {
             [self analyzeMessageType:dic];
+        }else{
+            if ([[Database shareInstance].currentHouse.houseUid isEqualToString:message.routingKey]) {
+                [self analyzeMessageType:dic];
+            }
         }
 
     }];
