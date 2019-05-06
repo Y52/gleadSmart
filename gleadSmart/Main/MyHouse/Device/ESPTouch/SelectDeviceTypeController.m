@@ -14,7 +14,7 @@
 NSString *const CellIdentifier_SelectDeviceType = @"CellID_SelectDeviceType";
 static float HEIGHT_CELL = 50.f;
 static float HEIGHT_HEADER = 40.f;
-#define deviceCount 5;
+#define deviceCount 4;
 
 @interface SelectDeviceTypeController () <UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) UITableView *deviceTypeTable;
