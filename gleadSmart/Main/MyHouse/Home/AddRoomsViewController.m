@@ -60,6 +60,8 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    //去除导航透明
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 #pragma mark - Lazyload
@@ -115,15 +117,15 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (cell == nil) {
         cell = [[AddRoomsTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_addRoomsText];
-            }
-        if (indexPath.row == 0) {
+    }
+    if (indexPath.row == 0) {
         cell.leftLabel.text = LocalString(@"房间名称");
         cell.inputTF.placeholder = LocalString(@"请您添加房间");
         cell.TFBlock = ^(NSString *text) {
-                   
+            
         };
     }
-        return cell;
+    return cell;
 
 }
 
@@ -137,6 +139,7 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     if (!_footView) {
         _footView = [[UIView alloc] init];
         _footView.backgroundColor = [UIColor clearColor];
+        _footView.backgroundColor = [UIColor redColor];
         [self.view addSubview:_footView];
         [_footView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake( ScreenWidth , 180.f));
