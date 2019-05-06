@@ -274,12 +274,19 @@
             [self bindDevice:dModel success:^{
                 dispatch_async(dispatch_get_main_queue(), ^{
 #warning todo 直接返回主界面并显示设备,以及设备tcp连接
+                    if (dModel.type == DeviceCenterlControl) {
+                        Network *net = [Network shareNetwork];
+                        NSError *error;
+                        if ([net connectToHost:ipAddress onPort:16888 error:&error]) {
+                            net.connectedDevice = dModel;
+                        }
+                    }
                     for (UIViewController *controller in self.navigationController.viewControllers) {
                         if ([controller isKindOfClass:[DeviceViewController class]]) {
                             [self.navigationController popToViewController:controller animated:YES];
                         }
                     }
-                    [NSObject showHudTipStr:LocalString(@"配网成功")];
+                    [NSObject showHudTipStr:LocalString(@"绑定设备成功")];
                 });
             } failure:^{
                 
@@ -324,9 +331,17 @@
     [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
     
     Database *db = [Database shareInstance];
-    NSMutableArray *roomArr = [db queryRoomsWith:db.currentHouse.houseUid];
-    RoomModel *room = roomArr[roomArr.count-1];
-    NSDictionary *parameters = @{@"mac":device.mac,@"name":device.name,@"type":device.type,@"houseUid":db.currentHouse.houseUid,@"roomUid":room.roomUid};
+    
+    NSDictionary *parameters;
+    NSMutableArray *homeList = [db queryRoomsWith:db.currentHouse.houseUid];
+    if (homeList.count <= 0) {
+        [NSObject showHudTipStr:LocalString(@"当前家庭还没有添加房间，请尽快添加")];
+        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":db.currentHouse.houseUid,@"houseUid":db.currentHouse.houseUid};
+    }else{
+        RoomModel *room = homeList[0];//将新设备插入到家庭第一个房间
+        parameters = @{@"mac":device.mac,@"name":device.name,@"type":device.type,@"houseUid":db.currentHouse.houseUid,@"roomUid":room.roomUid};
+    }
+    NSLog(@"%@",parameters);
     
     NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];

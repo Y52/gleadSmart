@@ -138,13 +138,9 @@ static float HEIGHT_HEADER = 40.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0) {
-        DeviceViewController *gatewayVC = [[DeviceViewController alloc] init];
-        [self.navigationController pushViewController:gatewayVC animated:YES];
-    }else if (indexPath.row == 4){
-        StatusConfirmController *scVC = [[StatusConfirmController alloc] init];
-        [self.navigationController pushViewController:scVC animated:YES];
-    }
+    StatusConfirmController *scVC = [[StatusConfirmController alloc] init];
+    [self.navigationController pushViewController:scVC animated:YES];
+
 }
 
 

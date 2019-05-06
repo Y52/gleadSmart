@@ -47,6 +47,8 @@ NSString *const CellIdentifier_device = @"CellID_device";
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1].CGColor;
     
+#warning 现在不用了
+    return;
     self.navigationItem.title = LocalString(@"我的设备");
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];

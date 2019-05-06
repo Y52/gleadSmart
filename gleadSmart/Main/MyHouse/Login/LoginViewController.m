@@ -280,8 +280,8 @@
     [manager POST:url parameters:parameters progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
               NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+              NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+              NSString *daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
               NSLog(@"success:%@",daetr);
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
                   //获取userID和token
