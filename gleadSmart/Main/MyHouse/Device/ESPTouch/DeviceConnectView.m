@@ -273,7 +273,6 @@
             dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
             [self bindDevice:dModel success:^{
                 dispatch_async(dispatch_get_main_queue(), ^{
-#warning todo 直接返回主界面并显示设备,以及设备tcp连接
                     if (dModel.type == DeviceCenterlControl) {
                         Network *net = [Network shareNetwork];
                         NSError *error;
@@ -281,11 +280,7 @@
                             net.connectedDevice = dModel;
                         }
                     }
-                    for (UIViewController *controller in self.navigationController.viewControllers) {
-                        if ([controller isKindOfClass:[DeviceViewController class]]) {
-                            [self.navigationController popToViewController:controller animated:YES];
-                        }
-                    }
+                    [self dismissViewControllerAnimated:YES completion:nil];
                     [NSObject showHudTipStr:LocalString(@"绑定设备成功")];
                 });
             } failure:^{
