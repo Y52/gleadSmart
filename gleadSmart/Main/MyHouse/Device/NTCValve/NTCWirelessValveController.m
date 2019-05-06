@@ -593,7 +593,7 @@ CGFloat const nodeButtonWidthNTC = 20.f;
     NSNumber *temp = [userInfo objectForKey:@"temp"];
     dispatch_async(dispatch_get_main_queue(), ^{
         self.temperatureLabel.text = [NSString stringWithFormat:@"温度:%d℃",[temp intValue]];
-        if (temp >= threshold) {
+        if ([temp intValue] >= [threshold intValue]) {
             self.temperatureImage.image = [UIImage imageNamed:@"valveTemperature_abnormal"];
         }else{
             self.temperatureImage.image = [UIImage imageNamed:@"valveTemperature_normal"];
