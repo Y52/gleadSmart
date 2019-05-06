@@ -263,7 +263,7 @@ static float HEIGHT_CELL = 50.f;
     manager.requestSerializer.timeoutInterval = 6.f;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"%@/api/user/password",httpIpAddress];
+    NSString *url = [NSString stringWithFormat:@"%@/api/user/findPassword",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -279,8 +279,7 @@ static float HEIGHT_CELL = 50.f;
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             [NSObject showHudTipStr:@"修改密码成功"];
-            [self resignFirstResponder];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }else{
             [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
         }
