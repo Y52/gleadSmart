@@ -139,7 +139,6 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     if (!_footView) {
         _footView = [[UIView alloc] init];
         _footView.backgroundColor = [UIColor clearColor];
-        _footView.backgroundColor = [UIColor redColor];
         [self.view addSubview:_footView];
         [_footView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake( ScreenWidth , 180.f));
