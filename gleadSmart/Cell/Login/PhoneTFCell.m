@@ -35,6 +35,7 @@
             //_phoneTF.borderStyle = UITextBorderStyleRoundedRect;
             _phoneTF.clearButtonMode = UITextFieldViewModeWhileEditing;
             _phoneTF.autocorrectionType = UITextAutocorrectionTypeNo;
+            _phoneTF.keyboardType = UIKeyboardTypePhonePad;
             _phoneTF.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
             //设置为YES时文本会自动缩小以适应文本窗口大小.默认是保持原来大小,而让长文本滚动
             _phoneTF.adjustsFontSizeToFitWidth = YES;

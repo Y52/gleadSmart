@@ -75,8 +75,8 @@
         _phoneTF.placeholder = LocalString(@"请输入手机号");
         _phoneTF.clearButtonMode = UITextFieldViewModeWhileEditing;
         _phoneTF.autocorrectionType = UITextAutocorrectionTypeNo;
+        _phoneTF.keyboardType = UIKeyboardTypePhonePad;
         _phoneTF.delegate = self;
-        _phoneTF.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         _phoneTF.borderStyle = UITextBorderStyleNone;
         [phoneview addSubview:_phoneTF];
         [_phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -131,6 +131,7 @@
         _verifyTF.autocorrectionType = UITextAutocorrectionTypeNo;
         _verifyTF.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _verifyTF.borderStyle = UITextBorderStyleNone;
+        _verifyTF.keyboardType = UIKeyboardTypeNumberPad;
         _verifyTF.placeholder = LocalString(@"请输入验证码");
         [verifyTFView addSubview:_verifyTF];
         [_verifyTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -267,14 +268,19 @@
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     NSDictionary *parameters = [[NSDictionary alloc] init];
+    NSString *url = [[NSString alloc] init];
     if (_changeLoginBtn.tag == yUnselect){
         parameters = @{@"mobile":self.phoneTF.text,@"code":self.verifyTF.text};
+        url = [NSString stringWithFormat:@"%@/api/user/login/code",httpIpAddress];
+        url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+        
     }else{
         parameters = @{@"mobile":self.phoneTF.text,@"password":self.verifyTF.text};
+        url = [NSString stringWithFormat:@"%@/api/user/login",httpIpAddress];
+        url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     }
     
-    NSString *url = [NSString stringWithFormat:@"%@/api/user/login",httpIpAddress];
-    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
 
     
     [manager POST:url parameters:parameters progress:nil

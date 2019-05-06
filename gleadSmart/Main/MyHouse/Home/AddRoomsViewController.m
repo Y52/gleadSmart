@@ -14,6 +14,10 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
 @interface AddRoomsViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *addRoomsTable;
+@property (strong, nonatomic) UIView *footView;
+@property (strong, nonatomic) UIButton *handBtn;
+@property (strong, nonatomic) UIButton *recommendBtn;
+
 @property (strong, nonatomic) UIButton *hostbedRoomBtn;//主卧
 @property (strong, nonatomic) UIButton *secondarybedRoomBtn;//次卧
 @property (strong, nonatomic) UIButton *guestRoomBtn;//客厅
@@ -25,10 +29,6 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
 @property (strong, nonatomic) UIButton *cloakRoomBtn;//衣帽间
 @property (strong, nonatomic) UIButton *childrenRoomBtn;//儿童房
 @property (strong, nonatomic) UIButton *bathRoomBtn;//卫生间
-@property (strong, nonatomic) UIButton *recommendBtn;
-@property (strong, nonatomic) UIView *handView;
-
-@property (strong, nonatomic) NSArray *defaultRoomList;
 
 
 @end
@@ -40,8 +40,9 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     self.view.layer.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1].CGColor;
     [self setNavItem];
     
-    self.defaultRoomList = [self defaultRoomList];
     self.addRoomsTable = [self addRoomsTable];
+    self.footView = [self footView];
+    self.handBtn = [self handBtn];
     self.hostbedRoomBtn = [self hostbedRoomBtn];
     self.secondarybedRoomBtn = [self secondarybedRoomBtn];
     self.guestRoomBtn = [self guestRoomBtn];
@@ -54,7 +55,6 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     self.childrenRoomBtn = [self childrenRoomBtn];
     self.bathRoomBtn = [self bathRoomBtn];
     self.recommendBtn = [self recommendBtn];
-    self.handView = [self handView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -75,13 +75,6 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
-}
-
--(NSArray *)defaultRoomList{
-    if (!_defaultRoomList) {
-        _defaultRoomList = @[@"主卧",@"次卧",@"客厅",@"餐厅",@"厨房",@"书房"];
-    }
-    return _defaultRoomList;
 }
 
 - (UITableView *)addRoomsTable{
@@ -119,6 +112,7 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
    
     AddRoomsTextCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_addRoomsText];
     cell.backgroundColor = [UIColor whiteColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (cell == nil) {
         cell = [[AddRoomsTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_addRoomsText];
             }
@@ -139,24 +133,41 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
    return 15;
 }
 
--(UIView *)handView{
-    if (!_handView) {
-        _handView = [[UIView alloc] init];
-        _handView.backgroundColor = [UIColor clearColor];
-        [self.view insertSubview:_handView atIndex:1];
-        [_handView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(18.f), 18.f));
-            make.top.equalTo(self.view.mas_top).offset(65);
-            make.left.equalTo(self.view.mas_left).offset(23);
+-(UIView *)footView{
+    if (!_footView) {
+        _footView = [[UIView alloc] init];
+        _footView.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:_footView];
+        [_footView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake( ScreenWidth , 180.f));
+            make.top.equalTo(self.view.mas_top).offset(yAutoFit(65.f));
+            make.centerX.equalTo(self.view.mas_centerX);
         }];
         
-        UIImageView *bgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"addRoom_hand"]];
-        [_handView insertSubview:bgImageView atIndex:1];
-        [bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.bottom.mas_equalTo(0);
+    }
+    return _footView;
+}
+
+- (UIButton *)handBtn{
+    if (!_handBtn) {
+        _handBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_handBtn setTitle:LocalString(@"") forState:UIControlStateNormal];
+        [_handBtn setImage:[UIImage imageNamed:@"addRoom_hand"] forState:UIControlStateNormal];
+        [_handBtn setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
+        [_handBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+        [_handBtn setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
+        //[_recommendBtn.layer setBorderWidth:1.0];
+        //_recommendBtn.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
+        //_recommendBtn.layer.cornerRadius = 15.f;
+        [_handBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
+        [self.footView addSubview:_handBtn];
+        [_handBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(20.f), 20.f));
+            make.left.equalTo(self.footView.mas_left).offset(yAutoFit(15.f));
+            make.top.equalTo(self.footView.mas_top).offset(yAutoFit(5.f));
         }];
     }
-    return _handView;
+    return _handBtn;
 }
 
 - (UIButton *)recommendBtn{
@@ -171,11 +182,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         //_recommendBtn.layer.cornerRadius = 15.f;
         [_recommendBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_recommendBtn addTarget:self action:@selector(recommend) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_recommendBtn];
+        [self.footView addSubview:_recommendBtn];
         [_recommendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(40.f), 20.f));
-            make.left.equalTo(self.handView.mas_right).offset(5);
-            make.top.equalTo(self.view.mas_top).offset(65);
+            make.left.equalTo(self.handBtn.mas_right).offset(yAutoFit(5.f));
+            make.top.equalTo(self.footView.mas_top).offset(yAutoFit(5.f));
         }];
     }
     return _recommendBtn;
@@ -196,8 +207,8 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         [self.view addSubview:_hostbedRoomBtn];
         [_hostbedRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.view.mas_left).offset(23);
-            make.top.equalTo(self.view.mas_top).offset(100);
+            make.left.equalTo(self.footView.mas_left).offset(yAutoFit(15.f));
+            make.top.equalTo(self.footView.mas_top).offset(yAutoFit(40.f));
         }];
     }
     return _hostbedRoomBtn;
@@ -215,11 +226,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         _secondarybedRoomBtn.layer.cornerRadius = 1.f;
         [_secondarybedRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_secondarybedRoomBtn addTarget:self action:@selector(secondarybedRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_secondarybedRoomBtn];
+        [self.footView addSubview:_secondarybedRoomBtn];
         [_secondarybedRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.hostbedRoomBtn.mas_right).offset(25);
-            make.top.equalTo(self.view.mas_top).offset(100);
+            make.left.equalTo(self.hostbedRoomBtn.mas_right).offset(yAutoFit(25.f));
+            make.top.equalTo(self.footView.mas_top).offset(yAutoFit(40.f));
         }];
     }
     return _secondarybedRoomBtn;
@@ -237,11 +248,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         _guestRoomBtn.layer.cornerRadius = 1.f;
         [_guestRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_guestRoomBtn addTarget:self action:@selector(guestRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_guestRoomBtn];
+        [self.footView addSubview:_guestRoomBtn];
         [_guestRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.secondarybedRoomBtn.mas_right).offset(25);
-            make.top.equalTo(self.view.mas_top).offset(100);
+            make.left.equalTo(self.secondarybedRoomBtn.mas_right).offset(yAutoFit(25.f));
+            make.top.equalTo(self.footView.mas_top).offset(yAutoFit(40.f));
         }];
     }
     return _guestRoomBtn;
@@ -259,11 +270,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         _dinningRoomBtn.layer.cornerRadius = 1.f;
         [_dinningRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_dinningRoomBtn addTarget:self action:@selector(dinningRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_dinningRoomBtn];
+        [self.footView addSubview:_dinningRoomBtn];
         [_dinningRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.guestRoomBtn.mas_right).offset(25);
-            make.top.equalTo(self.view.mas_top).offset(100);
+            make.left.equalTo(self.guestRoomBtn.mas_right).offset(yAutoFit(25.f));
+            make.top.equalTo(self.footView.mas_top).offset(yAutoFit(40.f));
         }];
     }
     return _dinningRoomBtn;
@@ -281,11 +292,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         _kitchenRoomBtn.layer.cornerRadius = 1.f;
         [_kitchenRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_kitchenRoomBtn addTarget:self action:@selector(kitchenRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_kitchenRoomBtn];
+        [self.footView addSubview:_kitchenRoomBtn];
         [_kitchenRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.view .mas_left).offset(23);
-            make.top.equalTo(self.hostbedRoomBtn.mas_bottom).offset(15);
+            make.left.equalTo(self.footView .mas_left).offset(yAutoFit(15.f));
+            make.top.equalTo(self.hostbedRoomBtn.mas_bottom).offset(yAutoFit(15.f));
         }];
     }
     return _kitchenRoomBtn;
@@ -303,11 +314,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         _studyRoomBtn.layer.cornerRadius = 1.f;
         [_studyRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_studyRoomBtn addTarget:self action:@selector(studyRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_studyRoomBtn];
+        [self.footView addSubview:_studyRoomBtn];
         [_studyRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.kitchenRoomBtn.mas_right).offset(25);
-            make.top.equalTo(self.hostbedRoomBtn.mas_bottom).offset(15);
+            make.left.equalTo(self.kitchenRoomBtn.mas_right).offset(yAutoFit(25.f));
+            make.top.equalTo(self.hostbedRoomBtn.mas_bottom).offset(yAutoFit(15.f));
         }];
     }
     return _studyRoomBtn;
@@ -325,11 +336,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         _balconyRoomBtn.layer.cornerRadius = 1.f;
         [_balconyRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_balconyRoomBtn addTarget:self action:@selector(balconyRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_balconyRoomBtn];
+        [self.footView addSubview:_balconyRoomBtn];
         [_balconyRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.studyRoomBtn.mas_right).offset(25);
-            make.top.equalTo(self.hostbedRoomBtn.mas_bottom).offset(15);
+            make.left.equalTo(self.studyRoomBtn.mas_right).offset(yAutoFit(25.f));
+            make.top.equalTo(self.hostbedRoomBtn.mas_bottom).offset(yAutoFit(15.f));
         }];
     }
     return _balconyRoomBtn;
@@ -347,11 +358,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         _entranceRoomBtn.layer.cornerRadius = 1.f;
         [_entranceRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_entranceRoomBtn addTarget:self action:@selector(entranceRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_entranceRoomBtn];
+        [self.footView addSubview:_entranceRoomBtn];
         [_entranceRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.balconyRoomBtn.mas_right).offset(25);
-            make.top.equalTo(self.hostbedRoomBtn.mas_bottom).offset(15);
+            make.left.equalTo(self.balconyRoomBtn.mas_right).offset(yAutoFit(25.f));
+            make.top.equalTo(self.hostbedRoomBtn.mas_bottom).offset(yAutoFit(15.f));
         }];
     }
     return _entranceRoomBtn;
@@ -369,11 +380,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         _cloakRoomBtn.layer.cornerRadius = 1.f;
         [_cloakRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_cloakRoomBtn addTarget:self action:@selector(cloakRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_cloakRoomBtn];
+        [self.footView addSubview:_cloakRoomBtn];
         [_cloakRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.view.mas_left).offset(23);
-            make.top.equalTo(self.kitchenRoomBtn.mas_bottom).offset(15);
+            make.left.equalTo(self.footView.mas_left).offset(yAutoFit(15.f));
+            make.top.equalTo(self.kitchenRoomBtn.mas_bottom).offset(yAutoFit(15.f));
         }];
     }
     return _cloakRoomBtn;
@@ -391,11 +402,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         _childrenRoomBtn.layer.cornerRadius = 1.f;
         [_childrenRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_childrenRoomBtn addTarget:self action:@selector(childrenRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_childrenRoomBtn];
+        [self.footView addSubview:_childrenRoomBtn];
         [_childrenRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.cloakRoomBtn.mas_right).offset(25);
-            make.top.equalTo(self.kitchenRoomBtn.mas_bottom).offset(15);
+            make.left.equalTo(self.cloakRoomBtn.mas_right).offset(yAutoFit(25.f));
+            make.top.equalTo(self.kitchenRoomBtn.mas_bottom).offset(yAutoFit(15.f));
         }];
     }
     return _childrenRoomBtn;
@@ -413,11 +424,11 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         _bathRoomBtn.layer.cornerRadius = 1.f;
         [_bathRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
         [_bathRoomBtn addTarget:self action:@selector(bathRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_bathRoomBtn];
+        [self.footView addSubview:_bathRoomBtn];
         [_bathRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.childrenRoomBtn.mas_right).offset(25);
-            make.top.equalTo(self.kitchenRoomBtn.mas_bottom).offset(15);
+            make.left.equalTo(self.childrenRoomBtn.mas_right).offset(yAutoFit(25.f));
+            make.top.equalTo(self.kitchenRoomBtn.mas_bottom).offset(yAutoFit(15.f));
         }];
     }
     return _bathRoomBtn;
