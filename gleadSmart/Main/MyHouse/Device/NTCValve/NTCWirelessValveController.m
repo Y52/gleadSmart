@@ -591,10 +591,16 @@ CGFloat const nodeButtonWidthNTC = 20.f;
     NSDictionary *userInfo = [notification userInfo];
     NSNumber *threshold = [userInfo objectForKey:@"getThreshold"];
     NSNumber *temp = [userInfo objectForKey:@"temp"];
-    NSLog(@"zdaadafglfgl%@",temp);
     dispatch_async(dispatch_get_main_queue(), ^{
         self.temperatureLabel.text = [NSString stringWithFormat:@"温度:%d℃",[temp intValue]];
+        if (temp >= threshold) {
+            self.temperatureImage.image = [UIImage imageNamed:@"valveTemperature_abnormal"];
+        }else{
+            self.temperatureImage.image = [UIImage imageNamed:@"valveTemperature_normal"];
+            
+        }
     });
+    
 }
 
 - (NSMutableArray *)sortLeakageInfosByDate:(NSMutableArray *)arr{
