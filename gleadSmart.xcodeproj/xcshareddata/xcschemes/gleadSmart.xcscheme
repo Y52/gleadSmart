@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB49DF8C21958864004E00A2"
+               BlueprintIdentifier = "10ED717F3F9213F0CF58ABFF5B967FB2"
                BuildableName = "gleadSmart.app"
                BlueprintName = "gleadSmart"
                ReferencedContainer = "container:gleadSmart.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB49DFA721958867004E00A2"
+               BlueprintIdentifier = "01B04D0DF67B68F2F18C016E826B07C9"
                BuildableName = "gleadSmartTests.xctest"
                BlueprintName = "gleadSmartTests"
                ReferencedContainer = "container:gleadSmart.xcodeproj">
@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB49DFB221958867004E00A2"
+               BlueprintIdentifier = "61F812B805B28D0EFD9E7D2838D82996"
                BuildableName = "gleadSmartUITests.xctest"
                BlueprintName = "gleadSmartUITests"
                ReferencedContainer = "container:gleadSmart.xcodeproj">
@@ -52,7 +52,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BB49DF8C21958864004E00A2"
+            BlueprintIdentifier = "10ED717F3F9213F0CF58ABFF5B967FB2"
             BuildableName = "gleadSmart.app"
             BlueprintName = "gleadSmart"
             ReferencedContainer = "container:gleadSmart.xcodeproj">
@@ -75,7 +75,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BB49DF8C21958864004E00A2"
+            BlueprintIdentifier = "10ED717F3F9213F0CF58ABFF5B967FB2"
             BuildableName = "gleadSmart.app"
             BlueprintName = "gleadSmart"
             ReferencedContainer = "container:gleadSmart.xcodeproj">
@@ -109,7 +109,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BB49DF8C21958864004E00A2"
+            BlueprintIdentifier = "10ED717F3F9213F0CF58ABFF5B967FB2"
             BuildableName = "gleadSmart.app"
             BlueprintName = "gleadSmart"
             ReferencedContainer = "container:gleadSmart.xcodeproj">
