@@ -30,6 +30,8 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
 @property (strong, nonatomic) UIButton *controlButton;
 @property (strong, nonatomic) UIButton *setButton;
 
+@property (nonatomic, strong) UIPanGestureRecognizer *panGest;//旋转手势
+
 @end
 
 @implementation ThermostatController{
@@ -115,6 +117,7 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
             
             self.thermostatView.image = [UIImage imageNamed:@"thermostatKnob_On"];
             self.thermostatView.userInteractionEnabled = YES;
+            self.panGest.enabled = YES;
 
             [self.timeButton setTitleColor:[UIColor colorWithRed:69/255.0 green:142/255.0 blue:248/255.0 alpha:1.0] forState:UIControlStateNormal];
             [self.timeButton setImage:[UIImage imageNamed:@"thermostat_timing_on"] forState:UIControlStateNormal];
@@ -154,6 +157,7 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
             
             self.thermostatView.image = [UIImage imageNamed:@"thermostatKnob"];
             self.thermostatView.userInteractionEnabled = YES;
+            self.panGest.enabled = NO;
 
             [self.timeButton setTitleColor:[UIColor colorWithRed:160/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:UIControlStateNormal];
             [self.timeButton setImage:[UIImage imageNamed:@"thermostat_timing"] forState:UIControlStateNormal];
@@ -450,8 +454,9 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
         //_thermostatView.multipleTouchEnabled = YES;
 
         //初始化一个拖拽手势
-        UIPanGestureRecognizer *panGest = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panView:)];
-        [_thermostatView addGestureRecognizer:panGest];
+        _panGest = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panView:)];
+        _panGest.enabled = NO;
+        [_thermostatView addGestureRecognizer:_panGest];
     }
     return _thermostatView;
 }
