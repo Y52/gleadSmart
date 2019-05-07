@@ -421,6 +421,7 @@ static int noUserInteractionHeartbeat = 0;
  */
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data failuer:(nullable void(^)(void))failure{
     if ([[Database shareInstance].currentHouse.mac isKindOfClass:[NSNull class]]) {
+        NSLog(@"currentHouse.mac is null");
         [NSObject showHudTipStr:@"当前家庭没有添加中央控制器"];
         [SVProgressHUD dismiss];
         return;
@@ -458,6 +459,10 @@ static int noUserInteractionHeartbeat = 0;
             [data69 addObjectsFromArray:data];
             [data69 addObject:[NSNumber numberWithUnsignedChar:[NSObject getCS:data69]]];
             [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
+            
+            if ([[Database shareInstance].currentHouse.mac isKindOfClass:[NSNull class]]) {
+                return;
+            }
             
             if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
                 Database *db = [Database shareInstance];
@@ -1272,13 +1277,30 @@ static int noUserInteractionHeartbeat = 0;
     }
     
     Database *db = [Database shareInstance];
+    
+    //查询该设备是否已经添加到deviceArray
+    BOOL isExisted = NO;//防止设备在localdevice中未添加到deviceArray，导致页面上UI不显示
     for (DeviceModel *device in self.deviceArray) {
+        NSLog(@"%@",device.mac);
         if ([device.mac isEqualToString:mac]) {
-            //收到信息就上线
             device.isOnline = @1;
+            isExisted = YES;
         }
     }
-
+    if (!isExisted) {
+        //localdevice中的该设备添加到deviceArray
+        for (DeviceModel *localDevice in db.localDeviceArray) {
+            if ([mac isEqualToString:localDevice.mac]) {
+                localDevice.isOnline = @1;
+                
+                [self.deviceArray addObject:localDevice];
+                NSLog(@"%@",localDevice.mac);
+                [db.localDeviceArray removeObject:localDevice];
+                break;
+            }
+        }
+    }
+    
     switch ([_recivedData69[9] unsignedIntegerValue]) {
         case 0x01:
         case 0x02:
@@ -1400,7 +1422,7 @@ static int noUserInteractionHeartbeat = 0;
                 
                 NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
                 if ([isOn integerValue]) {
-                    NSLog(@"%@",isOn);
+                    NSLog(@"开关温控器%@",isOn);
                     
                     //打开温控器，通知温控器页面查询温度等
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"openThermostat" object:nil userInfo:nil];
@@ -1730,7 +1752,7 @@ static int noUserInteractionHeartbeat = 0;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"valveDeleteHangingNode" object:nil userInfo:nil];//删除节点后直接水阀页面节点重新生成
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x08 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-               
+                
                 NSLog(@"查询水阀阈值");
                 NSNumber *getThreshold = [NSNumber numberWithInt:[_recivedData69[12] intValue]];
                 NSNumber *temp = [NSNumber numberWithInt:[_recivedData69[13] intValue]];
@@ -1738,7 +1760,7 @@ static int noUserInteractionHeartbeat = 0;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"getValveThreshold" object:nil userInfo:userInfo];
             }
             if ([_recivedData69[10] unsignedIntegerValue] == 0x08 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
-               
+                
                 NSLog(@"设置水阀阈值");
                 NSNumber *setThreshold = [NSNumber numberWithInt:[_recivedData69[12] intValue]];
                 NSDictionary *userInfo = @{@"setThreshold":setThreshold};

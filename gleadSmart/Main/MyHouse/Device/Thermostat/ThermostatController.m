@@ -108,7 +108,6 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
                 self.device = device;
             }
         }
-        
         if ([self.device.isOn boolValue]) {
             
             if (self->isInquireTimerSuspend) {
