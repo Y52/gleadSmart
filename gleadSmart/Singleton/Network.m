@@ -460,6 +460,10 @@ static int noUserInteractionHeartbeat = 0;
             [data69 addObject:[NSNumber numberWithUnsignedChar:[NSObject getCS:data69]]];
             [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
             
+            if ([[Database shareInstance].currentHouse.mac isKindOfClass:[NSNull class]]) {
+                return;
+            }
+            
             if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
                 Database *db = [Database shareInstance];
                 [self oneNETSendData:data69 apiKey:db.currentHouse.apiKey deviceId:db.currentHouse.deviceId failure:failure];//OneNet发送
