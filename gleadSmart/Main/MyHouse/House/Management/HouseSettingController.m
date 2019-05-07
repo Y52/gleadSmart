@@ -30,6 +30,8 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
 
 @implementation HouseSettingController
 
+#pragma mark - life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1];
@@ -39,6 +41,17 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
     self.removeHouseButton = [self removeHouseButton];
     
     [self houseLocation:self.house.lon lat:self.house.lat];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
 }
 
 #pragma mark - private methods
