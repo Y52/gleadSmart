@@ -18,7 +18,7 @@ static dispatch_once_t oneToken;
 static int noUserInteractionHeartbeat = 0;
 
 @implementation Network{
-    int _frameCount;
+    UInt8 _frameCount;
     dispatch_queue_t _queue;//设备通信线程
     
     NSLock *_lock;//udp搜寻锁
@@ -865,7 +865,16 @@ static int noUserInteractionHeartbeat = 0;
         return DeviceNTCValve;
     }
     if (macByte2 >= 0x48 && macByte2 <= 0x4F) {
-        return DeviceMulSwitch;
+        return DeviceFourSwitch;
+    }
+    if (macByte2 >= 0x50 && macByte2 <= 0x57) {
+        return DeviceThreeSwitch;
+    }
+    if (macByte2 >= 0x58 && macByte2 <= 0x5F) {
+        return DeviceTwoSwitch;
+    }
+    if (macByte2 >= 0x60 && macByte2 <= 0x67) {
+        return DeviceOneSwitch;
     }
     return DeviceCenterlControl;
 }
@@ -1794,87 +1803,203 @@ static int noUserInteractionHeartbeat = 0;
         case 0x11:
         {
             //智能插座
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                //NSLog(@"查询wifi智能插座的开关状态");
-                
-            }
-            if (([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) || ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x01)) {
-                NSLog(@"查询或设置wifi智能插座的开关状态,或主动上报");
-                NSDictionary *userInfo;
-                
-                NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
-                
-                for (DeviceModel *device in self.deviceArray) {
-                    if ([device.mac isEqualToString:mac]) {
-                        NSLog(@"%@",device.mac);
-                        device.isOn = isOn;
-                        device.isOnline = @1;
-                        userInfo = @{@"device":device,@"isShare":@0};
+             NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]];
+            switch (type) {
+                case DevicePlugOutlet: //智能插座
+                {
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        //NSLog(@"查询wifi智能插座的开关状态");
+                        
+                    }
+                    if (([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) || ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x01)) {
+                        NSLog(@"查询或设置wifi智能插座的开关状态,或主动上报");
+                        NSDictionary *userInfo;
+                        
+                        NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        
+                        for (DeviceModel *device in self.deviceArray) {
+                            if ([device.mac isEqualToString:mac]) {
+                                NSLog(@"%@",device.mac);
+                                device.isOn = isOn;
+                                device.isOnline = @1;
+                                userInfo = @{@"device":device,@"isShare":@0};
+                            }
+                        }
+                        for (DeviceModel *device in db.shareDeviceArray) {
+                            if ([device.mac isEqualToString:mac]) {
+                                NSLog(@"%@",device.mac);
+                                device.isOn = isOn;
+                                device.isOnline = @1;
+                                userInfo = @{@"device":device,@"isShare":@1};
+                            }
+                        }
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshPlugOutletUI" object:nil userInfo:userInfo];
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能插座当前日期时间");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                        //在网节点查询
+                        NSLog(@"设置wifi智能插座当前日期时间");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能插座的闹钟");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                        NSLog(@"设置wifi智能插座的闹钟");
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetClock" object:nil userInfo:nil];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteClock" object:nil userInfo:nil];
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能插座的闹钟项列表");
+                        NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"getClockList" object:nil userInfo:userInfo];
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能插座的延时开关");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                        NSLog(@"设置wifi智能插座的延时开关");
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetDelay" object:nil userInfo:nil];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteDelayClock" object:nil userInfo:nil];
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能插座的延时开关列表");
+                        NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"getdelayclockList" object:nil userInfo:userInfo];
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x10 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能插座的电量（电压，电流，功率）");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x11 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能插座的电压");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x12 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能插座的电流");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x13 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能插座的功率");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x20 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                        NSLog(@"设置wifi的SSID");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x21 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                        NSLog(@"设置wifi的密码");
                     }
                 }
-                for (DeviceModel *device in db.shareDeviceArray) {
-                    if ([device.mac isEqualToString:mac]) {
-                        NSLog(@"%@",device.mac);
-                        device.isOn = isOn;
-                        device.isOnline = @1;
-                        userInfo = @{@"device":device,@"isShare":@1};
+                    break;
+        
+                default: //智能开关
+                {
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        //NSLog(@"查询wifi智能开关的状态");
+                        NSDictionary *userInfo;
+                        
+                        NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        
+                        for (DeviceModel *device in self.deviceArray) {
+                            if ([device.mac isEqualToString:mac]) {
+                                NSLog(@"%@",device.mac);
+                                device.isOn = isOn;
+                                device.isOnline = @1;
+                                userInfo = @{@"device":device,@"isShare":@0};
+                            }
+                        }
+                        for (DeviceModel *device in db.shareDeviceArray) {
+                            if ([device.mac isEqualToString:mac]) {
+                                NSLog(@"%@",device.mac);
+                                device.isOn = isOn;
+                                device.isOnline = @1;
+                                userInfo = @{@"device":device,@"isShare":@1};
+                            }
+                        }
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshMulSwitchUI" object:nil userInfo:nil];
+                        
+                    }
+                    if (([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) || ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x01)) {
+                        NSLog(@"查询或设置wifi智能开关的状态");
+                        NSDictionary *userInfo;
+                        
+                        NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        
+                        for (DeviceModel *device in self.deviceArray) {
+                            if ([device.mac isEqualToString:mac]) {
+                                NSLog(@"%@",device.mac);
+                                device.isOn = isOn;
+                                device.isOnline = @1;
+                                userInfo = @{@"device":device,@"isShare":@0};
+                            }
+                        }
+                        for (DeviceModel *device in db.shareDeviceArray) {
+                            if ([device.mac isEqualToString:mac]) {
+                                NSLog(@"%@",device.mac);
+                                device.isOn = isOn;
+                                device.isOnline = @1;
+                                userInfo = @{@"device":device,@"isShare":@1};
+                            }
+                        }
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshMulSwitchUI" object:nil userInfo:nil];
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能开关当前日期时间");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                        //在网节点查询
+                        NSLog(@"设置wifi智能开关当前日期时间");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能开关的闹钟");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                        NSLog(@"设置wifi智能开关的闹钟");
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetClock" object:nil userInfo:nil];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteClock" object:nil userInfo:nil];
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能开关的闹钟项列表");
+                        NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"getClockList" object:nil userInfo:userInfo];
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能开关的延时");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                        NSLog(@"设置wifi智能开关的延时");
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetDelay" object:nil userInfo:nil];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteDelayClock" object:nil userInfo:nil];
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能开关的延时开关列表");
+                        NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"getdelayclockList" object:nil userInfo:userInfo];
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x10 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能开关的电量（电压，电流，功率）");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x11 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能开关的电压");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x12 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能开关的电流");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x13 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                        NSLog(@"查询wifi智能开关的功率");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x20 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                        NSLog(@"设置wifi的SSID");
+                    }
+                    if ([_recivedData69[10] unsignedIntegerValue] == 0x21 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                        NSLog(@"设置wifi的密码");
                     }
                 }
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshPlugOutletUI" object:nil userInfo:userInfo];
+                    break;
             }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"查询wifi智能插座当前日期时间");
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
-                //在网节点查询
-                NSLog(@"设置wifi智能插座当前日期时间");
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"查询wifi智能插座的闹钟");
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
-                NSLog(@"设置wifi智能插座的闹钟");
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetClock" object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteClock" object:nil userInfo:nil];
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"查询wifi智能插座的闹钟项列表");
-                NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"getClockList" object:nil userInfo:userInfo];
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"查询wifi智能插座的延时开关");
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x04 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
-                NSLog(@"设置wifi智能插座的延时开关");
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetDelay" object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteDelayClock" object:nil userInfo:nil];
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x05 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"查询wifi智能插座的延时开关列表");
-                NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"getdelayclockList" object:nil userInfo:userInfo];
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x10 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"查询wifi智能插座的电量（电压，电流，功率）");
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x11 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"查询wifi智能插座的电压");
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x12 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"查询wifi智能插座的电流");
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x13 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                NSLog(@"查询wifi智能插座的功率");
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x20 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
-                NSLog(@"设置wifi的SSID");
-            }
-            if ([_recivedData69[10] unsignedIntegerValue] == 0x21 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
-                NSLog(@"设置wifi的密码");
-            }
+            
         }
             break;
             

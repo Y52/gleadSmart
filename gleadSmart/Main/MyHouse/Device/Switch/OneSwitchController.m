@@ -21,6 +21,7 @@
 @property (strong, nonatomic) UIButton *timeButton_1;
 @property (strong, nonatomic) UIButton *delayButton;
 @property (strong, nonatomic) UIButton *closeAllButton_1;
+@property (strong, nonatomic) UIButton *switchButton;
 
 @end
 
@@ -46,7 +47,7 @@
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMulSwitchUI:) name:@"refreshMulSwitchUI" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshOneSwitchUI) name:@"refreshMulSwitchUI" object:nil];
     
 }
 
@@ -81,11 +82,42 @@
 - (void)switchClickOne:(UIButton *)sender{
     if (sender.tag == yUnselect) {
         sender.tag = ySelect;
+        
         [sender setImage:[UIImage imageNamed:@"img_switch3_on"] forState:UIControlStateNormal];
+        UInt8 controlCode = 0x01;
+        NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@0];
+        [self.device sendData69With:controlCode mac:self.device.mac data:data];
     }else{
         sender.tag = yUnselect;
         [sender setImage:[UIImage imageNamed:@"img_switch3_off"] forState:UIControlStateNormal];
+        
+        UInt8 controlCode = 0x01;
+        NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@1];
+        [self.device sendData69With:controlCode mac:self.device.mac data:data];
     }
+}
+
+#pragma mark - notification
+
+- (void)refreshOneSwitchUI{
+    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+        if ([device.mac isEqualToString:self.device.mac]) {
+            self.device = device;
+        }
+    }
+    [self ThreeSwitchUITransformationByStatus];
+}
+
+//更新UI
+- (void)ThreeSwitchUITransformationByStatus{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //NSLog(@"%@",self.device.isOn);
+        if ([self.device.isOn intValue] & 0x01) {
+            [self.switchButton setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+        }else{
+            [self.switchButton setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+        }
+    });
 }
 
 #pragma mark - setters & getters
@@ -144,14 +176,14 @@
             make.centerY.equalTo(self.mulSwitchView_1.mas_centerY);
         }];
         
-        UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        switchButton.frame = CGRectMake(0, 0, yAutoFit(200.f), 190.f);
-        switchButton.tag = yUnselect;
-        [switchButton setImage:[UIImage imageNamed:@"img_switch3_off"] forState:UIControlStateNormal];
-        [switchButton.imageView setClipsToBounds:YES];
-        switchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [switchButton addTarget:self action:@selector(switchClickOne:) forControlEvents:UIControlEventTouchUpInside];
-        [self.mulSwitchCloth_1 addSubview:switchButton];
+        _switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _switchButton.frame = CGRectMake(0, 0, yAutoFit(200.f), 190.f);
+        _switchButton.tag = yUnselect;
+        [_switchButton setImage:[UIImage imageNamed:@"img_switch3_off"] forState:UIControlStateNormal];
+        [_switchButton.imageView setClipsToBounds:YES];
+        _switchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [_switchButton addTarget:self action:@selector(switchClickOne:) forControlEvents:UIControlEventTouchUpInside];
+        [self.mulSwitchCloth_1 addSubview:self.switchButton];
     }
     return _mulSwitchCloth_1;
 }

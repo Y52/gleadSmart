@@ -453,7 +453,7 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
-        case DeviceMulSwitch:
+        case DeviceFourSwitch:
         {
             
         }
@@ -569,7 +569,7 @@ static CGFloat const Cell_Height = 72.f;
         }
             break;
             
-        case DeviceMulSwitch:
+        case DeviceFourSwitch:
         {
             
         }
@@ -619,32 +619,39 @@ static CGFloat const Cell_Height = 72.f;
                     
                 case DevicePlugOutlet:
                 {
-//                    MulSwitchController *switchVC = [[MulSwitchController alloc] init];
-//                    switchVC.device = device;
-//                    [self.navigationController pushViewController:switchVC animated:YES];
-                    
-//                    OneSwitchController *switchVC = [[OneSwitchController alloc] init];
-//                    switchVC.device = device;
-//                    [self.navigationController pushViewController:switchVC animated:YES];
-                    
-//                    TwoSwitchController *switchVC = [[TwoSwitchController alloc] init];
-//                    switchVC.device = device;
-//                    [self.navigationController pushViewController:switchVC animated:YES];
-                    
-                    ThreeSwitchController *switchVC = [[ThreeSwitchController alloc] init];
-                    switchVC.device = device;
-                    [self.navigationController pushViewController:switchVC animated:YES];
-                    
-                    return;
                     PlugOutletController *plugVC = [[PlugOutletController alloc] init];
                     plugVC.device = device;
                     [self.navigationController pushViewController:plugVC animated:YES];
                 }
                     break;
                     
-                case DeviceMulSwitch:
+                case DeviceFourSwitch:
                 {
                     MulSwitchController *switchVC = [[MulSwitchController alloc] init];
+                    switchVC.device = device;
+                    [self.navigationController pushViewController:switchVC animated:YES];
+                }
+                    break;
+                    
+                case DeviceThreeSwitch:
+                {
+                    ThreeSwitchController *switchVC = [[ThreeSwitchController alloc] init];
+                    switchVC.device = device;
+                    [self.navigationController pushViewController:switchVC animated:YES];
+                }
+                    break;
+                   
+                case DeviceTwoSwitch:
+                {
+                    TwoSwitchController *switchVC = [[TwoSwitchController alloc] init];
+                    switchVC.device = device;
+                    [self.navigationController pushViewController:switchVC animated:YES];
+                }
+                    break;
+                    
+                case DeviceOneSwitch:
+                {
+                    OneSwitchController *switchVC = [[OneSwitchController alloc] init];
                     switchVC.device = device;
                     [self.navigationController pushViewController:switchVC animated:YES];
                 }
@@ -699,7 +706,7 @@ static CGFloat const Cell_Height = 72.f;
                 }
                     break;
                     
-                case DeviceMulSwitch:
+                case DeviceFourSwitch:
                 {
                     
                 }
