@@ -38,7 +38,7 @@
     self.timeButton_1 = [self timeButton_1];
     //self.delayButton = [self delayButton];不要了
     self.closeAllButton_1 = [self closeAllButton_1];
-    
+    [self getSwitchStatus];
     [self setBackgroundColor_1];
 }
 
@@ -58,6 +58,12 @@
 
 #pragma mark - private methods
 
+- (void)getSwitchStatus{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
+}
+
 - (void)goSetting_1{
     DeviceSettingController *VC = [[DeviceSettingController alloc] init];
     VC.device = self.device;
@@ -65,7 +71,9 @@
 }
 
 - (void)mulSwitchAllOpen_1{
-    
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@0x01];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
 }
 
 - (void)mulSwitchClock_1{
@@ -76,23 +84,24 @@
 }
 
 - (void)mulSwitchAllClose_1{
-    
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@0x00];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
 }
 
 - (void)switchClickOne:(UIButton *)sender{
     if (sender.tag == yUnselect) {
         sender.tag = ySelect;
-        
-        [sender setImage:[UIImage imageNamed:@"img_switch3_on"] forState:UIControlStateNormal];
+        //[sender setImage:[UIImage imageNamed:@"img_switch3_on"] forState:UIControlStateNormal];
         UInt8 controlCode = 0x01;
-        NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@0];
+        NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] | 0x01)];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
     }else{
         sender.tag = yUnselect;
-        [sender setImage:[UIImage imageNamed:@"img_switch3_off"] forState:UIControlStateNormal];
+        //[sender setImage:[UIImage imageNamed:@"img_switch3_off"] forState:UIControlStateNormal];
         
         UInt8 controlCode = 0x01;
-        NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@1];
+        NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] & ~0x01)];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
     }
 }
@@ -113,9 +122,9 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         //NSLog(@"%@",self.device.isOn);
         if ([self.device.isOn intValue] & 0x01) {
-            [self.switchButton setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+            [self.switchButton setImage:[UIImage imageNamed:@"img_switch3_on"] forState:UIControlStateNormal];
         }else{
-            [self.switchButton setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+            [self.switchButton setImage:[UIImage imageNamed:@"img_switch3_off"] forState:UIControlStateNormal];
         }
     });
 }

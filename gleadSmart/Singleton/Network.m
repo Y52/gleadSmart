@@ -557,9 +557,10 @@ static int noUserInteractionHeartbeat = 0;
         if ([localDevice.type integerValue] == DeviceCenterlControl) {
             continue;//中央控制器
         }
-        if ([localDevice.type intValue] == DevicePlugOutlet) {
+        if ([localDevice.type intValue] >= DevicePlugOutlet) {
             //插座
             [self.deviceArray addObject:localDevice];
+            continue;
         }
         [self removeOldDeviceWith:localDevice success:^{
             //通知刷新设备
@@ -1894,7 +1895,7 @@ static int noUserInteractionHeartbeat = 0;
                 default: //智能开关
                 {
                     if ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                        //NSLog(@"查询wifi智能开关的状态");
+                        NSLog(@"查询wifi智能开关的状态");
                         NSDictionary *userInfo;
                         
                         NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
