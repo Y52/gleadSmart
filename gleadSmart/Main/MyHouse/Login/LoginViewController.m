@@ -131,7 +131,6 @@
         _verifyTF.autocorrectionType = UITextAutocorrectionTypeNo;
         _verifyTF.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _verifyTF.borderStyle = UITextBorderStyleNone;
-        _verifyTF.keyboardType = UIKeyboardTypeNumberPad;
         _verifyTF.placeholder = LocalString(@"请输入验证码");
         [verifyTFView addSubview:_verifyTF];
         [_verifyTF mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -62,7 +62,22 @@ NSString *const CellIdentifier_MulSwitchSetingCell = @"CellID_MulSwitchSeting";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    //区分几路开关
+    switch ([self.device.type integerValue]) {
+        case DeviceOneSwitch:
+            return 1;
+            break;
+        case DeviceTwoSwitch:
+            return 2;
+            break;
+        case DeviceThreeSwitch:
+            return 3;
+            break;
+            
+        default:
+            return 4;
+            break;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -102,30 +117,9 @@ NSString *const CellIdentifier_MulSwitchSetingCell = @"CellID_MulSwitchSeting";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    switch (indexPath.row) {
-        case 0:
-        {
-            MulSwitchTimingController *timingVC = [[MulSwitchTimingController alloc] init];
-            timingVC.device = self.device;
-            [self.navigationController pushViewController:timingVC animated:YES];
-            
-        }
-            break;
-        case 1:
-            
-            
-            break;
-        case 2:
-            
-            
-            break;
-            
-        default:
-            
-            break;
-    }
-
-    
+    MulSwitchTimingController *timingVC = [[MulSwitchTimingController alloc] init];
+    timingVC.device = self.device;
+    [self.navigationController pushViewController:timingVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

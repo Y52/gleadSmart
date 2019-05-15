@@ -21,6 +21,8 @@
 @property (strong, nonatomic) UIButton *timeButton_2;
 @property (strong, nonatomic) UIButton *delayButton;
 @property (strong, nonatomic) UIButton *closeAllButton_2;
+@property (strong, nonatomic) UIButton *switchButton2_1;//开关按钮
+@property (strong, nonatomic) UIButton *switchButton2_2;//开关按钮
 
 @end
 
@@ -37,6 +39,7 @@
     self.timeButton_2 = [self timeButton_2];
     //self.delayButton = [self delayButton];不要了
     self.closeAllButton_2 = [self closeAllButton_2];
+    [self getSwitchStatus];
     
     [self setBackgroundColor_2];
 }
@@ -46,7 +49,7 @@
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMulSwitchUI:) name:@"refreshMulSwitchUI" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTwoSwitchUI) name:@"refreshMulSwitchUI" object:nil];
     
 }
 
@@ -57,6 +60,12 @@
 
 #pragma mark - private methods
 
+- (void)getSwitchStatus{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
+}
+
 - (void)goSetting_2{
     DeviceSettingController *VC = [[DeviceSettingController alloc] init];
     VC.device = self.device;
@@ -64,7 +73,9 @@
 }
 
 - (void)mulSwitchAllOpen_2{
-    
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@0x03];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
 }
 
 - (void)mulSwitchClock_2{
@@ -75,18 +86,74 @@
 }
 
 - (void)mulSwitchAllClose_2{
-    
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@0x00];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
+}
+
+- (void)switchClickTwo_1:(UIButton *)sender{
+    if (sender.tag == yUnselect) {
+        sender.tag = ySelect;
+        
+        //[sender setImage:[UIImage imageNamed:@"img_switch2_on"] forState:UIControlStateNormal];
+        UInt8 controlCode = 0x01;
+        NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] | 0x01)];
+        [self.device sendData69With:controlCode mac:self.device.mac data:data];
+    }else{
+        sender.tag = yUnselect;
+        //[sender setImage:[UIImage imageNamed:@"img_switch2_off"] forState:UIControlStateNormal];
+        
+        UInt8 controlCode = 0x01;
+        NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] & ~0x01)];
+        [self.device sendData69With:controlCode mac:self.device.mac data:data];
+    }
+}
+
+- (void)switchClickTwo_2:(UIButton *)sender{
+    if (sender.tag == yUnselect) {
+        sender.tag = ySelect;
+        
+        //[sender setImage:[UIImage imageNamed:@"img_switch2_on"] forState:UIControlStateNormal];
+        UInt8 controlCode = 0x01;
+        NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] | 0x02)];
+        [self.device sendData69With:controlCode mac:self.device.mac data:data];
+    }else{
+        sender.tag = yUnselect;
+        //[sender setImage:[UIImage imageNamed:@"img_switch2_off"] forState:UIControlStateNormal];
+        
+        UInt8 controlCode = 0x01;
+        NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] & ~0x02)];
+        [self.device sendData69With:controlCode mac:self.device.mac data:data];
+    }
 }
 
 
-- (void)switchClickTwo:(UIButton *)sender{
-    if (sender.tag == yUnselect) {
-        sender.tag = ySelect;
-        [sender setImage:[UIImage imageNamed:@"img_switch2_on"] forState:UIControlStateNormal];
-    }else{
-        sender.tag = yUnselect;
-        [sender setImage:[UIImage imageNamed:@"img_switch2_off"] forState:UIControlStateNormal];
+#pragma mark - notification
+
+- (void)refreshTwoSwitchUI{
+    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+        if ([device.mac isEqualToString:self.device.mac]) {
+            self.device = device;
+        }
     }
+    [self TwoSwitchUITransformationByStatus];
+}
+
+//更新UI
+- (void)TwoSwitchUITransformationByStatus{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //NSLog(@"%@",self.device.isOn);
+        if ([self.device.isOn intValue] & 0x01) {
+            [self.switchButton2_1 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+        }else{
+            [self.switchButton2_1 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+        }
+        if ([self.device.isOn intValue] & 0x02) {
+            [self.switchButton2_2 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+        }else{
+            [self.switchButton2_2 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+        }
+    });
 }
 
 
@@ -158,16 +225,24 @@
         image.contentMode = UIViewContentModeScaleAspectFit;
         [_mulSwitchCloth_2 addSubview:image];
         //分开两路开关
-        for (int i = 0; i < 2; i++) {
-            UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            switchButton.frame = CGRectMake(i*(yAutoFit(270.f)/2), 0, yAutoFit(270.f)/2, 120.f);
-            switchButton.tag = yUnselect;
-            [switchButton setImage:[UIImage imageNamed:@"img_switch2_off"] forState:UIControlStateNormal];
-            [switchButton.imageView setClipsToBounds:YES];
-            switchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-            [switchButton addTarget:self action:@selector(switchClickTwo:) forControlEvents:UIControlEventTouchUpInside];
-            [self.mulSwitchCloth_2 addSubview:switchButton];
-        }
+        self.switchButton2_1 = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.switchButton2_1.frame = CGRectMake(0*(yAutoFit(270.f)/2), 0, yAutoFit(270.f)/2, 120.f);
+        self.switchButton2_1.tag = yUnselect;
+        [self.switchButton2_1 setImage:[UIImage imageNamed:@"img_switch2_off"] forState:UIControlStateNormal];
+        [self.switchButton2_1.imageView setClipsToBounds:YES];
+        self.switchButton2_1.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.switchButton2_1 addTarget:self action:@selector(switchClickTwo_1:) forControlEvents:UIControlEventTouchUpInside];
+        [self.mulSwitchCloth_2 addSubview:self.switchButton2_1];
+        
+        self.switchButton2_2 = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.switchButton2_2.frame = CGRectMake(1*(yAutoFit(270.f)/2), 0, yAutoFit(270.f)/2, 120.f);
+        self.switchButton2_2.tag = yUnselect;
+        [self.switchButton2_2 setImage:[UIImage imageNamed:@"img_switch2_off"] forState:UIControlStateNormal];
+        [self.switchButton2_2.imageView setClipsToBounds:YES];
+        self.switchButton2_2.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.switchButton2_2 addTarget:self action:@selector(switchClickTwo_2:) forControlEvents:UIControlEventTouchUpInside];
+        [self.mulSwitchCloth_2 addSubview:self.switchButton2_2];
+        
     }
     return _mulSwitchCloth_2;
 }

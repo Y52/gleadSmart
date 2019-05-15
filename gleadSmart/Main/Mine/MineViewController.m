@@ -19,6 +19,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIButton *headButton;
 @property (nonatomic, strong) UILabel *nickLabel;
+@property (nonatomic, strong) NSString *rssiStr;
 
 @property (nonatomic, strong) UITableView *mineTableView;
 
@@ -42,6 +43,8 @@ static CGFloat const HEIGHT_CELL = 51.f;
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     [self getUserInfoByApi];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveRouterRSSIValue:) name:@"getRouterRSSIValue" object:nil];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -49,6 +52,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     //[self.navigationController.navigationBar setShadowImage:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getRouterRSSIValue" object:nil];
 }
 
 #pragma mark - Lazyload
@@ -115,7 +119,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
     if (section == 0){
         return 3;
     }else{
-        return 2;
+        return 3;
     }
 }
 
@@ -151,8 +155,13 @@ static CGFloat const HEIGHT_CELL = 51.f;
             cell.normalImage.image = [UIImage imageNamed:@"img_mine_checkUpdate"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
-        }else{
+        }else if (indexPath.row == 1){
             cell.normalLabel.text = LocalString(@"关于我们");
+            cell.normalImage.image = [UIImage imageNamed:@"img_mine_aboutus"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            return cell;
+        }else{
+            cell.normalLabel.text = LocalString(@"信号测试");
             cell.normalImage.image = [UIImage imageNamed:@"img_mine_aboutus"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
@@ -176,6 +185,10 @@ static CGFloat const HEIGHT_CELL = 51.f;
         if (indexPath.row == 1) {
 
         }else if (indexPath.row == 0){
+            
+        }else if (indexPath.row == 2){
+         
+            [self getRouterRSSIValue];
             
         }
     }
@@ -211,6 +224,22 @@ static CGFloat const HEIGHT_CELL = 51.f;
     return view;
 }
 
+#pragma mark - notification
+
+- (void)recieveRouterRSSIValue:(NSNotification *)nsnotification
+{
+    NSDictionary *dataDic = [nsnotification userInfo];
+    NSNumber *RSSI = [dataDic objectForKey:@"RSSI"];
+    self.rssiStr = [NSString stringWithFormat:@"%@%@",LocalString(@"RSSI:"),RSSI];
+    //提示框
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"当前网络信号") message:self.rssiStr preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:LocalString(@"OK") style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
+
 #pragma mark - Actions
 - (void)accountSetAction{
 
@@ -218,6 +247,12 @@ static CGFloat const HEIGHT_CELL = 51.f;
 
 - (void)scanAction{
     
+}
+
+- (void)getRouterRSSIValue{
+    UInt8 controlCode = 0x00;
+    NSArray *data = @[@0xFE,@0x03,@0x01,@0x00];
+    [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
 }
 
 #pragma mark - API
