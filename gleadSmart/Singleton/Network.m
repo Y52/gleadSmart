@@ -1358,6 +1358,14 @@ static int noUserInteractionHeartbeat = 0;
                 NSLog(@"ap发送密码成功");
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"apSendPasswordSucc" object:nil userInfo:nil];
             }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x01 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
+                NSLog(@"获取路由器的RSSI值");
+                NSMutableDictionary *dataDic = [[NSMutableDictionary alloc] init];
+                
+                NSNumber *RSSI = _recivedData69[12];
+                [dataDic setObject:RSSI forKey:@"RSSI"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"getRouterRSSIValue" object:nil userInfo:dataDic];
+            }
         }
             break;
             
