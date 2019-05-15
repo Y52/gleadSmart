@@ -55,6 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///@brief AP配网发帧
 - (void)APsendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data;
 
+///@brief OneNET数据流查询
+- (void)oneNETSendData:(NSMutableArray *)msg apiKey:(NSString *)apiKey deviceId:(NSString *)deviceId failure:(void(^)(void))failure;
 ///@brief OneNET回复数据处理
 - (void)handleOneNET69Message:(NSString *)cmmdReply;
 

@@ -717,6 +717,42 @@
 		BA43C1C8DEC5F1AD661CEA2E2A8C3603 /* img_wallHob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A70610DF8D91BBF42E7F5A99D40160 /* img_wallHob@2x.png */; };
 		BB0FE2F7F493DDE8A4747626FF69BE8A /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE2F22BCCDF3189299FD71E16EB5C68 /* RDVTabBarItem.m */; };
 		BB676311E426B7DBE31D0DE5A6C81FCA /* img_plugView_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8C7FCF4134B75BFAF55EA3F55B6D75 /* img_plugView_off@2x.png */; };
+		BB93C9D1228BEBBA00B0DB6B /* NTCSetTemperatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BBFFC8D406E8DDBC479447F693F151 /* NTCSetTemperatureController.m */; };
+		BB93C9D2228BEBBC00B0DB6B /* NTCValveAlertInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED050E8D2512FC8291B929FEBC41A44 /* NTCValveAlertInfoController.m */; };
+		BB93C9D3228BEBC400B0DB6B /* StatusConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F1CBDF488F0986DB38563B5AC6FC31 /* StatusConfirmController.m */; };
+		BB93C9D4228BEBCE00B0DB6B /* APStatusConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = 866F4396A50C75DF4A5A708B7F4A43D7 /* APStatusConfirmController.m */; };
+		BB93C9D5228BEBF100B0DB6B /* DeviceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F15FDEE07315D694041C72C71FB75C /* DeviceSettingController.m */; };
+		BB93C9D6228BEBF500B0DB6B /* PlugOutletAddDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C4AF5950797B161A9613034FC0FE45 /* PlugOutletAddDelayController.m */; };
+		BB93C9D7228BEBF800B0DB6B /* PlugOutletAddTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE15A0A0F3529DFE855A2C106C11FB9 /* PlugOutletAddTimingController.m */; };
+		BB93C9D8228BEBFA00B0DB6B /* PlugOutletController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9557C486348BC450901BA8C7C3FFD0BF /* PlugOutletController.m */; };
+		BB93C9D9228BEBFD00B0DB6B /* PlugOutletDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4138EA160EE4F7D1C361D73E3B7022C6 /* PlugOutletDelayController.m */; };
+		BB93C9DA228BEC0000B0DB6B /* PlugOutletSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D97867D9255014834BFE4D2DC39A8F /* PlugOutletSettingController.m */; };
+		BB93C9DB228BEC0200B0DB6B /* PlugOutletTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7524728465C46673151B7670D3C7A002 /* PlugOutletTimingController.m */; };
+		BB93C9DC228BEC0700B0DB6B /* PlugOutletWeekSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AD9DD67833CFADA73C7334ED5B006B /* PlugOutletWeekSelectController.m */; };
+		BB93C9DD228BEC0C00B0DB6B /* OneSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4EE227F06BB001F6382 /* OneSwitchController.m */; };
+		BB93C9DE228BEC0E00B0DB6B /* TwoSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4F2227F06BC001F6382 /* TwoSwitchController.m */; };
+		BB93C9DF228BEC1000B0DB6B /* ThreeSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4F3227F06BC001F6382 /* ThreeSwitchController.m */; };
+		BB93C9E0228BEC1300B0DB6B /* MulSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E159C9A30BA6F33095B9D60DF9A4CBC /* MulSwitchController.m */; };
+		BB93C9E1228BEC1500B0DB6B /* MulSwitchAddTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC05FCEF3342B429D839E39F2BC503 /* MulSwitchAddTimingController.m */; };
+		BB93C9E2228BEC1800B0DB6B /* MulSwitchTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC516E356B38803A5BEF1C540760DB73 /* MulSwitchTimingController.m */; };
+		BB93C9E3228BEC1A00B0DB6B /* MulSwitchTimingSetingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CFC2BD40F18C80B26C8B0F321B3CFB /* MulSwitchTimingSetingController.m */; };
+		BB93C9E4228BEC1E00B0DB6B /* MulSwitchWeekSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CB059DA2F455157C7F4DA494D7E62F /* MulSwitchWeekSelectController.m */; };
+		BB93C9E5228BEC4D00B0DB6B /* WirelessValveController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585B8511E6090264CB9CC763866EBD6F /* WirelessValveController.m */; };
+		BB93C9E6228BEC5000B0DB6B /* ValveAlertInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F3E4776732175E3B5305E81CE771D /* ValveAlertInfoController.m */; };
+		BB93C9E7228BEC5300B0DB6B /* NodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D923988CC01F26B56427744DF9FD3F9D /* NodeDetailViewController.m */; };
+		BB93C9E8228BEC6700B0DB6B /* MulSwitchAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184694E482D98F98C2D0214119DF60F0 /* MulSwitchAddTimingCell.m */; };
+		BB93C9E9228BEC6900B0DB6B /* MulSwitchSaveAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 839E40F9506EE063C912608ECED3A637 /* MulSwitchSaveAddTimingCell.m */; };
+		BB93C9EA228BEC6B00B0DB6B /* MulSwitchSetingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B552627CDF2A04A30A1BA064D7E5C766 /* MulSwitchSetingCell.m */; };
+		BB93C9EB228BEC6E00B0DB6B /* MulSwitchWeekSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89638D1A5B70EDB64DE69764BDBB0122 /* MulSwitchWeekSelectCell.m */; };
+		BB93C9EC228BECAC00B0DB6B /* DeviceSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A32D0A88AB91832941E402FAE881B79D /* DeviceSettingCell.m */; };
+		BB93C9ED228BECB800B0DB6B /* ClockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBF5EA4820D39E78916AA795B20B68 /* ClockModel.m */; };
+		BB93C9EE228BECBA00B0DB6B /* DelayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 060272D5995FF7B1A6CEA22675F8076E /* DelayModel.m */; };
+		BB93C9EF228BECD400B0DB6B /* PlugOutletAddDelayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AB6BA98C2BC079AE0377F0C68885B5 /* PlugOutletAddDelayCell.m */; };
+		BB93C9F0228BECD600B0DB6B /* PlugOutletAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8717F9A3AA0D9E047A4E858811F4BE /* PlugOutletAddTimingCell.m */; };
+		BB93C9F1228BECD900B0DB6B /* PlugOutletSaveAddDelayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CF9BBDD9DDD02F026942CBB696CC03 /* PlugOutletSaveAddDelayCell.m */; };
+		BB93C9F2228BECDB00B0DB6B /* PlugOutletSaveAddTimingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D63BD1F1C711261D7A37EE8DB6DC9DD3 /* PlugOutletSaveAddTimingCell.m */; };
+		BB93C9F3228BECDD00B0DB6B /* PlugOutletWeekSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F14806152CB4818C5A08261E49248 /* PlugOutletWeekSelectCell.m */; };
+		BB93C9F4228BECDF00B0DB6B /* WeekendNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AA11257F11DB1A78886703088FB335 /* WeekendNameCell.m */; };
 		BBACD65E4CE4050F281BFF75293101DC /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */; };
 		BBED11018EEF75677A4A4B0EB91CB50F /* img_ther_addTimerSwitch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF326CB45C32724F7009A6732B37108E /* img_ther_addTimerSwitch@2x.png */; };
 		BC03EF0BB3B4A525FEEFFBF94BED099B /* img_plug_electricity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80B319A1DAF4D3592BC631424E81A128 /* img_plug_electricity@3x.png */; };
@@ -3987,22 +4023,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DDEECCCFBB26AAE80F9BDDD2136FB66 /* AFHTTPSessionManager.m in Sources */,
+				BB93C9D4228BEBCE00B0DB6B /* APStatusConfirmController.m in Sources */,
 				BA10BAF504BA5772F97F7758A6BF7EC9 /* AFNetworkReachabilityManager.m in Sources */,
+				BB93C9F1228BECD900B0DB6B /* PlugOutletSaveAddDelayCell.m in Sources */,
 				E0D5F6DCA3B746A06EC2CB8904659494 /* AFSecurityPolicy.m in Sources */,
 				C1A6C0DAB77799903E870C65303715F4 /* AFURLRequestSerialization.m in Sources */,
 				27B6B34E6F34DC102EF49DB10E19C244 /* AFURLResponseSerialization.m in Sources */,
 				090E1482AF2AEC0687D3AEA78AED7140 /* AFURLSessionManager.m in Sources */,
 				982907771AA52E1F11B25B2B5F2CEADA /* APNetworkController.m in Sources */,
+				BB93C9D7228BEBF800B0DB6B /* PlugOutletAddTimingController.m in Sources */,
+				BB93C9E4228BEC1E00B0DB6B /* MulSwitchWeekSelectController.m in Sources */,
 				ECC30D823A8CB2A5591D8AB0BC31EA07 /* APProcessController.m in Sources */,
 				0B524FBADCD6BA8A23C29BAFB2F99B31 /* AccountHeaderCell.m in Sources */,
 				942E2CF06067DC3FADA21BBCFA51B1C5 /* AccountViewController.m in Sources */,
 				292254B44A70F57702667B01A078AD33 /* AddDeviceShareController.m in Sources */,
 				DCB94C7F65AF5F7228A1328EC2B3268F /* AddFamilySelectCell.m in Sources */,
+				BB93C9F3228BECDD00B0DB6B /* PlugOutletWeekSelectCell.m in Sources */,
 				14A096864DB8E0634A47F5546C119016 /* AddFamilyTextCell.m in Sources */,
 				C570C5A093CA10C4650530338D08003F /* AddFamilyViewController.m in Sources */,
 				A10E1ED58585708147C8A402B04B17C2 /* AddHouseMemberCell.m in Sources */,
 				A035E4C61C95FDB10D8081B229218970 /* AddMemberController.m in Sources */,
 				CF785FB26D32187D3F04750A9BFEAFC6 /* AddRoomsTextCell.m in Sources */,
+				BB93C9ED228BECB800B0DB6B /* ClockModel.m in Sources */,
 				FD4638C873009CEC745FDD5C1B76CA75 /* AddRoomsViewController.m in Sources */,
 				3B85326E25B122F38A34B0CB451C1AF9 /* AddShareController.m in Sources */,
 				2C1EB33E644F290B89D370B9894FF025 /* AppDelegate.m in Sources */,
@@ -4010,6 +4052,7 @@
 				B096455F834FD0723210068E7FA52338 /* ConnectApNetController.m in Sources */,
 				543A146D973191761073F996E50EBA18 /* Database.m in Sources */,
 				F16D3CF44BBD0F2CA55F3073DC077924 /* DeviceConnectView.m in Sources */,
+				BB93C9EF228BECD400B0DB6B /* PlugOutletAddDelayCell.m in Sources */,
 				72E3F39167162093B517DA110527AD8C /* DeviceModel.m in Sources */,
 				72ABBE3C979235E9C577D8FD1ADE6AED /* DeviceShareController.m in Sources */,
 				003A557DA9077BA77856F20ABAEAA4DD /* DeviceTableViewCell.m in Sources */,
@@ -4017,8 +4060,12 @@
 				D1A8D8FBCA4052B80F0CFE2DAC5F17F7 /* ESPAES.m in Sources */,
 				EA45FEB7838C21D1BDD4158BA01D6175 /* ESPDataCode.m in Sources */,
 				41F1738DC2D726F0669B4B362054FDB0 /* ESPDatumCode.m in Sources */,
+				BB93C9F2228BECDB00B0DB6B /* PlugOutletSaveAddTimingCell.m in Sources */,
 				0A84283DB2452AF04765A95F71B21D38 /* ESPGuideCode.m in Sources */,
+				BB93C9D6228BEBF500B0DB6B /* PlugOutletAddDelayController.m in Sources */,
+				BB93C9E5228BEC4D00B0DB6B /* WirelessValveController.m in Sources */,
 				3F015CBFAFA015DF35EE13125184C981 /* ESPTouchGenerator.m in Sources */,
+				BB93C9DE228BEC0E00B0DB6B /* TwoSwitchController.m in Sources */,
 				83E50F54F70ABF49226082484D95FFCD /* ESPTouchResult.m in Sources */,
 				32D03E283F71F215477C312ED6BEE1D2 /* ESPTouchTask.m in Sources */,
 				F3806CE462444A800FC35FDB9E3E66AC /* ESPTouchTaskParameter.m in Sources */,
@@ -4037,7 +4084,9 @@
 				A706C059B6B5335107B6327337557D16 /* HomeDeviceController.m in Sources */,
 				D0D8537C6997CB835FBD3D5716A42733 /* HomeDeviceSelectController.m in Sources */,
 				4A9634A962A19DA519798D88B75EA21E /* HomeManagementCell.m in Sources */,
+				BB93C9DB228BEC0200B0DB6B /* PlugOutletTimingController.m in Sources */,
 				EF92AE96FAC619DEBA97AA9529289CDE /* HomeManagementController.m in Sources */,
+				BB93C9DD228BEC0C00B0DB6B /* OneSwitchController.m in Sources */,
 				CEB30E292C25B7DFD39073F3B6F78C3C /* HouseManagementController.m in Sources */,
 				F563180954CC6A54EBAABB5A5DEA218D /* HouseManagementTableViewCell.m in Sources */,
 				438BA8847EA81371E53E06F14D56337C /* HouseModel.m in Sources */,
@@ -4045,6 +4094,8 @@
 				2850853B8929DC2BFDF1F2DE415CEE56 /* HouseSelectCell.m in Sources */,
 				40469CB74205250137BFF14D1794B618 /* HouseSelectController.m in Sources */,
 				5C5F5942207B36105B35C85CEB1F2123 /* HouseSetCommonCell.m in Sources */,
+				BB93C9F4228BECDF00B0DB6B /* WeekendNameCell.m in Sources */,
+				BB93C9D1228BEBBA00B0DB6B /* NTCSetTemperatureController.m in Sources */,
 				2BA6921A8B9FD43A5204F13FCB7B6F70 /* HouseSetMemberCell.m in Sources */,
 				F4051ADC506EADF05151B99CF3D576D0 /* HouseSettingController.m in Sources */,
 				BF60E3A08D01DAA532C2A141C028B496 /* HouseShareController.m in Sources */,
@@ -4053,15 +4104,18 @@
 				D0276CD94F77FC666D33EBD8FECAC65A /* LoginViewController.m in Sources */,
 				677B17460D6E40332EFD0F2BB534BC60 /* MainViewController.m in Sources */,
 				9F0D1130D181D5F653071C06EBB09510 /* ManagerSetCell.m in Sources */,
+				BB93C9DA228BEC0000B0DB6B /* PlugOutletSettingController.m in Sources */,
 				3CA58D3587E64F7BDA7595096D7300DC /* MemberAccountCell.m in Sources */,
 				95FA6FFEC06A99657B285D57F1167D2E /* MemberModel.m in Sources */,
 				B8B85E3E2C2526C3B670B9A6D5C26DBD /* MineNormalCell.m in Sources */,
+				BB93C9F0228BECD600B0DB6B /* PlugOutletAddTimingCell.m in Sources */,
 				D1B63F2B0E2D929C8070A00D2B79CA05 /* MineViewController.m in Sources */,
 				48690E5B534E3597B8BA81AD8131535C /* ModifyPasswordViewController.m in Sources */,
 				C055F06F29117A626520DCF032ED88CE /* MyHouseController.m in Sources */,
 				1831AC0F78461AC86CA02DC74BBFFD8A /* NSDate+Common.m in Sources */,
 				3193B24C15B4D5230620153B12B885A7 /* NSObject+Common.m in Sources */,
 				FA63DCDE9F62B064437B8D8423D0AFCA /* NSString+Common.m in Sources */,
+				BB93C9D5228BEBF100B0DB6B /* DeviceSettingController.m in Sources */,
 				250AA73AB2A4947D9DF9E4E036997532 /* NTCNodeDetailViewController.m in Sources */,
 				290CFE921220F2AE117819F07432F36C /* NTCWirelessValveController.m in Sources */,
 				FFBD7407C797F8E5DDF61A32BCE938D7 /* Network.m in Sources */,
@@ -4069,53 +4123,71 @@
 				2A8FE5A487622702070E45CD9D462975 /* NoHouseBridgingController.m in Sources */,
 				B4A2B3CCD68998CD02654CB8B3A701D9 /* NodeButton.m in Sources */,
 				5C1D3D00FDE211844F11861CA4DB7AB3 /* NodeDetailCell.m in Sources */,
+				BB93C9EA228BEC6B00B0DB6B /* MulSwitchSetingCell.m in Sources */,
 				1743D6EF27156F0B7447ECCD88C13FD7 /* NodeInfoCell.m in Sources */,
 				EF0C75C08FA8BA7942E3B1C5BA7C2D2B /* NodeModel.m in Sources */,
 				4B7F9B31A9B7E019412F43571ABE933A /* PasswordLoginController.m in Sources */,
 				CE9D69D78463EF485BDA9B335E6D44B0 /* PhoneTFCell.m in Sources */,
 				9A70A978A0E62C88C0716A0605C7CC27 /* PhoneVerifyCell.m in Sources */,
+				BB93C9EE228BECBA00B0DB6B /* DelayModel.m in Sources */,
 				222FCCD89F5C16CF6B98B9564675CAE8 /* PlugOutletSettingCell.m in Sources */,
 				8212A89DB8FAC86CD8BACCD592BE6BE0 /* RDVTabBar.m in Sources */,
 				7BFD528BD2D160A283F2656686234BFF /* RDVTabBarController.m in Sources */,
 				656A20055D35F832076132FD7404A2B3 /* RDVTabBarItem.m in Sources */,
 				EDA2AEDCF158667CBEBFA4B435B149B2 /* RegisterAccountController.m in Sources */,
 				388DC7DA5FF4AA3CC352FBC46D289E5A /* RegisterController.m in Sources */,
+				BB93C9D8228BEBFA00B0DB6B /* PlugOutletController.m in Sources */,
 				D39415556E47D43747FCC47801D8D4D9 /* RetrievePasswordController.m in Sources */,
 				009EF5A6132558B9618045AF563BCF93 /* RoomModel.m in Sources */,
+				BB93C9DF228BEC1000B0DB6B /* ThreeSwitchController.m in Sources */,
+				BB93C9DC228BEC0700B0DB6B /* PlugOutletWeekSelectController.m in Sources */,
 				5F5D53D98EBBF3FBE6B28215179A783E /* SelectDeviceTypeCell.m in Sources */,
 				CDB94A29C4A3C6CD642E8F75BA8FE073 /* SelectDeviceTypeController.m in Sources */,
+				BB93C9E1228BEC1500B0DB6B /* MulSwitchAddTimingController.m in Sources */,
 				5715BFC93AE421FD63C33183B8D71DD8 /* ShareDeviceDetailCell.m in Sources */,
 				EFAE5731FCD73A7C6B55D981197ED235 /* ShareDeviceDetailController.m in Sources */,
 				8913FEEAB2A89ADDAD572B823DB8A491 /* ShareDeviceListCell.m in Sources */,
+				BB93C9E3228BEC1A00B0DB6B /* MulSwitchTimingSetingController.m in Sources */,
+				BB93C9D3228BEBC400B0DB6B /* StatusConfirmController.m in Sources */,
 				A20DE1935C781C94F5BF7532D2673CF0 /* ShareDeviceListController.m in Sources */,
+				BB93C9E9228BEC6900B0DB6B /* MulSwitchSaveAddTimingCell.m in Sources */,
 				073215FA34E66C63C5E353412AFA3F43 /* ShareDeviceSelectCell.m in Sources */,
 				9A2CD9A2EF2B48DD79CBED9872F72BB4 /* SharerDetailController.m in Sources */,
 				C75DA666A92E62799D880633DEE25D31 /* SharerInfoCell.m in Sources */,
 				4918525AA4983AD16799CC76AA77623E /* SharerInputController.m in Sources */,
 				69EAC414AB10A27149340015ADDADA31 /* SharerModel.m in Sources */,
+				BB93C9E6228BEC5000B0DB6B /* ValveAlertInfoController.m in Sources */,
 				2F83A5DBBFA316C099868B4936A3846B /* SharerRemarkController.m in Sources */,
 				9DD35240963FB90F0C95201377250E4F /* TextFieldCell.m in Sources */,
 				EA880D16C033E24CD17FD10B1AA622D1 /* TherAddTimerSwitchCell.m in Sources */,
 				7C3F3880DF468EFC532D2F406D13CDC2 /* TherAddTimerWeekCell.m in Sources */,
 				326A487BA59ADA1B1C25511EAC6D7DD5 /* TherSettingCell.m in Sources */,
 				5970D69F27B6F02C87F3021CF3B42AC5 /* TherTimerCell.m in Sources */,
+				BB93C9E2228BEC1800B0DB6B /* MulSwitchTimingController.m in Sources */,
 				297446F7E116AF7741BE2E4359A09815 /* TherWeekProgramCell.m in Sources */,
 				25EA0112E593B9FF0826231BEF012BE8 /* TherWeekProgramController.m in Sources */,
 				BF08E99700B2262E5B7B191F25C60799 /* TherWeekSelCell.m in Sources */,
 				9FAC8477E279B04CF3BB7EF02B29A667 /* TherWeekSelectController.m in Sources */,
+				BB93C9EB228BEC6E00B0DB6B /* MulSwitchWeekSelectCell.m in Sources */,
+				BB93C9EC228BECAC00B0DB6B /* DeviceSettingCell.m in Sources */,
 				82716802731369A6C4B3F99634804C93 /* ThermostSettingController.m in Sources */,
 				2EFB068B429F1ABF3784BB0144733CCF /* ThermostatAddTimerController.m in Sources */,
+				BB93C9E8228BEC6700B0DB6B /* MulSwitchAddTimingCell.m in Sources */,
+				BB93C9D9228BEBFD00B0DB6B /* PlugOutletDelayController.m in Sources */,
 				0D1BE8BDE31C61F5B41682A56532C9E5 /* ThermostatController.m in Sources */,
 				D953B69C48C921F6FC1896645436BF5B /* ThermostatTimerController.m in Sources */,
 				A4355B412C8D1279DE63AF01DCB533E3 /* TouchTableView.m in Sources */,
 				EBD641E5AE0A0BFEF2CD1A091A511FC0 /* UIButton+Common.m in Sources */,
+				BB93C9E7228BEC5300B0DB6B /* NodeDetailViewController.m in Sources */,
 				90835F9FDE870B44B34058C4E3A6393C /* UIColor+ColorChange.m in Sources */,
 				D0CA04B88D34448F0EF5366D243623A0 /* UILabel+YBAttributeTextTapAction.m in Sources */,
 				B28C348F7A48593E3268F03DD0DFFEB3 /* UserModel.m in Sources */,
+				BB93C9D2228BEBBC00B0DB6B /* NTCValveAlertInfoController.m in Sources */,
 				38968F8F7ED340F7D06AD7380FDD43F9 /* UsernameViewController.m in Sources */,
 				6B243CF6A61E0FEEA01B7C081D86C131 /* ViewController.m in Sources */,
 				A6F0CDFEC15D9894F1AC75C90615A702 /* WeekProgramSetController.m in Sources */,
 				CB573F9C7D3D3C045312C2A6C46EFFC3 /* YAlertViewController.m in Sources */,
+				BB93C9E0228BEC1300B0DB6B /* MulSwitchController.m in Sources */,
 				D63368C5CA43E62E3B821B7ACCFBAEBD /* YRabbitMQ.m in Sources */,
 				68DA9F3046092AB7064A9736FD7CD685 /* YSZCoreDataStackManager.m in Sources */,
 				8B2E6B64147FE9819ED46F628FCB897A /* YTFAlertController.m in Sources */,
