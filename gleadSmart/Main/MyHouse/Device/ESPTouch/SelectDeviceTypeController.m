@@ -14,7 +14,8 @@
 NSString *const CellIdentifier_SelectDeviceType = @"CellID_SelectDeviceType";
 static float HEIGHT_CELL = 50.f;
 static float HEIGHT_HEADER = 40.f;
-#define deviceCount 4;
+
+static int deviceCount = 4;//设置为4，插座在洁利达项目不显示，要显示就设置为5
 
 @interface SelectDeviceTypeController () <UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) UITableView *deviceTypeTable;

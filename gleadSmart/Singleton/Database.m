@@ -478,7 +478,7 @@ static dispatch_once_t oneToken;
                             device.deviceId = [obj objectForKey:@"deviceId"];
                             device.houseUid = [obj objectForKey:@"houseUid"];
                             device.isShare = YES;
-                            if (![device.mac isKindOfClass:[NSNull class]]) {
+                            if (![device.mac isKindOfClass:[NSNull class]] && device.mac.length == 8) {
                                 //插入房间的设备
                                 [self insertNewShareDevice:device];
                                 [self.shareDeviceArray addObject:device];
