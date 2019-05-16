@@ -42,24 +42,25 @@ static float HEIGHT_CELL = 50.f;
     self.navigationController.navigationBar.translucent = NO;
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plugoutSetClock) name:@"plugoutSetClock" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchSetClock) name:@"switchSetClock" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"plugoutSetClock" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"switchSetClock" object:nil];
 }
 
 #pragma mark - private methods
 - (void)setClockListBySocket{
     UInt8 controlCode = 0x01;
-    NSNumber *A = [NSNumber numberWithInt:self.clock.number];
+    NSNumber *A = [NSNumber numberWithInt:self.clock.number |self.switchNumber];
     NSNumber *B = @1;
     NSNumber *C = [NSNumber numberWithInt:self.clock.week];
     NSNumber *D = [NSNumber numberWithInt:self.clock.hour];
     NSNumber *E = [NSNumber numberWithInt:self.clock.minute];
     NSNumber *F = [NSNumber numberWithBool:self.clock.isOn];
     NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,A,B,C,D,E,F];
+    
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
     
     [SVProgressHUD show];
@@ -67,7 +68,7 @@ static float HEIGHT_CELL = 50.f;
         //异步等待4秒，如果未收到信息做如下处理
         sleep(4);
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (plugSeted == NO) {
+            if (switchSeted == NO) {
                 [SVProgressHUD dismiss];
                 [NSObject showHudTipStr:LocalString(@"设置失败，请重试")];
             }
@@ -76,11 +77,11 @@ static float HEIGHT_CELL = 50.f;
 }
 
 #pragma mark - notification
-static bool plugSeted = NO;
-- (void)plugoutSetClock{
+static bool switchSeted = NO;
+- (void)switchSetClock{
     dispatch_async(dispatch_get_main_queue(), ^{
         [SVProgressHUD dismiss];
-        plugSeted = YES;
+        switchSeted = YES;
         [self.navigationController popViewControllerAnimated:YES];
     });
 }

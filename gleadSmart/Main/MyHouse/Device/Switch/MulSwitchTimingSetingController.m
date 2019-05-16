@@ -9,6 +9,7 @@
 #import "MulSwitchTimingSetingController.h"
 #import "MulSwitchSetingCell.h"
 #import "MulSwitchTimingController.h"
+#import "ClockModel.h"
 
 static float HEIGHT_HEADER = 20.f;
 NSString *const CellIdentifier_MulSwitchSetingCell = @"CellID_MulSwitchSeting";
@@ -16,6 +17,8 @@ NSString *const CellIdentifier_MulSwitchSetingCell = @"CellID_MulSwitchSeting";
 @interface MulSwitchTimingSetingController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *switchSetingTable;
+
+@property (nonatomic) int switchNumber;//开关编号
 
 @end
 
@@ -32,6 +35,10 @@ NSString *const CellIdentifier_MulSwitchSetingCell = @"CellID_MulSwitchSeting";
     [super viewWillAppear:animated];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+}
 
 #pragma mark - Lazyload
 
@@ -55,6 +62,12 @@ NSString *const CellIdentifier_MulSwitchSetingCell = @"CellID_MulSwitchSeting";
     }
     return _switchSetingTable;
 }
+
+#pragma mark - nsnotification
+
+
+#pragma mark - private methods
+
 
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -116,10 +129,66 @@ NSString *const CellIdentifier_MulSwitchSetingCell = @"CellID_MulSwitchSeting";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.row) {
+        case 0:
+        {
+            self.switchNumber = 0x80;
+            MulSwitchTimingController *timingVC = [[MulSwitchTimingController alloc] init];
+            timingVC.device = self.device;
+            timingVC.switchNumber = self.switchNumber;
+            [self.navigationController pushViewController:timingVC animated:YES];
+            UInt8 controlCode = 0x00;
+            NSNumber *A = [NSNumber numberWithInt:self.clock.number | self.switchNumber];
+            NSArray *data = @[@0xFC,@0x11,@0x02,@0x00,A];
+            [self.device sendData69With:controlCode mac:self.device.mac data:data];
+        }
+            break;
+        case 1:
+        {
+            self.switchNumber = 0x90;
+            MulSwitchTimingController *timingVC = [[MulSwitchTimingController alloc] init];
+            timingVC.device = self.device;
+            timingVC.switchNumber = self.switchNumber;
+            [self.navigationController pushViewController:timingVC animated:YES];
+            
+            UInt8 controlCode = 0x00;
+            NSNumber *A = [NSNumber numberWithInt:self.clock.number | self.switchNumber];
+            NSArray *data = @[@0xFC,@0x11,@0x02,@0x00,A];
+            [self.device sendData69With:controlCode mac:self.device.mac data:data];
+        }
+            
+            break;
+        case 2:
+        {
+            self.switchNumber = 0xa0;
+            MulSwitchTimingController *timingVC = [[MulSwitchTimingController alloc] init];
+            timingVC.device = self.device;
+            timingVC.switchNumber = self.switchNumber;
+            [self.navigationController pushViewController:timingVC animated:YES];
+            UInt8 controlCode = 0x00;
+            NSNumber *A = [NSNumber numberWithInt:self.clock.number | self.switchNumber];
+            NSArray *data = @[@0xFC,@0x11,@0x02,@0x00,A];
+            [self.device sendData69With:controlCode mac:self.device.mac data:data];
+        }
+            
+            break;
+            
+        default:
+        {
+            self.switchNumber = 0xb0;
+            MulSwitchTimingController *timingVC = [[MulSwitchTimingController alloc] init];
+            timingVC.device = self.device;
+            timingVC.switchNumber = self.switchNumber;
+            [self.navigationController pushViewController:timingVC animated:YES];
+            
+            UInt8 controlCode = 0x00;
+            NSNumber *A = [NSNumber numberWithInt:self.clock.number | self.switchNumber];
+            NSArray *data = @[@0xFC,@0x11,@0x02,@0x00,A];
+            [self.device sendData69With:controlCode mac:self.device.mac data:data];
+        }
+            break;
+    }
     
-    MulSwitchTimingController *timingVC = [[MulSwitchTimingController alloc] init];
-    timingVC.device = self.device;
-    [self.navigationController pushViewController:timingVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
