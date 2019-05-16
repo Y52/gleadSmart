@@ -54,7 +54,15 @@ static int frameCount = 0;
                 [data69 addObjectsFromArray:data];
                 [data69 addObject:[NSNumber numberWithUnsignedChar:[NSObject getCS:data69]]];
                 [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
-                [self send:data69 withTag:100];
+                
+                if (![self.socket isDisconnected]) {
+                    [self send:data69 withTag:100];
+                }else{
+                    Network *net = [Network shareNetwork];
+                    [net oneNETSendData:data69 apiKey:self.apiKey deviceId:self.deviceId failure:^{
+                        
+                    }];//OneNet发送
+                }
             });
         });
     }

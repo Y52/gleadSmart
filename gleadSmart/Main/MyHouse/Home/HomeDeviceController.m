@@ -124,11 +124,6 @@ static CGFloat const Cell_Height = 72.f;
     for (int i = 0; i < self.deviceArray.count; i++) {
         DeviceModel *oldDevice = self.deviceArray[i];
         if ([device.mac isEqualToString:oldDevice.mac]) {
-            oldDevice.isOn = device.isOn;
-            oldDevice.mode = device.mode;
-            oldDevice.modeTemp = device.modeTemp;
-            oldDevice.indoorTemp = device.indoorTemp;
-            oldDevice.isOnline = device.isOnline;
             dispatch_async(dispatch_get_main_queue(), ^{
                 HomeDeviceCell *cell = [self.deviceTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
                 cell.controlSwitch.enabled = YES;

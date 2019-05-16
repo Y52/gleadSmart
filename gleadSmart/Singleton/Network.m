@@ -658,7 +658,7 @@ static int noUserInteractionHeartbeat = 0;
                     [self analysisResultValue:streamId value:value];
                 }];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+            //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
             
         }
         
@@ -694,6 +694,9 @@ static int noUserInteractionHeartbeat = 0;
                 default:
                     break;
             }
+            
+            NSDictionary *userInfo = @{@"device":device,@"isShare":@0};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
         }
     }
 }

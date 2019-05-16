@@ -108,7 +108,7 @@
         sleep(6);
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!self->thresholdGeted) {
-                [NSObject showHudTipStr:LocalString(@"查询当前阈值失败")];
+                [NSObject showHudTipStr:LocalString(@"设置阈值失败")];
                 [SVProgressHUD dismiss];
             }
         });
