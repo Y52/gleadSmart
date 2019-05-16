@@ -35,6 +35,16 @@
 
 static int frameCount = 0;
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data{
+    if (!self.socket) {
+        self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+    }
+    if (!self.queue) {
+        self.queue = dispatch_queue_create((char *)[self.mac UTF8String], DISPATCH_QUEUE_SERIAL);
+    }
+    if (!self.sendSignal) {
+        self.sendSignal = dispatch_semaphore_create(1);
+    }
+    
     if (self.queue) {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             dispatch_sync(self.queue, ^{

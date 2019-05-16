@@ -81,7 +81,7 @@ static dispatch_once_t oneToken;
         }else{
             NSLog(@"创建表room失败");
         }
-        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS device (mac text PRIMARY KEY,name text,roomUid text,houseUid text,type integer)"];
+        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS device (mac text PRIMARY KEY,name text,roomUid text,houseUid text,type integer,deviceId text,apiKey text)"];
         if (result) {
             NSLog(@"创建表device成功");
         }else{
@@ -191,7 +191,8 @@ static dispatch_once_t oneToken;
             device.roomUid = [set stringForColumn:@"roomUid"];
             device.type = [NSNumber numberWithInt:[set intForColumn:@"type"]];
             device.houseUid = houseUid;
-            NSLog(@"%@,%@",device.name,device.mac);
+            device.apiKey = [set stringForColumn:@"apiKey"];
+            device.deviceId = [set stringForColumn:@"deviceId"];
             [deviceArray addObject:device];
         }
     }];
@@ -255,6 +256,8 @@ static dispatch_once_t oneToken;
             DeviceModel *device = [[DeviceModel alloc] init];
             device.mac = [set stringForColumn:@"mac"];
             device.name = [set stringForColumn:@"name"];
+            device.apiKey = [set stringForColumn:@"apiKey"];
+            device.deviceId = [set stringForColumn:@"deviceId"];
             device.roomUid = roomUid;
             [deviceArray addObject:device];
         }
@@ -295,7 +298,7 @@ static dispatch_once_t oneToken;
     }
     static BOOL result = NO;
     [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-        result = [db executeUpdate:@"REPLACE INTO device (mac,roomUid,name,houseUid,type) VALUES (?,?,?,?,?)",device.mac,device.roomUid,device.name,device.houseUid,device.type];
+        result = [db executeUpdate:@"REPLACE INTO device (mac,roomUid,name,houseUid,type,deviceId,apiKey) VALUES (?,?,?,?,?,?,?)",device.mac,device.roomUid,device.name,device.houseUid,device.type,device.deviceId,device.apiKey];
     }];
     return result;
 }
@@ -443,6 +446,8 @@ static dispatch_once_t oneToken;
                             device.mac = [obj objectForKey:@"mac"];
                             device.roomUid = room.roomUid;
                             device.roomName = room.name;
+                            device.apiKey = [obj objectForKey:@"apiKey"];
+                            device.deviceId = [obj objectForKey:@"deviceId"];
                             device.houseUid = house.houseUid;
                             if ([NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]] == 0x01) {
                                 device.type = @0;
