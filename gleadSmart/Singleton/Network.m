@@ -194,6 +194,7 @@ static int noUserInteractionHeartbeat = 0;
         for (DeviceModel *bindDevice in self.deviceArray) {
             NSUInteger type = [self judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]];
             if (type == DeviceCenterlControl) {
+                //中央控制器退出循环
                 break;
             }
             if ([bindDevice.mac isEqualToString:mac]) {
