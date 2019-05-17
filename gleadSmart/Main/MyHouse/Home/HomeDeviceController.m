@@ -178,7 +178,6 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 - (void)refreshTable{
-    [SVProgressHUD show];
     Network *net = [Network shareNetwork];
     UInt8 controlCode = 0x00;
     NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
@@ -188,8 +187,6 @@ static CGFloat const Cell_Height = 72.f;
         //异步等待10秒，如果未收到信息做如下处理
         sleep(10);
         if ([self.deviceTable.mj_header isRefreshing]) {
-            [NSObject showHudTipStr:@"设备或服务器异常，无法查询设备"];
-            [SVProgressHUD dismiss];
             [self.deviceTable.mj_header endRefreshing];
         }
     });
