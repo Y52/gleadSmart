@@ -70,7 +70,7 @@ static float HEIGHT_FOOT = 20.f;
     }
     MulSwitchAddTimingController *addVC = [[MulSwitchAddTimingController alloc] init];
     addVC.device = self.device;
-    addVC.switchNumber = self.switchNumber;
+    addVC.switchNumber = self.switchNumber & 0x7f;
     addVC.clock = [[ClockModel alloc] init];
     for (int i = 0; i < self.clockList.count; i++) {
         ClockModel *clock = self.clockList[i];
@@ -85,7 +85,7 @@ static float HEIGHT_FOOT = 20.f;
 
 - (void)deleteClockListBySocket:(ClockModel *)clock{
     UInt8 controlCode = 0x01;
-    NSNumber *A = [NSNumber numberWithInt:clock.number |self.switchNumber];
+    NSNumber *A = [NSNumber numberWithInt:clock.number |(self.switchNumber & 0x7f)];
     NSNumber *B = @0;
     NSNumber *C = @0;
     NSNumber *D = @0;

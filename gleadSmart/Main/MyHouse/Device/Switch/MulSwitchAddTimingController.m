@@ -54,6 +54,7 @@ static float HEIGHT_CELL = 50.f;
 - (void)setClockListBySocket{
     UInt8 controlCode = 0x01;
     NSNumber *A = [NSNumber numberWithInt:self.clock.number |self.switchNumber];
+    NSLog(@"addahhjg%d",[A intValue]);
     NSNumber *B = @1;
     NSNumber *C = [NSNumber numberWithInt:self.clock.week];
     NSNumber *D = [NSNumber numberWithInt:self.clock.hour];

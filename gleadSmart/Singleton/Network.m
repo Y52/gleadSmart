@@ -232,8 +232,8 @@ static int noUserInteractionHeartbeat = 0;
             }
         }
 
-        if (self.connectedDevice && [self.connectedDevice.mac isEqualToString:mac]) {
-            //如果已经连接了这个设备，就不再重新连接了
+        if (![self.mySocket isDisconnected]) {
+            //如果已经连接了中央控制器，就不再重新连接了
             [_lock unlock];
             return;
         }
