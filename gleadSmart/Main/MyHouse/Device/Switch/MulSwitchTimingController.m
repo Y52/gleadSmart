@@ -42,20 +42,21 @@ static float HEIGHT_FOOT = 20.f;
     self.navigationController.navigationBar.translucent = NO;
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getClockList:) name:@"getClockList" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plugoutDeleteClock) name:@"plugoutDeleteClock" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSwitchClockList:) name:@"getSwitchClockList" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchDeleteClock) name:@"switchDeleteClock" object:nil];
     [self getClockListBySocket];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getClockList" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"plugoutDeleteClock" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getSwitchClockList" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"switchDeleteClock" object:nil];
 }
 #pragma mark - private methods
 - (void)getClockListBySocket{
     UInt8 controlCode = 0x00;
-    NSArray *data = @[@0xFC,@0x11,@0x03,@0x00];
+    NSNumber *A = [NSNumber numberWithInt:self.clock.number |self.switchNumber];
+    NSArray *data = @[@0xFC,@0x11,@0x02,@0x00,A];
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
 }
 
@@ -69,6 +70,7 @@ static float HEIGHT_FOOT = 20.f;
     }
     MulSwitchAddTimingController *addVC = [[MulSwitchAddTimingController alloc] init];
     addVC.device = self.device;
+    addVC.switchNumber = self.switchNumber & 0x7f;
     addVC.clock = [[ClockModel alloc] init];
     for (int i = 0; i < self.clockList.count; i++) {
         ClockModel *clock = self.clockList[i];
@@ -83,7 +85,7 @@ static float HEIGHT_FOOT = 20.f;
 
 - (void)deleteClockListBySocket:(ClockModel *)clock{
     UInt8 controlCode = 0x01;
-    NSNumber *A = [NSNumber numberWithInt:clock.number];
+    NSNumber *A = [NSNumber numberWithInt:clock.number |(self.switchNumber & 0x7f)];
     NSNumber *B = @0;
     NSNumber *C = @0;
     NSNumber *D = @0;
@@ -97,28 +99,28 @@ static float HEIGHT_FOOT = 20.f;
         //异步等待4秒，如果未收到信息做如下处理
         sleep(4);
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (plugDeleted == NO) {
+            if (switchDeleted == NO) {
                 [SVProgressHUD dismiss];
                 [NSObject showHudTipStr:LocalString(@"删除失败，请重试")];
             }else{
-                plugDeleted = NO;
+                switchDeleted = NO;
             }
         });
     });
 }
 
 #pragma mark - nsnotification
-static bool plugDeleted = NO;
-- (void)plugoutDeleteClock{
+static bool switchDeleted = NO;
+- (void)switchDeleteClock{
     dispatch_async(dispatch_get_main_queue(), ^{
         [SVProgressHUD dismiss];
-        plugDeleted = YES;
+        switchDeleted = YES;
         //成功之后推送 刷新闹钟列表
         [self getClockListBySocket];
     });
 }
 
-- (void)getClockList:(NSNotification *)notification{
+- (void)getSwitchClockList:(NSNotification *)notification{
     NSDictionary *userInfo = [notification userInfo];
     NSMutableArray *frame = [userInfo objectForKey:@"frame"];
     NSString *mac= [userInfo objectForKey:@"mac"];

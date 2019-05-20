@@ -234,8 +234,8 @@ static int noUserInteractionHeartbeat = 0;
             }
         }
 
-        if (self.connectedDevice && [self.connectedDevice.mac isEqualToString:mac]) {
-            //如果已经连接了这个设备，就不再重新连接了
+        if (![self.mySocket isDisconnected]) {
+            //如果已经连接了中央控制器，就不再重新连接了
             [_lock unlock];
             return;
         }
@@ -1971,11 +1971,14 @@ static int noUserInteractionHeartbeat = 0;
                     }
                     if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                         NSLog(@"查询wifi智能开关的闹钟");
+                        NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"getSwitchClockList" object:nil userInfo:userInfo];
+                        
                     }
                     if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                         NSLog(@"设置wifi智能开关的闹钟");
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutSetClock" object:nil userInfo:nil];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"plugoutDeleteClock" object:nil userInfo:nil];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"switchSetClock" object:nil userInfo:nil];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"switchDeleteClock" object:nil userInfo:nil];
                     }
                     if ([_recivedData69[10] unsignedIntegerValue] == 0x03 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                         NSLog(@"查询wifi智能开关的闹钟项列表");

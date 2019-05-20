@@ -230,7 +230,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
 {
     NSDictionary *dataDic = [nsnotification userInfo];
     NSNumber *RSSI = [dataDic objectForKey:@"RSSI"];
-    self.rssiStr = [NSString stringWithFormat:@"%@%@",LocalString(@"RSSI:"),RSSI];
+    self.rssiStr = [NSString stringWithFormat:@"%@%@",LocalString(@"RSSI:-"),RSSI];
     //提示框
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"当前网络信号") message:self.rssiStr preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:LocalString(@"OK") style:UIAlertActionStyleCancel handler:nil];

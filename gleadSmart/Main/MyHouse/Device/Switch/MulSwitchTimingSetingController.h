@@ -10,9 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ClockModel;
+
 @interface MulSwitchTimingSetingController : UIViewController
 
 @property (nonatomic, strong) DeviceModel *device;
+
+@property (nonatomic, strong) ClockModel *clock;
 
 @end
 

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) DeviceModel *device;
 @property (nonatomic, strong) ClockModel *clock;
+@property (nonatomic) int switchNumber;//开关编号
 
 @end
 
