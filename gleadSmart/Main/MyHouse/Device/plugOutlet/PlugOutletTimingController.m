@@ -11,6 +11,7 @@
 #import "PlugOutletAddTimingController.h"
 #import "PlugOutletSaveAddTimingCell.h"
 #import "ClockModel.h"
+#import "PlugOutletEditTimingController.h"
 
 NSString *const CellIdentifier_PlugOutletTimingCell = @"CellID_PlugOutletTiming";
 
@@ -230,7 +231,7 @@ static bool plugDeleted = NO;
             NSNumber *C = [NSNumber numberWithInt:clock.week];
             NSNumber *D = [NSNumber numberWithInt:clock.hour];
             NSNumber *E = [NSNumber numberWithInt:clock.minute];
-            NSNumber *F = [NSNumber numberWithBool:clock.isOn];
+            NSNumber *F = [NSNumber numberWithInt:clock.action];
             NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,A,B,C,D,E,F];
             [self.device sendData69With:controlCode mac:self.device.mac data:data];
         }else{
@@ -240,7 +241,7 @@ static bool plugDeleted = NO;
             NSNumber *C = [NSNumber numberWithInt:clock.week];
             NSNumber *D = [NSNumber numberWithInt:clock.hour];
             NSNumber *E = [NSNumber numberWithInt:clock.minute];
-            NSNumber *F = [NSNumber numberWithBool:clock.isOn];
+            NSNumber *F = [NSNumber numberWithInt:clock.action];
             NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,A,B,C,D,E,F];
             [self.device sendData69With:controlCode mac:self.device.mac data:data];
         }
@@ -252,8 +253,63 @@ static bool plugDeleted = NO;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
+    switch (indexPath.row) {
+        case 0:
+        {
+            PlugOutletEditTimingController *addVC = [[PlugOutletEditTimingController alloc] init];
+            addVC.device = self.device;
+            addVC.clock = [[ClockModel alloc] init];
+            ClockModel *clock = self.clockList[0];
+            addVC.clock.number = clock.number;
+            [self.navigationController pushViewController:addVC animated:YES];
+            
+        }
+            break;
+        case 1:
+        {
+            PlugOutletEditTimingController *addVC = [[PlugOutletEditTimingController alloc] init];
+            addVC.device = self.device;
+            addVC.clock = [[ClockModel alloc] init];
+            ClockModel *clock = self.clockList[1];
+            addVC.clock.number = clock.number;
+            [self.navigationController pushViewController:addVC animated:YES];
+            
+        }
+            break;
+        case 2:
+        {
+            PlugOutletEditTimingController *addVC = [[PlugOutletEditTimingController alloc] init];
+            addVC.device = self.device;
+            addVC.clock = [[ClockModel alloc] init];
+            ClockModel *clock = self.clockList[2];
+            addVC.clock.number = clock.number;
+            [self.navigationController pushViewController:addVC animated:YES];
+            
+        }
+            break;
+        case 3:
+        {
+            PlugOutletEditTimingController *addVC = [[PlugOutletEditTimingController alloc] init];
+            addVC.device = self.device;
+            addVC.clock = [[ClockModel alloc] init];
+            ClockModel *clock = self.clockList[3];
+            addVC.clock.number = clock.number;
+            [self.navigationController pushViewController:addVC animated:YES];
+            
+        }
+            break;
+            
+        default:
+        {
+            PlugOutletEditTimingController *addVC = [[PlugOutletEditTimingController alloc] init];
+            addVC.device = self.device;
+            addVC.clock = [[ClockModel alloc] init];
+            ClockModel *clock = self.clockList[4];
+            addVC.clock.number = clock.number;
+            [self.navigationController pushViewController:addVC animated:YES];
+        }
+            break;
+    }
 }
 
 //左滑删除

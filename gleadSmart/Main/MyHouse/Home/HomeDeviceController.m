@@ -447,6 +447,46 @@ static CGFloat const Cell_Height = 72.f;
             
         case DeviceFourSwitch:
         {
+            cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_4"];
+            if (device.isOnline) {
+                cell.status.text = LocalString(@"在线");
+            }else{
+                cell.status.text = LocalString(@"离线");;
+            }
+            blockCell.controlSwitch.hidden = YES;
+        }
+            break;
+        case DeviceThreeSwitch:
+        {
+            cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_3"];
+            if (device.isOnline) {
+                cell.status.text = LocalString(@"在线");
+            }else{
+                cell.status.text = LocalString(@"离线");;
+            }
+            blockCell.controlSwitch.hidden = YES;
+        }
+            break;
+        case DeviceTwoSwitch:
+        {
+            cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_2"];
+            if (device.isOnline) {
+                cell.status.text = LocalString(@"在线");
+            }else{
+                cell.status.text = LocalString(@"离线");;
+            }
+            blockCell.controlSwitch.hidden = YES;
+        }
+            break;
+        case DeviceOneSwitch:
+        {
+            cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_1"];
+            if (device.isOnline) {
+                cell.status.text = LocalString(@"在线");
+            }else{
+                cell.status.text = LocalString(@"离线");;
+            }
+            blockCell.controlSwitch.hidden = YES;
             
         }
             break;

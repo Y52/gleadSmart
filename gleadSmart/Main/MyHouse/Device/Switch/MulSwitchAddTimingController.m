@@ -54,12 +54,11 @@ static float HEIGHT_CELL = 50.f;
 - (void)setClockListBySocket{
     UInt8 controlCode = 0x01;
     NSNumber *A = [NSNumber numberWithInt:self.clock.number |self.switchNumber];
-    NSLog(@"addahhjg%d",[A intValue]);
     NSNumber *B = @1;
     NSNumber *C = [NSNumber numberWithInt:self.clock.week];
     NSNumber *D = [NSNumber numberWithInt:self.clock.hour];
     NSNumber *E = [NSNumber numberWithInt:self.clock.minute];
-    NSNumber *F = [NSNumber numberWithBool:self.clock.isOn];
+    NSNumber *F = [NSNumber numberWithInt:self.clock.action];
     NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,A,B,C,D,E,F];
     
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
@@ -254,8 +253,13 @@ static bool switchSeted = NO;
             cell.leftName.text = LocalString(@"开关");
             cell.timeSwitch.on = YES;
             self.clock.isOn = YES;
+            self.clock.action = clockActionOpen;//闹钟开关执行的动作
             cell.switchBlock = ^(BOOL isOn) {
-                self.clock.isOn = isOn;
+                if (isOn) {
+                    self.clock.action = clockActionOpen;
+                }else{
+                    self.clock.action = clockActionClose;
+                }
             };
             return cell;
         }

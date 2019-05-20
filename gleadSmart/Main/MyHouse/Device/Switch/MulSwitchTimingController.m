@@ -10,6 +10,7 @@
 #import "MulSwitchAddTimingController.h"
 #import "MulSwitchSaveAddTimingCell.h"
 #import "ClockModel.h"
+#import "MulSwitchEditTimingController.h"
 
 NSString *const CellIdentifier_MulSwitchTimingCell = @"CellID_MulSwitchTiming";
 
@@ -215,7 +216,6 @@ static bool switchDeleted = NO;
     if (cell == nil) {
         cell = [[MulSwitchSaveAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_MulSwitchTimingCell];
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor whiteColor];
     ClockModel *clock = self.clockList[indexPath.row];
     cell.hourName.text = [clock getTimeString];
@@ -226,22 +226,22 @@ static bool switchDeleted = NO;
     cell.switchBlock = ^(BOOL isOn) {
         if (isOn == 0) {
             UInt8 controlCode = 0x01;
-            NSNumber *A = [NSNumber numberWithInt:clock.number];
+            NSNumber *A = [NSNumber numberWithInt:clock.number |(self.switchNumber & 0x7f)];
             NSNumber *B = @2;
             NSNumber *C = [NSNumber numberWithInt:clock.week];
             NSNumber *D = [NSNumber numberWithInt:clock.hour];
             NSNumber *E = [NSNumber numberWithInt:clock.minute];
-            NSNumber *F = [NSNumber numberWithBool:clock.isOn];
+            NSNumber *F = [NSNumber numberWithInt:clock.action];
             NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,A,B,C,D,E,F];
             [self.device sendData69With:controlCode mac:self.device.mac data:data];
         }else{
             UInt8 controlCode = 0x01;
-            NSNumber *A = [NSNumber numberWithInt:clock.number];
+            NSNumber *A = [NSNumber numberWithInt:clock.number |(self.switchNumber & 0x7f)];
             NSNumber *B = @1;
             NSNumber *C = [NSNumber numberWithInt:clock.week];
             NSNumber *D = [NSNumber numberWithInt:clock.hour];
             NSNumber *E = [NSNumber numberWithInt:clock.minute];
-            NSNumber *F = [NSNumber numberWithBool:clock.isOn];
+            NSNumber *F = [NSNumber numberWithInt:clock.action];
             NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,A,B,C,D,E,F];
             [self.device sendData69With:controlCode mac:self.device.mac data:data];
         }
@@ -253,6 +253,68 @@ static bool switchDeleted = NO;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.row) {
+        case 0:
+            {
+                MulSwitchEditTimingController *addVC = [[MulSwitchEditTimingController alloc] init];
+                addVC.device = self.device;
+                addVC.switchNumber = self.switchNumber & 0x7f;
+                addVC.clock = [[ClockModel alloc] init];
+                ClockModel *clock = self.clockList[0];
+                addVC.clock.number = clock.number;
+                [self.navigationController pushViewController:addVC animated:YES];
+                
+            }
+            break;
+        case 1:
+        {
+            MulSwitchEditTimingController *addVC = [[MulSwitchEditTimingController alloc] init];
+            addVC.device = self.device;
+            addVC.switchNumber = self.switchNumber & 0x7f;
+            addVC.clock = [[ClockModel alloc] init];
+            ClockModel *clock = self.clockList[1];
+            addVC.clock.number = clock.number;
+            [self.navigationController pushViewController:addVC animated:YES];
+            
+        }
+            break;
+        case 2:
+        {
+            MulSwitchEditTimingController *addVC = [[MulSwitchEditTimingController alloc] init];
+            addVC.device = self.device;
+            addVC.switchNumber = self.switchNumber & 0x7f;
+            addVC.clock = [[ClockModel alloc] init];
+            ClockModel *clock = self.clockList[2];
+            addVC.clock.number = clock.number;
+            [self.navigationController pushViewController:addVC animated:YES];
+            
+        }
+            break;
+        case 3:
+        {
+            MulSwitchEditTimingController *addVC = [[MulSwitchEditTimingController alloc] init];
+            addVC.device = self.device;
+            addVC.switchNumber = self.switchNumber & 0x7f;
+            addVC.clock = [[ClockModel alloc] init];
+            ClockModel *clock = self.clockList[3];
+            addVC.clock.number = clock.number;
+            [self.navigationController pushViewController:addVC animated:YES];
+            
+        }
+            break;
+
+        default:
+        {
+            MulSwitchEditTimingController *addVC = [[MulSwitchEditTimingController alloc] init];
+            addVC.device = self.device;
+            addVC.switchNumber = self.switchNumber & 0x7f;
+            addVC.clock = [[ClockModel alloc] init];
+            ClockModel *clock = self.clockList[4];
+            addVC.clock.number = clock.number;
+            [self.navigationController pushViewController:addVC animated:YES];
+        }
+            break;
+    }
     
     
 }

@@ -41,7 +41,7 @@
     //self.delayButton = [self delayButton];不要了
     self.closeAllButton = [self closeAllButton];
     [self getSwitchStatus];
-    
+    [self getSwitchDateTime];
     [self setBackgroundColor_3];
 }
 
@@ -60,10 +60,16 @@
 }
 
 #pragma mark - private methods
-
+//获取开关状态查询
 - (void)getSwitchStatus{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
+}
+//获取开关日期时间查询
+- (void)getSwitchDateTime{
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFC,@0x11,@0x01,@0x00];
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
 }
 
