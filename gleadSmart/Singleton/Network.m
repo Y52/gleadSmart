@@ -192,8 +192,10 @@ static int noUserInteractionHeartbeat = 0;
          *根据设备（网关、插座、开关）mac连接每个设备的tcp
          */
         for (DeviceModel *bindDevice in self.deviceArray) {
-            if ([bindDevice.type integerValue] == DeviceCenterlControl) {
-                continue;
+            NSUInteger type = [self judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]];
+            if (type == DeviceCenterlControl) {
+                //中央控制器退出循环
+                break;
             }
             if ([bindDevice.mac isEqualToString:mac]) {
                 /*
@@ -324,6 +326,7 @@ static int noUserInteractionHeartbeat = 0;
     
     for (DeviceModel *device in self.deviceArray) {
         if (device.socket == sock) {
+            
             [device.socket readDataWithTimeout:-1 tag:1];
             
             //以下操作保证收到上报帧或者回复帧后只有一个信号量，不会一次发出多条帧
@@ -1048,7 +1051,7 @@ static int noUserInteractionHeartbeat = 0;
             self->_frameCount++;//帧计数器增加
             NSDictionary *data =[responseDic objectForKey:@"data"];
             NSString *cmd_uuid = [data objectForKey:@"cmd_uuid"];
-            [self getOneNETCommandStatus:cmd_uuid resendTimes:5];
+            [self getOneNETCommandStatus:cmd_uuid apiKey:apiKey resendTimes:5];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error:%@",error);
@@ -1059,11 +1062,10 @@ static int noUserInteractionHeartbeat = 0;
     }];
 }
 
-- (void)getOneNETCommandStatus:(NSString *)cmd_uuid resendTimes:(NSInteger)resendTimes{
-    Database *db = [Database shareInstance];
+- (void)getOneNETCommandStatus:(NSString *)cmd_uuid apiKey:(NSString *)apiKey resendTimes:(NSInteger)resendTimes{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
+    [manager.requestSerializer setValue:apiKey forHTTPHeaderField:@"api-key"];
     
     //设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
@@ -1085,13 +1087,13 @@ static int noUserInteractionHeartbeat = 0;
                     dispatch_async(dispatch_get_global_queue(0, 0), ^{
                         sleep(3.f);
                         NSInteger times = resendTimes - 1;
-                        [self getOneNETCommandStatus:cmd_uuid resendTimes:times];
+                        [self getOneNETCommandStatus:cmd_uuid apiKey:apiKey resendTimes:times];
                     });
                 }else{
                     
                 }
             }else if ([[data objectForKey:@"status"] intValue] == 4){
-                [self getOneNETCommandRespond:cmd_uuid];
+                [self getOneNETCommandRespond:cmd_uuid apiKey:apiKey];
             }
         }
         
@@ -1101,11 +1103,10 @@ static int noUserInteractionHeartbeat = 0;
     }];
 }
 
-- (void)getOneNETCommandRespond:(NSString *)cmd_uuid{
-    Database *db = [Database shareInstance];
+- (void)getOneNETCommandRespond:(NSString *)cmd_uuid apiKey:(NSString *)apiKey{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
+    [manager.requestSerializer setValue:apiKey forHTTPHeaderField:@"api-key"];
     
     //设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
@@ -1117,6 +1118,10 @@ static int noUserInteractionHeartbeat = 0;
     
     
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSLog(@"%@",responseObject);
+        if (responseObject == nil) {
+            return ;
+        }
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
         NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
         NSString * daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

@@ -146,7 +146,6 @@
 - (void)switchClickFour_4:(UIButton *)sender{
     if (sender.tag == yUnselect) {
         sender.tag = ySelect;
-        
         //[sender setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] | 0x08)];
