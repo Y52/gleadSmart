@@ -1,42 +1,35 @@
 //
-//  PlugOutletAddTimingController.m
+//  PlugOutletEditDelayController.m
 //  gleadSmart
 //
-//  Created by 安建伟 on 2019/4/17.
+//  Created by 安建伟 on 2019/5/20.
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "PlugOutletAddTimingController.h"
-#import "PlugOutletAddTimingCell.h"
-#import "WeekendNameCell.h"
-#import "PlugOutletWeekSelectController.h"
-#import "ClockModel.h"
-
-NSString *const CellIdentifier_PlugOutletAddTiming = @"CellID_PlugOutletAddTimingCell";
-NSString *const CellIdentifier_WeekendName = @"CellID_WeekendNameCell";
+#import "PlugOutletEditDelayController.h"
+#import "PlugOutletAddDelayCell.h"
+#import "DelayModel.h"
+NSString *const CellIdentifier_PlugOutletEditDelay = @"CellID_PlugOutletEditDelay";
 static float HEIGHT_CELL = 50.f;
 
-@interface PlugOutletAddTimingController () <UIPickerViewDataSource,UIPickerViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface PlugOutletEditDelayController ()<UIPickerViewDataSource,UIPickerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UIPickerView *timePicker;
 @property (nonatomic, strong) NSMutableArray *hoursArray;
 @property (nonatomic, strong) NSMutableArray *minutesArray;
-@property (nonatomic, strong) NSMutableArray *weekArray;
 
-@property (strong, nonatomic) UITableView *addTimingTable;
-
+@property (strong, nonatomic) UITableView *editDelayTable;
 
 @end
 
-@implementation PlugOutletAddTimingController
-
+@implementation PlugOutletEditDelayController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1.0].CGColor;
     [self setNavItem];
     self.timePicker = [self timePicker];
-    self.addTimingTable = [self addTimingTable];
+    self.editDelayTable = [self editDelayTable];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -44,26 +37,32 @@ static float HEIGHT_CELL = 50.f;
     self.navigationController.navigationBar.translucent = NO;
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plugoutSetClock) name:@"plugoutSetClock" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plugoutSetDelay) name:@"plugoutSetDelay" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"plugoutSetClock" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"plugoutSetDelay" object:nil];
 }
 
 #pragma mark - private methods
-- (void)setClockListBySocket{
+- (void)setDelayListBySocket{
+    //十进制转化为十六进制
+    int temp ;
+    temp = self.clock.hour * 3600 + self.clock.minute *60;
+    int by1 = (temp & 0xff0000) >>16; //高8位
+    int by2 = (temp & 0xff00)>>8; //中8位
+    int by3 = (temp & 0xff); //低8位
+    
     UInt8 controlCode = 0x01;
     NSNumber *A = [NSNumber numberWithInt:self.clock.number];
     NSNumber *B = @1;
-    NSNumber *C = [NSNumber numberWithInt:self.clock.week];
-    NSNumber *D = [NSNumber numberWithInt:self.clock.hour];
-    NSNumber *E = [NSNumber numberWithInt:self.clock.minute];
+    NSNumber *C = [NSNumber numberWithInt:by1];
+    NSNumber *D = [NSNumber numberWithInt:by2];
+    NSNumber *E = [NSNumber numberWithInt:by3];
     NSNumber *F = [NSNumber numberWithInt:self.clock.action];
-    NSArray *data = @[@0xFC,@0x11,@0x02,@0x01,A,B,C,D,E,F];
+    NSArray *data = @[@0xFC,@0x11,@0x04,@0x01,A,B,C,D,E,F];
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
-    
     [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         //异步等待4秒，如果未收到信息做如下处理
@@ -79,7 +78,7 @@ static float HEIGHT_CELL = 50.f;
 
 #pragma mark - notification
 static bool plugSeted = NO;
-- (void)plugoutSetClock{
+- (void)plugoutSetDelay{
     dispatch_async(dispatch_get_main_queue(), ^{
         [SVProgressHUD dismiss];
         plugSeted = YES;
@@ -89,29 +88,28 @@ static bool plugSeted = NO;
 
 #pragma mark - setters and getters
 - (void)setNavItem{
-    self.navigationItem.title = LocalString(@"添加定时");
+    self.navigationItem.title = LocalString(@"添加延时");
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 30, 30);
     [rightButton setTitle:@"保存" forState:UIControlStateNormal];
     [rightButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
     [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(setClockListBySocket) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton addTarget:self action:@selector(setDelayListBySocket) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
 }
 
--(UITableView *)addTimingTable{
-    if (!_addTimingTable) {
-        _addTimingTable = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 245.f, ScreenWidth, HEIGHT_CELL * 2) style:UITableViewStylePlain];
+-(UITableView *)editDelayTable{
+    if (!_editDelayTable) {
+        _editDelayTable = ({
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 245.f, ScreenWidth, HEIGHT_CELL) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
             tableView.dataSource = self;
             tableView.delegate = self;
             //tableView.separatorColor = [UIColor clearColor];
-            [tableView registerClass:[PlugOutletAddTimingCell class] forCellReuseIdentifier:CellIdentifier_PlugOutletAddTiming];
-            [tableView registerClass:[WeekendNameCell class] forCellReuseIdentifier:CellIdentifier_WeekendName];
+            [tableView registerClass:[PlugOutletAddDelayCell class] forCellReuseIdentifier:CellIdentifier_PlugOutletEditDelay];
             [self.view addSubview:tableView];
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
@@ -120,7 +118,7 @@ static bool plugSeted = NO;
             tableView;
         });
     }
-    return _addTimingTable;
+    return _editDelayTable;
 }
 
 -(UIPickerView *)timePicker{
@@ -135,8 +133,6 @@ static bool plugSeted = NO;
         for (int i = 0; i < 60; i++) {
             [self.minutesArray addObject:[NSString stringWithFormat:@"%02d",i]];
         }
-        //self.hoursArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23"]];
-        //self.minutesArray = [NSMutableArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59"]];
         self.timePicker.dataSource = self;
         self.timePicker.delegate = self;
         //在当前选择上显示一个透明窗口
@@ -226,71 +222,34 @@ static bool plugSeted = NO;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0:
-        {
-            WeekendNameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_WeekendName];
-            if (cell == nil) {
-                cell = [[WeekendNameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_WeekendName];
-            }
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.leftLabel.text = LocalString(@"重复");
-            cell.rightLabel.text = [self.clock getWeekString];
-            return cell;
-        }
-            break;
-            
-        default:
-        {
-            PlugOutletAddTimingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletAddTiming];
-            if (cell == nil) {
-                cell = [[PlugOutletAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletAddTiming];
-            }
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            cell.leftName.text = LocalString(@"开关");
-            cell.timeSwitch.on = YES;
-            self.clock.isOn = YES;
-            self.clock.action = clockActionOpen;
-            cell.switchBlock = ^(BOOL isOn) {
-                if (isOn) {
-                    self.clock.action = clockActionOpen;
-                }else{
-                    self.clock.action = clockActionClose;
-                }
-            };
-            return cell;
-        }
-            break;
+    
+    PlugOutletAddDelayCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletEditDelay];
+    if (cell == nil) {
+        cell = [[PlugOutletAddDelayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletEditDelay];
     }
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    cell.leftName.text = LocalString(@"开关");
+    cell.timeSwitch.on = YES;
+    self.clock.isOn = YES;
+    self.clock.action = delayActionOpen;
+    cell.switchBlock = ^(BOOL isOn) {
+        if (isOn) {
+            self.clock.action = delayActionOpen;
+        }else{
+            self.clock.action = delayActionClose;
+        }
+    };
+    return cell;
+    
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.row) {
-        case 0:
-        {
-            PlugOutletWeekSelectController *WeekVC = [[PlugOutletWeekSelectController alloc] init];
-            WeekVC.clock = self.clock;
-            WeekVC.popBlock = ^(ClockModel *clock){
-                self.clock = clock;
-                [self.addTimingTable reloadData];
-            };
-            [self.navigationController pushViewController:WeekVC animated:YES];
-            
-        }
-            break;
-            
-        default:
-        {
-            
-        }
-            break;
-    }
     
 }
 

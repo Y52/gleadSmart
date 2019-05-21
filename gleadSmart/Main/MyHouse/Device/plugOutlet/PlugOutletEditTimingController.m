@@ -1,22 +1,22 @@
 //
-//  PlugOutletAddTimingController.m
+//  PlugOutletEditTimingController.m
 //  gleadSmart
 //
-//  Created by 安建伟 on 2019/4/17.
+//  Created by 安建伟 on 2019/5/20.
 //  Copyright © 2019 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "PlugOutletAddTimingController.h"
+#import "PlugOutletEditTimingController.h"
 #import "PlugOutletAddTimingCell.h"
 #import "WeekendNameCell.h"
 #import "PlugOutletWeekSelectController.h"
 #import "ClockModel.h"
 
-NSString *const CellIdentifier_PlugOutletAddTiming = @"CellID_PlugOutletAddTimingCell";
-NSString *const CellIdentifier_WeekendName = @"CellID_WeekendNameCell";
+NSString *const CellIdentifier_PlugOutletEditTiming = @"CellID_PlugOutletEditTimingCell";
+NSString *const CellIdentifier_PlugOutletEditWeekendName = @"CellID_PlugOutletEditWeekendNameCell";
 static float HEIGHT_CELL = 50.f;
 
-@interface PlugOutletAddTimingController () <UIPickerViewDataSource,UIPickerViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface PlugOutletEditTimingController () <UIPickerViewDataSource,UIPickerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UIPickerView *timePicker;
 @property (nonatomic, strong) NSMutableArray *hoursArray;
@@ -25,11 +25,9 @@ static float HEIGHT_CELL = 50.f;
 
 @property (strong, nonatomic) UITableView *addTimingTable;
 
-
 @end
 
-@implementation PlugOutletAddTimingController
-
+@implementation PlugOutletEditTimingController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -110,8 +108,8 @@ static bool plugSeted = NO;
             tableView.dataSource = self;
             tableView.delegate = self;
             //tableView.separatorColor = [UIColor clearColor];
-            [tableView registerClass:[PlugOutletAddTimingCell class] forCellReuseIdentifier:CellIdentifier_PlugOutletAddTiming];
-            [tableView registerClass:[WeekendNameCell class] forCellReuseIdentifier:CellIdentifier_WeekendName];
+            [tableView registerClass:[PlugOutletAddTimingCell class] forCellReuseIdentifier:CellIdentifier_PlugOutletEditTiming];
+            [tableView registerClass:[WeekendNameCell class] forCellReuseIdentifier:CellIdentifier_PlugOutletEditWeekendName];
             [self.view addSubview:tableView];
             tableView.estimatedRowHeight = 0;
             tableView.estimatedSectionHeaderHeight = 0;
@@ -233,9 +231,9 @@ static bool plugSeted = NO;
     switch (indexPath.row) {
         case 0:
         {
-            WeekendNameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_WeekendName];
+            WeekendNameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletEditWeekendName];
             if (cell == nil) {
-                cell = [[WeekendNameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_WeekendName];
+                cell = [[WeekendNameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletEditWeekendName];
             }
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.leftLabel.text = LocalString(@"重复");
@@ -246,15 +244,14 @@ static bool plugSeted = NO;
             
         default:
         {
-            PlugOutletAddTimingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletAddTiming];
+            PlugOutletAddTimingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutletEditTiming];
             if (cell == nil) {
-                cell = [[PlugOutletAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletAddTiming];
+                cell = [[PlugOutletAddTimingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutletEditTiming];
             }
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             cell.leftName.text = LocalString(@"开关");
             cell.timeSwitch.on = YES;
             self.clock.isOn = YES;
-            self.clock.action = clockActionOpen;
             cell.switchBlock = ^(BOOL isOn) {
                 if (isOn) {
                     self.clock.action = clockActionOpen;

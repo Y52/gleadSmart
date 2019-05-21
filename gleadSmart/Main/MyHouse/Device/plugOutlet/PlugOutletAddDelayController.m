@@ -61,7 +61,7 @@ static float HEIGHT_CELL = 50.f;
     NSNumber *C = [NSNumber numberWithInt:by1];
     NSNumber *D = [NSNumber numberWithInt:by2];
     NSNumber *E = [NSNumber numberWithInt:by3];
-    NSNumber *F = [NSNumber numberWithBool:self.clock.isOn];
+    NSNumber *F = [NSNumber numberWithInt:self.clock.action];
     NSArray *data = @[@0xFC,@0x11,@0x04,@0x01,A,B,C,D,E,F];
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
     [SVProgressHUD show];
@@ -236,8 +236,13 @@ static bool plugSeted = NO;
     cell.leftName.text = LocalString(@"开关");
     cell.timeSwitch.on = YES;
     self.clock.isOn = YES;
+    self.clock.action = delayActionOpen;
     cell.switchBlock = ^(BOOL isOn) {
-        self.clock.isOn = isOn;
+        if (isOn) {
+            self.clock.action = delayActionOpen;
+        }else{
+            self.clock.action = delayActionClose;
+        }
     };
     return cell;
        
