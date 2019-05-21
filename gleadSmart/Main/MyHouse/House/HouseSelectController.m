@@ -140,9 +140,9 @@ static CGFloat const Cell_Height = 50.f;
     if (![data.currentHouse.houseUid isEqualToString:house.houseUid]) {
         //选择了不同家庭
         data.currentHouse = house;
-        [data.localDeviceArray removeAllObjects];
         [data.shareDeviceArray removeAllObjects];
         [net.deviceArray removeAllObjects];
+        [net.connectedDevice.gatewayMountDeviceList removeAllObjects];
         if (net.mySocket.isConnected) {
             [net.mySocket disconnect];
         }

@@ -153,7 +153,7 @@ static CGFloat const Cell_Height = 44.f;
 
 #pragma mark - NSNotification
 - (void)refreshCompensate{
-    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+    for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
         if ([device.mac isEqualToString:self.device.mac]) {
             self.device = device;
         }

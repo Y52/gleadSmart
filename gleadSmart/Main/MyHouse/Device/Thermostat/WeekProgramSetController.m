@@ -199,7 +199,7 @@
 }
 
 - (void)confirm{
-    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+    for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
         if ([device.mac isEqualToString:self.mac]) {
             NSMutableArray *weekProgramArray = [NSMutableArray arrayWithArray:device.weekProgram];
             NSInteger index = (self.indexpath.section*4+self.indexpath.row)*2;

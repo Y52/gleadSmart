@@ -27,8 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///@brief Currently Selected House
 @property (strong, nonatomic, nullable) HouseModel *currentHouse;
 
-///@brief Device Info
-@property (strong, nonatomic) NSMutableArray *localDeviceArray;
 ///@brief 共享家庭与设备,不在本地存储
 @property (strong, nonatomic) NSMutableArray *shareDeviceArray;
 
@@ -42,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (RoomModel *)queryRoomWith:(NSString *)roomUid;
 - (NSMutableArray *)queryAllDevice:(NSString *)houseUid;
 - (NSMutableArray *)queryDevice:(NSString *)houseUid WithoutCenterlControlType:(NSNumber *)type;
+- (NSMutableArray *)queryCenterlControlMountDevice:(NSString *)houseUid;
 - (DeviceModel *)queryGateway:(NSString *)houseUid;
 - (BOOL)queryDevice:(NSString *)mac;
 - (NSMutableArray *)queryDevicesWith:(NSString *)roomUid;

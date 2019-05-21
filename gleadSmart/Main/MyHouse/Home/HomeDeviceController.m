@@ -66,13 +66,18 @@ static CGFloat const Cell_Height = 72.f;
 - (void)selectDevicesWithRoom{
     [self.deviceTable.mj_header endRefreshing];
     [SVProgressHUD dismiss];
+    Network *net = [Network shareNetwork];
     NSMutableArray *allDevice = [[NSMutableArray alloc] init];
-    if ([Network shareNetwork].deviceArray.count > 0) {
+    if (net.deviceArray.count > 0) {
         //从中央控制器得到了设备的回复信息
-        allDevice = [Network shareNetwork].deviceArray;
+        [allDevice addObjectsFromArray:net.deviceArray];
+    }
+    if (net.connectedDevice && net.connectedDevice.gatewayMountDeviceList > 0) {
+        [allDevice addObjectsFromArray:net.connectedDevice.gatewayMountDeviceList];
     }else{
         //未得到回复信息，用本地or服务器存储的信息
-        allDevice = [[Database shareInstance] queryDevice:[Database shareInstance].currentHouse.houseUid WithoutCenterlControlType:@0];
+        NSMutableArray *mountDeviceList = [[Database shareInstance] queryCenterlControlMountDevice:[Database shareInstance].currentHouse.houseUid];
+        [allDevice addObjectsFromArray:mountDeviceList];
     }
     if (!_room) {
         //所有设备房间列表

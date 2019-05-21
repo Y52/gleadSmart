@@ -485,11 +485,14 @@ static int noUserInteractionHeartbeat = 0;
 
 - (void)inquireNode:(NSMutableArray *)recivedData69{
     Database *db = [Database shareInstance];
-    db.localDeviceArray = [db queryAllDevice:db.currentHouse.houseUid];
-    if (!self.deviceArray) {
-        self.deviceArray = [[NSMutableArray alloc] init];
+    NSMutableArray *localMountDeviceArray = [db queryCenterlControlMountDevice:db.currentHouse.houseUid];
+    if (!self.connectedDevice) {
+        self.connectedDevice = [[DeviceModel alloc] init];
     }
-    [self.deviceArray removeAllObjects];
+    if (!self.connectedDevice.gatewayMountDeviceList) {
+        self.connectedDevice.gatewayMountDeviceList = [[NSMutableArray alloc] init];
+    }
+    [self.connectedDevice.gatewayMountDeviceList removeAllObjects];
     NSMutableArray *data = [[NSMutableArray alloc] init];
     [data addObjectsFromArray:recivedData69];
     int count = [data[12] intValue];
@@ -508,11 +511,11 @@ static int noUserInteractionHeartbeat = 0;
         
         //将中央控制器查询到的设备和服务器设备对比
         BOOL isExisted = NO;//防止重复显示以及刷新时重新添加设备到服务器
-        for (DeviceModel *existedDevice in self.deviceArray) {
+        for (DeviceModel *existedDevice in self.connectedDevice.gatewayMountDeviceList) {
             NSLog(@"%@",existedDevice.mac);
             if ([existedDevice.mac isEqualToString:device.mac]) {
-                existedDevice.isOnline = @0;
-                existedDevice.isOn = @0;
+                //existedDevice.isOnline = @0;
+                //existedDevice.isOn = @0;
                 isExisted = YES;
             }
         }
@@ -522,13 +525,13 @@ static int noUserInteractionHeartbeat = 0;
         
         //判断设备是否本地存储过
         BOOL isLocal = NO;
-        for (DeviceModel *localDevice in db.localDeviceArray) {
+        for (DeviceModel *localDevice in localMountDeviceArray) {
             if ([device.mac isEqualToString:localDevice.mac]) {
                 localDevice.type = device.type;
                 
-                [self.deviceArray addObject:localDevice];
+                [self.connectedDevice.gatewayMountDeviceList addObject:localDevice];
                 NSLog(@"%@",localDevice.mac);
-                [db.localDeviceArray removeObject:localDevice];
+                [localMountDeviceArray removeObject:localDevice];
                 isLocal = YES;
                 break;
             }
@@ -547,7 +550,7 @@ static int noUserInteractionHeartbeat = 0;
             }
             __block typeof(self) blockSelf = self;
             [self addNewDeviceWith:device success:^{
-                [blockSelf.deviceArray addObject:device];
+                [blockSelf.connectedDevice.gatewayMountDeviceList addObject:device];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
             }];
         }
@@ -556,15 +559,7 @@ static int noUserInteractionHeartbeat = 0;
     /*
      *将localDeviceArray剩余的device从服务器中删除，因为在网关中查找不到设备
      */
-    for (DeviceModel *localDevice in db.localDeviceArray) {
-        if ([localDevice.type integerValue] == DeviceCenterlControl) {
-            continue;//中央控制器
-        }
-        if ([localDevice.type intValue] >= DevicePlugOutlet) {
-            //插座
-            [self.deviceArray addObject:localDevice];
-            continue;
-        }
+    for (DeviceModel *localDevice in localMountDeviceArray) {
         [self removeOldDeviceWith:localDevice success:^{
             //通知刷新设备
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
@@ -578,10 +573,10 @@ static int noUserInteractionHeartbeat = 0;
     
     if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
         //外网，OneNet查询监控点
-        [self inquireDeviceInfoByOneNetdatastreams:self.deviceArray];
+        [self inquireDeviceInfoByOneNetdatastreams:self.connectedDevice.gatewayMountDeviceList];
     }else{
         //内网
-        for (DeviceModel *device in self.deviceArray) {
+        for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
             //每个设备发送状态查询帧
             UInt8 controlCode = 0x01;
             NSArray *data;
@@ -675,7 +670,7 @@ static int noUserInteractionHeartbeat = 0;
 - (void)analysisResultValue:(NSString *)streamId value:(NSNumber *)value{
     NSString *index = [streamId substringWithRange:NSMakeRange(0, 2)];
     NSString *mac = [streamId substringFromIndex:2];
-    for (DeviceModel *device in self.deviceArray) {
+    for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
         if ([device.mac isEqualToString:mac]) {
             switch ([index integerValue]) {
                 case 11:
@@ -1295,10 +1290,11 @@ static int noUserInteractionHeartbeat = 0;
     }
     
     Database *db = [Database shareInstance];
-    
+    NSMutableArray *localMountDeviceArray = [db queryCenterlControlMountDevice:db.currentHouse.houseUid];
+
     //查询该设备是否已经添加到deviceArray
     BOOL isExisted = NO;//防止设备在localdevice中未添加到deviceArray，导致页面上UI不显示
-    for (DeviceModel *device in self.deviceArray) {
+    for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
         NSLog(@"%@",device.mac);
         if ([device.mac isEqualToString:mac]) {
             device.isOnline = @1;
@@ -1307,13 +1303,12 @@ static int noUserInteractionHeartbeat = 0;
     }
     if (!isExisted) {
         //localdevice中的该设备添加到deviceArray
-        for (DeviceModel *localDevice in db.localDeviceArray) {
+        for (DeviceModel *localDevice in localMountDeviceArray) {
             if ([mac isEqualToString:localDevice.mac]) {
                 localDevice.isOnline = @1;
                 
-                [self.deviceArray addObject:localDevice];
-                NSLog(@"%@",localDevice.mac);
-                [db.localDeviceArray removeObject:localDevice];
+                [self.connectedDevice.gatewayMountDeviceList addObject:localDevice];
+                NSLog(@"%@设备在localdevice中未添加到deviceArray，导致页面上UI不显示",localDevice.mac);
                 break;
             }
         }
@@ -1412,7 +1407,7 @@ static int noUserInteractionHeartbeat = 0;
                     }
                     NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
                     
-                    for (DeviceModel *device in self.deviceArray) {
+                    for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
                         if ([device.mac isEqualToString:mac]) {
                             NSLog(@"%@",device.mac);
                             device.isOn = isOn;
@@ -1475,7 +1470,7 @@ static int noUserInteractionHeartbeat = 0;
                     }
                     NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
                     
-                    for (DeviceModel *device in self.deviceArray) {
+                    for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
                         if ([device.mac isEqualToString:mac]) {
                             NSLog(@"%@",device.mac);
                             device.isOn = isOn;
@@ -1525,7 +1520,7 @@ static int noUserInteractionHeartbeat = 0;
                 }
                 NSNumber *indoorTemp = [NSNumber numberWithFloat:indoortemp/2.f];
                 
-                for (DeviceModel *device in self.deviceArray) {
+                for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
                     if ([device.mac isEqualToString:mac]) {
                         device.mode = [NSNumber numberWithUnsignedInteger:mode];
                         device.modeTemp = modeTemp;
@@ -1569,7 +1564,7 @@ static int noUserInteractionHeartbeat = 0;
                     [weekProgram addObject:[NSNumber numberWithUnsignedInteger:[_recivedData69[12 + i] unsignedIntegerValue]]];
                 }
                 
-                for (DeviceModel *device in self.deviceArray) {
+                for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
                     if ([device.mac isEqualToString:mac]) {
                         device.weekProgram = weekProgram;
                     }
@@ -1587,7 +1582,7 @@ static int noUserInteractionHeartbeat = 0;
                 NSLog(@"切换模式");
                 UInt8 mode = [_recivedData69[12] unsignedIntegerValue];
                 
-                for (DeviceModel *device in self.deviceArray) {
+                for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
                     if ([device.mac isEqualToString:mac]) {
                         device.mode = [NSNumber numberWithUnsignedInteger:mode];
                     }
@@ -1609,7 +1604,7 @@ static int noUserInteractionHeartbeat = 0;
                 }
                 NSNumber *compensate = [NSNumber numberWithUnsignedInteger:temp];
                 
-                for (DeviceModel *device in self.deviceArray) {
+                for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
                     if ([device.mac isEqualToString:mac]) {
                         device.compensate = compensate;
                     }
@@ -1630,7 +1625,7 @@ static int noUserInteractionHeartbeat = 0;
                 //控制水阀状态
                 NSLog(@"控制水阀状态");
                 NSDictionary *userInfo;
-                for (DeviceModel *device in self.deviceArray) {
+                for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
                     if ([device.mac isEqualToString:mac]) {
                         device.isOnline = @1;
                         device.isOn = [NSNumber numberWithUnsignedInteger:([_recivedData69[12] unsignedIntegerValue] & 0x01)];
@@ -1658,7 +1653,7 @@ static int noUserInteractionHeartbeat = 0;
                 //查询无线水阀状态
                 NSDictionary *userInfo;
                 NSLog(@"查询无线水阀状态");
-                for (DeviceModel *device in self.deviceArray) {
+                for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
                     if ([device.mac isEqualToString:mac]) {
                         device.isOnline = @1;
                         device.isOn = [NSNumber numberWithUnsignedInteger:([_recivedData69[12] unsignedIntegerValue] & 0x01)];
@@ -1718,7 +1713,7 @@ static int noUserInteractionHeartbeat = 0;
                     [nodeArray addObject:node];
                 }
                 
-                for (DeviceModel *device in self.deviceArray) {
+                for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
                     if ([device.mac isEqualToString:mac]) {
                         device.nodeArray = nodeArray;
                     }
@@ -1737,7 +1732,7 @@ static int noUserInteractionHeartbeat = 0;
                 //水阀恢复出厂设置
                 NSLog(@"水阀恢复出厂设置");
                 
-                for (DeviceModel *device in self.deviceArray) {
+                for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
                     if ([device.mac isEqualToString:mac]) {
                         [device.nodeArray removeAllObjects];
                     }
