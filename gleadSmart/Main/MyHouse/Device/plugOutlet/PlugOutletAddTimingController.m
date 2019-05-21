@@ -150,6 +150,8 @@ static bool plugSeted = NO;
         NSInteger currentHour=[[formatter stringFromDate:date]integerValue];
         [formatter setDateFormat:@"mm"];
         NSInteger currentMinute=[[formatter stringFromDate:date] integerValue];
+        self.clock.hour = (int) currentHour;
+        self.clock.minute = (int) currentMinute;
         
         [self.timePicker selectRow:currentHour inComponent:0 animated:YES];
         [self.timePicker selectRow:currentMinute inComponent:1 animated:YES];

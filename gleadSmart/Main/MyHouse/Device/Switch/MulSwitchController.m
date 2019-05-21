@@ -180,23 +180,31 @@
         //NSLog(@"%@",self.device.isOn);
         if ([self.device.isOn intValue] & 0x01) {
             [self.switchButton4_1 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+            self.switchButton4_1.tag = ySelect;
         }else{
             [self.switchButton4_1 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+            self.switchButton4_1.tag = yUnselect;
         }
         if ([self.device.isOn intValue] & 0x02) {
             [self.switchButton4_2 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+            self.switchButton4_2.tag = ySelect;
         }else{
             [self.switchButton4_2 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+            self.switchButton4_2.tag = yUnselect;
         }
         if ([self.device.isOn intValue] & 0x04) {
             [self.switchButton4_3 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+            self.switchButton4_3.tag = ySelect;
         }else{
             [self.switchButton4_3 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+            self.switchButton4_3.tag = yUnselect;
         }
         if ([self.device.isOn intValue] & 0x08) {
             [self.switchButton4_4 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+            self.switchButton4_4.tag = ySelect;
         }else{
             [self.switchButton4_4 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+            self.switchButton4_4.tag = yUnselect;
         }
     });
 }

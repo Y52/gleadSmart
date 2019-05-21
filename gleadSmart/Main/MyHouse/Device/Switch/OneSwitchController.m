@@ -176,8 +176,10 @@
         //NSLog(@"%@",self.device.isOn);
         if ([self.device.isOn intValue] & 0x01) {
             [self.switchButton setImage:[UIImage imageNamed:@"img_switch3_on"] forState:UIControlStateNormal];
+            self.switchButton.tag = ySelect;
         }else{
             [self.switchButton setImage:[UIImage imageNamed:@"img_switch3_off"] forState:UIControlStateNormal];
+            self.switchButton.tag = yUnselect;
         }
     });
 }
