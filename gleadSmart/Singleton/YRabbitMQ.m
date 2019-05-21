@@ -118,7 +118,7 @@ static NSArray *_routingkeys = nil;
 }
 
 /*
- *修改开关
+ *修改中央控制器下挂设备开关
  */
 - (void)analyzeMessageTypeB:(NSDictionary *)dic{
     NSDictionary *userInfo;
@@ -126,7 +126,7 @@ static NSArray *_routingkeys = nil;
     NSNumber *on = [dic objectForKey:@"on"];
     NSNumber *online = [dic objectForKey:@"online"];
     
-    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+    for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
         if ([device.mac isEqualToString:mac]) {
             NSLog(@"%@",device.mac);
             device.isOn = on;
@@ -163,7 +163,7 @@ static NSArray *_routingkeys = nil;
         NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
         [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
     }else{
-        for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+        for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
             device.isOnline = online;
         }
     }

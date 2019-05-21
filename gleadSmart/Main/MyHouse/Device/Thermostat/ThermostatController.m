@@ -103,7 +103,7 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
 #pragma mark - private method
 - (void)UITransformationByStatus{
     dispatch_async(dispatch_get_main_queue(), ^{
-        for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+        for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
             if ([device.mac isEqualToString:self.device.mac]) {
                 self.device = device;
             }

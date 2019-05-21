@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
 ///@brief 分享设备页面判断是否已经分享过
 @property (nonatomic) BOOL isShared;
 
+///@brief 设备基本信息
 @property (strong, nonatomic) NSString *mac;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *ipAddress;
@@ -40,6 +41,10 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
 @property (strong, nonatomic) NSString *houseUid;
 @property (strong, nonatomic) NSNumber *isOn;
 @property (strong, nonatomic) NSNumber *isOnline;//判断在线离线
+
+///@brief 设备列表，中央控制器拥有，包含温控器，水阀等
+@property (nonatomic, strong) NSMutableArray *gatewayMountDeviceList;
+
 
 ///@breif 温控器拥有的属性
 @property (strong, nonatomic) NSNumber *mode;//0为手动，1为自动

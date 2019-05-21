@@ -119,7 +119,7 @@ CGFloat const nodeButtonWidth = 20.f;
 #pragma mark - private methods
 //更新内容的kvc
 - (void)refreshDevice{
-    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+    for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
         if ([device.mac isEqualToString:self.device.mac]) {
             self.device = device;
         }
@@ -437,7 +437,7 @@ CGFloat const nodeButtonWidth = 20.f;
 
 //刷新节点UI的notification@selector，即获得了节点信息帧
 - (void)refreshValveNodesUI{
-    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+    for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
         if ([device.mac isEqualToString:self.device.mac]) {
             self.device = device;
         }

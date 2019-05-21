@@ -36,9 +36,6 @@ static dispatch_once_t oneToken;
         if (!self.houseList) {
             self.houseList = [[NSMutableArray alloc] init];
         }
-        if (!self.localDeviceArray) {
-            self.localDeviceArray = [[NSMutableArray alloc] init];
-        }
     }
     return self;
 }
@@ -216,6 +213,24 @@ static dispatch_once_t oneToken;
         }
     }];
     NSLog(@"%lu",(unsigned long)deviceArray.count);
+    return deviceArray;
+}
+
+- (NSMutableArray *)queryCenterlControlMountDevice:(NSString *)houseUid{
+    NSMutableArray *deviceArray = [[NSMutableArray alloc] init];
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        FMResultSet *set = [db executeQuery:@"SELECT * FROM device WHERE houseUid = ? AND type >= ? AND type <= ?",houseUid,[NSNumber numberWithInt:DeviceThermostat],[NSNumber numberWithInt:DeviceNTCValve]];
+        while ([set next]) {
+            DeviceModel *device = [[DeviceModel alloc] init];
+            device.mac = [set stringForColumn:@"mac"];
+            device.name = [set stringForColumn:@"name"];
+            device.roomUid = [set stringForColumn:@"roomUid"];
+            device.type = [NSNumber numberWithInt:[set intForColumn:@"type"]];
+            device.houseUid = houseUid;
+            NSLog(@"%@,%@",device.name,device.mac);
+            [deviceArray addObject:device];
+        }
+    }];
     return deviceArray;
 }
 
@@ -449,13 +464,12 @@ static dispatch_once_t oneToken;
                             device.apiKey = [obj objectForKey:@"apiKey"];
                             device.deviceId = [obj objectForKey:@"deviceId"];
                             device.houseUid = house.houseUid;
-                            if ([NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]] == 0x01) {
-                                device.type = @0;
-                            }else{
-                                device.type = [NSNumber numberWithInteger:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]]];
-                            }
+                            
                             if ([device.mac isKindOfClass:[NSString class]] && device.mac.length > 0) {
-                                //插入房间的设备
+                                DeviceType type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
+                                device.type = [NSNumber numberWithInt:type];
+
+                                //插入设备到本地
                                 [self insertNewDevice:device];
                             }
                         }];

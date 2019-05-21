@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///@brief 接收数据
 @property (strong, nonatomic) NSMutableArray *recivedData69;
 
-///@brief Device Info,中央控制器下挂设备
+///@brief Device Info,中央控制器、插座、开关等可以socket连接的设备
 @property (strong, nonatomic) NSMutableArray *deviceArray;
 
 ///@brief 设备删除成功

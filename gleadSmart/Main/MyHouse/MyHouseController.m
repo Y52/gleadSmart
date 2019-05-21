@@ -238,16 +238,16 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     [self.homeList removeAllObjects];
     self.homeList = [db queryRoomsWith:db.currentHouse.houseUid];
     
-    db.localDeviceArray = [db queryAllDevice:db.currentHouse.houseUid];
-    for (DeviceModel *device in db.localDeviceArray) {
+    NSMutableArray *localDeviceArray = [db queryAllDevice:db.currentHouse.houseUid];
+    for (DeviceModel *device in localDeviceArray) {
         NSLog(@"%@",device.mac);
         if ([device.type intValue] == DeviceCenterlControl) {
             //获取中央控制器的mac并设置为当前家庭的mac
             db.currentHouse.mac = device.mac;
         }
         
-        if ([device.type intValue] >= DevicePlugOutlet) {
-            //插座
+        if ([device.type intValue] >= DevicePlugOutlet && [device.type intValue] <= DeviceFourSwitch) {
+            //插座或者开关
             if (!net.deviceArray) {
                 net.deviceArray = [[NSMutableArray alloc] init];
             }

@@ -219,7 +219,7 @@ static CGFloat const Header_Height = 35.f;
 - (void)refreshWeekProgram{
     isWeekProgramGeted = YES;
     [SVProgressHUD dismiss];
-    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+    for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
         if ([device.mac isEqualToString:self.device.mac]) {
             self.device = device;
         }
