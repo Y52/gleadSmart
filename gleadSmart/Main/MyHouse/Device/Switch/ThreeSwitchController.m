@@ -41,8 +41,9 @@
     //self.delayButton = [self delayButton];不要了
     self.closeAllButton = [self closeAllButton];
     [self getSwitchStatus];
-    [self getSwitchDateTime];
+    //[self getSwitchDateTime];
     [self setBackgroundColor_3];
+    [self setSwitchTimes];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -70,6 +71,51 @@
 - (void)getSwitchDateTime{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFC,@0x11,@0x01,@0x00];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
+}
+
+//校准开关时间
+- (void)setSwitchTimes{
+    NSDate *date = [NSDate date];
+    NSCalendar *currentCalendar = [NSCalendar currentCalendar];    //IOS 8 之后
+    NSUInteger integer = NSCalendarUnitYear | NSCalendarUnitMonth |NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday;
+    NSDateComponents *dataCom = [currentCalendar components:integer fromDate:date];
+    
+    UInt8 controlCode = 0x01;
+    NSNumber *A = [NSNumber numberWithUnsignedInteger:[dataCom year] % 100];
+    NSNumber *B = [NSNumber numberWithUnsignedInteger:[dataCom month]];
+    NSNumber *C = [NSNumber numberWithUnsignedInteger:[dataCom day]];
+    NSNumber *D = [NSNumber numberWithUnsignedInteger:[dataCom hour]];
+    NSNumber *E = [NSNumber numberWithUnsignedInteger:[dataCom minute]];
+    NSNumber *F = [NSNumber numberWithUnsignedInteger:[dataCom second]];
+    NSNumber *G = [NSNumber numberWithUnsignedInteger:[dataCom weekday]];
+    //区分 星期天、星期一…星期六
+    switch ([G intValue]) {
+        case 1:
+            G = [NSNumber numberWithInt: 0x01];
+            break;
+        case 2:
+            G = [NSNumber numberWithInt: 0x02];
+            break;
+        case 3:
+            G = [NSNumber numberWithInt: 0x04];
+            break;
+        case 4:
+            G = [NSNumber numberWithInt: 0x08];
+            break;
+        case 5:
+            G = [NSNumber numberWithInt: 0x10];
+            break;
+        case 6:
+            G = [NSNumber numberWithInt: 0x20];
+            break;
+        case 7:
+            G = [NSNumber numberWithInt: 0x40];
+            break;
+        default:
+            break;
+    }
+    NSArray *data = @[@0xFC,@0x11,@0x01,@0x01,A,B,C,D,E,F,G];
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
 }
 
@@ -170,18 +216,24 @@
         //NSLog(@"%@",self.device.isOn);
         if ([self.device.isOn intValue] & 0x01) {
             [self.switchButton3_1 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+            self.switchButton3_1.tag = ySelect;
         }else{
             [self.switchButton3_1 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+            self.switchButton3_1.tag = yUnselect;
         }
         if ([self.device.isOn intValue] & 0x02) {
             [self.switchButton3_2 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+            self.switchButton3_2.tag = ySelect;
         }else{
             [self.switchButton3_2 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+            self.switchButton3_2.tag = yUnselect;
         }
         if ([self.device.isOn intValue] & 0x04) {
             [self.switchButton3_3 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+            self.switchButton3_3.tag = ySelect;
         }else{
             [self.switchButton3_3 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+            self.switchButton3_3.tag = yUnselect;
         }
     });
 }

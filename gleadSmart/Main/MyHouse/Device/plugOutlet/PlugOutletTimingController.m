@@ -253,63 +253,13 @@ static bool plugDeleted = NO;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.row) {
-        case 0:
-        {
-            PlugOutletEditTimingController *addVC = [[PlugOutletEditTimingController alloc] init];
-            addVC.device = self.device;
-            addVC.clock = [[ClockModel alloc] init];
-            ClockModel *clock = self.clockList[0];
-            addVC.clock.number = clock.number;
-            [self.navigationController pushViewController:addVC animated:YES];
+    
+    PlugOutletEditTimingController *EditVC = [[PlugOutletEditTimingController alloc] init];
+    EditVC.device = self.device;
+    EditVC.clock = self.clockList[indexPath.row];
+    [self.navigationController pushViewController:EditVC animated:YES];
             
-        }
-            break;
-        case 1:
-        {
-            PlugOutletEditTimingController *addVC = [[PlugOutletEditTimingController alloc] init];
-            addVC.device = self.device;
-            addVC.clock = [[ClockModel alloc] init];
-            ClockModel *clock = self.clockList[1];
-            addVC.clock.number = clock.number;
-            [self.navigationController pushViewController:addVC animated:YES];
-            
-        }
-            break;
-        case 2:
-        {
-            PlugOutletEditTimingController *addVC = [[PlugOutletEditTimingController alloc] init];
-            addVC.device = self.device;
-            addVC.clock = [[ClockModel alloc] init];
-            ClockModel *clock = self.clockList[2];
-            addVC.clock.number = clock.number;
-            [self.navigationController pushViewController:addVC animated:YES];
-            
-        }
-            break;
-        case 3:
-        {
-            PlugOutletEditTimingController *addVC = [[PlugOutletEditTimingController alloc] init];
-            addVC.device = self.device;
-            addVC.clock = [[ClockModel alloc] init];
-            ClockModel *clock = self.clockList[3];
-            addVC.clock.number = clock.number;
-            [self.navigationController pushViewController:addVC animated:YES];
-            
-        }
-            break;
-            
-        default:
-        {
-            PlugOutletEditTimingController *addVC = [[PlugOutletEditTimingController alloc] init];
-            addVC.device = self.device;
-            addVC.clock = [[ClockModel alloc] init];
-            ClockModel *clock = self.clockList[4];
-            addVC.clock.number = clock.number;
-            [self.navigationController pushViewController:addVC animated:YES];
-        }
-            break;
-    }
+       
 }
 
 //左滑删除

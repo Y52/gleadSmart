@@ -87,7 +87,7 @@ static bool plugSeted = NO;
 
 #pragma mark - setters and getters
 - (void)setNavItem{
-    self.navigationItem.title = LocalString(@"添加定时");
+    self.navigationItem.title = LocalString(@"编辑定时");
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 30, 30);
@@ -140,8 +140,8 @@ static bool plugSeted = NO;
         //在当前选择上显示一个透明窗口
         self.timePicker.showsSelectionIndicator = YES;
         //初始化，自动转一圈，避免第一次是数组第一个值造成留白
-        [self.timePicker selectRow:[self.hoursArray count] inComponent:0 animated:YES];
-        [self.timePicker selectRow:[self.minutesArray count] inComponent:1 animated:YES];
+        [self.timePicker selectRow:self.clock.hour inComponent:0 animated:YES];
+        [self.timePicker selectRow:self.clock.minute inComponent:1 animated:YES];
         [self.view addSubview:_timePicker];
         
         [_timePicker mas_makeConstraints:^(MASConstraintMaker *make) {

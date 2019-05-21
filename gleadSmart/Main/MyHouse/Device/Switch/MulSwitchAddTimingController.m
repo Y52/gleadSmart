@@ -141,8 +141,20 @@ static bool switchSeted = NO;
         //在当前选择上显示一个透明窗口
         self.timePicker.showsSelectionIndicator = YES;
         //初始化，自动转一圈，避免第一次是数组第一个值造成留白
-        [self.timePicker selectRow:[self.hoursArray count] inComponent:0 animated:YES];
-        [self.timePicker selectRow:[self.minutesArray count] inComponent:1 animated:YES];
+        
+        //初始化当前时间显示
+        NSDate *date =[NSDate date];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+        [formatter setDateFormat:@"HH"];
+        NSInteger currentHour=[[formatter stringFromDate:date]integerValue];
+        [formatter setDateFormat:@"mm"];
+        NSInteger currentMinute=[[formatter stringFromDate:date] integerValue];
+        self.clock.hour = (int) currentHour;
+        self.clock.minute = (int) currentMinute;
+        
+        [self.timePicker selectRow:currentHour inComponent:0 animated:YES];
+        [self.timePicker selectRow:currentMinute inComponent:1 animated:YES];
+        
         [self.view addSubview:_timePicker];
         
         [_timePicker mas_makeConstraints:^(MASConstraintMaker *make) {

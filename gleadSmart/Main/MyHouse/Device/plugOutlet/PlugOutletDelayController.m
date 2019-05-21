@@ -262,63 +262,12 @@ static bool plugDeleted = NO;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.row) {
-        case 0:
-        {
-            PlugOutletEditDelayController *addVC = [[PlugOutletEditDelayController alloc] init];
-            addVC.device = self.device;
-            addVC.clock = [[DelayModel alloc] init];
-            DelayModel *clock = self.delayclockList[0];
-            addVC.clock.number = clock.number;
-            [self.navigationController pushViewController:addVC animated:YES];
-            
-        }
-            break;
-        case 1:
-        {
-            PlugOutletEditDelayController *addVC = [[PlugOutletEditDelayController alloc] init];
-            addVC.device = self.device;
-            addVC.clock = [[DelayModel alloc] init];
-            DelayModel *clock = self.delayclockList[1];
-            addVC.clock.number = clock.number;
-            [self.navigationController pushViewController:addVC animated:YES];
-            
-        }
-            break;
-        case 2:
-        {
-            PlugOutletEditDelayController *addVC = [[PlugOutletEditDelayController alloc] init];
-            addVC.device = self.device;
-            addVC.clock = [[DelayModel alloc] init];
-            DelayModel *clock = self.delayclockList[2];
-            addVC.clock.number = clock.number;
-            [self.navigationController pushViewController:addVC animated:YES];
-            
-        }
-            break;
-        case 3:
-        {
-            PlugOutletEditDelayController *addVC = [[PlugOutletEditDelayController alloc] init];
-            addVC.device = self.device;
-            addVC.clock = [[DelayModel alloc] init];
-            DelayModel *clock = self.delayclockList[3];
-            addVC.clock.number = clock.number;
-            [self.navigationController pushViewController:addVC animated:YES];
-            
-        }
-            break;
-            
-        default:
-        {
-            PlugOutletEditDelayController *addVC = [[PlugOutletEditDelayController alloc] init];
-            addVC.device = self.device;
-            addVC.clock = [[DelayModel alloc] init];
-            DelayModel *clock = self.delayclockList[4];
-            addVC.clock.number = clock.number;
-            [self.navigationController pushViewController:addVC animated:YES];
-        }
-            break;
-    }
+    
+    PlugOutletEditDelayController *DelayVC = [[PlugOutletEditDelayController alloc] init];
+    DelayVC.device = self.device;
+    DelayVC.clock = self.delayclockList[indexPath.row];
+    [self.navigationController pushViewController:DelayVC animated:YES];
+    
 }
 
 //左滑删除
