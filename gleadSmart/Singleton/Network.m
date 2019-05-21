@@ -573,7 +573,7 @@ static int noUserInteractionHeartbeat = 0;
     
     if (![[Database shareInstance].currentHouse.mac isEqualToString:self.connectedDevice.mac]) {
         //外网，OneNet查询监控点
-        [self inquireDeviceInfoByOneNetdatastreams:self.connectedDevice.gatewayMountDeviceList];
+        [self inquireDeviceInfoByOneNetdatastreams:self.connectedDevice.gatewayMountDeviceList apiKey:db.currentHouse.apiKey deviceId:db.currentHouse.deviceId];
     }else{
         //内网
         for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
@@ -605,7 +605,7 @@ static int noUserInteractionHeartbeat = 0;
 /*
  *批量查询数据流信息
  */
-- (void)inquireDeviceInfoByOneNetdatastreams:(NSMutableArray *)deviceArray{
+- (void)inquireDeviceInfoByOneNetdatastreams:(NSMutableArray *)deviceArray apiKey:(NSString *)apiKey deviceId:(NSString *)deviceId{
     Database *db = [Database shareInstance];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
@@ -615,9 +615,9 @@ static int noUserInteractionHeartbeat = 0;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
     [manager.requestSerializer setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.currentHouse.apiKey forHTTPHeaderField:@"api-key"];
+    [manager.requestSerializer setValue:apiKey forHTTPHeaderField:@"api-key"];
     
-    NSString *url = [NSString stringWithFormat:@"http://api.heclouds.com/devices/%@/datastreams",db.currentHouse.deviceId];
+    NSString *url = [NSString stringWithFormat:@"http://api.heclouds.com/devices/%@/datastreams",deviceId];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     NSString *datastreams = @"";
@@ -637,11 +637,22 @@ static int noUserInteractionHeartbeat = 0;
                 datastreams = [datastreams stringByAppendingString:@","];
                 break;
                 
+            case DevicePlugOutlet:
+            case DeviceOneSwitch:
+            case DeviceTwoSwitch:
+            case DeviceThreeSwitch:
+            case DeviceFourSwitch:
+                datastreams = [datastreams stringByAppendingString:@"FC1100"];
+                datastreams = [datastreams stringByAppendingString:device.mac];
+                datastreams = [datastreams stringByAppendingString:@","];
+                break;
+                
             default:
                 break;
         }
     }
     NSDictionary *parameters = @{@"datastream_ids":datastreams};
+    NSLog(@"%@",parameters);
     
     [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];

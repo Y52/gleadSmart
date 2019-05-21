@@ -78,4 +78,19 @@ static int frameCount = 0;
     }
 }
 
+//获取继电器状态
+- (void)getRelayStatus{
+    if (!self.socket) {
+        self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+    }
+    if (![self.socket isDisconnected]) {
+        UInt8 controlCode = 0x00;
+        NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];//在网节点查询
+        [self sendData69With:controlCode mac:self.mac data:data];
+    }else{
+        NSMutableArray *deviceArray = [NSMutableArray arrayWithObject:self];
+        [[Network shareNetwork] inquireDeviceInfoByOneNetdatastreams:deviceArray apiKey:self.apiKey deviceId:self.deviceId];
+    }
+}
+
 @end

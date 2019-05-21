@@ -252,6 +252,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
                 net.deviceArray = [[NSMutableArray alloc] init];
             }
             [net.deviceArray addObject:device];
+            [device getRelayStatus];
         }
     }
     
