@@ -148,11 +148,20 @@
         }
     }
 
-    UInt8 controlCode = 0x00;
-    NSMutableArray *data = [@[@0xFE,@0x03,@0x01,@0x01] mutableCopy];
-    [data addObjectsFromArray:ssidArray];
-    NSLog(@"%@",data);
-    [[Network shareNetwork] APsendData69With:controlCode mac:mac data:data];
+    DeviceType type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]];
+    if (type == DeviceCenterlControl) {
+        UInt8 controlCode = 0x00;
+        NSMutableArray *data = [@[@0xFE,@0x03,@0x01,@0x01] mutableCopy];
+        [data addObjectsFromArray:ssidArray];
+        NSLog(@"%@",data);
+        [[Network shareNetwork] APsendData69With:controlCode mac:mac data:data];
+    }else if (type >= DevicePlugOutlet && type <= DeviceFourSwitch){
+        UInt8 controlCode = 0x00;
+        NSMutableArray *data = [@[@0xFC,@0x11,@0x20,@0x01] mutableCopy];
+        [data addObjectsFromArray:ssidArray];
+        NSLog(@"%@",data);
+        [[Network shareNetwork] APsendData69With:controlCode mac:mac data:data];
+    }
 }
 
 - (void)tcpSendPassword{
@@ -164,11 +173,20 @@
         [passwordArray addObject:asciiSSID];
     }
 
-    UInt8 controlCode = 0x00;
-    NSMutableArray *data = [@[@0xFE,@0x03,@0x02,@0x01] mutableCopy];
-    [data addObjectsFromArray:passwordArray];
-    NSLog(@"%@",data);
-    [[Network shareNetwork] APsendData69With:controlCode mac:mac data:data];
+    DeviceType type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]];
+    if (type == DeviceCenterlControl) {
+        UInt8 controlCode = 0x00;
+        NSMutableArray *data = [@[@0xFE,@0x03,@0x02,@0x01] mutableCopy];
+        [data addObjectsFromArray:passwordArray];
+        NSLog(@"%@",data);
+        [[Network shareNetwork] APsendData69With:controlCode mac:mac data:data];
+    }else if (type >= DevicePlugOutlet && type <= DeviceFourSwitch){
+        UInt8 controlCode = 0x00;
+        NSMutableArray *data = [@[@0xFC,@0x11,@0x21,@0x01] mutableCopy];
+        [data addObjectsFromArray:passwordArray];
+        NSLog(@"%@",data);
+        [[Network shareNetwork] APsendData69With:controlCode mac:mac data:data];
+    }
 }
 
 static bool isSSIDSendSucc = NO;
