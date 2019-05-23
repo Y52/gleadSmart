@@ -213,12 +213,7 @@ static int hotspotAlertTime = 3;
     NSDictionary *netInfo = [self fetchNetInfo];
     NSString *ssid = [netInfo objectForKey:@"SSID"];
     NSLog(@"%@",ssid);
-    if ([ssid isEqualToString:self.ssid]) {
-        if (isPasswordSendSucc && isSSIDSendSucc) {
-            isFind = NO;
-            [self sendSearchBroadcast];
-        }
-    }else if(![ssid hasPrefix:@"Thingcom"] && [ssid isKindOfClass:[NSString class]]){
+    if(![ssid hasPrefix:@"ESP"]){
         ///热点搜到设备后直接绑定，等待云平台推送
         DeviceModel *dModel = [[DeviceModel alloc] init];
         dModel.mac = mac;
