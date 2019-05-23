@@ -74,6 +74,8 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
 ///@brief 设备socket发帧
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data;
 
+///@brief 获取设备状态
+- (void)getRelayStatus;
 @end
 
 NS_ASSUME_NONNULL_END

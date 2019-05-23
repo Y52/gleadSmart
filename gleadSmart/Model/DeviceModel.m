@@ -13,7 +13,7 @@
 //帧的发送
 - (void)send:(NSMutableArray *)msg withTag:(NSUInteger)tag
 {
-    if (![self.socket isDisconnected]){
+    if (self.socket && ![self.socket isDisconnected]){
         NSUInteger len = msg.count;
         UInt8 sendBuffer[len];
         for (int i = 0; i < len; i++)
@@ -36,7 +36,7 @@
 static int frameCount = 0;
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data{
     if (!self.socket) {
-        self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+        self.socket = [[GCDAsyncSocket alloc] initWithDelegate:[Network shareNetwork] delegateQueue:dispatch_get_global_queue(0, 0)];
     }
     if (!self.queue) {
         self.queue = dispatch_queue_create((char *)[self.mac UTF8String], DISPATCH_QUEUE_SERIAL);
@@ -65,7 +65,7 @@ static int frameCount = 0;
                 [data69 addObject:[NSNumber numberWithUnsignedChar:[NSObject getCS:data69]]];
                 [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
                 
-                if (![self.socket isDisconnected]) {
+                if (self.socket && [self.socket isConnected]) {
                     [self send:data69 withTag:100];
                 }else{
                     Network *net = [Network shareNetwork];
@@ -75,6 +75,21 @@ static int frameCount = 0;
                 }
             });
         });
+    }
+}
+
+//获取继电器状态
+- (void)getRelayStatus{
+    if (!self.socket) {
+        self.socket = [[GCDAsyncSocket alloc] initWithDelegate:[Network shareNetwork] delegateQueue:dispatch_get_global_queue(0, 0)];
+    }
+    if (![self.socket isDisconnected]) {
+        UInt8 controlCode = 0x00;
+        NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];//在网节点查询
+        [self sendData69With:controlCode mac:self.mac data:data];
+    }else{
+        NSMutableArray *deviceArray = [NSMutableArray arrayWithObject:self];
+        [[Network shareNetwork] inquireDeviceInfoByOneNetdatastreams:deviceArray apiKey:self.apiKey deviceId:self.deviceId];
     }
 }
 

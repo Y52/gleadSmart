@@ -49,12 +49,16 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(apSendSSIDSucc) name:@"apSendSSIDSucc" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(apSendPasswordSucc) name:@"apSendPasswordSucc" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rabbitDeviceApProcessSucc) name:@"rabbitDeviceApProcessSucc" object:nil];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"apSendSSIDSucc" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"apSendPasswordSucc" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"rabbitDeviceApProcessSucc" object:nil];
 
     [_timer setFireDate:[NSDate distantFuture]];
     [_timer invalidate];
@@ -193,13 +197,16 @@ static bool isSSIDSendSucc = NO;
 static bool isPasswordSendSucc = NO;
 - (void)apSendSSIDSucc{
     isSSIDSendSucc = YES;
+    NSLog(@"isSSIDSendSucc");
 }
 
 - (void)apSendPasswordSucc{
     isPasswordSendSucc = YES;
+    NSLog(@"isPasswordSendSucc");
 }
 
 static int hotspotAlertTime = 3;
+static bool bindSucc = NO;
 - (void)confirmWifiName{
     if (!(isSSIDSendSucc && isPasswordSendSucc)) {
         return;
@@ -207,42 +214,20 @@ static int hotspotAlertTime = 3;
     NSDictionary *netInfo = [self fetchNetInfo];
     NSString *ssid = [netInfo objectForKey:@"SSID"];
     NSLog(@"%@",ssid);
-    if ([ssid isEqualToString:self.ssid]) {
-        if (isPasswordSendSucc && isSSIDSendSucc) {
-            isFind = NO;
-            [self sendSearchBroadcast];
-        }
-    }else if(![ssid hasPrefix:@"ESP"] && [ssid isKindOfClass:[NSString class]]){
-#warning TODO 自动去连接要连接的Wi-Fi
-        if (@available(iOS 11.0, *)) {
-            if (hotspotAlertTime > 0) {
-                hotspotAlertTime--;
-                return;
-            }
-            hotspotAlertTime = 3;
-            NEHotspotConfiguration *hotspotConfig = [[NEHotspotConfiguration alloc] initWithSSID:self.ssid];
-            [[NEHotspotConfigurationManager sharedManager] applyConfiguration:hotspotConfig completionHandler:^(NSError * _Nullable error) {
-                NSLog(@"%@",error);
-                if (error && error.code != 13 && error.code != 7) {
-                    hotspotAlertTime = 0;//马上弹出框
-                }else if(error.code ==7){//error code = 7 ：用户点击了弹框取消按钮
-                    hotspotAlertTime = 0;
-                }else{// error code = 13 ：已连接
-                    hotspotAlertTime = 100000;
-                }
+    if(![ssid hasPrefix:@"Thingcom"]){
+        ///热点搜到设备后直接绑定，等待云平台推送
+        if (!bindSucc) {
+            DeviceModel *dModel = [[DeviceModel alloc] init];
+            dModel.mac = mac;
+            dModel.name = mac;
+            dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
+            
+            [self bindDevice:dModel success:^{
+                NSLog(@"绑定设备成功");
+                bindSucc = YES;
+            } failure:^{
+                
             }];
-        } else {
-            //ios11以下版本逻辑
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"配网成功") message:LocalString(@"您未连接到配网的Wi-Fi,会导致搜索不到设备，请注意切换Wi-Fi") preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                for (UIViewController *controller in self.navigationController.viewControllers) {
-                    if ([controller isKindOfClass:[DeviceViewController class]]) {
-                        [self.navigationController popToViewController:controller animated:YES];
-                    }
-                }
-            }];
-            [alertController addAction:cancelAction];
-            [self presentViewController:alertController animated:YES completion:nil];
         }
     }
 }
@@ -264,6 +249,13 @@ static int hotspotAlertTime = 3;
     return SSIDInfo;
 }
 
+- (void)rabbitDeviceApProcessSucc{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [NSObject showHudTipStr:LocalString(@"配网成功")];
+    });
+}
+
 #pragma mark - udp delegate
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext{
     [_lock lock];
@@ -271,21 +263,21 @@ static int hotspotAlertTime = 3;
     isFind = YES;//停止发送udp
     if (isSSIDSendSucc && isPasswordSendSucc) {
         /**
-         *发送玩账号密码后在Wi-Fi里查询udp
+         *发送完账号密码后在Wi-Fi里查询udp
          **/
-        NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"%@",msg);
-        NSString *newMac = [msg substringWithRange:NSMakeRange(0, 8)];
-        if ([newMac isEqualToString:mac]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                for (UIViewController *controller in self.navigationController.viewControllers) {
-                    if ([controller isKindOfClass:[DeviceViewController class]]) {
-                        [self.navigationController popToViewController:controller animated:YES];
-                    }
-                }
-                [NSObject showHudTipStr:LocalString(@"连接成功，请进行设备的选择")];
-            });
-        }
+//        NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"%@",msg);
+//        NSString *newMac = [msg substringWithRange:NSMakeRange(0, 8)];
+//        if ([newMac isEqualToString:mac]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                for (UIViewController *controller in self.navigationController.viewControllers) {
+//                    if ([controller isKindOfClass:[DeviceViewController class]]) {
+//                        [self.navigationController popToViewController:controller animated:YES];
+//                    }
+//                }
+//                [NSObject showHudTipStr:LocalString(@"连接成功，请进行设备的选择")];
+//            });
+//        }
     }else{
         /**
          *热点连接时获得udp地址
@@ -305,7 +297,7 @@ static int hotspotAlertTime = 3;
         NSLog(@"%@",msg);
         mac = [msg substringWithRange:NSMakeRange(0, 8)];
         
-        resendTimes = 3;
+        self->resendTimes = 3;
         [self tcpActions:ipAddress];
     }
     [_lock unlock];
@@ -335,6 +327,64 @@ static int hotspotAlertTime = 3;
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error{
     NSLog(@"没有发送数据");
 }
+
+#pragma mark - private methods
+- (void)bindDevice:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failur{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
+    [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
+    
+    Database *db = [Database shareInstance];
+    
+    NSDictionary *parameters;
+    NSMutableArray *homeList = [db queryRoomsWith:db.currentHouse.houseUid];
+    if (homeList.count <= 0) {
+        [NSObject showHudTipStr:LocalString(@"当前家庭还没有添加房间，请尽快添加")];
+        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":db.currentHouse.houseUid,@"houseUid":db.currentHouse.houseUid};
+    }else{
+        RoomModel *room = homeList[0];//将新设备插入到家庭第一个房间
+        parameters = @{@"mac":device.mac,@"name":device.name,@"type":device.type,@"houseUid":db.currentHouse.houseUid,@"roomUid":room.roomUid};
+    }
+    NSLog(@"%@",parameters);
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager POST:url parameters:parameters progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+              NSLog(@"success:%@",daetr);
+              
+              if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+                  [NSObject showHudTipStr:LocalString(@"绑定该设备成功")];
+                  [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+                      BOOL result = [db executeUpdate:@"INSERT INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.mac,device.type,[Database shareInstance].currentHouse.houseUid];
+                      if (result) {
+                          NSLog(@"插入设备到device成功");
+                      }else{
+                          NSLog(@"插入设备到device失败");
+                      }
+                  }];
+                  if (success) {
+                      success();
+                  }
+              }else{
+                  [NSObject showHudTipStr:LocalString(@"绑定该设备失败")];
+              }
+          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              NSLog(@"Error:%@",error);
+          }];
+}
+
 
 
 #pragma mark - setters and getters
