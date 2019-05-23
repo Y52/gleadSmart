@@ -692,7 +692,7 @@ static int noUserInteractionHeartbeat = 0;
             case DeviceTwoSwitch:
             case DeviceThreeSwitch:
             case DeviceFourSwitch:
-                datastreams = [datastreams stringByAppendingString:@"FE1100"];
+                datastreams = [datastreams stringByAppendingString:@"FC1100"];
                 datastreams = [datastreams stringByAppendingString:device.mac];
                 datastreams = [datastreams stringByAppendingString:@","];
                 break;
@@ -730,6 +730,12 @@ static int noUserInteractionHeartbeat = 0;
 //解析从onenet获取的监控点信息
 - (void)analysisResultValue:(NSString *)streamId value:(NSNumber *)value{
     NSString *index = [streamId substringWithRange:NSMakeRange(0, 2)];
+    if ([index isEqualToString:@"FC"]) {
+        [self analysisJienuo:streamId value:value];
+    }else{
+        //中央控制器下挂设备
+    }
+    
     NSString *mac = [streamId substringFromIndex:2];
     for (DeviceModel *device in self.connectedDevice.gatewayMountDeviceList) {
         if ([device.mac isEqualToString:mac]) {
@@ -747,6 +753,35 @@ static int noUserInteractionHeartbeat = 0;
                     device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0x01];
                     device.isUnusual = [value unsignedIntegerValue] & 0x40;
                     device.isTemperatureAlarm = [value unsignedIntegerValue] & 0x20;
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            NSDictionary *userInfo = @{@"device":device,@"isShare":@0};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+        }
+    }
+}
+
+- (void)analysisJienuo:(NSString *)streamId value:(NSNumber *)value{
+    NSString *funcFrame = [streamId substringWithRange:NSMakeRange(4, 2)];
+    NSString *mac = [streamId substringFromIndex:6];
+    for (DeviceModel *device in self.deviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            switch ([funcFrame integerValue]) {
+                case 00:
+                {
+                    device.isOnline = @1;
+                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0xFF];
+                }
+                    break;
+                    
+                case 10:
+                {
+                    
                 }
                     break;
                     
@@ -1050,6 +1085,13 @@ static int noUserInteractionHeartbeat = 0;
 //解析从onenet获取的分享设备监控点信息
 - (void)analysisShareDeviceResultValue:(NSString *)streamId value:(NSNumber *)value{
     NSString *index = [streamId substringWithRange:NSMakeRange(0, 2)];
+    
+    if ([index isEqualToString:@"FC"]) {
+        [self analysisShareDeviceJienuo:streamId value:value];
+    }else{
+        //中央控制器下挂设备
+    }
+    
     NSString *mac = [streamId substringFromIndex:2];
     for (DeviceModel *device in [Database shareInstance].shareDeviceArray) {
         if ([device.mac isEqualToString:mac]) {
@@ -1071,6 +1113,35 @@ static int noUserInteractionHeartbeat = 0;
                 default:
                     break;
             }
+        }
+    }
+}
+
+- (void)analysisShareDeviceJienuo:(NSString *)streamId value:(NSNumber *)value{
+    NSString *funcFrame = [streamId substringWithRange:NSMakeRange(4, 2)];
+    NSString *mac = [streamId substringFromIndex:6];
+    for (DeviceModel *device in [Database shareInstance].shareDeviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            switch ([funcFrame integerValue]) {
+                case 00:
+                {
+                    device.isOnline = @1;
+                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0xFF];
+                }
+                    break;
+                    
+                case 10:
+                {
+                    
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            NSDictionary *userInfo = @{@"device":device,@"isShare":@1};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
         }
     }
 }
