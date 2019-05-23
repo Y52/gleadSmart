@@ -212,7 +212,7 @@ static int hotspotAlertTime = 3;
             isFind = NO;
             [self sendSearchBroadcast];
         }
-    }else if(![ssid hasPrefix:@"ESP"] && [ssid isKindOfClass:[NSString class]]){
+    }else if(![ssid hasPrefix:@"Thingcom"] && [ssid isKindOfClass:[NSString class]]){
 #warning TODO 自动去连接要连接的Wi-Fi
         if (@available(iOS 11.0, *)) {
             if (hotspotAlertTime > 0) {
