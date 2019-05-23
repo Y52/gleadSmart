@@ -493,9 +493,9 @@ static dispatch_once_t oneToken;
                             DeviceModel *device = [[DeviceModel alloc] init];
                             device.name = [obj1 objectForKey:@"deviceName"];
                             device.mac = [obj1 objectForKey:@"mac"];
-                            device.apiKey = [obj objectForKey:@"apiKey"];
-                            device.deviceId = [obj objectForKey:@"deviceId"];
-                            device.houseUid = [obj objectForKey:@"houseUid"];
+                            device.apiKey = [obj1 objectForKey:@"apiKey"];
+                            device.deviceId = [obj1 objectForKey:@"deviceId"];
+                            device.houseUid = [obj1 objectForKey:@"houseUid"];
                             device.isShare = YES;
                             if (![device.mac isKindOfClass:[NSNull class]] && device.mac.length == 8) {
                                 //插入房间的设备

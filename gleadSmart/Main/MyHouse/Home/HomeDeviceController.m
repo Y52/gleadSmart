@@ -602,7 +602,24 @@ static CGFloat const Cell_Height = 72.f;
             
         case DevicePlugOutlet:
         {
-            
+            cell.switchBlock = ^(BOOL isOn) {
+                blockCell.controlSwitch.enabled = NO;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    //异步等待4秒，如果未收到信息做如下处理
+                    sleep(4);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        DeviceModel *device = self.deviceArray[indexPath.row];
+                        if ([device.isOn boolValue] != isOn) {
+                            blockCell.controlSwitch.enabled = YES;
+                            blockCell.controlSwitch.on = !isOn;//失败时把开关状态设置为操作前的状态
+                        }
+                    });
+                });
+                
+                UInt8 controlCode = 0x01;
+                NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,[NSNumber numberWithBool:isOn]];
+                [device sendData69With:controlCode mac:device.mac data:data];
+            };
         }
             break;
             
@@ -786,7 +803,34 @@ static CGFloat const Cell_Height = 72.f;
                     
                 case DeviceFourSwitch:
                 {
+                    MulSwitchController *switchVC = [[MulSwitchController alloc] init];
+                    switchVC.device = device;
+                    [self.navigationController pushViewController:switchVC animated:YES];
+                }
+                    break;
                     
+                case DeviceThreeSwitch:
+                {
+                    ThreeSwitchController *switchVC = [[ThreeSwitchController alloc] init];
+                    switchVC.device = device;
+                    NSLog(@"%@",device.deviceId);
+                    [self.navigationController pushViewController:switchVC animated:YES];
+                }
+                    break;
+                    
+                case DeviceTwoSwitch:
+                {
+                    TwoSwitchController *switchVC = [[TwoSwitchController alloc] init];
+                    switchVC.device = device;
+                    [self.navigationController pushViewController:switchVC animated:YES];
+                }
+                    break;
+                    
+                case DeviceOneSwitch:
+                {
+                    OneSwitchController *switchVC = [[OneSwitchController alloc] init];
+                    switchVC.device = device;
+                    [self.navigationController pushViewController:switchVC animated:YES];
                 }
                     break;
                     

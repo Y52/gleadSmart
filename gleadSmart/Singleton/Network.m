@@ -234,6 +234,55 @@ static int noUserInteractionHeartbeat = 0;
                 }
             }
         }
+        
+        /*
+         *分享设备列表
+         *根据设备（网关、插座、开关）mac连接每个设备的tcp
+         */
+        for (DeviceModel *bindDevice in [Database shareInstance].shareDeviceArray) {
+            NSUInteger type = [self judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]];
+            if (type == DeviceCenterlControl) {
+                //中央控制器退出循环
+                break;
+            }
+            if ([bindDevice.mac isEqualToString:mac]) {
+                /*
+                 *初始化
+                 */
+                if (!bindDevice.socket) {
+                    bindDevice.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+                }
+                if (!bindDevice.queue) {
+                    bindDevice.queue = dispatch_queue_create((char *)[bindDevice.mac UTF8String], DISPATCH_QUEUE_SERIAL);
+                }
+                if (!bindDevice.sendSignal) {
+                    bindDevice.sendSignal = dispatch_semaphore_create(1);
+                }
+                
+                if (![bindDevice.socket isDisconnected]) {
+                    //已经连接了
+                    [_lock unlock];
+                    return;
+                }
+                
+                NSError *error;
+                if ([bindDevice.socket connectToHost:ipAddress onPort:16888 error:&error]) {
+                    //连接操作
+                    [_lock unlock];
+                    
+                    //查询插座状态
+                    UInt8 controlCode = 0x01;
+                    NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
+                    [bindDevice sendData69With:controlCode mac:bindDevice.mac data:data];
+                    
+                    NSLog(@"%@连接成功",mac);
+                    return;
+                }else{
+                    NSLog(@"bindError%@",error);
+                }
+            }
+        }
+
 
         if (![self.mySocket isDisconnected]) {
             //如果已经连接了中央控制器，就不再重新连接了
@@ -957,10 +1006,21 @@ static int noUserInteractionHeartbeat = 0;
             datastreams = [datastreams stringByAppendingString:device.mac];
             break;
             
+        case DevicePlugOutlet:
+        case DeviceOneSwitch:
+        case DeviceTwoSwitch:
+        case DeviceThreeSwitch:
+        case DeviceFourSwitch:
+            datastreams = [datastreams stringByAppendingString:@"FE1100"];
+            datastreams = [datastreams stringByAppendingString:device.mac];
+            datastreams = [datastreams stringByAppendingString:@","];
+            break;
+            
         default:
             break;
     }
     NSDictionary *parameters = @{@"datastream_ids":datastreams};
+    NSLog(@"%@",parameters);
     
     [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
