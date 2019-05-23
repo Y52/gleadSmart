@@ -335,7 +335,7 @@
         _mulSwitchCloth_4 = [[UIView alloc] init];
         [_mulSwitchView_4 addSubview:_mulSwitchCloth_4];
         [_mulSwitchCloth_4 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(270.f), 120.f));
+            make.size.mas_equalTo(CGSizeMake((270.f), 120.f));
             make.centerX.equalTo(self.mulSwitchView_4.mas_centerX);
             make.centerY.equalTo(self.mulSwitchView_4.mas_centerY);
         }];
@@ -347,12 +347,12 @@
         _mulSwitchCloth_4.layer.cornerRadius = 2.5;
 
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_4switch_back"]];
-        image.frame = CGRectMake(0, 0, yAutoFit(270.f), 120.f);
+        image.frame = CGRectMake(0, 0, (270.f), 120.f);
         image.contentMode = UIViewContentModeScaleAspectFit;
         [_mulSwitchCloth_4 addSubview:image];
         //分开四路开关
         _switchButton4_1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        _switchButton4_1.frame = CGRectMake(0*(yAutoFit(270.f)/4), 0, yAutoFit(270.f)/4, 120.f);
+        _switchButton4_1.frame = CGRectMake(0*((270.f)/4), 0, (270.f)/4, 120.f);
         _switchButton4_1.tag = yUnselect;
         [_switchButton4_1 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         [_switchButton4_1.imageView setClipsToBounds:YES];
@@ -361,7 +361,7 @@
         [self.mulSwitchCloth_4 addSubview:self.switchButton4_1];
         
         _switchButton4_2 = [UIButton buttonWithType:UIButtonTypeCustom];
-        _switchButton4_2.frame = CGRectMake(1*(yAutoFit(270.f)/4), 0, yAutoFit(270.f)/4, 120.f);
+        _switchButton4_2.frame = CGRectMake(1*((270.f)/4), 0, (270.f)/4, 120.f);
         _switchButton4_2.tag = yUnselect;
         [_switchButton4_2 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         [_switchButton4_2.imageView setClipsToBounds:YES];
@@ -370,7 +370,7 @@
         [self.mulSwitchCloth_4 addSubview:self.switchButton4_2];
         
         _switchButton4_3 = [UIButton buttonWithType:UIButtonTypeCustom];
-        _switchButton4_3.frame = CGRectMake(2*(yAutoFit(270.f)/4), 0, yAutoFit(270.f)/4, 120.f);
+        _switchButton4_3.frame = CGRectMake(2*((270.f)/4), 0, (270.f)/4, 120.f);
         _switchButton4_3.tag = yUnselect;
         [_switchButton4_3 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         [_switchButton4_3.imageView setClipsToBounds:YES];
@@ -379,7 +379,7 @@
         [self.mulSwitchCloth_4 addSubview:self.switchButton4_3];
         
         _switchButton4_4 = [UIButton buttonWithType:UIButtonTypeCustom];
-        _switchButton4_4.frame = CGRectMake(3*(yAutoFit(270.f)/4), 0, yAutoFit(270.f)/4, 120.f);
+        _switchButton4_4.frame = CGRectMake(3*((270.f)/4), 0, (270.f)/4, 120.f);
         _switchButton4_4.tag = yUnselect;
         [_switchButton4_4 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         [_switchButton4_4.imageView setClipsToBounds:YES];

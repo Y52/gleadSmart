@@ -301,7 +301,7 @@
         _mulSwitchCloth = [[UIView alloc] init];
         [_mulSwitchView addSubview:_mulSwitchCloth];
         [_mulSwitchCloth mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(202.5f), 120.f));
+            make.size.mas_equalTo(CGSizeMake((202.5f), 120.f));
             make.centerX.equalTo(self.mulSwitchView.mas_centerX);
             make.centerY.equalTo(self.mulSwitchView.mas_centerY);
         }];
@@ -313,12 +313,12 @@
         _mulSwitchCloth.layer.cornerRadius = 2.5;
         
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_3switch_back"]];
-        image.frame = CGRectMake(0, 0, yAutoFit(202.5f), 120.f);
+        image.frame = CGRectMake(0, 0, (202.5f), 120.f);
         image.contentMode = UIViewContentModeScaleAspectFit;
         [_mulSwitchCloth addSubview:image];
         //分开三路开关
         self.switchButton3_1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.switchButton3_1.frame = CGRectMake(0*(yAutoFit(202.5f)/3), 0, yAutoFit(202.5f)/3, 120.f);
+        self.switchButton3_1.frame = CGRectMake(0*((202.5f)/3), 0, (202.5f)/3, 120.f);
         self.switchButton3_1.tag = yUnselect;
         [self.switchButton3_1 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         [self.switchButton3_1.imageView setClipsToBounds:YES];
@@ -327,7 +327,7 @@
         [self.mulSwitchCloth addSubview:self.switchButton3_1];
         
         self.switchButton3_2 = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.switchButton3_2.frame = CGRectMake(1*(yAutoFit(202.5f)/3), 0, yAutoFit(202.5f)/3, 120.f);
+        self.switchButton3_2.frame = CGRectMake(1*((202.5f)/3), 0, (202.5f)/3, 120.f);
         self.switchButton3_2.tag = yUnselect;
         [self.switchButton3_2 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         [self.switchButton3_2.imageView setClipsToBounds:YES];
@@ -336,7 +336,7 @@
         [self.mulSwitchCloth addSubview:self.switchButton3_2];
         
         self.switchButton3_3 = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.switchButton3_3.frame = CGRectMake(2*(yAutoFit(202.5f)/3), 0, yAutoFit(202.5f)/3, 120.f);
+        self.switchButton3_3.frame = CGRectMake(2*(202.5f /3), 0, 202.5f /3, 120.f);
         self.switchButton3_3.tag = yUnselect;
         [self.switchButton3_3 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         [self.switchButton3_3.imageView setClipsToBounds:YES];
