@@ -227,9 +227,10 @@ static int noUserInteractionHeartbeat = 0;
                     NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
                     [bindDevice sendData69With:controlCode mac:bindDevice.mac data:data];
                     
+                    NSLog(@"%@连接成功",mac);
                     return;
                 }else{
-                    NSLog(@"%@",error);
+                    NSLog(@"bindError%@",error);
                 }
             }
         }
