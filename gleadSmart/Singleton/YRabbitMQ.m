@@ -162,6 +162,9 @@ static NSArray *_routingkeys = nil;
         UInt8 controlCode = 0x00;
         NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
         [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitDeviceApProcessSucc" object:nil userInfo:nil];
+
     }else{
         for (DeviceModel *device in [Network shareNetwork].deviceArray) {
             device.isOnline = online;
