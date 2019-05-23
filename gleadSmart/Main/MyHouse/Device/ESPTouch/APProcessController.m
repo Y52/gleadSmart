@@ -199,37 +199,17 @@ static int hotspotAlertTime = 3;
             [self sendSearchBroadcast];
         }
     }else if(![ssid hasPrefix:@"ESP"] && [ssid isKindOfClass:[NSString class]]){
-#warning TODO 自动去连接要连接的Wi-Fi
-//        if (@available(iOS 11.0, *)) {
-//            if (hotspotAlertTime > 0) {
-//                hotspotAlertTime--;
-//                return;
-//            }
-//            hotspotAlertTime = 3;
-//            NEHotspotConfiguration *hotspotConfig = [[NEHotspotConfiguration alloc] initWithSSID:self.ssid];
-//            [[NEHotspotConfigurationManager sharedManager] applyConfiguration:hotspotConfig completionHandler:^(NSError * _Nullable error) {
-//                NSLog(@"%@",error);
-//                if (error && error.code != 13 && error.code != 7) {
-//                    hotspotAlertTime = 0;//马上弹出框
-//                }else if(error.code ==7){//error code = 7 ：用户点击了弹框取消按钮
-//                    hotspotAlertTime = 0;
-//                }else{// error code = 13 ：已连接
-//                    hotspotAlertTime = 100000;
-//                }
-//            }];
-//        } else {
-//            //ios11以下版本逻辑
-//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"配网成功") message:LocalString(@"您未连接到配网的Wi-Fi,会导致搜索不到设备，请注意切换Wi-Fi") preferredStyle:UIAlertControllerStyleAlert];
-//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//                for (UIViewController *controller in self.navigationController.viewControllers) {
-//                    if ([controller isKindOfClass:[DeviceViewController class]]) {
-//                        [self.navigationController popToViewController:controller animated:YES];
-//                    }
-//                }
-//            }];
-//            [alertController addAction:cancelAction];
-//            [self presentViewController:alertController animated:YES completion:nil];
-//        }
+        ///热点搜到设备后直接绑定，等待云平台推送
+        DeviceModel *dModel = [[DeviceModel alloc] init];
+        dModel.mac = mac;
+        dModel.name = mac;
+        dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
+
+        [self bindDevice:dModel success:^{
+            NSLog(@"绑定设备成功");
+        } failure:^{
+            
+        }];
     }
 }
 
@@ -298,19 +278,8 @@ static int hotspotAlertTime = 3;
         NSLog(@"%@",msg);
         mac = [msg substringWithRange:NSMakeRange(0, 8)];
         
-        ///热点搜到设备后直接绑定，等待云平台推送
-        DeviceModel *dModel = [[DeviceModel alloc] init];
-        dModel.mac = mac;
-        dModel.ipAddress = ipAddress;
-        dModel.name = mac;
-        dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
-        [self bindDevice:dModel success:^{
-            NSLog(@"绑定设备成功");
-            self->resendTimes = 3;
-            [self tcpActions:ipAddress];
-        } failure:^{
-            
-        }];
+        self->resendTimes = 3;
+        [self tcpActions:ipAddress];
     }
     [_lock unlock];
 }
