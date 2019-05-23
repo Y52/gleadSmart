@@ -66,6 +66,9 @@
     
     dispatch_source_cancel(_confirmWifiTimer);
 
+    isSSIDSendSucc = NO;
+    isPasswordSendSucc = NO;
+    bindSucc = NO;
 }
 
 - (void)dealloc{
@@ -226,7 +229,6 @@ static bool bindSucc = NO;
                 NSLog(@"绑定设备成功");
                 bindSucc = YES;
             } failure:^{
-                
             }];
         }
     }
@@ -378,7 +380,6 @@ static bool bindSucc = NO;
                       success();
                   }
               }else{
-                  [NSObject showHudTipStr:LocalString(@"绑定该设备失败")];
               }
           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
               NSLog(@"Error:%@",error);

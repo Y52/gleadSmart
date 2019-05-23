@@ -944,6 +944,60 @@ static int noUserInteractionHeartbeat = 0;
 }
 
 /*
+ *删除捷诺设备
+ */
+- (void)removeJienuoOldDeviceWith:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failure{
+    Database *db = [Database shareInstance];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    NSDictionary *parameters = @{@"mac":device.mac,@"type":device.type,@"apiKey":device.apiKey};
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
+    
+    [manager DELETE:url parameters:parameters
+            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+                NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+                NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"success:%@",daetr);
+                if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+                    /*
+                     *在本地删除
+                     */
+                    [db deleteDevice:device.mac];
+                    NSLog(@"删除设备%@成功",device.mac);
+                    if (success) {
+                        success();
+                    }
+                }else{
+                    if (failure) {
+                        failure();
+                    }
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"Error:%@",error);
+                if (failure) {
+                    failure();
+                }
+            }
+     ];
+}
+
+
+/*
  *判断设备类型
  */
 - (DeviceType)judgeDeviceTypeWith:(int)macByte2{
@@ -1046,7 +1100,7 @@ static int noUserInteractionHeartbeat = 0;
         case DeviceTwoSwitch:
         case DeviceThreeSwitch:
         case DeviceFourSwitch:
-            datastreams = [datastreams stringByAppendingString:@"FE1100"];
+            datastreams = [datastreams stringByAppendingString:@"FC1100"];
             datastreams = [datastreams stringByAppendingString:device.mac];
             datastreams = [datastreams stringByAppendingString:@","];
             break;
