@@ -946,6 +946,7 @@ static int noUserInteractionHeartbeat = 0;
             break;
             
         case DeviceValve:
+        case DeviceNTCValve:
             datastreams = [datastreams stringByAppendingString:@"21"];
             datastreams = [datastreams stringByAppendingString:device.mac];
             break;
