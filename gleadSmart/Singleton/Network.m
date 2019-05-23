@@ -1825,6 +1825,15 @@ static int noUserInteractionHeartbeat = 0;
     switch ([_recivedData69[9] unsignedIntegerValue]) {
         case 0x11:
         {
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x20 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"ap发送ssid成功");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"apSendSSIDSucc" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x21 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                NSLog(@"ap发送密码成功");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"apSendPasswordSucc" object:nil userInfo:nil];
+            }
+
             //智能插座
              NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]];
             switch (type) {

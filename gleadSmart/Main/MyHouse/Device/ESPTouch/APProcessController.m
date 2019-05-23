@@ -197,10 +197,12 @@ static bool isSSIDSendSucc = NO;
 static bool isPasswordSendSucc = NO;
 - (void)apSendSSIDSucc{
     isSSIDSendSucc = YES;
+    NSLog(@"isSSIDSendSucc");
 }
 
 - (void)apSendPasswordSucc{
     isPasswordSendSucc = YES;
+    NSLog(@"isPasswordSendSucc");
 }
 
 static int hotspotAlertTime = 3;
@@ -216,7 +218,7 @@ static int hotspotAlertTime = 3;
             isFind = NO;
             [self sendSearchBroadcast];
         }
-    }else if(![ssid hasPrefix:@"ESP"] && [ssid isKindOfClass:[NSString class]]){
+    }else if(![ssid hasPrefix:@"Thingcom"] && [ssid isKindOfClass:[NSString class]]){
         ///热点搜到设备后直接绑定，等待云平台推送
         DeviceModel *dModel = [[DeviceModel alloc] init];
         dModel.mac = mac;
