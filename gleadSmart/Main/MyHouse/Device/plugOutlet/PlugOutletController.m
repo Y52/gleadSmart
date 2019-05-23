@@ -10,6 +10,7 @@
 #import "PlugOutletSettingController.h"
 #import "PlugOutletTimingController.h"
 #import "PlugOutletDelayController.h"
+#import "PlugOutletElectricityController.h"
 
 @interface PlugOutletController ()
 
@@ -116,6 +117,9 @@
 
 - (void)plugElectricity{
     
+    PlugOutletElectricityController *ElectricityVC = [[PlugOutletElectricityController alloc] init];
+    ElectricityVC.device = self.device;
+    [self.navigationController pushViewController:ElectricityVC animated:YES];
 }
 
 //校准开关时间

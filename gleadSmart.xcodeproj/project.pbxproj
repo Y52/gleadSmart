@@ -228,9 +228,24 @@
 		354EF55AD66BAA5AE0E1F906FB1DBEED /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = A37B0543958C8E985B098CC1212C6A50 /* Network.m */; };
 		3581BEC59185814B004DD1B9FFB790E4 /* ESPAES.m in Sources */ = {isa = PBXBuildFile; fileRef = F789B46B0694D8CB107F0C43B3E0A7C9 /* ESPAES.m */; };
 		35F5F26A13D9FF2F653DC00FCC9696E6 /* img_tab_03_unselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD3FF0A2B7DB898369CC6DC9D2E2C6C8 /* img_tab_03_unselect@3x.png */; };
+		36018A9B2294E7DD00EBC093 /* PlugOutletElectricityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36018A9A2294E7DD00EBC093 /* PlugOutletElectricityController.m */; };
+		36018A9C2294E92600EBC093 /* PlugOutletElectricityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36018A9A2294E7DD00EBC093 /* PlugOutletElectricityController.m */; };
+		36018A9D2294ECB500EBC093 /* currenttemperature@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A4375688CDA42E6C4F1939DA25D1EE /* currenttemperature@2x.png */; };
+		36018A9E2294ECB900EBC093 /* currenttemperature@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F05509C0C6EC9126C5F8FEB48B981B0 /* currenttemperature@3x.png */; };
+		36018A9F2294ECCB00EBC093 /* temperatureSet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8316ADD849F43975E0EA4D15FDBDFFBF /* temperatureSet@2x.png */; };
+		36018AA02294ECD000EBC093 /* temperatureSet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9E1F00F286095898E369C6B396BC2ED /* temperatureSet@3x.png */; };
+		36018AA12294ECE200EBC093 /* valveTemperature_abnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9DDC282A0D3B5D632E35A340276EE9 /* valveTemperature_abnormal@2x.png */; };
+		36018AA22294ECEA00EBC093 /* valveTemperature_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BC960A81942BF8A6C724C5267E19FEC /* valveTemperature_abnormal@3x.png */; };
+		36018AA32294ECEE00EBC093 /* valveTemperature_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A3BF5985BEFB28EB361DCB73323B4C /* valveTemperature_normal@2x.png */; };
+		36018AA42294ECF100EBC093 /* valveTemperature_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0EA5185222DDCAC3EB7F05E0FAF637D /* valveTemperature_normal@3x.png */; };
+		36018AA72295372500EBC093 /* PlugOutleDatatStatisticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36018AA62295372500EBC093 /* PlugOutleDatatStatisticsCell.m */; };
+		36018AA822953C0B00EBC093 /* PlugOutleDatatStatisticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36018AA62295372500EBC093 /* PlugOutleDatatStatisticsCell.m */; };
 		3604B4F4227F06BC001F6382 /* OneSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4EE227F06BB001F6382 /* OneSwitchController.m */; };
 		3604B4F5227F06BC001F6382 /* TwoSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4F2227F06BC001F6382 /* TwoSwitchController.m */; };
 		3604B4F6227F06BC001F6382 /* ThreeSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4F3227F06BC001F6382 /* ThreeSwitchController.m */; };
+		367F6F0022941FFF00DFBE9B /* img_Lamp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8011E1C077F398A68FECF74D5B9B4FB2 /* img_Lamp@2x.png */; };
+		367F6F012294200200DFBE9B /* img_Lamp.png in Resources */ = {isa = PBXBuildFile; fileRef = C246B5DD0E31E4F0D2ECA462E78EBD55 /* img_Lamp.png */; };
+		367F6F022294200500DFBE9B /* img_Lamp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E18ABDAF0D686E483EC93AE0DE9C657 /* img_Lamp@3x.png */; };
 		36844A2F229290F700330C74 /* MulSwitchEditTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36844A2E229290F700330C74 /* MulSwitchEditTimingController.m */; };
 		36844A302292989A00330C74 /* MulSwitchEditTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36844A2E229290F700330C74 /* MulSwitchEditTimingController.m */; };
 		36844A3322929D0200330C74 /* PlugOutletEditTimingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36844A3222929D0200330C74 /* PlugOutletEditTimingController.m */; };
@@ -1255,6 +1270,10 @@
 		350DC94CC98742725BB9A45684D10BEA /* img_mine_houseManage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_mine_houseManage.png; sourceTree = "<group>"; };
 		35449D345676A32714524E62D7244524 /* img_adddevice_wenkongqi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_wenkongqi@3x.png"; sourceTree = "<group>"; };
 		35C3CC0DEC8567BC97DF96DDF99C9123 /* Pods-gleadSmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.release.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.release.xcconfig"; sourceTree = "<group>"; };
+		36018A992294E7DD00EBC093 /* PlugOutletElectricityController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletElectricityController.h; sourceTree = "<group>"; };
+		36018A9A2294E7DD00EBC093 /* PlugOutletElectricityController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletElectricityController.m; sourceTree = "<group>"; };
+		36018AA52295372500EBC093 /* PlugOutleDatatStatisticsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutleDatatStatisticsCell.h; sourceTree = "<group>"; };
+		36018AA62295372500EBC093 /* PlugOutleDatatStatisticsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutleDatatStatisticsCell.m; sourceTree = "<group>"; };
 		3604B4EE227F06BB001F6382 /* OneSwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneSwitchController.m; sourceTree = "<group>"; };
 		3604B4EF227F06BB001F6382 /* TwoSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoSwitchController.h; sourceTree = "<group>"; };
 		3604B4F0227F06BB001F6382 /* OneSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneSwitchController.h; sourceTree = "<group>"; };
@@ -2870,6 +2889,8 @@
 			children = (
 				1C122768DA7A85AFC35BCFB9496F7247 /* PlugOutletSettingCell.h */,
 				0F3D2D809CEA92B51AC6789573207FC8 /* PlugOutletSettingCell.m */,
+				36018AA52295372500EBC093 /* PlugOutleDatatStatisticsCell.h */,
+				36018AA62295372500EBC093 /* PlugOutleDatatStatisticsCell.m */,
 			);
 			name = plugOutlet;
 			path = Myhouse;
@@ -3087,6 +3108,8 @@
 				B4C4AF5950797B161A9613034FC0FE45 /* PlugOutletAddDelayController.m */,
 				36844A452292AE0300330C74 /* PlugOutletEditDelayController.h */,
 				36844A462292AE0300330C74 /* PlugOutletEditDelayController.m */,
+				36018A992294E7DD00EBC093 /* PlugOutletElectricityController.h */,
+				36018A9A2294E7DD00EBC093 /* PlugOutletElectricityController.m */,
 			);
 			path = plugOutlet;
 			sourceTree = "<group>";
@@ -3326,6 +3349,7 @@
 				51ADD12A60448AD1C7F7EAE442FE68C0 /* Main.storyboard in Resources */,
 				E45659269D080C06C851E1A9E00F397D /* addFamily_check.png in Resources */,
 				3A9A61933A084DE5D7B03C26435D8D63 /* addFamily_check@2x.png in Resources */,
+				36018A9F2294ECCB00EBC093 /* temperatureSet@2x.png in Resources */,
 				4771D4348F2765432D4921FA89B05450 /* addFamily_check@3x.png in Resources */,
 				E16A68710246049465BACD77F32464BA /* addFamily_device.png in Resources */,
 				71E397E80D1FD1CE36C3408BEB5BB9F8 /* addFamily_device@2x.png in Resources */,
@@ -3381,8 +3405,10 @@
 				A4FDD9BB05CFD8DD548B76A2666D156C /* img_houseSelected.png in Resources */,
 				40FCFBB7B9E99939BF14B65D0A5AE4F7 /* img_houseSelected@2x.png in Resources */,
 				445A93E7DE4E8033B668A5ADE8970586 /* img_houseSelected@3x.png in Resources */,
+				367F6F0022941FFF00DFBE9B /* img_Lamp@2x.png in Resources */,
 				BB1BD741228D5C5500AF5741 /* img_switch_allclose@2x.png in Resources */,
 				448AD91BF120A35D6EAAC223FBABC9B9 /* img_houseUnelect.png in Resources */,
+				36018AA22294ECEA00EBC093 /* valveTemperature_abnormal@3x.png in Resources */,
 				B4C93ABBAB15AA5300EA1C32244C41FE /* img_houseUnelect@2x.png in Resources */,
 				50F9D764C3F39F75DB61437B1D9E043A /* img_houseUnelect@3x.png in Resources */,
 				E6D71DD89F86C89D9AE698CF93655B5C /* img_launchBG.png in Resources */,
@@ -3422,6 +3448,8 @@
 				BB1BD74F228D5C5500AF5741 /* img_switch3_off@3x.png in Resources */,
 				BB1BD731228D5C5400AF5741 /* img_3switch_back@2x.png in Resources */,
 				C17E44445DC5E6FE7B84BBB219D1C5F1 /* img_mine_editPW@2x.png in Resources */,
+				367F6F012294200200DFBE9B /* img_Lamp.png in Resources */,
+				367F6F022294200500DFBE9B /* img_Lamp@3x.png in Resources */,
 				0B709A0106E165F043D44434D99443AA /* img_mine_editPW@3x.png in Resources */,
 				16EDE6CBDECBBF2094B24325E2E63DFB /* img_mine_header.png in Resources */,
 				BB1BD76B228D5C5500AF5741 /* img_plug_electricity@3x.png in Resources */,
@@ -3528,7 +3556,9 @@
 				22471CF88F8A8E82C16E4B2C65A4908F /* img_weekProgram_out@2x.png in Resources */,
 				B233AFAB15B8350C02D54C18EA891408 /* img_weekProgram_out@3x.png in Resources */,
 				C382A84F8F054C113A16881F3E1091B4 /* img_weekProgram_sleep.png in Resources */,
+				36018A9D2294ECB500EBC093 /* currenttemperature@2x.png in Resources */,
 				003406E3FF54450331456A6FDB601482 /* img_weekProgram_sleep@2x.png in Resources */,
+				36018AA02294ECD000EBC093 /* temperatureSet@3x.png in Resources */,
 				CB1EAB3D6232CC8A7CBB66D3E0E0EC0D /* img_weekProgram_sleep@3x.png in Resources */,
 				D38B2558F503647FD4FB04ECBB6FD9CC /* img_wifipwd.png in Resources */,
 				F4D4A6862AEC509145350B7EB00DC6F7 /* img_wifipwd@2x.png in Resources */,
@@ -3594,6 +3624,7 @@
 				BB1BD729228D5C5400AF5741 /* img_2switch_back@2x.png in Resources */,
 				751ED2CA5F1728CBFDB767EAD08CF28F /* thermostatSet@2x.png in Resources */,
 				8020EA69D79A232B77E6DA18AE4BCA4C /* thermostatSet@3x.png in Resources */,
+				36018AA32294ECEE00EBC093 /* valveTemperature_normal@2x.png in Resources */,
 				BB1BD769228D5C5500AF5741 /* img_plugView_off@3x.png in Resources */,
 				BB1BD735228D5C5400AF5741 /* img_switch3_on@3x.png in Resources */,
 				BC42FC2F4108CBC11EFA469901A8EC2D /* thermostatSet_on.png in Resources */,
@@ -3639,8 +3670,10 @@
 				2A8478770C12FCD16375719B6EF9F67A /* valveNode_abnormal@2x.png in Resources */,
 				0143FBFF30CD91AFCC928FDC3C3356EA /* valveNode_abnormal@3x.png in Resources */,
 				C5DEA67DF8AF8194777A98266865F62A /* valveNode_normal@2x.png in Resources */,
+				36018A9E2294ECB900EBC093 /* currenttemperature@3x.png in Resources */,
 				BB1BD763228D5C5500AF5741 /* img_plugView_on@3x.png in Resources */,
 				3CD516702A6034D2ACD1A45BD345D9C1 /* valveNode_normal@3x.png in Resources */,
+				36018AA12294ECE200EBC093 /* valveTemperature_abnormal@2x.png in Resources */,
 				B2CC4CBAABE34F0E485C1ACC56ADE01C /* valveNode_selabnormal@2x.png in Resources */,
 				F80EB441297C9E8A3ABA613D7C68C931 /* valveNode_selabnormal@3x.png in Resources */,
 				09A9EF725AFC541D75E50DB768D54DAA /* valveNode_selnormal@2x.png in Resources */,
@@ -3651,6 +3684,7 @@
 				9E8FBAC7186C95ED10DF14F3226FA075 /* valveStatus_abnormal@3x.png in Resources */,
 				948E08E0D9F57175E104D9F8E5C41920 /* valveStatus_normal.png in Resources */,
 				B1B424B1B621896F28B9C4C82D907499 /* valveStatus_normal@2x.png in Resources */,
+				36018AA42294ECF100EBC093 /* valveTemperature_normal@3x.png in Resources */,
 				E7A1B4053BEF46461A1BA131DD58F4ED /* valveStatus_normal@3x.png in Resources */,
 				4BB11FFAC386B782AF1471B46753C5E7 /* valveSwitch_abnormal.png in Resources */,
 				BB1BD755228D5C5500AF5741 /* img_switch1_on@3x.png in Resources */,
@@ -4259,6 +4293,7 @@
 				D0276CD94F77FC666D33EBD8FECAC65A /* LoginViewController.m in Sources */,
 				677B17460D6E40332EFD0F2BB534BC60 /* MainViewController.m in Sources */,
 				9F0D1130D181D5F653071C06EBB09510 /* ManagerSetCell.m in Sources */,
+				36018AA822953C0B00EBC093 /* PlugOutleDatatStatisticsCell.m in Sources */,
 				BB93C9DA228BEC0000B0DB6B /* PlugOutletSettingController.m in Sources */,
 				3CA58D3587E64F7BDA7595096D7300DC /* MemberAccountCell.m in Sources */,
 				95FA6FFEC06A99657B285D57F1167D2E /* MemberModel.m in Sources */,
@@ -4281,6 +4316,7 @@
 				BB93C9EA228BEC6B00B0DB6B /* MulSwitchSetingCell.m in Sources */,
 				1743D6EF27156F0B7447ECCD88C13FD7 /* NodeInfoCell.m in Sources */,
 				EF0C75C08FA8BA7942E3B1C5BA7C2D2B /* NodeModel.m in Sources */,
+				36018A9C2294E92600EBC093 /* PlugOutletElectricityController.m in Sources */,
 				4B7F9B31A9B7E019412F43571ABE933A /* PasswordLoginController.m in Sources */,
 				CE9D69D78463EF485BDA9B335E6D44B0 /* PhoneTFCell.m in Sources */,
 				9A70A978A0E62C88C0716A0605C7CC27 /* PhoneVerifyCell.m in Sources */,
@@ -4440,6 +4476,7 @@
 				72E3064BEC5F0A5AD700039A6B2848F7 /* MulSwitchAddTimingController.m in Sources */,
 				1189F4451BF6D9BECDCDC49D9F89424F /* MulSwitchController.m in Sources */,
 				07CDDB3CE6036864BE0DB2EDCB2A0B89 /* MulSwitchSaveAddTimingCell.m in Sources */,
+				36018AA72295372500EBC093 /* PlugOutleDatatStatisticsCell.m in Sources */,
 				9E8361C826044C75454F722BB3FEC0A7 /* MulSwitchSetingCell.m in Sources */,
 				1F994AFBDB7CDA416ADFD0EB3A0FECFC /* MulSwitchTimingController.m in Sources */,
 				6632708248AF747B7A3386D2B0580971 /* MulSwitchTimingSetingController.m in Sources */,
@@ -4462,6 +4499,7 @@
 				CE780924FA9CF6736779E32336BC6AB3 /* NodeInfoCell.m in Sources */,
 				D906D57C0561829069B62DDB894D8098 /* NodeModel.m in Sources */,
 				36BD5C934295C3C0C24A86FF8759B110 /* PasswordLoginController.m in Sources */,
+				36018A9B2294E7DD00EBC093 /* PlugOutletElectricityController.m in Sources */,
 				F8803B519C2915072A84CD07F7D5C9EA /* PhoneTFCell.m in Sources */,
 				16A08720656B381545EEF8207BF1F19F /* PhoneVerifyCell.m in Sources */,
 				0631F2634997620D326B38D7AA05E7E6 /* PlugOutletAddDelayCell.m in Sources */,
