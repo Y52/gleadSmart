@@ -60,7 +60,7 @@ static NSArray *_routingkeys = nil;
     //初始化exchange、queue
     id<RMQChannel> ch = [_conn createChannel];
     
-    RMQExchange *exchange = [ch topic:@"gleadSmart" options:RMQExchangeDeclareDurable];
+    RMQExchange *exchange = [ch topic:@"jienuo" options:RMQExchangeDeclareDurable];
     RMQQueue *queue = [ch queue:@"" options:RMQQueueDeclareExclusive];
     
     //queue绑定routingKeys
