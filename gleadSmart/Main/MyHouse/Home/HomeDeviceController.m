@@ -429,6 +429,7 @@ static CGFloat const Cell_Height = 72.f;
             
         case DevicePlugOutlet:
         {
+            cell.deviceImage.image = [UIImage imageNamed:@"img_plug_icon"];
             cell.switchBlock = ^(BOOL isOn) {
                 blockCell.controlSwitch.enabled = NO;
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
