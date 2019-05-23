@@ -206,6 +206,7 @@ static bool isPasswordSendSucc = NO;
 }
 
 static int hotspotAlertTime = 3;
+static bool bindSucc = NO;
 - (void)confirmWifiName{
     if (!(isSSIDSendSucc && isPasswordSendSucc)) {
         return;
@@ -213,18 +214,21 @@ static int hotspotAlertTime = 3;
     NSDictionary *netInfo = [self fetchNetInfo];
     NSString *ssid = [netInfo objectForKey:@"SSID"];
     NSLog(@"%@",ssid);
-    if(![ssid hasPrefix:@"ESP"]){
+    if(![ssid hasPrefix:@"Thingcom"]){
         ///热点搜到设备后直接绑定，等待云平台推送
-        DeviceModel *dModel = [[DeviceModel alloc] init];
-        dModel.mac = mac;
-        dModel.name = mac;
-        dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
-
-        [self bindDevice:dModel success:^{
-            NSLog(@"绑定设备成功");
-        } failure:^{
+        if (!bindSucc) {
+            DeviceModel *dModel = [[DeviceModel alloc] init];
+            dModel.mac = mac;
+            dModel.name = mac;
+            dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
             
-        }];
+            [self bindDevice:dModel success:^{
+                NSLog(@"绑定设备成功");
+                bindSucc = YES;
+            } failure:^{
+                
+            }];
+        }
     }
 }
 
