@@ -3222,6 +3222,9 @@
 					};
 					541635390C38F22EEA943A43CDA16D2A = {
 						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 0;
+							};
 							com.apple.HotspotConfiguration = {
 								enabled = 0;
 							};
@@ -4585,7 +4588,7 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H889Y9C8V4;
+				DEVELOPMENT_TEAM = HL4DHZX78L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4615,7 +4618,6 @@
 			baseConfigurationReference = FF6D24B0FEAD4E2B7945E448A7C453CE /* Pods-jienuoIOT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4745,7 +4747,7 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H889Y9C8V4;
+				DEVELOPMENT_TEAM = HL4DHZX78L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4794,7 +4796,6 @@
 			baseConfigurationReference = 570FD2948B582496DE0ED8F17ACB0D05 /* Pods-jienuoIOT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
 				FRAMEWORK_SEARCH_PATHS = (
