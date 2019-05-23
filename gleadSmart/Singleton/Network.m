@@ -642,7 +642,7 @@ static int noUserInteractionHeartbeat = 0;
             case DeviceTwoSwitch:
             case DeviceThreeSwitch:
             case DeviceFourSwitch:
-                datastreams = [datastreams stringByAppendingString:@"FC1100"];
+                datastreams = [datastreams stringByAppendingString:@"FE1100"];
                 datastreams = [datastreams stringByAppendingString:device.mac];
                 datastreams = [datastreams stringByAppendingString:@","];
                 break;
