@@ -273,7 +273,7 @@
         _mulSwitchCloth_2 = [[UIView alloc] init];
         [_mulSwitchView_2 addSubview:_mulSwitchCloth_2];
         [_mulSwitchCloth_2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(270.f), 120.f));
+            make.size.mas_equalTo(CGSizeMake((270.f), 120.f));
             make.centerX.equalTo(self.mulSwitchView_2.mas_centerX);
             make.centerY.equalTo(self.mulSwitchView_2.mas_centerY);
         }];
@@ -285,12 +285,12 @@
         _mulSwitchCloth_2.layer.cornerRadius = 2.5;
         
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_4switch_back"]];
-        image.frame = CGRectMake(0, 0, yAutoFit(270.f), 120.f);
+        image.frame = CGRectMake(0, 0, (270.f), 120.f);
         image.contentMode = UIViewContentModeScaleAspectFit;
         [_mulSwitchCloth_2 addSubview:image];
         //分开两路开关
         self.switchButton2_1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.switchButton2_1.frame = CGRectMake(0*(yAutoFit(270.f)/2), 0, yAutoFit(270.f)/2, 120.f);
+        self.switchButton2_1.frame = CGRectMake(0*((270.f)/2), 0, (270.f)/2, 120.f);
         self.switchButton2_1.tag = yUnselect;
         [self.switchButton2_1 setImage:[UIImage imageNamed:@"img_switch2_off"] forState:UIControlStateNormal];
         [self.switchButton2_1.imageView setClipsToBounds:YES];
@@ -299,7 +299,7 @@
         [self.mulSwitchCloth_2 addSubview:self.switchButton2_1];
         
         self.switchButton2_2 = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.switchButton2_2.frame = CGRectMake(1*(yAutoFit(270.f)/2), 0, yAutoFit(270.f)/2, 120.f);
+        self.switchButton2_2.frame = CGRectMake(1*((270.f)/2), 0, (270.f)/2, 120.f);
         self.switchButton2_2.tag = yUnselect;
         [self.switchButton2_2 setImage:[UIImage imageNamed:@"img_switch2_off"] forState:UIControlStateNormal];
         [self.switchButton2_2.imageView setClipsToBounds:YES];
