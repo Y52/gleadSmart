@@ -148,7 +148,7 @@
     if (sender.tag == yUnselect) {
         sender.tag = ySelect;
         
-        //[sender setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] | 0x01)];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
@@ -156,7 +156,7 @@
         self.device.isOn = @([self.device.isOn intValue] | 0x01);
     }else{
         sender.tag = yUnselect;
-        //[sender setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] & ~0x01)];
@@ -170,7 +170,7 @@
     if (sender.tag == yUnselect) {
         sender.tag = ySelect;
         
-        //[sender setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] | 0x02)];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
@@ -178,7 +178,7 @@
         self.device.isOn = @([self.device.isOn intValue] | 0x02);
     }else{
         sender.tag = yUnselect;
-        //[sender setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] & ~0x02)];
@@ -192,7 +192,7 @@
     if (sender.tag == yUnselect) {
         sender.tag = ySelect;
         
-        //[sender setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] | 0x04)];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
@@ -200,7 +200,7 @@
         self.device.isOn = @([self.device.isOn intValue] | 0x04);
     }else{
         sender.tag = yUnselect;
-        //[sender setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
         
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] & ~0x04)];
