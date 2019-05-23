@@ -930,7 +930,6 @@
 		DD07650A6768DCAFDE37041F10A5FBF7 /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FC069E3B92DA2E843EA65EA7B5036 /* NoHouseAddController.m */; };
 		DD83D133D28AEBC7AF9E430CC334F2D5 /* img_weekProgram_out@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3DCAF4E038E94408A39FC880CDF6160 /* img_weekProgram_out@2x.png */; };
 		DDDEFAEDC536F8A8768D83FAC9686A49 /* img_headerBg@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE85C7F703C45790F304C2C8975DB387 /* img_headerBg@1x.png */; };
-		DDF00D079D5D71CF1E1A9F51118E8C94 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270FFB05ED3692E6C0BF7BC5D8FDAF28 /* NetworkExtension.framework */; };
 		DE184A9B84C00E4E8F518DB4CFE24E6A /* TherWeekSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5483B95EF8977C584C7A92C2DFFA938E /* TherWeekSelectController.m */; };
 		DF3E5FA076704DED009B9ACFBD8AA3B4 /* img_retrieve_verify@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7576A679E070567D5C73A0D7D805523 /* img_retrieve_verify@3x.png */; };
 		DF4C45F7253E322BE82C20323C0F5366 /* img_pwd_visiable.png in Resources */ = {isa = PBXBuildFile; fileRef = C18318C77F1AF295436E4B7A2F8DF51E /* img_pwd_visiable.png */; };
@@ -997,7 +996,6 @@
 		EFAE5731FCD73A7C6B55D981197ED235 /* ShareDeviceDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A53A934BB5313B0794F3429D96FBBF7 /* ShareDeviceDetailController.m */; };
 		EFF26A5E72770A98891EAFC77E7A0958 /* img_adddevice_wenkongqi.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A41BB78C66F6FA1C4A9D4558DB482E3 /* img_adddevice_wenkongqi.png */; };
 		F049E446594DAF9D4E8CFB6139C1392B /* nodeSet_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65365312BBD97A97CF2C7982605E9A79 /* nodeSet_normal@3x.png */; };
-		F04A1164A051FF50F355F1C2D7530C28 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270FFB05ED3692E6C0BF7BC5D8FDAF28 /* NetworkExtension.framework */; };
 		F0C885211A3265E0166E6FD555FFE664 /* HouseNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E40B2A49B33DBAAC85D7E156097306F /* HouseNameCell.m */; };
 		F0FA4D901402A265825CD4EAC5515753 /* nodeSet_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE85587BF1D2071948CA4931BD25C38 /* nodeSet_normal@2x.png */; };
 		F16D3CF44BBD0F2CA55F3073DC077924 /* DeviceConnectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8715A7F2D54B3893BD01F8E6D50B96BD /* DeviceConnectView.m */; };
@@ -1193,7 +1191,6 @@
 		26453AC075B436FCA2730EF6B2F341CE /* 80@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "80@2x.png"; sourceTree = "<group>"; };
 		26BC2C760520018FBDC01564F5B8B834 /* thermostatControl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@2x.png"; sourceTree = "<group>"; };
 		26C2A330291FD859B18168D2EEAA8E8F /* addFamily_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addFamily_check@2x.png"; sourceTree = "<group>"; };
-		270FFB05ED3692E6C0BF7BC5D8FDAF28 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		27462532C1496AFBF000803AC63902A3 /* PlugOutletAddTimingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletAddTimingCell.h; sourceTree = "<group>"; };
 		274E6FCB0E723442A28FE9E253B25CC4 /* 120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120@2x.png"; sourceTree = "<group>"; };
 		27642B8C9E3A9672D61DC8EBDDB02730 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
@@ -1824,7 +1821,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDF00D079D5D71CF1E1A9F51118E8C94 /* NetworkExtension.framework in Frameworks */,
 				BBACD65E4CE4050F281BFF75293101DC /* Pods_gleadSmart.framework in Frameworks */,
 				5C798AF4DBC204EF75421620D9970084 /* Pods_jienuoIOT.framework in Frameworks */,
 			);
@@ -1834,7 +1830,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F04A1164A051FF50F355F1C2D7530C28 /* NetworkExtension.framework in Frameworks */,
 				8BA886B50F9DB64151E556A8556B9275 /* Pods_gleadSmart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1961,7 +1956,6 @@
 		163612BB24B0FB9228947700D5747E51 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				270FFB05ED3692E6C0BF7BC5D8FDAF28 /* NetworkExtension.framework */,
 				8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */,
 				CCDC8A25F5E504F477B0277BE80343F5 /* Pods_jienuoIOT.framework */,
 			);
@@ -3222,6 +3216,13 @@
 								enabled = 1;
 							};
 							com.apple.WAC = {
+								enabled = 0;
+							};
+						};
+					};
+					541635390C38F22EEA943A43CDA16D2A = {
+						SystemCapabilities = {
+							com.apple.HotspotConfiguration = {
 								enabled = 0;
 							};
 						};
@@ -4584,7 +4585,7 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				DEVELOPMENT_TEAM = H889Y9C8V4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4602,7 +4603,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GLEAD.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4744,7 +4745,7 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				DEVELOPMENT_TEAM = H889Y9C8V4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4762,7 +4763,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GLEAD.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
