@@ -1223,7 +1223,7 @@ static int noUserInteractionHeartbeat = 0;
             if ([[data objectForKey:@"status"] intValue] == 2 || [[data objectForKey:@"status"] intValue] == 1) {
                 if (resendTimes > 0) {
                     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                        sleep(3.f);
+                        sleep(1.f);
                         NSInteger times = resendTimes - 1;
                         [self getOneNETCommandStatus:cmd_uuid apiKey:apiKey resendTimes:times];
                     });
