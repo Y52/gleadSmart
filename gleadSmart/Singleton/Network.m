@@ -1954,6 +1954,10 @@ static int noUserInteractionHeartbeat = 0;
             device.isOnline = @1;
         }
     }
+    if ([_recivedData69[1] unsignedIntegerValue] == 0x81 ) {
+        //NSLog(@"屏蔽内网上报");
+        return;
+    }
     switch ([_recivedData69[9] unsignedIntegerValue]) {
         case 0x11:
         {
