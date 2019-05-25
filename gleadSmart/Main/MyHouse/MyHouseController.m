@@ -251,16 +251,17 @@ static CGFloat const gleadMenuItemMargin = 20.f;
             if (!net.deviceArray) {
                 net.deviceArray = [[NSMutableArray alloc] init];
             }
-            [net.deviceArray addObject:device];
+            [net.deviceArray updateOrAddDeviceModel:device];
             [device getRelayStatus];
         }
     }
     
 #warning todo 网关获取下挂设备，插座开关等获取状态
+#warning warn 中央控制器在这里先不显示了
     //获取家庭网关下所有下挂设备
-    UInt8 controlCode = 0x00;
-    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-    [[Network shareNetwork] sendData69With:controlCode mac:db.currentHouse.mac data:data failuer:nil];
+//    UInt8 controlCode = 0x00;
+//    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+//    [[Network shareNetwork] sendData69With:controlCode mac:db.currentHouse.mac data:data failuer:nil];
 }
 
 #pragma mark - Actions

@@ -15,7 +15,8 @@ NSString *const CellIdentifier_SelectDeviceType = @"CellID_SelectDeviceType";
 static float HEIGHT_CELL = 50.f;
 static float HEIGHT_HEADER = 40.f;
 
-static int deviceCount = 4;//设置为4，插座在洁利达项目不显示，要显示就设置为5
+#warning 捷诺项目显示插座和开关
+static int deviceCount = 2;
 
 @interface SelectDeviceTypeController () <UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) UITableView *deviceTypeTable;
@@ -103,34 +104,16 @@ static int deviceCount = 4;//设置为4，插座在洁利达项目不显示，�
     switch (indexPath.row) {
         case 0:
         {
-            cell.deviceName.text = LocalString(@"中央控制器");
-            cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_gateway"];
+            cell.deviceName.text = LocalString(@"插座");
+            cell.deviceImage.image = [UIImage imageNamed:@"img_plug_icon"];
         }
             break;
+            
         case 1:
         {
-            cell.deviceName.text = LocalString(@"温控器（LoRa）");
-            cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_wenkongqi"];
+            cell.deviceName.text = LocalString(@"开关");
+            cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_4"];
         }
-            break;
-        case 2:
-        {
-            cell.deviceName.text = LocalString(@"壁挂炉调节器（LoRa）");
-            cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_bigualu"];
-        }
-            break;
-        case 3:
-        {
-            cell.deviceName.text = LocalString(@"无线阀门（LoRa）");
-            cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_valve"];
-        }
-            break;
-        case 4:
-        {
-            cell.deviceName.text = LocalString(@"插座");
-            cell.deviceImage.image = [UIImage imageNamed:@"img_adddevice_valve"];
-        }
-            break;
         default:
             break;
     }

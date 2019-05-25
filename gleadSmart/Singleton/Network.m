@@ -475,7 +475,7 @@ static int noUserInteractionHeartbeat = 0;
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data failuer:(nullable void(^)(void))failure{
     if ([[Database shareInstance].currentHouse.mac isKindOfClass:[NSNull class]]) {
         NSLog(@"currentHouse.mac is null");
-        [NSObject showHudTipStr:@"当前家庭没有添加中央控制器"];
+        //[NSObject showHudTipStr:@"当前家庭没有添加中央控制器"];
         [SVProgressHUD dismiss];
         return;
     }

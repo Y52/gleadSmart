@@ -334,6 +334,18 @@ static bool bindSucc = NO;
 - (void)bindDevice:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failur{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
+    [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"没有网络");
+                return;
+                break;
+                
+            default:
+                break;
+        }
+    }];
+    
     //设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
