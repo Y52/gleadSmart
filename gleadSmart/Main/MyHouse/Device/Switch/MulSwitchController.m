@@ -33,7 +33,7 @@
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1.0].CGColor;
     [self setNavItem];
-
+    
     self.mulSwitchView_4 = [self mulSwitchView_4];
     self.mulSwitchCloth_4 = [self mulSwitchCloth_4];
     self.openAllButton_4 = [self openAllButton_4];
@@ -165,7 +165,7 @@
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@([self.device.isOn intValue] | 0x08)];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
         
-         self.device.isOn = @([self.device.isOn intValue] | 0x08);
+        self.device.isOn = @([self.device.isOn intValue] | 0x08);
     }else{
         sender.tag = yUnselect;
         //[sender setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
@@ -184,7 +184,6 @@
     for (DeviceModel *device in [Network shareNetwork].deviceArray) {
         if ([device.mac isEqualToString:self.device.mac]) {
             self.device = device;
-        
         }
     }
     [self FourSwitchUITransformationByStatus];
@@ -320,7 +319,7 @@
         _mulSwitchView_4.layer.shadowOffset = CGSizeMake(0,9);
         _mulSwitchView_4.layer.shadowOpacity = 1;
         _mulSwitchView_4.layer.shadowRadius = 12;
-
+        
         
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_switchback_back"]];
         image.frame = CGRectMake(0, 0, yAutoFit(290.f), 280.f);
@@ -345,7 +344,7 @@
         _mulSwitchCloth_4.layer.shadowOpacity = 1;
         _mulSwitchCloth_4.layer.shadowRadius = 25;
         _mulSwitchCloth_4.layer.cornerRadius = 2.5;
-
+        
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_4switch_back"]];
         image.frame = CGRectMake(0, 0, (270.f), 120.f);
         image.contentMode = UIViewContentModeScaleAspectFit;
