@@ -117,9 +117,11 @@ static CGFloat const HEIGHT_CELL = 51.f;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
-        return 3;
+#warning 去掉微信测试
+        return 2;
     }else{
-        return 3;
+#warning 去掉检查更新
+        return 2;
     }
 }
 
@@ -150,12 +152,7 @@ static CGFloat const HEIGHT_CELL = 51.f;
         }
         
     }else if (indexPath.section == 1){
-        if (indexPath.row == 0) {
-            cell.normalLabel.text = LocalString(@"检查更新");
-            cell.normalImage.image = [UIImage imageNamed:@"img_mine_checkUpdate"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
-        }else if (indexPath.row == 1){
+        if (indexPath.row == 0){
             cell.normalLabel.text = LocalString(@"关于我们");
             cell.normalImage.image = [UIImage imageNamed:@"img_mine_aboutus"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

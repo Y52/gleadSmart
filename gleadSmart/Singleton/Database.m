@@ -464,6 +464,7 @@ static dispatch_once_t oneToken;
                             device.apiKey = [obj objectForKey:@"apiKey"];
                             device.deviceId = [obj objectForKey:@"deviceId"];
                             device.houseUid = house.houseUid;
+                            device.isShare = NO;
                             
                             if ([device.mac isKindOfClass:[NSString class]] && device.mac.length > 0) {
                                 DeviceType type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
@@ -485,7 +486,6 @@ static dispatch_once_t oneToken;
             if (!self.shareDeviceArray) {
                 self.shareDeviceArray = [[NSMutableArray alloc] init];
             }
-            [self.shareDeviceArray removeAllObjects];
             if ([[dic objectForKey:@"shareHouse"] isKindOfClass:[NSArray class]] && [[dic objectForKey:@"shareHouse"] count] > 0) {
                 [[dic objectForKey:@"shareHouse"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     if ([[obj objectForKey:@"devices"] isKindOfClass:[NSArray class]] && [[obj objectForKey:@"devices"] count] > 0) {
@@ -500,7 +500,7 @@ static dispatch_once_t oneToken;
                             if (![device.mac isKindOfClass:[NSNull class]] && device.mac.length == 8) {
                                 //插入房间的设备
                                 [self insertNewShareDevice:device];
-                                [self.shareDeviceArray addObject:device];
+                                [self.shareDeviceArray updateOrAddDeviceModel:device];
                             }
                         }];
                     }

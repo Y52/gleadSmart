@@ -910,18 +910,28 @@ static CGFloat const Cell_Height = 72.f;
     switch (indexPath.section) {
         case 0:
             if (editingStyle == UITableViewCellEditingStyleDelete) {
-                DeviceModel *device = self.deviceArray[indexPath.row];
                 Network *net = [Network shareNetwork];
-                UInt8 controlCode = 0x00;
-                NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]]];//删除节点
-                [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
-                [net removeOldDeviceWith:device success:^{
-                    [self.deviceArray removeObject:device];
-                    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                    [NSObject showHudTipStr:LocalString(@"删除设备成功")];
-                } failure:^{
-                    [NSObject showHudTipStr:LocalString(@"删除设备失败")];
-                }];
+                DeviceModel *device = self.deviceArray[indexPath.row];
+                if ([device.type intValue] >= DevicePlugOutlet && [device.type intValue] <= DeviceFourSwitch) {
+                    [net removeJienuoOldDeviceWith:device success:^{
+                        [self.deviceArray removeObject:device];
+                        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                        [NSObject showHudTipStr:LocalString(@"删除设备成功")];
+                    } failure:^{
+                        [NSObject showHudTipStr:LocalString(@"删除设备失败")];
+                    }];
+                }else if ([device.type intValue] >= DeviceThermostat && [device.type intValue] <= DeviceNTCValve){
+                    UInt8 controlCode = 0x00;
+                    NSArray *data = @[@0xFE,@0x02,@0x92,@0x01,[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(6, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(4, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]],[NSNumber numberWithInt:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(0, 2)]]]];//删除节点
+                    [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
+                    [net removeOldDeviceWith:device success:^{
+                        [self.deviceArray removeObject:device];
+                        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                        [NSObject showHudTipStr:LocalString(@"删除设备成功")];
+                    } failure:^{
+                        [NSObject showHudTipStr:LocalString(@"删除设备失败")];
+                    }];
+                }
             }
             break;
             

@@ -44,7 +44,6 @@ static int frameCount = 0;
     if (!self.sendSignal) {
         self.sendSignal = dispatch_semaphore_create(1);
     }
-    
     if (self.queue) {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             dispatch_sync(self.queue, ^{

@@ -66,6 +66,9 @@
     
     dispatch_source_cancel(_confirmWifiTimer);
 
+    isSSIDSendSucc = NO;
+    isPasswordSendSucc = NO;
+    bindSucc = NO;
 }
 
 - (void)dealloc{
@@ -226,7 +229,6 @@ static bool bindSucc = NO;
                 NSLog(@"绑定设备成功");
                 bindSucc = YES;
             } failure:^{
-                
             }];
         }
     }
@@ -332,6 +334,18 @@ static bool bindSucc = NO;
 - (void)bindDevice:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failur{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
+    [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"没有网络");
+                return;
+                break;
+                
+            default:
+                break;
+        }
+    }];
+    
     //设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
@@ -378,7 +392,6 @@ static bool bindSucc = NO;
                       success();
                   }
               }else{
-                  [NSObject showHudTipStr:LocalString(@"绑定该设备失败")];
               }
           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
               NSLog(@"Error:%@",error);
