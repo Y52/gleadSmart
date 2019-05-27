@@ -228,6 +228,9 @@
 		354EF55AD66BAA5AE0E1F906FB1DBEED /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = A37B0543958C8E985B098CC1212C6A50 /* Network.m */; };
 		3581BEC59185814B004DD1B9FFB790E4 /* ESPAES.m in Sources */ = {isa = PBXBuildFile; fileRef = F789B46B0694D8CB107F0C43B3E0A7C9 /* ESPAES.m */; };
 		35F5F26A13D9FF2F653DC00FCC9696E6 /* img_tab_03_unselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD3FF0A2B7DB898369CC6DC9D2E2C6C8 /* img_tab_03_unselect@3x.png */; };
+		360087AB229B7AAA006164FE /* DeviceLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 360087AA229B7AAA006164FE /* DeviceLocationController.m */; };
+		360087AC229B7BEC006164FE /* DeviceLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 360087AA229B7AAA006164FE /* DeviceLocationController.m */; };
+		360087AF229B7F96006164FE /* DeviceLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 360087AE229B7F96006164FE /* DeviceLocationCell.m */; };
 		3604B4F4227F06BC001F6382 /* OneSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4EE227F06BB001F6382 /* OneSwitchController.m */; };
 		3604B4F5227F06BC001F6382 /* TwoSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4F2227F06BC001F6382 /* TwoSwitchController.m */; };
 		3604B4F6227F06BC001F6382 /* ThreeSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4F3227F06BC001F6382 /* ThreeSwitchController.m */; };
@@ -1230,6 +1233,10 @@
 		350DC94CC98742725BB9A45684D10BEA /* img_mine_houseManage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_mine_houseManage.png; sourceTree = "<group>"; };
 		35449D345676A32714524E62D7244524 /* img_adddevice_wenkongqi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_wenkongqi@3x.png"; sourceTree = "<group>"; };
 		35C3CC0DEC8567BC97DF96DDF99C9123 /* Pods-gleadSmart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gleadSmart.release.xcconfig"; path = "Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart.release.xcconfig"; sourceTree = "<group>"; };
+		360087A9229B7AAA006164FE /* DeviceLocationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceLocationController.h; sourceTree = "<group>"; };
+		360087AA229B7AAA006164FE /* DeviceLocationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceLocationController.m; sourceTree = "<group>"; };
+		360087AD229B7F96006164FE /* DeviceLocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceLocationCell.h; sourceTree = "<group>"; };
+		360087AE229B7F96006164FE /* DeviceLocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceLocationCell.m; sourceTree = "<group>"; };
 		3604B4EE227F06BB001F6382 /* OneSwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneSwitchController.m; sourceTree = "<group>"; };
 		3604B4EF227F06BB001F6382 /* TwoSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoSwitchController.h; sourceTree = "<group>"; };
 		3604B4F0227F06BB001F6382 /* OneSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneSwitchController.h; sourceTree = "<group>"; };
@@ -2348,6 +2355,8 @@
 			children = (
 				DB100A6D216C6D2667C81857889D2E32 /* SelectDeviceTypeCell.h */,
 				9849761AD2CB8AED3EE2FDF5113C589A /* SelectDeviceTypeCell.m */,
+				360087AD229B7F96006164FE /* DeviceLocationCell.h */,
+				360087AE229B7F96006164FE /* DeviceLocationCell.m */,
 			);
 			name = Device;
 			sourceTree = "<group>";
@@ -2728,6 +2737,8 @@
 				EE7D7101BAAF5F4A9C9905A57EF19AB6 /* plugOutlet */,
 				A88B6787AD8DA60CBDFF8F9466729CE9 /* DeviceSettingController.h */,
 				B9F15FDEE07315D694041C72C71FB75C /* DeviceSettingController.m */,
+				360087A9229B7AAA006164FE /* DeviceLocationController.h */,
+				360087AA229B7AAA006164FE /* DeviceLocationController.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -4256,6 +4267,7 @@
 				326A487BA59ADA1B1C25511EAC6D7DD5 /* TherSettingCell.m in Sources */,
 				5970D69F27B6F02C87F3021CF3B42AC5 /* TherTimerCell.m in Sources */,
 				BB93C9E2228BEC1800B0DB6B /* MulSwitchTimingController.m in Sources */,
+				360087AC229B7BEC006164FE /* DeviceLocationController.m in Sources */,
 				297446F7E116AF7741BE2E4359A09815 /* TherWeekProgramCell.m in Sources */,
 				25EA0112E593B9FF0826231BEF012BE8 /* TherWeekProgramController.m in Sources */,
 				BF08E99700B2262E5B7B191F25C60799 /* TherWeekSelCell.m in Sources */,
@@ -4414,6 +4426,7 @@
 				D11BCC7BE75F1F38B076396EB276C10B /* RDVTabBar.m in Sources */,
 				00F0CA59DBA8694984F51FE83C814AA7 /* RDVTabBarController.m in Sources */,
 				BB0FE2F7F493DDE8A4747626FF69BE8A /* RDVTabBarItem.m in Sources */,
+				360087AF229B7F96006164FE /* DeviceLocationCell.m in Sources */,
 				1BE637E3B3F97FDC1DD3DD2BAFDFB5A3 /* RegisterAccountController.m in Sources */,
 				E8E70DA72851AFE3BFC03B8E5767FACF /* RegisterController.m in Sources */,
 				9C340243937CA7E064F7B03B981C9C90 /* RetrievePasswordController.m in Sources */,
@@ -4434,6 +4447,7 @@
 				7B76B2A5DADD2DC9695794405C01CF27 /* TextFieldCell.m in Sources */,
 				331CF391D4F85467AF1FA69DE5BB380D /* TherAddTimerSwitchCell.m in Sources */,
 				8FF08F7EDBEA2C593A7D3ED76AD89BBE /* TherAddTimerWeekCell.m in Sources */,
+				360087AB229B7AAA006164FE /* DeviceLocationController.m in Sources */,
 				A5C561A58C865678B60C7D58A779A7F1 /* TherSettingCell.m in Sources */,
 				09ADAEF888D156E03EA1F2AA584B528D /* TherTimerCell.m in Sources */,
 				3604B4F5227F06BC001F6382 /* TwoSwitchController.m in Sources */,
@@ -4588,7 +4602,7 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HL4DHZX78L;
+				DEVELOPMENT_TEAM = 5FAMV3D32N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4747,7 +4761,7 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HL4DHZX78L;
+				DEVELOPMENT_TEAM = 5FAMV3D32N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
