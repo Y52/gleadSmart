@@ -52,11 +52,25 @@ static CGFloat const Header_Height = 25.f;
 - (void)didMoveToParentViewController:(UIViewController *)parent{
     [super didMoveToParentViewController:parent];
     Database *data = [Database shareInstance];
+    Network *net = [Network shareNetwork];
     if (data.currentHouse) {
+        BOOL isDelete = YES;//判断当前家庭是否被移除了
         //更新家庭信息，避免家庭设置中修改了家庭信息而主页面未改变
         for (HouseModel *house in data.houseList) {
             if ([data.currentHouse.houseUid isEqualToString:house.houseUid]) {
                 data.currentHouse = house;
+                isDelete = NO;
+            }
+        }
+        if (isDelete) {
+            //当前家庭被移除了，换成第一个家庭
+            HouseModel *house = data.houseList[0];
+            data.currentHouse = house;
+            [data.localDeviceArray removeAllObjects];
+            [data.shareDeviceArray removeAllObjects];
+            [net.deviceArray removeAllObjects];
+            if (net.mySocket.isConnected) {
+                [net.mySocket disconnect];
             }
         }
     }

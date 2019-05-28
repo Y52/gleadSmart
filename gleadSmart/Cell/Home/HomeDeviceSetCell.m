@@ -1,23 +1,24 @@
 //
-//  DeviceTableViewCell.m
-//  Coffee
+//  HomeDeviceSetCell.m
+//  gleadSmart
 //
-//  Created by 杭州轨物科技有限公司 on 2018/6/27.
-//  Copyright © 2018年 杭州轨物科技有限公司. All rights reserved.
+//  Created by 杭州轨物科技有限公司 on 2019/5/27.
+//  Copyright © 2019年 杭州轨物科技有限公司. All rights reserved.
 //
 
-#import "DeviceTableViewCell.h"
+#import "HomeDeviceSetCell.h"
 
-@implementation DeviceTableViewCell
+@implementation HomeDeviceSetCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         if (!_deviceImage) {
+            _deviceImage = [[UIImageView alloc] init];
             [self.contentView addSubview:_deviceImage];
             [_deviceImage mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(yAutoFit(90), yAutoFit(60)));
+                make.size.mas_equalTo(CGSizeMake(yAutoFit(30), yAutoFit(30)));
                 make.centerY.equalTo(self.contentView.mas_centerY);
                 make.left.equalTo(self.contentView.mas_left).offset(15);
             }];

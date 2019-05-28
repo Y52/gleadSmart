@@ -10,7 +10,6 @@
 #import "GCDAsyncUdpSocket.h"
 #import "DeviceViewController.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
-#import <NetworkExtension/NEHotspotConfigurationManager.h>
 
 #import <netdb.h>//解析udp获取的IP地址
 

@@ -64,6 +64,72 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     self.navigationController.navigationBar.translucent = NO;
 }
 
+#pragma mark - private methods
+-(void)completeAddRooms{
+    AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    if ([cell.inputTF.text isEqualToString:@""]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"错误") message:LocalString(@"请输入正确的房间名字") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
+    [SVProgressHUD show];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    Database *db = [Database shareInstance];
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/room",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    NSDictionary *parameters = @{@"name":cell.inputTF.text,@"houseUid":self.houseUid};
+    
+    [manager POST:url parameters:parameters progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+              NSLog(@"success:%@",daetr);
+              if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+                  [self.navigationController popViewControllerAnimated:YES];
+                  NSDictionary *data = [responseDic objectForKey:@"data"];
+                  NSString *roomUid = [data objectForKey:@"roomUid"];
+                  RoomModel *room = [[RoomModel alloc] init];
+                  room.roomUid = roomUid;
+                  room.name = cell.inputTF.text;
+                  room.houseUid = self.houseUid;
+                  room.sortId = self.sortId;
+                  [[Database shareInstance] insertNewRoom:room];
+              }else{
+                  [NSObject showHudTipStr:LocalString(@"添加房间失败")];
+              }
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  [SVProgressHUD dismiss];
+              });
+          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              NSLog(@"%@",error);
+              if (error.code == -1001) {
+                  [NSObject showHudTipStr:LocalString(@"当前网络状况不佳")];
+              }else{
+                  [NSObject showHudTipStr:LocalString(@"添加房间失败")];
+              }
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  [SVProgressHUD dismiss];
+              });
+          }
+     ];
+    
+}
+
 #pragma mark - Lazyload
 - (void)setNavItem{
     self.navigationItem.title = LocalString(@"添加房间");
@@ -434,64 +500,6 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
         }];
     }
     return _bathRoomBtn;
-}
-
-
--(void)completeAddRooms{
-    AddRoomsTextCell *cell = [self.addRoomsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    if ([cell.inputTF.text isEqualToString:@""]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"错误") message:LocalString(@"请输入正确的房间名字") preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
-        [alertController addAction:cancelAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-        return;
-    }
-
-    [SVProgressHUD show];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    Database *db = [Database shareInstance];
-    //设置超时时间
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
-    
-    NSString *url = [NSString stringWithFormat:@"%@/api/room",httpIpAddress];
-    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-
-    NSDictionary *parameters = @{@"name":cell.inputTF.text,@"houseUid":self.houseUid};
-    
-    [manager POST:url parameters:parameters progress:nil
-          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-              NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
-              NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
-              NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-              NSLog(@"success:%@",daetr);
-              if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-                  [self.navigationController popViewControllerAnimated:YES];
-              }else{
-                  [NSObject showHudTipStr:LocalString(@"添加房间失败")];
-              }
-              dispatch_async(dispatch_get_main_queue(), ^{
-                  [SVProgressHUD dismiss];
-              });
-          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-              NSLog(@"%@",error);
-              if (error.code == -1001) {
-                  [NSObject showHudTipStr:LocalString(@"当前网络状况不佳")];
-              }else{
-                  [NSObject showHudTipStr:LocalString(@"添加房间失败")];
-              }
-              dispatch_async(dispatch_get_main_queue(), ^{
-                  [SVProgressHUD dismiss];
-              });
-          }
-     ];
-
 }
 
 -(void)recommend{

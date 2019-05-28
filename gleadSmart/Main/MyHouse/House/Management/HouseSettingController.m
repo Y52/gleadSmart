@@ -16,6 +16,7 @@
 #import "AddMemberController.h"
 #import "FamilyMemberController.h"
 #import "HouseShareController.h"
+#import "HomeManagementController.h"
 
 NSString *const CellIdentifier_HouseSetCommon = @"CellID_HouseSetCommon";
 NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
@@ -385,6 +386,7 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Database *db = [Database shareInstance];
     switch (indexPath.section) {
         case 0:
             if (indexPath.row == 0) {
@@ -410,6 +412,11 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
                     [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
                     [alert.rightBtn setTitle:LocalString(@"确认") forState:UIControlStateNormal];
                 }];
+            }else if (indexPath.row == 1){
+                HomeManagementController *HomeManagementVC = [[HomeManagementController alloc] init];
+                HomeManagementVC.homeList = [db queryRoomsWith:self.house.houseUid];
+                HomeManagementVC.houseUid = self.house.houseUid;
+                [self.navigationController pushViewController:HomeManagementVC animated:YES];
             }else if (indexPath.row == 2){
                 if ([self.house.auth integerValue]) {
                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您没有该权限") preferredStyle:UIAlertControllerStyleAlert];
