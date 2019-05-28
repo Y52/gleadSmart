@@ -24,13 +24,13 @@ static float HEIGHT_HEADER = 30.f;
 @property (strong, nonatomic) UILabel *todayElectricityLabel;
 
 @property (strong, nonatomic) UILabel *currentLabel;
-@property (strong, nonatomic) UILabel *currentValueLabel;
-@property (strong, nonatomic) UILabel *consumptionLabel;
-@property (strong, nonatomic) UILabel *consumptionValueLabel;
+@property (strong, nonatomic) UILabel *currentValueLabel; //当前电流
+@property (strong, nonatomic) UILabel *powerLabel;
+@property (strong, nonatomic) UILabel *powerValueLabel;//当前功率
 @property (strong, nonatomic) UILabel *voltageLabel;
-@property (strong, nonatomic) UILabel *voltageValueLabel;
+@property (strong, nonatomic) UILabel *voltageValueLabel;//当前电压
 @property (strong, nonatomic) UILabel *electricityLabel;
-@property (strong, nonatomic) UILabel *electricityValueLabel;
+@property (strong, nonatomic) UILabel *electricityValueLabel;//总电量
 
 @property (strong, nonatomic) UITableView *timeTableView;
 
@@ -51,23 +51,45 @@ static float HEIGHT_HEADER = 30.f;
     self.todayElectricityLabel = [self todayElectricityLabel];
     self.listView = [self listView];
     self.timeTableView = [self timeTableView];
+    [self getElectricityBySocket];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getElectricityValue:) name:@"getElectricityValue" object:nil];
     
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getElectricityValue" object:nil];
 }
 
 #pragma mark - notification
 
+- (void)getElectricityValue:(NSNotification *)nsnotification
+{
+    NSDictionary *userInfo = [nsnotification userInfo];
+    NSString *voltage = [userInfo objectForKey:@"Voltage"];
+    NSString *current = [userInfo objectForKey:@"Current"];
+    NSString *power = [userInfo objectForKey:@"Power"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.voltageValueLabel.text = voltage;
+        self.currentValueLabel.text = current;
+        self.powerValueLabel.text = power;
+    });
+    
+}
+
 #pragma mark - private methods
+
+- (void)getElectricityBySocket{
+    UInt8 controlCode = 0x00;
+    NSArray *data = @[@0xFC,@0x11,@0x10,@0x00];
+    [self.device sendData69With:controlCode mac:self.device.mac data:data];
+}
 
 - (void)goSetting{
     PlugOutletSettingController *VC = [[PlugOutletSettingController alloc] init];
@@ -189,27 +211,27 @@ static float HEIGHT_HEADER = 30.f;
             make.top.equalTo(self.listView.mas_centerY).offset(yAutoFit(5.5f));
         }];
         
-        _consumptionLabel = [[UILabel alloc] init];
-        _consumptionLabel.text = LocalString(@"当前功耗(W)");
-        _consumptionLabel.textAlignment = NSTextAlignmentCenter;
-        _consumptionLabel.adjustsFontSizeToFitWidth = YES;
-        _consumptionLabel.textColor = [UIColor colorWithRed:68/255.0 green:68/255.0 blue:68/255.0 alpha:1];
-        _consumptionLabel.font = [UIFont fontWithName:@"Helvetica" size:13.f];
-        [self.listView addSubview:_consumptionLabel];
-        [_consumptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        _powerLabel = [[UILabel alloc] init];
+        _powerLabel.text = LocalString(@"当前功耗(W)");
+        _powerLabel.textAlignment = NSTextAlignmentCenter;
+        _powerLabel.adjustsFontSizeToFitWidth = YES;
+        _powerLabel.textColor = [UIColor colorWithRed:68/255.0 green:68/255.0 blue:68/255.0 alpha:1];
+        _powerLabel.font = [UIFont fontWithName:@"Helvetica" size:13.f];
+        [self.listView addSubview:_powerLabel];
+        [_powerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(80.f), yAutoFit(13.f)));
             make.left.equalTo(self.currentLabel.mas_right).offset(yAutoFit(10.f));
             make.bottom.equalTo(self.listView.mas_centerY).offset(-yAutoFit(5.5f));
         }];
         
-        _consumptionValueLabel = [[UILabel alloc] init];
-        _consumptionValueLabel.text = LocalString(@"160");
-        _consumptionValueLabel.textAlignment = NSTextAlignmentCenter;
-        _consumptionValueLabel.adjustsFontSizeToFitWidth = YES;
-        _consumptionValueLabel.textColor = [UIColor colorWithRed:68/255.0 green:68/255.0 blue:68/255.0 alpha:1];
-        _consumptionValueLabel.font = [UIFont fontWithName:@"Helvetica" size:13.f];
-        [self.listView addSubview:_consumptionValueLabel];
-        [_consumptionValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        _powerValueLabel = [[UILabel alloc] init];
+        _powerValueLabel.text = LocalString(@"160");
+        _powerValueLabel.textAlignment = NSTextAlignmentCenter;
+        _powerValueLabel.adjustsFontSizeToFitWidth = YES;
+        _powerValueLabel.textColor = [UIColor colorWithRed:68/255.0 green:68/255.0 blue:68/255.0 alpha:1];
+        _powerValueLabel.font = [UIFont fontWithName:@"Helvetica" size:13.f];
+        [self.listView addSubview:_powerValueLabel];
+        [_powerValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(80.f), yAutoFit(13.f)));
             make.left.equalTo(self.currentValueLabel.mas_right).offset(yAutoFit(10.f));
             make.top.equalTo(self.listView.mas_centerY).offset(yAutoFit(5.5f));
@@ -224,7 +246,7 @@ static float HEIGHT_HEADER = 30.f;
         [self.listView addSubview:_voltageLabel];
         [_voltageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(80.f), yAutoFit(13.f)));
-            make.left.equalTo(self.consumptionLabel.mas_right).offset(yAutoFit(10.f));
+            make.left.equalTo(self.powerLabel.mas_right).offset(yAutoFit(10.f));
             make.bottom.equalTo(self.listView.mas_centerY).offset(-yAutoFit(5.5f));
         }];
         
@@ -237,7 +259,7 @@ static float HEIGHT_HEADER = 30.f;
         [self.listView addSubview:_voltageValueLabel];
         [_voltageValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(80.f), yAutoFit(13.f)));
-            make.left.equalTo(self.consumptionValueLabel.mas_right).offset(yAutoFit(10.f));
+            make.left.equalTo(self.powerValueLabel.mas_right).offset(yAutoFit(10.f));
             make.top.equalTo(self.listView.mas_centerY).offset(yAutoFit(5.5f));
         }];
         

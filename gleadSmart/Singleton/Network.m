@@ -1243,7 +1243,7 @@ static int noUserInteractionHeartbeat = 0;
             self->_frameCount++;//帧计数器增加
             NSDictionary *data =[responseDic objectForKey:@"data"];
             NSString *cmd_uuid = [data objectForKey:@"cmd_uuid"];
-            [self getOneNETCommandStatus:cmd_uuid apiKey:apiKey resendTimes:5];
+            [self getOneNETCommandStatus:cmd_uuid apiKey:apiKey resendTimes:20];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error:%@",error);
@@ -1277,7 +1277,7 @@ static int noUserInteractionHeartbeat = 0;
             if ([[data objectForKey:@"status"] intValue] == 2 || [[data objectForKey:@"status"] intValue] == 1) {
                 if (resendTimes > 0) {
                     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                        sleep(1.f);
+                        sleep(0.5f);
                         NSInteger times = resendTimes - 1;
                         [self getOneNETCommandStatus:cmd_uuid apiKey:apiKey resendTimes:times];
                     });
@@ -2094,6 +2094,24 @@ static int noUserInteractionHeartbeat = 0;
                     }
                     if ([_recivedData69[10] unsignedIntegerValue] == 0x10 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                         NSLog(@"查询wifi智能插座的电量（电压，电流，功率）");
+                        
+                        NSMutableDictionary *dataDic = [[NSMutableDictionary alloc] init];
+                        
+                        NSNumber *voltage1 = _recivedData69[12];
+                        NSNumber *voltage2 = _recivedData69[13];
+                        NSNumber *current1 = _recivedData69[14];
+                        NSNumber *current2 = _recivedData69[15];
+                        NSNumber *power1 = _recivedData69[16];
+                        NSNumber *power2 = _recivedData69[17];
+                        NSString *voltage = [[NSString alloc] initWithFormat:@"%d",[voltage1 intValue]*256 + [voltage2 intValue]];
+                        NSString *current = [[NSString alloc] initWithFormat:@"%d",[current1 intValue]*256 + [current2 intValue]];
+                        NSString *power = [[NSString alloc] initWithFormat:@"%d",[power1 intValue]*256 + [power2 intValue]];
+                        [dataDic setObject:voltage forKey:@"Voltage"];
+                        [dataDic setObject:current forKey:@"Current"];
+                        [dataDic setObject:power forKey:@"Power"];
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"getElectricityValue" object:nil userInfo:dataDic];
+
                     }
                     if ([_recivedData69[10] unsignedIntegerValue] == 0x11 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                         NSLog(@"查询wifi智能插座的电压");
