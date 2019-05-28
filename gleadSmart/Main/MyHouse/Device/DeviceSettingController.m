@@ -9,6 +9,7 @@
 #import "DeviceSettingController.h"
 #import "DeviceSettingCell.h"
 #import "DeviceShareController.h"
+#import "DeviceLocationController.h"
 
 NSString *const CellIdentifier_deviceSetting = @"CellID_deviceSetting";
 static float HEIGHT_CELL = 50.f;
@@ -172,6 +173,14 @@ static float HEIGHT_HEADER = 40.f;
                 
             }
             if (indexPath.row == 1) {
+                
+                DeviceLocationController *VC = [[DeviceLocationController alloc] init];
+                VC.device = self.device;
+                VC.popBlock = ^(NSString *roomUid) {
+                    self.device.roomUid = roomUid;
+                    [self.deviceSettingTable reloadData];
+                };
+                [self.navigationController pushViewController:VC  animated:YES];
                 
             }
         }
