@@ -860,6 +860,10 @@
 		BBAD0D45229D14F5009D4F42 /* PlugOutletEditDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D43229D14F5009D4F42 /* PlugOutletEditDelayController.m */; };
 		BBAD0D48229D1504009D4F42 /* NSMutableArray+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D47229D1504009D4F42 /* NSMutableArray+Common.m */; };
 		BBAD0D49229D1504009D4F42 /* NSMutableArray+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D47229D1504009D4F42 /* NSMutableArray+Common.m */; };
+		BBAD0D52229D1609009D4F42 /* DeviceLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D50229D1609009D4F42 /* DeviceLocationController.m */; };
+		BBAD0D53229D1609009D4F42 /* DeviceLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D50229D1609009D4F42 /* DeviceLocationController.m */; };
+		BBAD0D56229D161D009D4F42 /* DeviceLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D54229D161D009D4F42 /* DeviceLocationCell.m */; };
+		BBAD0D57229D161D009D4F42 /* DeviceLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D54229D161D009D4F42 /* DeviceLocationCell.m */; };
 		BBED11018EEF75677A4A4B0EB91CB50F /* img_ther_addTimerSwitch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF326CB45C32724F7009A6732B37108E /* img_ther_addTimerSwitch@2x.png */; };
 		BC42FC2F4108CBC11EFA469901A8EC2D /* thermostatSet_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B47A1EC308F2F47B7E47F3B379FEDC4 /* thermostatSet_on.png */; };
 		BC46119D165A9B7DD6BEE91EC6196BE0 /* thermostat_max@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B70707341694A8C599741756AC9A9626 /* thermostat_max@3x.png */; };
@@ -1716,6 +1720,10 @@
 		BBAD0D43229D14F5009D4F42 /* PlugOutletEditDelayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletEditDelayController.m; sourceTree = "<group>"; };
 		BBAD0D46229D1504009D4F42 /* NSMutableArray+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Common.h"; sourceTree = "<group>"; };
 		BBAD0D47229D1504009D4F42 /* NSMutableArray+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Common.m"; sourceTree = "<group>"; };
+		BBAD0D50229D1609009D4F42 /* DeviceLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceLocationController.m; sourceTree = "<group>"; };
+		BBAD0D51229D1609009D4F42 /* DeviceLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceLocationController.h; sourceTree = "<group>"; };
+		BBAD0D54229D161D009D4F42 /* DeviceLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceLocationCell.m; sourceTree = "<group>"; };
+		BBAD0D55229D161D009D4F42 /* DeviceLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceLocationCell.h; sourceTree = "<group>"; };
 		BCCFAFCD4C12F63A3F250A729BB80519 /* img_addDevice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addDevice@2x.png"; sourceTree = "<group>"; };
 		BD1273BB75C4015B79584FA6F8BD9915 /* valveStatus_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_abnormal@3x.png"; sourceTree = "<group>"; };
 		BD2801B712735F8857037B146A29A9CF /* WeekendNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekendNameCell.h; sourceTree = "<group>"; };
@@ -2238,9 +2246,9 @@
 				B7C6139013697CA8834ABE677880C425 /* UIButton+Common.m */,
 				A5D2254969D312C50A21FA2FDD24A288 /* UIColor+ColorChange.h */,
 				1EFE54353B0FA94FE79ABFBE653BA7A1 /* UIColor+ColorChange.m */,
+				BBAD0D40229D0CBB009D4F42 /* NullSafe.m */,
 				14AEEA56F4EED4E5BA3EABD6EFB915A8 /* UILabel+YBAttributeTextTapAction.h */,
 				7BC9E677A480DA747490F9D4FADA29ED /* UILabel+YBAttributeTextTapAction.m */,
-				BBAD0D40229D0CBB009D4F42 /* NullSafe.m */,
 			);
 			path = OC_Category;
 			sourceTree = SOURCE_ROOT;
@@ -2436,6 +2444,8 @@
 			children = (
 				DB100A6D216C6D2667C81857889D2E32 /* SelectDeviceTypeCell.h */,
 				9849761AD2CB8AED3EE2FDF5113C589A /* SelectDeviceTypeCell.m */,
+				BBAD0D55229D161D009D4F42 /* DeviceLocationCell.h */,
+				BBAD0D54229D161D009D4F42 /* DeviceLocationCell.m */,
 			);
 			name = Device;
 			sourceTree = "<group>";
@@ -2818,6 +2828,8 @@
 				EE7D7101BAAF5F4A9C9905A57EF19AB6 /* plugOutlet */,
 				A88B6787AD8DA60CBDFF8F9466729CE9 /* DeviceSettingController.h */,
 				B9F15FDEE07315D694041C72C71FB75C /* DeviceSettingController.m */,
+				BBAD0D51229D1609009D4F42 /* DeviceLocationController.h */,
+				BBAD0D50229D1609009D4F42 /* DeviceLocationController.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -4347,6 +4359,7 @@
 				D1B63F2B0E2D929C8070A00D2B79CA05 /* MineViewController.m in Sources */,
 				48690E5B534E3597B8BA81AD8131535C /* ModifyPasswordViewController.m in Sources */,
 				C055F06F29117A626520DCF032ED88CE /* MyHouseController.m in Sources */,
+				BBAD0D57229D161D009D4F42 /* DeviceLocationCell.m in Sources */,
 				BBA02AAC229B7DC900C561A4 /* HomeNameSetCell.m in Sources */,
 				1831AC0F78461AC86CA02DC74BBFFD8A /* NSDate+Common.m in Sources */,
 				3193B24C15B4D5230620153B12B885A7 /* NSObject+Common.m in Sources */,
@@ -4366,6 +4379,7 @@
 				4B7F9B31A9B7E019412F43571ABE933A /* PasswordLoginController.m in Sources */,
 				CE9D69D78463EF485BDA9B335E6D44B0 /* PhoneTFCell.m in Sources */,
 				9A70A978A0E62C88C0716A0605C7CC27 /* PhoneVerifyCell.m in Sources */,
+				BBAD0D53229D1609009D4F42 /* DeviceLocationController.m in Sources */,
 				BB93C9EE228BECBA00B0DB6B /* DelayModel.m in Sources */,
 				222FCCD89F5C16CF6B98B9564675CAE8 /* PlugOutletSettingCell.m in Sources */,
 				8212A89DB8FAC86CD8BACCD592BE6BE0 /* RDVTabBar.m in Sources */,
@@ -4567,6 +4581,7 @@
 				C3807EF4A61AC40C947838B77269F7F5 /* PlugOutletTimingController.m in Sources */,
 				3E35C52B2483FFEAA4EBD09CB8018809 /* PlugOutletWeekSelectCell.m in Sources */,
 				83D80B334D0A06787691229ECACAFB0D /* PlugOutletWeekSelectController.m in Sources */,
+				BBAD0D56229D161D009D4F42 /* DeviceLocationCell.m in Sources */,
 				D11BCC7BE75F1F38B076396EB276C10B /* RDVTabBar.m in Sources */,
 				00F0CA59DBA8694984F51FE83C814AA7 /* RDVTabBarController.m in Sources */,
 				BB0FE2F7F493DDE8A4747626FF69BE8A /* RDVTabBarItem.m in Sources */,
@@ -4616,6 +4631,7 @@
 				5A8CEFEA9C2EC5B1E3A40B262F242356 /* WeekendNameCell.m in Sources */,
 				EF370CFBA75E4E73A946B916CECEC153 /* WirelessValveController.m in Sources */,
 				C6C3BD1E69ACD550B21B97E40A669473 /* YAlertViewController.m in Sources */,
+				BBAD0D52229D1609009D4F42 /* DeviceLocationController.m in Sources */,
 				065E3009D7C8C4B3DAB2864FC47B9D28 /* YRabbitMQ.m in Sources */,
 				FFAABC32BA1F955667037C1B35FE1A4B /* YSZCoreDataStackManager.m in Sources */,
 				C231661C6564D217C3C91C5AB67A3EA7 /* YTFAlertController.m in Sources */,

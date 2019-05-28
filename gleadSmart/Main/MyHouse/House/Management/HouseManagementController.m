@@ -66,7 +66,6 @@ static CGFloat const Header_Height = 25.f;
             //当前家庭被移除了，换成第一个家庭
             HouseModel *house = data.houseList[0];
             data.currentHouse = house;
-            [data.localDeviceArray removeAllObjects];
             [data.shareDeviceArray removeAllObjects];
             [net.deviceArray removeAllObjects];
             if (net.mySocket.isConnected) {
