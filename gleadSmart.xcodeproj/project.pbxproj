@@ -856,6 +856,10 @@
 		BBA02AB1229B7EAD00C561A4 /* HomeDeviceSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA02AAF229B7EAD00C561A4 /* HomeDeviceSetCell.m */; };
 		BBACD65E4CE4050F281BFF75293101DC /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */; };
 		BBAD0D41229D0CBB009D4F42 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D40229D0CBB009D4F42 /* NullSafe.m */; };
+		BBAD0D44229D14F5009D4F42 /* PlugOutletEditDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D43229D14F5009D4F42 /* PlugOutletEditDelayController.m */; };
+		BBAD0D45229D14F5009D4F42 /* PlugOutletEditDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D43229D14F5009D4F42 /* PlugOutletEditDelayController.m */; };
+		BBAD0D48229D1504009D4F42 /* NSMutableArray+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D47229D1504009D4F42 /* NSMutableArray+Common.m */; };
+		BBAD0D49229D1504009D4F42 /* NSMutableArray+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D47229D1504009D4F42 /* NSMutableArray+Common.m */; };
 		BBED11018EEF75677A4A4B0EB91CB50F /* img_ther_addTimerSwitch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF326CB45C32724F7009A6732B37108E /* img_ther_addTimerSwitch@2x.png */; };
 		BC42FC2F4108CBC11EFA469901A8EC2D /* thermostatSet_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B47A1EC308F2F47B7E47F3B379FEDC4 /* thermostatSet_on.png */; };
 		BC46119D165A9B7DD6BEE91EC6196BE0 /* thermostat_max@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B70707341694A8C599741756AC9A9626 /* thermostat_max@3x.png */; };
@@ -1708,6 +1712,10 @@
 		BBA02AAE229B7EAD00C561A4 /* HomeDeviceSetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceSetCell.h; sourceTree = "<group>"; };
 		BBA02AAF229B7EAD00C561A4 /* HomeDeviceSetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceSetCell.m; sourceTree = "<group>"; };
 		BBAD0D40229D0CBB009D4F42 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
+		BBAD0D42229D14F5009D4F42 /* PlugOutletEditDelayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugOutletEditDelayController.h; sourceTree = "<group>"; };
+		BBAD0D43229D14F5009D4F42 /* PlugOutletEditDelayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugOutletEditDelayController.m; sourceTree = "<group>"; };
+		BBAD0D46229D1504009D4F42 /* NSMutableArray+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Common.h"; sourceTree = "<group>"; };
+		BBAD0D47229D1504009D4F42 /* NSMutableArray+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Common.m"; sourceTree = "<group>"; };
 		BCCFAFCD4C12F63A3F250A729BB80519 /* img_addDevice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addDevice@2x.png"; sourceTree = "<group>"; };
 		BD1273BB75C4015B79584FA6F8BD9915 /* valveStatus_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_abnormal@3x.png"; sourceTree = "<group>"; };
 		BD2801B712735F8857037B146A29A9CF /* WeekendNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekendNameCell.h; sourceTree = "<group>"; };
@@ -2215,6 +2223,8 @@
 		330A84273800CD8D5B5A089ED887816F /* OC_Category */ = {
 			isa = PBXGroup;
 			children = (
+				BBAD0D46229D1504009D4F42 /* NSMutableArray+Common.h */,
+				BBAD0D47229D1504009D4F42 /* NSMutableArray+Common.m */,
 				B377FF1067AC6387D96BF418F4CAAFAD /* TableView+Touch */,
 				D48BC7951D1046A31DFC13293A523331 /* UIButton */,
 				A89E615B081EBB1C4C21F9C6900502A3 /* View */,
@@ -3109,6 +3119,8 @@
 		EE7D7101BAAF5F4A9C9905A57EF19AB6 /* plugOutlet */ = {
 			isa = PBXGroup;
 			children = (
+				BBAD0D42229D14F5009D4F42 /* PlugOutletEditDelayController.h */,
+				BBAD0D43229D14F5009D4F42 /* PlugOutletEditDelayController.m */,
 				FE9DBC36893ABA5F410C756F68A0044C /* PlugOutletController.h */,
 				9557C486348BC450901BA8C7C3FFD0BF /* PlugOutletController.m */,
 				C01BA74A6AC91B6AC23FC642EBFC1C0F /* PlugOutletSettingController.h */,
@@ -4381,6 +4393,7 @@
 				C75DA666A92E62799D880633DEE25D31 /* SharerInfoCell.m in Sources */,
 				4918525AA4983AD16799CC76AA77623E /* SharerInputController.m in Sources */,
 				69EAC414AB10A27149340015ADDADA31 /* SharerModel.m in Sources */,
+				BBAD0D49229D1504009D4F42 /* NSMutableArray+Common.m in Sources */,
 				BB93C9E6228BEC5000B0DB6B /* ValveAlertInfoController.m in Sources */,
 				2F83A5DBBFA316C099868B4936A3846B /* SharerRemarkController.m in Sources */,
 				9DD35240963FB90F0C95201377250E4F /* TextFieldCell.m in Sources */,
@@ -4393,6 +4406,7 @@
 				25EA0112E593B9FF0826231BEF012BE8 /* TherWeekProgramController.m in Sources */,
 				BF08E99700B2262E5B7B191F25C60799 /* TherWeekSelCell.m in Sources */,
 				9FAC8477E279B04CF3BB7EF02B29A667 /* TherWeekSelectController.m in Sources */,
+				BBAD0D45229D14F5009D4F42 /* PlugOutletEditDelayController.m in Sources */,
 				BB93C9EB228BEC6E00B0DB6B /* MulSwitchWeekSelectCell.m in Sources */,
 				BB93C9EC228BECAC00B0DB6B /* DeviceSettingCell.m in Sources */,
 				82716802731369A6C4B3F99634804C93 /* ThermostSettingController.m in Sources */,
@@ -4494,10 +4508,12 @@
 				99597CEE0924BA5BDCB1205EDA910053 /* HouseSelectController.m in Sources */,
 				BBA02AAB229B7C8700C561A4 /* HomeNameSetCell.m in Sources */,
 				4E251585DE2F690D29CBC79483B64831 /* HouseSetCommonCell.m in Sources */,
+				BBAD0D44229D14F5009D4F42 /* PlugOutletEditDelayController.m in Sources */,
 				9DD6BB47E2672186CA68F01200A87784 /* HouseSetMemberCell.m in Sources */,
 				126B2A57B52CB8878E186F5D232386C1 /* HouseSettingController.m in Sources */,
 				B1055287C177F1180258B39A53A8B532 /* HouseShareController.m in Sources */,
 				B124BEFBE1A8911E748AD410B8CB35DD /* KYDivisionPickerView.m in Sources */,
+				BBAD0D48229D1504009D4F42 /* NSMutableArray+Common.m in Sources */,
 				6772B33A599FB0EA31D8BEA4775E2497 /* LogOutCell.m in Sources */,
 				5B4DCD5A6ADE6F613AACE59B262F039C /* LoginViewController.m in Sources */,
 				2BB34E038DB5475145E49EE14E14DB15 /* MainViewController.m in Sources */,
