@@ -262,8 +262,6 @@
 		36844A422292A36800330C74 /* img_switch_icon_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36844A3A2292A36800330C74 /* img_switch_icon_3@2x.png */; };
 		36844A432292A36800330C74 /* img_switch_icon_4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36844A3B2292A36800330C74 /* img_switch_icon_4@3x.png */; };
 		36844A442292A36800330C74 /* img_switch_icon_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36844A3C2292A36800330C74 /* img_switch_icon_2@3x.png */; };
-		36844A472292AE0300330C74 /* PlugOutletEditDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36844A462292AE0300330C74 /* PlugOutletEditDelayController.m */; };
-		36844A482292AEF600330C74 /* PlugOutletEditDelayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36844A462292AE0300330C74 /* PlugOutletEditDelayController.m */; };
 		36844A492292B18200330C74 /* img_switch_icon_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36844A382292A36800330C74 /* img_switch_icon_1@2x.png */; };
 		36844A4A2292B18700330C74 /* img_switch_icon_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36844A352292A36700330C74 /* img_switch_icon_1@3x.png */; };
 		36844A4B2292B18B00330C74 /* img_switch_icon_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36844A362292A36800330C74 /* img_switch_icon_2@2x.png */; };
@@ -1300,8 +1298,6 @@
 		36844A3A2292A36800330C74 /* img_switch_icon_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch_icon_3@2x.png"; sourceTree = "<group>"; };
 		36844A3B2292A36800330C74 /* img_switch_icon_4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch_icon_4@3x.png"; sourceTree = "<group>"; };
 		36844A3C2292A36800330C74 /* img_switch_icon_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch_icon_2@3x.png"; sourceTree = "<group>"; };
-		36844A452292AE0300330C74 /* PlugOutletEditDelayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletEditDelayController.h; sourceTree = "<group>"; };
-		36844A462292AE0300330C74 /* PlugOutletEditDelayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletEditDelayController.m; sourceTree = "<group>"; };
 		36C9151A73CDCC7A44897EB31411F3F9 /* img_nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_nav_back.png; sourceTree = "<group>"; };
 		37216C47A7ACEE60A2B8FC473474E9A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3782C0956AEC32D9119F32C9B61EFDF7 /* valveTabMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTabMore@2x.png"; sourceTree = "<group>"; };
@@ -3114,8 +3110,6 @@
 				4138EA160EE4F7D1C361D73E3B7022C6 /* PlugOutletDelayController.m */,
 				D1F409D77D4D01158002DCF236F62FBE /* PlugOutletAddDelayController.h */,
 				B4C4AF5950797B161A9613034FC0FE45 /* PlugOutletAddDelayController.m */,
-				36844A452292AE0300330C74 /* PlugOutletEditDelayController.h */,
-				36844A462292AE0300330C74 /* PlugOutletEditDelayController.m */,
 				36018A992294E7DD00EBC093 /* PlugOutletElectricityController.h */,
 				36018A9A2294E7DD00EBC093 /* PlugOutletElectricityController.m */,
 			);
@@ -4340,7 +4334,6 @@
 				EDA2AEDCF158667CBEBFA4B435B149B2 /* RegisterAccountController.m in Sources */,
 				388DC7DA5FF4AA3CC352FBC46D289E5A /* RegisterController.m in Sources */,
 				BB93C9D8228BEBFA00B0DB6B /* PlugOutletController.m in Sources */,
-				36844A482292AEF600330C74 /* PlugOutletEditDelayController.m in Sources */,
 				D39415556E47D43747FCC47801D8D4D9 /* RetrievePasswordController.m in Sources */,
 				009EF5A6132558B9618045AF563BCF93 /* RoomModel.m in Sources */,
 				BB93C9DF228BEC1000B0DB6B /* ThreeSwitchController.m in Sources */,
@@ -4523,7 +4516,6 @@
 				9D4B444C0A60A795A3AAA37331282625 /* PlugOutletSaveAddDelayCell.m in Sources */,
 				640342ABC12FF5D9F3C84391824A1237 /* PlugOutletSaveAddTimingCell.m in Sources */,
 				F57F9404DBD11847E930A079070E067A /* PlugOutletSettingCell.m in Sources */,
-				36844A472292AE0300330C74 /* PlugOutletEditDelayController.m in Sources */,
 				C0114A9306015296485BB917530BB4AD /* PlugOutletSettingController.m in Sources */,
 				C3807EF4A61AC40C947838B77269F7F5 /* PlugOutletTimingController.m in Sources */,
 				3E35C52B2483FFEAA4EBD09CB8018809 /* PlugOutletWeekSelectCell.m in Sources */,
