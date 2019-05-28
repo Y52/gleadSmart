@@ -35,6 +35,12 @@ static CGFloat const Cell_Height = 44.f;
     [self getDeviceList:self.houseUid];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    editNameSucc = NO;
+    editDeviceSucc = NO;
+}
+
 #pragma mark - private methods
 - (void)getDeviceList:(NSString *)houseUid{
     self.deviceList = [[Database shareInstance] queryDevice:houseUid WithoutCenterlControlType:@(DeviceCenterlControl)];
@@ -90,10 +96,10 @@ static CGFloat const Cell_Height = 44.f;
         }
 }
 
+static BOOL editNameSucc = NO;
+static BOOL editDeviceSucc = NO;
 //点中右上角按键  进入编辑状态
 -(void)editHomeDevice{
-    static BOOL editNameSucc = NO;
-    static BOOL editDeviceSucc = NO;
     [self editRoomNameByApi:^{
         editNameSucc = YES;
         if (editDeviceSucc && editNameSucc) {
