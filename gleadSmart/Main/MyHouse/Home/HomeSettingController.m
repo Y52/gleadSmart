@@ -185,7 +185,12 @@ static BOOL editDeviceSucc = NO;
     for (DeviceModel *device in self.roomDeviceList) {
         [macList addObject:@{@"mac":device.mac}];
     }
-    NSDictionary *parameters = @{@"roomUid":self.room.roomUid,@"macList":macList};
+    NSDictionary *parameters;
+    if (macList.count > 0) {
+        parameters = @{@"roomUid":self.room.roomUid,@"macList":macList};
+    }else{
+        parameters = @{@"roomUid":self.room.roomUid};
+    }
     NSLog(@"%@",parameters);
 
     [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
