@@ -817,6 +817,8 @@
 		BBA02AB1229B7EAD00C561A4 /* HomeDeviceSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA02AAF229B7EAD00C561A4 /* HomeDeviceSetCell.m */; };
 		BBACD65E4CE4050F281BFF75293101DC /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */; };
 		BBAD0D41229D0CBB009D4F42 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D40229D0CBB009D4F42 /* NullSafe.m */; };
+		BBAD0D4C229D155C009D4F42 /* DeviceLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D4A229D155B009D4F42 /* DeviceLocationController.m */; };
+		BBAD0D4F229D156F009D4F42 /* DeviceLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D4D229D156F009D4F42 /* DeviceLocationCell.m */; };
 		BBED11018EEF75677A4A4B0EB91CB50F /* img_ther_addTimerSwitch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF326CB45C32724F7009A6732B37108E /* img_ther_addTimerSwitch@2x.png */; };
 		BC42FC2F4108CBC11EFA469901A8EC2D /* thermostatSet_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B47A1EC308F2F47B7E47F3B379FEDC4 /* thermostatSet_on.png */; };
 		BC46119D165A9B7DD6BEE91EC6196BE0 /* thermostat_max@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B70707341694A8C599741756AC9A9626 /* thermostat_max@3x.png */; };
@@ -1651,6 +1653,10 @@
 		BBA02AAE229B7EAD00C561A4 /* HomeDeviceSetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDeviceSetCell.h; sourceTree = "<group>"; };
 		BBA02AAF229B7EAD00C561A4 /* HomeDeviceSetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDeviceSetCell.m; sourceTree = "<group>"; };
 		BBAD0D40229D0CBB009D4F42 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
+		BBAD0D4A229D155B009D4F42 /* DeviceLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceLocationController.m; sourceTree = "<group>"; };
+		BBAD0D4B229D155B009D4F42 /* DeviceLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceLocationController.h; sourceTree = "<group>"; };
+		BBAD0D4D229D156F009D4F42 /* DeviceLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceLocationCell.m; sourceTree = "<group>"; };
+		BBAD0D4E229D156F009D4F42 /* DeviceLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceLocationCell.h; sourceTree = "<group>"; };
 		BCCFAFCD4C12F63A3F250A729BB80519 /* img_addDevice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_addDevice@2x.png"; sourceTree = "<group>"; };
 		BD1273BB75C4015B79584FA6F8BD9915 /* valveStatus_abnormal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveStatus_abnormal@3x.png"; sourceTree = "<group>"; };
 		BD2801B712735F8857037B146A29A9CF /* WeekendNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekendNameCell.h; sourceTree = "<group>"; };
@@ -2369,6 +2375,8 @@
 			children = (
 				DB100A6D216C6D2667C81857889D2E32 /* SelectDeviceTypeCell.h */,
 				9849761AD2CB8AED3EE2FDF5113C589A /* SelectDeviceTypeCell.m */,
+				BBAD0D4E229D156F009D4F42 /* DeviceLocationCell.h */,
+				BBAD0D4D229D156F009D4F42 /* DeviceLocationCell.m */,
 			);
 			name = Device;
 			sourceTree = "<group>";
@@ -2749,6 +2757,8 @@
 				EE7D7101BAAF5F4A9C9905A57EF19AB6 /* plugOutlet */,
 				A88B6787AD8DA60CBDFF8F9466729CE9 /* DeviceSettingController.h */,
 				B9F15FDEE07315D694041C72C71FB75C /* DeviceSettingController.m */,
+				BBAD0D4B229D155B009D4F42 /* DeviceLocationController.h */,
+				BBAD0D4A229D155B009D4F42 /* DeviceLocationController.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -4326,6 +4336,7 @@
 				495BB39576B86CBA7A009ED4242A5085 /* APProcessController.m in Sources */,
 				586E00FEDB08C6B20A1B805149C5FB82 /* APStatusConfirmController.m in Sources */,
 				3F22DBD8270B8A288D5B77C52AC7E423 /* AccountHeaderCell.m in Sources */,
+				BBAD0D4F229D156F009D4F42 /* DeviceLocationCell.m in Sources */,
 				776892966EE36F009805FFCA24A05367 /* AccountViewController.m in Sources */,
 				2851F929D2B4CC053AEA9C05EBE12521 /* AddDeviceShareController.m in Sources */,
 				291FB34389886CC11273B24EFABB8702 /* AddFamilySelectCell.m in Sources */,
@@ -4382,6 +4393,7 @@
 				25CF5BA1F0073CBC65A6310BEBD4EC50 /* HouseSelectCell.m in Sources */,
 				99597CEE0924BA5BDCB1205EDA910053 /* HouseSelectController.m in Sources */,
 				BBA02AAB229B7C8700C561A4 /* HomeNameSetCell.m in Sources */,
+				BBAD0D4C229D155C009D4F42 /* DeviceLocationController.m in Sources */,
 				4E251585DE2F690D29CBC79483B64831 /* HouseSetCommonCell.m in Sources */,
 				9DD6BB47E2672186CA68F01200A87784 /* HouseSetMemberCell.m in Sources */,
 				126B2A57B52CB8878E186F5D232386C1 /* HouseSettingController.m in Sources */,
