@@ -35,6 +35,11 @@ static CGFloat const Cell_Height = 44.f;
     [self getDeviceList:self.houseUid];
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+    editDeviceSucc = NO;
+    editNameSucc = NO;
+}
+
 #pragma mark - private methods
 - (void)getDeviceList:(NSString *)houseUid{
     self.deviceList = [[Database shareInstance] queryDevice:houseUid WithoutCenterlControlType:@(DeviceCenterlControl)];
@@ -90,14 +95,15 @@ static CGFloat const Cell_Height = 44.f;
         }
 }
 
+static BOOL editNameSucc = NO;
+static BOOL editDeviceSucc = NO;
 //点中右上角按键  进入编辑状态
 -(void)editHomeDevice{
-    static BOOL editNameSucc = NO;
-    static BOOL editDeviceSucc = NO;
     [self editRoomNameByApi:^{
         editNameSucc = YES;
         if (editDeviceSucc && editNameSucc) {
             [NSObject showHudTipStr:LocalString(@"设置成功")];
+            NSLog(@"设置成功");
             [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^{
@@ -107,6 +113,7 @@ static CGFloat const Cell_Height = 44.f;
         editDeviceSucc = YES;
         if (editDeviceSucc && editNameSucc) {
             [NSObject showHudTipStr:LocalString(@"设置成功")];
+            NSLog(@"设置成功");
             if (self.popBlock) {
                 self.popBlock();
             }
