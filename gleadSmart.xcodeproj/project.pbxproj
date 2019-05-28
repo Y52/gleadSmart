@@ -726,8 +726,6 @@
 		BA10BAF504BA5772F97F7758A6BF7EC9 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEC253DAC801F4C270E7603C299928 /* AFNetworkReachabilityManager.m */; };
 		BA43C1C8DEC5F1AD661CEA2E2A8C3603 /* img_wallHob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A70610DF8D91BBF42E7F5A99D40160 /* img_wallHob@2x.png */; };
 		BB0FE2F7F493DDE8A4747626FF69BE8A /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE2F22BCCDF3189299FD71E16EB5C68 /* RDVTabBarItem.m */; };
-		BB117EB82298E6BD00D3AC58 /* NSMutableArray+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB117EB72298E6BD00D3AC58 /* NSMutableArray+Common.m */; };
-		BB117EB92298E6BD00D3AC58 /* NSMutableArray+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BB117EB72298E6BD00D3AC58 /* NSMutableArray+Common.m */; };
 		BB1BD726228D5C5400AF5741 /* img_switch2_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1BD6F9228D5C5400AF5741 /* img_switch2_off@2x.png */; };
 		BB1BD727228D5C5400AF5741 /* img_switch2_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1BD6F9228D5C5400AF5741 /* img_switch2_off@2x.png */; };
 		BB1BD728228D5C5400AF5741 /* img_2switch_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1BD6FA228D5C5400AF5741 /* img_2switch_back@2x.png */; };
@@ -1658,8 +1656,6 @@
 		BA32968D7F640B597C949F20288619F4 /* addFamily_uncheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addFamily_uncheck@3x.png"; sourceTree = "<group>"; };
 		BA55A4DAFC3221CAB82E13718748436B /* valveNode_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_normal@3x.png"; sourceTree = "<group>"; };
 		BA57AC696C1EF7DE44EA5523323CEF10 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB117EB62298E6BD00D3AC58 /* NSMutableArray+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Common.h"; sourceTree = "<group>"; };
-		BB117EB72298E6BD00D3AC58 /* NSMutableArray+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Common.m"; sourceTree = "<group>"; };
 		BB1BD6F9228D5C5400AF5741 /* img_switch2_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch2_off@2x.png"; sourceTree = "<group>"; };
 		BB1BD6FA228D5C5400AF5741 /* img_2switch_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_2switch_back@2x.png"; sourceTree = "<group>"; };
 		BB1BD6FB228D5C5400AF5741 /* img_switch3_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch3_on@2x.png"; sourceTree = "<group>"; };
@@ -2228,8 +2224,6 @@
 				1EFE54353B0FA94FE79ABFBE653BA7A1 /* UIColor+ColorChange.m */,
 				14AEEA56F4EED4E5BA3EABD6EFB915A8 /* UILabel+YBAttributeTextTapAction.h */,
 				7BC9E677A480DA747490F9D4FADA29ED /* UILabel+YBAttributeTextTapAction.m */,
-				BB117EB62298E6BD00D3AC58 /* NSMutableArray+Common.h */,
-				BB117EB72298E6BD00D3AC58 /* NSMutableArray+Common.m */,
 			);
 			path = OC_Category;
 			sourceTree = SOURCE_ROOT;
@@ -4401,7 +4395,6 @@
 				BB93C9E0228BEC1300B0DB6B /* MulSwitchController.m in Sources */,
 				D63368C5CA43E62E3B821B7ACCFBAEBD /* YRabbitMQ.m in Sources */,
 				68DA9F3046092AB7064A9736FD7CD685 /* YSZCoreDataStackManager.m in Sources */,
-				BB117EB92298E6BD00D3AC58 /* NSMutableArray+Common.m in Sources */,
 				8B2E6B64147FE9819ED46F628FCB897A /* YTFAlertController.m in Sources */,
 				ACA78961F9F7130BDDF9B4CC380AC9AB /* alarmModel.m in Sources */,
 				00C334373ACC9FC2590DF83B22D42AF5 /* main.m in Sources */,
@@ -4585,7 +4578,6 @@
 				C6C3BD1E69ACD550B21B97E40A669473 /* YAlertViewController.m in Sources */,
 				065E3009D7C8C4B3DAB2864FC47B9D28 /* YRabbitMQ.m in Sources */,
 				FFAABC32BA1F955667037C1B35FE1A4B /* YSZCoreDataStackManager.m in Sources */,
-				BB117EB82298E6BD00D3AC58 /* NSMutableArray+Common.m in Sources */,
 				C231661C6564D217C3C91C5AB67A3EA7 /* YTFAlertController.m in Sources */,
 				00BF2ECC139B1906B19744CA10B3426E /* alarmModel.m in Sources */,
 				AA165284D6383A8C6365589B57E87240 /* main.m in Sources */,
