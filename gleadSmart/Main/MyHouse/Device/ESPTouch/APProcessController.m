@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSLock *lock;
 @property (nonatomic) dispatch_source_t confirmWifiTimer;//确认Wi-Fi切换时钟
+@property (nonatomic) dispatch_source_t getStatusTimer;//查询设备是否在线
 
 @end
 
@@ -42,6 +43,7 @@
     
     [self sendSearchBroadcast];
     self.confirmWifiTimer = [self confirmWifiTimer];
+    self.getStatusTimer = [self getStatusTimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -49,7 +51,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(apSendSSIDSucc) name:@"apSendSSIDSucc" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(apSendPasswordSucc) name:@"apSendPasswordSucc" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rabbitDeviceApProcessSucc) name:@"rabbitDeviceApProcessSucc" object:nil];
 
 }
 
@@ -57,13 +58,13 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"apSendSSIDSucc" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"apSendPasswordSucc" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"rabbitDeviceApProcessSucc" object:nil];
 
     [_timer setFireDate:[NSDate distantFuture]];
     [_timer invalidate];
     _timer = nil;
     
     dispatch_source_cancel(_confirmWifiTimer);
+    dispatch_source_cancel(_getStatusTimer);
 
     isSSIDSendSucc = NO;
     isPasswordSendSucc = NO;
@@ -207,7 +208,6 @@ static bool isPasswordSendSucc = NO;
     NSLog(@"isPasswordSendSucc");
 }
 
-static int hotspotAlertTime = 3;
 static bool bindSucc = NO;
 - (void)confirmWifiName{
     if (!(isSSIDSendSucc && isPasswordSendSucc)) {
@@ -216,19 +216,38 @@ static bool bindSucc = NO;
     NSDictionary *netInfo = [self fetchNetInfo];
     NSString *ssid = [netInfo objectForKey:@"SSID"];
     NSLog(@"%@",ssid);
-    if(![ssid hasPrefix:@"Thingcom"]){
-        ///热点搜到设备后直接绑定，等待云平台推送
+    if(![ssid hasPrefix:@"ESP"]){
+        ///热点搜到设备后直接绑定，查询api等待设备上线
         if (!bindSucc) {
             DeviceModel *dModel = [[DeviceModel alloc] init];
             dModel.mac = mac;
             dModel.name = mac;
             dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
             
-            [self bindDevice:dModel success:^{
-                NSLog(@"绑定设备成功");
-                bindSucc = YES;
-            } failure:^{
+            
+            [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+            [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+                
+                switch (status) {
+                    case AFNetworkReachabilityStatusNotReachable:
+                    {
+                        NSLog(@"没有网络");
+                        return;
+                    }
+                        break;
+                        
+                    default:
+                    {
+                        [self bindDevice:dModel success:^{
+                            NSLog(@"绑定设备成功");
+                            bindSucc = YES;
+                        } failure:^{
+                        }];
+                    }
+                        break;
+                }
             }];
+            
         }
     }
 }
@@ -248,13 +267,6 @@ static bool bindSucc = NO;
         }
     }
     return SSIDInfo;
-}
-
-- (void)rabbitDeviceApProcessSucc{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self dismissViewControllerAnimated:YES completion:nil];
-        [NSObject showHudTipStr:LocalString(@"配网成功")];
-    });
 }
 
 #pragma mark - udp delegate
@@ -333,18 +345,6 @@ static bool bindSucc = NO;
 - (void)bindDevice:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failur{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        switch (status) {
-            case AFNetworkReachabilityStatusNotReachable:
-                NSLog(@"没有网络");
-                return;
-                break;
-                
-            default:
-                break;
-        }
-    }];
-    
     //设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
@@ -397,7 +397,45 @@ static bool bindSucc = NO;
           }];
 }
 
-
+//查询配网绑定的设备是否在线，在线就判断绑定成功并退出页面
+- (void)getStatus{
+    if (!bindSucc) {
+        return;
+    }
+    Database *db = [Database shareInstance];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/device/state?mac=%@",httpIpAddress,mac];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            NSDictionary *data = [responseDic objectForKey:@"data"];
+            NSNumber *state = [data objectForKey:@"state"];
+            if ([state integerValue]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [NSObject showHudTipStr:LocalString(@"配网成功")];
+                });
+            }
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
 
 #pragma mark - setters and getters
 - (UIActivityIndicatorView *)spinner{
@@ -453,6 +491,19 @@ static bool bindSucc = NO;
         dispatch_resume(_confirmWifiTimer);
     }
     return _confirmWifiTimer;
+}
+
+- (dispatch_source_t)getStatusTimer{
+    if (!_getStatusTimer) {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        _getStatusTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+        dispatch_source_set_timer(_getStatusTimer, dispatch_walltime(NULL, 0), 5.f * NSEC_PER_SEC, 0);
+        dispatch_source_set_event_handler(_getStatusTimer, ^{
+            [self getStatus];
+        });
+        dispatch_resume(_getStatusTimer);
+    }
+    return _getStatusTimer;
 }
 
 -(NSLock *)lock{

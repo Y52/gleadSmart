@@ -53,7 +53,7 @@
 - (void)confirmWifiName{
     NSDictionary *netInfo = [self fetchNetInfo];
     NSString *ssid = [netInfo objectForKey:@"SSID"];
-    if ([ssid hasPrefix:@"Thingcom"]) {
+    if ([ssid hasPrefix:@"ESP"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self goAPProcess];
         });

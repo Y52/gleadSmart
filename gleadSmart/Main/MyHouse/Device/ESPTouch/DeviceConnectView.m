@@ -280,6 +280,7 @@
                             net.connectedDevice = dModel;
                         }
                     }
+                    [Network shareNetwork].isDeviceVC = NO;
                     [self dismissViewControllerAnimated:YES completion:nil];
                     [NSObject showHudTipStr:LocalString(@"绑定设备成功")];
                 });
