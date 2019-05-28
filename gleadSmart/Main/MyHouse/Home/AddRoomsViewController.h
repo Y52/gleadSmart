@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AddRoomsViewController : UIViewController
 
 @property (nonatomic, strong) NSString *houseUid;
-
+@property (nonatomic, strong) NSNumber *sortId;
 @end
 
 NS_ASSUME_NONNULL_END

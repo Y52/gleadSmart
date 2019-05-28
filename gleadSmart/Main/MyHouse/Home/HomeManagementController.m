@@ -9,6 +9,7 @@
 #import "HomeManagementController.h"
 #import "HomeManagementCell.h"
 #import "AddRoomsViewController.h"
+#import "HomeSettingController.h"
 
 NSString *const CellIdentifier_HomeManagementTable = @"CellID_HomeManagementTable";
 static CGFloat const Cell_Height = 50.f;
@@ -32,19 +33,21 @@ static CGFloat const Cell_Height = 50.f;
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView:)];
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self getHomeList];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
 #pragma mark - Lazy Load
 -(UITableView *)homeManagementTable{
     if (!_homeManagementTable) {
         _homeManagementTable = ({
             UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight - getRectNavAndStatusHight - 120.f) style:UITableViewStylePlain];
             tableView.backgroundColor = [UIColor clearColor];
-            tableView.separatorStyle = UIAccessibilityTraitNone;
+            tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             tableView.dataSource = self;
             tableView.delegate = self;
             tableView.separatorColor = [UIColor whiteColor];
@@ -111,6 +114,19 @@ static CGFloat const Cell_Height = 50.f;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    RoomModel *room = self.homeList[indexPath.row];
+    HomeSettingController *homeSetVC = [[HomeSettingController alloc] init];
+    homeSetVC.houseUid = self.houseUid;
+    homeSetVC.room = room;
+    homeSetVC.popBlock = ^{
+        Database *data = [Database shareInstance];
+        [data getHouseHomeListAndDevice:data.currentHouse success:^{
+            [self getHomeList];
+        } failure:^{
+            
+        }];
+    };
+    [self.navigationController pushViewController:homeSetVC animated:YES];
     
 }
 
@@ -342,7 +358,7 @@ static CGFloat const Cell_Height = 50.f;
     manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
-    NSString *url = [NSString stringWithFormat:@"%@/api/room/list?houseUid=%@",httpIpAddress,db.currentHouse.houseUid];
+    NSString *url = [NSString stringWithFormat:@"%@/api/room/list?houseUid=%@",httpIpAddress,self.houseUid];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -397,9 +413,9 @@ static CGFloat const Cell_Height = 50.f;
 }
 
 -(void)goRooms{
-    
     AddRoomsViewController *AddRoomsVC = [[AddRoomsViewController alloc] init];
     AddRoomsVC.houseUid = self.houseUid;
+    AddRoomsVC.sortId = [NSNumber numberWithInteger:self.homeList.count];
     [self.navigationController pushViewController:AddRoomsVC animated:YES];
 }
 
