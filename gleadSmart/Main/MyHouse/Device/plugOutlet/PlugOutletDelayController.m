@@ -61,7 +61,7 @@ static float HEIGHT_FOOT = 20.f;
 }
 
 - (void)addDelay{
-    if (self.delayclockList.count >= 4) {
+    if (self.delayclockList.count >= 5) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"定时器数量已经达到额度") message:LocalString(@"请先删除一个定时再添加") preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:nil];
         [alertController addAction:cancelAction];

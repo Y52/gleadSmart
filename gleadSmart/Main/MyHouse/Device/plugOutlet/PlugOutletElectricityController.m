@@ -75,10 +75,12 @@ static float HEIGHT_HEADER = 30.f;
     NSString *voltage = [userInfo objectForKey:@"Voltage"];
     NSString *current = [userInfo objectForKey:@"Current"];
     NSString *power = [userInfo objectForKey:@"Power"];
+    NSString *todayEnergyUsed = [userInfo objectForKey:@"todayEnergyUsed"];
     dispatch_async(dispatch_get_main_queue(), ^{
         self.voltageValueLabel.text = voltage;
         self.currentValueLabel.text = current;
         self.powerValueLabel.text = power;
+        self.degreeLabel.text = [NSString stringWithFormat:@"%@度", todayEnergyUsed];
     });
     
 }

@@ -48,7 +48,7 @@
     [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rabbitMQPlugOutletStatusUpdate:) name:@"rabbitMQPlugOutletStatusUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPlugOutletUI:) name:@"refreshPlugOutletUI" object:nil];
 
 }
@@ -56,9 +56,19 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshPlugOutletUI" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"rabbitMQPlugOutletStatusUpdate" object:nil];
 }
 #pragma mark - notification
 - (void)refreshPlugOutletUI:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    DeviceModel *device = [userInfo objectForKey:@"device"];
+    self.device = device;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self PlugUITransformationByStatus];
+    });
+}
+
+- (void)rabbitMQPlugOutletStatusUpdate:(NSNotification *)notification{
     NSDictionary *userInfo = [notification userInfo];
     DeviceModel *device = [userInfo objectForKey:@"device"];
     self.device = device;

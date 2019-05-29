@@ -2104,12 +2104,18 @@ static int noUserInteractionHeartbeat = 0;
                         NSNumber *current2 = _recivedData69[15];
                         NSNumber *power1 = _recivedData69[16];
                         NSNumber *power2 = _recivedData69[17];
+                        NSNumber *todayEnergyUsed1 = _recivedData69[18];
+                        NSNumber *todayEnergyUsed2 = _recivedData69[19];
+                        NSNumber *todayEnergyUsed3 = _recivedData69[20];
+                        NSNumber *todayEnergyUsed4 = _recivedData69[21];
                         NSString *voltage = [[NSString alloc] initWithFormat:@"%d",[voltage1 intValue]*256 + [voltage2 intValue]];
                         NSString *current = [[NSString alloc] initWithFormat:@"%d",[current1 intValue]*256 + [current2 intValue]];
                         NSString *power = [[NSString alloc] initWithFormat:@"%d",[power1 intValue]*256 + [power2 intValue]];
+                        NSString *todayEnergyUsed = [[NSString alloc] initWithFormat:@"%d",[todayEnergyUsed1 intValue]*65536 + [todayEnergyUsed2 intValue]*4096 +[todayEnergyUsed3 intValue]*256 +[todayEnergyUsed4 intValue]];
                         [dataDic setObject:voltage forKey:@"Voltage"];
                         [dataDic setObject:current forKey:@"Current"];
                         [dataDic setObject:power forKey:@"Power"];
+                        [dataDic setObject:todayEnergyUsed forKey:@"todayEnergyUsed"];
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"getElectricityValue" object:nil userInfo:dataDic];
 
