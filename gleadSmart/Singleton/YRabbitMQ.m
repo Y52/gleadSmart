@@ -154,8 +154,13 @@ static NSArray *_routingkeys = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitMQPlugOutletStatusUpdate" object:nil userInfo:userInfo];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitMQSwitchStatusUpdate" object:nil userInfo:userInfo];
+    //区分开关和插座的推送
+    NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]];
+    if (type == DevicePlugOutlet) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitMQPlugOutletStatusUpdate" object:nil userInfo:userInfo];
+    }else if (type >= DeviceOneSwitch && type <= DeviceFourSwitch){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitMQSwitchStatusUpdate" object:nil userInfo:userInfo];
+    }
     
 }
 
