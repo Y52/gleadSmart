@@ -213,6 +213,7 @@ static int noUserInteractionHeartbeat = 0;
                 
                 if (![bindDevice.socket isDisconnected]) {
                     //已经连接了
+                    NSLog(@"%@已经连接了",mac);
                     [_lock unlock];
                     return;
                 }

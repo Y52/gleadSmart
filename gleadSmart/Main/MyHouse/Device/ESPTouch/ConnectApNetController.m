@@ -119,7 +119,7 @@
         
         UITextView *textView = [[UITextView alloc] init];
         textView.backgroundColor = [UIColor clearColor];
-        textView.text = LocalString(@"1.请将手机连接到如下热点: SmartLife-XXXX\n2.返回本应用，继续添加设备");
+        textView.text = LocalString(@"1.请将手机连接到如下热点: ESP-XXXX\n2.返回本应用，继续添加设备");
         textView.font = [UIFont systemFontOfSize:17.f];
         textView.textAlignment = NSTextAlignmentLeft;
         textView.textColor = [UIColor blackColor];
