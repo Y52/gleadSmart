@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class ClockModel;
 @interface MulSwitchTimingController : UIViewController
 
 @property (nonatomic, strong) DeviceModel *device;
-@property (nonatomic, strong) ClockModel *clock;
+
 @property (nonatomic) int switchNumber;//开关编号
 
 @end

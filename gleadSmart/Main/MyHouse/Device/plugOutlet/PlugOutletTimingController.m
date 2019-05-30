@@ -57,7 +57,8 @@ static float HEIGHT_FOOT = 20.f;
 #pragma mark - private methods
 - (void)getClockListBySocket{
     UInt8 controlCode = 0x00;
-    NSArray *data = @[@0xFC,@0x11,@0x03,@0x00];
+    NSNumber *A = [NSNumber numberWithInt: 0x80];
+    NSArray *data = @[@0xFC,@0x11,@0x02,@0x00,A];
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
 }
 
