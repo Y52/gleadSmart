@@ -8,7 +8,9 @@
 
 #import "DeviceModel.h"
 
-@implementation DeviceModel
+@implementation DeviceModel{
+    dispatch_source_t _clockHeartbeatTimer;//心跳时钟
+}
 
 //帧的发送
 - (void)send:(NSMutableArray *)msg withTag:(NSUInteger)tag
@@ -91,5 +93,35 @@ static int frameCount = 0;
         [[Network shareNetwork] inquireDeviceInfoByOneNetdatastreams:deviceArray apiKey:self.apiKey deviceId:self.deviceId];
     }
 }
+
+static int clockInteractionHeartbeat = 0;
+
+- (void)heartBeat{
+    if (!_clockHeartbeatTimer){
+        //心跳时钟，每一秒加1
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        _clockHeartbeatTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+        dispatch_source_set_timer(_clockHeartbeatTimer, dispatch_walltime(NULL, 0), 1.f * NSEC_PER_SEC, 0);
+        dispatch_source_set_event_handler(_clockHeartbeatTimer, ^{
+            clockInteractionHeartbeat++;
+            if (self.socket.isConnected) {
+                
+                dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1.f * NSEC_PER_SEC);
+                dispatch_semaphore_wait(self.sendSignal, time);
+                
+                clockInteractionHeartbeat = 0;//心跳清零
+                
+                NSMutableArray *data69 = [[NSMutableArray alloc] init];
+                [data69 addObject:[NSNumber numberWithUnsignedInteger:0x69]];
+                [data69 addObject:[NSNumber numberWithUnsignedInteger:0xC0]];
+                [data69 addObject:[NSNumber numberWithUnsignedInteger:0x00]];
+                [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
+                [self send:data69 withTag:100];//内网tcp发送
+            }
+        });
+        dispatch_resume(_clockHeartbeatTimer);
+    }
+}
+
 
 @end

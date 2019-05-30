@@ -7,7 +7,7 @@
 //
 
 #import "PlugOutletController.h"
-#import "PlugOutletSettingController.h"
+#import "DeviceSettingController.h"
 #import "PlugOutletTimingController.h"
 #import "PlugOutletDelayController.h"
 #import "PlugOutletElectricityController.h"
@@ -107,7 +107,7 @@
 }
 
 - (void)goSetting{
-    PlugOutletSettingController *VC = [[PlugOutletSettingController alloc] init];
+    DeviceSettingController *VC = [[DeviceSettingController alloc] init];
     VC.device = self.device;
     [self.navigationController pushViewController:VC animated:YES];
 }
