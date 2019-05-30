@@ -52,12 +52,14 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshThreeSwitchUI) name:@"refreshMulSwitchUI" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rabbitMQSwitchStatusUpdate:) name:@"rabbitMQSwitchStatusUpdate" object:nil];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshMulSwitchUI" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"rabbitMQSwitchStatusUpdate" object:nil];
 }
 
 #pragma mark - private methods
@@ -221,6 +223,14 @@
     [self ThreeSwitchUITransformationByStatus];
 }
 
+- (void)rabbitMQSwitchStatusUpdate:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    DeviceModel *device = [userInfo objectForKey:@"device"];
+    self.device = device;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self ThreeSwitchUITransformationByStatus];
+    });
+}
 //更新UI
 - (void)ThreeSwitchUITransformationByStatus{
     dispatch_async(dispatch_get_main_queue(), ^{

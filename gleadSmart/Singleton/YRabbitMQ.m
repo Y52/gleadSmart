@@ -155,6 +155,7 @@ static NSArray *_routingkeys = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshValve" object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitMQPlugOutletStatusUpdate" object:nil userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitMQSwitchStatusUpdate" object:nil userInfo:userInfo];
     
 }
 
