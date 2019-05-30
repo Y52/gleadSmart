@@ -15,7 +15,7 @@
 //帧的发送
 - (void)send:(NSMutableArray *)msg withTag:(NSUInteger)tag
 {
-    if (self.socket && ![self.socket isDisconnected]){
+    if (![self.socket isDisconnected]){
         NSUInteger len = msg.count;
         UInt8 sendBuffer[len];
         for (int i = 0; i < len; i++)
@@ -37,6 +37,15 @@
 
 static int frameCount = 0;
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data{
+    for (DeviceModel *device in [Network shareNetwork].deviceArray) {
+        if ([device.mac isEqualToString:self.mac]) {
+            //每次都切换到devicearray的devicemodel的socket、queue等
+            self.socket = device.socket;
+            self.queue = device.queue;
+            self.sendSignal = device.sendSignal;
+        }
+    }
+    
     if (!self.socket) {
         self.socket = [[GCDAsyncSocket alloc] initWithDelegate:[Network shareNetwork] delegateQueue:dispatch_get_global_queue(0, 0)];
     }
@@ -66,7 +75,7 @@ static int frameCount = 0;
                 [data69 addObject:[NSNumber numberWithUnsignedChar:[NSObject getCS:data69]]];
                 [data69 addObject:[NSNumber numberWithUnsignedChar:0x17]];
                 
-                if (self.socket && [self.socket isConnected]) {
+                if (![self.socket isDisconnected]) {
                     [self send:data69 withTag:100];
                 }else{
                     Network *net = [Network shareNetwork];
