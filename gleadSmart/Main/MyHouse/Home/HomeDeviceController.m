@@ -243,6 +243,61 @@ static CGFloat const Cell_Height = 72.f;
     return status;
 }
 
+//删除分享设备的API
+- (void)deleteShareDeviceByApi:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failure{
+    
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 6.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/share/house/device",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];//不加这句代码，delete方法会把字典以param形式加到url后面，而不是生成一个body，服务器会收不到信息
+    
+    NSDictionary *parameters = @{@"houseUid":[Database shareInstance].currentHouse.houseUid,@"mac":device.mac};
+    
+    [manager DELETE:url parameters: parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString *daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [[Database shareInstance] deleteShareDevice:device.mac];
+            [self.deviceTable reloadData];
+            if (success) {
+                success();
+            }
+        }else{
+            [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
+            if (failure) {
+                failure();
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            NSLog(@"%@",error);
+            if (failure) {
+                failure();
+            }
+        });
+    }];
+}
+
+
 #pragma mark - Lazy Load
 -(UITableView *)deviceTable{
     if (!_deviceTable) {
@@ -904,6 +959,20 @@ static CGFloat const Cell_Height = 72.f;
                 }
             }
             break;
+            
+        case 1:
+        {
+            if (editingStyle == UITableViewCellEditingStyleDelete) {
+                DeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
+                [self deleteShareDeviceByApi:device success:^{
+                    [NSObject showHudTipStr:LocalString(@"删除分享设备成功")];
+                    [[Database shareInstance].shareDeviceArray removeObject:device];
+                    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                } failure:^{
+                    [NSObject showHudTipStr:LocalString(@"删除分享设备失败")];
+                }];
+            }
+        }
             
         default:
             break;
