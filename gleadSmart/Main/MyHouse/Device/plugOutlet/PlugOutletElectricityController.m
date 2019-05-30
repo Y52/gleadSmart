@@ -77,6 +77,7 @@ static float HEIGHT_HEADER = 30.f;
     NSString *power = [userInfo objectForKey:@"Power"];
     NSString *todayEnergyUsed = [userInfo objectForKey:@"todayEnergyUsed"];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
         self.voltageValueLabel.text = voltage;
         self.currentValueLabel.text = current;
         self.powerValueLabel.text = power;
@@ -91,6 +92,7 @@ static float HEIGHT_HEADER = 30.f;
     UInt8 controlCode = 0x00;
     NSArray *data = @[@0xFC,@0x11,@0x10,@0x00];
     [self.device sendData69With:controlCode mac:self.device.mac data:data];
+    [SVProgressHUD show];
 }
 
 - (void)goSetting{
@@ -165,7 +167,7 @@ static float HEIGHT_HEADER = 30.f;
         _todayDegreeLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
         _todayDegreeLabel.font = [UIFont fontWithName:@"Helvetica" size:30.f];
         _todayDegreeLabel.adjustsFontSizeToFitWidth = YES;
-        _todayDegreeLabel.text = LocalString(@"20度");
+        _todayDegreeLabel.text = LocalString(@"");
         [self.todayElectricityView addSubview:_todayDegreeLabel];
         [_todayDegreeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(80.f), yAutoFit(30.f)));
@@ -202,7 +204,7 @@ static float HEIGHT_HEADER = 30.f;
         }];
         
         _currentValueLabel = [[UILabel alloc] init];
-        _currentValueLabel.text = LocalString(@"160");
+        _currentValueLabel.text = LocalString(@"");
         _currentValueLabel.textAlignment = NSTextAlignmentCenter;
         _currentValueLabel.adjustsFontSizeToFitWidth = YES;
         _currentValueLabel.textColor = [UIColor colorWithRed:68/255.0 green:68/255.0 blue:68/255.0 alpha:1];
@@ -228,7 +230,7 @@ static float HEIGHT_HEADER = 30.f;
         }];
         
         _powerValueLabel = [[UILabel alloc] init];
-        _powerValueLabel.text = LocalString(@"160");
+        _powerValueLabel.text = LocalString(@"");
         _powerValueLabel.textAlignment = NSTextAlignmentCenter;
         _powerValueLabel.adjustsFontSizeToFitWidth = YES;
         _powerValueLabel.textColor = [UIColor colorWithRed:68/255.0 green:68/255.0 blue:68/255.0 alpha:1];
@@ -254,7 +256,7 @@ static float HEIGHT_HEADER = 30.f;
         }];
         
         _voltageValueLabel = [[UILabel alloc] init];
-        _voltageValueLabel.text = LocalString(@"160");
+        _voltageValueLabel.text = LocalString(@"");
         _voltageValueLabel.textAlignment = NSTextAlignmentCenter;
         _voltageValueLabel.adjustsFontSizeToFitWidth = YES;
         _voltageValueLabel.textColor = [UIColor colorWithRed:68/255.0 green:68/255.0 blue:68/255.0 alpha:1];
@@ -280,7 +282,7 @@ static float HEIGHT_HEADER = 30.f;
         }];
         
         _electricityValueLabel = [[UILabel alloc] init];
-        _electricityValueLabel.text = LocalString(@"160");
+        _electricityValueLabel.text = LocalString(@"");
         _electricityValueLabel.textAlignment = NSTextAlignmentCenter;
         _electricityValueLabel.adjustsFontSizeToFitWidth = YES;
         _electricityValueLabel.textColor = [UIColor colorWithRed:68/255.0 green:68/255.0 blue:68/255.0 alpha:1];
