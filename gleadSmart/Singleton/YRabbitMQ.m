@@ -126,7 +126,16 @@ static NSArray *_routingkeys = nil;
     NSNumber *on = [dic objectForKey:@"on"];
     NSNumber *online = [dic objectForKey:@"online"];
     
-    for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
+    Network *net = [Network shareNetwork];
+    for (DeviceModel *device in net.deviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            device.isOn = on;
+            device.isOnline = online;
+            userInfo = @{@"device":device,@"isShare":@0};
+        }
+    }
+    
+    for (DeviceModel *device in net.connectedDevice.gatewayMountDeviceList) {
         if ([device.mac isEqualToString:mac]) {
             NSLog(@"%@",device.mac);
             device.isOn = on;
