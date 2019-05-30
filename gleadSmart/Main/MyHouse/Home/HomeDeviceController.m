@@ -131,7 +131,7 @@ static CGFloat const Cell_Height = 72.f;
                 
                 RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
                 NSString *status = room.name;
-                if (room.roomUid == nil) {
+                if ([room.roomUid isEqualToString:@""]) {
                     status = LocalString(@"未设置");
                 }
                 if (oldDevice.isUnusual) {
@@ -280,7 +280,7 @@ static CGFloat const Cell_Height = 72.f;
             cell.deviceName.text = device.name;
             RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
             NSString *status = room.name;
-            if (room.roomUid == nil) {
+            if ([room.roomUid isEqualToString:@""]) {
                 status = LocalString(@"未设置");
             }
             
