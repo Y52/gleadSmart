@@ -2069,6 +2069,8 @@ static int noUserInteractionHeartbeat = 0;
                     }
                     if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                         NSLog(@"查询wifi智能插座的闹钟");
+                        NSDictionary *userInfo = @{@"frame":_recivedData69,@"mac":mac};
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"getClockList" object:nil userInfo:userInfo];
                     }
                     if ([_recivedData69[10] unsignedIntegerValue] == 0x02 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
                         NSLog(@"设置wifi智能插座的闹钟");
@@ -2108,10 +2110,10 @@ static int noUserInteractionHeartbeat = 0;
                         NSNumber *todayEnergyUsed2 = _recivedData69[19];
                         NSNumber *todayEnergyUsed3 = _recivedData69[20];
                         NSNumber *todayEnergyUsed4 = _recivedData69[21];
-                        NSString *voltage = [[NSString alloc] initWithFormat:@"%d",[voltage1 intValue]*256 + [voltage2 intValue]];
+                        NSString *voltage = [[NSString alloc] initWithFormat:@"%.1f",([voltage1 intValue]*256 + [voltage2 intValue]) * 0.1];
                         NSString *current = [[NSString alloc] initWithFormat:@"%d",[current1 intValue]*256 + [current2 intValue]];
                         NSString *power = [[NSString alloc] initWithFormat:@"%d",[power1 intValue]*256 + [power2 intValue]];
-                        NSString *todayEnergyUsed = [[NSString alloc] initWithFormat:@"%d",[todayEnergyUsed1 intValue]*65536 + [todayEnergyUsed2 intValue]*4096 +[todayEnergyUsed3 intValue]*256 +[todayEnergyUsed4 intValue]];
+                        NSString *todayEnergyUsed = [[NSString alloc] initWithFormat:@"%.3f",([todayEnergyUsed1 intValue]*65536 + [todayEnergyUsed2 intValue]*4096 +[todayEnergyUsed3 intValue]*256 +[todayEnergyUsed4 intValue]) *0.001];
                         [dataDic setObject:voltage forKey:@"Voltage"];
                         [dataDic setObject:current forKey:@"Current"];
                         [dataDic setObject:power forKey:@"Power"];

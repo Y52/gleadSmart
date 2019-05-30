@@ -18,7 +18,7 @@ static float HEIGHT_HEADER = 30.f;
 
 @property (strong, nonatomic) UIView *todayElectricityView;
 @property (strong, nonatomic) UIImageView *todayElectricityImage;
-@property (strong, nonatomic) UILabel *degreeLabel;
+@property (strong, nonatomic) UILabel *todayDegreeLabel;
 @property (strong, nonatomic) UIView *listView;
 
 @property (strong, nonatomic) UILabel *todayElectricityLabel;
@@ -47,7 +47,7 @@ static float HEIGHT_HEADER = 30.f;
     
     self.todayElectricityView = [self todayElectricityView];
     self.todayElectricityImage = [self todayElectricityImage];
-    self.degreeLabel = [self degreeLabel];
+    self.todayDegreeLabel = [self todayDegreeLabel];
     self.todayElectricityLabel = [self todayElectricityLabel];
     self.listView = [self listView];
     self.timeTableView = [self timeTableView];
@@ -80,7 +80,7 @@ static float HEIGHT_HEADER = 30.f;
         self.voltageValueLabel.text = voltage;
         self.currentValueLabel.text = current;
         self.powerValueLabel.text = power;
-        self.degreeLabel.text = [NSString stringWithFormat:@"%@度", todayEnergyUsed];
+        self.todayDegreeLabel.text = todayEnergyUsed;
     });
     
 }
@@ -158,21 +158,22 @@ static float HEIGHT_HEADER = 30.f;
     return _todayElectricityLabel;
 }
 
-- (UILabel *)degreeLabel{
-    if (!_degreeLabel) {
-        _degreeLabel = [[UILabel alloc] init];
-        _degreeLabel.textAlignment = NSTextAlignmentCenter;
-        _degreeLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
-        _degreeLabel.font = [UIFont fontWithName:@"Helvetica" size:30.f];
-        _degreeLabel.text = LocalString(@"20度");
-        [self.todayElectricityView addSubview:_degreeLabel];
-        [_degreeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UILabel *)todayDegreeLabel{
+    if (!_todayDegreeLabel) {
+        _todayDegreeLabel = [[UILabel alloc] init];
+        _todayDegreeLabel.textAlignment = NSTextAlignmentCenter;
+        _todayDegreeLabel.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:254/255.0 alpha:1];
+        _todayDegreeLabel.font = [UIFont fontWithName:@"Helvetica" size:30.f];
+        _todayDegreeLabel.adjustsFontSizeToFitWidth = YES;
+        _todayDegreeLabel.text = LocalString(@"20度");
+        [self.todayElectricityView addSubview:_todayDegreeLabel];
+        [_todayDegreeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(80.f), yAutoFit(30.f)));
             make.centerX.equalTo(self.todayElectricityImage.mas_centerX);
             make.centerY.equalTo(self.todayElectricityImage.mas_centerY);
         }];
     }
-    return _degreeLabel;
+    return _todayDegreeLabel;
 }
 
 - (UIView *)listView{
