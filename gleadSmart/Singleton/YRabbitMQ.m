@@ -164,24 +164,44 @@ static NSArray *_routingkeys = nil;
 - (void)analyzeMessageTypeC:(NSDictionary *)dic{
     NSString *houseUid = [dic objectForKey:@"houseUid"];
     NSNumber *online = [dic objectForKey:@"online"];
+    NSString *mac = [dic objectForKey:@"mac"];
     Database *db = [Database shareInstance];
     if (![db.currentHouse.houseUid isEqualToString:houseUid]) {
         return;
     }
-    if ([online integerValue]) {
-        //上线的时候查询设备
-        UInt8 controlCode = 0x00;
-        NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-        [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitDeviceApProcessSucc" object:nil userInfo:nil];
-
-    }else{
-        for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
-            device.isOnline = online;
+    Network *net = [Network shareNetwork];
+    for (DeviceModel *device in net.deviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            if ([device.type integerValue] == DeviceCenterlControl) {
+                //中央控制器
+                if ([online integerValue]) {
+                    //上线的时候查询设备
+                    UInt8 controlCode = 0x00;
+                    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+                    [[Network shareNetwork] sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
+                }else{
+                    for (DeviceModel *device in [Network shareNetwork].connectedDevice.gatewayMountDeviceList) {
+                        device.isOnline = online;
+                    }
+                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+            }else{
+                //上线离线的除了中央控制器就是开关插座
+                device.isOnline = online;
+                NSDictionary *userInfo = @{@"device":device,@"isShare":@0};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+            }
         }
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+    for (DeviceModel *device in [Database shareInstance].shareDeviceArray) {
+        if ([device.mac isEqualToString:mac]) {
+            NSLog(@"%@",device.mac);
+            device.isOnline = online;
+            NSDictionary *userInfo = @{@"device":device,@"isShare":@1};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+        }
+    }
+    
 }
 
 /*
