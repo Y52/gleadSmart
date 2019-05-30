@@ -1052,7 +1052,7 @@ static int noUserInteractionHeartbeat = 0;
             self->_frameCount++;//帧计数器增加
             NSDictionary *data =[responseDic objectForKey:@"data"];
             NSString *cmd_uuid = [data objectForKey:@"cmd_uuid"];
-            [self getOneNETCommandStatus:cmd_uuid apiKey:apiKey resendTimes:5];
+            [self getOneNETCommandStatus:cmd_uuid apiKey:apiKey resendTimes:20];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error:%@",error);
@@ -1086,7 +1086,7 @@ static int noUserInteractionHeartbeat = 0;
             if ([[data objectForKey:@"status"] intValue] == 2 || [[data objectForKey:@"status"] intValue] == 1) {
                 if (resendTimes > 0) {
                     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                        sleep(3.f);
+                        sleep(0.5);
                         NSInteger times = resendTimes - 1;
                         [self getOneNETCommandStatus:cmd_uuid apiKey:apiKey resendTimes:times];
                     });
