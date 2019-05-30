@@ -110,14 +110,7 @@ static CGFloat const Cell_Height = 72.f;
                     HomeDeviceCell *cell = [self.deviceTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1]];
                     cell.controlSwitch.enabled = YES;
                     cell.controlSwitch.on = [device.isOn boolValue];
-                    if ([device.isOn boolValue]) {
-                        cell.status.text = LocalString(@"已开启");
-                    }else{
-                        cell.status.text = LocalString(@"已关闭");
-                    }
-                    if (shareDevice.isUnusual) {
-                        cell.status.text = LocalString(@"异常");
-                    }
+                    cell.status.text = [self getDeviceRoomNameAndStatus:device isShare:YES];
                     NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
                     [self differenceShareDiveceAction:type isOnline:[device.isOnline boolValue] device:device cell:cell indexpath:[NSIndexPath indexPathForRow:i inSection:1]];
                 });
@@ -134,20 +127,7 @@ static CGFloat const Cell_Height = 72.f;
                 cell.controlSwitch.enabled = YES;
                 cell.controlSwitch.on = [oldDevice.isOn boolValue];
                 
-                RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
-                NSString *status = room.name;
-                if (room.roomUid == nil) {
-                    status = LocalString(@"未设置");
-                }
-                if (oldDevice.isUnusual) {
-                    cell.status.text = [status stringByAppendingString:LocalString(@" | 异常")];
-                }else{
-                    if ([device.isOn boolValue]) {
-                        cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
-                    }else{
-                        cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
-                    }
-                }
+                cell.status.text = [self getDeviceRoomNameAndStatus:oldDevice isShare:NO];
                 [self differenceDiveceActionWithDevice:oldDevice cell:cell indexpath:[NSIndexPath indexPathForRow:i inSection:0]];
             });
         }
@@ -168,7 +148,7 @@ static CGFloat const Cell_Height = 72.f;
                 HomeDeviceCell *cell = [self.deviceTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
                 RoomModel *room = [[Database shareInstance] queryRoomWith:oldDevice.roomUid];
                 NSString *status = room.name;
-                if (room.roomUid == nil) {
+                if ([room.roomUid isEqualToString:@""]) {
                     status = LocalString(@"未设置");
                 }
                 if (node.isLeak || node.isLowVoltage) {
@@ -212,6 +192,55 @@ static CGFloat const Cell_Height = 72.f;
         }];
     };
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (NSString *)getDeviceRoomNameAndStatus:(DeviceModel *)device isShare:(BOOL)isShare{
+    NSString *status;
+    if (isShare) {
+        if ([device.type integerValue] < DeviceNTCValve) {
+            if (device.isUnusual) {
+                status = [status stringByAppendingString:LocalString(@"异常")];
+            }else{
+                if ([device.isOn boolValue]) {
+                    status = [status stringByAppendingString:LocalString(@"已开启")];
+                }else{
+                    status = [status stringByAppendingString:LocalString(@"已关闭")];
+                }
+            }
+        }else{
+            if ([device.isOnline integerValue]) {
+                status = [status stringByAppendingString:LocalString(@"在线")];
+            }else{
+                status = [status stringByAppendingString:LocalString(@"离线")];
+            }
+        }
+    }else{
+        RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
+        if ([room.roomUid isEqualToString:@""]) {
+            status = LocalString(@"未设置");
+        }else{
+            status = room.name;
+        }
+        
+        if ([device.type integerValue] < DeviceNTCValve) {
+            if (device.isUnusual) {
+                status = [status stringByAppendingString:LocalString(@" | 异常")];
+            }else{
+                if ([device.isOn boolValue]) {
+                    status = [status stringByAppendingString:LocalString(@" | 已开启")];
+                }else{
+                    status = [status stringByAppendingString:LocalString(@" | 已关闭")];
+                }
+            }
+        }else{
+            if ([device.isOnline integerValue]) {
+                status = [status stringByAppendingString:LocalString(@" | 在线")];
+            }else{
+                status = [status stringByAppendingString:LocalString(@" | 离线")];
+            }
+        }
+    }
+    return status;
 }
 
 #pragma mark - Lazy Load
@@ -283,22 +312,7 @@ static CGFloat const Cell_Height = 72.f;
         {
             DeviceModel *device = self.deviceArray[indexPath.row];
             cell.deviceName.text = device.name;
-            RoomModel *room = [[Database shareInstance] queryRoomWith:device.roomUid];
-            NSString *status = room.name;
-            if (room.roomUid == nil) {
-                status = LocalString(@"未设置");
-            }
-            
-            //NSLog(@"%@---%@",device.isOn,device.mac);
-            if (device.isUnusual) {
-                cell.status.text = [status stringByAppendingString:LocalString(@" | 异常")];
-            }else{
-                if ([device.isOn boolValue]) {
-                    cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
-                }else{
-                    cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
-                }
-            }
+            cell.status.text = [self getDeviceRoomNameAndStatus:device isShare:NO];
             [self differenceDiveceActionWithDevice:device cell:cell indexpath:indexPath];
         }
             break;
@@ -308,15 +322,11 @@ static CGFloat const Cell_Height = 72.f;
             DeviceModel *device = [Database shareInstance].shareDeviceArray[indexPath.row];
             cell.deviceName.text = device.name;
             if ([device.isOn boolValue]) {
-                cell.status.text = LocalString(@"已开启");
                 cell.controlSwitch.on = YES;
             }else{
-                cell.status.text = LocalString(@"已关闭");
                 cell.controlSwitch.on = NO;
             }
-            if (device.isUnusual) {
-                cell.status.text = LocalString(@"异常");
-            }
+            cell.status.text = [self getDeviceRoomNameAndStatus:device isShare:YES];
             NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
             [self differenceShareDiveceAction:type isOnline:[device.isOnline boolValue] device:device cell:cell indexpath:indexPath];
         }
@@ -454,44 +464,24 @@ static CGFloat const Cell_Height = 72.f;
         case DeviceFourSwitch:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_4"];
-            if (device.isOnline) {
-                cell.status.text = LocalString(@"在线");
-            }else{
-                cell.status.text = LocalString(@"离线");;
-            }
             blockCell.controlSwitch.hidden = YES;
         }
             break;
         case DeviceThreeSwitch:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_3"];
-            if (device.isOnline) {
-                cell.status.text = LocalString(@"在线");
-            }else{
-                cell.status.text = LocalString(@"离线");;
-            }
             blockCell.controlSwitch.hidden = YES;
         }
             break;
         case DeviceTwoSwitch:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_2"];
-            if (device.isOnline) {
-                cell.status.text = LocalString(@"在线");
-            }else{
-                cell.status.text = LocalString(@"离线");;
-            }
             blockCell.controlSwitch.hidden = YES;
         }
             break;
         case DeviceOneSwitch:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_1"];
-            if (device.isOnline) {
-                cell.status.text = LocalString(@"在线");
-            }else{
-                cell.status.text = LocalString(@"离线");;
-            }
             blockCell.controlSwitch.hidden = YES;
             
         }
@@ -627,44 +617,24 @@ static CGFloat const Cell_Height = 72.f;
         case DeviceFourSwitch:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_4"];
-            if (device.isOnline) {
-                cell.status.text = LocalString(@"在线");
-            }else{
-                cell.status.text = LocalString(@"离线");;
-            }
             blockCell.controlSwitch.hidden = YES;
         }
             break;
         case DeviceThreeSwitch:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_3"];
-            if (device.isOnline) {
-                cell.status.text = LocalString(@"在线");
-            }else{
-                cell.status.text = LocalString(@"离线");;
-            }
             blockCell.controlSwitch.hidden = YES;
         }
             break;
         case DeviceTwoSwitch:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_2"];
-            if (device.isOnline) {
-                cell.status.text = LocalString(@"在线");
-            }else{
-                cell.status.text = LocalString(@"离线");;
-            }
             blockCell.controlSwitch.hidden = YES;
         }
             break;
         case DeviceOneSwitch:
         {
             cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_1"];
-            if (device.isOnline) {
-                cell.status.text = LocalString(@"在线");
-            }else{
-                cell.status.text = LocalString(@"离线");;
-            }
             blockCell.controlSwitch.hidden = YES;
             
         }

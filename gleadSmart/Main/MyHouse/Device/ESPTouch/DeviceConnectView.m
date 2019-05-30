@@ -332,10 +332,10 @@
     NSMutableArray *homeList = [db queryRoomsWith:db.currentHouse.houseUid];
     if (homeList.count <= 0) {
         [NSObject showHudTipStr:LocalString(@"当前家庭还没有添加房间，请尽快添加")];
-        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":db.currentHouse.houseUid,@"houseUid":db.currentHouse.houseUid};
+        parameters = @{@"type":@4,@"mac":device.mac,@"name":device.name,@"roomUid":db.currentHouse.houseUid,@"houseUid":db.currentHouse.houseUid};
     }else{
         RoomModel *room = homeList[0];//将新设备插入到家庭第一个房间
-        parameters = @{@"mac":device.mac,@"name":device.name,@"type":device.type,@"houseUid":db.currentHouse.houseUid,@"roomUid":room.roomUid};
+        parameters = @{@"mac":device.mac,@"name":device.name,@"type":@4,@"houseUid":db.currentHouse.houseUid,@"roomUid":room.roomUid};
     }
     NSLog(@"%@",parameters);
     
@@ -352,7 +352,7 @@
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
                   [NSObject showHudTipStr:LocalString(@"绑定该设备成功")];
                   [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-                      BOOL result = [db executeUpdate:@"INSERT INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.mac,device.type,[Database shareInstance].currentHouse.houseUid];
+                      BOOL result = [db executeUpdate:@"REPLACE INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.name,device.type,[Database shareInstance].currentHouse.houseUid];
                       if (result) {
                           NSLog(@"插入设备到device成功");
                       }else{

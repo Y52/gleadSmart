@@ -380,7 +380,7 @@ static bool bindSucc = NO;
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
                   [NSObject showHudTipStr:LocalString(@"绑定该设备成功")];
                   [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
-                      BOOL result = [db executeUpdate:@"REPLACE INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.mac,device.type,[Database shareInstance].currentHouse.houseUid];
+                      BOOL result = [db executeUpdate:@"REPLACE INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.name,device.type,[Database shareInstance].currentHouse.houseUid];
                       if (result) {
                           NSLog(@"插入设备到device成功");
                       }else{
@@ -412,6 +412,8 @@ static bool bindSucc = NO;
     
     NSString *url = [NSString stringWithFormat:@"%@/api/device/state?mac=%@",httpIpAddress,mac];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    NSLog(@"%@",url);
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
