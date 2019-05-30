@@ -356,14 +356,24 @@ static bool bindSucc = NO;
     
     Database *db = [Database shareInstance];
     
+    NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]];
+    NSNumber *postType;
+    if (type == DevicePlugOutlet) {
+        postType = @4;
+    }else if (type >= DeviceOneSwitch && type <= DeviceFourSwitch){
+        postType = @3;
+    }else if (type == DeviceCenterlControl){
+        postType = @0;
+    }
+    
     NSDictionary *parameters;
     NSMutableArray *homeList = [db queryRoomsWith:db.currentHouse.houseUid];
     if (homeList.count <= 0) {
         [NSObject showHudTipStr:LocalString(@"当前家庭还没有添加房间，请尽快添加")];
-        parameters = @{@"type":@4,@"mac":device.mac,@"name":device.name,@"roomUid":db.currentHouse.houseUid,@"houseUid":db.currentHouse.houseUid};
+        parameters = @{@"type":postType,@"mac":device.mac,@"name":device.name,@"roomUid":db.currentHouse.houseUid,@"houseUid":db.currentHouse.houseUid};
     }else{
         RoomModel *room = homeList[0];//将新设备插入到家庭第一个房间
-        parameters = @{@"mac":device.mac,@"name":device.name,@"type":@4,@"houseUid":db.currentHouse.houseUid,@"roomUid":room.roomUid};
+        parameters = @{@"mac":device.mac,@"name":device.name,@"type":postType,@"houseUid":db.currentHouse.houseUid,@"roomUid":room.roomUid};
     }
     NSLog(@"%@",parameters);
     
