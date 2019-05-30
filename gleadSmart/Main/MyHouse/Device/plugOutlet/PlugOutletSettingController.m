@@ -35,6 +35,13 @@ static float HEIGHT_HEADER = 40.f;
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];    
 }
+
+#pragma mark - private methods
+- (void)removeDevice{
+    NSLog(@"移除设备");
+}
+
+
 #pragma mark - Lazy Load
 -(UITableView *)plugOutletSettingTable{
     if (!_plugOutletSettingTable) {
@@ -300,9 +307,4 @@ static float HEIGHT_HEADER = 40.f;
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return HEIGHT_HEADER;
 }
-
-- (void)removeDevice{
-    NSLog(@"移除设备");
-}
-
 @end
