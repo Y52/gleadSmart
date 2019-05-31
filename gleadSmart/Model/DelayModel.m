@@ -29,14 +29,14 @@
             
         case delayActionOpen:
         {
-            return [NSString stringWithFormat:@"%02d:%02d%@",self.hour,self.minute,@"后开启"];
+            return [NSString stringWithFormat:@"%02d:%02d:%02d%@",self.hour,self.minute,self.second,@"后开启"];
             
         }
             break;
             
         case delayActionClose:
         {
-            return [NSString stringWithFormat:@"%02d:%02d%@",self.hour,self.minute,@"后关闭"];
+            return [NSString stringWithFormat:@"%02d:%02d:%02d%@",self.hour,self.minute,self.second,@"后关闭"];
             
         }
             break;
