@@ -176,10 +176,12 @@
 - (void)rabbitMQSwitchStatusUpdate:(NSNotification *)notification{
     NSDictionary *userInfo = [notification userInfo];
     DeviceModel *device = [userInfo objectForKey:@"device"];
-    self.device = device;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self OneSwitchUITransformationByStatus];
-    });
+    if ([device.mac isEqualToString:self.device.mac]) {
+        self.device = device;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self OneSwitchUITransformationByStatus];
+        });
+    }
 }
 
 //更新UI

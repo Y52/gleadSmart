@@ -394,6 +394,19 @@ static dispatch_once_t oneToken;
     return result;
 }
 
+#pragma mark - 删除数据表
+- (void)deleteTable:(NSString *)tableName{
+    [_queueDB inDatabase:^(FMDatabase * _Nonnull db) {
+        BOOL result = [db executeUpdate:[NSString stringWithFormat:@"DROP TABLE %@",tableName]];
+        if (result) {
+            NSLog(@"Drop table success");
+        }else
+        {
+            NSLog(@"Drop table Failure");
+        }
+    }];
+}
+
 #pragma mark - API methods and update database
 - (void)getHouseHomeListAndDevice:(HouseModel *)house success:(void(^)(void))success failure:(void(^)(void))failure{
     //[SVProgressHUD show];
@@ -455,6 +468,9 @@ static dispatch_once_t oneToken;
                     
                     //获取房间内关联的所有设备
                     if ([[obj objectForKey:@"devices"] count] > 0) {
+                        [self deleteTable:@"device"];
+                        [self createTable];
+
                         [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                             DeviceModel *device = [[DeviceModel alloc] init];
                             device.name = [obj objectForKey:@"deviceName"];
@@ -487,6 +503,7 @@ static dispatch_once_t oneToken;
                 self.shareDeviceArray = [[NSMutableArray alloc] init];
             }
             if ([[dic objectForKey:@"shareHouse"] isKindOfClass:[NSArray class]] && [[dic objectForKey:@"shareHouse"] count] > 0) {
+
                 [[dic objectForKey:@"shareHouse"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     if ([[obj objectForKey:@"devices"] isKindOfClass:[NSArray class]] && [[obj objectForKey:@"devices"] count] > 0) {
                         [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj1, NSUInteger idx, BOOL * _Nonnull stop) {
