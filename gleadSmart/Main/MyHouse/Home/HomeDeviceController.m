@@ -164,13 +164,22 @@ static CGFloat const Cell_Height = 72.f;
 
 - (void)refreshTable{
     Network *net = [Network shareNetwork];
-    UInt8 controlCode = 0x00;
-    NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
-    [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
+    
+    if (net.connectedDevice) {
+        UInt8 controlCode = 0x00;
+        NSArray *data = @[@0xFE,@0x01,@0x45,@0x00];//在网节点查询
+        [net sendData69With:controlCode mac:[Database shareInstance].currentHouse.mac data:data failuer:nil];
+    }
+    
+    for (DeviceModel *device in net.deviceArray) {
+        NSLog(@"1111%@",device.mac);
+        //开关插座获取状态
+        [device getRelayStatus];
+    }
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         //异步等待10秒，如果未收到信息做如下处理
-        sleep(10);
+        sleep(1);
         if ([self.deviceTable.mj_header isRefreshing]) {
             [self.deviceTable.mj_header endRefreshing];
         }

@@ -775,6 +775,7 @@ static int noUserInteractionHeartbeat = 0;
             switch ([funcFrame integerValue]) {
                 case 00:
                 {
+                    NSLog(@"设备%@上线",device.mac);
                     device.isOnline = @1;
                     device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0xFF];
                 }

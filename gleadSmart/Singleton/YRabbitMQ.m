@@ -197,9 +197,11 @@ static NSArray *_routingkeys = nil;
                 NSDictionary *userInfo = @{@"device":device,@"isShare":@0};
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
 
-                //设备上线就根据数据流查询状态
-                NSMutableArray *deviceArray = [NSMutableArray arrayWithObject:device];
-                [[Network shareNetwork] inquireDeviceInfoByOneNetdatastreams:deviceArray apiKey:device.apiKey deviceId:device.deviceId];
+                if ([online integerValue]) {
+                    //设备上线就根据数据流查询状态
+                    NSMutableArray *deviceArray = [NSMutableArray arrayWithObject:device];
+                    [[Network shareNetwork] inquireDeviceInfoByOneNetdatastreams:deviceArray apiKey:device.apiKey deviceId:device.deviceId];
+                }
 
             }
         }
