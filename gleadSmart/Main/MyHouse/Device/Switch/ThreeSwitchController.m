@@ -27,7 +27,9 @@
 
 @end
 
-@implementation ThreeSwitchController
+@implementation ThreeSwitchController{
+    int needShieldRabbitMQCount;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,6 +56,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshThreeSwitchUI) name:@"refreshMulSwitchUI" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rabbitMQSwitchStatusUpdate:) name:@"rabbitMQSwitchStatusUpdate" object:nil];
     
+    needShieldRabbitMQCount = 0;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -163,6 +166,8 @@
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@0xFE];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
     }
+    
+    needShieldRabbitMQCount++;
 }
 
 - (void)switchClickThree_2:(UIButton *)sender{
@@ -183,6 +188,7 @@
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
         
     }
+    needShieldRabbitMQCount++;
 }
 
 - (void)switchClickThree_3:(UIButton *)sender{
@@ -203,6 +209,7 @@
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
         
     }
+    needShieldRabbitMQCount++;
 }
 
 #pragma mark - notification
@@ -217,6 +224,11 @@
 }
 
 - (void)rabbitMQSwitchStatusUpdate:(NSNotification *)notification{
+    if (needShieldRabbitMQCount) {
+        needShieldRabbitMQCount--;
+        return;
+    }
+    
     NSDictionary *userInfo = [notification userInfo];
     DeviceModel *device = [userInfo objectForKey:@"device"];
     if ([device.mac isEqualToString:self.device.mac]) {
