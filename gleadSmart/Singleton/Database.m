@@ -430,6 +430,9 @@ static dispatch_once_t oneToken;
         NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             NSDictionary *dic = [responseDic objectForKey:@"data"];
+            [self deleteTable:@"device"];
+            [self createTable];
+
             
             /*
              *取出家庭详细信息
@@ -468,8 +471,6 @@ static dispatch_once_t oneToken;
                     
                     //获取房间内关联的所有设备
                     if ([[obj objectForKey:@"devices"] count] > 0) {
-                        [self deleteTable:@"device"];
-                        [self createTable];
 
                         [[obj objectForKey:@"devices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                             DeviceModel *device = [[DeviceModel alloc] init];
@@ -481,7 +482,7 @@ static dispatch_once_t oneToken;
                             device.deviceId = [obj objectForKey:@"deviceId"];
                             device.houseUid = house.houseUid;
                             device.isShare = NO;
-                            
+
                             if ([device.mac isKindOfClass:[NSString class]] && device.mac.length > 0) {
                                 DeviceType type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
                                 device.type = [NSNumber numberWithInt:type];

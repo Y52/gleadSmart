@@ -240,7 +240,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     
     NSMutableArray *localDeviceArray = [db queryAllDevice:db.currentHouse.houseUid];
     for (DeviceModel *device in localDeviceArray) {
-        NSLog(@"%@",device.mac);
+        NSLog(@"1111%@",device.mac);
         if ([device.type intValue] == DeviceCenterlControl) {
             //获取中央控制器的mac并设置为当前家庭的mac
             db.currentHouse.mac = device.mac;
