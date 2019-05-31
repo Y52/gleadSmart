@@ -10,6 +10,7 @@
 #import "DeviceSettingCell.h"
 #import "DeviceShareController.h"
 #import "DeviceLocationController.h"
+#import "YTFAlertController.h"
 
 NSString *const CellIdentifier_deviceSetting = @"CellID_deviceSetting";
 static float HEIGHT_CELL = 50.f;
@@ -59,6 +60,49 @@ static float HEIGHT_HEADER = 40.f;
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)deviceNameSetting{
+    
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    NSDictionary *parameters = @{@"name":self.device.name,@"mac":self.device.mac};
+    [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            //[NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            
+        }else{
+            [NSObject showHudTipStr:@"修改设备名称失败"];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [self.deviceSettingTable reloadData];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"修改设备名称失败"];
+        });
+    }];
 }
 
 //删除分享设备的API
@@ -240,6 +284,28 @@ static float HEIGHT_HEADER = 40.f;
         case 0:
         {
             if (indexPath.row == 0) {
+//                if ([self.house.auth integerValue]) {
+//                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您没有该权限") preferredStyle:UIAlertControllerStyleAlert];
+//                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+//                    [alertController addAction:cancelAction];
+//                    [self presentViewController:alertController animated:YES completion:nil];
+//                    return;
+//                }
+                YTFAlertController *alert = [[YTFAlertController alloc] init];
+                alert.lBlock = ^{
+                };
+                alert.rBlock = ^(NSString * _Nullable text) {
+                    self.device.name = text;
+                    //使用Api更新
+                    [self deviceNameSetting];
+                };
+                alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                [self presentViewController:alert animated:NO completion:^{
+                    alert.titleLabel.text = LocalString(@"更改设备名称");
+                    alert.textField.text = self.device.name;
+                    [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
+                    [alert.rightBtn setTitle:LocalString(@"确认") forState:UIControlStateNormal];
+                }];
                 
             }
             if (indexPath.row == 1) {

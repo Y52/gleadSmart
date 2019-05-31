@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, delayAction) {
 @property (nonatomic) int number;
 @property (nonatomic) int hour;
 @property (nonatomic) int minute;
+@property (nonatomic) int second;
 @property (nonatomic) BOOL isOn;
 @property (nonatomic) delayAction action;
 

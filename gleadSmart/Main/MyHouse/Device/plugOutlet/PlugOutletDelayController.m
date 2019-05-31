@@ -150,6 +150,7 @@ static bool plugDeleted = NO;
             temp = (by3 | (by2 << 8) | (by1 << 16));
             clock.hour = temp / 3600;
             clock.minute = (temp % 3600)/60;
+            clock.second = (temp % 3600)%60;
             clock.action = [frame[17+i*6] intValue];
             [self.delayclockList addObject:clock];
         }

@@ -223,11 +223,12 @@ static int noUserInteractionHeartbeat = 0;
                     //连接操作
                     [_lock unlock];
                     
-                    //查询插座状态
-                    UInt8 controlCode = 0x01;
-                    NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
-                    [bindDevice sendData69With:controlCode mac:bindDevice.mac data:data];
-                    
+                    if ([bindDevice.type integerValue] == DevicePlugOutlet) {
+                        //查询插座状态
+                        UInt8 controlCode = 0x01;
+                        NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
+                        [bindDevice sendData69With:controlCode mac:bindDevice.mac data:data];
+                    }                                                                                       
                     NSLog(@"%@连接成功",mac);
                     return;
                 }else{
@@ -359,9 +360,9 @@ static int noUserInteractionHeartbeat = 0;
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
     NSLog(@"连接失败");
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [NSObject showHudTipStr:LocalString(@"连接已断开")];
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        //[NSObject showHudTipStr:LocalString(@"连接已断开")];
+//    });
     if (!_isDeviceVC) {
         [self.udpTimer setFireDate:[NSDate date]];
     }
@@ -1274,7 +1275,7 @@ static int noUserInteractionHeartbeat = 0;
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
         NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
         NSString * daetr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"success:%@",daetr);
+        //NSLog(@"success:%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             NSDictionary *data =[responseDic objectForKey:@"data"];
             if ([[data objectForKey:@"status"] intValue] == 2 || [[data objectForKey:@"status"] intValue] == 1) {
