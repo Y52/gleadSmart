@@ -192,10 +192,15 @@ static NSArray *_routingkeys = nil;
                 }
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
             }else{
-                //上线离线的除了中央控制器就是开关插座
+                //开关插座等设备的上线离线
                 device.isOnline = online;
                 NSDictionary *userInfo = @{@"device":device,@"isShare":@0};
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+
+                //设备上线就根据数据流查询状态
+                NSMutableArray *deviceArray = [NSMutableArray arrayWithObject:device];
+                [[Network shareNetwork] inquireDeviceInfoByOneNetdatastreams:deviceArray apiKey:device.apiKey deviceId:device.deviceId];
+
             }
         }
     }

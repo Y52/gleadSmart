@@ -76,8 +76,7 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
 
 ///@brief 获取设备状态
 - (void)getRelayStatus;
-///@brief 心跳帧
-- (void)heartBeat;
+
 @end
 
 NS_ASSUME_NONNULL_END
