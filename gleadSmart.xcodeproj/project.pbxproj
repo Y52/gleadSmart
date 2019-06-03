@@ -276,6 +276,22 @@
 		36F6C608FCD6FCDBBF4D4639C55EBEBA /* img_thermostat_on.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22850D9DCDC939D219DB689FE5E6CD /* img_thermostat_on.png */; };
 		36FDB07E22A4B87800E6E7A8 /* AAProgressCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */; };
 		36FDB07F22A4B87F00E6E7A8 /* AAProgressCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */; };
+		36FDB09122A5307C00E6E7A8 /* jld_1024@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08122A5307B00E6E7A8 /* jld_1024@2x.png */; };
+		36FDB09222A5307C00E6E7A8 /* jld_80@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08222A5307B00E6E7A8 /* jld_80@2x.png */; };
+		36FDB09422A5307C00E6E7A8 /* jld_60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08422A5307C00E6E7A8 /* jld_60@2x.png */; };
+		36FDB09522A5307C00E6E7A8 /* jld_120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08522A5307C00E6E7A8 /* jld_120@2x.png */; };
+		36FDB09822A5307C00E6E7A8 /* jld_180@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08822A5307C00E6E7A8 /* jld_180@2x.png */; };
+		36FDB09922A5307C00E6E7A8 /* jld_40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08922A5307C00E6E7A8 /* jld_40@2x.png */; };
+		36FDB09C22A5307C00E6E7A8 /* jld_87@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08C22A5307C00E6E7A8 /* jld_87@2x.png */; };
+		36FDB0A122A531EA00E6E7A8 /* jld_40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08922A5307C00E6E7A8 /* jld_40@2x.png */; };
+		36FDB0A222A531EF00E6E7A8 /* jld_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08B22A5307C00E6E7A8 /* jld_58@2x.png */; };
+		36FDB0A322A531F300E6E7A8 /* jld_60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08422A5307C00E6E7A8 /* jld_60@2x.png */; };
+		36FDB0A422A531F700E6E7A8 /* jld_80@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08222A5307B00E6E7A8 /* jld_80@2x.png */; };
+		36FDB0A522A531FA00E6E7A8 /* jld_87@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08C22A5307C00E6E7A8 /* jld_87@2x.png */; };
+		36FDB0A622A531FD00E6E7A8 /* jld_120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08522A5307C00E6E7A8 /* jld_120@2x.png */; };
+		36FDB0A722A531FF00E6E7A8 /* jld_180@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08822A5307C00E6E7A8 /* jld_180@2x.png */; };
+		36FDB0A822A5320200E6E7A8 /* jld_1024@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08122A5307B00E6E7A8 /* jld_1024@2x.png */; };
+		36FDB0A922A5320600E6E7A8 /* jld_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08B22A5307C00E6E7A8 /* jld_58@2x.png */; };
 		37072A994D24530D66D96159C618DA2C /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FC069E3B92DA2E843EA65EA7B5036 /* NoHouseAddController.m */; };
 		37C462E32B088C95F9191CA486344B3D /* img_login_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 5240930AAF71C9AC342A08EFBD4A5A99 /* img_login_password.png */; };
 		388DC7DA5FF4AA3CC352FBC46D289E5A /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8551A6A8B7EEFAD03BD1A7E17428E022 /* RegisterController.m */; };
@@ -1319,6 +1335,14 @@
 		36C9151A73CDCC7A44897EB31411F3F9 /* img_nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_nav_back.png; sourceTree = "<group>"; };
 		36FDB07C22A4B87800E6E7A8 /* AAProgressCircleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAProgressCircleView.h; sourceTree = "<group>"; };
 		36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAProgressCircleView.m; sourceTree = "<group>"; };
+		36FDB08122A5307B00E6E7A8 /* jld_1024@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jld_1024@2x.png"; sourceTree = "<group>"; };
+		36FDB08222A5307B00E6E7A8 /* jld_80@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jld_80@2x.png"; sourceTree = "<group>"; };
+		36FDB08422A5307C00E6E7A8 /* jld_60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jld_60@2x.png"; sourceTree = "<group>"; };
+		36FDB08522A5307C00E6E7A8 /* jld_120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jld_120@2x.png"; sourceTree = "<group>"; };
+		36FDB08822A5307C00E6E7A8 /* jld_180@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jld_180@2x.png"; sourceTree = "<group>"; };
+		36FDB08922A5307C00E6E7A8 /* jld_40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jld_40@2x.png"; sourceTree = "<group>"; };
+		36FDB08B22A5307C00E6E7A8 /* jld_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jld_58@2x.png"; sourceTree = "<group>"; };
+		36FDB08C22A5307C00E6E7A8 /* jld_87@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jld_87@2x.png"; sourceTree = "<group>"; };
 		37216C47A7ACEE60A2B8FC473474E9A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3782C0956AEC32D9119F32C9B61EFDF7 /* valveTabMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTabMore@2x.png"; sourceTree = "<group>"; };
 		37C8969D02CE2D43FB9D75DD7322C081 /* img_adddevice_wenkongqi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_wenkongqi@2x.png"; sourceTree = "<group>"; };
@@ -2283,6 +2307,7 @@
 		3559D0BF6BE16535600B71C5430B9DBE /* appIcon */ = {
 			isa = PBXGroup;
 			children = (
+				36FDB08022A5301400E6E7A8 /* jienuoAppIcon */,
 				11CFC1DE86F60EB0BFF152B7536D66AC /* 1024@2x.png */,
 				274E6FCB0E723442A28FE9E253B25CC4 /* 120@2x.png */,
 				3DF6A20154FAF6DFDA41BF26D4FB2373 /* 180@2x.png */,
@@ -2302,6 +2327,21 @@
 				36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */,
 			);
 			path = ProgressCircleView;
+			sourceTree = "<group>";
+		};
+		36FDB08022A5301400E6E7A8 /* jienuoAppIcon */ = {
+			isa = PBXGroup;
+			children = (
+				36FDB08922A5307C00E6E7A8 /* jld_40@2x.png */,
+				36FDB08B22A5307C00E6E7A8 /* jld_58@2x.png */,
+				36FDB08422A5307C00E6E7A8 /* jld_60@2x.png */,
+				36FDB08222A5307B00E6E7A8 /* jld_80@2x.png */,
+				36FDB08C22A5307C00E6E7A8 /* jld_87@2x.png */,
+				36FDB08522A5307C00E6E7A8 /* jld_120@2x.png */,
+				36FDB08822A5307C00E6E7A8 /* jld_180@2x.png */,
+				36FDB08122A5307B00E6E7A8 /* jld_1024@2x.png */,
+			);
+			path = jienuoAppIcon;
 			sourceTree = "<group>";
 		};
 		39476F30E11E8C23960A025461CA54F7 /* RDVTabbarController */ = {
@@ -3453,8 +3493,10 @@
 				59F50A917740EF9AE1613722EFC27350 /* img_addDevice@2x.png in Resources */,
 				D94185B42A5B35C252573B1813260DEC /* img_addDevice@3x.png in Resources */,
 				F3B28955672E050AD7447C7268FDD277 /* img_addShareCheck_notable.png in Resources */,
+				36FDB0A522A531FA00E6E7A8 /* jld_87@2x.png in Resources */,
 				A83C108991F9A579DF41915D221ACA3F /* img_addShareCheck_notable@2x.png in Resources */,
 				C566193125691EFFACD752BE1FCE4135 /* img_addShareCheck_notable@3x.png in Resources */,
+				36FDB0A722A531FF00E6E7A8 /* jld_180@2x.png in Resources */,
 				B6B034A1A27ADE6C04DF1F356E007B10 /* img_adddevice_bigualu.png in Resources */,
 				B01D0B0174DBBE86B509315CF8D20BA8 /* img_adddevice_bigualu@2x.png in Resources */,
 				AE28DDD98A1A9EA861B84C04A9E16945 /* img_adddevice_bigualu@3x.png in Resources */,
@@ -3558,6 +3600,7 @@
 				9A1D2F91AFA6B9DF1671C156E35E214B /* img_mine_wechat@3x.png in Resources */,
 				F18E5B3B539E3F401429D3BAB8E507F1 /* img_nav_back.png in Resources */,
 				548800F77C583CC6B88F8A97791FD1CA /* img_nav_back@2x.png in Resources */,
+				36FDB0A422A531F700E6E7A8 /* jld_80@2x.png in Resources */,
 				2ABB28F421421EBF198841F7E8C23D4E /* img_nav_back@3x.png in Resources */,
 				B68E842D9AFD51948171C7576C1A4575 /* img_noSharer.png in Resources */,
 				718E9F2FC0BCBB214E4B29FA128F88DB /* img_noSharer@2x.png in Resources */,
@@ -3658,6 +3701,7 @@
 				D9D771003AFEEACEEF569D0180F6FC8F /* nodeBattery_abnormal@2x.png in Resources */,
 				D8C3B6C8A77BAE0D52166C82D42EB227 /* nodeBattery_abnormal@3x.png in Resources */,
 				41A2FD60230D3C58CB44096812C1A007 /* nodeBattery_normal.png in Resources */,
+				36FDB0A622A531FD00E6E7A8 /* jld_120@2x.png in Resources */,
 				291BA666048297075BED26E7E6730339 /* nodeBattery_normal@2x.png in Resources */,
 				26C1BBB65AF274938FEEC96AE8B809D4 /* nodeBattery_normal@3x.png in Resources */,
 				719A5A17E37AAF158C6AD0BC6E0B7899 /* nodeHeaderBtn.png in Resources */,
@@ -3671,6 +3715,7 @@
 				1C2A751C4A068C64FE9A78260DEC90E0 /* nodeLeakBig_normal@3x.png in Resources */,
 				34EE4266975635361E48FBDA123ADC2C /* nodeLeakSmall_normal.png in Resources */,
 				9C247ACD2BE2815A8528B9665BC8BB39 /* nodeLeakSmall_normal@2x.png in Resources */,
+				36FDB0A822A5320200E6E7A8 /* jld_1024@2x.png in Resources */,
 				36844A4D2292B19300330C74 /* img_switch_icon_3@2x.png in Resources */,
 				B92FB42BBB8D200F6C90B794A5E25573 /* nodeLeakSmall_normal@3x.png in Resources */,
 				FCE92735E0546E99B7146FF9592E116F /* nodeSet_abnormal.png in Resources */,
@@ -3709,6 +3754,7 @@
 				9C4E7AB0C988AD14FB8F1AE6156B454B /* thermostatMoer@3x.png in Resources */,
 				525038D5A74C4E187C8C49A131A3B769 /* thermostatSet@1x.png in Resources */,
 				BB1BD729228D5C5400AF5741 /* img_2switch_back@2x.png in Resources */,
+				36FDB0A222A531EF00E6E7A8 /* jld_58@2x.png in Resources */,
 				751ED2CA5F1728CBFDB767EAD08CF28F /* thermostatSet@2x.png in Resources */,
 				8020EA69D79A232B77E6DA18AE4BCA4C /* thermostatSet@3x.png in Resources */,
 				36018AA32294ECEE00EBC093 /* valveTemperature_normal@2x.png in Resources */,
@@ -3753,6 +3799,7 @@
 				9826ADF090CA5AC80CCE7A7E60B98ADC /* valveLeak_normal.png in Resources */,
 				BB1BD761228D5C5500AF5741 /* img_plug_delayTime@2x.png in Resources */,
 				8AB4DCA43F999F0B196FDF157C803CCB /* valveLeak_normal@2x.png in Resources */,
+				36FDB0A322A531F300E6E7A8 /* jld_60@2x.png in Resources */,
 				D9AFA86CE95A9C12810E5448720625DF /* valveLeak_normal@3x.png in Resources */,
 				2A8478770C12FCD16375719B6EF9F67A /* valveNode_abnormal@2x.png in Resources */,
 				0143FBFF30CD91AFCC928FDC3C3356EA /* valveNode_abnormal@3x.png in Resources */,
@@ -3768,6 +3815,7 @@
 				BB1BD74D228D5C5500AF5741 /* img_switch_clock@3x.png in Resources */,
 				C512530EB872C1BFA09899DE849B8B11 /* valveStatus_abnormal.png in Resources */,
 				6D2351D137F7C1A337CB65F78081462B /* valveStatus_abnormal@2x.png in Resources */,
+				36FDB0A122A531EA00E6E7A8 /* jld_40@2x.png in Resources */,
 				9E8FBAC7186C95ED10DF14F3226FA075 /* valveStatus_abnormal@3x.png in Resources */,
 				948E08E0D9F57175E104D9F8E5C41920 /* valveStatus_normal.png in Resources */,
 				B1B424B1B621896F28B9C4C82D907499 /* valveStatus_normal@2x.png in Resources */,
@@ -3811,6 +3859,7 @@
 				0C1AB6988ED8C7D21803B5CDA2DDA554 /* Imag_retrieve_phoneuser@3x.png in Resources */,
 				CB6BBE3A5697884C4838388924F6F452 /* KYDivisionPickerView_list.json in Resources */,
 				028B398D27F392388660423629D6D6DF /* LaunchScreen.storyboard in Resources */,
+				36FDB09522A5307C00E6E7A8 /* jld_120@2x.png in Resources */,
 				3468F378EEC1249F3F6D2F6E35028173 /* Main.storyboard in Resources */,
 				5318F514566369861893CD67233412D3 /* addFamily_check.png in Resources */,
 				49DEC61C05345F76A2D42C01F5421250 /* addFamily_check@2x.png in Resources */,
@@ -3845,6 +3894,7 @@
 				1C3C81EDE8CAFF1471C8362CA9C19081 /* img_adddevice_bigualu.png in Resources */,
 				5255A5A194C5D4552A7B27636FB25EA5 /* img_adddevice_bigualu@2x.png in Resources */,
 				11B002FA467BC2200A9FF5D235EA0CA8 /* img_adddevice_bigualu@3x.png in Resources */,
+				36FDB09C22A5307C00E6E7A8 /* jld_87@2x.png in Resources */,
 				8AE04941D3F9ECEA3A8A61620AC2DEB2 /* img_adddevice_gateway.png in Resources */,
 				66363F12FB9D0841D1F63DBB74181CFD /* img_adddevice_gateway@2x.png in Resources */,
 				39032CB244BA49A92FB63B92378F8F82 /* img_adddevice_gateway@3x.png in Resources */,
@@ -3926,6 +3976,7 @@
 				43F3BF5885ADB17E962EEF95B6BB3D31 /* img_mine_editPW@3x.png in Resources */,
 				C4A2EFCC4931328BB95B54E14E758872 /* img_mine_header.png in Resources */,
 				BB1BD758228D5C5500AF5741 /* img_switch1_off@3x.png in Resources */,
+				36FDB09222A5307C00E6E7A8 /* jld_80@2x.png in Resources */,
 				62EE24236C28FC4818249071ABEB7A98 /* img_mine_header@2x.png in Resources */,
 				BB1BD73E228D5C5500AF5741 /* img_switchback_back@3x.png in Resources */,
 				A8F927C0FE68ADC823A37F585349F861 /* img_mine_header@3x.png in Resources */,
@@ -3938,6 +3989,7 @@
 				8872F3E2190365546BA7CE6F9CB23238 /* img_mine_logout@2x.png in Resources */,
 				BB1BD75E228D5C5500AF5741 /* img_plugView_off@2x.png in Resources */,
 				6BD277FDBD3712DE61296F981A1C277F /* img_mine_logout@3x.png in Resources */,
+				36FDB0A922A5320600E6E7A8 /* jld_58@2x.png in Resources */,
 				16606DF0DC3EBD748C3E5292D1642AF2 /* img_mine_wechat.png in Resources */,
 				97F60EC343D324B213AEFB890F4BFA5C /* img_mine_wechat@2x.png in Resources */,
 				89FC0773FDDE78D94EA99B4A9171806E /* img_mine_wechat@3x.png in Resources */,
@@ -3997,6 +4049,7 @@
 				32802A6775FEB1A8136DE663FE99E9F3 /* img_thermostat_off@2x.png in Resources */,
 				747F6EC6F04053BC840B0FB48C32FC0A /* img_thermostat_off@3x.png in Resources */,
 				D081656B1E2517C98A0B83BAD8DDDC1C /* img_thermostat_on.png in Resources */,
+				36FDB09922A5307C00E6E7A8 /* jld_40@2x.png in Resources */,
 				9C1E75C078382EBB4F908E999E534BB8 /* img_thermostat_on@2x.png in Resources */,
 				85F52D1EE3FEC299F6C566255200B410 /* img_thermostat_on@3x.png in Resources */,
 				9A0551B2B20153C2E66886CE1E8CC49B /* img_valve_off.png in Resources */,
@@ -4008,6 +4061,7 @@
 				DAA96677464BEE6107DC969064D2FB3B /* img_valve_on@3x.png in Resources */,
 				5113C7FB18C27FED6DBA962A9C654182 /* img_wallHob.png in Resources */,
 				BA43C1C8DEC5F1AD661CEA2E2A8C3603 /* img_wallHob@2x.png in Resources */,
+				36FDB09122A5307C00E6E7A8 /* jld_1024@2x.png in Resources */,
 				BB1BD772228D5C5500AF5741 /* kaiguan@2x.png in Resources */,
 				EF95017D2B2C17A06C60BAE1E1025364 /* img_wallHob@3x.png in Resources */,
 				40B5289C0ACAD7668F0C2C92B02E5F27 /* img_weatherBg.png in Resources */,
@@ -4083,6 +4137,7 @@
 				36844A402292A36800330C74 /* img_switch_icon_1@2x.png in Resources */,
 				53A4DB6FC7016A7C379B5159501E9348 /* thermostatKnob@2x.png in Resources */,
 				1DCC007BA75CAC50B5A92EACA79E044F /* thermostatKnob@3x.png in Resources */,
+				36FDB09422A5307C00E6E7A8 /* jld_60@2x.png in Resources */,
 				DA54BD3B5039A3AAF0A1A0479A5B0015 /* thermostatKnob_On@2x.png in Resources */,
 				BB1BD760228D5C5500AF5741 /* img_plug_delayTime@2x.png in Resources */,
 				12A82A8B53296EAC4365C8D42B1CFF25 /* thermostatKnob_On@3x.png in Resources */,
@@ -4131,6 +4186,7 @@
 				8B1F1C895EDF19148090372968769B5A /* valveLeak_abnormal@3x.png in Resources */,
 				B4827F8993840C33EBC6C74365DA48F7 /* valveLeak_normal.png in Resources */,
 				589A2E6C0CBEBDA7E22A559F1A583968 /* valveLeak_normal@2x.png in Resources */,
+				36FDB09822A5307C00E6E7A8 /* jld_180@2x.png in Resources */,
 				311F1ADCC2150ED70CA236264A858656 /* valveLeak_normal@3x.png in Resources */,
 				6D363CCAAA1DF5263D44DFF892AE33C8 /* valveNode_abnormal@2x.png in Resources */,
 				BB1BD72C228D5C5400AF5741 /* img_switch_allopen@3x.png in Resources */,
@@ -4829,7 +4885,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FF6D24B0FEAD4E2B7945E448A7C453CE /* Pods-jienuoIOT.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-jienuo";
 				CODE_SIGN_ENTITLEMENTS = jienuoIOT/jienuoIOT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
@@ -5008,7 +5064,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 570FD2948B582496DE0ED8F17ACB0D05 /* Pods-jienuoIOT.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-jienuo";
 				CODE_SIGN_ENTITLEMENTS = jienuoIOT/jienuoIOT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
