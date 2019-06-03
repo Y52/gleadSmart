@@ -219,7 +219,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [NSObject showHudTipStr:@"获取当前天气失败"];
+            //[NSObject showHudTipStr:@"获取当前天气失败"];
         });
     }];
 }
