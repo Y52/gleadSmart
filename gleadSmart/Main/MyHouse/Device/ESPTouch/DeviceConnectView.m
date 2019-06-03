@@ -330,6 +330,32 @@
     Database *db = [Database shareInstance];
     
     NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
+    switch ([device.type integerValue]) {
+        case DevicePlugOutlet:
+            device.name = [NSString stringWithFormat:@"插座%@",[device.mac substringWithRange:NSMakeRange(6, 2)]];
+            break;
+            
+        case DeviceOneSwitch:
+            device.name = [NSString stringWithFormat:@"一路开关%@",[device.mac substringWithRange:NSMakeRange(6, 2)]];
+            break;
+            
+        case DeviceTwoSwitch:
+            device.name = [NSString stringWithFormat:@"二路开关%@",[device.mac substringWithRange:NSMakeRange(6, 2)]];
+            break;
+            
+        case DeviceThreeSwitch:
+            device.name = [NSString stringWithFormat:@"三路开关%@",[device.mac substringWithRange:NSMakeRange(6, 2)]];
+            break;
+            
+        case DeviceFourSwitch:
+            device.name = [NSString stringWithFormat:@"四路开关%@",[device.mac substringWithRange:NSMakeRange(6, 2)]];
+            break;
+            
+        default:
+            device.name = device.mac;
+            break;
+    }
+    
     NSNumber *postType;
     if (type == DevicePlugOutlet) {
         postType = @4;
