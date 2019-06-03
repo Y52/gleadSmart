@@ -1086,7 +1086,7 @@ static int noUserInteractionHeartbeat = 0;
             if ([[data objectForKey:@"status"] intValue] == 2 || [[data objectForKey:@"status"] intValue] == 1) {
                 if (resendTimes > 0) {
                     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                        sleep(0.5);
+                        sleep(1.f);
                         NSInteger times = resendTimes - 1;
                         [self getOneNETCommandStatus:cmd_uuid apiKey:apiKey resendTimes:times];
                     });
@@ -1119,7 +1119,6 @@ static int noUserInteractionHeartbeat = 0;
     
     
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        NSLog(@"%@",responseObject);
         if (responseObject == nil) {
             return ;
         }
@@ -1604,11 +1603,38 @@ static int noUserInteractionHeartbeat = 0;
             if ([_recivedData69[10] unsignedIntegerValue] == 0x07 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
                 //查询补偿
                 NSLog(@"查询补偿");
-                UInt8 temp = [_recivedData69[12] unsignedIntegerValue];
-                if (temp * 0x80) {
-                    temp = temp & 0x7F;
+                NSNumber *compensate;
+                UInt8 number = [_recivedData69[12] unsignedIntegerValue];
+                if (number & 0x80) {
+                    number = number & 0x7F;
+                    compensate = [NSNumber numberWithFloat:-((float)number/2.f)];
+                }else{
+                    compensate = [NSNumber numberWithFloat:(float)number/2.f];
                 }
-                NSNumber *compensate = [NSNumber numberWithUnsignedInteger:temp];
+                
+                for (DeviceModel *device in self.deviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.compensate = compensate;
+                    }
+                }
+                for (DeviceModel *device in db.shareDeviceArray) {
+                    if ([device.mac isEqualToString:mac]) {
+                        device.compensate = compensate;
+                    }
+                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCompensate" object:nil userInfo:nil];
+            }
+            if ([_recivedData69[10] unsignedIntegerValue] == 0x07 && [_recivedData69[11] unsignedIntegerValue] == 0x01) {
+                //设置补偿
+                NSLog(@"设置补偿");
+                NSNumber *compensate;
+                UInt8 number = [_recivedData69[12] unsignedIntegerValue];
+                if (number & 0x80) {
+                    number = number & 0x7F;
+                    compensate = [NSNumber numberWithFloat:-((float)number/2.f)];
+                }else{
+                    compensate = [NSNumber numberWithFloat:(float)number/2.f];
+                }
                 
                 for (DeviceModel *device in self.deviceArray) {
                     if ([device.mac isEqualToString:mac]) {

@@ -9,6 +9,7 @@
 #import "ThermostSettingController.h"
 #import "TherSettingCell.h"
 #import "TherWeekProgramController.h"
+#import "YPickerAlertController.h"
 
 NSString *const CellIdentifier_TherSetting = @"CellID_TherSetting";
 static CGFloat const Cell_Height = 44.f;
@@ -98,8 +99,11 @@ static CGFloat const Cell_Height = 44.f;
             cell.rightLabel.text = LocalString(@"℃");
         }else{
             cell.leftLabel.text = LocalString(@"温度补偿");
-            cell.rightLabel.text = LocalString(@"-1");
-
+            if (self.device.compensate) {
+                cell.rightLabel.text = [NSString stringWithFormat:@"%@",self.device.compensate];
+            }else{
+                cell.rightLabel.text = [NSString stringWithFormat:@"0"];
+            }
         }
     }else{
         cell.leftLabel.text = LocalString(@"周程序");
@@ -109,7 +113,29 @@ static CGFloat const Cell_Height = 44.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        //温度补偿
+        YPickerAlertController *VC = [[YPickerAlertController alloc] init];
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        float i = -8;
+        while (i <= 8) {
+            [array addObject:[NSNumber numberWithFloat:i]];
+            if (i == [self.device.compensate floatValue]) {
+                VC.index = array.count-1;
+            }
+            i=i+0.5;
+        }
+        
+        VC.pickerArr = [array mutableCopy];
+        VC.pickerBlock = ^(NSInteger picker) {
+            NSNumber *componsate = [array objectAtIndex:picker];
+            [self sendCompensate:componsate];
+        };
+        VC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        VC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:VC animated:YES completion:nil];
+        VC.titleLabel.text = LocalString(@"选择温度补偿值");
+    }
     if (indexPath.section == 1) {
         TherWeekProgramController *weekProgramVC = [[TherWeekProgramController alloc] init];
         weekProgramVC.device = self.device;
@@ -148,6 +174,17 @@ static CGFloat const Cell_Height = 44.f;
 - (void)inquireCompensate{
     UInt8 controlCode = 0x01;
     NSArray *data = @[@0xFE,@0x12,@0x07,@0x00];
+    [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
+}
+
+- (void)sendCompensate:(NSNumber *)compensate{
+    UInt8 compensateData = (int)(fabsf([compensate floatValue]) * 2);//取绝对值
+    if ([compensate floatValue] < 0) {
+        compensateData = compensateData | 0x80;
+    }
+    
+    UInt8 controlCode = 0x01;
+    NSArray *data = @[@0xFE,@0x12,@0x07,@0x01,@(compensateData)];
     [[Network shareNetwork] sendData69With:controlCode mac:self.device.mac data:data failuer:nil];
 }
 

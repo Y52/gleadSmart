@@ -776,6 +776,8 @@
 		BB303671229E1C2100208322 /* DeviceLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D4A229D155B009D4F42 /* DeviceLocationController.m */; };
 		BB303673229E1CC600208322 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB303672229E1CC600208322 /* ExternalAccessory.framework */; };
 		BB303675229E1D1F00208322 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB303672229E1CC600208322 /* ExternalAccessory.framework */; };
+		BB32790022A50B2100D8FD5B /* YPickerAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3278FE22A50B2100D8FD5B /* YPickerAlertController.m */; };
+		BB32790122A50B2100D8FD5B /* YPickerAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3278FE22A50B2100D8FD5B /* YPickerAlertController.m */; };
 		BB93C9D1228BEBBA00B0DB6B /* NTCSetTemperatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BBFFC8D406E8DDBC479447F693F151 /* NTCSetTemperatureController.m */; };
 		BB93C9D2228BEBBC00B0DB6B /* NTCValveAlertInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED050E8D2512FC8291B929FEBC41A44 /* NTCValveAlertInfoController.m */; };
 		BB93C9D3228BEBC400B0DB6B /* StatusConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F1CBDF488F0986DB38563B5AC6FC31 /* StatusConfirmController.m */; };
@@ -1650,6 +1652,8 @@
 		BB1BD725228D5C5400AF5741 /* kaiguan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kaiguan@3x.png"; sourceTree = "<group>"; };
 		BB303672229E1CC600208322 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		BB303674229E1CC600208322 /* jienuoIOT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = jienuoIOT.entitlements; sourceTree = "<group>"; };
+		BB3278FE22A50B2100D8FD5B /* YPickerAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YPickerAlertController.m; sourceTree = "<group>"; };
+		BB3278FF22A50B2100D8FD5B /* YPickerAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YPickerAlertController.h; sourceTree = "<group>"; };
 		BB5CE1616DADF6B37F074AE81CB3D8EF /* nodeBattery_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeBattery_normal@3x.png"; sourceTree = "<group>"; };
 		BBA02AA6229B78FF00C561A4 /* HomeSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeSettingController.h; sourceTree = "<group>"; };
 		BBA02AA7229B78FF00C561A4 /* HomeSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeSettingController.m; sourceTree = "<group>"; };
@@ -2787,6 +2791,8 @@
 				1021C025CE5B97F72CCEDFFE68CDE870 /* YAlertViewController.m */,
 				224751DB130B6E3A422680A028FB2D4F /* YTFAlertController.h */,
 				49ABD0B1C2BDA3D8FBF9953B63D7486C /* YTFAlertController.m */,
+				BB3278FF22A50B2100D8FD5B /* YPickerAlertController.h */,
+				BB3278FE22A50B2100D8FD5B /* YPickerAlertController.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4211,6 +4217,7 @@
 				73CDDFD5790C6791625EC42CF38DB769 /* ESP_ByteUtil.m in Sources */,
 				B1AC6D0D696CEF3C3EC0FFBC2E8C02A0 /* ESP_CRC8.m in Sources */,
 				FBED95BBFA2F8A88948FB2D4C0680B90 /* ESP_NetUtil.m in Sources */,
+				BB32790122A50B2100D8FD5B /* YPickerAlertController.m in Sources */,
 				246EBD2924B31085732A062BE3F2597B /* ESP_WifiUtil.m in Sources */,
 				23F919477EA7E99C238AF64897FD5268 /* EspViewController.m in Sources */,
 				5389A75F7D10335A43E504CD2616BE96 /* FamilyLocationController.m in Sources */,
@@ -4405,6 +4412,7 @@
 				F0C885211A3265E0166E6FD555FFE664 /* HouseNameCell.m in Sources */,
 				25CF5BA1F0073CBC65A6310BEBD4EC50 /* HouseSelectCell.m in Sources */,
 				99597CEE0924BA5BDCB1205EDA910053 /* HouseSelectController.m in Sources */,
+				BB32790022A50B2100D8FD5B /* YPickerAlertController.m in Sources */,
 				BBA02AAB229B7C8700C561A4 /* HomeNameSetCell.m in Sources */,
 				BBAD0D4C229D155C009D4F42 /* DeviceLocationController.m in Sources */,
 				4E251585DE2F690D29CBC79483B64831 /* HouseSetCommonCell.m in Sources */,
