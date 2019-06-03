@@ -274,6 +274,8 @@
 		36BD5C934295C3C0C24A86FF8759B110 /* PasswordLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2FA0747A658151A6991FB381B10270 /* PasswordLoginController.m */; };
 		36E241C8FFFCDB30079685560310395A /* img_account_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B52A8A238C321BC9DFD0173E7E330CC /* img_account_header@2x.png */; };
 		36F6C608FCD6FCDBBF4D4639C55EBEBA /* img_thermostat_on.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22850D9DCDC939D219DB689FE5E6CD /* img_thermostat_on.png */; };
+		36FDB07E22A4B87800E6E7A8 /* AAProgressCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */; };
+		36FDB07F22A4B87F00E6E7A8 /* AAProgressCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */; };
 		37072A994D24530D66D96159C618DA2C /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FC069E3B92DA2E843EA65EA7B5036 /* NoHouseAddController.m */; };
 		37C462E32B088C95F9191CA486344B3D /* img_login_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 5240930AAF71C9AC342A08EFBD4A5A99 /* img_login_password.png */; };
 		388DC7DA5FF4AA3CC352FBC46D289E5A /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8551A6A8B7EEFAD03BD1A7E17428E022 /* RegisterController.m */; };
@@ -1313,6 +1315,8 @@
 		36844A3B2292A36800330C74 /* img_switch_icon_4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch_icon_4@3x.png"; sourceTree = "<group>"; };
 		36844A3C2292A36800330C74 /* img_switch_icon_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch_icon_2@3x.png"; sourceTree = "<group>"; };
 		36C9151A73CDCC7A44897EB31411F3F9 /* img_nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_nav_back.png; sourceTree = "<group>"; };
+		36FDB07C22A4B87800E6E7A8 /* AAProgressCircleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAProgressCircleView.h; sourceTree = "<group>"; };
+		36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAProgressCircleView.m; sourceTree = "<group>"; };
 		37216C47A7ACEE60A2B8FC473474E9A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3782C0956AEC32D9119F32C9B61EFDF7 /* valveTabMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTabMore@2x.png"; sourceTree = "<group>"; };
 		37C8969D02CE2D43FB9D75DD7322C081 /* img_adddevice_wenkongqi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_adddevice_wenkongqi@2x.png"; sourceTree = "<group>"; };
@@ -2242,6 +2246,7 @@
 				BBAD0D47229D1504009D4F42 /* NSMutableArray+Common.m */,
 				B377FF1067AC6387D96BF418F4CAAFAD /* TableView+Touch */,
 				D48BC7951D1046A31DFC13293A523331 /* UIButton */,
+				36FDB07B22A4B73E00E6E7A8 /* ProgressCircleView */,
 				A89E615B081EBB1C4C21F9C6900502A3 /* View */,
 				AAB11CE17F5B000C0EA8C997322AAF71 /* NSDate+Common.h */,
 				E6855BEAB08A799F5DDB840243555D10 /* NSDate+Common.m */,
@@ -2284,6 +2289,15 @@
 				DE8649ABE9163DAC2D8B855ACF17353E /* 87@2x.png */,
 			);
 			path = appIcon;
+			sourceTree = "<group>";
+		};
+		36FDB07B22A4B73E00E6E7A8 /* ProgressCircleView */ = {
+			isa = PBXGroup;
+			children = (
+				36FDB07C22A4B87800E6E7A8 /* AAProgressCircleView.h */,
+				36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */,
+			);
+			path = ProgressCircleView;
 			sourceTree = "<group>";
 		};
 		39476F30E11E8C23960A025461CA54F7 /* RDVTabbarController */ = {
@@ -4419,6 +4433,7 @@
 				073215FA34E66C63C5E353412AFA3F43 /* ShareDeviceSelectCell.m in Sources */,
 				9A2CD9A2EF2B48DD79CBED9872F72BB4 /* SharerDetailController.m in Sources */,
 				C75DA666A92E62799D880633DEE25D31 /* SharerInfoCell.m in Sources */,
+				36FDB07F22A4B87F00E6E7A8 /* AAProgressCircleView.m in Sources */,
 				4918525AA4983AD16799CC76AA77623E /* SharerInputController.m in Sources */,
 				69EAC414AB10A27149340015ADDADA31 /* SharerModel.m in Sources */,
 				BBAD0D49229D1504009D4F42 /* NSMutableArray+Common.m in Sources */,
@@ -4473,6 +4488,7 @@
 				5EE8641843F231A51319F31B5846BE90 /* AFSecurityPolicy.m in Sources */,
 				6724218A12C195503304FD54B455C242 /* AFURLRequestSerialization.m in Sources */,
 				ABC0E986036B83CD0E995DAAC780C987 /* AFURLResponseSerialization.m in Sources */,
+				36FDB07E22A4B87800E6E7A8 /* AAProgressCircleView.m in Sources */,
 				4A0C9D4A5FBAECB7A1625DA543C8D4CF /* AFURLSessionManager.m in Sources */,
 				4606DE93AFC99E91AA7A953016BBCF6B /* APNetworkController.m in Sources */,
 				495BB39576B86CBA7A009ED4242A5085 /* APProcessController.m in Sources */,

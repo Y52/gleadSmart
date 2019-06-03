@@ -10,6 +10,7 @@
 #import "GCDAsyncUdpSocket.h"
 #import "DeviceViewController.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
+#import "AAProgressCircleView.h"
 
 #import <netdb.h>//解析udp获取的IP地址
 
@@ -495,6 +496,9 @@ static bool bindSucc = NO;
             make.centerY.equalTo(self.spinner.mas_centerY);
             make.left.equalTo(self.spinner.mas_right).offset(8.f);
         }];
+        
+        AAProgressCircleView *circleView = [[AAProgressCircleView alloc]initWithFrame:CGRectMake(80, 100, 217, 300)];
+        [self.view addSubview:circleView];
     }
     return _spinner;
 }
