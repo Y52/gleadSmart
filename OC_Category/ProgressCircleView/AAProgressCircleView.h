@@ -14,11 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 圆环底层视图 */
 @property (nonatomic, strong) UIView *bgView;
-@property (strong, nonatomic) UILabel *titleLab;
 @property (strong, nonatomic) UILabel *progressLab;
 @property (strong, nonatomic) UIView *pointView;
-/** 开始动画按钮 */
-@property (nonatomic, strong) UIButton *startBtn;
 
 //进度条
 @property (nonatomic,strong) CAShapeLayer *progressLayer;
@@ -29,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 //当前显示进度值
 @property (assign, nonatomic) CGFloat showProgress;
 
+- (void)didCircleProgressAction;
 @end
 
 NS_ASSUME_NONNULL_END

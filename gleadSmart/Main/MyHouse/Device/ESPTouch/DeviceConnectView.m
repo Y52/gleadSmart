@@ -16,6 +16,7 @@
 #import "ESPAES.h"
 #import "DeviceViewController.h"
 #import <netdb.h>
+#import "AAProgressCircleView.h"
 
 @interface EspTouchDelegateImpl : NSObject<ESPTouchDelegate>
 
@@ -383,26 +384,15 @@
 #pragma mark - setters and getters
 - (UIActivityIndicatorView *)spinner{
     if (!_spinner) {
-        _spinner = [[UIActivityIndicatorView alloc] init];
-        [_spinner setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-        [_spinner setHidesWhenStopped:NO];
-        //[_spinner setColor:[UIColor blueColor]];
-        [self.view addSubview:_spinner];
-        [_spinner mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15.f, 15.f));
-            make.top.equalTo(self.view.mas_top).offset(yAutoFit(337.f));
-            make.left.equalTo(self.view.mas_left).offset(yAutoFit(128.5f));
-        }];
+        //圆形进度
+        AAProgressCircleView *circleView = [[AAProgressCircleView alloc]init];
+        [circleView didCircleProgressAction];
+        [self.view addSubview:circleView];
         
-        UILabel *tipLabel = [[UILabel alloc] init];
-        tipLabel.text = LocalString(@"正在搜索设备...");
-        tipLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
-        tipLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
-        [self.view addSubview:tipLabel];
-        [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(100.f), 20.f));
-            make.centerY.equalTo(self.spinner.mas_centerY);
-            make.left.equalTo(self.spinner.mas_right).offset(8.f);
+        [circleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(217.f, 300.f));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
         }];
     }
     return _spinner;
@@ -437,7 +427,7 @@
         [tipLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(ScreenWidth, 20.f));
             make.centerX.equalTo(self.view.mas_centerX);
-            make.top.equalTo(self.image.mas_bottom).offset(18.f);
+            make.top.equalTo(self.image.mas_bottom).offset(118.f);
         }];
         [tipLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(ScreenWidth, 20.f));
