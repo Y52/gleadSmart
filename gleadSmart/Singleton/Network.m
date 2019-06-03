@@ -1314,7 +1314,6 @@ static int noUserInteractionHeartbeat = 0;
     
     
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        NSLog(@"%@",responseObject);
         if (responseObject == nil) {
             return ;
         }
