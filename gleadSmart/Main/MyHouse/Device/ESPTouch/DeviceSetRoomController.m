@@ -7,13 +7,18 @@
 //
 
 #import "DeviceSetRoomController.h"
+#import "RoomButtonCollectCell.h"
 
-@interface DeviceSetRoomController ()
+NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
+
+@interface DeviceSetRoomController () <UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (nonatomic, strong) NSMutableArray *roomList;
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *deviceImage;
 @property (nonatomic, strong) UITextField *nameButton;
-@property (nonatomic, strong) UIView *buttonView;
+@property (nonatomic, strong) UICollectionView *buttonView;
 @property (nonatomic, strong) UIButton *doneButton;
 
 @end
@@ -26,16 +31,21 @@
 
     self.navigationItem.title = LocalString(@"添加设备");
     
+    Database *db = [Database shareInstance];
+    self.roomList = [db queryRoomsWith:db.currentHouse.houseUid];
+    
     self.titleLabel = [self titleLabel];
     self.deviceImage = [self deviceImage];
     self.nameButton = [self nameButton];
     self.buttonView = [self buttonView];
     self.doneButton = [self doneButton];
+}
+#pragma mark - private methods
+- (void)clickRoombutton:(UIButton *)button{
     
 }
 
 #pragma mark - setters and getters
-
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel =[[UILabel alloc] init];
@@ -68,59 +78,60 @@
     return _deviceImage;
 }
 
-//- (UIButton *)nameButton{
-//    if (!_nameButton) {
-//        _nameButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [_nameButton setTitle:LocalString(@"") forState:UIControlStateNormal];
-//        [_nameButton setImage:[UIImage imageNamed:@"addRoom_hand"] forState:UIControlStateNormal];
-//        [_nameButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
-//        [_nameButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
-//        [_nameButton setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
-//        //[_recommendBtn.layer setBorderWidth:1.0];
-//        //_recommendBtn.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
-//        //_recommendBtn.layer.cornerRadius = 15.f;
-//        [_nameButton setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
-//        [self.buttonView addSubview:_nameButton];
-//        [_nameButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(yAutoFit(20.f), 20.f));
-//            make.left.equalTo(self.buttonView.mas_left).offset(yAutoFit(15.f));
-//            make.top.equalTo(self.buttonView.mas_top).offset(yAutoFit(5.f));
-//        }];
-//    }
-//    return _nameButton;
-//}
-
-- (UIView *)buttonView{
+- (UICollectionView *)buttonView{
     if (!_buttonView) {
-        _buttonView = [[UIView alloc] init];
-        _buttonView.backgroundColor = [UIColor clearColor];
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        _buttonView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, yAutoFit(180.f), ScreenWidth, 300.f) collectionViewLayout:layout];
         [self.view addSubview:_buttonView];
-        [_buttonView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth , 180.f));
-            make.top.equalTo(self.deviceImage.mas_bottom).offset(yAutoFit(30.f));
-            make.centerX.equalTo(self.view.mas_centerX);
-        }];
+        _buttonView.backgroundColor = [UIColor clearColor];
+        _buttonView.scrollEnabled = NO;
         
-        UIButton *hostbedRoomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [hostbedRoomBtn setTitle:LocalString(@"主卧") forState:UIControlStateNormal];
-        [hostbedRoomBtn setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
-        [hostbedRoomBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
-        [hostbedRoomBtn setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
-        [hostbedRoomBtn.layer setBorderWidth:1.0];
-        hostbedRoomBtn.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
-        hostbedRoomBtn.layer.cornerRadius = 1.f;
-        [hostbedRoomBtn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]];
-        [hostbedRoomBtn addTarget:self action:@selector(hostbedRoom) forControlEvents:UIControlEventTouchUpInside];
-        [self.buttonView addSubview:hostbedRoomBtn];
-        [hostbedRoomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(63.f), 32.f));
-            make.left.equalTo(self.buttonView.mas_left).offset(yAutoFit(15.f));
-            make.top.equalTo(self.buttonView.mas_top).offset(yAutoFit(40.f));
-        }];
+        [_buttonView registerClass:[RoomButtonCollectCell class] forCellWithReuseIdentifier:CollectCellIdentifier_DeviceRoom];
         
-        
+        _buttonView.delegate = self;
+        _buttonView.dataSource = self;
     }
     return _buttonView;
 }
+
+#pragma mark - collectionView代理方法
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.roomList.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    RoomButtonCollectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectCellIdentifier_DeviceRoom forIndexPath:indexPath];
+    RoomModel *room = self.roomList[indexPath.row];
+    [cell.button setTitle:room.name forState:UIControlStateNormal];
+    [cell.button addTarget:self action:@selector(clickRoombutton:) forControlEvents:UIControlEventTouchUpInside];
+    return cell;
+}
+
+//设置每个item的尺寸
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(ScreenWidth/3.f, 50.f);
+}
+
+//设置每个item水平间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0.f;
+}
+
+
+//设置每个item垂直间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 5.f;
+}
+
 
 @end

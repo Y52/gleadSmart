@@ -743,6 +743,8 @@
 		B9A97A3A2A2C9AB611AA13C0569AF668 /* thermostatSet_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1166FCB878EC5095C0096E9F647602 /* thermostatSet_on@2x.png */; };
 		BA10BAF504BA5772F97F7758A6BF7EC9 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEC253DAC801F4C270E7603C299928 /* AFNetworkReachabilityManager.m */; };
 		BA43C1C8DEC5F1AD661CEA2E2A8C3603 /* img_wallHob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A70610DF8D91BBF42E7F5A99D40160 /* img_wallHob@2x.png */; };
+		BB03341722A651F500EEEFD2 /* RoomButtonCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB03341622A651F500EEEFD2 /* RoomButtonCollectCell.m */; };
+		BB03341822A651F900EEEFD2 /* RoomButtonCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB03341622A651F500EEEFD2 /* RoomButtonCollectCell.m */; };
 		BB0FE2F7F493DDE8A4747626FF69BE8A /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE2F22BCCDF3189299FD71E16EB5C68 /* RDVTabBarItem.m */; };
 		BB13599322A521D800ABC491 /* DeviceSetRoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB13599222A521D800ABC491 /* DeviceSetRoomController.m */; };
 		BB13599422A521D800ABC491 /* DeviceSetRoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB13599222A521D800ABC491 /* DeviceSetRoomController.m */; };
@@ -1699,6 +1701,8 @@
 		BA32968D7F640B597C949F20288619F4 /* addFamily_uncheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addFamily_uncheck@3x.png"; sourceTree = "<group>"; };
 		BA55A4DAFC3221CAB82E13718748436B /* valveNode_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveNode_normal@3x.png"; sourceTree = "<group>"; };
 		BA57AC696C1EF7DE44EA5523323CEF10 /* gleadSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gleadSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB03341522A651F500EEEFD2 /* RoomButtonCollectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomButtonCollectCell.h; sourceTree = "<group>"; };
+		BB03341622A651F500EEEFD2 /* RoomButtonCollectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomButtonCollectCell.m; sourceTree = "<group>"; };
 		BB13599122A521D800ABC491 /* DeviceSetRoomController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceSetRoomController.h; sourceTree = "<group>"; };
 		BB13599222A521D800ABC491 /* DeviceSetRoomController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSetRoomController.m; sourceTree = "<group>"; };
 		BB178936229D21B300CB40B0 /* jienuoIOT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = jienuoIOT.entitlements; sourceTree = "<group>"; };
@@ -3283,6 +3287,8 @@
 				A32D0A88AB91832941E402FAE881B79D /* DeviceSettingCell.m */,
 				CA6C8099DF3FD4A928B6E76048C9225F /* DeviceTableViewCell.h */,
 				D445EBE380F436FBDA2B1BA3939BE695 /* DeviceTableViewCell.m */,
+				BB03341522A651F500EEEFD2 /* RoomButtonCollectCell.h */,
+				BB03341622A651F500EEEFD2 /* RoomButtonCollectCell.m */,
 			);
 			path = DeviceESP;
 			sourceTree = "<group>";
@@ -4407,6 +4413,7 @@
 				BB93C9E5228BEC4D00B0DB6B /* WirelessValveController.m in Sources */,
 				3F015CBFAFA015DF35EE13125184C981 /* ESPTouchGenerator.m in Sources */,
 				BB93C9DE228BEC0E00B0DB6B /* TwoSwitchController.m in Sources */,
+				BB03341822A651F900EEEFD2 /* RoomButtonCollectCell.m in Sources */,
 				83E50F54F70ABF49226082484D95FFCD /* ESPTouchResult.m in Sources */,
 				32D03E283F71F215477C312ED6BEE1D2 /* ESPTouchTask.m in Sources */,
 				F3806CE462444A800FC35FDB9E3E66AC /* ESPTouchTaskParameter.m in Sources */,
@@ -4723,6 +4730,7 @@
 				C562DBCD04C87EEE0604A63D7B4EB417 /* UIColor+ColorChange.m in Sources */,
 				75F963399C5D950AEFE5E95A7E1A59ED /* UILabel+YBAttributeTextTapAction.m in Sources */,
 				3604B4F6227F06BC001F6382 /* ThreeSwitchController.m in Sources */,
+				BB03341722A651F500EEEFD2 /* RoomButtonCollectCell.m in Sources */,
 				B3841F183F2A45433A614DD4E836CE7C /* UserModel.m in Sources */,
 				D64B936DF3F5D28E527B6EA96365663D /* UsernameViewController.m in Sources */,
 				EA45863F686FF8354DB5C9FB9DE31253 /* ValveAlertInfoController.m in Sources */,
