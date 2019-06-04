@@ -175,7 +175,7 @@ NSString *const CellIdentifier_MulSwitchSetingCell = @"CellID_MulSwitchSeting";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 41.f;
+    return 50.f;
 }
 
 //section头部间距
