@@ -168,7 +168,6 @@
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@0xF7];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
-
     }
 }
 

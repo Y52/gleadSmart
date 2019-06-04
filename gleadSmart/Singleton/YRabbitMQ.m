@@ -124,13 +124,12 @@ static NSArray *_routingkeys = nil;
     NSDictionary *userInfo;
     NSString *mac = [dic objectForKey:@"mac"];
     NSNumber *on = [dic objectForKey:@"on"];
-    NSNumber *online = [dic objectForKey:@"online"];
     
     Network *net = [Network shareNetwork];
     for (DeviceModel *device in net.deviceArray) {
         if ([device.mac isEqualToString:mac]) {
             device.isOn = on;
-            device.isOnline = online;
+            device.isOnline = @1;
             userInfo = @{@"device":device,@"isShare":@0};
         }
     }
@@ -139,7 +138,7 @@ static NSArray *_routingkeys = nil;
         if ([device.mac isEqualToString:mac]) {
             NSLog(@"%@",device.mac);
             device.isOn = on;
-            device.isOnline = online;
+            device.isOnline = @1;
             userInfo = @{@"device":device,@"isShare":@0};
         }
     }
@@ -147,7 +146,7 @@ static NSArray *_routingkeys = nil;
         if ([device.mac isEqualToString:mac]) {
             NSLog(@"%@",device.mac);
             device.isOn = on;
-            device.isOnline = online;
+            device.isOnline = @1;
             userInfo = @{@"device":device,@"isShare":@1};
         }
     }
