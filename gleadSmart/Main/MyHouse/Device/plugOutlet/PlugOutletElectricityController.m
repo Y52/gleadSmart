@@ -7,7 +7,7 @@
 //
 
 #import "PlugOutletElectricityController.h"
-#import "PlugOutletSettingController.h"
+#import "DeviceSettingController.h"
 #import "PlugOutleDatatStatisticsCell.h"
 
 NSString *const CellIdentifier_PlugOutleDatatStatistics = @"CellID_PlugOutleDatatStatistics";
@@ -96,7 +96,7 @@ static float HEIGHT_HEADER = 30.f;
 }
 
 - (void)goSetting{
-    PlugOutletSettingController *VC = [[PlugOutletSettingController alloc] init];
+    DeviceSettingController *VC = [[DeviceSettingController alloc] init];
     VC.device = self.device;
     [self.navigationController pushViewController:VC animated:YES];
 }
