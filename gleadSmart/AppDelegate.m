@@ -31,6 +31,7 @@
 //    ThermostatController *ther = [[ThermostatController alloc] init];
 //    ther.device = [[DeviceModel alloc] init];
 //    ther.device.isOn = @1;
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ther];
 
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

@@ -14,6 +14,7 @@
 #define ToRad(deg)      ( (M_PI * (deg)) / 180.0 )
 #define ToDeg(rad)      ( (180.0 * (rad)) / M_PI )
 #define SQR(x)          ( (x) * (x) )
+#define maxTemp 40.f
 
 static float UIGestureRecognizerStateMovedTemp = 0.0;
 
@@ -229,16 +230,16 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
     
     if (angleInRadians > M_PI/6 && angleInRadians < M_PI*5/6) {
         if (UIGestureRecognizerStateMovedTemp > 20.f) {
-            angleInRadians = M_PI/6;//设置为30.0摄氏度
+            angleInRadians = M_PI/6;//设置为最大温度
         }else if (UIGestureRecognizerStateMovedTemp < 10.f){
-            angleInRadians = M_PI*5/6;//设置为0.0摄氏度
+            angleInRadians = M_PI*5/6;//设置为最小温度
         }
     }
 
-    float temp = (30.f/8/(M_PI/6)) * (angleInRadians - M_PI + M_PI/6);
+    float temp = (maxTemp/8/(M_PI/6)) * (angleInRadians - M_PI + M_PI/6);
     if (angleInRadians - M_PI + M_PI/6 < 0) {
         //x轴下方是正的值，在AngleFromNorth函数中没有加2M_PI，所以在这里右下圆弧angleInRadians - M_PI + M_PI/6是负的，左下刚好到0，右下的需要特殊处理，加上2M_PI
-        temp = (30.f/8/(M_PI/6)) * (angleInRadians + 2*M_PI - M_PI + M_PI/6);
+        temp = (maxTemp/8/(M_PI/6)) * (angleInRadians + 2*M_PI - M_PI + M_PI/6);
     }
     
     //温度间隔是0.5，所以先乘2取整再除回来，可以有.5
@@ -250,7 +251,7 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
     self.statusLabel.attributedText = [self generateStringByTemperature:temp currentTemp:[self.device.indoorTemp floatValue]];//显示设置的温度
     self.thermostatView.transform = CGAffineTransformMakeRotation(angleInRadians - M_PI);//旋转,减M_PI是因为图片是朝向左的，x轴是朝右的，所以将角度减M_PI
     //更新圆圈颜色
-    float needDiscolorationCircleCount = temp/(30.f/8);//除以一个间隔的温度
+    float needDiscolorationCircleCount = temp/(maxTemp/8);//除以一个间隔的温度
     for (UIImageView *circle in self.circleView.subviews) {
         if (circle.tag == 2000) {
             //max min 图片
@@ -314,8 +315,8 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
 
 - (void)addManualTemp{
     CGFloat temp = [self.device.modeTemp floatValue];
-    if (temp == 30.f) {
-        [NSObject showHudTipStr:LocalString(@"最高只能30℃哦～～")];
+    if (temp == 40.f) {
+        [NSObject showHudTipStr:LocalString(@"最高只能40℃哦～～")];
         return;
     }
     temp = temp + 0.5;
@@ -327,8 +328,8 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
 
 - (void)minusManualTemp{
     CGFloat temp = [self.device.modeTemp floatValue];
-    if (temp == 5.f) {
-        [NSObject showHudTipStr:LocalString(@"最低只能5℃哦～～")];
+    if (temp == 0.f) {
+        [NSObject showHudTipStr:LocalString(@"最低只能0℃哦～～")];
         return;
     }
     temp = temp - 0.5;
