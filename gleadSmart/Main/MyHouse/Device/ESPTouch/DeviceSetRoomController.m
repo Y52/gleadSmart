@@ -8,6 +8,7 @@
 
 #import "DeviceSetRoomController.h"
 #import "RoomButtonCollectCell.h"
+#import "YTFAlertController.h"
 
 NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
 
@@ -17,9 +18,11 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *deviceImage;
-@property (nonatomic, strong) UITextField *nameButton;
+@property (nonatomic, strong) UIButton *nameButton;
 @property (nonatomic, strong) UICollectionView *buttonView;
 @property (nonatomic, strong) UIButton *doneButton;
+
+@property (strong, nonatomic) NSString *selectRoomUid;
 
 @end
 
@@ -42,7 +45,114 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
 }
 #pragma mark - private methods
 - (void)clickRoombutton:(UIButton *)button{
+    button.backgroundColor = [UIColor grayColor];
+}
+
+- (void)nameModify{
     
+    YTFAlertController *alert = [[YTFAlertController alloc] init];
+    alert.lBlock = ^{
+    };
+    alert.rBlock = ^(NSString * _Nullable text) {
+        self.device.name = text;
+        //使用Api更新
+        [self deviceNameModify];
+    };
+    alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:alert animated:NO completion:^{
+        alert.titleLabel.text = LocalString(@"更改设备名称");
+        alert.textField.text = self.device.name;
+        [alert.leftBtn setTitle:LocalString(@"取消") forState:UIControlStateNormal];
+        [alert.rightBtn setTitle:LocalString(@"确认") forState:UIControlStateNormal];
+    }];
+}
+
+- (void)deviceNameModify{
+    
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    
+    NSDictionary *parameters = @{@"name":self.device.name,@"mac":self.device.mac};
+    [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            //[NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
+            
+        }else{
+            [NSObject showHudTipStr:@"修改设备名称失败"];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"修改设备名称失败"];
+        });
+    }];
+}
+
+- (void)completeAddRoom{
+    
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSMutableArray *maclist = [[NSMutableArray alloc] init];
+    NSDictionary *dic = @{@"mac":self.device.mac};
+    [maclist addObject:dic];
+    
+    NSDictionary *parameters = @{@"roomUid":self.selectRoomUid,@"macList":maclist};
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/device/room",httpIpAddress];
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            [NSObject showHudTipStr:@"修改设备位置成功"];
+//            if (self.popBlock) {
+//                self.popBlock(self.selectRoomUid);
+//            }
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else{
+            [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [NSObject showHudTipStr:LocalString(@"修改设置位置失败")];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
 }
 
 #pragma mark - setters and getters
@@ -72,10 +182,30 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
         [_deviceImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(44.f), yAutoFit(44.f)));
             make.left.equalTo(self.view.mas_left).offset(yAutoFit(40.f));
-            make.top.equalTo(self.titleLabel.mas_bottom).offset(yAutoFit(30.f));
+            make.top.equalTo(self.titleLabel.mas_bottom).offset(yAutoFit(20.f));
         }];
     }
     return _deviceImage;
+}
+
+- (UIButton *)nameButton{
+    if (!_nameButton) {
+        _nameButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_nameButton setTitle:self.device.name forState:UIControlStateNormal];
+        [_nameButton.titleLabel setFont:[UIFont systemFontOfSize:13.f]];
+        [_nameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _nameButton.backgroundColor = [UIColor clearColor];
+        [_nameButton addTarget:self action:@selector(nameModify) forControlEvents:UIControlEventTouchUpInside];
+        _nameButton.layer.cornerRadius = 3.f;
+        _nameButton.enabled = YES;
+        [self.view addSubview:_nameButton];
+        [_nameButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(100.f), yAutoFit(40.f)));
+            make.top.equalTo(self.titleLabel.mas_bottom).offset(yAutoFit(20.f));
+            make.left.equalTo(self.deviceImage.mas_right).offset(yAutoFit(10.f));
+        }];
+    }
+    return _nameButton;
 }
 
 - (UICollectionView *)buttonView{
@@ -94,6 +224,26 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
     return _buttonView;
 }
 
+- (UIButton *)doneButton{
+    if (!_doneButton) {
+        _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_doneButton setTitle:LocalString(@"完成") forState:UIControlStateNormal];
+        [_doneButton.titleLabel setFont:[UIFont systemFontOfSize:18.f]];
+        [_doneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_doneButton setBackgroundColor:[UIColor colorWithRed:255/255.0 green:72/255.0 blue:0/255.0 alpha:1.0]];
+        [_doneButton addTarget:self action:@selector(completeAddRoom) forControlEvents:UIControlEventTouchUpInside];
+        _doneButton.layer.cornerRadius = 3.f;
+        _doneButton.enabled = YES;
+        [self.view addSubview:_doneButton];
+        [_doneButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(yAutoFit(284.f), yAutoFit(40.f)));
+            make.bottom.equalTo(self.view.mas_bottom).offset(-40.f);
+            make.centerX.equalTo(self.view.mas_centerX);
+        }];
+    }
+    return _doneButton;
+}
+
 #pragma mark - collectionView代理方法
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -109,6 +259,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
 {
     RoomButtonCollectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectCellIdentifier_DeviceRoom forIndexPath:indexPath];
     RoomModel *room = self.roomList[indexPath.row];
+    self.selectRoomUid = room.roomUid;
     [cell.button setTitle:room.name forState:UIControlStateNormal];
     [cell.button addTarget:self action:@selector(clickRoombutton:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
