@@ -100,16 +100,18 @@ static CGFloat const gleadMenuItemMargin = 20.f;
 
     [self reloadData];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rabbitMQUpdateHouse) name:@"rabbitMQUpdateHouse" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHouseInfo) name:@"rabbitMQUpdateHouse" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHouseInfo) name:@"configNetUpdateHouse" object:nil];
     
     if (![self.houseButton.titleLabel.text isEqualToString:[Database shareInstance].currentHouse.name]) {
-        [self rabbitMQUpdateHouse];
+        [self updateHouseInfo];
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"rabbitMQUpdateHouse" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"configNetUpdateHouse" object:nil];
 
     //[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
@@ -348,7 +350,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
 }
 
 #pragma mark - nsnotification
-- (void)rabbitMQUpdateHouse{
+- (void)updateHouseInfo{
     dispatch_async(dispatch_get_main_queue(), ^{
         [self getHouseHomeListAndDevice];
         if (![Database shareInstance].currentHouse) {
