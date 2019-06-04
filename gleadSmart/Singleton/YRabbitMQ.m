@@ -125,18 +125,14 @@ static NSArray *_routingkeys = nil;
     NSString *mac = [dic objectForKey:@"mac"];
     NSNumber *on = [dic objectForKey:@"on"];
     
+    BOOL isSocketConnectd = NO;
+    
     Network *net = [Network shareNetwork];
     for (DeviceModel *device in net.deviceArray) {
         if ([device.mac isEqualToString:mac]) {
-            device.isOn = on;
-            device.isOnline = @1;
-            userInfo = @{@"device":device,@"isShare":@0};
-        }
-    }
-    
-    for (DeviceModel *device in net.connectedDevice.gatewayMountDeviceList) {
-        if ([device.mac isEqualToString:mac]) {
-            NSLog(@"%@",device.mac);
+            if (device.socket.isConnected) {
+                isSocketConnectd = YES;
+            }
             device.isOn = on;
             device.isOnline = @1;
             userInfo = @{@"device":device,@"isShare":@0};
@@ -145,10 +141,26 @@ static NSArray *_routingkeys = nil;
     for (DeviceModel *device in [Database shareInstance].shareDeviceArray) {
         if ([device.mac isEqualToString:mac]) {
             NSLog(@"%@",device.mac);
+            if (device.socket.isConnected) {
+                isSocketConnectd = YES;
+            }
             device.isOn = on;
             device.isOnline = @1;
             userInfo = @{@"device":device,@"isShare":@1};
         }
+    }
+    for (DeviceModel *device in net.connectedDevice.gatewayMountDeviceList) {
+        //中央温控器下挂设备
+        if ([device.mac isEqualToString:mac]) {
+            NSLog(@"%@",device.mac);
+            device.isOn = on;
+            device.isOnline = @1;
+            userInfo = @{@"device":device,@"isShare":@0};
+        }
+    }
+    if (isSocketConnectd) {
+        //内网已经连接就不推送
+        return;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshThermostat" object:nil userInfo:nil];
