@@ -56,12 +56,12 @@
     backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
     [self.view insertSubview:backgroundImage atIndex:0];
     
-    UIImageView *titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_launchTitle"]];
+    UIImageView *titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_jienuo"]];
     [self.view addSubview:titleImage];
     [titleImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(254.f, 50.f));
+        make.size.mas_equalTo(CGSizeMake(120.f, 120.f));
         make.centerX.equalTo(self.view.mas_centerX);
-        make.top.equalTo(self.view.mas_top).offset(yAutoFit(158.f));
+        make.top.equalTo(self.view.mas_top).offset(yAutoFit(128.f));
     }];
 }
 

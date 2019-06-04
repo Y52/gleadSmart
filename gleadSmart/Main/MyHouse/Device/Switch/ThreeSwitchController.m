@@ -226,6 +226,7 @@
 - (void)rabbitMQSwitchStatusUpdate:(NSNotification *)notification{
     if (needShieldRabbitMQCount) {
         needShieldRabbitMQCount--;
+        NSLog(@"%d",needShieldRabbitMQCount);
         return;
     }
     
@@ -238,6 +239,7 @@
         });
     }
 }
+
 //更新UI
 - (void)ThreeSwitchUITransformationByStatus{
     dispatch_async(dispatch_get_main_queue(), ^{

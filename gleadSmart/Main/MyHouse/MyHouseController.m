@@ -366,7 +366,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
         _headerView.backgroundColor = [UIColor clearColor];
         [self.view insertSubview:_headerView atIndex:0];
         [_headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mas_topLayoutGuideTop);
+            make.top.equalTo(self.mas_topLayoutGuideTop).offset(-1);
             make.size.mas_equalTo(CGSizeMake(ScreenWidth, yAutoFit(gleadHeaderHeight)));
             make.centerX.equalTo(self.view.mas_centerX);
         }];
