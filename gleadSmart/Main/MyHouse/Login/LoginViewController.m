@@ -45,7 +45,7 @@
 
 #pragma mark - Lazy load
 - (void)setBackGroundUI{
-    UIImageView *headerImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"jienuo_120"]];
+    UIImageView *headerImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_login_header"]];
     headerImage.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:headerImage];
     [headerImage mas_makeConstraints:^(MASConstraintMaker *make) {
