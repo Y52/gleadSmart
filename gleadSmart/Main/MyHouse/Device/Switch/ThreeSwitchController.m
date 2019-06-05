@@ -178,7 +178,6 @@
         UInt8 controlCode = 0x01;
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@(0x02)];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
-        
     }else{
         sender.tag = yUnselect;
         //[sender setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
@@ -226,7 +225,6 @@
 - (void)rabbitMQSwitchStatusUpdate:(NSNotification *)notification{
     if (needShieldRabbitMQCount) {
         needShieldRabbitMQCount--;
-        NSLog(@"%d",needShieldRabbitMQCount);
         return;
     }
     

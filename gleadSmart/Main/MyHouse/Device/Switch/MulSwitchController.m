@@ -27,7 +27,9 @@
 
 @end
 
-@implementation MulSwitchController
+@implementation MulSwitchController{
+    int needShieldRabbitMQCount;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -110,6 +112,8 @@
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@0xFE];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
     }
+    
+    needShieldRabbitMQCount--;
 }
 
 - (void)switchClickFour_2:(UIButton *)sender{
@@ -130,6 +134,8 @@
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
         
     }
+    
+    needShieldRabbitMQCount--;
 }
 
 - (void)switchClickFour_3:(UIButton *)sender{
@@ -150,6 +156,8 @@
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
         
     }
+    
+    needShieldRabbitMQCount--;
 }
 
 
@@ -169,6 +177,8 @@
         NSArray *data = @[@0xFC,@0x11,@0x00,@0x01,@0xF7];
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
     }
+    
+    needShieldRabbitMQCount--;
 }
 
 #pragma mark - notification
@@ -183,6 +193,11 @@
 }
 
 - (void)rabbitMQSwitchStatusUpdate:(NSNotification *)notification{
+    if (needShieldRabbitMQCount) {
+        needShieldRabbitMQCount--;
+        return;
+    }
+    
     NSDictionary *userInfo = [notification userInfo];
     DeviceModel *device = [userInfo objectForKey:@"device"];
     if ([device.mac isEqualToString:self.device.mac]) {
