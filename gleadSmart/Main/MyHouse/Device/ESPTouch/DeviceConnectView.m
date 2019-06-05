@@ -95,6 +95,8 @@
     [super viewWillAppear:animated];
     //去掉返回键的文字
     self.navigationController.navigationBar.topItem.title = @"";
+    
+    isApiBinding = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -241,6 +243,7 @@
     
 }
 
+static bool isApiBinding = NO;
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext{
     NSLog(@"UDP接收数据……………………………………………………");
     if (1) {
@@ -269,53 +272,29 @@
             dModel.mac = mac;
             dModel.ipAddress = ipAddress;
             dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
-            switch ([dModel.type integerValue]) {
-                case DevicePlugOutlet:
-                    dModel.name = [NSString stringWithFormat:@"插座%@",[dModel.mac substringWithRange:NSMakeRange(6, 2)]];
-                    break;
-                    
-                case DeviceOneSwitch:
-                    dModel.name = [NSString stringWithFormat:@"一路开关%@",[dModel.mac substringWithRange:NSMakeRange(6, 2)]];
-                    break;
-                    
-                case DeviceTwoSwitch:
-                    dModel.name = [NSString stringWithFormat:@"二路开关%@",[dModel.mac substringWithRange:NSMakeRange(6, 2)]];
-                    break;
-                    
-                case DeviceThreeSwitch:
-                    dModel.name = [NSString stringWithFormat:@"三路开关%@",[dModel.mac substringWithRange:NSMakeRange(6, 2)]];
-                    break;
-                    
-                case DeviceFourSwitch:
-                    dModel.name = [NSString stringWithFormat:@"四路开关%@",[dModel.mac substringWithRange:NSMakeRange(6, 2)]];
-                    break;
-                    
-                default:
-                    dModel.name = dModel.mac;
-                    break;
-            }
+            [dModel setInitialName];
             
-            [self bindDevice:dModel success:^{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (dModel.type == DeviceCenterlControl) {
-                        Network *net = [Network shareNetwork];
-                        NSError *error;
-                        if ([net connectToHost:ipAddress onPort:16888 error:&error]) {
-                            net.connectedDevice = dModel;
+            if (!isApiBinding) {
+                isApiBinding = YES;
+                [self bindDevice:dModel success:^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (dModel.type == DeviceCenterlControl) {
+                            Network *net = [Network shareNetwork];
+                            NSError *error;
+                            if ([net connectToHost:ipAddress onPort:16888 error:&error]) {
+                                net.connectedDevice = dModel;
+                            }
                         }
-                    }
-                    [Network shareNetwork].isDeviceVC = NO;
-                    
-                    DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
-                    roomVC.device = dModel;
-                    [self.navigationController pushViewController:roomVC animated:YES];
-                    
-                });
-            } failure:^{
-                
-            }];
-            
-            
+                        [Network shareNetwork].isDeviceVC = NO;
+                        
+                        DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
+                        roomVC.device = dModel;
+                        [self.navigationController pushViewController:roomVC animated:YES];
+                    });
+                } failure:^{
+                    isApiBinding = NO;
+                }];
+            }
         }
     }
 }
