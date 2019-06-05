@@ -137,7 +137,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         [self deleteTimer];
     }
     
-    if (self.showProgress >1) {
+    if (self.showProgress >= 1) {
         self.showProgress = 0.99;
     }
     
@@ -174,7 +174,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 }
 
 #pragma mark - getter
-
 - (UIView *)bgView{
     if (_bgView == nil) {
         _bgView = [[UIView alloc]init];

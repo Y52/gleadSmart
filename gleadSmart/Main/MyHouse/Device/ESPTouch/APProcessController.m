@@ -47,7 +47,7 @@
     [self sendSearchBroadcast];
     self.confirmWifiTimer = [self confirmWifiTimer];
     self.getStatusTimer = [self getStatusTimer];
-    [self progressView];
+    self.circleView = [self circleView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -393,7 +393,6 @@ static bool isApiBinding = NO;
               NSLog(@"success:%@",daetr);
               
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-                  [NSObject showHudTipStr:LocalString(@"绑定该设备成功")];
                   [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
                       BOOL result = [db executeUpdate:@"REPLACE INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.name,device.type,[Database shareInstance].currentHouse.houseUid];
                       if (result) {
@@ -446,12 +445,11 @@ static bool isApiBinding = NO;
             NSNumber *state = [data objectForKey:@"state"];
             if ([state integerValue]) {
                 [self.circleView deleteTimer];
-                self.circleView.showProgress = 1;
-                sleep(1);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
                     roomVC.device = self.device;
-                    [self.navigationController pushViewController:roomVC animated:YES];                });
+                    [self.navigationController pushViewController:roomVC animated:YES];
+                });
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -460,18 +458,20 @@ static bool isApiBinding = NO;
 }
 
 #pragma mark - setters and getters
-
--(void)progressView{
-    //圆形进度图
-    _circleView = [[AAProgressCircleView alloc]init];
-    [_circleView didCircleProgressAction];
-    [self.view addSubview:_circleView];
-    
-    [_circleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(217.f, 300.f));
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
-    }];
+- (AAProgressCircleView *)circleView{
+    if (!_circleView) {
+        //圆形进度图
+        _circleView = [[AAProgressCircleView alloc]init];
+        [_circleView didCircleProgressAction];
+        [self.view addSubview:_circleView];
+        
+        [_circleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(217.f, 300.f));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
+        }];
+    }
+    return _circleView;
 }
 
 - (GCDAsyncUdpSocket *)udpSocket{
