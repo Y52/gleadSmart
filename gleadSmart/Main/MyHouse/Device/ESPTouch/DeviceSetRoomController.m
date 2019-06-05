@@ -32,7 +32,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
     self.view.layer.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1].CGColor;
 
     self.navigationItem.title = LocalString(@"设置设备信息");
-    
+    self.selectRoomUid = @"";
     Database *db = [Database shareInstance];
     self.roomList = [db queryRoomsWith:db.currentHouse.houseUid];
     
@@ -121,7 +121,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
 - (void)completeAddRoom{
     
     if ([self.selectRoomUid isEqualToString:@""]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您没有选择设备位置") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您没有选择设备") preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
         [alertController addAction:cancelAction];
         [self presentViewController:alertController animated:YES completion:nil];
