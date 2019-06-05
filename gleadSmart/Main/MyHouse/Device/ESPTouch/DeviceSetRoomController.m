@@ -120,6 +120,14 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
 
 - (void)completeAddRoom{
     
+    if ([self.selectRoomUid isEqualToString:@""]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您没有选择设备位置") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
     [SVProgressHUD show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置超时时间
@@ -183,7 +191,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
     if (!_nameButton) {
         _nameButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_nameButton setTitle:self.device.name forState:UIControlStateNormal];
-        [_nameButton.titleLabel setFont:[UIFont systemFontOfSize:13.f]];
+        [_nameButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
         [_nameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _nameButton.backgroundColor = [UIColor clearColor];
         [_nameButton addTarget:self action:@selector(nameModify) forControlEvents:UIControlEventTouchUpInside];
@@ -193,7 +201,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
         [_nameButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(100.f), yAutoFit(40.f)));
             make.top.equalTo(self.titleLabel.mas_bottom).offset(yAutoFit(20.f));
-            make.left.equalTo(self.titleLabel.mas_right).offset(yAutoFit(70.f));
+            make.centerX.equalTo(self.view.mas_centerX);
         }];
     }
     return _nameButton;
