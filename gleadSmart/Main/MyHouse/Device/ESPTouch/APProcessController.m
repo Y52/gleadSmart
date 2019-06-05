@@ -68,6 +68,7 @@
 
     isSSIDSendSucc = NO;
     isPasswordSendSucc = NO;
+    isApiBinding = NO;
     bindSucc = NO;
 }
 
@@ -209,6 +210,7 @@ static bool isPasswordSendSucc = NO;
 }
 
 static bool bindSucc = NO;
+static bool isApiBinding = NO;
 - (void)confirmWifiName{
     if (!(isSSIDSendSucc && isPasswordSendSucc)) {
         return;
@@ -218,7 +220,8 @@ static bool bindSucc = NO;
     NSLog(@"%@",ssid);
     if(![ssid hasPrefix:@"ESP"]){
         ///热点搜到设备后直接绑定，查询api等待设备上线
-        if (!bindSucc) {
+        if (!isApiBinding) {
+            isApiBinding = YES;
             DeviceModel *dModel = [[DeviceModel alloc] init];
             dModel.mac = mac;
             dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
@@ -264,6 +267,7 @@ static bool bindSucc = NO;
                             NSLog(@"绑定设备成功");
                             bindSucc = YES;
                         } failure:^{
+                            isApiBinding = NO;
                         }];
                     }
                         break;

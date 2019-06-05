@@ -46,6 +46,8 @@
     //[self getSwitchDateTime];
     [self setSwitchTimes];
     [self setBackgroundColor_4];
+    
+    needShieldRabbitMQCount = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -113,7 +115,7 @@
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
     }
     
-    needShieldRabbitMQCount--;
+    needShieldRabbitMQCount++;
 }
 
 - (void)switchClickFour_2:(UIButton *)sender{
@@ -135,7 +137,7 @@
         
     }
     
-    needShieldRabbitMQCount--;
+    needShieldRabbitMQCount++;
 }
 
 - (void)switchClickFour_3:(UIButton *)sender{
@@ -157,7 +159,7 @@
         
     }
     
-    needShieldRabbitMQCount--;
+    needShieldRabbitMQCount++;
 }
 
 
@@ -178,7 +180,7 @@
         [self.device sendData69With:controlCode mac:self.device.mac data:data];
     }
     
-    needShieldRabbitMQCount--;
+    needShieldRabbitMQCount++;
 }
 
 #pragma mark - notification
