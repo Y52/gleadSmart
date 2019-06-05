@@ -200,10 +200,10 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
 
 //根据设置温度改变仪表UI
 - (void)updateModeTempUI{
-    self.thermostatView.transform = CGAffineTransformMakeRotation((-30.f + [self.device.modeTemp floatValue]/(30.f/8)*30.f) / 180 * M_PI);//旋转
+    self.thermostatView.transform = CGAffineTransformMakeRotation((-30.f + [self.device.modeTemp floatValue]/(maxTemp/8)*30.f) / 180 * M_PI);//旋转
 
     //根据温度设置UI上圆圈颜色
-    float needDiscolorationCircleCount = [self.device.modeTemp floatValue]/(30.f/8);//除以一个间隔的温度
+    float needDiscolorationCircleCount = [self.device.modeTemp floatValue]/(maxTemp/8);//除以一个间隔的温度
     for (UIImageView *circle in self.circleView.subviews) {
         if (circle.tag == 2000) {
             //max min 图片
@@ -231,7 +231,7 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
     if (angleInRadians > M_PI/6 && angleInRadians < M_PI*5/6) {
         if (UIGestureRecognizerStateMovedTemp > 20.f) {
             angleInRadians = M_PI/6;//设置为最大温度
-        }else if (UIGestureRecognizerStateMovedTemp < 10.f){
+        }else if (UIGestureRecognizerStateMovedTemp < 20.f){
             angleInRadians = M_PI*5/6;//设置为最小温度
         }
     }
@@ -245,6 +245,7 @@ static float UIGestureRecognizerStateMovedTemp = 0.0;
     //温度间隔是0.5，所以先乘2取整再除回来，可以有.5
     int tempFloor = floor(temp * 2);
     temp = tempFloor/2.f;
+    NSLog(@"%f",temp);
     
     UIGestureRecognizerStateMovedTemp = temp;//存储下来用来判断此时应该设置为30还是0摄氏度
     

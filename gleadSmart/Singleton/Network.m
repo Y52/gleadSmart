@@ -535,8 +535,7 @@ static int noUserInteractionHeartbeat = 0;
         }
         if (!isLocal) {
             /**
-             ～～未保存过，需要上传到服务器，保存到本地～～
-             *不需要保存，显示在所有设备里，用户添加到房间才保存*
+             未保存过，需要上传到服务器，保存到本地
              **/
             
             //初始命名
@@ -546,8 +545,8 @@ static int noUserInteractionHeartbeat = 0;
                 device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"无线水阀"),[device.mac substringWithRange:NSMakeRange(6, 2)]];
             }
             __block typeof(self) blockSelf = self;
-            [self addNewDeviceWith:device success:^{
-                [blockSelf.deviceArray addObject:device];
+            [self addNewDeviceWith:device success:^(DeviceModel *blockDevice) {
+                [blockSelf.deviceArray addObject:blockDevice];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
             }];
         }
@@ -717,29 +716,56 @@ static int noUserInteractionHeartbeat = 0;
     
     DeviceModel *device = [[DeviceModel alloc] init];
     device.mac = @"";
-    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
-    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
-    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
     device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[15] intValue]]];
-    //device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[13] intValue]]];
+    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[14] intValue]]];
+    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[13] intValue]]];
+    device.mac = [device.mac stringByAppendingString:[NSString HexByInt:[data[12] intValue]]];
+    device.type = [NSNumber numberWithInteger:[self judgeDeviceTypeWith:[data[14] intValue]]];
     
-    /*
-     ～未保存过，需要上传到服务器，保存到本地～
-     *现在不保存到服务器，只加入所有设备房间中*
-     */
-    //[self addNewDeviceWith:device];
+    if ([device.type integerValue] == DeviceCenterlControl) {
+        return;
+    }
     
-    device.name = device.mac;
-    [self.deviceArray addObject:device];
+    //将中央控制器查询到的设备和服务器设备对比
+    BOOL isExisted = NO;//防止重复显示以及刷新时重新添加设备到服务器
+    for (DeviceModel *existedDevice in self.deviceArray) {
+        if ([existedDevice.mac isEqualToString:device.mac]) {
+            existedDevice.isOnline = @0;
+            existedDevice.isOn = @0;
+            isExisted = YES;
+        }
+    }
+    if (isExisted) {
+        return;
+    }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+    //判断设备是否本地存储过
+    Database *db = [Database shareInstance];
+    if (![db queryDevice:device.mac]) {
+        /**
+         未保存过，需要上传到服务器，保存到本地
+         **/
+        
+        //初始命名
+        if ([device.type integerValue] == 1) {
+            device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"温控器"),[device.mac substringWithRange:NSMakeRange(6, 2)]];
+        }else if ([device.type integerValue] == 2){
+            device.name = [NSString stringWithFormat:@"%@%@",LocalString(@"无线水阀"),[device.mac substringWithRange:NSMakeRange(6, 2)]];
+        }
+        __block typeof(self) blockSelf = self;
+        [self addNewDeviceWith:device success:^(DeviceModel *blockDevice) {
+            [blockSelf.deviceArray addObject:blockDevice];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshDeviceTable" object:nil userInfo:nil];
+        }];
+    }
 }
+
 
 
 /*
  *上传新设备
  */
-- (void)addNewDeviceWith:(DeviceModel *)device success:(void(^)(void))success{
+- (void)addNewDeviceWith:(DeviceModel *)device success:(void(^)(DeviceModel *device))success{
     Database *db = [Database shareInstance];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -756,15 +782,15 @@ static int noUserInteractionHeartbeat = 0;
     if (!device.name) {
         device.name = device.mac;
     }
-    NSDictionary *parameters;
     NSMutableArray *homeList = [db queryRoomsWith:db.currentHouse.houseUid];
     if (homeList.count <= 0) {
         [NSObject showHudTipStr:LocalString(@"当前家庭还没有添加房间，请尽快添加")];
-        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":db.currentHouse.houseUid,@"houseUid":db.currentHouse.houseUid};
+        device.roomUid = db.currentHouse.houseUid;
     }else{
         RoomModel *room = homeList[0];//将新设备插入到家庭第一个房间
-        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":room.roomUid,@"houseUid":db.currentHouse.houseUid};
+        device.roomUid = room.roomUid;
     }
+    NSDictionary *parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":device.roomUid,@"houseUid":db.currentHouse.houseUid};
     NSLog(@"%@",parameters);
     
     NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
@@ -782,7 +808,7 @@ static int noUserInteractionHeartbeat = 0;
                    */
                   [db insertNewDevice:device];
                   if (success) {
-                      success();
+                      success(device);
                   }
               }else{
                   
@@ -1296,25 +1322,28 @@ static int noUserInteractionHeartbeat = 0;
     
     Database *db = [Database shareInstance];
     
-    //查询该设备是否已经添加到deviceArray
-    BOOL isExisted = NO;//防止设备在localdevice中未添加到deviceArray，导致页面上UI不显示
-    for (DeviceModel *device in self.deviceArray) {
-        NSLog(@"%@",device.mac);
-        if ([device.mac isEqualToString:mac]) {
-            device.isOnline = @1;
-            isExisted = YES;
+    DeviceType type = [self judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]];
+    if (type != DeviceCenterlControl) {
+        //查询该设备是否已经添加到deviceArray
+        BOOL isExisted = NO;//防止设备在localdevice中未添加到deviceArray，导致页面上UI不显示
+        for (DeviceModel *device in self.deviceArray) {
+            NSLog(@"%@",device.mac);
+            if ([device.mac isEqualToString:mac]) {
+                device.isOnline = @1;
+                isExisted = YES;
+            }
         }
-    }
-    if (!isExisted) {
-        //localdevice中的该设备添加到deviceArray
-        for (DeviceModel *localDevice in db.localDeviceArray) {
-            if ([mac isEqualToString:localDevice.mac]) {
-                localDevice.isOnline = @1;
-                
-                [self.deviceArray addObject:localDevice];
-                NSLog(@"%@",localDevice.mac);
-                [db.localDeviceArray removeObject:localDevice];
-                break;
+        if (!isExisted) {
+            //localdevice中的该设备添加到deviceArray
+            for (DeviceModel *localDevice in db.localDeviceArray) {
+                if ([mac isEqualToString:localDevice.mac]) {
+                    localDevice.isOnline = @1;
+                    
+                    [self.deviceArray addObject:localDevice];
+                    NSLog(@"%@",localDevice.mac);
+                    [db.localDeviceArray removeObject:localDevice];
+                    break;
+                }
             }
         }
     }
