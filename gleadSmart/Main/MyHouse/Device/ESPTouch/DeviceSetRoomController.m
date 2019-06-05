@@ -152,8 +152,11 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
         NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-    
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:^{
+                //发送通知更新配网成功的设备列表
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"configNetUpdateHouse" object:nil userInfo:nil];
+                
+            }];
         }else{
             [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
         }

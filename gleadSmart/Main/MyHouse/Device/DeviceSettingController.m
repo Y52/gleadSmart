@@ -44,6 +44,7 @@ static float HEIGHT_HEADER = 40.f;
 #pragma mark - private methods
 - (void)removeDevice{
     NSLog(@"移除设备");
+
 }
 
 - (void)showConfirmAlert{

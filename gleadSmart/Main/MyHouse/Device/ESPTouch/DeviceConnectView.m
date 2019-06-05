@@ -320,7 +320,7 @@ static bool isApiBinding = NO;
 }
 
 #pragma mark - private methods
-- (void)bindDevice:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failur{
+- (void)bindDevice:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failure{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     //设置超时时间
@@ -381,9 +381,15 @@ static bool isApiBinding = NO;
                   }
               }else{
                   [NSObject showHudTipStr:LocalString(@"绑定该设备失败")];
+                  if (failure) {
+                      failure();
+                  }
               }
           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
               NSLog(@"Error:%@",error);
+              if (failure) {
+                  failure();
+              }
           }];
 }
 
