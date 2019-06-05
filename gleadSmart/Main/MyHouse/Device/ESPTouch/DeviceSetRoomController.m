@@ -17,7 +17,6 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
 @property (nonatomic, strong) NSMutableArray *roomList;
 
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIImageView *deviceImage;
 @property (nonatomic, strong) UIButton *nameButton;
 @property (nonatomic, strong) UICollectionView *buttonView;
 @property (nonatomic, strong) UIButton *doneButton;
@@ -32,20 +31,29 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1].CGColor;
 
-    self.navigationItem.title = LocalString(@"添加设备");
+    self.navigationItem.title = LocalString(@"设置设备信息");
     
     Database *db = [Database shareInstance];
     self.roomList = [db queryRoomsWith:db.currentHouse.houseUid];
     
     self.titleLabel = [self titleLabel];
-    self.deviceImage = [self deviceImage];
     self.nameButton = [self nameButton];
     self.buttonView = [self buttonView];
     self.doneButton = [self doneButton];
 }
 #pragma mark - private methods
 - (void)clickRoombutton:(UIButton *)button{
-    button.backgroundColor = [UIColor grayColor];
+    NSArray *indexpathArr = [self.buttonView indexPathsForVisibleItems];
+    for (NSIndexPath *perIndexPath in indexpathArr) {
+        RoomButtonCollectCell *cell = (RoomButtonCollectCell *)[self.buttonView cellForItemAtIndexPath:perIndexPath];
+        if (cell.button == button) {
+            cell.button.backgroundColor = [UIColor grayColor];
+            RoomModel *room = _roomList[perIndexPath.item];
+            self.selectRoomUid = room.roomUid;
+        }else{
+            cell.button.backgroundColor = [UIColor clearColor];
+        }
+    }
 }
 
 - (void)nameModify{
@@ -57,6 +65,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
         self.device.name = text;
         //使用Api更新
         [self deviceNameModify];
+        self.nameButton.titleLabel.text = text;
     };
     alert.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:alert animated:NO completion:^{
@@ -135,12 +144,8 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
         NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"%@",daetr);
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-            [NSObject showHudTipStr:@"修改设备位置成功"];
-//            if (self.popBlock) {
-//                self.popBlock(self.selectRoomUid);
-//            }
-            [self.navigationController popViewControllerAnimated:YES];
-            
+    
+            [self dismissViewControllerAnimated:YES completion:nil];
         }else{
             [NSObject showHudTipStr:[responseDic objectForKey:@"error"]];
         }
@@ -148,7 +153,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
             [SVProgressHUD dismiss];
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [NSObject showHudTipStr:LocalString(@"修改设置位置失败")];
+        [NSObject showHudTipStr:LocalString(@"网络异常")];
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
         });
@@ -162,6 +167,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
         _titleLabel.text = LocalString(@"添加设备成功");
         _titleLabel.font = [UIFont boldSystemFontOfSize:25.f];
         _titleLabel.adjustsFontSizeToFitWidth = YES;
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.numberOfLines = 0;
         [self.view addSubview:_titleLabel];
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -171,21 +177,6 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
         }];
     }
     return _titleLabel;
-}
-
--(UIImageView *)deviceImage{
-    if (!_deviceImage) {
-        _deviceImage = [[UIImageView alloc] init];
-        _deviceImage.contentMode = UIViewContentModeScaleAspectFit;
-        _deviceImage.image = [UIImage imageNamed:@"img_switch_icon_1"];
-        [self.view addSubview:_deviceImage];
-        [_deviceImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(yAutoFit(44.f), yAutoFit(44.f)));
-            make.left.equalTo(self.view.mas_left).offset(yAutoFit(40.f));
-            make.top.equalTo(self.titleLabel.mas_bottom).offset(yAutoFit(20.f));
-        }];
-    }
-    return _deviceImage;
 }
 
 - (UIButton *)nameButton{
@@ -202,7 +193,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
         [_nameButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(100.f), yAutoFit(40.f)));
             make.top.equalTo(self.titleLabel.mas_bottom).offset(yAutoFit(20.f));
-            make.left.equalTo(self.deviceImage.mas_right).offset(yAutoFit(10.f));
+            make.left.equalTo(self.titleLabel.mas_right).offset(yAutoFit(70.f));
         }];
     }
     return _nameButton;
@@ -230,9 +221,9 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
         [_doneButton setTitle:LocalString(@"完成") forState:UIControlStateNormal];
         [_doneButton.titleLabel setFont:[UIFont systemFontOfSize:18.f]];
         [_doneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_doneButton setBackgroundColor:[UIColor colorWithRed:255/255.0 green:72/255.0 blue:0/255.0 alpha:1.0]];
+        [_doneButton setBackgroundColor:[UIColor colorWithRed:57/255.0 green:135/255.0 blue:248/255.0 alpha:1.0]];
         [_doneButton addTarget:self action:@selector(completeAddRoom) forControlEvents:UIControlEventTouchUpInside];
-        _doneButton.layer.cornerRadius = 3.f;
+        _doneButton.layer.cornerRadius = 10.f;
         _doneButton.enabled = YES;
         [self.view addSubview:_doneButton];
         [_doneButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -259,7 +250,6 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
 {
     RoomButtonCollectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectCellIdentifier_DeviceRoom forIndexPath:indexPath];
     RoomModel *room = self.roomList[indexPath.row];
-    self.selectRoomUid = room.roomUid;
     [cell.button setTitle:room.name forState:UIControlStateNormal];
     [cell.button addTarget:self action:@selector(clickRoombutton:) forControlEvents:UIControlEventTouchUpInside];
     return cell;

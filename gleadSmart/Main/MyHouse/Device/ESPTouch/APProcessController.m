@@ -11,17 +11,18 @@
 #import "DeviceViewController.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "AAProgressCircleView.h"
+#import "DeviceSetRoomController.h"
 
 #import <netdb.h>//解析udp获取的IP地址
 
 @interface APProcessController () <GCDAsyncUdpSocketDelegate>
 
-@property (nonatomic, strong) UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) GCDAsyncUdpSocket *udpSocket;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSLock *lock;
 @property (nonatomic) dispatch_source_t confirmWifiTimer;//确认Wi-Fi切换时钟
 @property (nonatomic) dispatch_source_t getStatusTimer;//查询设备是否在线
+@property (nonatomic, strong)  DeviceModel *device;
 
 @end
 
@@ -36,8 +37,7 @@
     self.view.layer.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1].CGColor;
     
     self.navigationItem.title = LocalString(@"AP配网");
-
-    self.spinner = [self spinner];
+    
     self.timer = [self timer];
     self.udpSocket = [self udpSocket];
     self.lock = [self lock];
@@ -45,6 +45,7 @@
     [self sendSearchBroadcast];
     self.confirmWifiTimer = [self confirmWifiTimer];
     self.getStatusTimer = [self getStatusTimer];
+    [self progressView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -416,6 +417,8 @@ static bool bindSucc = NO;
                       BOOL result = [db executeUpdate:@"REPLACE INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.name,device.type,[Database shareInstance].currentHouse.houseUid];
                       if (result) {
                           NSLog(@"插入设备到device成功");
+                          
+                          self.device = device;
                       }else{
                           NSLog(@"插入设备到device失败");
                       }
@@ -462,9 +465,9 @@ static bool bindSucc = NO;
             NSNumber *state = [data objectForKey:@"state"];
             if ([state integerValue]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    [NSObject showHudTipStr:LocalString(@"配网成功")];
-                });
+                    DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
+                    roomVC.device = self.device;
+                    [self.navigationController pushViewController:roomVC animated:YES];                });
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -473,20 +476,18 @@ static bool bindSucc = NO;
 }
 
 #pragma mark - setters and getters
-- (UIActivityIndicatorView *)spinner{
-    if (!_spinner) {
-        //圆形进度图
-        AAProgressCircleView *circleView = [[AAProgressCircleView alloc]init];
-        [circleView didCircleProgressAction];
-        [self.view addSubview:circleView];
-        
-        [circleView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(217.f, 300.f));
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
-        }];
-    }
-    return _spinner;
+
+-(void)progressView{
+    //圆形进度图
+    AAProgressCircleView *circleView = [[AAProgressCircleView alloc]init];
+    [circleView didCircleProgressAction];
+    [self.view addSubview:circleView];
+    
+    [circleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(217.f, 300.f));
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
+    }];
 }
 
 - (GCDAsyncUdpSocket *)udpSocket{
