@@ -77,6 +77,8 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
 ///@brief 获取设备状态
 - (void)getRelayStatus;
 
+///@brief 设备绑定时设置初始名字
+- (void)setInitialName;
 @end
 
 NS_ASSUME_NONNULL_END

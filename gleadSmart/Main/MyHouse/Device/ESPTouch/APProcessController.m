@@ -225,30 +225,7 @@ static bool isApiBinding = NO;
             DeviceModel *dModel = [[DeviceModel alloc] init];
             dModel.mac = mac;
             dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
-            switch ([dModel.type integerValue]) {
-                case DevicePlugOutlet:
-                    dModel.name = [NSString stringWithFormat:@"插座%@",[mac substringWithRange:NSMakeRange(6, 2)]];
-                    break;
-                    
-                case DeviceOneSwitch:
-                    dModel.name = [NSString stringWithFormat:@"一路开关%@",[mac substringWithRange:NSMakeRange(6, 2)]];
-                    break;
-                    
-                case DeviceTwoSwitch:
-                    dModel.name = [NSString stringWithFormat:@"二路开关%@",[mac substringWithRange:NSMakeRange(6, 2)]];
-                    break;
-                    
-                case DeviceThreeSwitch:
-                    dModel.name = [NSString stringWithFormat:@"三路开关%@",[mac substringWithRange:NSMakeRange(6, 2)]];
-                    break;
-                    
-                case DeviceFourSwitch:
-                    dModel.name = [NSString stringWithFormat:@"四路开关%@",[mac substringWithRange:NSMakeRange(6, 2)]];
-                    break;
-                    
-                default:
-                    break;
-            }
+            [dModel setInitialName];
             
             [[AFNetworkReachabilityManager sharedManager] startMonitoring];
             [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {

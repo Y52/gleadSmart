@@ -101,5 +101,32 @@ static int frameCount = 0;
     }
 }
 
+- (void)setInitialName{
+    switch ([self.type integerValue]) {
+        case DevicePlugOutlet:
+            self.name = [NSString stringWithFormat:@"插座%@",[self.mac substringWithRange:NSMakeRange(6, 2)]];
+            break;
+            
+        case DeviceOneSwitch:
+            self.name = [NSString stringWithFormat:@"一路开关%@",[self.mac substringWithRange:NSMakeRange(6, 2)]];
+            break;
+            
+        case DeviceTwoSwitch:
+            self.name = [NSString stringWithFormat:@"二路开关%@",[self.mac substringWithRange:NSMakeRange(6, 2)]];
+            break;
+            
+        case DeviceThreeSwitch:
+            self.name = [NSString stringWithFormat:@"三路开关%@",[self.mac substringWithRange:NSMakeRange(6, 2)]];
+            break;
+            
+        case DeviceFourSwitch:
+            self.name = [NSString stringWithFormat:@"四路开关%@",[self.mac substringWithRange:NSMakeRange(6, 2)]];
+            break;
+            
+        default:
+            self.name = self.mac;
+            break;
+    }
+}
 
 @end
