@@ -24,6 +24,8 @@
 @property (nonatomic) dispatch_source_t getStatusTimer;//查询设备是否在线
 @property (nonatomic, strong)  DeviceModel *device;
 
+@property (nonatomic, strong) AAProgressCircleView *circleView;
+
 @end
 
 @implementation APProcessController{
@@ -443,6 +445,9 @@ static bool isApiBinding = NO;
             NSDictionary *data = [responseDic objectForKey:@"data"];
             NSNumber *state = [data objectForKey:@"state"];
             if ([state integerValue]) {
+                [self.circleView deleteTimer];
+                self.circleView.showProgress = 1;
+                sleep(1);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
                     roomVC.device = self.device;
@@ -458,11 +463,11 @@ static bool isApiBinding = NO;
 
 -(void)progressView{
     //圆形进度图
-    AAProgressCircleView *circleView = [[AAProgressCircleView alloc]init];
-    [circleView didCircleProgressAction];
-    [self.view addSubview:circleView];
+    _circleView = [[AAProgressCircleView alloc]init];
+    [_circleView didCircleProgressAction];
+    [self.view addSubview:_circleView];
     
-    [circleView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_circleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(217.f, 300.f));
         make.centerX.equalTo(self.view.mas_centerX);
         make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));

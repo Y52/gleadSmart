@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) CGFloat showProgress;
 
 - (void)didCircleProgressAction;
+
+- (void)deleteTimer;
 @end
 
 NS_ASSUME_NONNULL_END
