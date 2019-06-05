@@ -963,7 +963,15 @@ static int noUserInteractionHeartbeat = 0;
     [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
     
-    NSDictionary *parameters = @{@"mac":device.mac,@"type":device.type,@"apiKey":device.apiKey};
+    NSInteger type = [device.type integerValue];
+    NSNumber *postType;
+    if (type == DevicePlugOutlet) {
+        postType = @4;
+    }else if (type >= DeviceOneSwitch && type <= DeviceFourSwitch){
+        postType = @3;
+    }
+    
+    NSDictionary *parameters = @{@"mac":device.mac,@"type":postType,@"apiKey":device.apiKey};
     
     NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
