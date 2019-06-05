@@ -9,7 +9,6 @@
 #import "StatusConfirmController.h"
 #import "EspViewController.h"
 #import "APStatusConfirmController.h"
-#import "DeviceSetRoomController.h"
 
 @interface StatusConfirmController ()
 
@@ -42,8 +41,7 @@
 
 #pragma mark - private methods
 -(void)Sure{
-    DeviceSetRoomController *EspVC = [[DeviceSetRoomController alloc] init];
-    //EspViewController *EspVC = [[EspViewController alloc] init];
+    EspViewController *EspVC = [[EspViewController alloc] init];
     [self.navigationController pushViewController:EspVC animated:YES];
 }
 

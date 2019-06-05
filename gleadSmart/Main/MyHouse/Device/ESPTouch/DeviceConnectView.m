@@ -17,6 +17,7 @@
 #import "DeviceViewController.h"
 #import <netdb.h>
 #import "AAProgressCircleView.h"
+#import "DeviceSetRoomController.h"
 
 @interface EspTouchDelegateImpl : NSObject<ESPTouchDelegate>
 
@@ -39,7 +40,6 @@
 @property (nonatomic, strong) NSCondition *condition;
 
 @property (nonatomic, strong) UIImageView *image;
-@property (nonatomic, strong) UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) UIButton *cancelBtn;
 
 @property (nonatomic, strong) EspTouchDelegateImpl *espTouchDelegate;
@@ -78,7 +78,6 @@
     
     self.condition = [[NSCondition alloc] init];
     self.espTouchDelegate = [[EspTouchDelegateImpl alloc] init];
-    _spinner = [self spinner];
     _image =[self image];
     _cancelBtn = [self cancelBtn];
     [self startEsptouchConnect];
@@ -116,8 +115,7 @@
 #pragma mark - start Esptouch
 - (void)startEsptouchConnect
 {
-    [self.spinner startAnimating];
-    
+    [self progressView];
     NSLog(@"ESPViewController do confirm action...");
     dispatch_queue_t  queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -126,7 +124,6 @@
         NSArray *esptouchResultArray = [self executeForResults];
         // show the result to the user in UI Main Thread
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.spinner stopAnimating];
             
             ESPTouchResult *firstResult = [esptouchResultArray objectAtIndex:0];
             
@@ -167,6 +164,7 @@
                 }
                 else
                 {
+#warning 配网失败处理
                     //[self fail];
                 }
             }
@@ -270,8 +268,33 @@
             
             dModel.mac = mac;
             dModel.ipAddress = ipAddress;
-            dModel.name = mac;
             dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
+            switch ([dModel.type integerValue]) {
+                case DevicePlugOutlet:
+                    dModel.name = [NSString stringWithFormat:@"插座%@",[dModel.mac substringWithRange:NSMakeRange(6, 2)]];
+                    break;
+                    
+                case DeviceOneSwitch:
+                    dModel.name = [NSString stringWithFormat:@"一路开关%@",[dModel.mac substringWithRange:NSMakeRange(6, 2)]];
+                    break;
+                    
+                case DeviceTwoSwitch:
+                    dModel.name = [NSString stringWithFormat:@"二路开关%@",[dModel.mac substringWithRange:NSMakeRange(6, 2)]];
+                    break;
+                    
+                case DeviceThreeSwitch:
+                    dModel.name = [NSString stringWithFormat:@"三路开关%@",[dModel.mac substringWithRange:NSMakeRange(6, 2)]];
+                    break;
+                    
+                case DeviceFourSwitch:
+                    dModel.name = [NSString stringWithFormat:@"四路开关%@",[dModel.mac substringWithRange:NSMakeRange(6, 2)]];
+                    break;
+                    
+                default:
+                    dModel.name = dModel.mac;
+                    break;
+            }
+            
             [self bindDevice:dModel success:^{
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (dModel.type == DeviceCenterlControl) {
@@ -282,8 +305,11 @@
                         }
                     }
                     [Network shareNetwork].isDeviceVC = NO;
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    [NSObject showHudTipStr:LocalString(@"绑定设备成功")];
+                    
+                    DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
+                    roomVC.device = dModel;
+                    [self.navigationController pushViewController:roomVC animated:YES];
+                    
                 });
             } failure:^{
                 
@@ -330,31 +356,6 @@
     Database *db = [Database shareInstance];
     
     NSInteger type = [[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[device.mac substringWithRange:NSMakeRange(2, 2)]]];
-    switch ([device.type integerValue]) {
-        case DevicePlugOutlet:
-            device.name = [NSString stringWithFormat:@"插座%@",[device.mac substringWithRange:NSMakeRange(6, 2)]];
-            break;
-            
-        case DeviceOneSwitch:
-            device.name = [NSString stringWithFormat:@"一路开关%@",[device.mac substringWithRange:NSMakeRange(6, 2)]];
-            break;
-            
-        case DeviceTwoSwitch:
-            device.name = [NSString stringWithFormat:@"二路开关%@",[device.mac substringWithRange:NSMakeRange(6, 2)]];
-            break;
-            
-        case DeviceThreeSwitch:
-            device.name = [NSString stringWithFormat:@"三路开关%@",[device.mac substringWithRange:NSMakeRange(6, 2)]];
-            break;
-            
-        case DeviceFourSwitch:
-            device.name = [NSString stringWithFormat:@"四路开关%@",[device.mac substringWithRange:NSMakeRange(6, 2)]];
-            break;
-            
-        default:
-            device.name = device.mac;
-            break;
-    }
     
     NSNumber *postType;
     if (type == DevicePlugOutlet) {
@@ -408,20 +409,18 @@
 }
 
 #pragma mark - setters and getters
-- (UIActivityIndicatorView *)spinner{
-    if (!_spinner) {
-        //圆形进度
-        AAProgressCircleView *circleView = [[AAProgressCircleView alloc]init];
-        [circleView didCircleProgressAction];
-        [self.view addSubview:circleView];
-        
-        [circleView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(217.f, 300.f));
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
-        }];
-    }
-    return _spinner;
+//开启进度条
+-(void)progressView{
+    //圆形进度
+    AAProgressCircleView *circleView = [[AAProgressCircleView alloc]init];
+    [circleView didCircleProgressAction];
+    [self.view addSubview:circleView];
+    
+    [circleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(217.f, 300.f));
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
+    }];
 }
 
 - (UIImageView *)image{
