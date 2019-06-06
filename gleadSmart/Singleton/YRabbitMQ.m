@@ -100,6 +100,8 @@ static NSArray *_routingkeys = nil;
         [self analyzeMessageTypeD:dic];
     }else if ([type isEqualToString:@"E"]){
         [self analyzeMessageTypeE:dic];
+    }else if ([type isEqualToString:@"F"]){
+        [self analyzeMessageTypeF:dic];
     }
 }
 
@@ -314,6 +316,15 @@ static NSArray *_routingkeys = nil;
     NSDictionary *userInfo = @{@"node":node};
     [[NSNotificationCenter defaultCenter] postNotificationName:@"valveHangingNodesRabbitmqReport" object:nil userInfo:userInfo];
 }
+
+/*
+ *需要刷新家庭主页面列表
+ */
+- (void)analyzeMessageTypeF:(NSDictionary *)dic{
+    //发送通知更新设备列表
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitMQUpdateHouse" object:nil userInfo:nil];
+}
+
 
 #pragma mark - 系统通知监听
 - (void)activeNotification:(NSNotification *)notification{
