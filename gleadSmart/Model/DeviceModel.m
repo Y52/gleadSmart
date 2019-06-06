@@ -33,7 +33,7 @@
     }
 }
 
-static int frameCount = 0;
+static UInt8 frameCount = 0;
 - (void)sendData69With:(UInt8)controlCode mac:(NSString *)mac data:(NSArray *)data{
     for (DeviceModel *device in [Network shareNetwork].deviceArray) {
         if ([device.mac isEqualToString:self.mac]) {
