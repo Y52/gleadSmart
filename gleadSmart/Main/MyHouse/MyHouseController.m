@@ -102,7 +102,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHouseInfo) name:@"rabbitMQUpdateHouse" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHouseInfo) name:@"configNetUpdateHouse" object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHouseInfo) name:@"removeDeviceUpdateHouse" object:nil];
     if (![self.houseButton.titleLabel.text isEqualToString:[Database shareInstance].currentHouse.name]) {
         [self updateHouseInfo];
     }

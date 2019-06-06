@@ -43,8 +43,23 @@ static float HEIGHT_HEADER = 40.f;
 
 #pragma mark - private methods
 - (void)removeDevice{
-    NSLog(@"移除设备");
-
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LocalString(@"移除设备") message:LocalString(@"确认移除设备吗？设备移除后相关的功能将失效。") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        Network *net = [Network shareNetwork];
+        [net removeJienuoOldDeviceWith:self.device success:^{
+            //发送通知更新配网成功的设备列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"removeDeviceUpdateHouse" object:nil userInfo:nil];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        } failure:^{
+            [NSObject showHudTipStr:LocalString(@"移除设备失败")];
+        }];
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)showConfirmAlert{
