@@ -25,8 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) CGFloat progress;
 //当前显示进度值
 @property (assign, nonatomic) CGFloat showProgress;
+//动画百分比
+@property (assign, nonatomic) CGFloat percent;
 
 - (void)didCircleProgressAction;
+- (void)configSecondAnimate;
 
 - (void)deleteTimer;
 @end
