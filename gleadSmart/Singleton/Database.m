@@ -503,6 +503,13 @@ static dispatch_once_t oneToken;
             if (!self.shareDeviceArray) {
                 self.shareDeviceArray = [[NSMutableArray alloc] init];
             }
+            for (DeviceModel *device in self.shareDeviceArray) {
+                //解锁，防止锁时释放
+                if (device.sendSignal) {
+                    dispatch_semaphore_signal(device.sendSignal);
+                }
+            }
+            [self.shareDeviceArray removeAllObjects];//移除所有设备
             if ([[dic objectForKey:@"shareHouse"] isKindOfClass:[NSArray class]] && [[dic objectForKey:@"shareHouse"] count] > 0) {
 
                 [[dic objectForKey:@"shareHouse"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

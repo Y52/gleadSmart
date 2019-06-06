@@ -101,9 +101,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     [self reloadData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHouseInfo) name:@"updateHouseInfo" object:nil];
-    if (![self.houseButton.titleLabel.text isEqualToString:[Database shareInstance].currentHouse.name]) {
-        [self updateHouseInfo];
-    }
+    [self updateHouseInfo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -236,6 +234,15 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     [self.homeList removeAllObjects];
     self.homeList = [db queryRoomsWith:db.currentHouse.houseUid];
     
+    for (DeviceModel *device in net.deviceArray) {
+        //解锁，防止锁时释放
+        if (device.sendSignal) {
+            dispatch_semaphore_signal(device.sendSignal);
+        }
+    }
+    [net.deviceArray removeAllObjects];//移除所有设备
+    [net.connectedDevice.gatewayMountDeviceList removeAllObjects];//移除所有设备
+
     NSMutableArray *localDeviceArray = [db queryAllDevice:db.currentHouse.houseUid];
     for (DeviceModel *device in localDeviceArray) {
         NSLog(@"1111%@",device.mac);
