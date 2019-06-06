@@ -112,6 +112,7 @@ static CGFloat const gleadMenuItemMargin = 20.f;
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"rabbitMQUpdateHouse" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"configNetUpdateHouse" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"removeDeviceUpdateHouse" object:nil];
 
     //[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
