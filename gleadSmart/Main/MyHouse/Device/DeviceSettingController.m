@@ -52,7 +52,7 @@ static float HEIGHT_HEADER = 40.f;
         [net removeJienuoOldDeviceWith:self.device success:^{
             [self.navigationController popToRootViewControllerAnimated:YES];
             //发送通知更新配网成功的设备列表
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"removeDeviceUpdateHouse" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"updateHouseInfo" object:nil userInfo:nil];
         } failure:^{
             [NSObject showHudTipStr:LocalString(@"移除设备失败")];
         }];

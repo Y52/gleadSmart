@@ -263,7 +263,7 @@ static NSArray *_routingkeys = nil;
                 }else{
                     db.currentHouse = nil;
                 }
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitMQUpdateHouse" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateHouseInfo" object:nil userInfo:nil];
             }
         }
     });
@@ -322,7 +322,7 @@ static NSArray *_routingkeys = nil;
  */
 - (void)analyzeMessageTypeF:(NSDictionary *)dic{
     //发送通知更新设备列表
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"rabbitMQUpdateHouse" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateHouseInfo" object:nil userInfo:nil];
 }
 
 

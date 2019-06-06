@@ -154,7 +154,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
         if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
             [self dismissViewControllerAnimated:YES completion:^{
                 //发送通知更新配网成功的设备列表
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"configNetUpdateHouse" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateHouseInfo" object:nil userInfo:nil];
                 
             }];
         }else{
