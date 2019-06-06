@@ -60,6 +60,9 @@ typedef NS_ENUM(NSUInteger, DeviceType) {
 ///@brief 无线混水阀门拥有的属性
 @property (nonatomic) BOOL isTemperatureAlarm;//是否温度报警
 
+///@bruef 开关拥有的属性
+@property (nonatomic) NSNumber *relayNumber;//继电器编号
+
 ///@brief 分享设备特有的属性
 @property (nonatomic) BOOL isShare;
 @property (nonatomic, strong) NSString *apiKey;

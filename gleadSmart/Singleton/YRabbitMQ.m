@@ -126,6 +126,8 @@ static NSArray *_routingkeys = nil;
     NSDictionary *userInfo;
     NSString *mac = [dic objectForKey:@"mac"];
     NSNumber *on = [dic objectForKey:@"on"];
+    NSNumber *num = @0;
+    num = @([[dic objectForKey:@"num"] integerValue]);
     
     BOOL isSocketConnectd = NO;
     
@@ -135,9 +137,14 @@ static NSArray *_routingkeys = nil;
             if (device.socket.isConnected) {
                 isSocketConnectd = YES;
             }
-            device.isOn = on;
-            device.isOnline = @1;
-            userInfo = @{@"device":device,@"isShare":@0};
+            if ([device.type integerValue] >= DeviceOneSwitch && [device.type integerValue] <= DeviceFourSwitch) {
+                userInfo = @{@"on":on,@"num":num,@"device":device,@"isShare":@0};
+                break;
+            }else{
+                device.isOn = on;//这里设置会影响到设备页面里面的ison
+                device.isOnline = @1;
+                userInfo = @{@"device":device,@"isShare":@0};
+            }
         }
     }
     for (DeviceModel *device in [Database shareInstance].shareDeviceArray) {
@@ -146,9 +153,14 @@ static NSArray *_routingkeys = nil;
             if (device.socket.isConnected) {
                 isSocketConnectd = YES;
             }
-            device.isOn = on;
-            device.isOnline = @1;
-            userInfo = @{@"device":device,@"isShare":@1};
+            if ([device.type integerValue] >= DeviceOneSwitch && [device.type integerValue] <= DeviceFourSwitch) {
+                userInfo = @{@"on":on,@"num":num,@"device":device,@"isShare":@1};
+                break;
+            }else{
+                device.isOn = on;
+                device.isOnline = @1;
+                userInfo = @{@"device":device,@"isShare":@1};
+            }
         }
     }
     for (DeviceModel *device in net.connectedDevice.gatewayMountDeviceList) {

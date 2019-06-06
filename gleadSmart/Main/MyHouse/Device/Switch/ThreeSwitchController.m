@@ -230,8 +230,52 @@
     
     NSDictionary *userInfo = [notification userInfo];
     DeviceModel *device = [userInfo objectForKey:@"device"];
+    NSNumber *on = [userInfo objectForKey:@"on"];
+    NSNumber *num = [userInfo objectForKey:@"num"];
     if ([device.mac isEqualToString:self.device.mac]) {
-        self.device = device;
+        //        self.device = device;
+        
+        if (![num intValue]) {
+            //如果num是0，屏蔽刷新
+            return;
+        }
+
+        if ([on integerValue]) {
+            switch ([num integerValue]) {
+                case 1:
+                    self.device.isOn = @([self.device.isOn intValue] | 0x01);
+                    break;
+                    
+                case 2:
+                    self.device.isOn = @([self.device.isOn intValue] | 0x02);
+                    break;
+                    
+                case 3:
+                    self.device.isOn = @([self.device.isOn intValue] | 0x04);
+                    break;
+                    
+                default:
+                    break;
+            }
+        }else{
+            switch ([num integerValue]) {
+                case 1:
+                    self.device.isOn = @([self.device.isOn intValue] & 0xFE);
+                    break;
+                    
+                case 2:
+                    self.device.isOn = @([self.device.isOn intValue] & 0xFD);
+                    break;
+                    
+                case 3:
+                    self.device.isOn = @([self.device.isOn intValue] & 0xFB);
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self ThreeSwitchUITransformationByStatus];
         });
