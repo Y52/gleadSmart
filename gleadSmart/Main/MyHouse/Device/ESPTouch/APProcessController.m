@@ -453,7 +453,7 @@ static bool isApiBinding = NO;
                 self.circleView.percent = 1;
                 [self.circleView deleteTimer];
                 [self.circleView configSecondAnimate];
-                //延时6秒
+                //延时5秒
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];

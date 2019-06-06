@@ -119,7 +119,6 @@
 #pragma mark - start Esptouch
 - (void)startEsptouchConnect
 {
-    [self progressView];
     NSLog(@"ESPViewController do confirm action...");
     dispatch_queue_t  queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -292,7 +291,7 @@ static bool isApiBinding = NO;
                         self.circleView.percent = 1;
                         [self.circleView deleteTimer];
                         [self.circleView configSecondAnimate];
-                        //延时6秒
+                        //延时5秒
                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
@@ -405,10 +404,6 @@ static bool isApiBinding = NO;
 }
 
 #pragma mark - setters and getters
-//开启进度条
--(void)progressView{
-    
-}
 
 - (AAProgressCircleView *)circleView{
     if (!_circleView) {
