@@ -139,26 +139,28 @@ static CGFloat const Cell_Height = 50.f;
     HouseModel *house = data.houseList[indexPath.row];
     if (![data.currentHouse.houseUid isEqualToString:house.houseUid]) {
         //选择了不同家庭
-        data.currentHouse = house;
-        for (DeviceModel *device in data.shareDeviceArray) {
-            //解锁，防止锁时释放
-            if (device.sendSignal) {
-                dispatch_semaphore_signal(device.sendSignal);
-            }
-        }
-        [data.shareDeviceArray removeAllObjects];
-        for (DeviceModel *device in net.deviceArray) {
-            //解锁，防止锁时释放
-            if (device.sendSignal) {
-                dispatch_semaphore_signal(device.sendSignal);
-            }
-        }
-        [net.deviceArray removeAllObjects];
-        [net.connectedDevice.gatewayMountDeviceList removeAllObjects];
         if (net.mySocket.isConnected) {
             [net.mySocket disconnect];
         }
     }
+    
+    data.currentHouse = house;
+    for (DeviceModel *device in data.shareDeviceArray) {
+        //解锁，防止锁时释放
+        if (device.sendSignal) {
+            dispatch_semaphore_signal(device.sendSignal);
+        }
+    }
+    [data.shareDeviceArray removeAllObjects];
+    for (DeviceModel *device in net.deviceArray) {
+        //解锁，防止锁时释放
+        if (device.sendSignal) {
+            dispatch_semaphore_signal(device.sendSignal);
+        }
+    }
+    [net.deviceArray removeAllObjects];
+    [net.connectedDevice.gatewayMountDeviceList removeAllObjects];
+    
     [self dismissVC];
 }
 
