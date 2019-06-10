@@ -202,11 +202,64 @@
     
     NSDictionary *userInfo = [notification userInfo];
     DeviceModel *device = [userInfo objectForKey:@"device"];
+    NSNumber *on = [userInfo objectForKey:@"on"];
+    NSNumber *num = [userInfo objectForKey:@"num"];
     if ([device.mac isEqualToString:self.device.mac]) {
-        self.device = device;
+//        self.device = device;
+        
+        if (![num intValue]) {
+            //如果num是0，屏蔽刷新
+            return;
+        }
+        
+        if ([on integerValue]) {
+            switch ([num integerValue]) {
+                case 1:
+                    self.device.isOn = @([self.device.isOn intValue] | 0x01);
+                    break;
+                    
+                case 2:
+                    self.device.isOn = @([self.device.isOn intValue] | 0x02);
+                    break;
+                    
+                case 3:
+                    self.device.isOn = @([self.device.isOn intValue] | 0x04);
+                    break;
+                    
+                case 4:
+                    self.device.isOn = @([self.device.isOn intValue] | 0x08);
+                    break;
+                    
+                default:
+                    break;
+            }
+        }else{
+            switch ([num integerValue]) {
+                case 1:
+                    self.device.isOn = @([self.device.isOn intValue] & 0xFE);
+                    break;
+                    
+                case 2:
+                    self.device.isOn = @([self.device.isOn intValue] & 0xFD);
+                    break;
+                    
+                case 3:
+                    self.device.isOn = @([self.device.isOn intValue] & 0xFB);
+                    break;
+                    
+                case 4:
+                    self.device.isOn = @([self.device.isOn intValue] & 0xF7);
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self FourSwitchUITransformationByStatus];
         });
+
     }
 }
 
@@ -217,6 +270,7 @@
         if ([self.device.isOn intValue] & 0x01) {
             [self.switchButton4_1 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
             self.switchButton4_1.tag = ySelect;
+            NSLog(@"1");
         }else{
             [self.switchButton4_1 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
             self.switchButton4_1.tag = yUnselect;
@@ -224,6 +278,8 @@
         if ([self.device.isOn intValue] & 0x02) {
             [self.switchButton4_2 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
             self.switchButton4_2.tag = ySelect;
+            NSLog(@"2");
+
         }else{
             [self.switchButton4_2 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
             self.switchButton4_2.tag = yUnselect;
@@ -231,6 +287,8 @@
         if ([self.device.isOn intValue] & 0x04) {
             [self.switchButton4_3 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
             self.switchButton4_3.tag = ySelect;
+            NSLog(@"3");
+
         }else{
             [self.switchButton4_3 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
             self.switchButton4_3.tag = yUnselect;
@@ -238,6 +296,8 @@
         if ([self.device.isOn intValue] & 0x08) {
             [self.switchButton4_4 setImage:[UIImage imageNamed:@"img_switch1_on"] forState:UIControlStateNormal];
             self.switchButton4_4.tag = ySelect;
+            NSLog(@"4");
+
         }else{
             [self.switchButton4_4 setImage:[UIImage imageNamed:@"img_switch1_off"] forState:UIControlStateNormal];
             self.switchButton4_4.tag = yUnselect;
