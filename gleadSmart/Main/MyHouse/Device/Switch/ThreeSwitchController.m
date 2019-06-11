@@ -55,7 +55,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshThreeSwitchUI) name:@"refreshMulSwitchUI" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rabbitMQSwitchStatusUpdate:) name:@"rabbitMQSwitchStatusUpdate" object:nil];
-    
+    [self getSwitchStatus];
     needShieldRabbitMQCount = 0;
 }
 

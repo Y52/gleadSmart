@@ -81,7 +81,7 @@
     self.condition = [[NSCondition alloc] init];
     self.espTouchDelegate = [[EspTouchDelegateImpl alloc] init];
     _image =[self image];
-    _cancelBtn = [self cancelBtn];
+    //_cancelBtn = [self cancelBtn];
     [self startEsptouchConnect];
     self.circleView = [self circleView];
     [self sendSearchBroadcast];
@@ -168,7 +168,33 @@
                 else
                 {
 #warning 配网失败处理
-                    //[self fail];
+                    //配网超时
+                    NSString *message = [NSString stringWithFormat:@"\n\n\n\n\n\n%@\n",@"连接超时"];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"查看帮助" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                        //响应事件
+                        NSLog(@"action = %@", action);
+                    }];
+                    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                        //响应事件
+                        NSLog(@"action = %@", action);
+                        [self cancel];
+                    }];
+                    
+                    UIImageView *imageView2 = [[UIImageView alloc] init];
+                    imageView2.image = [UIImage imageNamed:@"netWarning_icon"];
+                    [alert.view addSubview:imageView2];
+                    
+                    [imageView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.size.mas_equalTo(CGSizeMake(88.f, 88.f));
+                        make.centerX.equalTo(alert.view.mas_centerX);
+                        make.top.equalTo(alert.view.mas_top).offset(yAutoFit(15.f));
+                    }];
+                    
+                    [alert addAction:defaultAction];
+                    [alert addAction:cancelAction];
+                    [self presentViewController:alert animated:YES completion:nil];
                 }
             }
             
@@ -291,13 +317,11 @@ static bool isApiBinding = NO;
                         self.circleView.percent = 1;
                         [self.circleView deleteTimer];
                         [self.circleView configSecondAnimate];
-                        //延时5秒
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
-                                roomVC.device = dModel;
-                                [self.navigationController pushViewController:roomVC animated:YES];
-                            });
+                        //延时3秒
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
+                            roomVC.device = dModel;
+                            [self.navigationController pushViewController:roomVC animated:YES];
                         });
                         
                     });

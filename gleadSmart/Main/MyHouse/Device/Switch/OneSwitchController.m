@@ -51,7 +51,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshOneSwitchUI) name:@"refreshMulSwitchUI" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rabbitMQSwitchStatusUpdate:) name:@"rabbitMQSwitchStatusUpdate" object:nil];
-    
+    [self getSwitchStatus];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

@@ -121,7 +121,7 @@ NSString *const CollectCellIdentifier_DeviceRoom = @"CollectCellID_DeviceRoom";
 - (void)completeAddRoom{
     
     if ([self.selectRoomUid isEqualToString:@""]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您没有选择设备") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:LocalString(@"您没有选择设备房间") preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
         [alertController addAction:cancelAction];
         [self presentViewController:alertController animated:YES completion:nil];
