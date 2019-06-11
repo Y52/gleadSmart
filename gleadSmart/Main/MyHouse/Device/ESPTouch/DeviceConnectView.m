@@ -81,7 +81,7 @@
     self.condition = [[NSCondition alloc] init];
     self.espTouchDelegate = [[EspTouchDelegateImpl alloc] init];
     _image =[self image];
-    //_cancelBtn = [self cancelBtn];
+    _cancelBtn = [self cancelBtn];
     [self startEsptouchConnect];
     self.circleView = [self circleView];
     [self sendSearchBroadcast];
@@ -172,15 +172,18 @@
                     NSString *message = [NSString stringWithFormat:@"\n\n\n\n\n\n%@\n",@"连接超时"];
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
                     
-                    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"查看帮助" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    UIAlertAction* helpAction = [UIAlertAction actionWithTitle:@"查看帮助" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                         //响应事件
                         NSLog(@"action = %@", action);
                     }];
-                    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                    UIAlertAction *iKnowAction = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                         //响应事件
                         NSLog(@"action = %@", action);
                         [self cancel];
                     }];
+                    
+                    [helpAction setValue:[UIColor blackColor] forKey:@"titleTextColor"];
+                    //[iKnowAction setValue:[UIColor redColor] forKey:@"titleTextColor"];
                     
                     UIImageView *imageView2 = [[UIImageView alloc] init];
                     imageView2.image = [UIImage imageNamed:@"netWarning_icon"];
@@ -192,8 +195,8 @@
                         make.top.equalTo(alert.view.mas_top).offset(yAutoFit(15.f));
                     }];
                     
-                    [alert addAction:defaultAction];
-                    [alert addAction:cancelAction];
+                    [alert addAction:helpAction];
+                    [alert addAction:iKnowAction];
                     [self presentViewController:alert animated:YES completion:nil];
                 }
             }

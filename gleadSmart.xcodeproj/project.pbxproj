@@ -4257,7 +4257,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
@@ -4286,7 +4286,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6C249BF1E8EE4C76AD977671872A840E /* [CP] Check Pods Manifest.lock */ = {
@@ -4315,7 +4315,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
@@ -4344,7 +4344,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh\"\n";
 		};
 		C977EB57D9D3CC9695719955C99AF81B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
