@@ -56,9 +56,16 @@ static UInt8 frameCount = 0;
     if (self.queue) {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             dispatch_sync(self.queue, ^{
-                //线程锁需要放在最前面，放在后面锁不住
-                dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 0.6 * NSEC_PER_SEC);
-                dispatch_semaphore_wait(self.sendSignal, time);
+                
+                if (![self.socket isDisconnected]) {
+                    //内网发送指令限制
+                    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC);
+                    dispatch_semaphore_wait(self.sendSignal, time);
+                }else{
+                    //线程锁需要放在最前面，放在后面锁不住
+                    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 0.6 * NSEC_PER_SEC);
+                    dispatch_semaphore_wait(self.sendSignal, time);
+                }
                 
                 NSMutableArray *data69 = [[NSMutableArray alloc] init];
                 [data69 addObject:[NSNumber numberWithUnsignedInteger:0x69]];

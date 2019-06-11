@@ -15,6 +15,8 @@ green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #define duration_First 60.0 //设定预估配网时间
+#define duration_Second 5 //到达100%时间
+
 #define TimeInterval 1  //定时器刷新间隔
 
 #define lineWH 217
@@ -23,6 +25,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        _percent =0.8; //第一段动画百分比
         //创建基本视图
         [self createSubview];
         //创建路径及layer
@@ -107,7 +110,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 - (void)configCircleAnimate{
     CABasicAnimation *animation_1 = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     animation_1.fromValue = @0;
-    animation_1.toValue = [NSNumber numberWithDouble:self.progress];
+    animation_1.toValue = [NSNumber numberWithDouble:self.progress*_percent];
     animation_1.duration = duration_First;
     animation_1.fillMode = kCAFillModeForwards;
     animation_1.removedOnCompletion = NO;
@@ -120,9 +123,32 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     pathAnimation_1.duration = duration_First;
     pathAnimation_1.repeatCount = 0;
     
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(lineWH/2, lineWH/2) radius:(lineWH-17)/2.0 startAngle:-M_PI/2 endAngle:-M_PI/2+2*M_PI*self.progress clockwise:YES];
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(lineWH/2, lineWH/2) radius:(lineWH-17)/2.0 startAngle:-M_PI/2 endAngle:-M_PI/2+2*M_PI*self.progress*_percent clockwise:YES];
     pathAnimation_1.path = circlePath.CGPath;
     [self.pointView.layer addAnimation:pathAnimation_1 forKey:@"movePoint"];
+}
+
+- (void)configSecondAnimate{
+    CABasicAnimation *animation_2 = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    animation_2.fromValue = [NSNumber numberWithDouble:self.progress*_percent];
+    animation_2.toValue = [NSNumber numberWithDouble:self.progress];
+    animation_2.duration = duration_Second;
+    animation_2.fillMode = kCAFillModeForwards;
+    animation_2.removedOnCompletion = NO;
+    [self.progressLayer addAnimation:animation_2 forKey:nil];
+    
+    CAKeyframeAnimation *pathAnimation_2 = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    pathAnimation_2.calculationMode = kCAAnimationPaced;
+    pathAnimation_2.fillMode = kCAFillModeForwards;
+    pathAnimation_2.removedOnCompletion = NO;
+    pathAnimation_2.duration = duration_Second;
+    pathAnimation_2.repeatCount = 0;
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(lineWH/2, lineWH/2) radius:(lineWH-17)/2.0 startAngle:-M_PI/2+2*M_PI*self.progress*_percent endAngle:-M_PI/2+2*M_PI*self.progress clockwise:YES];
+    pathAnimation_2.path = circlePath.CGPath;
+    [self.pointView.layer addAnimation:pathAnimation_2 forKey:@"movePoint"];
+    
+    self.showProgress = 1;
+    self.progressLab.text = [NSString stringWithFormat:@"%d%%", (int)(self.showProgress*100)];
 }
 
 - (void)startTimer{
@@ -131,14 +157,17 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 }
 
 - (void)animate:(NSTimer *)time{
-    if (self.showProgress <= self.progress) {
-        self.showProgress += TimeInterval*self.progress/duration_First;
-    }else{
+    if (self.showProgress <= self.progress*_percent) {
+        self.showProgress += TimeInterval*self.progress*_percent/duration_First;
+    }else if (self.showProgress <= self.progress){
+        self.showProgress += TimeInterval*self.progress*(1-_percent)/duration_Second;
+    }
+    else{
         [self deleteTimer];
     }
     
     if (self.showProgress >= 1) {
-        self.showProgress = 0.99;
+        self.showProgress = 1;
     }
     
     self.progressLab.text = [NSString stringWithFormat:@"%d%%", (int)(self.showProgress*100)];
@@ -169,6 +198,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         [weakSelf configCircleAnimate];
         //开启定时器
         [weakSelf startTimer];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration_First * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //设置第二段动画
+            [weakSelf configSecondAnimate];
+        });
         
     });
 }

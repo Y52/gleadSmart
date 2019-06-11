@@ -450,12 +450,18 @@ static bool isApiBinding = NO;
             NSDictionary *data = [responseDic objectForKey:@"data"];
             NSNumber *state = [data objectForKey:@"state"];
             if ([state integerValue]) {
+                self.circleView.percent = 1;
                 [self.circleView deleteTimer];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
-                    roomVC.device = self.device;
-                    [self.navigationController pushViewController:roomVC animated:YES];
+                [self.circleView configSecondAnimate];
+                //延时5秒
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
+                        roomVC.device = self.device;
+                        [self.navigationController pushViewController:roomVC animated:YES];
+                    });
                 });
+                
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

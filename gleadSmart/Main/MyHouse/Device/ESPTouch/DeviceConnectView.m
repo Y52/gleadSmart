@@ -48,6 +48,8 @@
 @property (strong, nonatomic) NSTimer *udpTimer;;
 @property (strong, nonatomic) GCDAsyncUdpSocket *udpSocket;
 
+@property (nonatomic, strong) AAProgressCircleView *circleView;
+
 @end
 
 @implementation DeviceConnectView{
@@ -81,7 +83,7 @@
     _image =[self image];
     _cancelBtn = [self cancelBtn];
     [self startEsptouchConnect];
-    
+    self.circleView = [self circleView];
     [self sendSearchBroadcast];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         sleep(10);
@@ -117,7 +119,6 @@
 #pragma mark - start Esptouch
 - (void)startEsptouchConnect
 {
-    [self progressView];
     NSLog(@"ESPViewController do confirm action...");
     dispatch_queue_t  queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -287,9 +288,18 @@ static bool isApiBinding = NO;
                         }
                         [Network shareNetwork].isDeviceVC = NO;
                         
-                        DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
-                        roomVC.device = dModel;
-                        [self.navigationController pushViewController:roomVC animated:YES];
+                        self.circleView.percent = 1;
+                        [self.circleView deleteTimer];
+                        [self.circleView configSecondAnimate];
+                        //延时5秒
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                DeviceSetRoomController *roomVC = [[DeviceSetRoomController alloc] init];
+                                roomVC.device = dModel;
+                                [self.navigationController pushViewController:roomVC animated:YES];
+                            });
+                        });
+                        
                     });
                 } failure:^{
                     isApiBinding = NO;
@@ -367,7 +377,7 @@ static bool isApiBinding = NO;
               NSLog(@"success:%@",daetr);
               
               if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
-                  [NSObject showHudTipStr:LocalString(@"绑定该设备成功")];
+                  
                   [[Database shareInstance].queueDB inDatabase:^(FMDatabase * _Nonnull db) {
                       BOOL result = [db executeUpdate:@"REPLACE INTO device (mac,name,type,houseUid) VALUES (?,?,?,?)",device.mac,device.name,device.type,[Database shareInstance].currentHouse.houseUid];
                       if (result) {
@@ -394,18 +404,21 @@ static bool isApiBinding = NO;
 }
 
 #pragma mark - setters and getters
-//开启进度条
--(void)progressView{
-    //圆形进度
-    AAProgressCircleView *circleView = [[AAProgressCircleView alloc]init];
-    [circleView didCircleProgressAction];
-    [self.view addSubview:circleView];
-    
-    [circleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(217.f, 300.f));
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
-    }];
+
+- (AAProgressCircleView *)circleView{
+    if (!_circleView) {
+        //圆形进度图
+        _circleView = [[AAProgressCircleView alloc]init];
+        [_circleView didCircleProgressAction];
+        [self.view addSubview:_circleView];
+        
+        [_circleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(217.f, 300.f));
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(self.view.mas_top).offset(yAutoFit(82.f));
+        }];
+    }
+    return _circleView;
 }
 
 - (UIImageView *)image{
