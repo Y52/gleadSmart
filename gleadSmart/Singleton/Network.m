@@ -658,7 +658,7 @@ static int noUserInteractionHeartbeat = 0;
  *批量查询数据流信息
  */
 - (void)inquireDeviceInfoByOneNetdatastreams:(NSMutableArray *)deviceArray apiKey:(NSString *)apiKey deviceId:(NSString *)deviceId{
-    Database *db = [Database shareInstance];
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     //设置超时时间
