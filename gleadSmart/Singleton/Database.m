@@ -416,8 +416,10 @@ static dispatch_once_t oneToken;
              */
             for (HouseModel *existHouse in self.houseList) {
                 if (house.houseUid == existHouse.houseUid) {
-                    [self.houseList addObject:house];
-                    [self.houseList removeObject:existHouse];
+                    existHouse.lon = house.lon;
+                    existHouse.lat = house.lat;
+                    existHouse.apiKey = house.apiKey;
+                    existHouse.deviceId = house.deviceId;
                     break;
                 }
             }
