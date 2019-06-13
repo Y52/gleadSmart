@@ -25,7 +25,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        _percent =0.8; //第一段动画百分比
+        _percent =0.99; //第一段动画百分比
         //创建基本视图
         [self createSubview];
         //创建路径及layer

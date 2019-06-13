@@ -292,6 +292,10 @@
 		36FDB0A722A531FF00E6E7A8 /* jienuo__180@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08822A5307C00E6E7A8 /* jienuo__180@2x.png */; };
 		36FDB0A822A5320200E6E7A8 /* jienuo__1024@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08122A5307B00E6E7A8 /* jienuo__1024@2x.png */; };
 		36FDB0A922A5320600E6E7A8 /* jienuo__58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FDB08B22A5307C00E6E7A8 /* jienuo__58@2x.png */; };
+		36FE2CE422AE090C00B99C54 /* netWarning_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FE2CE222AE090B00B99C54 /* netWarning_icon@2x.png */; };
+		36FE2CE522AE090C00B99C54 /* netWarning_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FE2CE322AE090B00B99C54 /* netWarning_icon@3x.png */; };
+		36FE2CE622AE091000B99C54 /* netWarning_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FE2CE222AE090B00B99C54 /* netWarning_icon@2x.png */; };
+		36FE2CE722AE091300B99C54 /* netWarning_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FE2CE322AE090B00B99C54 /* netWarning_icon@3x.png */; };
 		36FFA51822A607A500C910B2 /* logo_jienuo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FFA51722A607A500C910B2 /* logo_jienuo@2x.png */; };
 		36FFA51922A607BB00C910B2 /* logo_jienuo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FFA51722A607A500C910B2 /* logo_jienuo@2x.png */; };
 		37072A994D24530D66D96159C618DA2C /* NoHouseAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FC069E3B92DA2E843EA65EA7B5036 /* NoHouseAddController.m */; };
@@ -1347,6 +1351,8 @@
 		36FDB08922A5307C00E6E7A8 /* jienuo_40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jienuo_40@2x.png"; sourceTree = "<group>"; };
 		36FDB08B22A5307C00E6E7A8 /* jienuo__58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jienuo__58@2x.png"; sourceTree = "<group>"; };
 		36FDB08C22A5307C00E6E7A8 /* jienuo__87@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jienuo__87@2x.png"; sourceTree = "<group>"; };
+		36FE2CE222AE090B00B99C54 /* netWarning_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "netWarning_icon@2x.png"; sourceTree = "<group>"; };
+		36FE2CE322AE090B00B99C54 /* netWarning_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "netWarning_icon@3x.png"; sourceTree = "<group>"; };
 		36FFA51722A607A500C910B2 /* logo_jienuo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_jienuo@2x.png"; sourceTree = "<group>"; };
 		37216C47A7ACEE60A2B8FC473474E9A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3782C0956AEC32D9119F32C9B61EFDF7 /* valveTabMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "valveTabMore@2x.png"; sourceTree = "<group>"; };
@@ -3031,6 +3037,8 @@
 		BB1BD6F8228D5C5400AF5741 /* 开关 */ = {
 			isa = PBXGroup;
 			children = (
+				36FE2CE222AE090B00B99C54 /* netWarning_icon@2x.png */,
+				36FE2CE322AE090B00B99C54 /* netWarning_icon@3x.png */,
 				36844A382292A36800330C74 /* img_switch_icon_1@2x.png */,
 				36844A352292A36700330C74 /* img_switch_icon_1@3x.png */,
 				36844A362292A36800330C74 /* img_switch_icon_2@2x.png */,
@@ -3533,6 +3541,7 @@
 				90184834B6DFEB97A0675EEA6E576850 /* img_headerBg@3x.png in Resources */,
 				11DA049F1418D302A7887C2C99E5B2BE /* img_homeSet.png in Resources */,
 				29BA76A34FA2685E590FDDD39B6645C6 /* img_homeSet@2x.png in Resources */,
+				36FE2CE622AE091000B99C54 /* netWarning_icon@2x.png in Resources */,
 				09E7342C2CCCCFB6AA41EF772959AB87 /* img_homeSet@3x.png in Resources */,
 				3A22C19469DFB3C0DDED930EC0FF6F84 /* img_houseManage.png in Resources */,
 				3015B3987DD6213A4250CB758A2B8AA4 /* img_houseManage@2x.png in Resources */,
@@ -3564,6 +3573,7 @@
 				15BE690C93893D330AE6FE186C125562 /* img_login_password@2x.png in Resources */,
 				62984FBB3933A302762904D303A34DB4 /* img_login_password@3x.png in Resources */,
 				17BD53C672FE610CCA8609D7FE755CE7 /* img_login_phone.png in Resources */,
+				36FE2CE722AE091300B99C54 /* netWarning_icon@3x.png in Resources */,
 				BB1BD779228D5C5500AF5741 /* dl_background@2x.png in Resources */,
 				72DE594673683493585528C34239F4BD /* img_login_phone@2x.png in Resources */,
 				C4F322DEE07F90B96E2096C18B3B1C5F /* img_login_phone@3x.png in Resources */,
@@ -3935,6 +3945,7 @@
 				52C2A4BAB66117108602AE2FCFF7E4F8 /* img_houseManage@2x.png in Resources */,
 				AD664200B82EA1E76DFB75014A64576E /* img_houseManage@3x.png in Resources */,
 				F629B1D5486E47D934E5E4999ABC0DE9 /* img_houseSelect.png in Resources */,
+				36FE2CE522AE090C00B99C54 /* netWarning_icon@3x.png in Resources */,
 				63AEAFFB11F800B54327E6012435A1D6 /* img_houseSelect@2x.png in Resources */,
 				BB1BD748228D5C5500AF5741 /* img_switch2_on@3x.png in Resources */,
 				42B2D54AA877D801A679D39509CDE09F /* img_houseSelect@3x.png in Resources */,
@@ -4000,6 +4011,7 @@
 				8872F3E2190365546BA7CE6F9CB23238 /* img_mine_logout@2x.png in Resources */,
 				BB1BD75E228D5C5500AF5741 /* img_plugView_off@2x.png in Resources */,
 				6BD277FDBD3712DE61296F981A1C277F /* img_mine_logout@3x.png in Resources */,
+				36FE2CE422AE090C00B99C54 /* netWarning_icon@2x.png in Resources */,
 				36FDB0A922A5320600E6E7A8 /* jienuo__58@2x.png in Resources */,
 				16606DF0DC3EBD748C3E5292D1642AF2 /* img_mine_wechat.png in Resources */,
 				97F60EC343D324B213AEFB890F4BFA5C /* img_mine_wechat@2x.png in Resources */,
@@ -4245,7 +4257,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
@@ -4274,7 +4286,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6C249BF1E8EE4C76AD977671872A840E /* [CP] Check Pods Manifest.lock */ = {
@@ -4303,7 +4315,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
@@ -4332,7 +4344,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh\"\n";
 		};
 		C977EB57D9D3CC9695719955C99AF81B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -11,6 +11,7 @@
 #import "RegisterController.h"
 #import "ThermostatController.h"
 #import "DeviceSetRoomController.h"
+#import <Bugly/Bugly.h>
 
 @interface AppDelegate ()
 
@@ -32,7 +33,11 @@
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     
+    //错误日志上报
+    [Bugly startWithAppId:@"3db3fec3e2"];
+    
     return YES;
+    
 }
 
 

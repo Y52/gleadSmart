@@ -57,7 +57,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFourSwitchUI) name:@"refreshMulSwitchUI" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rabbitMQSwitchStatusUpdate:) name:@"rabbitMQSwitchStatusUpdate" object:nil];
-    
+    [self getSwitchStatus];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -199,7 +199,7 @@
         needShieldRabbitMQCount--;
         return;
     }
-    
+    NSLog(@"sdsfd as");
     NSDictionary *userInfo = [notification userInfo];
     DeviceModel *device = [userInfo objectForKey:@"device"];
     NSNumber *on = [userInfo objectForKey:@"on"];

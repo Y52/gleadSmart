@@ -92,7 +92,7 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     
     NSDictionary *parameters = @{@"name":cell.inputTF.text,@"houseUid":self.houseUid};
-    
+    NSLog(@"%@",parameters);
     [manager POST:url parameters:parameters progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
               NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
@@ -108,7 +108,7 @@ NSString *const CellIdentifier_addRoomsText = @"addRoomsText";
                   room.name = cell.inputTF.text;
                   room.houseUid = self.houseUid;
                   room.sortId = self.sortId;
-                  [[Database shareInstance] insertNewRoom:room];
+                  //[[Database shareInstance] insertNewRoom:room];
               }else{
                   [NSObject showHudTipStr:LocalString(@"添加房间失败")];
               }
