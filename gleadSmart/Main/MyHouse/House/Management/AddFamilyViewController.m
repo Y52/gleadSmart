@@ -24,6 +24,8 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
 
 @implementation AddFamilyViewController{
     NSString *name;
+    NSString *province;
+    NSString *city;
     NSNumber *lon;
     NSNumber *lat;
     NSMutableArray *checkedRoomArray;
@@ -213,6 +215,8 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
                 NSLog(@"11111%@",house.location);
                 self->lon = house.lon;
                 self->lat = house.lat;
+                self->province = house.province;
+                self->city = house.city;
             };
             [self presentViewController:locaVC animated:YES completion:nil];
         }
@@ -313,8 +317,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
         NSDictionary *dic = @{@"name":self->checkedRoomArray[i]};
         [rooms addObject:dic];
     }
-    NSDictionary *parameters = @{@"name":self->name,@"lon":self->lon,@"lat":self->lat,@"rooms":rooms};
-    
+    NSDictionary *parameters = @{@"name":self->name,@"lon":self->lon,@"lat":self->lat,@"rooms":rooms,@"province":self->province,@"city":self->city};
     NSString *url = [NSString stringWithFormat:@"%@/api/house",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
 

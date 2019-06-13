@@ -854,10 +854,10 @@ static int noUserInteractionHeartbeat = 0;
     NSMutableArray *homeList = [db queryRoomsWith:db.currentHouse.houseUid];
     if (homeList.count <= 0) {
         [NSObject showHudTipStr:LocalString(@"当前家庭还没有添加房间，请尽快添加")];
-        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":db.currentHouse.houseUid,@"houseUid":db.currentHouse.houseUid};
+        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":db.currentHouse.houseUid,@"houseUid":db.currentHouse.houseUid,@"companyId":@"000001"};
     }else{
         RoomModel *room = homeList[0];//将新设备插入到家庭第一个房间
-        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":room.roomUid,@"houseUid":db.currentHouse.houseUid};
+        parameters = @{@"type":device.type,@"mac":device.mac,@"name":device.name,@"roomUid":room.roomUid,@"houseUid":db.currentHouse.houseUid,@"companyId":@"000001"};
     }
     NSLog(@"%@",parameters);
     

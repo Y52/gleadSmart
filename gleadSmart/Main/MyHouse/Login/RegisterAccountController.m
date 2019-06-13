@@ -238,7 +238,7 @@ static float HEIGHT_CELL = 50.f;
     
     NSDictionary *parameters = [[NSDictionary alloc] init];
     if ([NSString validateMobile:_phone] && _code.length == 6 && _pwText.length >= 6 && [_pwText isEqualToString:_pwConText]){
-        parameters = @{@"mobile":_phone,@"password":_pwText,@"code":_code};
+        parameters = @{@"mobile":_phone,@"password":_pwText,@"code":_code,@"companyId":@"000001"};
     }else{
         [NSObject showHudTipStr:LocalString(@"注册用户失败，请检查您填写的信息")];
         return;

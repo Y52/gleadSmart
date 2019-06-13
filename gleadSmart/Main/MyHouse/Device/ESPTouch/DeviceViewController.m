@@ -420,7 +420,7 @@ NSString *const CellIdentifier_device = @"CellID_device";
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",[Database shareInstance].token] forHTTPHeaderField:@"Authorization"];
     [manager.requestSerializer setValue:[Database shareInstance].user.userId forHTTPHeaderField:@"userId"];
-    NSDictionary *parameters = @{@"mac":device.mac,@"name":device.name,@"type":@0,@"houseUid":[Database shareInstance].currentHouse.houseUid};
+    NSDictionary *parameters = @{@"mac":device.mac,@"name":device.name,@"type":@0,@"houseUid":[Database shareInstance].currentHouse.houseUid,@"companyId":@"000001"};
     
     NSString *url = [NSString stringWithFormat:@"%@/api/device",httpIpAddress];
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];

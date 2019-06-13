@@ -143,6 +143,8 @@
 - (void)didGetAddressFromPickerViewWithProvinceName:(NSString *)provinceName cityName:(NSString *)cityName countyName:(NSString *)countyName streetName:(NSString *)streetName{
     NSString *addr = [NSString stringWithFormat:@"%@%@%@",provinceName,cityName,countyName];
     house.location = addr;
+    house.province =provinceName;
+    house.city = cityName;
     [_geocodel geocodeAddressString:addr completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *placemark=[placemarks firstObject];
         
