@@ -9,6 +9,8 @@
 #import "PlugOutletElectricityController.h"
 #import "DeviceSettingController.h"
 #import "PlugOutleDatatStatisticsCell.h"
+#import "ElectricitySectionModel.h"
+#import "ElectricityCellModel.h"
 
 NSString *const CellIdentifier_PlugOutleDatatStatistics = @"CellID_PlugOutleDatatStatistics";
 static float HEIGHT_CELL = 44.f;
@@ -34,12 +36,24 @@ static float HEIGHT_HEADER = 30.f;
 
 @property (strong, nonatomic) UITableView *timeTableView;
 
+@property (nonatomic, strong) NSMutableArray *electricityInfos;
 
 @end
 
 @implementation PlugOutletElectricityController
 
 #pragma mark - life cycle
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        if (!self.electricityInfos) {
+            self.electricityInfos = [[NSMutableArray alloc] init];
+        }
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithHexString:@"EAE9E8"].CGColor;
@@ -52,6 +66,7 @@ static float HEIGHT_HEADER = 30.f;
     self.listView = [self listView];
     self.timeTableView = [self timeTableView];
     [self getElectricityBySocket];
+    [self getDevicemonthElectricityStatistics];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -59,7 +74,6 @@ static float HEIGHT_HEADER = 30.f;
     [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getElectricityValue:) name:@"getElectricityValue" object:nil];
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -322,60 +336,95 @@ static float HEIGHT_HEADER = 30.f;
     return _timeTableView;
 }
 
+#pragma mark - Actions
+/*
+ *获取设备每年的月电量统计
+ */
+- (void)getDevicemonthElectricityStatistics{
+    [SVProgressHUD show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/device/electric/year?mac=%@",httpIpAddress,self.device.mac];
+    
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            if ([[responseDic objectForKey:@"data"] isKindOfClass:[NSArray class]] && [[responseDic objectForKey:@"data"] count] > 0) {
+                
+                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    
+                    ElectricitySectionModel *model = [[ElectricitySectionModel alloc] init];
+                    model.year = [obj objectForKey:@"year"];
+                    
+                    NSMutableArray *array = [[NSMutableArray alloc] init];
+                    [[obj objectForKey:@"deviceElectrics"] enumerateObjectsUsingBlock:^(id  _Nonnull obj1, NSUInteger idx, BOOL * _Nonnull stop) {
+                        ElectricityCellModel *cell = [[ElectricityCellModel alloc] init];
+                        cell.month = [obj1 objectForKey:@"month"];
+                        cell.value = [obj1 objectForKey:@"value"];
+                        [array addObject:cell];
+                    }];
+                    
+                    model.cellArray = [array copy];
+                    [self.electricityInfos addObject:model];
+                }];
+                
+            }
+            //[Database shareInstance].electrtyArray = self.electricityInfos;
+            [self.timeTableView reloadData];
+        }else{
+            [NSObject showHudTipStr:LocalString(@"获取电量信息失败")];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [NSObject showHudTipStr:@"从服务器获取信息失败,请检查网络状况"];
+        });
+    }];
+    
+}
+
 #pragma mark - UITableView delegate&datasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.electricityInfos.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+   ElectricitySectionModel *model = self.electricityInfos[section];
+    return model.cellArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    switch (indexPath.section) {
-        case 0:
-        {
-            PlugOutleDatatStatisticsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutleDatatStatistics];
-            if (cell == nil) {
-                cell = [[PlugOutleDatatStatisticsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutleDatatStatistics];
-            }
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
-            if (indexPath.row == 0) {
-                cell.leftName.text = LocalString(@"二月");
-                cell.rightName.text = LocalString(@"3.19");
-            }
-            if (indexPath.row == 1) {
-                cell.leftName.text = LocalString(@"一月");
-                cell.rightName.text = LocalString(@"3.11");
-            }
-            return cell;
-        }
-            break;
-            
-        default:
-        {
-            PlugOutleDatatStatisticsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutleDatatStatistics];
-            if (cell == nil) {
-                cell = [[PlugOutleDatatStatisticsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutleDatatStatistics];
-            }
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            if (indexPath.row == 0) {
-                cell.leftName.text = LocalString(@"二月");
-                cell.rightName.text = LocalString(@"3.19");
-            }
-            if (indexPath.row == 1) {
-                cell.leftName.text = LocalString(@"一月");
-                cell.rightName.text = LocalString(@"3.11");
-            }
-            
-            return cell;
-        }
-            break;
-            
+    PlugOutleDatatStatisticsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier_PlugOutleDatatStatistics];
+    if (cell == nil) {
+        cell = [[PlugOutleDatatStatisticsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier_PlugOutleDatatStatistics];
     }
+    ElectricitySectionModel *section = self.electricityInfos[indexPath.section];
+    ElectricityCellModel *model = section.cellArray[indexPath.row];
+   
+    cell.leftName.text = [NSString stringWithFormat:@"%d",[model.month intValue]];
+    cell.rightName.text = [NSString stringWithFormat:@"%d",[model.value intValue]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
     
 }
 
@@ -394,50 +443,21 @@ static float HEIGHT_HEADER = 30.f;
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT_HEADER)];
     headerView.layer.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1].CGColor;
     
-    switch (section) {
-        case 0:
-        {
-            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT_HEADER)];
-            textLabel.textColor = [UIColor colorWithHexString:@"999999"];
-            textLabel.font = [UIFont systemFontOfSize:13.f];
-            textLabel.textAlignment = NSTextAlignmentLeft;
-            textLabel.backgroundColor = [UIColor clearColor];
-            [headerView addSubview:textLabel];
-            textLabel.text = LocalString(@"2019年");
-            
-            [textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(80, 13));
-                make.centerY.equalTo(headerView.mas_centerY);
-                make.left.equalTo(headerView.mas_left).offset(20);
-            }];
-            
-            return headerView;
-        }
-            break;
-        case 1:
-        {
-            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT_HEADER + HEIGHT_CELL * 2 )];
-            textLabel.textColor = [UIColor colorWithHexString:@"999999"];
-            textLabel.font = [UIFont systemFontOfSize:13.f];
-            textLabel.textAlignment = NSTextAlignmentLeft;
-            textLabel.backgroundColor = [UIColor clearColor];
-            [headerView addSubview:textLabel];
-            textLabel.text = LocalString(@"2018年");
-            
-            [textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(120, 13));
-                make.centerY.equalTo(headerView.mas_centerY);
-                make.left.equalTo(headerView.mas_left).offset(20);
-            }];
-            
-            return headerView;
-        }
-            break;
-            
-        default:
-            
-            break;
-    }
+    ElectricitySectionModel *yearSection = self.electricityInfos[section];
+    
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT_HEADER)];
+    textLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    textLabel.font = [UIFont systemFontOfSize:13.f];
+    textLabel.textAlignment = NSTextAlignmentLeft;
+    textLabel.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:textLabel];
+    textLabel.text = [NSString stringWithFormat:@"%@",yearSection.year];
+    
+    [textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(80, 13));
+        make.centerY.equalTo(headerView.mas_centerY);
+        make.left.equalTo(headerView.mas_left).offset(20);
+    }];
     return headerView;
     
 }

@@ -247,6 +247,10 @@
 		360FD02122967E6D00505EA4 /* img_plug_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 360FD01F22967E6D00505EA4 /* img_plug_icon@2x.png */; };
 		360FD02222967EC200505EA4 /* img_plug_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 360FD01E22967E6D00505EA4 /* img_plug_icon@3x.png */; };
 		360FD02322967EC500505EA4 /* img_plug_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 360FD01F22967E6D00505EA4 /* img_plug_icon@2x.png */; };
+		362D9EC622B3A602001C8E71 /* ElectricitySectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 362D9EC522B3A602001C8E71 /* ElectricitySectionModel.m */; };
+		362D9EC922B3A62E001C8E71 /* ElectricityCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 362D9EC822B3A62E001C8E71 /* ElectricityCellModel.m */; };
+		362D9ECA22B3A63E001C8E71 /* ElectricitySectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 362D9EC522B3A602001C8E71 /* ElectricitySectionModel.m */; };
+		362D9ECB22B3A641001C8E71 /* ElectricityCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 362D9EC822B3A62E001C8E71 /* ElectricityCellModel.m */; };
 		367F6F0022941FFF00DFBE9B /* img_Lamp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8011E1C077F398A68FECF74D5B9B4FB2 /* img_Lamp@2x.png */; };
 		367F6F012294200200DFBE9B /* img_Lamp.png in Resources */ = {isa = PBXBuildFile; fileRef = C246B5DD0E31E4F0D2ECA462E78EBD55 /* img_Lamp.png */; };
 		367F6F022294200500DFBE9B /* img_Lamp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E18ABDAF0D686E483EC93AE0DE9C657 /* img_Lamp@3x.png */; };
@@ -1326,6 +1330,10 @@
 		3604B4F3227F06BC001F6382 /* ThreeSwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeSwitchController.m; sourceTree = "<group>"; };
 		360FD01E22967E6D00505EA4 /* img_plug_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plug_icon@3x.png"; sourceTree = "<group>"; };
 		360FD01F22967E6D00505EA4 /* img_plug_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_plug_icon@2x.png"; sourceTree = "<group>"; };
+		362D9EC422B3A602001C8E71 /* ElectricitySectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElectricitySectionModel.h; sourceTree = "<group>"; };
+		362D9EC522B3A602001C8E71 /* ElectricitySectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ElectricitySectionModel.m; sourceTree = "<group>"; };
+		362D9EC722B3A62E001C8E71 /* ElectricityCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElectricityCellModel.h; sourceTree = "<group>"; };
+		362D9EC822B3A62E001C8E71 /* ElectricityCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ElectricityCellModel.m; sourceTree = "<group>"; };
 		366389A83BAA2B2AD86C88E118E01D4E /* DelayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayModel.h; sourceTree = "<group>"; };
 		367AB32567CA6F853528C79179A99D01 /* valveSwitch_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valveSwitch_normal.png; sourceTree = "<group>"; };
 		36844A2D229290F700330C74 /* MulSwitchEditTimingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MulSwitchEditTimingController.h; sourceTree = "<group>"; };
@@ -2265,6 +2273,10 @@
 				DAF9E87E99BF9477F6E7F27C5834E583 /* UserModel.m */,
 				F50C719FE252DBC679F319AD3FF13108 /* alarmModel.h */,
 				13AAD2171B289C5B5F51EEC2A7DE00C0 /* alarmModel.m */,
+				362D9EC422B3A602001C8E71 /* ElectricitySectionModel.h */,
+				362D9EC522B3A602001C8E71 /* ElectricitySectionModel.m */,
+				362D9EC722B3A62E001C8E71 /* ElectricityCellModel.h */,
+				362D9EC822B3A62E001C8E71 /* ElectricityCellModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4484,6 +4496,7 @@
 				290CFE921220F2AE117819F07432F36C /* NTCWirelessValveController.m in Sources */,
 				FFBD7407C797F8E5DDF61A32BCE938D7 /* Network.m in Sources */,
 				DD07650A6768DCAFDE37041F10A5FBF7 /* NoHouseAddController.m in Sources */,
+				362D9ECA22B3A63E001C8E71 /* ElectricitySectionModel.m in Sources */,
 				2A8FE5A487622702070E45CD9D462975 /* NoHouseBridgingController.m in Sources */,
 				B4A2B3CCD68998CD02654CB8B3A701D9 /* NodeButton.m in Sources */,
 				5C1D3D00FDE211844F11861CA4DB7AB3 /* NodeDetailCell.m in Sources */,
@@ -4540,6 +4553,7 @@
 				BBAD0D45229D14F5009D4F42 /* PlugOutletEditDelayController.m in Sources */,
 				BB93C9EB228BEC6E00B0DB6B /* MulSwitchWeekSelectCell.m in Sources */,
 				BB93C9EC228BECAC00B0DB6B /* DeviceSettingCell.m in Sources */,
+				362D9ECB22B3A641001C8E71 /* ElectricityCellModel.m in Sources */,
 				82716802731369A6C4B3F99634804C93 /* ThermostSettingController.m in Sources */,
 				2EFB068B429F1ABF3784BB0144733CCF /* ThermostatAddTimerController.m in Sources */,
 				BB93C9E8228BEC6700B0DB6B /* MulSwitchAddTimingCell.m in Sources */,
@@ -4582,6 +4596,7 @@
 				495BB39576B86CBA7A009ED4242A5085 /* APProcessController.m in Sources */,
 				586E00FEDB08C6B20A1B805149C5FB82 /* APStatusConfirmController.m in Sources */,
 				3F22DBD8270B8A288D5B77C52AC7E423 /* AccountHeaderCell.m in Sources */,
+				362D9EC922B3A62E001C8E71 /* ElectricityCellModel.m in Sources */,
 				776892966EE36F009805FFCA24A05367 /* AccountViewController.m in Sources */,
 				2851F929D2B4CC053AEA9C05EBE12521 /* AddDeviceShareController.m in Sources */,
 				291FB34389886CC11273B24EFABB8702 /* AddFamilySelectCell.m in Sources */,
@@ -4741,6 +4756,7 @@
 				98F0D1BE7065A145FC96A313AA72CD76 /* UIButton+Common.m in Sources */,
 				C562DBCD04C87EEE0604A63D7B4EB417 /* UIColor+ColorChange.m in Sources */,
 				75F963399C5D950AEFE5E95A7E1A59ED /* UILabel+YBAttributeTextTapAction.m in Sources */,
+				362D9EC622B3A602001C8E71 /* ElectricitySectionModel.m in Sources */,
 				3604B4F6227F06BC001F6382 /* ThreeSwitchController.m in Sources */,
 				BB03341722A651F500EEEFD2 /* RoomButtonCollectCell.m in Sources */,
 				B3841F183F2A45433A614DD4E836CE7C /* UserModel.m in Sources */,
