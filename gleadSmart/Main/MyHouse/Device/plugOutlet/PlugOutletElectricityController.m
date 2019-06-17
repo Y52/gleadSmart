@@ -11,6 +11,7 @@
 #import "PlugOutleDatatStatisticsCell.h"
 #import "ElectricitySectionModel.h"
 #import "ElectricityCellModel.h"
+#import "PlugOutletElectricityCurveView.h"
 
 NSString *const CellIdentifier_PlugOutleDatatStatistics = @"CellID_PlugOutleDatatStatistics";
 static float HEIGHT_CELL = 44.f;
@@ -326,7 +327,7 @@ static float HEIGHT_HEADER = 30.f;
             tableView.scrollEnabled = YES;
             
             [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(ScreenWidth, yAutoFit(ScreenHeight - 320)));
+                make.size.mas_equalTo(CGSizeMake(ScreenWidth, yAutoFit(ScreenHeight - 300)));
                 make.top.equalTo(self.listView.mas_bottom).offset(yAutoFit(10.f));
                 make.centerX.equalTo(self.view.mas_centerX);
             }];
@@ -341,7 +342,7 @@ static float HEIGHT_HEADER = 30.f;
  *获取设备每年的月电量统计
  */
 - (void)getDevicemonthElectricityStatistics{
-    [SVProgressHUD show];
+
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     Database *db = [Database shareInstance];
@@ -382,20 +383,15 @@ static float HEIGHT_HEADER = 30.f;
                     model.cellArray = [array copy];
                     [self.electricityInfos addObject:model];
                 }];
-                
             }
-            //[Database shareInstance].electrtyArray = self.electricityInfos;
             [self.timeTableView reloadData];
         }else{
             [NSObject showHudTipStr:LocalString(@"获取电量信息失败")];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
             [NSObject showHudTipStr:@"从服务器获取信息失败,请检查网络状况"];
         });
     }];
@@ -421,7 +417,7 @@ static float HEIGHT_HEADER = 30.f;
     ElectricitySectionModel *section = self.electricityInfos[indexPath.section];
     ElectricityCellModel *model = section.cellArray[indexPath.row];
    
-    cell.leftName.text = [NSString stringWithFormat:@"%d",[model.month intValue]];
+    cell.leftName.text = [NSString stringWithFormat:@"%d%@",[model.month intValue],@"月"];
     cell.rightName.text = [NSString stringWithFormat:@"%d",[model.value intValue]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
@@ -431,6 +427,14 @@ static float HEIGHT_HEADER = 30.f;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    PlugOutletElectricityCurveView *DetailsVC = [[PlugOutletElectricityCurveView alloc] init];
+    DetailsVC.device = self.device;
+    ElectricitySectionModel *section = self.electricityInfos[indexPath.section];
+    ElectricityCellModel *model = section.cellArray[indexPath.row];
+    DetailsVC.month = [NSString stringWithFormat:@"%d",[model.month intValue]];
+    DetailsVC.monthElectricity = [NSString stringWithFormat:@"%d",[model.value intValue]];
+    DetailsVC.year = [NSString stringWithFormat:@"%d",[section.year intValue]];
+    [self.navigationController pushViewController:DetailsVC animated:YES];
     
 }
 

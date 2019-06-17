@@ -2123,7 +2123,7 @@ static int noUserInteractionHeartbeat = 0;
                         NSString *voltage = [[NSString alloc] initWithFormat:@"%.1f",([voltage1 intValue]*256 + [voltage2 intValue]) * 0.1];
                         NSString *current = [[NSString alloc] initWithFormat:@"%d",[current1 intValue]*256 + [current2 intValue]];
                         NSString *power = [[NSString alloc] initWithFormat:@"%d",[power1 intValue]*256 + [power2 intValue]];
-                        NSString *todayEnergyUsed = [[NSString alloc] initWithFormat:@"%.3f",([todayEnergyUsed1 intValue]*65536 + [todayEnergyUsed2 intValue]*4096 +[todayEnergyUsed3 intValue]*256 +[todayEnergyUsed4 intValue]) *0.001];
+                        NSString *todayEnergyUsed = [[NSString alloc] initWithFormat:@"%.2f",([todayEnergyUsed1 intValue]*65536 + [todayEnergyUsed2 intValue]*4096 +[todayEnergyUsed3 intValue]*256 +[todayEnergyUsed4 intValue]) *0.001];
                         [dataDic setObject:voltage forKey:@"Voltage"];
                         [dataDic setObject:current forKey:@"Current"];
                         [dataDic setObject:power forKey:@"Power"];

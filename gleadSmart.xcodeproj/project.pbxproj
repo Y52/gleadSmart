@@ -276,6 +276,8 @@
 		36844A502292B19C00330C74 /* img_switch_icon_4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36844A3B2292A36800330C74 /* img_switch_icon_4@3x.png */; };
 		3693E470DBEA5E27447C6154780EDB16 /* MemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A783708AE47329E84A32057E8E88B2C5 /* MemberModel.m */; };
 		36BD5C934295C3C0C24A86FF8759B110 /* PasswordLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2FA0747A658151A6991FB381B10270 /* PasswordLoginController.m */; };
+		36C4966422B7296D00A1304E /* PlugOutletElectricityCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C4966322B7296D00A1304E /* PlugOutletElectricityCurveView.m */; };
+		36C4966522B7299200A1304E /* PlugOutletElectricityCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C4966322B7296D00A1304E /* PlugOutletElectricityCurveView.m */; };
 		36E241C8FFFCDB30079685560310395A /* img_account_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B52A8A238C321BC9DFD0173E7E330CC /* img_account_header@2x.png */; };
 		36F6C608FCD6FCDBBF4D4639C55EBEBA /* img_thermostat_on.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22850D9DCDC939D219DB689FE5E6CD /* img_thermostat_on.png */; };
 		36FDB07E22A4B87800E6E7A8 /* AAProgressCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */; };
@@ -1348,6 +1350,8 @@
 		36844A3A2292A36800330C74 /* img_switch_icon_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch_icon_3@2x.png"; sourceTree = "<group>"; };
 		36844A3B2292A36800330C74 /* img_switch_icon_4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch_icon_4@3x.png"; sourceTree = "<group>"; };
 		36844A3C2292A36800330C74 /* img_switch_icon_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch_icon_2@3x.png"; sourceTree = "<group>"; };
+		36C4966222B7296D00A1304E /* PlugOutletElectricityCurveView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletElectricityCurveView.h; sourceTree = "<group>"; };
+		36C4966322B7296D00A1304E /* PlugOutletElectricityCurveView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletElectricityCurveView.m; sourceTree = "<group>"; };
 		36C9151A73CDCC7A44897EB31411F3F9 /* img_nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_nav_back.png; sourceTree = "<group>"; };
 		36FDB07C22A4B87800E6E7A8 /* AAProgressCircleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAProgressCircleView.h; sourceTree = "<group>"; };
 		36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAProgressCircleView.m; sourceTree = "<group>"; };
@@ -3247,6 +3251,8 @@
 				B4C4AF5950797B161A9613034FC0FE45 /* PlugOutletAddDelayController.m */,
 				36018A992294E7DD00EBC093 /* PlugOutletElectricityController.h */,
 				36018A9A2294E7DD00EBC093 /* PlugOutletElectricityController.m */,
+				36C4966222B7296D00A1304E /* PlugOutletElectricityCurveView.h */,
+				36C4966322B7296D00A1304E /* PlugOutletElectricityCurveView.m */,
 			);
 			path = plugOutlet;
 			sourceTree = "<group>";
@@ -4281,6 +4287,7 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/WMPageController/WMPageController.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -4295,6 +4302,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMPageController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4442,6 +4450,7 @@
 				32D03E283F71F215477C312ED6BEE1D2 /* ESPTouchTask.m in Sources */,
 				F3806CE462444A800FC35FDB9E3E66AC /* ESPTouchTaskParameter.m in Sources */,
 				A6D8CA0DFF3ED51BE7944A44E3A3BAC9 /* ESPUDPSocketClient.m in Sources */,
+				36C4966522B7299200A1304E /* PlugOutletElectricityCurveView.m in Sources */,
 				13AC1D5B141E342E1DB1F67A2BA5E935 /* ESPUDPSocketServer.m in Sources */,
 				73CDDFD5790C6791625EC42CF38DB769 /* ESP_ByteUtil.m in Sources */,
 				B1AC6D0D696CEF3C3EC0FFBC2E8C02A0 /* ESP_CRC8.m in Sources */,
@@ -4701,6 +4710,7 @@
 				36018A9B2294E7DD00EBC093 /* PlugOutletElectricityController.m in Sources */,
 				F8803B519C2915072A84CD07F7D5C9EA /* PhoneTFCell.m in Sources */,
 				16A08720656B381545EEF8207BF1F19F /* PhoneVerifyCell.m in Sources */,
+				36C4966422B7296D00A1304E /* PlugOutletElectricityCurveView.m in Sources */,
 				0631F2634997620D326B38D7AA05E7E6 /* PlugOutletAddDelayCell.m in Sources */,
 				2E36A554D6180CCE48D956A3256958D1 /* PlugOutletAddDelayController.m in Sources */,
 				6ECF978C166691C1BB6622F51D98FC71 /* PlugOutletAddTimingCell.m in Sources */,
