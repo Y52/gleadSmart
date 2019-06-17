@@ -21,9 +21,25 @@
 ///@brief 曲线图参数
 @property (nonatomic, strong) LineChartView *chartView;
 
+@property (nonatomic, strong) NSMutableArray *dateArray;
+@property (nonatomic, strong) NSMutableArray *valueArray;
+
 @end
 
 @implementation PlugOutletElectricityCurveView
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        if (!self.dateArray) {
+            self.dateArray = [[NSMutableArray alloc] init];
+        }
+        if (!self.valueArray) {
+            self.valueArray = [[NSMutableArray alloc] init];
+        }
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,6 +52,7 @@
     self.degreeLabel = [self degreeLabel];
     self.rightElectricityLabel = [self rightElectricityLabel];
     self.chartView = [self chartView];
+    [self getElectricityCurveData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -143,62 +160,23 @@
         [self.view addSubview:_chartView];
         
         [_chartView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth, yAutoFit(ScreenHeight - 200)));
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth, yAutoFit(ScreenHeight - 350)));
             make.centerX.equalTo(self.electricityImage.mas_centerX);
             make.top.equalTo(self.electricityBackgroundView.mas_bottom).offset(yAutoFit(20.f));
         }];
         
-        UILabel *leftLabel = [[UILabel alloc] init];
-        //leftLabel.text = [DataBase shareDataBase].setting.tempUnit;
-        leftLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        leftLabel.textColor = [UIColor colorWithRed:184/255.0 green:190/255.0 blue:204/255.0 alpha:1];
-        leftLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:leftLabel];
-        
-        UILabel *rightLabel = [[UILabel alloc] init];
-        //rightLabel.text = [NSString stringWithFormat:@"%@/min",[DataBase shareDataBase].setting.tempUnit];
-        rightLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        rightLabel.textColor = [UIColor colorWithRed:184/255.0 green:190/255.0 blue:204/255.0 alpha:1];
-        rightLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:rightLabel];
-        
-        UILabel *bottomLabel = [[UILabel alloc] init];
-        bottomLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        bottomLabel.textColor = [UIColor colorWithRed:184/255.0 green:190/255.0 blue:204/255.0 alpha:1];
-        bottomLabel.text = LocalString(@"(min)");
-        [self.view addSubview:bottomLabel];
-        
-        [leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(22, 15));
-            make.left.equalTo(self.chartView.mas_left);
-            make.bottom.equalTo(self.chartView.mas_top).offset(3);
-        }];
-        [rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(47, 12));
-            make.right.equalTo(self.chartView.mas_right);
-            make.bottom.equalTo(self.chartView.mas_top).offset(3);
-        }];
-        [bottomLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(29, 12));
-            make.left.equalTo(self.chartView.mas_right).offset(-15);
-            make.bottom.equalTo(self.chartView.mas_bottom);
-        }];
-        
         _chartView.noDataText = LocalString(@"暂无数据");
         _chartView.delegate = self;
-        
+        _chartView.rightAxis.enabled = NO;//关闭右坐标
         _chartView.chartDescription.enabled = NO;
-        
         _chartView.dragEnabled = YES;
-        [_chartView setScaleEnabled:YES];//缩放
-        [_chartView setScaleYEnabled:NO];
-        
-        _chartView.drawGridBackgroundEnabled = NO;//网格线
+        _chartView.scaleEnabled = YES;//缩放
+        _chartView.scaleYEnabled = NO;
+        _chartView.drawGridBackgroundEnabled = YES;//网格线
         _chartView.pinchZoomEnabled = YES;
         //_chartView.doubleTapToZoomEnabled = NO;//取消双击缩放
         //_chartView.dragDecelerationEnabled = NO;//拖拽后是否有惯性效果
         //_chartView.dragDecelerationFrictionCoef = 0;//拖拽后惯性效果的摩擦系数(0~1)，数值越小，惯性越不明显
-        
         _chartView.backgroundColor = [UIColor clearColor];
         
         _chartView.legend.enabled = NO;//不显示图例说明
@@ -218,33 +196,28 @@
         xAxis.drawGridLinesEnabled = NO;
         xAxis.drawAxisLineEnabled = NO;
         xAxis.granularityEnabled = YES;
-        xAxis.labelPosition = XAxisLabelPositionBottom;
+        xAxis.avoidFirstLastClippingEnabled = YES; //避免x轴的文字显示不全
+        xAxis.labelPosition = XAxisLabelPositionBottom;//一般把x轴放在底部
         xAxis.valueFormatter = self;
         xAxis.axisMinimum = 0;
-        //xAxis.axisMaximum = 60 * [DataBase shareDataBase].setting.timeAxis;
-        //[xAxis setLabelCount:[DataBase shareDataBase].setting.timeAxis + 1];
-        //xAxisMax = [DataBase shareDataBase].setting.timeAxis;
-        //xAxis.axisRange = 60 * [DataBase shareDataBase].setting.timeAxis;
+        xAxis.axisMaximum = 5;
+        xAxis.axisRange = 10;
         xAxis.granularity = 1;
-        [_chartView setVisibleXRangeWithMinXRange:60 maxXRange:UI_IS_IPHONE5?500:600];//修改缩小放大最多显示数量
-        //避免x轴的文字显示不全
-        xAxis.avoidFirstLastClippingEnabled = YES;
-        [xAxis setLabelPosition:XAxisLabelPositionBottom]; //一般把x轴放在底部
+        [_chartView setVisibleXRangeWithMinXRange:1 maxXRange:UI_IS_IPHONE5?500:600];//修改缩小放大最多显示数量
         
         ChartYAxis *leftAxis = _chartView.leftAxis;
         leftAxis.labelTextColor = [UIColor colorWithRed:184/255.0 green:190/255.0 blue:204/255.0 alpha:1];
         leftAxis.labelFont = [UIFont fontWithName:@"Avenir-Light" size:12];
-        leftAxis.axisMaximum = [NSString diffTempUnitStringWithTemp:5 - 0.5];
-        leftAxis.axisMinimum = [NSString diffTempUnitStringWithTemp:15 - 0.5];
-        leftAxis.axisMinimum = 50.0;
-        leftAxis.spaceTop = 30.f;
+        leftAxis.axisMaximum = 20;
+        leftAxis.axisMinimum = 0;
+        leftAxis.spaceTop = 10.f;
         leftAxis.drawGridLinesEnabled = YES;
         leftAxis.gridLineWidth = 0.6f;
         leftAxis.gridColor = [UIColor colorWithHexString:@"EBEDF0"];
-        //leftAxis.gridLineDashLengths = @[@5.f,@5.f];//虚线
-        leftAxis.drawZeroLineEnabled = NO;
+        leftAxis.gridLineDashLengths = @[@5.f,@5.f];//虚线
+        leftAxis.drawZeroLineEnabled = YES;
         leftAxis.granularityEnabled = YES;
-        leftAxis.granularity = 0;
+        leftAxis.granularity = 2;
         
     }
     return _chartView;
@@ -267,12 +240,130 @@
 }
 
 - (void)chartTranslated:(ChartViewBase * _Nonnull)chartView dX:(CGFloat)dX dY:(CGFloat)dY{
-    //NSLog(@"图表移动");
+    NSLog(@"图表移动");
 }
 
 - (NSString *)stringForValue:(double)value axis:(ChartAxisBase * _Nullable)axis {
     //value从0开始，我要从1开始
-    return [NSString stringWithFormat:@"%d月",(int)value + 1];
+    return [NSString stringWithFormat:@"%@-%02d",self.month,(int)value + 1];
+}
+
+#pragma mark - Actions
+/*
+ *获取设备每年的月电量详情
+ */
+- (void)getElectricityCurveData{
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    Database *db = [Database shareInstance];
+    
+    //设置超时时间
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = yHttpTimeoutInterval;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/device/electric/month",httpIpAddress];
+    
+    NSDictionary *parameters = @{@"mac":self.device.mac,@"year":self.year,@"month":self.month};
+    
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:db.user.userId forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",db.token] forHTTPHeaderField:@"Authorization"];
+    [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
+        NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
+        NSString * daetr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"success:%@",daetr);
+        if ([[responseDic objectForKey:@"errno"] intValue] == 0) {
+            if ([[responseDic objectForKey:@"data"] isKindOfClass:[NSArray class]] && [[responseDic objectForKey:@"data"] count] > 0) {
+                
+                [[responseDic objectForKey:@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [self.dateArray addObject:[obj objectForKey:@"modifiedTime"]];
+                    [self.valueArray addObject:[obj objectForKey:@"value"]];
+                }];
+            }
+            //加载数据
+            [self setChartData];
+            NSLog(@"gsdfhgh%@",self.valueArray);
+        }else{
+            [NSObject showHudTipStr:LocalString(@"获取电量详细失败")];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NSObject showHudTipStr:@"从服务器获取信息失败,请检查网络状况"];
+        });
+    }];
+    
+}
+
+-(void) setChartData{
+    
+    if (!self.dateArray) {
+        self.dateArray = [[NSMutableArray alloc] init];
+    }
+    if (!self.valueArray) {
+        self.valueArray = [[NSMutableArray alloc] init];
+    }
+    NSMutableArray *yValue1 = [[NSMutableArray alloc] init];
+    //对于每个x轴对应的点，添加相应的数据
+//    for (int i = 0; i < 31; i++) {
+//        [self.dateArray addObject:[NSString stringWithFormat:@"%02d",i]];
+//    }
+    for (int i = 0; i < self.valueArray.count; i++)
+    {
+        double val = [self.valueArray[i] doubleValue];
+        double month = [self.dateArray[i] doubleValue];
+        [yValue1 addObject:[[ChartDataEntry alloc] initWithX:i y:val]]; //对应加入数据
+    }
+    
+    //三个数据集
+    LineChartDataSet *set1 = nil;
+    
+    if (self.chartView.data.dataSetCount > 0)
+    {
+        //数据集已经绑定过了，就直接为数据集设置数据
+        set1 = (LineChartDataSet *)_chartView.data.dataSets[0];
+        set1.values = yValue1;
+        [self.chartView.data notifyDataChanged];
+        [self.chartView notifyDataSetChanged];
+    }
+    else
+    {
+        //没有，则初始化数据集
+        set1 = [[LineChartDataSet alloc] initWithValues:yValue1 label:@""]; //第一套数据的数据和代表的值
+        set1.axisDependency = AxisDependencyLeft; //数据依赖的是左边的轴
+        [set1 setColor:[UIColor colorWithRed:52/255.f green:188/255.f blue:248/255.f alpha:1.f]]; //线的颜色
+        [set1 setCircleColor:[UIColor lightGrayColor]]; //折点的颜色
+        set1.lineWidth = 3.0; //线宽
+        set1.circleRadius = 3.0; //折点半径
+        set1.fillAlpha = 65/255.0;
+        set1.fillColor = [UIColor colorWithRed:52/255.f green:188/255.f blue:248/255.f alpha:1.f];
+        //这个控制的是，点击某个点之后的十字线的颜色，这里我不需要十字线
+        //  set1.highlightColor = [UIColor blueColor];
+        //去掉highlightColor的颜色，但还是有默认颜色，我只能将线宽设置为0
+        set1.highlightLineWidth = 0;  //这个控制的是，点击某个点之后的十字线的颜色，这里我不需要十字线(去掉highlightColor的颜色，但还是有默认颜色，我只能将线宽设置为0)
+        set1.drawCircleHoleEnabled = YES; //是否可以空心
+        set1.circleHoleRadius = 2.0; //设置折点空心圆角
+        set1.drawValuesEnabled = YES;//是否在拐点处显示数据
+    }
+    
+    NSMutableArray *dataSets = [[NSMutableArray alloc] init];
+    [dataSets addObject:set1];
+    
+    LineChartData *data = [[LineChartData alloc] initWithDataSets:dataSets];
+    //这里的颜色控制的是每个折点的颜色
+    data.valueTextColor = UIColor.redColor;
+    data.valueFont = [UIFont systemFontOfSize:9.f];
+    
+    //每个这点上是否显示数值
+    data.drawValues = YES;
+    
+    self.chartView.data = data;
 }
 
 @end
