@@ -278,6 +278,7 @@
 		36BD5C934295C3C0C24A86FF8759B110 /* PasswordLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2FA0747A658151A6991FB381B10270 /* PasswordLoginController.m */; };
 		36C4966422B7296D00A1304E /* PlugOutletElectricityCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C4966322B7296D00A1304E /* PlugOutletElectricityCurveView.m */; };
 		36C4966522B7299200A1304E /* PlugOutletElectricityCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C4966322B7296D00A1304E /* PlugOutletElectricityCurveView.m */; };
+		36C4966922B766A100A1304E /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4966822B766A100A1304E /* Charts.swift */; };
 		36E241C8FFFCDB30079685560310395A /* img_account_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B52A8A238C321BC9DFD0173E7E330CC /* img_account_header@2x.png */; };
 		36F6C608FCD6FCDBBF4D4639C55EBEBA /* img_thermostat_on.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22850D9DCDC939D219DB689FE5E6CD /* img_thermostat_on.png */; };
 		36FDB07E22A4B87800E6E7A8 /* AAProgressCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */; };
@@ -1352,6 +1353,8 @@
 		36844A3C2292A36800330C74 /* img_switch_icon_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_switch_icon_2@3x.png"; sourceTree = "<group>"; };
 		36C4966222B7296D00A1304E /* PlugOutletElectricityCurveView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutletElectricityCurveView.h; sourceTree = "<group>"; };
 		36C4966322B7296D00A1304E /* PlugOutletElectricityCurveView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletElectricityCurveView.m; sourceTree = "<group>"; };
+		36C4966722B766A000A1304E /* gleadSmart-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gleadSmart-Bridging-Header.h"; sourceTree = "<group>"; };
+		36C4966822B766A100A1304E /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 		36C9151A73CDCC7A44897EB31411F3F9 /* img_nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_nav_back.png; sourceTree = "<group>"; };
 		36FDB07C22A4B87800E6E7A8 /* AAProgressCircleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAProgressCircleView.h; sourceTree = "<group>"; };
 		36FDB07D22A4B87800E6E7A8 /* AAProgressCircleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAProgressCircleView.m; sourceTree = "<group>"; };
@@ -2301,6 +2304,7 @@
 			children = (
 				BBAD0D46229D1504009D4F42 /* NSMutableArray+Common.h */,
 				BBAD0D47229D1504009D4F42 /* NSMutableArray+Common.m */,
+				36C4966622B7666000A1304E /* Charts */,
 				B377FF1067AC6387D96BF418F4CAAFAD /* TableView+Touch */,
 				D48BC7951D1046A31DFC13293A523331 /* UIButton */,
 				36FDB07B22A4B73E00E6E7A8 /* ProgressCircleView */,
@@ -2347,6 +2351,15 @@
 				DE8649ABE9163DAC2D8B855ACF17353E /* 87@2x.png */,
 			);
 			path = appIcon;
+			sourceTree = "<group>";
+		};
+		36C4966622B7666000A1304E /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				36C4966822B766A100A1304E /* Charts.swift */,
+				36C4966722B766A000A1304E /* gleadSmart-Bridging-Header.h */,
+			);
+			path = Charts;
 			sourceTree = "<group>";
 		};
 		36FDB07B22A4B73E00E6E7A8 /* ProgressCircleView */ = {
@@ -3432,6 +3445,7 @@
 					};
 					10ED717F3F9213F0CF58ABFF5B967FB2 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 						SystemCapabilities = {
 							com.apple.AccessWiFi = {
 								enabled = 1;
@@ -4722,6 +4736,7 @@
 				F57F9404DBD11847E930A079070E067A /* PlugOutletSettingCell.m in Sources */,
 				BBAD0D41229D0CBB009D4F42 /* NullSafe.m in Sources */,
 				C0114A9306015296485BB917530BB4AD /* PlugOutletSettingController.m in Sources */,
+				36C4966922B766A100A1304E /* Charts.swift in Sources */,
 				C3807EF4A61AC40C947838B77269F7F5 /* PlugOutletTimingController.m in Sources */,
 				3E35C52B2483FFEAA4EBD09CB8018809 /* PlugOutletWeekSelectCell.m in Sources */,
 				83D80B334D0A06787691229ECACAFB0D /* PlugOutletWeekSelectController.m in Sources */,
@@ -4885,6 +4900,7 @@
 		0E0B832339428BD9C2BC0C1A4F4AFC1D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
 				INFOPLIST_FILE = gleadSmartUITests/Info.plist;
@@ -4905,6 +4921,7 @@
 			baseConfigurationReference = 35C3CC0DEC8567BC97DF96DDF99C9123 /* Pods-gleadSmart.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -4929,6 +4946,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "OC_Category/Charts/gleadSmart-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -4967,6 +4986,7 @@
 		77033B19508133C21C03BDB87DB6251B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
 				INFOPLIST_FILE = gleadSmartUITests/Info.plist;
@@ -5044,6 +5064,7 @@
 		B76831E742F7FAB8E8A956A9A2CCCA22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;
@@ -5065,6 +5086,7 @@
 			baseConfigurationReference = A471D1DF535EB426AB9CADB8C5C85D22 /* Pods-gleadSmart.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -5089,6 +5111,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "OC_Category/Charts/gleadSmart-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -5096,6 +5121,7 @@
 		E765673B647AA4A032381616BE165180 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FAMV3D32N;

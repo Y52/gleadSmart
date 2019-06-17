@@ -418,7 +418,7 @@ static float HEIGHT_HEADER = 30.f;
     ElectricityCellModel *model = section.cellArray[indexPath.row];
    
     cell.leftName.text = [NSString stringWithFormat:@"%d%@",[model.month intValue],@"月"];
-    cell.rightName.text = [NSString stringWithFormat:@"%d",[model.value intValue]];
+    cell.rightName.text = [NSString stringWithFormat:@"%.2f",[model.value floatValue]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
     
@@ -432,7 +432,7 @@ static float HEIGHT_HEADER = 30.f;
     ElectricitySectionModel *section = self.electricityInfos[indexPath.section];
     ElectricityCellModel *model = section.cellArray[indexPath.row];
     DetailsVC.month = [NSString stringWithFormat:@"%d",[model.month intValue]];
-    DetailsVC.monthElectricity = [NSString stringWithFormat:@"%d",[model.value intValue]];
+    DetailsVC.monthElectricity = [NSString stringWithFormat:@"%.2f",[model.value floatValue]];
     DetailsVC.year = [NSString stringWithFormat:@"%d",[section.year intValue]];
     [self.navigationController pushViewController:DetailsVC animated:YES];
     
@@ -455,7 +455,7 @@ static float HEIGHT_HEADER = 30.f;
     textLabel.textAlignment = NSTextAlignmentLeft;
     textLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:textLabel];
-    textLabel.text = [NSString stringWithFormat:@"%@",yearSection.year];
+    textLabel.text = [NSString stringWithFormat:@"%@%@",yearSection.year,@"年"];
     
     [textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(80, 13));
