@@ -155,14 +155,12 @@
     if (!_chartView) {
         _chartView = [[LineChartView alloc] init];
         
-        //_chartView.frame = CGRectMake(yAutoFit(45+44)), yAutoFit(45+44), ScreenHeight - 87  - 44, ScreenWidth - 100);
-        
         [self.view addSubview:_chartView];
         
         [_chartView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(ScreenWidth, yAutoFit(ScreenHeight - 350)));
             make.centerX.equalTo(self.electricityImage.mas_centerX);
-            make.top.equalTo(self.electricityBackgroundView.mas_bottom).offset(yAutoFit(20.f));
+            make.top.equalTo(self.electricityBackgroundView.mas_bottom).offset(yAutoFit(10.f));
         }];
         
         _chartView.noDataText = LocalString(@"暂无数据");
@@ -173,6 +171,7 @@
         _chartView.scaleEnabled = YES;//缩放
         _chartView.scaleYEnabled = NO;
         _chartView.drawGridBackgroundEnabled = YES;//网格线
+        _chartView.gridBackgroundColor = [UIColor whiteColor];
         _chartView.pinchZoomEnabled = YES;
         //_chartView.doubleTapToZoomEnabled = NO;//取消双击缩放
         //_chartView.dragDecelerationEnabled = NO;//拖拽后是否有惯性效果
@@ -182,8 +181,8 @@
         _chartView.legend.enabled = NO;//不显示图例说明
         ChartLegend *l = _chartView.legend;
         l.form = ChartLegendFormLine;
-        l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.f];
-        l.textColor = UIColor.whiteColor;
+        l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.f];//EAE9E8
+        l.textColor = UIColor.grayColor;
         l.horizontalAlignment = ChartLegendHorizontalAlignmentLeft;
         l.verticalAlignment = ChartLegendVerticalAlignmentBottom;
         l.drawInside = YES;//legend显示在图表里
@@ -200,9 +199,10 @@
         xAxis.labelPosition = XAxisLabelPositionBottom;//一般把x轴放在底部
         xAxis.valueFormatter = self;
         xAxis.axisMinimum = 0;
-        xAxis.axisMaximum = 5;
+        xAxis.axisMaximum = 20;
         xAxis.axisRange = 10;
         xAxis.granularity = 1;
+        xAxis.labelCount = 5;
         [_chartView setVisibleXRangeWithMinXRange:1 maxXRange:UI_IS_IPHONE5?500:600];//修改缩小放大最多显示数量
         
         ChartYAxis *leftAxis = _chartView.leftAxis;
@@ -287,7 +287,6 @@
             }
             //加载数据
             [self setChartData];
-            NSLog(@"gsdfhgh%@",self.valueArray);
         }else{
             [NSObject showHudTipStr:LocalString(@"获取电量详细失败")];
         }
@@ -337,12 +336,13 @@
         //没有，则初始化数据集
         set1 = [[LineChartDataSet alloc] initWithValues:yValue1 label:@""]; //第一套数据的数据和代表的值
         set1.axisDependency = AxisDependencyLeft; //数据依赖的是左边的轴
-        [set1 setColor:[UIColor colorWithRed:52/255.f green:188/255.f blue:248/255.f alpha:1.f]]; //线的颜色
+        [set1 setColor:[UIColor colorWithRed:130/255.f green:181/255.f blue:244/255.f alpha:1.f]]; //线的颜色
         [set1 setCircleColor:[UIColor lightGrayColor]]; //折点的颜色
         set1.lineWidth = 3.0; //线宽
         set1.circleRadius = 3.0; //折点半径
         set1.fillAlpha = 65/255.0;
-        set1.fillColor = [UIColor colorWithRed:52/255.f green:188/255.f blue:248/255.f alpha:1.f];
+        set1.fillColor = [UIColor colorWithRed:130/255.f green:181/255.f blue:244/255.f alpha:1.f];
+        
         //这个控制的是，点击某个点之后的十字线的颜色，这里我不需要十字线
         //  set1.highlightColor = [UIColor blueColor];
         //去掉highlightColor的颜色，但还是有默认颜色，我只能将线宽设置为0
