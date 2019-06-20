@@ -68,7 +68,7 @@
             make.top.equalTo(self.view.mas_top).offset(yAutoFit(300.f));
             make.centerX.equalTo(self.view.mas_centerX);
         }];
-      
+        
         _phoneTF = [[UITextField alloc] init];
         _phoneTF.backgroundColor = [UIColor clearColor];
         _phoneTF.font = [UIFont systemFontOfSize:14];
@@ -93,14 +93,14 @@
             make.left.equalTo(phoneview.mas_left).offset(yAutoFit(18.f));
             make.centerY.equalTo(phoneview.mas_centerY);
         }];
-    
+        
     }
     return _phoneTF;
 }
 
 - (UITextField *)passwordTF{
     if (!_verifyTF) {
-       UIView *verifyTFView = [[UIView alloc] initWithFrame:CGRectMake(yAutoFit(45.f),yAutoFit(367.f),yAutoFit(286.f),yAutoFit(36.f))];
+        UIView *verifyTFView = [[UIView alloc] initWithFrame:CGRectMake(yAutoFit(45.f),yAutoFit(367.f),yAutoFit(286.f),yAutoFit(36.f))];
         verifyTFView.layer.borderWidth = 1;
         verifyTFView.backgroundColor = [UIColor clearColor];
         verifyTFView.layer.borderColor = [UIColor colorWithRed:99/255.0 green:157/255.0 blue:248/255.0 alpha:1].CGColor;
@@ -127,18 +127,18 @@
         _verifyTF.clearButtonMode = UITextFieldViewModeWhileEditing;
         _verifyTF.autocorrectionType = UITextAutocorrectionTypeNo;
         _verifyTF.delegate = self;
-        _verifyTF.secureTextEntry = NO;
         _verifyTF.autocorrectionType = UITextAutocorrectionTypeNo;
         _verifyTF.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _verifyTF.borderStyle = UITextBorderStyleNone;
-        _verifyTF.placeholder = LocalString(@"请输入验证码");
+        _verifyTF.placeholder = LocalString(@"请输入密码");
+        _verifyTF.secureTextEntry = YES;
         [verifyTFView addSubview:_verifyTF];
         [_verifyTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(130.f),yAutoFit(30.f)));
             make.left.equalTo(verifyTFView.mas_left).offset(yAutoFit(55.f));
             make.centerY.equalTo(verifyTFView.mas_centerY);
         }];
-
+        
         UIImageView *verifyImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_login_password"]];
         verifyImage.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:verifyImage];
@@ -153,6 +153,7 @@
         [_verifyBtn.titleLabel setFont:[UIFont systemFontOfSize:13]];
         [_verifyBtn setTitleColor:[UIColor colorWithHexString:@"0465C5"] forState:UIControlStateNormal];
         _verifyBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+        _verifyBtn.hidden = YES;
         [_verifyBtn addTarget:self action:@selector(getVerifyCode) forControlEvents:UIControlEventTouchUpInside];
         [verifyTFView addSubview:_verifyBtn];
         [_verifyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -165,7 +166,7 @@
         [_passwordVisiableBtn setImage:[UIImage imageNamed:@"img_pwd_unvisiable"] forState:UIControlStateNormal];
         [_passwordVisiableBtn addTarget:self action:@selector(passwordVisiableControl) forControlEvents:UIControlEventTouchUpInside];
         _passwordVisiableBtn.tag = yUnselect;//默认隐藏，选择后显示
-        _passwordVisiableBtn.hidden = YES;
+        _passwordVisiableBtn.hidden = NO;
         [verifyTFView addSubview:_passwordVisiableBtn];
         [_passwordVisiableBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(yAutoFit(80),yAutoFit(44.f)));
@@ -199,7 +200,7 @@
 - (UIButton *)changeLoginBtn{
     if (!_changeLoginBtn) {
         _changeLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_changeLoginBtn setTitle:LocalString(@"密码登录") forState:UIControlStateNormal];
+        [_changeLoginBtn setTitle:LocalString(@"验证码登录") forState:UIControlStateNormal];
         [_changeLoginBtn.titleLabel setFont:[UIFont systemFontOfSize:13.f]];
         [_changeLoginBtn setTitleColor:[UIColor colorWithHexString:@"4778CC"] forState:UIControlStateNormal];
         [_changeLoginBtn addTarget:self action:@selector(changeLoginMode) forControlEvents:UIControlEventTouchUpInside];
@@ -210,7 +211,7 @@
             make.top.equalTo(self.loginBtn.mas_bottom).offset(20);
         }];
         
-        _changeLoginBtn.tag = yUnselect;//等于当前是验证码登录模式
+        _changeLoginBtn.tag = ySelect;//等于当前是验证码登录模式
     }
     return _changeLoginBtn;
 }
@@ -241,7 +242,7 @@
     
     return _forgetPWBtn;
 }
-    
+
 #pragma mark - uitextfield delegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
@@ -280,7 +281,7 @@
     }
     
     
-
+    
     
     [manager POST:url parameters:parameters progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -365,7 +366,7 @@
                   dispatch_async(dispatch_get_main_queue(), ^{
                       [SVProgressHUD dismiss];
                   });
-
+                  
               }else{
                   [NSObject showHudTipStr:LocalString(@"登录失败，请检查验证码或者密码是否填写错误")];
                   dispatch_async(dispatch_get_main_queue(), ^{
@@ -389,7 +390,7 @@
     if (_changeLoginBtn.tag == yUnselect) {
         _changeLoginBtn.tag = ySelect;
         [_changeLoginBtn setTitle:LocalString(@"验证码登录") forState:UIControlStateNormal];
-
+        
         _verifyTF.placeholder = LocalString(@"请输入密码");
         _passwordVisiableBtn.hidden = NO;
         _verifyBtn.hidden = YES;
@@ -398,7 +399,7 @@
     }else{
         _changeLoginBtn.tag = yUnselect;
         [_changeLoginBtn setTitle:LocalString(@"密码登录") forState:UIControlStateNormal];
-
+        
         _verifyTF.placeholder = LocalString(@"请输入验证码");
         _passwordVisiableBtn.hidden = YES;
         _verifyBtn.hidden = NO;
