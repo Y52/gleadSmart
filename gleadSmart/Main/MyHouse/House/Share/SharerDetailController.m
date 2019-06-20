@@ -28,10 +28,16 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
-
+    self.navigationItem.title = LocalString(@"共享详情");
     self.sharerDetailTable = [self sharerDetailTable];
     self.addSharerButton = [self addSharerButton];
     [self getSharerInfo];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 #pragma mark - private methods
@@ -232,7 +238,32 @@ NSString *const CellIdentifier_SharerDetailDevice = @"CellID_SharerDetailDevice"
                     cell.deviceImage.image = [UIImage imageNamed:@"img_wallHob"];
                 }
                     break;
+                case DevicePlugOutlet:
+                {
+                    cell.deviceImage.image = [UIImage imageNamed:@"img_plug_icon"];
+                }
+                    break;
                     
+                case DeviceFourSwitch:
+                {
+                    cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_4"];
+                }
+                    break;
+                case DeviceThreeSwitch:
+                {
+                    cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_3"];
+                }
+                    break;
+                case DeviceTwoSwitch:
+                {
+                    cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_2"];
+                }
+                    break;
+                case DeviceOneSwitch:
+                {
+                    cell.deviceImage.image = [UIImage imageNamed:@"img_switch_icon_1"];
+                }
+                    break;
                 default:
                     break;
             }

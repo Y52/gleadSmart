@@ -3244,8 +3244,6 @@
 		EE7D7101BAAF5F4A9C9905A57EF19AB6 /* plugOutlet */ = {
 			isa = PBXGroup;
 			children = (
-				BBAD0D42229D14F5009D4F42 /* PlugOutletEditDelayController.h */,
-				BBAD0D43229D14F5009D4F42 /* PlugOutletEditDelayController.m */,
 				FE9DBC36893ABA5F410C756F68A0044C /* PlugOutletController.h */,
 				9557C486348BC450901BA8C7C3FFD0BF /* PlugOutletController.m */,
 				C01BA74A6AC91B6AC23FC642EBFC1C0F /* PlugOutletSettingController.h */,
@@ -3262,6 +3260,8 @@
 				4138EA160EE4F7D1C361D73E3B7022C6 /* PlugOutletDelayController.m */,
 				D1F409D77D4D01158002DCF236F62FBE /* PlugOutletAddDelayController.h */,
 				B4C4AF5950797B161A9613034FC0FE45 /* PlugOutletAddDelayController.m */,
+				BBAD0D42229D14F5009D4F42 /* PlugOutletEditDelayController.h */,
+				BBAD0D43229D14F5009D4F42 /* PlugOutletEditDelayController.m */,
 				36018A992294E7DD00EBC093 /* PlugOutletElectricityController.h */,
 				36018A9A2294E7DD00EBC093 /* PlugOutletElectricityController.m */,
 				36C4966222B7296D00A1304E /* PlugOutletElectricityCurveView.h */,

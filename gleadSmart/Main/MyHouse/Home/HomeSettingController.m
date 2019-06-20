@@ -76,21 +76,35 @@ static CGFloat const Cell_Height = 44.f;
             return [UIImage imageNamed:@"img_wallHob"];
         }
             break;
-            
         case DevicePlugOutlet:
         {
-            return [UIImage imageNamed:@"img_thermostat_on"];
+            return [UIImage imageNamed:@"img_plug_icon"];
+            
         }
             break;
-            
+        case DeviceOneSwitch:
+        {
+            return [UIImage imageNamed:@"img_switch_icon_1"];
+        }
+            break;
+        case DeviceTwoSwitch:
+        {
+            return [UIImage imageNamed:@"img_switch_icon_2"];
+        }
+            break;
+        case DeviceThreeSwitch:
+        {
+            return [UIImage imageNamed:@"img_switch_icon_3"];
+        }
+            break;
         case DeviceFourSwitch:
         {
-            return [UIImage imageNamed:@"img_thermostat_on"];
+            return [UIImage imageNamed:@"img_switch_icon_4"];
         }
             break;
             
         default:
-            return [UIImage imageNamed:@"img_thermostat_on"];
+            return [UIImage imageNamed:@"img_plug_icon"];
             break;
         }
 }

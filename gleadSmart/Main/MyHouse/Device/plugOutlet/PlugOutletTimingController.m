@@ -33,7 +33,7 @@ static float HEIGHT_FOOT = 20.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
-    self.navigationItem.title = LocalString(@"添加设备");
+    self.navigationItem.title = LocalString(@"定时任务");
     
     self.timingTable = [self timingTable];
     self.addTimingBtn = [self addTimingBtn];
