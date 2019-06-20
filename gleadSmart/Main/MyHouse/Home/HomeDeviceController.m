@@ -204,7 +204,7 @@ static CGFloat const Cell_Height = 72.f;
 }
 
 - (NSString *)getDeviceRoomNameAndStatus:(DeviceModel *)device isShare:(BOOL)isShare{
-    NSString *status;
+    NSString *status = @"";
     if (isShare) {
         if ([device.type integerValue] < DeviceNTCValve) {
             if (device.isUnusual) {
@@ -657,6 +657,7 @@ static CGFloat const Cell_Height = 72.f;
             
         case DevicePlugOutlet:
         {
+            cell.deviceImage.image = [UIImage imageNamed:@"img_plug_icon"];
             cell.switchBlock = ^(BOOL isOn) {
                 blockCell.controlSwitch.enabled = NO;
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{

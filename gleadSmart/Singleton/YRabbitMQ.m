@@ -233,10 +233,17 @@ static NSArray *_routingkeys = nil;
     }
     for (DeviceModel *device in [Database shareInstance].shareDeviceArray) {
         if ([device.mac isEqualToString:mac]) {
-            NSLog(@"%@",device.mac);
-            device.isOnline = online;
-            NSDictionary *userInfo = @{@"device":device,@"isShare":@1};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+            if ([device.type integerValue] >= DevicePlugOutlet) {
+                device.isOnline = online;
+                NSDictionary *userInfo = @{@"device":device,@"isShare":@1};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+                
+                if ([online integerValue]) {
+                    //设备上线就根据数据流查询状态
+                    NSMutableArray *shareDeviceArray = [NSMutableArray arrayWithObject:device];
+                    [[Network shareNetwork] inquireDeviceInfoByOneNetdatastreams:shareDeviceArray apiKey:device.apiKey deviceId:device.deviceId];
+                }
+            }
         }
     }
     
