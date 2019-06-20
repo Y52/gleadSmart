@@ -422,7 +422,6 @@
 
 - (void)forgetPW{
     RetrievePasswordController *RetrieveVC = [[RetrievePasswordController alloc] init];
-    [RetrieveVC setModalTransitionStyle:(UIModalTransitionStyleFlipHorizontal)];
     [self presentViewController:RetrieveVC animated:YES completion:nil];
 }
 
