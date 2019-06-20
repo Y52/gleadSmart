@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.view.layer.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1].CGColor;
+    self.view.layer.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1].CGColor;
     [self setBackGroundUI];
     
     _phoneTF = [self phoneTF];
@@ -40,7 +40,7 @@
     _loginBtn = [self loginBtn];
     _changeLoginBtn =[self changeLoginBtn];
     _forgetPWBtn = [self forgetPWBtn];
-
+    
 }
 
 #pragma mark - Lazy load
@@ -279,9 +279,6 @@
         url = [NSString stringWithFormat:@"%@/api/user/login",httpIpAddress];
         url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     }
-    
-    
-    
     
     [manager POST:url parameters:parameters progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
