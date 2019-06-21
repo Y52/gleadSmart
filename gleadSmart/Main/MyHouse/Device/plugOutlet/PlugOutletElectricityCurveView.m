@@ -158,7 +158,7 @@
         [self.view addSubview:_chartView];
         
         [_chartView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(ScreenWidth, yAutoFit(ScreenHeight - 350)));
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth, yAutoFit(320.f)));
             make.centerX.equalTo(self.electricityImage.mas_centerX);
             make.top.equalTo(self.electricityBackgroundView.mas_bottom).offset(yAutoFit(10.f));
         }];
