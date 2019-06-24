@@ -23,6 +23,8 @@
 @property (nonatomic) dispatch_source_t confirmWifiTimer;//确认Wi-Fi切换时钟
 @property (nonatomic) dispatch_source_t getStatusTimer;//查询设备是否在线
 @property (nonatomic, strong)  DeviceModel *device;
+//定时器计数配网超时
+@property (nonatomic) int APflag;
 
 @property (nonatomic, strong) AAProgressCircleView *circleView;
 
@@ -37,6 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.layer.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1].CGColor;
+    _APflag = 0;
     
     self.navigationItem.title = LocalString(@"AP配网");
     
@@ -274,6 +277,42 @@ static bool isApiBinding = NO;
     return SSIDInfo;
 }
 
+- (void)apNetTimeOut{
+    
+    if (self.APflag == 62){
+        //配网超时
+        NSString *message = [NSString stringWithFormat:@"\n\n\n\n\n\n%@\n",@"连接超时"];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* helpAction = [UIAlertAction actionWithTitle:@"查看帮助" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            //响应事件
+            NSLog(@"action = %@", action);
+        }];
+        UIAlertAction *iKnowAction = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            //响应事件
+            NSLog(@"action = %@", action);
+            
+            UIViewController *viewCtl =self.navigationController.viewControllers[2];
+            [self.navigationController popToViewController:viewCtl animated:YES];
+            
+        }];
+        
+        UIImageView *imageView2 = [[UIImageView alloc] init];
+        imageView2.image = [UIImage imageNamed:@"netWarning_icon"];
+        [alert.view addSubview:imageView2];
+        
+        [imageView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(88.f, 88.f));
+            make.centerX.equalTo(alert.view.mas_centerX);
+            make.top.equalTo(alert.view.mas_top).offset(yAutoFit(15.f));
+        }];
+        
+        [alert addAction:helpAction];
+        [alert addAction:iKnowAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
 #pragma mark - udp delegate
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext{
     [_lock lock];
@@ -462,34 +501,7 @@ static bool isApiBinding = NO;
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        if (error == 0){
-//            //配网超时
-//            NSString *message = [NSString stringWithFormat:@"\n\n\n\n\n\n%@\n",@"连接超时"];
-//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-//
-//            UIAlertAction* helpAction = [UIAlertAction actionWithTitle:@"查看帮助" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-//                //响应事件
-//                NSLog(@"action = %@", action);
-//            }];
-//            UIAlertAction *iKnowAction = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-//                //响应事件
-//                NSLog(@"action = %@", action);
-//            }];
-//            
-//            UIImageView *imageView2 = [[UIImageView alloc] init];
-//            imageView2.image = [UIImage imageNamed:@"netWarning_icon"];
-//            [alert.view addSubview:imageView2];
-//
-//            [imageView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.size.mas_equalTo(CGSizeMake(88.f, 88.f));
-//                make.centerX.equalTo(alert.view.mas_centerX);
-//                make.top.equalTo(alert.view.mas_top).offset(yAutoFit(15.f));
-//            }];
-//
-//            [alert addAction:helpAction];
-//            [alert addAction:iKnowAction];
-//            [self presentViewController:alert animated:YES completion:nil];
-//        }
+
     }];
 }
 
@@ -557,6 +569,9 @@ static bool isApiBinding = NO;
         dispatch_source_set_timer(_confirmWifiTimer, dispatch_walltime(NULL, 0), 1.f * NSEC_PER_SEC, 0);
         dispatch_source_set_event_handler(_confirmWifiTimer, ^{
             [self confirmWifiName];
+            //计数
+            self.APflag++;
+            [self apNetTimeOut];
         });
         dispatch_resume(_confirmWifiTimer);
     }
