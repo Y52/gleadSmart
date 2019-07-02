@@ -776,9 +776,9 @@ static int noUserInteractionHeartbeat = 0;
             switch ([funcFrame integerValue]) {
                 case 00:
                 {
-                    NSLog(@"设备%@上线",device.mac);
-                    device.isOnline = @1;
-                    device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0xFF];
+                    //NSLog(@"设备%@上线",device.mac);
+                    //device.isOnline = @1;
+                    //device.isOn = [NSNumber numberWithUnsignedInteger:[value unsignedIntegerValue] & 0xFF];
                 }
                     break;
                     
@@ -2041,8 +2041,29 @@ static int noUserInteractionHeartbeat = 0;
                 case DevicePlugOutlet: //智能插座
                 {
                     if ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) {
-                        //NSLog(@"查询wifi智能插座的开关状态");
+                        NSLog(@"查询wifi智能插座的开关状态");
+                        NSDictionary *userInfo;
                         
+                        NSNumber *isOn = [NSNumber numberWithUnsignedInteger:[_recivedData69[12] unsignedIntegerValue]];
+                        
+                        for (DeviceModel *device in self.deviceArray) {
+                            if ([device.mac isEqualToString:mac]) {
+                                NSLog(@"%@",device.mac);
+                                device.isOn = isOn;
+                                device.isOnline = @1;
+                                userInfo = @{@"device":device,@"isShare":@0};
+                            }
+                        }
+                        for (DeviceModel *device in db.shareDeviceArray) {
+                            if ([device.mac isEqualToString:mac]) {
+                                NSLog(@"%@",device.mac);
+                                device.isOn = isOn;
+                                device.isOnline = @1;
+                                userInfo = @{@"device":device,@"isShare":@1};
+                            }
+                        }
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshPlugOutletUI" object:nil userInfo:userInfo];
                     }
                     if (([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x00) || ([_recivedData69[10] unsignedIntegerValue] == 0x00 && [_recivedData69[11] unsignedIntegerValue] == 0x01)) {
                         NSLog(@"查询或设置wifi智能插座的开关状态,或主动上报");

@@ -422,7 +422,9 @@ static dispatch_once_t oneToken;
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [manager.requestSerializer setValue:self.user.userId forHTTPHeaderField:@"userId"];
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",self.token] forHTTPHeaderField:@"Authorization"];
+    
+    NSString *authorization = [NSString stringWithFormat:@"bearer %@",self.token];
+    [manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:nil];
         NSData * data = [NSJSONSerialization dataWithJSONObject:responseDic options:(NSJSONWritingOptions)0 error:nil];
