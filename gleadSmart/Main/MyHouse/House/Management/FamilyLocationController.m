@@ -218,6 +218,8 @@
     if (![house.lon isKindOfClass:[NSNumber class]]) {
         house.lon = [NSNumber numberWithFloat:116.41476250];
         house.lat = [NSNumber numberWithFloat:39.91633050];
+        house.province = @"北京市";
+        house.city = @"北京市";
         house.location = LocalString(@"北京市北京市东城区");
         NSLog(@"%@",house.lon);
     }

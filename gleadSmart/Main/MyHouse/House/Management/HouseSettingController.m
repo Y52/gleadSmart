@@ -17,6 +17,7 @@
 #import "FamilyMemberController.h"
 #import "HouseShareController.h"
 #import "HomeManagementController.h"
+#import "NoHouseBridgingController.h"
 
 NSString *const CellIdentifier_HouseSetCommon = @"CellID_HouseSetCommon";
 NSString *const CellIdentifier_HouseSetMember = @"CellID_HouseSetMember";
@@ -173,10 +174,17 @@ NSString *const CellIdentifier_HouseAddMember = @"CellID_HouseAddMember";
             for (HouseModel *house in db.houseList) {
                 if ([house.houseUid isEqualToString:self.house.houseUid]) {
                     [db.houseList removeObject:house];
+                    //数据库移除家庭
+                    [db deleteHouse:house.houseUid];
                     break;
                 }
             }
-            [self.navigationController popViewControllerAnimated:YES];
+            if (!([db.houseList isKindOfClass:[NSMutableArray class]]&& db.houseList.count >0)) {
+                NoHouseBridgingController *vc = [[NoHouseBridgingController alloc] init];
+                [self presentViewController:vc animated:YES completion:nil];
+            }else{
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }else{
             [NSObject showHudTipStr:[NSString stringWithFormat:@"%@",[responseDic objectForKey:@"error"]]];
         }
