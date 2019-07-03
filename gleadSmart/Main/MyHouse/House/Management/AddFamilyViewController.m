@@ -212,7 +212,7 @@ NSString *const CellIdentifier_addFaminlySelect = @"CellID_addFaminlySelect";
             locaVC.dismissBlock = ^(HouseModel *house) {
                 AddFamilyTextCell *cell = [tableView cellForRowAtIndexPath:indexPath];
                 cell.inputTF.text = house.location;
-                NSLog(@"11111%@",house.location);
+                //NSLog(@"11111%@",house.location);
                 self->lon = house.lon;
                 self->lat = house.lat;
                 self->province = house.province;
