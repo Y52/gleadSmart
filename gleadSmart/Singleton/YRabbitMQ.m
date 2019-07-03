@@ -127,7 +127,7 @@ static NSArray *_routingkeys = nil;
     NSString *mac = [dic objectForKey:@"mac"];
     NSNumber *on = [dic objectForKey:@"on"];
     NSNumber *num = @0;
-    num = @([[dic objectForKey:@"num"] integerValue]);
+    num = @([[dic objectForKey:@"num"] intValue]);
     
     BOOL isSocketConnectd = NO;
     
@@ -223,9 +223,10 @@ static NSArray *_routingkeys = nil;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
 
                 if ([online integerValue]) {
-                    //设备上线就根据数据流查询状态
-                    NSMutableArray *deviceArray = [NSMutableArray arrayWithObject:device];
-                    [[Network shareNetwork] inquireDeviceInfoByOneNetdatastreams:deviceArray apiKey:device.apiKey deviceId:device.deviceId];
+                    //设备上线就查询状态
+                    UInt8 controlCode = 0x00;
+                    NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
+                    [device sendData69With:controlCode mac:device.mac data:data];
                 }
 
             }
@@ -239,9 +240,10 @@ static NSArray *_routingkeys = nil;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"oneDeviceStatusUpdate" object:nil userInfo:userInfo];
                 
                 if ([online integerValue]) {
-                    //设备上线就根据数据流查询状态
-                    NSMutableArray *shareDeviceArray = [NSMutableArray arrayWithObject:device];
-                    [[Network shareNetwork] inquireDeviceInfoByOneNetdatastreams:shareDeviceArray apiKey:device.apiKey deviceId:device.deviceId];
+                    //设备上线就查询状态
+                    UInt8 controlCode = 0x00;
+                    NSArray *data = @[@0xFC,@0x11,@0x00,@0x00];
+                    [device sendData69With:controlCode mac:device.mac data:data];
                 }
             }
         }
