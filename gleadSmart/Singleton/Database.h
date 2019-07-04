@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)destroyInstance;
 
 @property (strong, nonatomic) FMDatabaseQueue *queueDB;
+///@brief 二维码扫描的mac
+@property (strong, nonatomic) NSString *macDeviceByQR;
 
 ///@brief User Information
 @property (strong, nonatomic) UserModel *user;

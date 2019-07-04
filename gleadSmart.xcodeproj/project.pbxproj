@@ -240,6 +240,17 @@
 		36018AA42294ECF100EBC093 /* valveTemperature_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0EA5185222DDCAC3EB7F05E0FAF637D /* valveTemperature_normal@3x.png */; };
 		36018AA72295372500EBC093 /* PlugOutleDatatStatisticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36018AA62295372500EBC093 /* PlugOutleDatatStatisticsCell.m */; };
 		36018AA822953C0B00EBC093 /* PlugOutleDatatStatisticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36018AA62295372500EBC093 /* PlugOutleDatatStatisticsCell.m */; };
+		3602A73A22CDD93C00EC6ED1 /* ic_nav_scan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3602A73622CDD93B00EC6ED1 /* ic_nav_scan@2x.png */; };
+		3602A73B22CDD93C00EC6ED1 /* ic_nav_scan_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3602A73722CDD93B00EC6ED1 /* ic_nav_scan_black@2x.png */; };
+		3602A73C22CDD93C00EC6ED1 /* ic_nav_scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3602A73822CDD93C00EC6ED1 /* ic_nav_scan@3x.png */; };
+		3602A73D22CDD93C00EC6ED1 /* ic_nav_scan_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3602A73922CDD93C00EC6ED1 /* ic_nav_scan_black@3x.png */; };
+		3602A74122CDD9B600EC6ED1 /* QRCodeScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3602A73F22CDD9B600EC6ED1 /* QRCodeScanController.m */; };
+		3602A74222CDDA9A00EC6ED1 /* QRCodeScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3602A73F22CDD9B600EC6ED1 /* QRCodeScanController.m */; };
+		3602A74322CDDCC400EC6ED1 /* ic_nav_scan_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3602A73722CDD93B00EC6ED1 /* ic_nav_scan_black@2x.png */; };
+		3602A74422CDDCC600EC6ED1 /* ic_nav_scan_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3602A73922CDD93C00EC6ED1 /* ic_nav_scan_black@3x.png */; };
+		3602A74522CDDCC900EC6ED1 /* ic_nav_scan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3602A73622CDD93B00EC6ED1 /* ic_nav_scan@2x.png */; };
+		3602A74622CDDCCC00EC6ED1 /* ic_nav_scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3602A73822CDD93C00EC6ED1 /* ic_nav_scan@3x.png */; };
+		3602A74822CDDD5100EC6ED1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3602A74722CDDD5100EC6ED1 /* AVFoundation.framework */; };
 		3604B4F4227F06BC001F6382 /* OneSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4EE227F06BB001F6382 /* OneSwitchController.m */; };
 		3604B4F5227F06BC001F6382 /* TwoSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4F2227F06BC001F6382 /* TwoSwitchController.m */; };
 		3604B4F6227F06BC001F6382 /* ThreeSwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3604B4F3227F06BC001F6382 /* ThreeSwitchController.m */; };
@@ -1325,6 +1336,13 @@
 		36018A9A2294E7DD00EBC093 /* PlugOutletElectricityController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutletElectricityController.m; sourceTree = "<group>"; };
 		36018AA52295372500EBC093 /* PlugOutleDatatStatisticsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlugOutleDatatStatisticsCell.h; sourceTree = "<group>"; };
 		36018AA62295372500EBC093 /* PlugOutleDatatStatisticsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlugOutleDatatStatisticsCell.m; sourceTree = "<group>"; };
+		3602A73622CDD93B00EC6ED1 /* ic_nav_scan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_nav_scan@2x.png"; sourceTree = "<group>"; };
+		3602A73722CDD93B00EC6ED1 /* ic_nav_scan_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_nav_scan_black@2x.png"; sourceTree = "<group>"; };
+		3602A73822CDD93C00EC6ED1 /* ic_nav_scan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_nav_scan@3x.png"; sourceTree = "<group>"; };
+		3602A73922CDD93C00EC6ED1 /* ic_nav_scan_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_nav_scan_black@3x.png"; sourceTree = "<group>"; };
+		3602A73F22CDD9B600EC6ED1 /* QRCodeScanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScanController.m; sourceTree = "<group>"; };
+		3602A74022CDD9B600EC6ED1 /* QRCodeScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScanController.h; sourceTree = "<group>"; };
+		3602A74722CDDD5100EC6ED1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3604B4EE227F06BB001F6382 /* OneSwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneSwitchController.m; sourceTree = "<group>"; };
 		3604B4EF227F06BB001F6382 /* TwoSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoSwitchController.h; sourceTree = "<group>"; };
 		3604B4F0227F06BB001F6382 /* OneSwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneSwitchController.h; sourceTree = "<group>"; };
@@ -1972,6 +1990,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3602A74822CDDD5100EC6ED1 /* AVFoundation.framework in Frameworks */,
 				BB178937229D21B500CB40B0 /* ExternalAccessory.framework in Frameworks */,
 				BBACD65E4CE4050F281BFF75293101DC /* Pods_gleadSmart.framework in Frameworks */,
 				5C798AF4DBC204EF75421620D9970084 /* Pods_jienuoIOT.framework in Frameworks */,
@@ -2109,6 +2128,7 @@
 		163612BB24B0FB9228947700D5747E51 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3602A74722CDDD5100EC6ED1 /* AVFoundation.framework */,
 				BBAEFA38229D20EB0062707C /* ExternalAccessory.framework */,
 				8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */,
 				CCDC8A25F5E504F477B0277BE80343F5 /* Pods_jienuoIOT.framework */,
@@ -2353,6 +2373,15 @@
 			path = appIcon;
 			sourceTree = "<group>";
 		};
+		3602A73E22CDD98F00EC6ED1 /* QRcode */ = {
+			isa = PBXGroup;
+			children = (
+				3602A74022CDD9B600EC6ED1 /* QRCodeScanController.h */,
+				3602A73F22CDD9B600EC6ED1 /* QRCodeScanController.m */,
+			);
+			path = QRcode;
+			sourceTree = "<group>";
+		};
 		36C4966622B7666000A1304E /* Charts */ = {
 			isa = PBXGroup;
 			children = (
@@ -2521,6 +2550,7 @@
 		5D0F85D89FD47E4B3BB6DD71E95FFEA2 /* gleadSmart */ = {
 			isa = PBXGroup;
 			children = (
+				3602A73E22CDD98F00EC6ED1 /* QRcode */,
 				656BDE6E05295837B9B786131EF534D9 /* AFNetworking */,
 				7E129F8347CBE2255BC73B75278FC7E7 /* Cell */,
 				D36872269C7B919BDED3418CBA81D010 /* EspTouch */,
@@ -2843,6 +2873,10 @@
 		7E9B0A3E3C61B9B571AFC9E6451ED7EA /* nav_general */ = {
 			isa = PBXGroup;
 			children = (
+				3602A73722CDD93B00EC6ED1 /* ic_nav_scan_black@2x.png */,
+				3602A73922CDD93C00EC6ED1 /* ic_nav_scan_black@3x.png */,
+				3602A73622CDD93B00EC6ED1 /* ic_nav_scan@2x.png */,
+				3602A73822CDD93C00EC6ED1 /* ic_nav_scan@3x.png */,
 				36C9151A73CDCC7A44897EB31411F3F9 /* img_nav_back.png */,
 				CC513545AD2E642CFB9810B2BD026B23 /* img_nav_back@2x.png */,
 				C8FE0B383F6E6999366F44F27A56B6A2 /* img_nav_back@3x.png */,
@@ -3538,6 +3572,7 @@
 				3001585136D73C492E757E35BEAC686F /* img_account_header.png in Resources */,
 				36E241C8FFFCDB30079685560310395A /* img_account_header@2x.png in Resources */,
 				47FA8369C914DFE9786FD32F951DA79B /* img_account_header@3x.png in Resources */,
+				3602A74322CDDCC400EC6ED1 /* ic_nav_scan_black@2x.png in Resources */,
 				01B29F278483795CF7692B5464D6EFB1 /* img_addDevice.png in Resources */,
 				BB1BD75F228D5C5500AF5741 /* img_plugView_off@2x.png in Resources */,
 				59F50A917740EF9AE1613722EFC27350 /* img_addDevice@2x.png in Resources */,
@@ -3606,6 +3641,7 @@
 				62984FBB3933A302762904D303A34DB4 /* img_login_password@3x.png in Resources */,
 				17BD53C672FE610CCA8609D7FE755CE7 /* img_login_phone.png in Resources */,
 				36FE2CE722AE091300B99C54 /* netWarning_icon@3x.png in Resources */,
+				3602A74422CDDCC600EC6ED1 /* ic_nav_scan_black@3x.png in Resources */,
 				BB1BD779228D5C5500AF5741 /* dl_background@2x.png in Resources */,
 				72DE594673683493585528C34239F4BD /* img_login_phone@2x.png in Resources */,
 				C4F322DEE07F90B96E2096C18B3B1C5F /* img_login_phone@3x.png in Resources */,
@@ -3614,6 +3650,7 @@
 				8E3EEE57BFFB06D4AB6E087F71ED58F3 /* img_manual_on@2x.png in Resources */,
 				BB1BD773228D5C5500AF5741 /* kaiguan@2x.png in Resources */,
 				2EBA10B9AF7717CEDDC9BA56492E7F52 /* img_manual_on@3x.png in Resources */,
+				3602A74522CDDCC900EC6ED1 /* ic_nav_scan@2x.png in Resources */,
 				28570D9E60627D26954099C7D8827790 /* img_mine_aboutus.png in Resources */,
 				792B9C14F0A51CF58A369AB899639C25 /* img_mine_aboutus@2x.png in Resources */,
 				FC4A236C915F01F6AC244652A1DE1309 /* img_mine_aboutus@3x.png in Resources */,
@@ -3849,6 +3886,7 @@
 				0249241FFC350BAE8F7A536FE2C9748E /* valveLeak_abnormal@2x.png in Resources */,
 				08000644F1F6560C7F04D35D0249CBE3 /* valveLeak_abnormal@3x.png in Resources */,
 				BB1BD727228D5C5400AF5741 /* img_switch2_off@2x.png in Resources */,
+				3602A74622CDDCCC00EC6ED1 /* ic_nav_scan@3x.png in Resources */,
 				9826ADF090CA5AC80CCE7A7E60B98ADC /* valveLeak_normal.png in Resources */,
 				BB1BD761228D5C5500AF5741 /* img_plug_delayTime@2x.png in Resources */,
 				8AB4DCA43F999F0B196FDF157C803CCB /* valveLeak_normal@2x.png in Resources */,
@@ -3920,6 +3958,7 @@
 				7D77E366FBEF2D2585D364552EFF84B2 /* addFamily_device.png in Resources */,
 				481B909D20541BE1BB2AAB9E88C0F814 /* addFamily_device@2x.png in Resources */,
 				36844A412292A36800330C74 /* img_switch_icon_4@2x.png in Resources */,
+				3602A73C22CDD93C00EC6ED1 /* ic_nav_scan@3x.png in Resources */,
 				959E0229C80F303E77C8405648565120 /* addFamily_device@3x.png in Resources */,
 				4F56D3717ABF410C492EF6223BDF3C77 /* addFamily_uncheck.png in Resources */,
 				CD9108D782F82AF49A50C98DF90CD8B1 /* addFamily_uncheck@2x.png in Resources */,
@@ -4097,6 +4136,7 @@
 				0454525925BB1015F398C6D4B78A60CB /* img_ther_addTimerWeek@2x.png in Resources */,
 				2C04401517546964543811484EBE854D /* img_ther_addTimerWeek@3x.png in Resources */,
 				E57680472A34D90E50D18B3C8037FC74 /* img_thermos_moTimer.png in Resources */,
+				3602A73A22CDD93C00EC6ED1 /* ic_nav_scan@2x.png in Resources */,
 				F495AC664E86275735112B2C159C3EB2 /* img_thermos_moTimer@2x.png in Resources */,
 				BB1BD736228D5C5500AF5741 /* img_2switch_back@3x.png in Resources */,
 				2A2672CB51754F3F35DB71B1D5C03173 /* img_thermos_moTimer@3x.png in Resources */,
@@ -4219,6 +4259,7 @@
 				FA700E7AC90A5FC341CAC8CCB23E0DC5 /* thermostat_max@2x.png in Resources */,
 				BC46119D165A9B7DD6BEE91EC6196BE0 /* thermostat_max@3x.png in Resources */,
 				4AAB1B5F39234F6AB657A4DDFC1A894F /* thermostat_min.png in Resources */,
+				3602A73B22CDD93C00EC6ED1 /* ic_nav_scan_black@2x.png in Resources */,
 				BB1BD72A228D5C5400AF5741 /* img_switch3_on@2x.png in Resources */,
 				7ACD2D720DAE72DC132E6C43D7F56602 /* thermostat_min@2x.png in Resources */,
 				E1C7020934C8E44B34FEFCBB17F2835D /* thermostat_min@3x.png in Resources */,
@@ -4232,6 +4273,7 @@
 				770CFB08DCD86E65CE091ECEF3057E17 /* valveAlertMark@2x.png in Resources */,
 				E341B4C5738383B03DBA6FF4EF8EA98E /* valveAlertMark@3x.png in Resources */,
 				BB1BD76A228D5C5500AF5741 /* img_plug_electricity@3x.png in Resources */,
+				3602A73D22CDD93C00EC6ED1 /* ic_nav_scan_black@3x.png in Resources */,
 				C5DB16944BAFA6BF76FD2B5477618DA6 /* valveHeader@1x.png in Resources */,
 				F5A89658AADE037A844A55383C31313A /* valveHeader@2x.png in Resources */,
 				7BEE282B76B8AB32346677F42B27A97B /* valveHeader@3x.png in Resources */,
@@ -4461,6 +4503,7 @@
 				BB93C9DE228BEC0E00B0DB6B /* TwoSwitchController.m in Sources */,
 				BB03341822A651F900EEEFD2 /* RoomButtonCollectCell.m in Sources */,
 				83E50F54F70ABF49226082484D95FFCD /* ESPTouchResult.m in Sources */,
+				3602A74222CDDA9A00EC6ED1 /* QRCodeScanController.m in Sources */,
 				32D03E283F71F215477C312ED6BEE1D2 /* ESPTouchTask.m in Sources */,
 				F3806CE462444A800FC35FDB9E3E66AC /* ESPTouchTaskParameter.m in Sources */,
 				A6D8CA0DFF3ED51BE7944A44E3A3BAC9 /* ESPUDPSocketClient.m in Sources */,
@@ -4622,6 +4665,7 @@
 				362D9EC922B3A62E001C8E71 /* ElectricityCellModel.m in Sources */,
 				776892966EE36F009805FFCA24A05367 /* AccountViewController.m in Sources */,
 				2851F929D2B4CC053AEA9C05EBE12521 /* AddDeviceShareController.m in Sources */,
+				3602A74122CDD9B600EC6ED1 /* QRCodeScanController.m in Sources */,
 				291FB34389886CC11273B24EFABB8702 /* AddFamilySelectCell.m in Sources */,
 				B8B7A93955131C976B54EF66F388270E /* AddFamilyTextCell.m in Sources */,
 				71CE48C649D1290AAB4EF7DC491543FF /* AddFamilyViewController.m in Sources */,

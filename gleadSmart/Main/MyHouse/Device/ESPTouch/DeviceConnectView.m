@@ -296,7 +296,7 @@ static bool isApiBinding = NO;
         NSString *mac = [msg substringWithRange:NSMakeRange(0, 8)];
         
         NSLog(@"%@,%@",ipAddress,self->espDeviceIpAddr);
-        if ([ipAddress isEqualToString:self->espDeviceIpAddr]) {
+        if ([ipAddress isEqualToString:self->espDeviceIpAddr] || [[Database shareInstance].macDeviceByQR isEqualToString:mac]) {
             DeviceModel *dModel = [[DeviceModel alloc] init];
             
             dModel.mac = mac;
@@ -316,6 +316,8 @@ static bool isApiBinding = NO;
                             }
                         }
                         [Network shareNetwork].isDeviceVC = NO;
+                        //配网成功清除二维码保存的mac
+                        [Database shareInstance].macDeviceByQR = @"";
                         
                         self.circleView.percent = 1;
                         [self.circleView deleteTimer];

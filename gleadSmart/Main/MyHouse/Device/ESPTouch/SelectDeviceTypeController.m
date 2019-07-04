@@ -10,6 +10,7 @@
 #import "SelectDeviceTypeCell.h"
 #import "DeviceViewController.h"
 #import "StatusConfirmController.h"
+#import "QRCodeScanController.h"
 
 NSString *const CellIdentifier_SelectDeviceType = @"CellID_SelectDeviceType";
 static float HEIGHT_CELL = 50.f;
@@ -50,18 +51,28 @@ static int deviceCount = 2;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)scanAction{
+    QRCodeScanController *scanVC = [[QRCodeScanController alloc] init];
+    [self.navigationController pushViewController:scanVC animated:YES];
+}
+
 #pragma mark - Lazy Load
 - (void)setNavItem{
     self.navigationItem.title = LocalString(@"选择设备类型");
     
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.frame = CGRectMake(0, 0, 30, 30);
+    UIButton *leftButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,30)];
     [leftButton setTitle:@"取消" forState:UIControlStateNormal];
     [leftButton.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
     [leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = leftBarButton;
+    
+    UIButton *scanButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,30)];
+    [scanButton setImage:[UIImage imageNamed:@"ic_nav_scan_black"] forState:UIControlStateNormal];
+    [scanButton addTarget:self action:@selector(scanAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc]initWithCustomView:scanButton];
+    self.navigationItem.rightBarButtonItem= rightBarButton;
 
 }
 
