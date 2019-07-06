@@ -8,7 +8,7 @@
 
 #import "QRCodeScanController.h"
 #import <AVFoundation/AVFoundation.h>
-#import "EspViewController.h"
+#import "StatusConfirmController.h"
 
 @interface QRCodeScanController () <AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate>
 
@@ -110,7 +110,7 @@
 {
     if (metadataObjects.count > 0) {
         AVMetadataMachineReadableCodeObject *object = [metadataObjects lastObject];
-        if (object.stringValue.length >= 8){
+        if (object.stringValue.length >= 11){
             [self.session stopRunning];
             NSArray *resultArray = [object.stringValue componentsSeparatedByString:@":"];
             NSLog(@"%@ %@",resultArray[0],resultArray[1]);
@@ -118,8 +118,8 @@
             Database *data = [Database shareInstance];
             data.macDeviceByQR = resultArray[1];
             if (data.macDeviceByQR) {
-                EspViewController *espVC = [[EspViewController alloc] init];
-                [self.navigationController pushViewController:espVC animated:YES];
+                StatusConfirmController *statusVC = [[StatusConfirmController alloc] init];
+                [self.navigationController pushViewController:statusVC animated:YES];
             }
             
         }else{

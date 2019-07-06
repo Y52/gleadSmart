@@ -99,6 +99,7 @@
     self.navigationController.navigationBar.topItem.title = @"";
     
     isApiBinding = NO;
+    bindDeviceAPITime = 0;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -274,6 +275,7 @@
 }
 
 static bool isApiBinding = NO;
+static int bindDeviceAPITime = 0;
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext{
     NSLog(@"UDP接收数据……………………………………………………");
     if (1) {
@@ -304,7 +306,7 @@ static bool isApiBinding = NO;
             dModel.type = [NSNumber numberWithInt:[[Network shareNetwork] judgeDeviceTypeWith:[NSString stringScanToInt:[mac substringWithRange:NSMakeRange(2, 2)]]]];
             [dModel setInitialName];
             
-            if (!isApiBinding) {
+            if (!isApiBinding && bindDeviceAPITime < 3) {
                 isApiBinding = YES;
                 [self bindDevice:dModel success:^{
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -332,6 +334,7 @@ static bool isApiBinding = NO;
                     });
                 } failure:^{
                     isApiBinding = NO;
+                    bindDeviceAPITime++;
                 }];
             }
         }
