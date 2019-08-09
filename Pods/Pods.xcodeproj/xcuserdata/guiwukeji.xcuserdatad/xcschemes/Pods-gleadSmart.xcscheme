@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AC248A466D666E287E435F735F2DCE3E"
+               BlueprintIdentifier = "50BA02BBA510CCEB643650B856F2CB08"
                BuildableName = "Pods_gleadSmart.framework"
                BlueprintName = "Pods-gleadSmart"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AC248A466D666E287E435F735F2DCE3E"
+            BlueprintIdentifier = "50BA02BBA510CCEB643650B856F2CB08"
             BuildableName = "Pods_gleadSmart.framework"
             BlueprintName = "Pods-gleadSmart"
             ReferencedContainer = "container:Pods.xcodeproj">

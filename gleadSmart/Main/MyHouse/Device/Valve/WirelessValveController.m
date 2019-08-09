@@ -485,11 +485,15 @@ CGFloat const nodeButtonWidth = 20.f;
 //选择节点后更新该节点内漏水和电量的状态信息
 - (void)updateSelectedNodeStatus:(NodeModel *)node{
     if (node.isLeak) {
-        [self.nodeLeakStatusButton setImage:[UIImage imageNamed:@"nodeLeakBig_abnormal"] forState:UIControlStateNormal];
-        self.nodeLeakStatusLabel.text = LocalString(@"当前节点漏水");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.nodeLeakStatusButton setImage:[UIImage imageNamed:@"nodeLeakBig_abnormal"] forState:UIControlStateNormal];
+            self.nodeLeakStatusLabel.text = LocalString(@"当前节点漏水");
+        });
     }else{
-        [self.nodeLeakStatusButton setImage:[UIImage imageNamed:@"nodeLeakBig_normal"] forState:UIControlStateNormal];
-        self.nodeLeakStatusLabel.text = LocalString(@"当前节点正常");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.nodeLeakStatusButton setImage:[UIImage imageNamed:@"nodeLeakBig_normal"] forState:UIControlStateNormal];
+            self.nodeLeakStatusLabel.text = LocalString(@"当前节点正常");
+        });
     }
     if (node.isLowVoltage) {
         [self.nodeBatteryButton setImage:[UIImage imageNamed:@"nodeBattery_abnormal"] forState:UIControlStateNormal];

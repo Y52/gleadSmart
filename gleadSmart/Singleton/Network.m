@@ -1121,6 +1121,8 @@ static int noUserInteractionHeartbeat = 0;
                 }
             }else if ([[data objectForKey:@"status"] intValue] == 4){
                 [self getOneNETCommandRespond:cmd_uuid apiKey:apiKey];
+            }else if ([[data objectForKey:@"status"] intValue] == 10){
+                [NSObject showHudTipStr:LocalString(@"当前中央控制器离线")];
             }
         }
         

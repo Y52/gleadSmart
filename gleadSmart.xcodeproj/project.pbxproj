@@ -778,6 +778,7 @@
 		BB303675229E1D1F00208322 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB303672229E1CC600208322 /* ExternalAccessory.framework */; };
 		BB32790022A50B2100D8FD5B /* YPickerAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3278FE22A50B2100D8FD5B /* YPickerAlertController.m */; };
 		BB32790122A50B2100D8FD5B /* YPickerAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3278FE22A50B2100D8FD5B /* YPickerAlertController.m */; };
+		BB81A1B722FAC4C70010BABB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB81A1B622FAC4C70010BABB /* NetworkExtension.framework */; };
 		BB93C9D1228BEBBA00B0DB6B /* NTCSetTemperatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BBFFC8D406E8DDBC479447F693F151 /* NTCSetTemperatureController.m */; };
 		BB93C9D2228BEBBC00B0DB6B /* NTCValveAlertInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED050E8D2512FC8291B929FEBC41A44 /* NTCValveAlertInfoController.m */; };
 		BB93C9D3228BEBC400B0DB6B /* StatusConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F1CBDF488F0986DB38563B5AC6FC31 /* StatusConfirmController.m */; };
@@ -820,7 +821,6 @@
 		BBA02AAD229B7DDF00C561A4 /* HomeSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA02AA7229B78FF00C561A4 /* HomeSettingController.m */; };
 		BBA02AB0229B7EAD00C561A4 /* HomeDeviceSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA02AAF229B7EAD00C561A4 /* HomeDeviceSetCell.m */; };
 		BBA02AB1229B7EAD00C561A4 /* HomeDeviceSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA02AAF229B7EAD00C561A4 /* HomeDeviceSetCell.m */; };
-		BBACD65E4CE4050F281BFF75293101DC /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */; };
 		BBAD0D41229D0CBB009D4F42 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D40229D0CBB009D4F42 /* NullSafe.m */; };
 		BBAD0D4C229D155C009D4F42 /* DeviceLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D4A229D155B009D4F42 /* DeviceLocationController.m */; };
 		BBAD0D4F229D156F009D4F42 /* DeviceLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAD0D4D229D156F009D4F42 /* DeviceLocationCell.m */; };
@@ -1464,7 +1464,6 @@
 		83AE1C0ED0B291580AE8710A1D7AC380 /* thermostatControl@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thermostatControl@1x.png"; sourceTree = "<group>"; };
 		8448F48C372C61FEF2E92D3F2320D513 /* img_auto_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_auto_off@2x.png"; sourceTree = "<group>"; };
 		84B4CE2102D1764EBE31FDFA0E65F530 /* SharerInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharerInfoCell.m; sourceTree = "<group>"; };
-		8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gleadSmart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8551A6A8B7EEFAD03BD1A7E17428E022 /* RegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterController.m; sourceTree = "<group>"; };
 		860673564731A4588E55C5EB537E585F /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		861AB80BEA749535D588153AC478169D /* APStatusConfirmController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APStatusConfirmController.h; sourceTree = "<group>"; };
@@ -1655,6 +1654,7 @@
 		BB3278FE22A50B2100D8FD5B /* YPickerAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YPickerAlertController.m; sourceTree = "<group>"; };
 		BB3278FF22A50B2100D8FD5B /* YPickerAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YPickerAlertController.h; sourceTree = "<group>"; };
 		BB5CE1616DADF6B37F074AE81CB3D8EF /* nodeBattery_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeBattery_normal@3x.png"; sourceTree = "<group>"; };
+		BB81A1B622FAC4C70010BABB /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		BBA02AA6229B78FF00C561A4 /* HomeSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeSettingController.h; sourceTree = "<group>"; };
 		BBA02AA7229B78FF00C561A4 /* HomeSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeSettingController.m; sourceTree = "<group>"; };
 		BBA02AA9229B7C8700C561A4 /* HomeNameSetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeNameSetCell.h; sourceTree = "<group>"; };
@@ -1851,7 +1851,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB303673229E1CC600208322 /* ExternalAccessory.framework in Frameworks */,
-				BBACD65E4CE4050F281BFF75293101DC /* Pods_gleadSmart.framework in Frameworks */,
 				5C798AF4DBC204EF75421620D9970084 /* Pods_jienuoIOT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1861,6 +1860,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB303675229E1D1F00208322 /* ExternalAccessory.framework in Frameworks */,
+				BB81A1B722FAC4C70010BABB /* NetworkExtension.framework in Frameworks */,
 				8BA886B50F9DB64151E556A8556B9275 /* Pods_gleadSmart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1987,8 +1987,8 @@
 		163612BB24B0FB9228947700D5747E51 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB81A1B622FAC4C70010BABB /* NetworkExtension.framework */,
 				BB303672229E1CC600208322 /* ExternalAccessory.framework */,
-				8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */,
 				CCDC8A25F5E504F477B0277BE80343F5 /* Pods_jienuoIOT.framework */,
 			);
 			name = Frameworks;
@@ -4040,37 +4040,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/JKVValue/JKVValue.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
-				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
-				"${BUILT_PRODUCTS_DIR}/RMQClient/RMQClient.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/WMPageController/WMPageController.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JKVValue.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RMQClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMPageController.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-jienuoIOT/Pods-jienuoIOT-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6C249BF1E8EE4C76AD977671872A840E /* [CP] Check Pods Manifest.lock */ = {
@@ -4097,38 +4076,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/JKVValue/JKVValue.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
-				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
-				"${BUILT_PRODUCTS_DIR}/RMQClient/RMQClient.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/WMPageController/WMPageController.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JKVValue.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RMQClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMPageController.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gleadSmart/Pods-gleadSmart-frameworks.sh\"\n";
 		};
 		C977EB57D9D3CC9695719955C99AF81B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4649,7 +4605,7 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				DEVELOPMENT_TEAM = HL4DHZX78L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4667,7 +4623,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GLEAD.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4809,7 +4765,7 @@
 				CODE_SIGN_ENTITLEMENTS = gleadSmart/gleadSmart.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5FAMV3D32N;
+				DEVELOPMENT_TEAM = HL4DHZX78L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4827,7 +4783,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thingcom.gleadSmart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GLEAD.gleadSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;

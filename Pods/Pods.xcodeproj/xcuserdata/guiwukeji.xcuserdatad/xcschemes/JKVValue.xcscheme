@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E24C71A761588E094C395031DE5CEB82"
+               BlueprintIdentifier = "693F68B0ECDCFF738C4CC7B5E5243743"
+               BuildableName = "JKVValue.framework"
                BlueprintName = "JKVValue"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "JKVValue.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

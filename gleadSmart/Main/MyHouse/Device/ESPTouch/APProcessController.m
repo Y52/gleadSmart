@@ -184,8 +184,8 @@ static bool isPasswordSendSucc = NO;
     isPasswordSendSucc = YES;
 }
 
-static int hotspotAlertTime = 3;
 static bool bindSucc = NO;
+static bool isApiBinding = NO;
 - (void)confirmWifiName{
     if (!(isSSIDSendSucc && isPasswordSendSucc)) {
         return;
@@ -195,7 +195,8 @@ static bool bindSucc = NO;
     NSLog(@"%@",ssid);
     if(![ssid hasPrefix:@"ESP"]){
         ///热点搜到设备后直接绑定，等待云平台推送
-        if (!bindSucc) {
+        if (!isApiBinding && !bindSucc) {
+            isApiBinding = YES;
             DeviceModel *dModel = [[DeviceModel alloc] init];
             dModel.mac = mac;
             dModel.name = mac;
@@ -203,8 +204,12 @@ static bool bindSucc = NO;
             
             [self bindDevice:dModel success:^{
                 NSLog(@"绑定设备成功");
+                bindSucc = YES;
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [NSObject showHudTipStr:LocalString(@"绑定设备成功")];
             } failure:^{
-                
+                isApiBinding = NO;
+                [NSObject showHudTipStr:LocalString(@"该设备无法绑定")];
             }];
         }
     }
@@ -307,7 +312,7 @@ static bool bindSucc = NO;
 }
 
 #pragma mark - private methods
-- (void)bindDevice:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failur{
+- (void)bindDevice:(DeviceModel *)device success:(void(^)(void))success failure:(void(^)(void))failure{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     //设置超时时间
@@ -356,10 +361,16 @@ static bool bindSucc = NO;
                       success();
                   }
               }else{
-                  [NSObject showHudTipStr:LocalString(@"绑定该设备失败")];
+                  if (failure) {
+                      failure();
+                  }
+                  //[NSObject showHudTipStr:LocalString(@"绑定该设备失败")];
               }
           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
               NSLog(@"Error:%@",error);
+              if (failure) {
+                  failure();
+              }
           }];
 }
 

@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "RegisterController.h"
 #import "ThermostatController.h"
+#import <Bugly/Bugly.h>
 
 @interface AppDelegate ()
 
@@ -21,6 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self customizeInterface];
+    [self BuglyInit];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -136,4 +138,9 @@
     }
 }
 
+#pragma mark - Bugly
+- (void)BuglyInit{
+    //错误日志上报
+    [Bugly startWithAppId:@"930be64802"];
+}
 @end

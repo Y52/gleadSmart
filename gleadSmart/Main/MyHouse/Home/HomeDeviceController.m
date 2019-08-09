@@ -345,8 +345,10 @@ static CGFloat const Cell_Height = 72.f;
             }else{
                 if ([device.isOn boolValue]) {
                     cell.status.text = [status stringByAppendingString:LocalString(@" | 已开启")];
+                    cell.controlSwitch.on = YES;
                 }else{
                     cell.status.text = [status stringByAppendingString:LocalString(@" | 已关闭")];
+                    cell.controlSwitch.on = NO;
                 }
             }
             [self differenceDiveceActionWithDevice:device cell:cell indexpath:indexPath];
