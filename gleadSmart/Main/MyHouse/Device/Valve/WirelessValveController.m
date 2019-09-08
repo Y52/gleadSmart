@@ -479,7 +479,9 @@ CGFloat const nodeButtonWidth = 20.f;
     }else{
         [nodeButton setImage:[UIImage imageNamed:@"valveNode_selnormal"] forState:UIControlStateNormal];
     }
-    [self updateSelectedNodeStatus:node];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateSelectedNodeStatus:node];
+    });
 }
 
 //选择节点后更新该节点内漏水和电量的状态信息

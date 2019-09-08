@@ -8,6 +8,7 @@
 
 #import "NodeDetailViewController.h"
 #import "NodeInfoCell.h"
+#import "NodeLocationController.h"
 
 NSString *const CellIdentifier_ValveDetailInfo = @"CellID_ValveDetailInfo";
 static CGFloat const Cell_Height = 44.f;
@@ -153,7 +154,25 @@ static CGFloat const Cell_Height = 44.f;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    switch (indexPath.row) {
+        case 0:
+            
+            break;
+            
+        case 2:
+        {
+            NodeLocationController *VC = [[NodeLocationController alloc] init];
+            VC.node = self.node;
+            VC.popBlock = ^(NSString *roomName) {
+                self.node.room = roomName;
+                [self.nodeDetailTable reloadData];
+            };
+            [self.navigationController pushViewController:VC  animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

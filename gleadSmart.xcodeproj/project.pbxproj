@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -509,7 +509,6 @@
 		8AE04941D3F9ECEA3A8A61620AC2DEB2 /* img_adddevice_gateway.png in Resources */ = {isa = PBXBuildFile; fileRef = 1440C5DD4BCAB6D4C49C439D212B4862 /* img_adddevice_gateway.png */; };
 		8B1F1C895EDF19148090372968769B5A /* valveLeak_abnormal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFB114B3EFFF7A28007790085002D10 /* valveLeak_abnormal@3x.png */; };
 		8B2E6B64147FE9819ED46F628FCB897A /* YTFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ABD0B1C2BDA3D8FBF9953B63D7486C /* YTFAlertController.m */; };
-		8BA886B50F9DB64151E556A8556B9275 /* Pods_gleadSmart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8512B310830D3976876249C267F3134C /* Pods_gleadSmart.framework */; };
 		8BBF170F09BE23C228EE5B672489A904 /* nodeLeakBig_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = F684F11B242EAF3311E40290DE2295BD /* nodeLeakBig_normal.png */; };
 		8BCB2F84D39547F7DEB0CC51F2C34399 /* img_valve_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B95F64CB505A2F3A1EAB214EAB0D29D /* img_valve_on@2x.png */; };
 		8C0D81316399739DCA2D5D9CDD8DA17D /* img_launchTitle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DD8DE64F17F28F2112D3096254680 /* img_launchTitle@2x.png */; };
@@ -778,6 +777,7 @@
 		BB303675229E1D1F00208322 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB303672229E1CC600208322 /* ExternalAccessory.framework */; };
 		BB32790022A50B2100D8FD5B /* YPickerAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3278FE22A50B2100D8FD5B /* YPickerAlertController.m */; };
 		BB32790122A50B2100D8FD5B /* YPickerAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3278FE22A50B2100D8FD5B /* YPickerAlertController.m */; };
+		BB752336230152A9005A339F /* NodeLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB752335230152A9005A339F /* NodeLocationController.m */; };
 		BB81A1B722FAC4C70010BABB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB81A1B622FAC4C70010BABB /* NetworkExtension.framework */; };
 		BB93C9D1228BEBBA00B0DB6B /* NTCSetTemperatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BBFFC8D406E8DDBC479447F693F151 /* NTCSetTemperatureController.m */; };
 		BB93C9D2228BEBBC00B0DB6B /* NTCValveAlertInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED050E8D2512FC8291B929FEBC41A44 /* NTCValveAlertInfoController.m */; };
@@ -1654,6 +1654,8 @@
 		BB3278FE22A50B2100D8FD5B /* YPickerAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YPickerAlertController.m; sourceTree = "<group>"; };
 		BB3278FF22A50B2100D8FD5B /* YPickerAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YPickerAlertController.h; sourceTree = "<group>"; };
 		BB5CE1616DADF6B37F074AE81CB3D8EF /* nodeBattery_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nodeBattery_normal@3x.png"; sourceTree = "<group>"; };
+		BB752334230152A9005A339F /* NodeLocationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeLocationController.h; sourceTree = "<group>"; };
+		BB752335230152A9005A339F /* NodeLocationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeLocationController.m; sourceTree = "<group>"; };
 		BB81A1B622FAC4C70010BABB /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		BBA02AA6229B78FF00C561A4 /* HomeSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeSettingController.h; sourceTree = "<group>"; };
 		BBA02AA7229B78FF00C561A4 /* HomeSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeSettingController.m; sourceTree = "<group>"; };
@@ -1861,7 +1863,6 @@
 			files = (
 				BB303675229E1D1F00208322 /* ExternalAccessory.framework in Frameworks */,
 				BB81A1B722FAC4C70010BABB /* NetworkExtension.framework in Frameworks */,
-				8BA886B50F9DB64151E556A8556B9275 /* Pods_gleadSmart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1887,6 +1888,8 @@
 			children = (
 				E6FF927EBA87D3A13B0B962B57879648 /* NodeDetailViewController.h */,
 				D923988CC01F26B56427744DF9FD3F9D /* NodeDetailViewController.m */,
+				BB752334230152A9005A339F /* NodeLocationController.h */,
+				BB752335230152A9005A339F /* NodeLocationController.m */,
 				B2CA11247FC02F4661264EEB8ED04517 /* ValveAlertInfoController.h */,
 				550F3E4776732175E3B5305E81CE771D /* ValveAlertInfoController.m */,
 				49E3D99A4B3E21057FAC529D0B1929C9 /* WirelessValveController.h */,
@@ -4327,6 +4330,7 @@
 				4C69EE7C1BFA06358339F94ADDE826DA /* AppDelegate.m in Sources */,
 				126CF54FCDE432286373C262CFB3DDBF /* AreaCodeCell.m in Sources */,
 				27C7AEDAF6058AEE46E806DCF75F0E22 /* ClockModel.m in Sources */,
+				BB752336230152A9005A339F /* NodeLocationController.m in Sources */,
 				441593096157A79703E7A991C86F335C /* ConnectApNetController.m in Sources */,
 				E317E724ACA06B499490ABE1E5F70D67 /* Database.m in Sources */,
 				94B436A1E663CFED1DBB9BC96FC98051 /* DelayModel.m in Sources */,
